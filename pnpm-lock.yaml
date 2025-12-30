@@ -75,6 +75,9 @@ importers:
       '@yagokoro/neo4j':
         specifier: workspace:*
         version: link:../neo4j
+      '@yagokoro/normalizer':
+        specifier: workspace:*
+        version: link:../normalizer
       '@yagokoro/vector':
         specifier: workspace:*
         version: link:../vector
@@ -218,6 +221,31 @@ importers:
       zod:
         specifier: ^3.24.1
         version: 3.25.76
+    devDependencies:
+      vitest:
+        specifier: ^2.1.8
+        version: 2.1.9(@types/node@20.19.27)
+
+  libs/normalizer:
+    dependencies:
+      '@yagokoro/domain':
+        specifier: workspace:*
+        version: link:../domain
+      '@yagokoro/neo4j':
+        specifier: workspace:*
+        version: link:../neo4j
+      '@yagokoro/vector':
+        specifier: workspace:*
+        version: link:../vector
+      compromise:
+        specifier: ^14.14.3
+        version: 14.14.5
+      fastest-levenshtein:
+        specifier: ^1.0.16
+        version: 1.0.16
+      yaml:
+        specifier: ^2.7.0
+        version: 2.8.2
     devDependencies:
       vitest:
         specifier: ^2.1.8
@@ -1162,6 +1190,10 @@ packages:
   fast-xml-parser@5.3.3:
     resolution: {integrity: sha512-2O3dkPAAC6JavuMm8+4+pgTk+5hoAs+CjZ+sWcQLkX9+/tHRuTkQh/Oaifr8qDmZ8iEHb771Ea6G8CdwkrgvYA==}
     hasBin: true
+
+  fastest-levenshtein@1.0.16:
+    resolution: {integrity: sha512-eRnCtTTtGZFpQCwhJiUOuxPQWRXVKYDn0b2PeHfXL6/Zi53SLAzAHfVhVWK2AryC/WH05kGfxhFIPvTF0SXQzg==}
+    engines: {node: '>= 4.9.1'}
 
   finalhandler@2.1.1:
     resolution: {integrity: sha512-S8KoZgRZN+a5rNwqTxlZZePjT/4cnm0ROV70LedRHZ0p8u9fRID0hJUZQpkKLzro8LfmC8sx23bY6tVNxv8pQA==}
@@ -2786,6 +2818,8 @@ snapshots:
   fast-xml-parser@5.3.3:
     dependencies:
       strnum: 2.1.2
+
+  fastest-levenshtein@1.0.16: {}
 
   finalhandler@2.1.1:
     dependencies:

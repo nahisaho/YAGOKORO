@@ -45,6 +45,15 @@ export {
   type SeedStatusResult,
 } from './seed.js';
 export {
+  createNormalizeCommand,
+  type NormalizeService,
+  type NormalizeResult,
+  type NormalizeOptions,
+  type AliasEntry,
+  type AliasListOptions,
+  type RuleEntry,
+} from './normalize.js';
+export {
   createBackupCommand,
   type BackupCommandService,
   type BackupOptions,

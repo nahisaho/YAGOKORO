@@ -37,3 +37,25 @@ export {
   type ConsistencyCheckerInterface,
   type ContradictionDetectorInterface,
 } from './advanced-tools.js';
+
+// Normalization tools
+export {
+  createNormalizationTools,
+  createNormalizeEntityTool,
+  createNormalizeBatchTool,
+  createRegisterAliasTool,
+  createResolveAliasTool,
+  createListAliasesTool,
+  createGetRulesTool,
+  NormalizeEntityInputSchema,
+  NormalizeBatchInputSchema,
+  RegisterAliasInputSchema,
+  ResolveAliasInputSchema,
+  ListAliasesInputSchema,
+  GetRulesInputSchema,
+  type NormalizationServiceInterface,
+  type NormalizationToolDependencies,
+  type NormalizationResult,
+  type AliasEntry as MCPAliasEntry,
+  type NormalizationRule,
+} from './normalization-tools.js';

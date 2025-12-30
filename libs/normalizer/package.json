@@ -1,8 +1,8 @@
 {
-  "name": "@yagokoro/cli",
+  "name": "@yagokoro/normalizer",
   "version": "0.1.0",
   "private": true,
-  "description": "CLI library for YAGOKORO GraphRAG system",
+  "description": "Entity normalization pipeline for YAGOKORO GraphRAG system",
   "type": "module",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -16,9 +16,8 @@
   "scripts": {
     "build": "tsc",
     "dev": "tsc --watch",
-    "test": "vitest run --passWithNoTests",
-    "test:unit": "vitest run --exclude='**/*.integration.test.ts'",
-    "test:integration": "vitest run --include='**/*.integration.test.ts'",
+    "test": "vitest run",
+    "test:unit": "vitest run",
     "test:watch": "vitest",
     "test:coverage": "vitest run --coverage",
     "typecheck": "tsc --noEmit",
@@ -26,17 +25,14 @@
   },
   "dependencies": {
     "@yagokoro/domain": "workspace:*",
-    "@yagokoro/graphrag": "workspace:*",
     "@yagokoro/neo4j": "workspace:*",
     "@yagokoro/vector": "workspace:*",
-    "@yagokoro/mcp": "workspace:*",
-    "@yagokoro/normalizer": "workspace:*",
-    "commander": "^13.1.0",
-    "chalk": "^5.4.1",
-    "ora": "^8.2.0"
+    "fastest-levenshtein": "^1.0.16",
+    "compromise": "^14.14.3",
+    "yaml": "^2.7.0"
   },
   "devDependencies": {
     "vitest": "^2.1.8"
   },
-  "keywords": ["cli", "commands", "terminal"]
+  "keywords": ["normalization", "entity", "alias", "graphrag"]
 }

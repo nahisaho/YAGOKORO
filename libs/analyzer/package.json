@@ -1,0 +1,39 @@
+{
+  "name": "@yagokoro/analyzer",
+  "version": "0.1.0",
+  "description": "Research gap analyzer for YAGOKORO GraphRAG system",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "scripts": {
+    "build": "tsc",
+    "test": "vitest run --passWithNoTests",
+    "test:watch": "vitest",
+    "lint": "biome check src/",
+    "clean": "rm -rf dist"
+  },
+  "dependencies": {
+    "@yagokoro/domain": "workspace:*",
+    "@yagokoro/neo4j": "workspace:*",
+    "@yagokoro/graphrag": "workspace:*",
+    "@yagokoro/vector": "workspace:*"
+  },
+  "devDependencies": {
+    "typescript": "^5.7.2",
+    "vitest": "^2.1.8"
+  },
+  "keywords": [
+    "research-gap",
+    "citation-analysis",
+    "cluster-analysis",
+    "graphrag"
+  ],
+  "author": "nahisaho",
+  "license": "MIT"
+}

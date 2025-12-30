@@ -82,3 +82,16 @@ export {
   type PathExplanation,
   type FindPathsOptions,
 } from './path-tools.js';
+
+// Gap analysis tools
+export {
+  createGapTools,
+  type GapToolDependencies,
+  type GapAnalyzerInterface,
+  type ResearchGap,
+  type GapAnalysisReport,
+  type ResearchProposal,
+  type GapType,
+  type GapSeverity,
+  type GapAnalyzeOptions,
+} from './gap-tools.js';

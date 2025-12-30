@@ -84,3 +84,12 @@ export {
   type CLIPathExplanation,
   type PathFindOptions,
 } from './path.js';
+export {
+  createGapCommand,
+  type GapService,
+  type CLIResearchGap,
+  type CLIGapReport,
+  type CLIResearchProposal,
+  type GapAnalyzeOptions,
+  type ProposalOptions,
+} from './gap.js';

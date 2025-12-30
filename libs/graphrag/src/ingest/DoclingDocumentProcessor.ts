@@ -255,10 +255,12 @@ export class DoclingDocumentProcessor {
       id: 'local',
       title: metadata?.title ?? 'Untitled',
       authors: metadata?.authors ?? [],
-      summary: '',
-      published: new Date().toISOString(),
-      updated: new Date().toISOString(),
+      abstract: '',
+      published: new Date(),
+      updated: new Date(),
       pdfUrl: metadata?.source ?? 'local',
+      absUrl: '',
+      primaryCategory: '',
       categories: [],
     };
 
@@ -285,7 +287,7 @@ export class DoclingDocumentProcessor {
   private createChunks(
     text: string,
     paper: ArxivPaper,
-    result: DoclingExtractionResult
+    _result: DoclingExtractionResult
   ): TextChunk[] {
     const chunks: TextChunk[] = [];
     const { chunkSize, chunkOverlap, minChunkSize, includeMetadata } = this.options;
@@ -304,19 +306,22 @@ export class DoclingDocumentProcessor {
       );
 
       for (const chunkText of sectionChunks) {
+        const chunkMetadata: TextChunk['metadata'] = includeMetadata
+          ? {
+              source: `arxiv:${paper.id}`,
+              title: paper.title,
+              authors: paper.authors,
+              chunkIndex,
+              totalChunks: -1, // Will be updated later
+            }
+          : {};
+        if (includeMetadata && section.header) {
+          chunkMetadata!.section = section.header;
+        }
         const chunk: TextChunk = {
           id: `${paper.id}-chunk-${chunkIndex}`,
           content: chunkText,
-          metadata: includeMetadata
-            ? {
-                source: `arxiv:${paper.id}`,
-                title: paper.title,
-                authors: paper.authors,
-                section: section.header ?? undefined,
-                chunkIndex,
-                totalChunks: -1, // Will be updated later
-              }
-            : {},
+          metadata: chunkMetadata,
         };
 
         chunks.push(chunk);

@@ -180,7 +180,7 @@ export class DoclingExtractor {
    */
   static async isAvailable(): Promise<boolean> {
     try {
-      const extractor = new DoclingExtractor();
+      new DoclingExtractor();
       return true;
     } catch {
       return false;

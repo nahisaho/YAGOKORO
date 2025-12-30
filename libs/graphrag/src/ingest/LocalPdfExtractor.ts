@@ -4,7 +4,9 @@
  * PDFからテキストを抽出するローカル実装
  * Unstructured.io APIの代わりにpdf-parseを使用
  */
-import pdfParse from 'pdf-parse';
+import * as pdfParseModule from 'pdf-parse';
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const pdfParse = (pdfParseModule as any).default || pdfParseModule;
 
 /**
  * 抽出されたページ情報
@@ -85,7 +87,7 @@ export class LocalPdfExtractor {
     const startTime = Date.now();
 
     // pdf-parseのオプション
-    const parseOptions: pdfParse.Options = {};
+    const parseOptions: Record<string, unknown> = {};
     if (this.options.maxPages && this.options.maxPages > 0) {
       parseOptions.max = this.options.maxPages;
     }
@@ -115,19 +117,24 @@ export class LocalPdfExtractor {
 
     // メタデータを抽出
     const info = data.info || {};
-    const metadata = {
-      title: info.Title || undefined,
-      author: info.Author || undefined,
-      subject: info.Subject || undefined,
-      creator: info.Creator || undefined,
-      producer: info.Producer || undefined,
-      creationDate: info.CreationDate ? this.parseDate(info.CreationDate) : undefined,
-      modificationDate: info.ModDate ? this.parseDate(info.ModDate) : undefined,
-    };
+    const metadata: LocalPdfResult['metadata'] = {};
+    if (info.Title) metadata.title = info.Title;
+    if (info.Author) metadata.author = info.Author;
+    if (info.Subject) metadata.subject = info.Subject;
+    if (info.Creator) metadata.creator = info.Creator;
+    if (info.Producer) metadata.producer = info.Producer;
+    if (info.CreationDate) {
+      const creationDate = this.parseDate(info.CreationDate);
+      if (creationDate) metadata.creationDate = creationDate;
+    }
+    if (info.ModDate) {
+      const modificationDate = this.parseDate(info.ModDate);
+      if (modificationDate) metadata.modificationDate = modificationDate;
+    }
 
     // 統計情報
     const totalCharacters = data.text.length;
-    const totalWords = data.text.split(/\s+/).filter((w) => w.length > 0).length;
+    const totalWords = data.text.split(/\s+/).filter((w: string) => w.length > 0).length;
 
     return {
       text: data.text,
@@ -187,13 +194,14 @@ export class LocalPdfExtractor {
       const match = dateStr.match(/D:(\d{4})(\d{2})(\d{2})(\d{2})?(\d{2})?(\d{2})?/);
       if (match) {
         const [, year, month, day, hour = '0', minute = '0', second = '0'] = match;
+        if (!year || !month || !day) return undefined;
         return new Date(
-          parseInt(year),
-          parseInt(month) - 1,
-          parseInt(day),
-          parseInt(hour),
-          parseInt(minute),
-          parseInt(second)
+          parseInt(year, 10),
+          parseInt(month, 10) - 1,
+          parseInt(day, 10),
+          parseInt(hour, 10),
+          parseInt(minute, 10),
+          parseInt(second, 10)
         );
       }
       return new Date(dateStr);

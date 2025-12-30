@@ -3,8 +3,8 @@
 | メタデータ | 値 |
 |-----------|-----|
 | Document ID | DES-003 |
-| Version | 1.1 |
-| Status | Review Complete |
+| Version | 1.3 |
+| Status | Approved |
 | Created | 2025-12-31 |
 | Author | GitHub Copilot |
 | Requirements | REQ-003-yagokoro-v3 |
@@ -343,7 +343,12 @@ type RelationType =
   | 'DEVELOPED_BY'
   | 'APPLIED_TO'
   | 'COMPARES_WITH'
-  // v3新規
+  // v3新規（REQ-003-002準拠）
+  | 'INFLUENCED_BY'              // 影響関係
+  | 'COLLABORATED_WITH'          // 協力関係
+  | 'EVOLVED_INTO'               // 進化関係
+  | 'COMPETES_WITH'              // 競合関係
+  | 'BASED_ON'                   // 基盤関係
   | 'CITES'                      // 引用関係
   | 'EXTENDS'                    // 拡張関係
   | 'IMPROVES'                   // 改善関係
@@ -1227,8 +1232,8 @@ libs/cli/src/
 
 | 要件 | 設計 |
 |------|------|
-| 論文取り込み: 100件/時間 | バッチ処理 + 並列抽出（5並列）|
-| NLQレスポンス: 3秒以内 | クエリキャッシュ（ヒット率80%目標）|
+| 論文取り込み: 1,000件/時間 | バッチ処理 + 並列抽出（10並列）|
+| NLQレスポンス: 5秒以内 | クエリキャッシュ（ヒット率80%目標）|
 | 差分更新: 10分以内 | 変更検知ハッシュ + 差分適用 |
 
 ### 8.2 可用性
@@ -1313,6 +1318,7 @@ interface DeadLetterItem {
 | 1.0 | 2025-12-31 | GitHub Copilot | 初版作成 |
 | 1.1 | 2025-12-31 | GitHub Copilot | レビュー対応: Document ID変更(DES-002→DES-003)、HITL閾値統一、エラーハンドリング追加 |
 | 1.2 | 2025-12-31 | GitHub Copilot | Article II準拠: CLI Interface設計セクション(§5)追加 |
+| 1.3 | 2025-12-31 | GitHub Copilot | REQ整合性修正: 処理速度(1,000件/時)、NLQレスポンス(5秒)、RelationType追加(5タイプ) |
 
 ---
 

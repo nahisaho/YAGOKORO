@@ -7,7 +7,7 @@
 | **Document ID** | REQ-002 |
 | **Version** | 0.1.0 (Draft) |
 | **Status** | Draft |
-| **Created** | 2024-12-30 |
+| **Created** | 2025-12-30 |
 | **Author** | YAGOKORO Development Team |
 | **Related Documents** | REQ-001, DES-001, qiita-ai-for-science-graphrag.md |
 
@@ -71,6 +71,9 @@ YAGOKORO v2.0.0 は、**AI for Science のための実用的な知識発見プ�
 | FR-001-03 | **LLM同一性確認**: システムは、類似度マッチングで検出された候補ペアに対し、LLMで同一性を確認**できなければならない** | P1 | When similar entities are detected, the system shall optionally confirm equivalence using LLM |
 | FR-001-04 | **エイリアステーブル構築**: システムは、正規化結果をエイリアステーブルとして永続化**しなければならない** | P0 | The system shall persist normalization results in an alias table |
 | FR-001-05 | **インクリメンタル正規化**: システムは、新規エンティティ追加時に既存エイリアステーブルを参照し、インクリメンタルに正規化**しなければならない** | P1 | When a new entity is added, the system shall incrementally normalize using the existing alias table |
+| FR-001-06 | **ドメイン辞書対応**: システムは、外部定義されたドメイン専門用語辞書を読み込み、正規化に使用**できなければならない** | P1 | The system shall load external domain-specific dictionaries for normalization |
+| FR-001-07 | **正規化ルールのカスタマイズ**: システムは、ドメインごとに異なる正規化ルールを適用**できなければならない** | P2 | The system shall allow domain-specific normalization rules |
+| FR-001-08 | **正規化の取り消し**: システムは、誤った正規化を取り消し、元の状態に戻す**ことができなければならない** | P2 | The system shall allow rollback of incorrect normalizations |
 
 #### 3.1.3 Acceptance Criteria
 
@@ -149,6 +152,8 @@ interface EquivalenceResult {
 | FR-002-03 | **重み付きトラバーサル**: システムは、関係の信頼度スコアを考慮した経路探索**ができなければならない** | P1 | The system shall perform weighted traversal considering confidence scores |
 | FR-002-04 | **パス説明生成**: システムは、発見されたパスの意味をLLMで説明**できなければならない** | P2 | The system shall generate LLM explanations for discovered paths |
 | FR-002-05 | **バッチパス探索**: システムは、複数のエンティティペアに対して並列にパス探索**しなければならない** | P1 | The system shall perform batch path finding for multiple entity pairs |
+| FR-002-06 | **パスキャッシュ**: システムは、頻繁に検索されるパスをキャッシュし、パフォーマンスを向上**させなければならない** | P1 | The system shall cache frequently searched paths |
+| FR-002-07 | **循環パス検出**: システムは、パス探索時に循環を検出し、無限ループを防止**しなければならない** | P0 | The system shall detect cycles and prevent infinite loops |
 
 #### 3.2.3 Acceptance Criteria
 
@@ -605,6 +610,21 @@ yagokoro report --format markdown --output report.md
 | NFR-011 | テストカバレッジ | > 80% |
 | NFR-012 | ドキュメントカバレッジ | 全public API |
 
+### 4.5 Security
+
+| ID | Requirement | Target |
+|----|-------------|--------|
+| NFR-013 | APIキー管理 | 環境変数またはシークレットマネージャー |
+| NFR-014 | 認証・認可 | MCPサーバーへのAPIキー認証 |
+
+### 4.6 Observability
+
+| ID | Requirement | Target |
+|----|-------------|--------|
+| NFR-015 | 操作ログ | 全CLI/MCP操作を記録 |
+| NFR-016 | エラーログ | スタックトレース付きエラー記録 |
+| NFR-017 | メトリクス | 処理時間、成功率の記録 |
+
 ---
 
 ## 5. Constraints
@@ -652,6 +672,9 @@ yagokoro report --format markdown --output report.md
 | マルチホップ探索の計算量爆発 | High | Medium | パス長制限、プルーニング戦略 |
 | Hype Cycle判定の主観性 | Medium | High | 複数指標の組み合わせ、信頼度スコア |
 | 大規模データでの性能劣化 | High | Medium | インデックス最適化、キャッシュ戦略 |
+| LLM応答品質のばらつき | Medium | High | プロンプトエンジニアリング、複数LLM合議 |
+| 外部API仕様変更 (arXiv等) | Medium | Low | アダプター層の抽象化 |
+| エイリアスの競合（同名異概念） | High | Medium | コンテキスト情報付加、曖昧性解消UI |
 
 ---
 

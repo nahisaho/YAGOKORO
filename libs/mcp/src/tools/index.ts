@@ -95,3 +95,20 @@ export {
   type GapSeverity,
   type GapAnalyzeOptions,
 } from './gap-tools.js';
+
+// Lifecycle tools
+export {
+  lifecycleTools,
+  createLifecycleToolHandler,
+  isLifecycleTool,
+  type LifecycleToolService,
+  type MCPLifecycleAnalysis,
+  type MCPLifecycleReport,
+  type MCPPhaseResult,
+  type MCPMaturityScore,
+  type MCPTrendForecast,
+  type MCPEmergingTechnology,
+  type MCPDecliningTechnology,
+  type MCPTechnologyComparison,
+  type LifecyclePhase as MCPLifecyclePhase,
+} from './lifecycle.js';

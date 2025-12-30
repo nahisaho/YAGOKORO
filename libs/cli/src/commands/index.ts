@@ -93,3 +93,17 @@ export {
   type GapAnalyzeOptions,
   type ProposalOptions,
 } from './gap.js';
+export {
+  createLifecycleCommand,
+  type LifecycleService,
+  type CLILifecycleAnalysis,
+  type CLILifecycleReport,
+  type CLIPhaseResult,
+  type CLIMaturityScore,
+  type CLITrendForecast,
+  type CLIEmergingTechnology,
+  type CLIDecliningTechnology,
+  type LifecycleAnalyzeOptions,
+  type LifecycleCompareOptions,
+  type LifecycleScanOptions,
+} from './lifecycle.js';

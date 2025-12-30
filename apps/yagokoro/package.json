@@ -1,0 +1,50 @@
+{
+  "name": "yagokoro-app",
+  "version": "0.1.0",
+  "private": true,
+  "description": "YAGOKORO GraphRAG MCP System - Main Application",
+  "type": "module",
+  "bin": {
+    "yagokoro": "./dist/cli.js"
+  },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": ["dist"],
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "start": "node dist/cli.js",
+    "start:mcp": "node dist/mcp-server.js",
+    "test": "vitest run --passWithNoTests",
+    "test:unit": "vitest run --exclude='**/*.integration.test.ts' --exclude='**/*.e2e.test.ts'",
+    "test:integration": "vitest run --include='**/*.integration.test.ts'",
+    "test:e2e": "vitest run --include='**/*.e2e.test.ts'",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
+    "typecheck": "tsc --noEmit",
+    "clean": "rm -rf dist coverage"
+  },
+  "dependencies": {
+    "@yagokoro/domain": "workspace:*",
+    "@yagokoro/graphrag": "workspace:*",
+    "@yagokoro/neo4j": "workspace:*",
+    "@yagokoro/vector": "workspace:*",
+    "@yagokoro/mcp": "workspace:*",
+    "@yagokoro/cli": "workspace:*",
+    "dotenv": "^16.4.7",
+    "pino": "^9.6.0",
+    "pino-pretty": "^13.0.0"
+  },
+  "devDependencies": {
+    "@testcontainers/neo4j": "^10.18.0",
+    "testcontainers": "^10.18.0",
+    "vitest": "^2.1.8"
+  },
+  "keywords": ["yagokoro", "graphrag", "mcp", "cli", "application"]
+}

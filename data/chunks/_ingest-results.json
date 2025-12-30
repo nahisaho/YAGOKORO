@@ -1,0 +1,233 @@
+{
+  "timestamp": "2025-12-29T13:17:51.319Z",
+  "summary": {
+    "total": 37,
+    "successful": 32,
+    "failed": 5,
+    "totalChunks": 5567
+  },
+  "results": [
+    {
+      "arxivId": "1706.03762",
+      "title": "Attention Is All You Need",
+      "status": "success",
+      "chunks": 74
+    },
+    {
+      "arxivId": "1810.04805",
+      "title": "BERT",
+      "status": "success",
+      "chunks": 102
+    },
+    {
+      "arxivId": "2010.11929",
+      "title": "Vision Transformer (ViT)",
+      "status": "success",
+      "chunks": 105
+    },
+    {
+      "arxivId": "2005.14165",
+      "title": "GPT-3: Language Models are Few-Shot Learners",
+      "status": "failed",
+      "error": "Docling failed with code null: 2025-12-29 21:44:00,513 - INFO - detected formats: [<InputFormat.PDF: 'pdf'>]\n2025-12-29 21:44:00,526 - INFO - Going to convert document batch...\n2025-12-29 21:44:00,526 - INFO - Initializing pipeline for StandardPdfPipeline with options hash 8a40261cb342c4ad4c6f3633056fb061\n2025-12-29 21:44:00,529 - INFO - Loading plugin 'docling_defaults'\n2025-12-29 21:44:00,530 - INFO - Registered picture descriptions: ['vlm', 'api']\n2025-12-29 21:44:00,532 - INFO - Loading plugin 'docling_defaults'\n2025-12-29 21:44:00,534 - INFO - Registered ocr engines: ['auto', 'easyocr', 'ocrmac', 'rapidocr', 'tesserocr', 'tesseract']\n2025-12-29 21:44:00,539 - INFO - Loading plugin 'docling_defaults'\n2025-12-29 21:44:00,540 - INFO - Registered layout engines: ['docling_layout_default', 'docling_experimental_table_crops_layout']\n2025-12-29 21:44:00,543 - INFO - Accelerator device: 'cpu'\n2025-12-29 21:44:00,947 - INFO - Loading plugin 'docling_defaults'\n2025-12-29 21:44:00,948 - INFO - Registered table structure engines: ['docling_tableformer']\n2025-12-29 21:44:01,174 - INFO - Accelerator device: 'cpu'\n2025-12-29 21:44:01,483 - INFO - Processing document docling-566d528c-c335-481a-8d07-518c4b5cfcfd.pdf\n"
+    },
+    {
+      "arxivId": "2302.13971",
+      "title": "LLaMA: Open Foundation Models",
+      "status": "success",
+      "chunks": 161
+    },
+    {
+      "arxivId": "2307.09288",
+      "title": "LLaMA 2",
+      "status": "failed",
+      "error": "Docling failed with code null: 2025-12-29 21:47:46,444 - INFO - detected formats: [<InputFormat.PDF: 'pdf'>]\n2025-12-29 21:47:46,463 - INFO - Going to convert document batch...\n2025-12-29 21:47:46,464 - INFO - Initializing pipeline for StandardPdfPipeline with options hash 8a40261cb342c4ad4c6f3633056fb061\n2025-12-29 21:47:46,467 - INFO - Loading plugin 'docling_defaults'\n2025-12-29 21:47:46,468 - INFO - Registered picture descriptions: ['vlm', 'api']\n2025-12-29 21:47:46,470 - INFO - Loading plugin 'docling_defaults'\n2025-12-29 21:47:46,472 - INFO - Registered ocr engines: ['auto', 'easyocr', 'ocrmac', 'rapidocr', 'tesserocr', 'tesseract']\n2025-12-29 21:47:46,478 - INFO - Loading plugin 'docling_defaults'\n2025-12-29 21:47:46,479 - INFO - Registered layout engines: ['docling_layout_default', 'docling_experimental_table_crops_layout']\n2025-12-29 21:47:46,482 - INFO - Accelerator device: 'cpu'\n2025-12-29 21:47:46,954 - INFO - Loading plugin 'docling_defaults'\n2025-12-29 21:47:46,955 - INFO - Registered table structure engines: ['docling_tableformer']\n2025-12-29 21:47:47,170 - INFO - Accelerator device: 'cpu'\n2025-12-29 21:47:47,349 - INFO - Processing document docling-a1e27921-b7a4-44b2-a141-8dba2b7cf810.pdf\n"
+    },
+    {
+      "arxivId": "2204.02311",
+      "title": "PaLM: Scaling Language Modeling",
+      "status": "failed",
+      "error": "Docling failed with code null: 2025-12-29 21:49:35,809 - INFO - detected formats: [<InputFormat.PDF: 'pdf'>]\n2025-12-29 21:49:35,818 - INFO - Going to convert document batch...\n2025-12-29 21:49:35,818 - INFO - Initializing pipeline for StandardPdfPipeline with options hash 8a40261cb342c4ad4c6f3633056fb061\n2025-12-29 21:49:35,821 - INFO - Loading plugin 'docling_defaults'\n2025-12-29 21:49:35,822 - INFO - Registered picture descriptions: ['vlm', 'api']\n2025-12-29 21:49:35,825 - INFO - Loading plugin 'docling_defaults'\n2025-12-29 21:49:35,826 - INFO - Registered ocr engines: ['auto', 'easyocr', 'ocrmac', 'rapidocr', 'tesserocr', 'tesseract']\n2025-12-29 21:49:35,832 - INFO - Loading plugin 'docling_defaults'\n2025-12-29 21:49:35,834 - INFO - Registered layout engines: ['docling_layout_default', 'docling_experimental_table_crops_layout']\n2025-12-29 21:49:35,836 - INFO - Accelerator device: 'cpu'\n2025-12-29 21:49:36,195 - INFO - Loading plugin 'docling_defaults'\n2025-12-29 21:49:36,196 - INFO - Registered table structure engines: ['docling_tableformer']\n2025-12-29 21:49:36,415 - INFO - Accelerator device: 'cpu'\n2025-12-29 21:49:36,594 - INFO - Processing document docling-f9842b35-2e57-44bd-9117-42e26c4dc76f.pdf\n"
+    },
+    {
+      "arxivId": "2312.11805",
+      "title": "Gemini",
+      "status": "success",
+      "chunks": 369
+    },
+    {
+      "arxivId": "2310.06825",
+      "title": "Mistral 7B",
+      "status": "success",
+      "chunks": 42
+    },
+    {
+      "arxivId": "2401.04088",
+      "title": "Mixtral of Experts",
+      "status": "success",
+      "chunks": 51
+    },
+    {
+      "arxivId": "1706.03741",
+      "title": "Deep RL from Human Preferences (RLHF)",
+      "status": "success",
+      "chunks": 90
+    },
+    {
+      "arxivId": "2203.02155",
+      "title": "InstructGPT: Training with Human Feedback",
+      "status": "success",
+      "chunks": 334
+    },
+    {
+      "arxivId": "2212.08073",
+      "title": "Constitutional AI",
+      "status": "success",
+      "chunks": 200
+    },
+    {
+      "arxivId": "2204.05862",
+      "title": "Training a Helpful and Harmless Assistant",
+      "status": "success",
+      "chunks": 449
+    },
+    {
+      "arxivId": "2001.08361",
+      "title": "Scaling Laws for Neural LMs",
+      "status": "success",
+      "chunks": 148
+    },
+    {
+      "arxivId": "2203.15556",
+      "title": "Chinchilla: Training Compute-Optimal LLMs",
+      "status": "success",
+      "chunks": 169
+    },
+    {
+      "arxivId": "2106.09685",
+      "title": "LoRA: Low-Rank Adaptation",
+      "status": "success",
+      "chunks": 141
+    },
+    {
+      "arxivId": "2205.14135",
+      "title": "FlashAttention",
+      "status": "success",
+      "chunks": 193
+    },
+    {
+      "arxivId": "2101.03961",
+      "title": "Switch Transformers (MoE)",
+      "status": "success",
+      "chunks": 155
+    },
+    {
+      "arxivId": "2201.11903",
+      "title": "Chain-of-Thought Prompting",
+      "status": "success",
+      "chunks": 205
+    },
+    {
+      "arxivId": "2212.10560",
+      "title": "Self-Instruct",
+      "status": "success",
+      "chunks": 156
+    },
+    {
+      "arxivId": "2210.03629",
+      "title": "ReAct: Reasoning and Acting",
+      "status": "success",
+      "chunks": 189
+    },
+    {
+      "arxivId": "2305.10601",
+      "title": "Tree of Thoughts",
+      "status": "success",
+      "chunks": 84
+    },
+    {
+      "arxivId": "2005.11401",
+      "title": "RAG: Retrieval-Augmented Generation",
+      "status": "success",
+      "chunks": 104
+    },
+    {
+      "arxivId": "2112.04426",
+      "title": "RETRO: Retrieval-Enhanced Transformers",
+      "status": "success",
+      "chunks": 256
+    },
+    {
+      "arxivId": "2404.16130",
+      "title": "From Local to Global: GraphRAG",
+      "status": "success",
+      "chunks": 149
+    },
+    {
+      "arxivId": "2103.00020",
+      "title": "CLIP: Learning Visual Concepts",
+      "status": "failed",
+      "error": "Docling failed with code null: 2025-12-29 22:06:54,554 - INFO - detected formats: [<InputFormat.PDF: 'pdf'>]\n2025-12-29 22:06:54,567 - INFO - Going to convert document batch...\n2025-12-29 22:06:54,568 - INFO - Initializing pipeline for StandardPdfPipeline with options hash 8a40261cb342c4ad4c6f3633056fb061\n2025-12-29 22:06:54,571 - INFO - Loading plugin 'docling_defaults'\n2025-12-29 22:06:54,572 - INFO - Registered picture descriptions: ['vlm', 'api']\n2025-12-29 22:06:54,574 - INFO - Loading plugin 'docling_defaults'\n2025-12-29 22:06:54,576 - INFO - Registered ocr engines: ['auto', 'easyocr', 'ocrmac', 'rapidocr', 'tesserocr', 'tesseract']\n2025-12-29 22:06:54,581 - INFO - Loading plugin 'docling_defaults'\n2025-12-29 22:06:54,582 - INFO - Registered layout engines: ['docling_layout_default', 'docling_experimental_table_crops_layout']\n2025-12-29 22:06:54,585 - INFO - Accelerator device: 'cpu'\n2025-12-29 22:06:54,908 - INFO - Loading plugin 'docling_defaults'\n2025-12-29 22:06:54,909 - INFO - Registered table structure engines: ['docling_tableformer']\n2025-12-29 22:06:55,280 - INFO - Accelerator device: 'cpu'\n2025-12-29 22:06:55,518 - INFO - Processing document docling-3e7f352c-f6d5-4727-86c7-687e25599a44.pdf\n"
+    },
+    {
+      "arxivId": "2204.14198",
+      "title": "Flamingo: Visual Language Model",
+      "status": "success",
+      "chunks": 330
+    },
+    {
+      "arxivId": "2301.12597",
+      "title": "BLIP-2",
+      "status": "success",
+      "chunks": 90
+    },
+    {
+      "arxivId": "2304.08485",
+      "title": "LLaVA: Visual Instruction Tuning",
+      "status": "success",
+      "chunks": 120
+    },
+    {
+      "arxivId": "2006.11239",
+      "title": "Denoising Diffusion Probabilistic Models",
+      "status": "success",
+      "chunks": 95
+    },
+    {
+      "arxivId": "2112.10752",
+      "title": "Latent Diffusion Models (Stable Diffusion)",
+      "status": "success",
+      "chunks": 181
+    },
+    {
+      "arxivId": "2205.11487",
+      "title": "Imagen: Text-to-Image Diffusion",
+      "status": "success",
+      "chunks": 131
+    },
+    {
+      "arxivId": "2302.05543",
+      "title": "ControlNet",
+      "status": "success",
+      "chunks": 78
+    },
+    {
+      "arxivId": "2206.07682",
+      "title": "Emergent Abilities of Large LMs",
+      "status": "success",
+      "chunks": 134
+    },
+    {
+      "arxivId": "2303.08774",
+      "title": "GPT-4 Technical Report",
+      "status": "success",
+      "chunks": 482
+    },
+    {
+      "arxivId": "2211.09110",
+      "title": "Holistic Evaluation (HELM)",
+      "status": "failed",
+      "error": "Docling failed with code null: 2025-12-29 22:16:06,568 - INFO - detected formats: [<InputFormat.PDF: 'pdf'>]\n2025-12-29 22:16:06,592 - INFO - Going to convert document batch...\n2025-12-29 22:16:06,592 - INFO - Initializing pipeline for StandardPdfPipeline with options hash 8a40261cb342c4ad4c6f3633056fb061\n2025-12-29 22:16:06,595 - INFO - Loading plugin 'docling_defaults'\n2025-12-29 22:16:06,596 - INFO - Registered picture descriptions: ['vlm', 'api']\n2025-12-29 22:16:06,599 - INFO - Loading plugin 'docling_defaults'\n2025-12-29 22:16:06,600 - INFO - Registered ocr engines: ['auto', 'easyocr', 'ocrmac', 'rapidocr', 'tesserocr', 'tesseract']\n2025-12-29 22:16:06,606 - INFO - Loading plugin 'docling_defaults'\n2025-12-29 22:16:06,607 - INFO - Registered layout engines: ['docling_layout_default', 'docling_experimental_table_crops_layout']\n2025-12-29 22:16:06,610 - INFO - Accelerator device: 'cpu'\n2025-12-29 22:16:06,969 - INFO - Loading plugin 'docling_defaults'\n2025-12-29 22:16:06,970 - INFO - Registered table structure engines: ['docling_tableformer']\n2025-12-29 22:16:07,188 - INFO - Accelerator device: 'cpu'\n2025-12-29 22:16:07,419 - INFO - Processing document docling-e67cccff-02ad-4148-8d99-f2360996a313.pdf\n"
+    }
+  ]
+}

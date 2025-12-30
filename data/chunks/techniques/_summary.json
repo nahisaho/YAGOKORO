@@ -1,0 +1,415 @@
+{
+  "timestamp": "2025-12-29T14:54:22.336Z",
+  "summary": {
+    "total": 64,
+    "successful": 64,
+    "failed": 0,
+    "totalChunks": 8966,
+    "totalCharacters": 6250535
+  },
+  "categoryBreakdown": {
+    "MoE": {
+      "count": 3,
+      "chunks": 289
+    },
+    "Efficient Attention": {
+      "count": 3,
+      "chunks": 361
+    },
+    "Position Encoding": {
+      "count": 4,
+      "chunks": 360
+    },
+    "State Space Model": {
+      "count": 3,
+      "chunks": 578
+    },
+    "Alignment": {
+      "count": 4,
+      "chunks": 445
+    },
+    "RAG": {
+      "count": 5,
+      "chunks": 747
+    },
+    "Long Context": {
+      "count": 3,
+      "chunks": 313
+    },
+    "Multimodal": {
+      "count": 5,
+      "chunks": 898
+    },
+    "Small LLM": {
+      "count": 5,
+      "chunks": 1040
+    },
+    "Quantization": {
+      "count": 3,
+      "chunks": 227
+    },
+    "Efficiency": {
+      "count": 2,
+      "chunks": 125
+    },
+    "Agent": {
+      "count": 4,
+      "chunks": 652
+    },
+    "Tool Use": {
+      "count": 2,
+      "chunks": 295
+    },
+    "Reasoning": {
+      "count": 4,
+      "chunks": 562
+    },
+    "Instruction Tuning": {
+      "count": 3,
+      "chunks": 541
+    },
+    "Safety": {
+      "count": 3,
+      "chunks": 510
+    },
+    "Evaluation": {
+      "count": 3,
+      "chunks": 544
+    },
+    "Memory": {
+      "count": 2,
+      "chunks": 160
+    },
+    "Training": {
+      "count": 2,
+      "chunks": 212
+    },
+    "Training Data": {
+      "count": 1,
+      "chunks": 107
+    }
+  },
+  "successful": [
+    {
+      "arxivId": "2401.04088",
+      "chunks": 51,
+      "category": "MoE"
+    },
+    {
+      "arxivId": "2401.06066",
+      "chunks": 148,
+      "category": "MoE"
+    },
+    {
+      "arxivId": "2402.07871",
+      "chunks": 90,
+      "category": "MoE"
+    },
+    {
+      "arxivId": "2205.14135",
+      "chunks": 193,
+      "category": "Efficient Attention"
+    },
+    {
+      "arxivId": "2307.08691",
+      "chunks": 57,
+      "category": "Efficient Attention"
+    },
+    {
+      "arxivId": "2309.06180",
+      "chunks": 111,
+      "category": "Efficient Attention"
+    },
+    {
+      "arxivId": "2104.09864",
+      "chunks": 71,
+      "category": "Position Encoding"
+    },
+    {
+      "arxivId": "2108.12409",
+      "chunks": 123,
+      "category": "Position Encoding"
+    },
+    {
+      "arxivId": "2306.15595",
+      "chunks": 88,
+      "category": "Position Encoding"
+    },
+    {
+      "arxivId": "2309.00071",
+      "chunks": 78,
+      "category": "Position Encoding"
+    },
+    {
+      "arxivId": "2312.00752",
+      "chunks": 222,
+      "category": "State Space Model"
+    },
+    {
+      "arxivId": "2401.04081",
+      "chunks": 83,
+      "category": "State Space Model"
+    },
+    {
+      "arxivId": "2405.21060",
+      "chunks": 273,
+      "category": "State Space Model"
+    },
+    {
+      "arxivId": "2305.18290",
+      "chunks": 160,
+      "category": "Alignment"
+    },
+    {
+      "arxivId": "2310.12036",
+      "chunks": 64,
+      "category": "Alignment"
+    },
+    {
+      "arxivId": "2402.01306",
+      "chunks": 126,
+      "category": "Alignment"
+    },
+    {
+      "arxivId": "2403.07691",
+      "chunks": 95,
+      "category": "Alignment"
+    },
+    {
+      "arxivId": "2310.11511",
+      "chunks": 160,
+      "category": "RAG"
+    },
+    {
+      "arxivId": "2401.18059",
+      "chunks": 123,
+      "category": "RAG"
+    },
+    {
+      "arxivId": "2312.10997",
+      "chunks": 183,
+      "category": "RAG"
+    },
+    {
+      "arxivId": "2404.10981",
+      "chunks": 230,
+      "category": "RAG"
+    },
+    {
+      "arxivId": "2402.03367",
+      "chunks": 51,
+      "category": "RAG"
+    },
+    {
+      "arxivId": "2402.08268",
+      "chunks": 103,
+      "category": "Long Context"
+    },
+    {
+      "arxivId": "2307.03172",
+      "chunks": 89,
+      "category": "Long Context"
+    },
+    {
+      "arxivId": "2401.01325",
+      "chunks": 121,
+      "category": "Long Context"
+    },
+    {
+      "arxivId": "2304.08485",
+      "chunks": 120,
+      "category": "Multimodal"
+    },
+    {
+      "arxivId": "2310.03744",
+      "chunks": 122,
+      "category": "Multimodal"
+    },
+    {
+      "arxivId": "2312.11805",
+      "chunks": 369,
+      "category": "Multimodal"
+    },
+    {
+      "arxivId": "2402.11530",
+      "chunks": 97,
+      "category": "Multimodal"
+    },
+    {
+      "arxivId": "2403.09611",
+      "chunks": 190,
+      "category": "Multimodal"
+    },
+    {
+      "arxivId": "2309.05463",
+      "chunks": 67,
+      "category": "Small LLM"
+    },
+    {
+      "arxivId": "2306.01116",
+      "chunks": 241,
+      "category": "Small LLM"
+    },
+    {
+      "arxivId": "2404.14219",
+      "chunks": 100,
+      "category": "Small LLM"
+    },
+    {
+      "arxivId": "2403.08295",
+      "chunks": 86,
+      "category": "Small LLM"
+    },
+    {
+      "arxivId": "2407.21783",
+      "chunks": 546,
+      "category": "Small LLM"
+    },
+    {
+      "arxivId": "2306.00978",
+      "chunks": 98,
+      "category": "Quantization"
+    },
+    {
+      "arxivId": "2210.17323",
+      "chunks": 93,
+      "category": "Quantization"
+    },
+    {
+      "arxivId": "2402.17764",
+      "chunks": 36,
+      "category": "Quantization"
+    },
+    {
+      "arxivId": "2310.11453",
+      "chunks": 56,
+      "category": "Efficiency"
+    },
+    {
+      "arxivId": "2211.17192",
+      "chunks": 69,
+      "category": "Efficiency"
+    },
+    {
+      "arxivId": "2308.08155",
+      "chunks": 237,
+      "category": "Agent"
+    },
+    {
+      "arxivId": "2310.04406",
+      "chunks": 147,
+      "category": "Agent"
+    },
+    {
+      "arxivId": "2303.17580",
+      "chunks": 129,
+      "category": "Agent"
+    },
+    {
+      "arxivId": "2402.18679",
+      "chunks": 139,
+      "category": "Agent"
+    },
+    {
+      "arxivId": "2305.16291",
+      "chunks": 170,
+      "category": "Tool Use"
+    },
+    {
+      "arxivId": "2307.16789",
+      "chunks": 125,
+      "category": "Tool Use"
+    },
+    {
+      "arxivId": "2305.10601",
+      "chunks": 84,
+      "category": "Reasoning"
+    },
+    {
+      "arxivId": "2309.03409",
+      "chunks": 294,
+      "category": "Reasoning"
+    },
+    {
+      "arxivId": "2402.03268",
+      "chunks": 104,
+      "category": "Reasoning"
+    },
+    {
+      "arxivId": "2305.20050",
+      "chunks": 80,
+      "category": "Reasoning"
+    },
+    {
+      "arxivId": "2304.03277",
+      "chunks": 45,
+      "category": "Instruction Tuning"
+    },
+    {
+      "arxivId": "2306.02707",
+      "chunks": 220,
+      "category": "Instruction Tuning"
+    },
+    {
+      "arxivId": "2308.10792",
+      "chunks": 276,
+      "category": "Instruction Tuning"
+    },
+    {
+      "arxivId": "2310.06987",
+      "chunks": 102,
+      "category": "Safety"
+    },
+    {
+      "arxivId": "2307.15043",
+      "chunks": 121,
+      "category": "Safety"
+    },
+    {
+      "arxivId": "2310.03693",
+      "chunks": 287,
+      "category": "Safety"
+    },
+    {
+      "arxivId": "2311.12022",
+      "chunks": 156,
+      "category": "Evaluation"
+    },
+    {
+      "arxivId": "2403.13787",
+      "chunks": 265,
+      "category": "Evaluation"
+    },
+    {
+      "arxivId": "2306.05685",
+      "chunks": 123,
+      "category": "Evaluation"
+    },
+    {
+      "arxivId": "2306.07174",
+      "chunks": 79,
+      "category": "Memory"
+    },
+    {
+      "arxivId": "2310.08560",
+      "chunks": 81,
+      "category": "Memory"
+    },
+    {
+      "arxivId": "2306.11644",
+      "chunks": 115,
+      "category": "Training"
+    },
+    {
+      "arxivId": "2305.11206",
+      "chunks": 97,
+      "category": "Training"
+    },
+    {
+      "arxivId": "2401.10020",
+      "chunks": 107,
+      "category": "Training Data"
+    }
+  ],
+  "failed": []
+}

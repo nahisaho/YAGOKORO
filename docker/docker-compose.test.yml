@@ -1,0 +1,51 @@
+# YAGOKORO Docker Test Environment
+#
+# Lightweight configuration for running integration tests.
+# Uses ephemeral storage and minimal resources.
+
+services:
+  neo4j-test:
+    image: neo4j:5.26.0-community
+    container_name: yagokoro-neo4j-test
+    ports:
+      - "7475:7474"  # HTTP (different port to avoid conflicts)
+      - "7688:7687"  # Bolt
+    environment:
+      - NEO4J_AUTH=neo4j/testpassword
+      - NEO4J_PLUGINS=["apoc"]
+      - NEO4J_dbms_security_procedures_unrestricted=apoc.*
+      - NEO4J_dbms_memory_heap_initial__size=128m
+      - NEO4J_dbms_memory_heap_max__size=512m
+      - NEO4J_dbms_memory_pagecache_size=128m
+    healthcheck:
+      test: ["CMD", "wget", "-q", "--spider", "http://localhost:7474"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+      start_period: 15s
+    networks:
+      - yagokoro-test-network
+    # No persistent volumes - ephemeral for tests
+
+  qdrant-test:
+    image: qdrant/qdrant:v1.13.2
+    container_name: yagokoro-qdrant-test
+    ports:
+      - "6335:6333"  # REST API (different port)
+      - "6336:6334"  # gRPC
+    environment:
+      - QDRANT__SERVICE__HTTP_PORT=6333
+      - QDRANT__SERVICE__GRPC_PORT=6334
+    healthcheck:
+      test: ["CMD", "wget", "-q", "--spider", "http://localhost:6333/health"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+      start_period: 5s
+    networks:
+      - yagokoro-test-network
+    # No persistent volumes - ephemeral for tests
+
+networks:
+  yagokoro-test-network:
+    driver: bridge

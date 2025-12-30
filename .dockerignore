@@ -1,0 +1,13 @@
+node_modules
+dist
+coverage
+.git
+.github
+.gitignore
+*.md
+*.log
+docker/data
+docker/logs
+.env
+.env.local
+.env.*.local

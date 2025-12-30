@@ -1,0 +1,23 @@
+{
+  "arxivId": "2303.07839",
+  "title": "ChatGPT Prompt Patterns for Improving Code Quality, Refactoring, Requirements Elicitation, and Software Design",
+  "authors": [
+    "Jules White",
+    "Sam Hays",
+    "Quchen Fu",
+    "Jesse Spencer-Smith",
+    "Douglas C. Schmidt"
+  ],
+  "abstract": "This paper presents prompt design techniques for software engineering, in the form of patterns, to solve common problems when using large language models (LLMs), such as ChatGPT to automate common software engineering activities, such as ensuring code is decoupled from third-party libraries and simulating a web application API before it is implemented. This paper provides two contributions to research on using LLMs for software engineering. First, it provides a catalog of patterns for software engineering that classifies patterns according to the types of problems they solve. Second, it explores several prompt patterns that have been applied to improve requirements elicitation, rapid prototyping, code quality, refactoring, and system design.",
+  "published": "2023-03-11T14:43:17Z",
+  "year": 2023,
+  "category": "promptEngineering",
+  "chunks": [
+    {
+      "id": "2303.07839-abstract",
+      "content": "Title: ChatGPT Prompt Patterns for Improving Code Quality, Refactoring, Requirements Elicitation, and Software Design\n\nAbstract: This paper presents prompt design techniques for software engineering, in the form of patterns, to solve common problems when using large language models (LLMs), such as ChatGPT to automate common software engineering activities, such as ensuring code is decoupled from third-party libraries and simulating a web application API before it is implemented. This paper provides two contributions to research on using LLMs for software engineering. First, it provides a catalog of patterns for software engineering that classifies patterns according to the types of problems they solve. Second, it explores several prompt patterns that have been applied to improve requirements elicitation, rapid prototyping, code quality, refactoring, and system design.",
+      "type": "abstract"
+    }
+  ],
+  "fullText": null
+}

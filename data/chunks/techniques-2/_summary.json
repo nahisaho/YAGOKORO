@@ -1,0 +1,477 @@
+{
+  "timestamp": "2025-12-29T22:23:27.178Z",
+  "summary": {
+    "total": 78,
+    "successful": 78,
+    "failed": 0,
+    "totalChunks": 12022,
+    "totalCharacters": 8386386
+  },
+  "categoryBreakdown": {
+    "Code LLM": {
+      "count": 8,
+      "chunks": 1938
+    },
+    "Math": {
+      "count": 6,
+      "chunks": 952
+    },
+    "Distillation": {
+      "count": 5,
+      "chunks": 733
+    },
+    "Model Merging": {
+      "count": 4,
+      "chunks": 508
+    },
+    "Synthetic Data": {
+      "count": 4,
+      "chunks": 433
+    },
+    "Embedding": {
+      "count": 5,
+      "chunks": 506
+    },
+    "Constitutional AI": {
+      "count": 2,
+      "chunks": 283
+    },
+    "Safety": {
+      "count": 3,
+      "chunks": 403
+    },
+    "Continual Learning": {
+      "count": 2,
+      "chunks": 227
+    },
+    "Audio LLM": {
+      "count": 5,
+      "chunks": 765
+    },
+    "2024 Model": {
+      "count": 8,
+      "chunks": 1728
+    },
+    "Prompting": {
+      "count": 5,
+      "chunks": 988
+    },
+    "Retrieval": {
+      "count": 4,
+      "chunks": 341
+    },
+    "Structured Output": {
+      "count": 3,
+      "chunks": 758
+    },
+    "Video LLM": {
+      "count": 3,
+      "chunks": 281
+    },
+    "Efficient Inference": {
+      "count": 5,
+      "chunks": 646
+    },
+    "Context Compression": {
+      "count": 3,
+      "chunks": 249
+    },
+    "MoE": {
+      "count": 3,
+      "chunks": 283
+    }
+  },
+  "successful": [
+    {
+      "arxivId": "2308.12950",
+      "chunks": 282,
+      "category": "Code LLM"
+    },
+    {
+      "arxivId": "2305.06161",
+      "chunks": 288,
+      "category": "Code LLM"
+    },
+    {
+      "arxivId": "2401.14196",
+      "chunks": 110,
+      "category": "Code LLM"
+    },
+    {
+      "arxivId": "2402.19173",
+      "chunks": 324,
+      "category": "Code LLM"
+    },
+    {
+      "arxivId": "2406.11612",
+      "chunks": 319,
+      "category": "Code LLM"
+    },
+    {
+      "arxivId": "2107.03374",
+      "chunks": 220,
+      "category": "Code LLM"
+    },
+    {
+      "arxivId": "2308.07124",
+      "chunks": 291,
+      "category": "Code LLM"
+    },
+    {
+      "arxivId": "2402.16906",
+      "chunks": 104,
+      "category": "Code LLM"
+    },
+    {
+      "arxivId": "2206.14858",
+      "chunks": 179,
+      "category": "Math"
+    },
+    {
+      "arxivId": "2310.10631",
+      "chunks": 155,
+      "category": "Math"
+    },
+    {
+      "arxivId": "2309.12284",
+      "chunks": 119,
+      "category": "Math"
+    },
+    {
+      "arxivId": "2402.03300",
+      "chunks": 138,
+      "category": "Math"
+    },
+    {
+      "arxivId": "2309.05653",
+      "chunks": 117,
+      "category": "Math"
+    },
+    {
+      "arxivId": "2308.09583",
+      "chunks": 244,
+      "category": "Math"
+    },
+    {
+      "arxivId": "2306.08543",
+      "chunks": 114,
+      "category": "Distillation"
+    },
+    {
+      "arxivId": "2311.11045",
+      "chunks": 211,
+      "category": "Distillation"
+    },
+    {
+      "arxivId": "2401.02954",
+      "chunks": 225,
+      "category": "Distillation"
+    },
+    {
+      "arxivId": "2310.06825",
+      "chunks": 42,
+      "category": "Distillation"
+    },
+    {
+      "arxivId": "2305.14314",
+      "chunks": 141,
+      "category": "Distillation"
+    },
+    {
+      "arxivId": "2403.19522",
+      "chunks": 119,
+      "category": "Model Merging"
+    },
+    {
+      "arxivId": "2306.01708",
+      "chunks": 124,
+      "category": "Model Merging"
+    },
+    {
+      "arxivId": "2311.03099",
+      "chunks": 107,
+      "category": "Model Merging"
+    },
+    {
+      "arxivId": "2212.04089",
+      "chunks": 158,
+      "category": "Model Merging"
+    },
+    {
+      "arxivId": "2304.12244",
+      "chunks": 96,
+      "category": "Synthetic Data"
+    },
+    {
+      "arxivId": "2305.14233",
+      "chunks": 105,
+      "category": "Synthetic Data"
+    },
+    {
+      "arxivId": "2308.06259",
+      "chunks": 118,
+      "category": "Synthetic Data"
+    },
+    {
+      "arxivId": "2401.00368",
+      "chunks": 133,
+      "category": "Embedding"
+    },
+    {
+      "arxivId": "2402.13228",
+      "chunks": 114,
+      "category": "Synthetic Data"
+    },
+    {
+      "arxivId": "2212.08073",
+      "chunks": 200,
+      "category": "Constitutional AI"
+    },
+    {
+      "arxivId": "2309.07124",
+      "chunks": 83,
+      "category": "Constitutional AI"
+    },
+    {
+      "arxivId": "2401.18018",
+      "chunks": 155,
+      "category": "Safety"
+    },
+    {
+      "arxivId": "2306.09442",
+      "chunks": 100,
+      "category": "Safety"
+    },
+    {
+      "arxivId": "2310.08419",
+      "chunks": 148,
+      "category": "Safety"
+    },
+    {
+      "arxivId": "2308.04014",
+      "chunks": 62,
+      "category": "Continual Learning"
+    },
+    {
+      "arxivId": "2309.09530",
+      "chunks": 165,
+      "category": "Continual Learning"
+    },
+    {
+      "arxivId": "2305.11000",
+      "chunks": 54,
+      "category": "Audio LLM"
+    },
+    {
+      "arxivId": "2306.12925",
+      "chunks": 171,
+      "category": "Audio LLM"
+    },
+    {
+      "arxivId": "2305.15255",
+      "chunks": 86,
+      "category": "Audio LLM"
+    },
+    {
+      "arxivId": "2312.11805",
+      "chunks": 369,
+      "category": "Audio LLM"
+    },
+    {
+      "arxivId": "2309.07062",
+      "chunks": 85,
+      "category": "Audio LLM"
+    },
+    {
+      "arxivId": "2212.03533",
+      "chunks": 104,
+      "category": "Embedding"
+    },
+    {
+      "arxivId": "2310.07554",
+      "chunks": 140,
+      "category": "Embedding"
+    },
+    {
+      "arxivId": "2402.05672",
+      "chunks": 39,
+      "category": "Embedding"
+    },
+    {
+      "arxivId": "2311.13534",
+      "chunks": 90,
+      "category": "Embedding"
+    },
+    {
+      "arxivId": "2401.02385",
+      "chunks": 58,
+      "category": "2024 Model"
+    },
+    {
+      "arxivId": "2405.04434",
+      "chunks": 203,
+      "category": "2024 Model"
+    },
+    {
+      "arxivId": "2403.05530",
+      "chunks": 683,
+      "category": "2024 Model"
+    },
+    {
+      "arxivId": "2407.10671",
+      "chunks": 149,
+      "category": "2024 Model"
+    },
+    {
+      "arxivId": "2402.05468",
+      "chunks": 162,
+      "category": "2024 Model"
+    },
+    {
+      "arxivId": "2403.04652",
+      "chunks": 136,
+      "category": "2024 Model"
+    },
+    {
+      "arxivId": "2406.12793",
+      "chunks": 103,
+      "category": "2024 Model"
+    },
+    {
+      "arxivId": "2407.12327",
+      "chunks": 234,
+      "category": "2024 Model"
+    },
+    {
+      "arxivId": "2210.03629",
+      "chunks": 189,
+      "category": "Prompting"
+    },
+    {
+      "arxivId": "2305.14325",
+      "chunks": 87,
+      "category": "Prompting"
+    },
+    {
+      "arxivId": "2210.11416",
+      "chunks": 302,
+      "category": "Prompting"
+    },
+    {
+      "arxivId": "2302.11382",
+      "chunks": 160,
+      "category": "Prompting"
+    },
+    {
+      "arxivId": "2309.16797",
+      "chunks": 250,
+      "category": "Prompting"
+    },
+    {
+      "arxivId": "2301.12652",
+      "chunks": 80,
+      "category": "Retrieval"
+    },
+    {
+      "arxivId": "2305.14283",
+      "chunks": 85,
+      "category": "Retrieval"
+    },
+    {
+      "arxivId": "2310.01558",
+      "chunks": 115,
+      "category": "Retrieval"
+    },
+    {
+      "arxivId": "2403.10131",
+      "chunks": 61,
+      "category": "Retrieval"
+    },
+    {
+      "arxivId": "2305.14992",
+      "chunks": 107,
+      "category": "Structured Output"
+    },
+    {
+      "arxivId": "2307.09288",
+      "chunks": 499,
+      "category": "Structured Output"
+    },
+    {
+      "arxivId": "2308.00245",
+      "chunks": 152,
+      "category": "Structured Output"
+    },
+    {
+      "arxivId": "2306.02858",
+      "chunks": 48,
+      "category": "Video LLM"
+    },
+    {
+      "arxivId": "2311.10122",
+      "chunks": 93,
+      "category": "Video LLM"
+    },
+    {
+      "arxivId": "2310.19773",
+      "chunks": 140,
+      "category": "Video LLM"
+    },
+    {
+      "arxivId": "2302.01318",
+      "chunks": 45,
+      "category": "Efficient Inference"
+    },
+    {
+      "arxivId": "2309.06180",
+      "chunks": 111,
+      "category": "Efficient Inference"
+    },
+    {
+      "arxivId": "2306.05836",
+      "chunks": 114,
+      "category": "Efficient Inference"
+    },
+    {
+      "arxivId": "2404.14294",
+      "chunks": 309,
+      "category": "Efficient Inference"
+    },
+    {
+      "arxivId": "2311.01282",
+      "chunks": 67,
+      "category": "Efficient Inference"
+    },
+    {
+      "arxivId": "2310.06201",
+      "chunks": 66,
+      "category": "Context Compression"
+    },
+    {
+      "arxivId": "2304.08467",
+      "chunks": 122,
+      "category": "Context Compression"
+    },
+    {
+      "arxivId": "2305.05176",
+      "chunks": 61,
+      "category": "Context Compression"
+    },
+    {
+      "arxivId": "2401.13792",
+      "chunks": 43,
+      "category": "MoE"
+    },
+    {
+      "arxivId": "2402.14905",
+      "chunks": 162,
+      "category": "MoE"
+    },
+    {
+      "arxivId": "2310.16944",
+      "chunks": 78,
+      "category": "MoE"
+    }
+  ],
+  "failed": []
+}

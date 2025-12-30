@@ -1,0 +1,41 @@
+{
+  "name": "@yagokoro/cli",
+  "version": "0.1.0",
+  "private": true,
+  "description": "CLI library for YAGOKORO GraphRAG system",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": ["dist"],
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "test": "vitest run --passWithNoTests",
+    "test:unit": "vitest run --exclude='**/*.integration.test.ts'",
+    "test:integration": "vitest run --include='**/*.integration.test.ts'",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
+    "typecheck": "tsc --noEmit",
+    "clean": "rm -rf dist coverage"
+  },
+  "dependencies": {
+    "@yagokoro/domain": "workspace:*",
+    "@yagokoro/graphrag": "workspace:*",
+    "@yagokoro/neo4j": "workspace:*",
+    "@yagokoro/vector": "workspace:*",
+    "@yagokoro/mcp": "workspace:*",
+    "commander": "^13.1.0",
+    "chalk": "^5.4.1",
+    "ora": "^8.2.0"
+  },
+  "devDependencies": {
+    "vitest": "^2.1.8"
+  },
+  "keywords": ["cli", "commands", "terminal"]
+}

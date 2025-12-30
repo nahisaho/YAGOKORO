@@ -1,0 +1,47 @@
+{
+  "name": "@yagokoro/hallucination",
+  "version": "0.1.0",
+  "description": "Hallucination detection and consistency checking for GraphRAG",
+  "type": "module",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "test": "vitest run --passWithNoTests",
+    "test:watch": "vitest watch",
+    "test:coverage": "vitest run --coverage",
+    "lint": "biome lint --write ./src",
+    "format": "biome format --write ./src"
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "keywords": [
+    "hallucination",
+    "consistency",
+    "graphrag",
+    "llm",
+    "fact-checking"
+  ],
+  "dependencies": {
+    "@yagokoro/domain": "workspace:*",
+    "@yagokoro/graphrag": "workspace:*",
+    "@yagokoro/neo4j": "workspace:*"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^1.9.4",
+    "@types/node": "^20.17.10",
+    "typescript": "^5.7.2",
+    "vitest": "^2.1.9"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  }
+}

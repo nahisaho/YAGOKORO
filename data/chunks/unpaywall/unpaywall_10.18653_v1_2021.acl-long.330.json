@@ -1,0 +1,1565 @@
+{
+  "doi": "10.18653/v1/2021.acl-long.330",
+  "title": "Measuring Massive Multitask Language Understanding",
+  "category": "Evaluation",
+  "year": 2021,
+  "paper": {
+    "doi": "10.18653/v1/2021.acl-long.330",
+    "doi_url": "https://doi.org/10.18653/v1/2021.acl-long.330",
+    "title": "Societal Biases in Language Generation: Progress and Challenges",
+    "genre": "proceedings-article",
+    "is_paratext": false,
+    "published_date": "2021-01-01",
+    "year": 2021,
+    "journal_name": "Proceedings of the 59th Annual Meeting of the Association for Computational Linguistics and the 11th International Joint Conference on Natural Language Processing (Volume 1: Long Papers)",
+    "journal_issns": null,
+    "journal_issn_l": null,
+    "journal_is_oa": false,
+    "journal_is_in_doaj": null,
+    "publisher": "Association for Computational Linguistics",
+    "is_oa": true,
+    "oa_status": "gold",
+    "has_repository_copy": null,
+    "best_oa_location": {
+      "url": "https://aclanthology.org/2021.acl-long.330.pdf",
+      "url_for_pdf": "https://aclanthology.org/2021.acl-long.330.pdf",
+      "url_for_landing_page": "https://doi.org/10.18653/v1/2021.acl-long.330",
+      "evidence": "deprecated",
+      "license": "cc-by",
+      "version": "publishedVersion",
+      "host_type": null,
+      "is_best": true,
+      "pmh_id": null,
+      "endpoint_id": null,
+      "repository_institution": null,
+      "oa_date": "2021-01-01",
+      "updated": "deprecated"
+    },
+    "first_oa_location": {
+      "url": "https://aclanthology.org/2021.acl-long.330.pdf",
+      "url_for_pdf": "https://aclanthology.org/2021.acl-long.330.pdf",
+      "url_for_landing_page": "https://doi.org/10.18653/v1/2021.acl-long.330",
+      "evidence": "deprecated",
+      "license": "cc-by",
+      "version": "publishedVersion",
+      "host_type": null,
+      "is_best": true,
+      "pmh_id": null,
+      "endpoint_id": null,
+      "repository_institution": null,
+      "oa_date": "2021-01-01",
+      "updated": "deprecated"
+    },
+    "oa_locations": [
+      {
+        "url": "https://aclanthology.org/2021.acl-long.330.pdf",
+        "url_for_pdf": "https://aclanthology.org/2021.acl-long.330.pdf",
+        "url_for_landing_page": "https://doi.org/10.18653/v1/2021.acl-long.330",
+        "evidence": "deprecated",
+        "license": "cc-by",
+        "version": "publishedVersion",
+        "host_type": null,
+        "is_best": true,
+        "pmh_id": null,
+        "endpoint_id": null,
+        "repository_institution": null,
+        "oa_date": "2021-01-01",
+        "updated": "deprecated"
+      }
+    ],
+    "oa_locations_embargoed": [],
+    "data_standard": 2,
+    "z_authors": [
+      {
+        "author_position": "first",
+        "raw_author_name": "Emily Sheng",
+        "is_corresponding": true,
+        "raw_affiliation_strings": [
+          "Information Sciences Institute, University of Southern California"
+        ]
+      },
+      {
+        "author_position": "additional",
+        "raw_author_name": "Kai-Wei Chang",
+        "is_corresponding": false,
+        "raw_affiliation_strings": [
+          "Computer Science Department, University of California, Los Angeles"
+        ]
+      },
+      {
+        "author_position": "additional",
+        "raw_author_name": "Prem Natarajan",
+        "is_corresponding": false,
+        "raw_affiliation_strings": [
+          "Information Sciences Institute, University of Southern California"
+        ]
+      },
+      {
+        "author_position": "last",
+        "raw_author_name": "Nanyun Peng",
+        "is_corresponding": false,
+        "raw_affiliation_strings": [
+          "Information Sciences Institute, University of Southern California",
+          "Computer Science Department, University of California, Los Angeles"
+        ]
+      }
+    ],
+    "updated": "2025-08-26T03:46:05Z"
+  },
+  "chunks": [
+    {
+      "id": "unpaywall-10.18653_v1_2021.acl-long.330-chunk-0",
+      "content": "## Societal Biases in Language Generation: Progress and Challenges\n\n## Emily Sheng 1 , Kai-Wei Chang 2 , Premkumar Natarajan 1 , Nanyun Peng 1 , 2\n\n1\n\nInformation Sciences Institute, University of Southern California\n\n2 Computer Science Department, University of California, Los Angeles\n\n{ ewsheng,pnataraj } @isi.edu , { kwchang,violetpeng } @cs.ucla.edu\n\n## Abstract",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2021.acl-long.330",
+        "title": "Measuring Massive Multitask Language Understanding",
+        "category": "Evaluation",
+        "year": 2021,
+        "authors": "undefined undefined, undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 0
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2021.acl-long.330-chunk-1",
+      "content": "ewsheng,pnataraj } @isi.edu , { kwchang,violetpeng } @cs.ucla.edu ## Abstract \n\nTechnology for language generation has advanced rapidly, spurred by advancements in pre-training large models on massive amounts of data and the need for intelligent agents to communicate in a natural manner. While techniques can effectively generate fluent text, they can also produce undesirable societal biases that can have a disproportionately negative impact on marginalized populations. Language generation presents unique challenges for biases in terms of direct user interaction and the structure of decoding techniques. To better understand these challenges, we present a survey on societal biases in language generation, focusing on how data and techniques contribute to biases and progress towards reducing biases. Motivated by a lack of studies on biases from decoding techniques, we also conduct experiments to quantify the effects of these techniques. By further discussing general trends and open challenges, we call to attention promising directions for research and the importance of fairness and inclusivity considerations for language generation applications.",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2021.acl-long.330",
+        "title": "Measuring Massive Multitask Language Understanding",
+        "category": "Evaluation",
+        "year": 2021,
+        "authors": "undefined undefined, undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 1
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2021.acl-long.330-chunk-2",
+      "content": "of these techniques. By further discussing general trends and open challenges, we call to attention promising directions for research and the importance of fairness and inclusivity considerations for language generation applications. \n\n## 1 Introduction\n\nNatural language generation (NLG) is a suite of techniques that enables the generation of humanreadable language for different goals. These techniques are the core components of applications such as virtual assistants, chat bots, automatic translators, summarizers, and creative language composers. Recent advances in techniques for language generation (e.g., GPT (Radford et al., 2018), GPT-2 (Radford et al., 2019), GPT-3 (Brown et al., 2020), TransformerXL (Dai et al., 2019), XLNet (Yang et al., 2019)) powered by Transformers (Vaswani et al., 2017) and an increasing repository of available data have created more capable applications. This has, in turn, channeled more interest and effort into developing NLG techniques.",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2021.acl-long.330",
+        "title": "Measuring Massive Multitask Language Understanding",
+        "category": "Evaluation",
+        "year": 2021,
+        "authors": "undefined undefined, undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 2
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2021.acl-long.330-chunk-3",
+      "content": "al., 2017) and an increasing repository of available data have created more capable applications. This has, in turn, channeled more interest and effort into developing NLG techniques. \n\nWe emphasize the importance of better understanding how societal biases manifest in NLG techniques, because NLG applications directly interact with many different users to generate novel content in various domains (e.g., chat bots for health, education, and customer support). However, when techniques are less effective or detrimental for marginalized populations, these techniques can inadvertently become gatekeepers of those populations for generation and associated language technologies. For example, an educational chat bot that produces more negative responses for topics about a specific ethnicity will discourage users of that ethnicity from interacting with the chat bot. While it is generally important to study the societal impact of NLP and AI techniques, we argue that the direct user impact of NLG techniques makes it especially important to carefully quantify the impact.",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2021.acl-long.330",
+        "title": "Measuring Massive Multitask Language Understanding",
+        "category": "Evaluation",
+        "year": 2021,
+        "authors": "undefined undefined, undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 3
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2021.acl-long.330-chunk-4",
+      "content": "important to study the societal impact of NLP and AI techniques, we argue that the direct user impact of NLG techniques makes it especially important to carefully quantify the impact. \n\nMotivated by the importance of fairness in language generation, we present the first comprehensive survey on societal biases in language generation. By enumerating how NLG techniques contribute to biases and examining progress towards bias analysis and mitigation, we contextualize the discussion of broader trends and challenges. Specifically, we focus on techniques for NLG tasks, i.e., tasks that generate a sequence of text. 1 Finding a lack of studies on biases from decoding techniques, we additionally present an experimental study to quantify the effects of various decoding techniques.\n\nBefore we delve into the details of biases in language generation, we first position our survey in the context of other relevant surveys and position papers. Sun et al. (2019) present a focused survey",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2021.acl-long.330",
+        "title": "Measuring Massive Multitask Language Understanding",
+        "category": "Evaluation",
+        "year": 2021,
+        "authors": "undefined undefined, undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 4
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2021.acl-long.330-chunk-5",
+      "content": "details of biases in language generation, we first position our survey in the context of other relevant surveys and position papers. Sun et al. (2019) present a focused survey \n\n1 Although bi-directional language models like BERT (Devlin et al., 2019) can also be used for auto-regressive generation (Wang and Cho, 2019; Chen et al., 2020), traditional auto-regressive models are still typically of better quality and more widely used for generation (Shwartz et al., 2020). Thus, we limit the scope of this survey to the latter models.\n\nTable 1: Existing bias studies on different demographic dimensions in various NLG tasks: autocomplete generation, dialogue generation, machine translation (MT), and text re-writing.",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2021.acl-long.330",
+        "title": "Measuring Massive Multitask Language Understanding",
+        "category": "Evaluation",
+        "year": 2021,
+        "authors": "undefined undefined, undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 5
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2021.acl-long.330-chunk-6",
+      "content": "Existing bias studies on different demographic dimensions in various NLG tasks: autocomplete generation, dialogue generation, machine translation (MT), and text re-writing. \n\n| Demo. Dim.   | NLG Task                            | Works                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |\n|--------------|-------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|\n| Gender       | Autocomplete Dialogue MT Re-writing | Bordia and Bowman (2019); Qian et al. (2019); Solaiman et al. (2019); Sheng et al. (2019, 2020); Vig et al. (2020); Yeo and Chen (2020); Brown et al. (2020); Dhamala et al. (2021); Schick et al. (2021); Nozza et al. (2021); Kirk et al. (2021) Henderson et al. (2018); Dinan et al. (2020a); Liu et al. (2020a,b); Cercas Curry et al. (2020); Sheng et al. (2021a,b) Vanmassenhove et al. (2018); Elaraby et al. (2018); Prates et al. (2019); Stanovsky et al. (2019); Escud´ e Font and Costa-juss` a (2019); Cho et al. (2019); Moryossef et al. (2019); Saunders and Byrne (2020); Saunders et al. (2020); Kocmi et al. (2020); Costa-juss` a and de Jorge (2020); Costa-juss` a et al. (2020); Basta et al. (2020); Farkas and N´ emeth (2020); Stafanoviˇ cs et al. (2020); Gonen and Webster (2020); Hovy et al. (2020); Roberts et al. (2020); Cho et al. (2021); Savoldi et al. (2021); Renduchintala and Williams (2021); Choubey et al. (2021); Saunders et al. (2021); Tomalin et al. (2021) Habash et al. (2019); Zmigrod et al. (2019); Alhafni et al. (2020); Sun et al. (2021) |\n| Profession   | Autocomplete                        | Huang et al. (2020); Dhamala et al. (2021)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |\n| Race         | Autocomplete Dialogue               | Solaiman et al. (2019); Sheng et al. (2019, 2020); Groenwold et al. (2020); Brown et al. (2020); Dhamala et al. (2021); Schick et al. (2021); Kirk et al. (2021) Sheng et al. (2021a,b)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |\n| Religion     | Autocomplete                        | Solaiman et al. (2019); Brown et al. (2020); Dhamala et al. (2021); Kirk et al. (2021); Abid et al. (2021)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |\n| Sexuality    | Autocomplete Dialogue               | Sheng et al. (2019, 2020); Kirk et al. (2021) Sheng et al. (2021a)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |\n| Other        | Autocomplete Dialogue Re-writing    | Shwartz et al. (2020); Peng et al. (2020); Huang et al. (2020); Dhamala et al. (2021); Kirk et al. (2021) Sheng et al. (2021a) Pryzant et al. (2020); Ma et al. (2020)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2021.acl-long.330",
+        "title": "Measuring Massive Multitask Language Understanding",
+        "category": "Evaluation",
+        "year": 2021,
+        "authors": "undefined undefined, undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 6
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2021.acl-long.330-chunk-7",
+      "content": "et al. (2021); Kirk et al. (2021); Abid et al. (2021) | | Sexuality | Autocomplete Dialogue | Sheng et al. (2019, 2020); Kirk et al. (2021) Sheng et al. (2021a) | | Other | Autocomplete Dialogue Re-writing | Shwartz et al. (2020); Peng et al. (2020); Huang et al. (2020); Dhamala et al. (2021); Kirk et al. (2021) Sheng et al. (2021a) Pryzant et al. (2020); Ma et al. (2020) | \n\non mitigating gender biases and Shah et al. (2020) categorize sources of biases-both largely focus on natural language understanding (NLU) tasks, while we examine biases in NLG tasks. Additionally, Blodgett et al. (2020) urge for more explicitly tying 'biases' in NLP to societal normative definitions of biases and social hierarchies; with their recommendations in mind, we discuss the negative impacts of biases in NLG techniques.",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2021.acl-long.330",
+        "title": "Measuring Massive Multitask Language Understanding",
+        "category": "Evaluation",
+        "year": 2021,
+        "authors": "undefined undefined, undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 7
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2021.acl-long.330-chunk-8",
+      "content": "in NLP to societal normative definitions of biases and social hierarchies; with their recommendations in mind, we discuss the negative impacts of biases in NLG techniques. \n\nOur contributions are a comprehensive survey on societal biases in language generation and an experimental study on biases from decoding techniques. To start, we describe classes of NLG tasks (Sec. 2) and subsequently examine examples of biases and harms in NLG (Sec. 3). We then discuss NLG techniques that facilitate biases, including a study of decoding techniques (Sec. 4). Sec. 5 highlights progress and challenges, and Sec. 6 presents open problems and proposals. We hope this survey brings more visibility to the importance of carefully considering different components of NLG pipelines for potential biases and mitigation methods.\n\n## 2 Language Generation Tasks",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2021.acl-long.330",
+        "title": "Measuring Massive Multitask Language Understanding",
+        "category": "Evaluation",
+        "year": 2021,
+        "authors": "undefined undefined, undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 8
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2021.acl-long.330-chunk-9",
+      "content": "more visibility to the importance of carefully considering different components of NLG pipelines for potential biases and mitigation methods. ## 2 Language Generation Tasks \n\nTo begin, we categorize generation tasks and introduce existing bias studies relevant to each task. NLG tasks broadly fall into two categories: those that generate text continuations conditioned on some prompt and those that transform text from one form to another . Table 1 organizes various bias-related works for NLG tasks.\n\n## 2.1 Continuation Generation Tasks\n\nThe continuation class includes autocomplete and dialogue generation, where the goal is to generate text that is coherent and relevant to a prompt.",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2021.acl-long.330",
+        "title": "Measuring Massive Multitask Language Understanding",
+        "category": "Evaluation",
+        "year": 2021,
+        "authors": "undefined undefined, undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 9
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2021.acl-long.330-chunk-10",
+      "content": "autocomplete and dialogue generation, where the goal is to generate text that is coherent and relevant to a prompt. \n\nAutocomplete Generation We use the term autocomplete generation to refer to conditional generation directly from language models. Language models are the core components for many NLG and NLU tasks, and this task enables directly quantifying biases in large, pre-trained language models (Bordia and Bowman, 2019; Sheng et al., 2019; Solaiman et al., 2019; Brown et al., 2020). Existing works analyzing biases in autocomplete generation have mostly examined Transformer-based models, including GPT (Shwartz et al., 2020), GPT2 (Solaiman et al., 2019; Sheng et al., 2019, 2020; Shwartz et al., 2020; Vig et al., 2020; Yeo and Chen, 2020; Huang et al., 2020; Dhamala et al., 2021; Schick et al., 2021), GPT-3 (Brown et al., 2020), CTRL (Dhamala et al., 2021), TransformerXL (Shwartz et al., 2020; Vig et al., 2020; Huang et al., 2020), and XLNet (Shwartz et al., 2020; Vig et al.,",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2021.acl-long.330",
+        "title": "Measuring Massive Multitask Language Understanding",
+        "category": "Evaluation",
+        "year": 2021,
+        "authors": "undefined undefined, undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 10
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2021.acl-long.330-chunk-11",
+      "content": "(Brown et al., 2020), CTRL (Dhamala et al., 2021), TransformerXL (Shwartz et al., 2020; Vig et al., 2020; Huang et al., 2020), and XLNet (Shwartz et al., 2020; Vig et al., \n\n2020; Yeo and Chen, 2020), though Bordia and Bowman (2019); Qian et al. (2019) also look at LSTM-based models.",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2021.acl-long.330",
+        "title": "Measuring Massive Multitask Language Understanding",
+        "category": "Evaluation",
+        "year": 2021,
+        "authors": "undefined undefined, undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 11
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2021.acl-long.330-chunk-12",
+      "content": "Qian et al. (2019) also look at LSTM-based models. \n\nDialogue Generation Dialogue generation is conditioned on user inputs and can be for specific domains (e.g., health, customer service) and tasks (e.g., behavior intervention, booking flights) or general chit-chat. These dialogue applications directly interact with users, and any propagated biases directly affect user behavior and actions. In terms of recurrent dialogue models, Henderson et al. (2018) analyze biases in hierarchical recurrent encoder-decoder architectures and Liu et al. (2020a,b) analyze LSTM-based encoder-decoder models. Other works on dialogue biases (Dinan et al., 2020a; Sheng et al., 2020, 2021b) focus on Transformer-based models such as DialoGPT (Zhang et al., 2020) and other custom architectures.\n\n## 2.2 Transformation Generation Tasks",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2021.acl-long.330",
+        "title": "Measuring Massive Multitask Language Understanding",
+        "category": "Evaluation",
+        "year": 2021,
+        "authors": "undefined undefined, undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 12
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2021.acl-long.330-chunk-13",
+      "content": "2020, 2021b) focus on Transformer-based models such as DialoGPT (Zhang et al., 2020) and other custom architectures. ## 2.2 Transformation Generation Tasks \n\nThe transformation class includes machine translation and various formulations of text re-writing. The general goal of these tasks is to transform text into a form with targeted properties.",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2021.acl-long.330",
+        "title": "Measuring Massive Multitask Language Understanding",
+        "category": "Evaluation",
+        "year": 2021,
+        "authors": "undefined undefined, undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 13
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2021.acl-long.330-chunk-14",
+      "content": "to transform text into a form with targeted properties. \n\nMachine Translation Translation is the task of transforming text between languages while preserving the meaning. Existing works on biases in machine translation have almost exclusively focused on issues of gender biases 2 in a variety of academic and commercial systems. The use of grammatical gender in some languages and not in others can expose unwanted gender associations (e.g., for different occupations) through translation (Prates et al., 2019). Earlier works by Vanmassenhove et al. (2018) and Elaraby et al. (2018) study LSTM-based encoder-decoder translation systems, and more recent works examine Transformer-based architectures (Escud´ e Font and Costa-juss` a, 2019; Stanovsky et al., 2019; Saunders and Byrne, 2020; Saunders et al., 2020; Costa-juss` a and de Jorge, 2020; Basta et al., 2020; Stafanoviˇ cs et al., 2020; Renduchintala and Williams, 2021; Choubey et al., 2021; Saunders et al., 2021; Tomalin et al., 2021). While Google Translate 3 has been the most popular commercial system to analyze for gender biases (Prates et al., 2019; Moryossef et al., 2019; Stanovsky et al., 2019; Cho et al., 2019; Farkas and N´ emeth, 2020), Stanovsky et al. (2019) also",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2021.acl-long.330",
+        "title": "Measuring Massive Multitask Language Understanding",
+        "category": "Evaluation",
+        "year": 2021,
+        "authors": "undefined undefined, undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 14
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2021.acl-long.330-chunk-15",
+      "content": "been the most popular commercial system to analyze for gender biases (Prates et al., 2019; Moryossef et al., 2019; Stanovsky et al., 2019; Cho et al., 2019; Farkas and N´ emeth, 2020), Stanovsky et al. (2019) also \n\n2 For a detailed survey of gender bias in machine translation, we refer readers to Savoldi et al. (2021).\n\n3 https://translate.google.com\n\nstudy Microsoft Translator, 4 Amazon Translate, 5 and SYSTRAN; 6 Cho et al. (2019) additionally look at Naver Papago 7 and Kakao Translator, 8 and Cho et al. (2021) also examine Yandex. 9",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2021.acl-long.330",
+        "title": "Measuring Massive Multitask Language Understanding",
+        "category": "Evaluation",
+        "year": 2021,
+        "authors": "undefined undefined, undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 15
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2021.acl-long.330-chunk-16",
+      "content": "at Naver Papago 7 and Kakao Translator, 8 and Cho et al. (2021) also examine Yandex. 9 \n\nRe-writing We use the term re-writing to refer to tasks of revising specific words and phrases in the original text to be more aligned with a targeted attribute. Specifically, there have been studies on re-inflection (Habash et al., 2019; Zmigrod et al., 2019; Alhafni et al., 2020) and re-writing text to use neutral viewpoints (Pryzant et al., 2020), genderneutral English (Sun et al., 2021), or more agency (Ma et al., 2020). These tasks typically rely on custom encoder-decoder models.\n\n## 2.3 Other Tasks\n\nThere are other NLG tasks, such as the continuation tasks of story and poetry generation, and the transformation tasks of abstractive summarization and paraphrase generation. However, these other NLG tasks are not yet well-studied in the context of societal biases. 10\n\n## 3 Biases and their Negative Impacts",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2021.acl-long.330",
+        "title": "Measuring Massive Multitask Language Understanding",
+        "category": "Evaluation",
+        "year": 2021,
+        "authors": "undefined undefined, undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 16
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2021.acl-long.330-chunk-17",
+      "content": "abstractive summarization and paraphrase generation. However, these other NLG tasks are not yet well-studied in the context of societal biases. 10 ## 3 Biases and their Negative Impacts \n\nIn this section, we introduce how existing studies of biases in NLG tasks commonly quantify biases and their negative impacts.\n\n## 3.1 Bias Definitions and Metrics\n\nIn the context of AI fairness, the term 'bias' commonly refers to skews that result in undesirable impacts (Crawford, 2017) and is quantifiable with some metric. There are relatively more existing studies on biases in NLU tasks, where it is arguably simpler to define bias metrics, since we can intuitively compare the accuracy of the task (e.g., coreference resolution, hate speech detection) for different demographics. Language generation tasks often involve stochastic generation of open-ended and lengthy texts, traits that are not directly compatible with traditional algorithmic bias definitions (e.g.,\n\n4\n\nhttps://translate.yandex.com",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2021.acl-long.330",
+        "title": "Measuring Massive Multitask Language Understanding",
+        "category": "Evaluation",
+        "year": 2021,
+        "authors": "undefined undefined, undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 17
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2021.acl-long.330-chunk-18",
+      "content": "different demographics. Language generation tasks often involve stochastic generation of open-ended and lengthy texts, traits that are not directly compatible with traditional algorithmic bias definitions (e.g., 4 https://translate.yandex.com \n\nhttps://www.bing.com/translator 5 https://aws.amazon.com/translate 6 https://www.systransoft.com 7 https://papago.naver.com 8 https://translate.kakao.com 9\n\n10 Lucy and Bamman (2021) is an exception that analyzes gender in generated stories. While there are studies of biases in poetry generation and summarization, they focus on non-NLG biases: Sheng and Uthus (2020) investigate biases in a poetry composition system, but in the context of information retrieval; Celis and Keswani (2020) analyze biases in extractive summarization.\n\nequalized odds, equal opportunity, demographic parity (Dwork et al., 2012; Hardt et al., 2016)).",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2021.acl-long.330",
+        "title": "Measuring Massive Multitask Language Understanding",
+        "category": "Evaluation",
+        "year": 2021,
+        "authors": "undefined undefined, undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 18
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2021.acl-long.330-chunk-19",
+      "content": "Keswani (2020) analyze biases in extractive summarization. equalized odds, equal opportunity, demographic parity (Dwork et al., 2012; Hardt et al., 2016)). \n\nBecause of the difficulty in defining metrics, existing works define bias loosely as demographic inequality and use intermediate proxy metrics to comparatively measure bias. Examples include:",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2021.acl-long.330",
+        "title": "Measuring Massive Multitask Language Understanding",
+        "category": "Evaluation",
+        "year": 2021,
+        "authors": "undefined undefined, undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 19
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2021.acl-long.330-chunk-20",
+      "content": "proxy metrics to comparatively measure bias. Examples include: \n\n- Regard Ratio : negative-neutral-positive regard score ratios of text generated from bias-inducing prompts (Sheng et al., 2019)\n- Sentiment Ratio : negative-neutral-positive sentiment score ratios of text generated from African American English (AAE) versus White-Aligned English (WAE) prompts (Groenwold et al., 2020)\n- Individual and Group Fairness through Sentiment : comparisons of the sentiment distributions of generated text across demographics and prompts (Huang et al., 2020)\n- Gendered Word Co-occurrence Score : mean and standard deviations of the absolute log ratio of probabilities: P ( word | female terms ) to P ( word | male terms ) across all words in generated text (Bordia and Bowman, 2019)",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2021.acl-long.330",
+        "title": "Measuring Massive Multitask Language Understanding",
+        "category": "Evaluation",
+        "year": 2021,
+        "authors": "undefined undefined, undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 20
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2021.acl-long.330-chunk-21",
+      "content": "| female terms ) to P ( word | male terms ) across all words in generated text (Bordia and Bowman, 2019) \n\nThere are also metrics for other bias evaluation setups in continuation generation tasks involving sentiment (Shwartz et al., 2020), the ratio of gendered words (Solaiman et al., 2019; Vig et al., 2020; Dinan et al., 2020a), and other novel metrics (Peng et al., 2020; Yeo and Chen, 2020). Studies of biases in transformation generation tasks favor metrics of accuracy in terms of successfully transforming text to have a desired property. We present a more thorough comparison of metrics in Section 5.4.",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2021.acl-long.330",
+        "title": "Measuring Massive Multitask Language Understanding",
+        "category": "Evaluation",
+        "year": 2021,
+        "authors": "undefined undefined, undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 21
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2021.acl-long.330-chunk-22",
+      "content": "successfully transforming text to have a desired property. We present a more thorough comparison of metrics in Section 5.4. \n\nBias metrics can also be categorized by how they define associations between demographic group attributes and text. Biases can be towards people described in text, people who produce the text, or people to whom the text is addressed (Dinan et al., 2020b). Most existing works define bias metrics through the first association-these biases are relatively easier to analyze, since both the demographic and the textual signals of bias are encapsulated within the text. There are also works that define biases towards people who produce the text (Groenwold et al., 2020) or people to whom the text is addressed (Sheng et al., 2021b), though there are relatively fewer works that study these latter associations.\n\n## 3.2 Negative Impacts",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2021.acl-long.330",
+        "title": "Measuring Massive Multitask Language Understanding",
+        "category": "Evaluation",
+        "year": 2021,
+        "authors": "undefined undefined, undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 22
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2021.acl-long.330-chunk-23",
+      "content": "people to whom the text is addressed (Sheng et al., 2021b), though there are relatively fewer works that study these latter associations. ## 3.2 Negative Impacts \n\nBiases in NLG techniques are important to study because they can result in harmful, negative im- pacts. We survey detrimental representational 11 and allocational 12 impacts (Crawford, 2017; Barocas et al., 2017; Blodgett et al., 2020) used to motivate existing studies of bias in NLG tasks, finding limited examples. While representational impacts are sometimes cited, it is difficult to measure the extent of the impacts. Additionally, techniques for effective NLG are relatively new, and existing studies have limited knowledge of potential allocational impacts. Finally, biases in NLG tasks give rise to a third type of negative impacts, which we call vulnerability impacts .",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2021.acl-long.330",
+        "title": "Measuring Massive Multitask Language Understanding",
+        "category": "Evaluation",
+        "year": 2021,
+        "authors": "undefined undefined, undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 23
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2021.acl-long.330-chunk-24",
+      "content": "knowledge of potential allocational impacts. Finally, biases in NLG tasks give rise to a third type of negative impacts, which we call vulnerability impacts . \n\nRepresentational Impacts The works in Table 1 motivate (to varying degrees) studying biases in NLG through potential negative representational impacts, in the form of propagating stereotypes, misrepresentations, or denigrations of social groups. For example, Sheng et al. (2019) enumerate how generated text can propagate varying social perceptions of different demographics, and Prates et al. (2019) discuss how occupation-related gender biases could propagate stereotypes in translation. However, it is difficult to quantify the effects of representational impacts; 13 while such impacts may be measured indirectly (e.g. by analyzing allocational impacts), we suggest long-term, interdisciplinary collaborations to explore the direct effects of these representational impacts.",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2021.acl-long.330",
+        "title": "Measuring Massive Multitask Language Understanding",
+        "category": "Evaluation",
+        "year": 2021,
+        "authors": "undefined undefined, undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 24
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2021.acl-long.330-chunk-25",
+      "content": "impacts may be measured indirectly (e.g. by analyzing allocational impacts), we suggest long-term, interdisciplinary collaborations to explore the direct effects of these representational impacts. \n\nAllocational Impacts Harmful allocational impacts result from an unequal allocation of resources across groups. Since effective NLG techniques based on large Transformer models (Vaswani et al., 2017) are relatively new, most of the existing works on biases in NLG that list possible impacts only analyze direct representational consequences. A real example of a negative allocational impact is when machine translation errors lead to arrests (Ong, 2017). In general, technologies that are less effective or detrimental for certain populations become barriers that actively prevent those populations from using the technology, leading to diminished opportunities in jobs, education, health, etc. Wediscuss more details in Section 4.5. With continuous technological advances, more organizations will turn to effective NLG techniques, making it imperative to start setting norms to reduce harmful allocational impacts (Tamkin et al., 2021).",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2021.acl-long.330",
+        "title": "Measuring Massive Multitask Language Understanding",
+        "category": "Evaluation",
+        "year": 2021,
+        "authors": "undefined undefined, undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 25
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2021.acl-long.330-chunk-26",
+      "content": "Section 4.5. With continuous technological advances, more organizations will turn to effective NLG techniques, making it imperative to start setting norms to reduce harmful allocational impacts (Tamkin et al., 2021). \n\n11 Unfair representations of different groups\n\n12 Unfair allocation of resources\n\n13 Kay et al. (2015) is a rare example that explicitly studies the effect of representational impacts in image search.",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2021.acl-long.330",
+        "title": "Measuring Massive Multitask Language Understanding",
+        "category": "Evaluation",
+        "year": 2021,
+        "authors": "undefined undefined, undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 26
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2021.acl-long.330-chunk-27",
+      "content": "that explicitly studies the effect of representational impacts in image search. \n\nVulnerability Impacts Open-domain generation tasks can amplify a group's vulnerability to manipulation and harm , which is an intermediate impact that makes a group more susceptible to representational and allocational impacts. For example, privacy-related issues (Carlini et al., 2020), misinformation (Levy et al., 2021), or radicalizing views in generated text could make a group more likely to be attributed to specific stereotypes (e.g., through action guided by misinformation) or end up with diminished opportunities (e.g., by having personal data exposed and misused). Separately identifying vulnerability impacts could help facilitate recognition of other negative impacts.\n\n## 4 Contributors to NLG Biases",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2021.acl-long.330",
+        "title": "Measuring Massive Multitask Language Understanding",
+        "category": "Evaluation",
+        "year": 2021,
+        "authors": "undefined undefined, undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 27
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2021.acl-long.330-chunk-28",
+      "content": "exposed and misused). Separately identifying vulnerability impacts could help facilitate recognition of other negative impacts. ## 4 Contributors to NLG Biases \n\nIn a pipeline from data collection to evaluation for an NLG task, each component could propagate biases. 14 We emphasize the ways in which data, model architecture, decoding, evaluation, and deployment uniquely exacerbate biases in generation tasks. Additionally, we present an empirical study to show how measured biases in generated text can vary based on decoding technique.\n\n## 4.1 Biases from Data",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2021.acl-long.330",
+        "title": "Measuring Massive Multitask Language Understanding",
+        "category": "Evaluation",
+        "year": 2021,
+        "authors": "undefined undefined, undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 28
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2021.acl-long.330-chunk-29",
+      "content": "biases in generated text can vary based on decoding technique. ## 4.1 Biases from Data \n\nModern NLP models often rely on large pre-trained language models, which in turn rely on a large collection of data to learn explicit and implicit associations. Several recent pre-trained language models used for NLG tasks, e.g., T5 (Raffel et al., 2020) and GPT-3 (Brown et al., 2020), are trained on the largest datasets used for any models. These large models for generation are commonly trained on web data, which is known to contain biased language (e.g., Ferrer et al. (2021) discover gender, religion, and ethnic biases in Reddit communities). While preprocessing is often included to filter out malformatted data and explicitly negative content (e.g., bad words and offensive phrases), those are generally the only efforts to reduce biases and associated impacts. Furthermore, by filtering out all words deemed 'bad', Bender et al. (2021) warns that we remove the discourse of marginalized populations. Paullada et al. (2020), Bender and Friedman (2018), and Gebru et al. (2018) provide more comprehensive surveys and frameworks that focus on aspects of data creation and management that",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2021.acl-long.330",
+        "title": "Measuring Massive Multitask Language Understanding",
+        "category": "Evaluation",
+        "year": 2021,
+        "authors": "undefined undefined, undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 29
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2021.acl-long.330-chunk-30",
+      "content": "we remove the discourse of marginalized populations. Paullada et al. (2020), Bender and Friedman (2018), and Gebru et al. (2018) provide more comprehensive surveys and frameworks that focus on aspects of data creation and management that \n\n14 Task formulation and application deployment are also part of NLG task pipelines (Kiritchenko et al., 2020), though we do not focus on biases in these areas.\n\ncould lead to biases, and we refer readers to their works for more discussion. In the context of translation, Cho et al. (2021) find that more data can increase translation fluency but may also make the system more biased.\n\n## 4.2 Biases from Model Architecture",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2021.acl-long.330",
+        "title": "Measuring Massive Multitask Language Understanding",
+        "category": "Evaluation",
+        "year": 2021,
+        "authors": "undefined undefined, undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 30
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2021.acl-long.330-chunk-31",
+      "content": "more data can increase translation fluency but may also make the system more biased. ## 4.2 Biases from Model Architecture \n\nThere are relatively few studies that examine model architectural properties that could lead to biases. We discuss the few efforts towards understanding model biases in NLG tasks and emphasize the need for more to generalize. For autocomplete generation, Vig et al. (2020) analyze GPT-2 variants through a causal mediation analysis, finding that larger models contain more gender bias, and bias tends to be concentrated in a small number of neurons and attention heads. Silva et al. (2021) observe amplified biases in distilled versus original models. For machine translation, Costa-juss` a et al. (2020) note that language-specific architectures are less biased because they encode more gender information than shared language encoder-decoder architectures. Studies like the aforementioned are useful for designing targeted bias mitigation methods (e.g., controlled generation to target specific attention heads or regularization to retain gender information). However, more evidence would be needed to generalize findings across models. 15",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2021.acl-long.330",
+        "title": "Measuring Massive Multitask Language Understanding",
+        "category": "Evaluation",
+        "year": 2021,
+        "authors": "undefined undefined, undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 31
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2021.acl-long.330-chunk-32",
+      "content": "useful for designing targeted bias mitigation methods (e.g., controlled generation to target specific attention heads or regularization to retain gender information). However, more evidence would be needed to generalize findings across models. 15 \n\n## 4.3 Biases from Decoding\n\nWhile NLU and NLG models have structural similarities, NLG tasks uniquely use search or sampling techniques at inference time to generate text. Popular techniques include:",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2021.acl-long.330",
+        "title": "Measuring Massive Multitask Language Understanding",
+        "category": "Evaluation",
+        "year": 2021,
+        "authors": "undefined undefined, undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 32
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2021.acl-long.330-chunk-33",
+      "content": "sampling techniques at inference time to generate text. Popular techniques include: \n\n- Greedy Search : at each time step, choose the word with the highest probability.\n- Beam Search : at each time step, keep the top b hypotheses with highest probabilities; eventually pick the hypothesis with the highest probability.\n- Topk sampling (Fan et al., 2018): at each time step, re-distribute the probability mass of the top k words with highest probabilities and sample.\n- Nucleus sampling (Holtzman et al., 2019): at each time step, re-distribute the probability mass of the smallest set of words with a cumulative probability exceeding p and sample.\n\nMore constrained forms of generation such as machine translation generally use variations of beam\n\n15 We also refer the reader to the work of Park et al. (2018) that discusses biases in NLU tasks from model components that 'attend' to specific words (e.g., through attention or pooling), which could be applicable to NLG tasks as well.",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2021.acl-long.330",
+        "title": "Measuring Massive Multitask Language Understanding",
+        "category": "Evaluation",
+        "year": 2021,
+        "authors": "undefined undefined, undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 33
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2021.acl-long.330-chunk-34",
+      "content": "et al. (2018) that discusses biases in NLU tasks from model components that 'attend' to specific words (e.g., through attention or pooling), which could be applicable to NLG tasks as well. \n\nsearch; however, preferred decoding techniques are more varied for open-domain generation. Despite variations in fluency and diversity between deterministic versus stochastic, search versus sampling procedures, there are limited studies (Roberts et al., 2020) on how different decoding properties affect biases in generation.",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2021.acl-long.330",
+        "title": "Measuring Massive Multitask Language Understanding",
+        "category": "Evaluation",
+        "year": 2021,
+        "authors": "undefined undefined, undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 34
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2021.acl-long.330-chunk-35",
+      "content": "(Roberts et al., 2020) on how different decoding properties affect biases in generation. \n\nA Study on Biases from Decoding To study how decoding techniques affect biases in generation, we use existing NLG bias metrics to evaluate text generated from different decoding methods. 16 We examine autocomplete generations from GPT, GPT-2, and XLNet, using the decoding techniques from Section 4.3. We evaluate with the following bias metrics: regard ratios (Sheng et al., 2019), sentiment ratios (Groenwold et al., 2020), individual and group fairness through sentiment scores (Huang et al., 2020), and gendered word co-occurrence scores (Bordia and Bowman, 2019) (as introduced in Section 3). More experimental details can be found in the Appendix.",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2021.acl-long.330",
+        "title": "Measuring Massive Multitask Language Understanding",
+        "category": "Evaluation",
+        "year": 2021,
+        "authors": "undefined undefined, undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 35
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2021.acl-long.330-chunk-36",
+      "content": "word co-occurrence scores (Bordia and Bowman, 2019) (as introduced in Section 3). More experimental details can be found in the Appendix. \n\nIn Section 5.4, we distinguish between relative and absolute score metrics to examine evaluation differences between NLG tasks. Here, we organize our results into these categories to generalize trends about decoding techniques. The ratio-based metrics are relative score metrics, since evaluation relies on comparing ratios between demographics. The latter three metrics are absolute score metrics that have target values of zero indicating no bias.",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2021.acl-long.330",
+        "title": "Measuring Massive Multitask Language Understanding",
+        "category": "Evaluation",
+        "year": 2021,
+        "authors": "undefined undefined, undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 36
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2021.acl-long.330-chunk-37",
+      "content": "latter three metrics are absolute score metrics that have target values of zero indicating no bias. \n\nFor the relative score metrics, search and sampling techniques generate similar outcomes. An interesting result between sampling techniques for the regard metric is that nucleus sampling is less biased yet more negative than topk sampling. For the absolute score metrics, we find that beam search is the most unbiased technique, closely followed by greedy search and then topk and nucleus sampling. Through our study, we discover that text diversity is not accounted for in any of the bias metrics, yet diversity can be a confounding factor. Specifically, beam search is the least diverse, 17 followed by greedy search, topk sampling, then nucleus sampling. Results indicate that the less diverse search techniques lead to better scores for individual fairness, group fairness, and gendered word co-occurrence ratios.\n\nWe hope these experimental results will encour-",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2021.acl-long.330",
+        "title": "Measuring Massive Multitask Language Understanding",
+        "category": "Evaluation",
+        "year": 2021,
+        "authors": "undefined undefined, undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 37
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2021.acl-long.330-chunk-38",
+      "content": "indicate that the less diverse search techniques lead to better scores for individual fairness, group fairness, and gendered word co-occurrence ratios. We hope these experimental results will encour- \n\n16 Code at https://github.com/ewsheng/ decoding-biases .\n\n17 We report average generated text length and vocabulary sizes to estimate diversity in Appendix Table 4.\n\nage researchers to document sampling techniques, consider how metrics can be formulated to evaluate both bias and other factors of generation quality, and inspire more comprehensive studies. 18\n\n## 4.4 Biases from Evaluation\n\nBiases can arise from both general evaluations and bias evaluations for NLG tasks.",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2021.acl-long.330",
+        "title": "Measuring Massive Multitask Language Understanding",
+        "category": "Evaluation",
+        "year": 2021,
+        "authors": "undefined undefined, undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 38
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2021.acl-long.330-chunk-39",
+      "content": "## 4.4 Biases from Evaluation Biases can arise from both general evaluations and bias evaluations for NLG tasks. \n\nGeneral Evaluations Current standards for NLG evaluation can reinforce certain types of language and penalize others. For example, using perplexity as measured by models pre-trained on datasets largely containing non-AAE text leads to an unfair evaluation of AAE text. Additionally, the subjectivity of generation tasks means that much of NLG evaluation depends on human labels. Since humans from different backgrounds are accustomed to different societal norms and linguistic variations, the choice of human annotators could drastically influence the evaluation standards for generated text.",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2021.acl-long.330",
+        "title": "Measuring Massive Multitask Language Understanding",
+        "category": "Evaluation",
+        "year": 2021,
+        "authors": "undefined undefined, undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 39
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2021.acl-long.330-chunk-40",
+      "content": "societal norms and linguistic variations, the choice of human annotators could drastically influence the evaluation standards for generated text. \n\nBias Evaluations It is difficult to evaluate societal biases in NLG tasks because NLG can be open-domain, and there are many different notions of biases from various backgrounds and cultures (Sambasivan et al., 2021). These factors lead to the use of a variety of metrics to evaluate biases (Section 3). To avoid experimental bias in evaluation, we recommend using multiple metrics to cover many types of biases at various granularities. We identify three points to emphasize the need for more comprehensive evaluations. First, most existing works on biases in generation center around one demographic dimension (often gender and from a Western perspective, e.g., using standard Western occupations). While there has been no comprehensive study on whether mitigating biases for one demographic dimension (e.g., gender) may exacerbate biases for others (e.g., race, intersectional identities), this is a possibility we must consider. Second, most works only evaluate bias through a single intermediate proxy; however, different metrics are defined at different granularities (e.g., sentiment is sentence-level, gendered word ratio is word-level). Finally, different evaluation datasets test for specific types of biases and are influenced by the backgrounds of the curators. Collectively evaluating biases across demographic dimensions and granularities can thus help reduce experimentally-biased evaluations.",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2021.acl-long.330",
+        "title": "Measuring Massive Multitask Language Understanding",
+        "category": "Evaluation",
+        "year": 2021,
+        "authors": "undefined undefined, undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 40
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2021.acl-long.330-chunk-41",
+      "content": "granularities (e.g., sentiment is sentence-level, gendered word ratio is word-level). Finally, different evaluation datasets test for specific types of biases and are influenced by the backgrounds of the curators. Collectively evaluating biases across demographic dimensions and granularities can thus help reduce experimentally-biased evaluations. \n\n18 Results are summarized in Appendix Tables 2, 3, and 5.\n\n## 4.5 Biases from Deploying Systems\n\nIn terms of deploying NLG systems, there is a feedback loop that benefits some communities and further disadvantages others. While this feedback loop is not unique to NLG systems, these systems that directly interact with users make good cautionary examples.",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2021.acl-long.330",
+        "title": "Measuring Massive Multitask Language Understanding",
+        "category": "Evaluation",
+        "year": 2021,
+        "authors": "undefined undefined, undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 41
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2021.acl-long.330-chunk-42",
+      "content": "feedback loop is not unique to NLG systems, these systems that directly interact with users make good cautionary examples. \n\nFirst, many deployed language technologies require internet access both to use and contribute feedback, thus favoring the views and languages of those privileged with this access. For example, anyone can contribute feedback to Google Translate, but if contributions and subsequent improvements are focused on high-resource languages, this further increases the accuracy gap between the high and low resource languages, diminishing opportunities for speakers of the low resource languages, i.e., representation disparity (Hashimoto et al., 2018).",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2021.acl-long.330",
+        "title": "Measuring Massive Multitask Language Understanding",
+        "category": "Evaluation",
+        "year": 2021,
+        "authors": "undefined undefined, undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 42
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2021.acl-long.330-chunk-43",
+      "content": "resource languages, diminishing opportunities for speakers of the low resource languages, i.e., representation disparity (Hashimoto et al., 2018). \n\nSecond, those who are unable to achieve their goals from using these language technologies (e.g., unsuccessful translation, unhelpful or offensive chat bot) are less likely to continue using the technology. This means that there is less feedback and data to improve the technologies, reinforcing the decreased effectiveness for certain populations, i.e., disparity amplification (Hashimoto et al., 2018).\n\nOne way we might intervene is to follow a more targeted approach for data and feedback collection, e.g., from excluded populations. However, we acknowledge that this remains a difficult task and that it is also necessary to be aware of 'community goals' and other factors in order to co-design language technologies without inflicting additional harm on marginalized populations (Bird, 2020).\n\n## 5 Progress, Trends, and Challenges",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2021.acl-long.330",
+        "title": "Measuring Massive Multitask Language Understanding",
+        "category": "Evaluation",
+        "year": 2021,
+        "authors": "undefined undefined, undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 43
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2021.acl-long.330-chunk-44",
+      "content": "of 'community goals' and other factors in order to co-design language technologies without inflicting additional harm on marginalized populations (Bird, 2020). ## 5 Progress, Trends, and Challenges \n\nFollowing the discussion of contributors to biases, we survey trends and challenges for reducing biases in NLG.\n\n## 5.1 Data Methods\n\nData-based methods for both bias analysis and mitigation use the general idea of counterfactual data augmentation (CDA) (Lu et al., 2020) to curate sets of counterfactual prompts. A common method for analysis is using targeted prompts to induce NLG models to reveal biases. For data-based mitigation, existing works focus on fine-tuning large models or training smaller models with datasets that are balanced with respect to targeted demographics.",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2021.acl-long.330",
+        "title": "Measuring Massive Multitask Language Understanding",
+        "category": "Evaluation",
+        "year": 2021,
+        "authors": "undefined undefined, undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 44
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2021.acl-long.330-chunk-45",
+      "content": "mitigation, existing works focus on fine-tuning large models or training smaller models with datasets that are balanced with respect to targeted demographics. \n\nCurated Datasets Existing datasets to study biases in translation include parallel sentences tagged with speaker or subject gender information (Vanmassenhove et al., 2018; Habash et al., 2019) and datasets to study gender biases when translating from neutral references of a person (e.g., nurse in English, gender-neutral pronouns) to gendered instances (e.g., enfermera or enfermero in Spanish, gendered pronouns) (Cho et al., 2019; Stanovsky et al., 2019; Gonen and Webster, 2020; Kocmi et al., 2020). Renduchintala and Williams (2021) additionally provide a dataset to study translation of neutral references in unambiguous contexts. Other works present parallel corpora of biased versus unbiased framings and presuppositions (Pryzant et al., 2020) and AAE versus WAE equivalents (Groenwold et al., 2020). Sheng et al. (2019); Huang et al. (2020); Dhamala et al. (2021) additionally curate sets of prompts that can be used to evaluate biases in autocomplete generation.",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2021.acl-long.330",
+        "title": "Measuring Massive Multitask Language Understanding",
+        "category": "Evaluation",
+        "year": 2021,
+        "authors": "undefined undefined, undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 45
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2021.acl-long.330-chunk-46",
+      "content": "equivalents (Groenwold et al., 2020). Sheng et al. (2019); Huang et al. (2020); Dhamala et al. (2021) additionally curate sets of prompts that can be used to evaluate biases in autocomplete generation. \n\nBias Analysis Most bias analyses of NLG tasks use prompts to probe for different biases in generated text, e.g., regarding social perception (Sheng et al., 2019), gender in translation (Prates et al., 2019), names (Shwartz et al., 2020), sentiment distribution (Huang et al., 2020), dialects (Groenwold et al., 2020), dialogue personas (Sheng et al., 2021a), or other notions of similarity across demographics (Yeo and Chen, 2020; Henderson et al., 2018). Vig et al. (2020) also use prompts to investigate gender biases, though they do so in the context of a causal mediation analysis. Furthermore, Prates et al. (2019) and Farkas and N´ emeth (2020) compare pronoun gender biases in translations (induced with prompts) to real-world statistics.",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2021.acl-long.330",
+        "title": "Measuring Massive Multitask Language Understanding",
+        "category": "Evaluation",
+        "year": 2021,
+        "authors": "undefined undefined, undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 46
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2021.acl-long.330-chunk-47",
+      "content": "of a causal mediation analysis. Furthermore, Prates et al. (2019) and Farkas and N´ emeth (2020) compare pronoun gender biases in translations (induced with prompts) to real-world statistics. \n\nBias Mitigation Methods can broadly be classified into two categories based on the type of data applied. The first category encompasses methods that fine-tune or train on a balanced dataset to lessen the effects of the model relying on spurious correlations between imbalanced data and task performance. CDA has been applied to datasets used for continued or fresh training in dialogue generation (Dinan et al., 2020a; Liu et al., 2020a) as well as machine translation (Saunders and Byrne, 2020; Costa-juss` a and de Jorge, 2020; Stafanoviˇ cs et al., 2020). The second category is methods that attach a short prefix at training time (Vanmassenhove et al., 2018; Basta et al., 2020; Alhafni et al., 2020) or inference time (Moryossef et al., 2019).",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2021.acl-long.330",
+        "title": "Measuring Massive Multitask Language Understanding",
+        "category": "Evaluation",
+        "year": 2021,
+        "authors": "undefined undefined, undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 47
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2021.acl-long.330-chunk-48",
+      "content": "is methods that attach a short prefix at training time (Vanmassenhove et al., 2018; Basta et al., 2020; Alhafni et al., 2020) or inference time (Moryossef et al., 2019). \n\nChallenges The size of state-of-the-art pretrained models and varying definitions of biases\n\nin generation present difficulties for creating standardized datasets that are generally effective across biases and demographics. Moreover, it remains to be seen whether data-based mitigation is as effective for open-domain NLG tasks as it is for more constrained settings.\n\n## 5.2 Training Methods\n\nIn addition to data-based mitigation, training-based mitigation is another popular class of methods to reduce biases in generation.",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2021.acl-long.330",
+        "title": "Measuring Massive Multitask Language Understanding",
+        "category": "Evaluation",
+        "year": 2021,
+        "authors": "undefined undefined, undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 48
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2021.acl-long.330-chunk-49",
+      "content": "Methods In addition to data-based mitigation, training-based mitigation is another popular class of methods to reduce biases in generation. \n\nBias Mitigation Several works that use trainingbased mitigation techniques rely on regularization (Bordia and Bowman, 2019; Qian et al., 2019; Huang et al., 2020; Liu et al., 2020a; Saunders and Byrne, 2020). There are also works that induce control by incorporating a bias control code through conditional training (Dinan et al., 2020a), by appending a target value to inputs during training (Ma et al., 2020), by using a normative classifier to produce reward values for backpropagation (Peng et al., 2020), or through adversarial training (Liu et al., 2020b). Other techniques include using debiased word embeddings (Escud´ e Font and Costajuss` a, 2019), identifying and editing out subjective words (Pryzant et al., 2020), and using Markov random fields to preserve morpho-syntactic agreement during reinflection (Zmigrod et al., 2019).",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2021.acl-long.330",
+        "title": "Measuring Massive Multitask Language Understanding",
+        "category": "Evaluation",
+        "year": 2021,
+        "authors": "undefined undefined, undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 49
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2021.acl-long.330-chunk-50",
+      "content": "Costajuss` a, 2019), identifying and editing out subjective words (Pryzant et al., 2020), and using Markov random fields to preserve morpho-syntactic agreement during reinflection (Zmigrod et al., 2019). \n\nChallenges The main challenge of bias mitigation through training methods is that it is costly and impractical to re-train models for new biases encountered. In fact, most of the techniques that rely on training from scratch use smaller architectures (exceptions are from larger institutions).\n\n## 5.3 Inference Methods",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2021.acl-long.330",
+        "title": "Measuring Massive Multitask Language Understanding",
+        "category": "Evaluation",
+        "year": 2021,
+        "authors": "undefined undefined, undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 50
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2021.acl-long.330-chunk-51",
+      "content": "from scratch use smaller architectures (exceptions are from larger institutions). ## 5.3 Inference Methods \n\nWhile the existing literature on inference time methods for bias mitigation is sparse, decoding-based methods are a promising alternative to data- and training-based methods. Specifically, these methods are compatible with any pre-trained language model for generation without additional training. Given recent development of inference-time methods for control that can reduce toxicity (e.g., PPLM (Dathathri et al., 2019), GeDi (Krause et al., 2020), DExperts (Liu et al., 2021)), there is potential for extending these methods to bias mitigation.",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2021.acl-long.330",
+        "title": "Measuring Massive Multitask Language Understanding",
+        "category": "Evaluation",
+        "year": 2021,
+        "authors": "undefined undefined, undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 51
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2021.acl-long.330-chunk-52",
+      "content": "al., 2020), DExperts (Liu et al., 2021)), there is potential for extending these methods to bias mitigation. \n\nBias Mitigation For autocomplete and dialogue generation, Sheng et al. (2020) formulate bias triggers using gradient-based methods of Wallace et al. (2019). These triggers are appended to prompts during inference time to control text generation to be more equalized towards different demographics. For translation, Saunders and Byrne (2020) present a lattice rescoring procedure that creates genderinflected search spaces to rescore text for more accurate translations, and Saunders et al. (2021) subsequently use this lattice structure to present more gendered options during beam search and rerank translation hypotheses according to gender criteria. For dialogue generation, Sheng et al. (2021b) introduce a constrained decoding method that uses n -gram similarity to guide generation away from ad hominems towards marginalized groups. For autocomplete generation, Schick et al. (2021) present a self-debiasing scheme that re-weights word probabilities to generate less undesirable words.",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2021.acl-long.330",
+        "title": "Measuring Massive Multitask Language Understanding",
+        "category": "Evaluation",
+        "year": 2021,
+        "authors": "undefined undefined, undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 52
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2021.acl-long.330-chunk-53",
+      "content": "to guide generation away from ad hominems towards marginalized groups. For autocomplete generation, Schick et al. (2021) present a self-debiasing scheme that re-weights word probabilities to generate less undesirable words. \n\nChallenges Control methods at inference time could potentially steer the model into degenerate spaces, so it is important to also evaluate these methods for coherence, fluency, and task relevance.\n\n## 5.4 Evaluation Methods\n\nThere are two types of evaluations: those that rely on absolute scores and those that rely on relative scores. mulated score to summarize inequalities between While it is possible to convert between relative and ing works choose to portray evaluations allows us",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2021.acl-long.330",
+        "title": "Measuring Massive Multitask Language Understanding",
+        "category": "Evaluation",
+        "year": 2021,
+        "authors": "undefined undefined, undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 53
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2021.acl-long.330-chunk-54",
+      "content": "summarize inequalities between While it is possible to convert between relative and ing works choose to portray evaluations allows us \n\nAbsolute score evaluations use an accudemographics, whereas relative evaluations explicitly report inequalities between all demographics. absolute scores, distinguishing between how existto examine differences between generation tasks. Absolute Evaluations We find that the transformation class of generation tasks favors bias evaluation through absolute metrics, which is possible because these tasks involve relatively more constrained forms of generation. Examples of evaluation objectives through absolute scores include Peng et al. (2020) reducing non-normative generations, Ma et al. (2020) increasing the accuracy of the change in agency, Zmigrod et al. (2019) increasing the number of correct inflections, Huang et al. (2020) reducing individual and group fairness scores, and Sheng et al. (2021b) reducing the amount of ad hominems towards marginalized groups. Studies of gender bias in machine translation are well-suited to evaluations using absolute scores: many use BLEU and its variants to evaluate correct gender inflections and translations (Moryossef et al., 2019; Escud´ e Font and Costajuss` a, 2019; Elaraby et al., 2018; Habash et al., 2019; Alhafni et al., 2020) or accuracy on WinoMT (Saunders and Byrne, 2020; Saunders et al., 2020;",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2021.acl-long.330",
+        "title": "Measuring Massive Multitask Language Understanding",
+        "category": "Evaluation",
+        "year": 2021,
+        "authors": "undefined undefined, undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 54
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2021.acl-long.330-chunk-55",
+      "content": "gender inflections and translations (Moryossef et al., 2019; Escud´ e Font and Costajuss` a, 2019; Elaraby et al., 2018; Habash et al., 2019; Alhafni et al., 2020) or accuracy on WinoMT (Saunders and Byrne, 2020; Saunders et al., 2020; \n\nKocmi et al., 2020; Costa-juss` a and de Jorge, 2020; Costa-juss` a et al., 2020; Basta et al., 2020; Choubey et al., 2021; Saunders et al., 2021).",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2021.acl-long.330",
+        "title": "Measuring Massive Multitask Language Understanding",
+        "category": "Evaluation",
+        "year": 2021,
+        "authors": "undefined undefined, undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 55
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2021.acl-long.330-chunk-56",
+      "content": "Basta et al., 2020; Choubey et al., 2021; Saunders et al., 2021). \n\nRelative Evaluations In terms of evaluation through relative scores, examples from existing works are mainly from continuation generation tasks. We infer that the less constrained, opendomain nature of continuation generation tasks makes it more preferable to evaluate mitigation through more flexible comparisons rather than absolute scores. For autocomplete generation, Sheng et al. (2019, 2020) and Groenwold et al. (2020) compare regard or sentiment scores across demographics, Shwartz et al. (2020) compare names across various intermediate metrics, Vig et al. (2020) measure proportional differences between the amount of bias under a gendered versus ambiguous reading, and Yeo and Chen (2020) compare occupations generated for different genders. Bias studies in dialogue generation use relative scores by comparing sentiment and offensive language discrepancies (Henderson et al., 2018; Liu et al., 2020a,b) and the percentage of gendered words (Dinan et al., 2020a).",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2021.acl-long.330",
+        "title": "Measuring Massive Multitask Language Understanding",
+        "category": "Evaluation",
+        "year": 2021,
+        "authors": "undefined undefined, undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 56
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2021.acl-long.330-chunk-57",
+      "content": "generation use relative scores by comparing sentiment and offensive language discrepancies (Henderson et al., 2018; Liu et al., 2020a,b) and the percentage of gendered words (Dinan et al., 2020a). \n\nChallenges A trade-off between framing biases as a relative or absolute metric is that relative metrics can be more flexibly aligned to normative concerns like social perception. Absolute metrics that look for ratios of gendered words or other indicator words assume that there is a set of words that captures all the differences between demographic groups, regardless of whether these differences are related to normative definitions of harm. There are also absolute metrics such as those of Huang et al. (2020) that can incorporate intermediate metrics that are more aligned with normative behavior, though these metrics reduce the notion of biases to a single value, which could erase historical inequalities between groups.\n\n## 6 Open Problems and Proposals",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2021.acl-long.330",
+        "title": "Measuring Massive Multitask Language Understanding",
+        "category": "Evaluation",
+        "year": 2021,
+        "authors": "undefined undefined, undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 57
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2021.acl-long.330-chunk-58",
+      "content": "with normative behavior, though these metrics reduce the notion of biases to a single value, which could erase historical inequalities between groups. ## 6 Open Problems and Proposals \n\nAs a fairly nascent area of exploration, the study of biases in language generation still poses many challenges. Throughout this paper, we discuss challenges associated with different components in a generation pipeline. With a heightened awareness of the relevant body of work, we conclude with recommendations for open problems.",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2021.acl-long.330",
+        "title": "Measuring Massive Multitask Language Understanding",
+        "category": "Evaluation",
+        "year": 2021,
+        "authors": "undefined undefined, undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 58
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2021.acl-long.330-chunk-59",
+      "content": "awareness of the relevant body of work, we conclude with recommendations for open problems. \n\nBias-Aware Data Curation Many works have highlighted the harms and problems when collecting training datasets with limited awareness for potential harms. Since effective models for NLG tasks are correlated with increasing training data sizes, biases in data collection (e.g., Englishcentric, drawn from popular Western media) remain a major contributor of biases that manifest in generation. Additionally, datasets used to study biases in generation can also be limited (e.g., only for binary gender classes). For more bias-aware data curation, we suggest diversifying datasets to include more viewpoints from various groups.",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2021.acl-long.330",
+        "title": "Measuring Massive Multitask Language Understanding",
+        "category": "Evaluation",
+        "year": 2021,
+        "authors": "undefined undefined, undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 59
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2021.acl-long.330-chunk-60",
+      "content": "binary gender classes). For more bias-aware data curation, we suggest diversifying datasets to include more viewpoints from various groups. \n\nUnderstanding Trade-Offs Different methods for analysis, mitigation, and evaluation have unique trade-offs. Existing works have been relatively small-scale and limited to a small number of biases for specific tasks. Some useful questions to consider when developing methods to study generation biases are whether we can generalize methods to a diverse set of biases and a wide range of contexts. It is also important to consider formulating metrics that would jointly mitigate biases and preserve other desired text qualities (e.g., diversity, fluency).",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2021.acl-long.330",
+        "title": "Measuring Massive Multitask Language Understanding",
+        "category": "Evaluation",
+        "year": 2021,
+        "authors": "undefined undefined, undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 60
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2021.acl-long.330-chunk-61",
+      "content": "important to consider formulating metrics that would jointly mitigate biases and preserve other desired text qualities (e.g., diversity, fluency). \n\nInteractive and Continuous Learning The difficulties of measuring and mitigating biases in generation can be reduced with a general framework for interactive and continuous learning. Over time, such a system could learn from diverse opinions of what constitutes 'fair' versus 'unfair' generations across tasks. A unified framework would centralize and highlight the importance of studying biases in generation, as well as fuel the development of a more comprehensive set of evaluations that may be useful for large-scale studies of impact.",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2021.acl-long.330",
+        "title": "Measuring Massive Multitask Language Understanding",
+        "category": "Evaluation",
+        "year": 2021,
+        "authors": "undefined undefined, undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 61
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2021.acl-long.330-chunk-62",
+      "content": "fuel the development of a more comprehensive set of evaluations that may be useful for large-scale studies of impact. \n\nFocusing on Negative Impacts Section 3 discusses how there are very few existing works on biases that explicitly and meaningfully engage with resulting negative impacts, even though these impacts are what motivate reducing biases. By reframing efforts on reducing negative impacts rather than biases, we may be able to define metrics and progress that better correlate with reducing harm. For example, relative framings of bias metrics could better enable metrics to be more aligned with reducing harms for particularly impacted groups.\n\n## Acknowledgments\n\nWewould like to thank Seraphina Goldfarb-Tarrant, Sunipa Dev, Jason Teoh, members of the Plus Lab, and our anonymous reviewers for the many helpful suggestions that went into this paper.\n\n## Ethics and Broader Implications",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2021.acl-long.330",
+        "title": "Measuring Massive Multitask Language Understanding",
+        "category": "Evaluation",
+        "year": 2021,
+        "authors": "undefined undefined, undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 62
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2021.acl-long.330-chunk-63",
+      "content": "Jason Teoh, members of the Plus Lab, and our anonymous reviewers for the many helpful suggestions that went into this paper. ## Ethics and Broader Implications \n\nIn this work, we present a survey and commentary on the progress and challenges for studying societal biases in language generation.\n\nData We do not check the quality of the datasets used to train popular language generation models (due to limited availability and size), though we do briefly mention problems that other works have found regarding using large datasets that have been minimally filtered. Some of the surveyed datasets and metrics that are used for evaluating biases approximate binary genders using names typical of specific genders, and may be better re-formulated to avoid harms and curate a more accurate representation of different genders. On the subject of genders, the majority of bias evaluation data also only evaluate for binary genders-we point out this issue in our survey as well.",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2021.acl-long.330",
+        "title": "Measuring Massive Multitask Language Understanding",
+        "category": "Evaluation",
+        "year": 2021,
+        "authors": "undefined undefined, undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 63
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2021.acl-long.330-chunk-64",
+      "content": "representation of different genders. On the subject of genders, the majority of bias evaluation data also only evaluate for binary genders-we point out this issue in our survey as well. \n\nTechniques Most of the techniques surveyed in this work are trained with or bias-tested with data drawn from Western sources or culture, since that is largely the focus of the existing body of work. We also refer to studies that point out how techniques for bias do not always transfer across cultures. Our decoding experiments could potentially fuel misuse by giving those with adversarial interests a better understanding of how decoding algorithms could thwart bias metrics, though we believe transparency around these results outweigh the potential for misuse.\n\n## References\n\nAbubakar Abid, Maheen Farooqi, and James Zou. 2021. Persistent anti-muslim bias in large language models. arXiv preprint arXiv:2101.05783 .",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2021.acl-long.330",
+        "title": "Measuring Massive Multitask Language Understanding",
+        "category": "Evaluation",
+        "year": 2021,
+        "authors": "undefined undefined, undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 64
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2021.acl-long.330-chunk-65",
+      "content": "results outweigh the potential for misuse. ## References Abubakar Abid, Maheen Farooqi, and James Zou. 2021. Persistent anti-muslim bias in large language models. arXiv preprint arXiv:2101.05783 . \n\nBashar Alhafni, Nizar Habash, and Houda Bouamor. 2020. Gender-aware reinflection using linguistically enhanced neural models. In Proceedings of the Second Workshop on Gender Bias in Natural Language Processing , pages 139-150, Barcelona, Spain (Online). Association for Computational Linguistics.\n\nSolon Barocas, Kate Crawford, Aaron Shapiro, and Hanna Wallach. 2017. The problem with bias: Allocative versus representational harms in machine learning. In 9th Annual Conference of the Special Interest Group for Computing, Information and Society .",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2021.acl-long.330",
+        "title": "Measuring Massive Multitask Language Understanding",
+        "category": "Evaluation",
+        "year": 2021,
+        "authors": "undefined undefined, undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 65
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2021.acl-long.330-chunk-66",
+      "content": "harms in machine learning. In 9th Annual Conference of the Special Interest Group for Computing, Information and Society . \n\nChristine Basta, Marta R. Costa-juss` a, and Jos´ e A. R. Fonollosa. 2020. Towards mitigating gender bias in a decoder-based neural machine translation model by adding contextual information. In Proceedings of the The Fourth Widening Natural Language Processing Workshop , pages 99-102, Seattle, USA. Association for Computational Linguistics.\n\nEmily M. Bender and Batya Friedman. 2018. Data statements for natural language processing: Toward mitigating system bias and enabling better science. Transactions of the Association for Computational Linguistics , 6:587-604.\n\nEmily M Bender, Timnit Gebru, Angelina McMillanMajor, and Shmargaret Shmitchell. 2021. On the dangers of stochastic parrots: Can language models be too big. Proceedings of FAccT .",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2021.acl-long.330",
+        "title": "Measuring Massive Multitask Language Understanding",
+        "category": "Evaluation",
+        "year": 2021,
+        "authors": "undefined undefined, undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 66
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2021.acl-long.330-chunk-67",
+      "content": "Timnit Gebru, Angelina McMillanMajor, and Shmargaret Shmitchell. 2021. On the dangers of stochastic parrots: Can language models be too big. Proceedings of FAccT . \n\nSteven Bird. 2020. Decolonising speech and language technology. In Proceedings of the 28th International Conference on Computational Linguistics , pages 3504-3519, Barcelona, Spain (Online). International Committee on Computational Linguistics.\n\nSu Lin Blodgett, Solon Barocas, Hal Daum´ e III, and Hanna Wallach. 2020. Language (technology) is power: A critical survey of 'bias' in NLP. In Proceedings of the 58th Annual Meeting of the Association for Computational Linguistics , pages 54545476, Online. Association for Computational Linguistics.",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2021.acl-long.330",
+        "title": "Measuring Massive Multitask Language Understanding",
+        "category": "Evaluation",
+        "year": 2021,
+        "authors": "undefined undefined, undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 67
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2021.acl-long.330-chunk-68",
+      "content": "the 58th Annual Meeting of the Association for Computational Linguistics , pages 54545476, Online. Association for Computational Linguistics. \n\nShikha Bordia and Samuel R. Bowman. 2019. Identifying and reducing gender bias in word-level language models. In Proceedings of the 2019 Conference of the North American Chapter of the Association for Computational Linguistics: Student Research Workshop , pages 7-15, Minneapolis, Minnesota. Association for Computational Linguistics.\n\nTom B Brown, Benjamin Mann, Nick Ryder, Melanie Subbiah, Jared Kaplan, Prafulla Dhariwal, Arvind Neelakantan, Pranav Shyam, Girish Sastry, Amanda Askell, et al. 2020. Language models are few-shot learners. arXiv preprint arXiv:2005.14165 .\n\nNicholas Carlini, Florian Tramer, Eric Wallace, Matthew Jagielski, Ariel Herbert-Voss, Katherine Lee, Adam Roberts, Tom Brown, Dawn Song, Ulfar Erlingsson, et al. 2020. Extracting training data from large language models. arXiv preprint arXiv:2012.07805 .",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2021.acl-long.330",
+        "title": "Measuring Massive Multitask Language Understanding",
+        "category": "Evaluation",
+        "year": 2021,
+        "authors": "undefined undefined, undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 68
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2021.acl-long.330-chunk-69",
+      "content": "Herbert-Voss, Katherine Lee, Adam Roberts, Tom Brown, Dawn Song, Ulfar Erlingsson, et al. 2020. Extracting training data from large language models. arXiv preprint arXiv:2012.07805 . \n\n- L Elisa Celis and Vijay Keswani. 2020. Dialect diversity in text summarization on twitter. arXiv preprint arXiv:2007.07860 .\n\nAmanda Cercas Curry, Judy Robertson, and Verena Rieser. 2020. Conversational assistants and gender stereotypes: Public perceptions and desiderata for voice personas. In Proceedings of the Second Workshop on Gender Bias in Natural Language Processing , pages 72-78, Barcelona, Spain (Online). Association for Computational Linguistics.\n\nYen-Chun Chen, Zhe Gan, Yu Cheng, Jingzhou Liu, and Jingjing Liu. 2020. Distilling knowledge learned in BERT for text generation. In Proceedings of the 58th Annual Meeting of the Association for\n\nComputational Linguistics , pages 7893-7905, Online. Association for Computational Linguistics.",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2021.acl-long.330",
+        "title": "Measuring Massive Multitask Language Understanding",
+        "category": "Evaluation",
+        "year": 2021,
+        "authors": "undefined undefined, undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 69
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2021.acl-long.330-chunk-70",
+      "content": "BERT for text generation. In Proceedings of the 58th Annual Meeting of the Association for Computational Linguistics , pages 7893-7905, Online. Association for Computational Linguistics. \n\nWon Ik Cho, Ji Won Kim, Seok Min Kim, and Nam Soo Kim. 2019. On measuring gender bias in translation of gender-neutral pronouns. In Proceedings of the First Workshop on Gender Bias in Natural Language Processing , pages 173-181, Florence, Italy. Association for Computational Linguistics.\n\nWon Ik Cho, Jiwon Kim, Jaeyeong Yang, and Nam Soo Kim. 2021. Towards cross-lingual generalization of translation gender bias. In Proceedings of the 2021 ACM Conference on Fairness, Accountability, and Transparency , pages 449-457.\n\nPrafulla Kumar Choubey, Anna Currey, Prashant Mathur, and Georgiana Dinu. 2021. Improving gender translation accuracy with filtered self-training. arXiv preprint arXiv:2104.07695 .",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2021.acl-long.330",
+        "title": "Measuring Massive Multitask Language Understanding",
+        "category": "Evaluation",
+        "year": 2021,
+        "authors": "undefined undefined, undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 70
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2021.acl-long.330-chunk-71",
+      "content": "pages 449-457. Prafulla Kumar Choubey, Anna Currey, Prashant Mathur, and Georgiana Dinu. 2021. Improving gender translation accuracy with filtered self-training. arXiv preprint arXiv:2104.07695 . \n\nMarta R Costa-juss` a, Carlos Escolano, Christine Basta, Javier Ferrando, Roser Batlle, and Ksenia Kharitonova. 2020. Gender bias in multilingual neural machine translation: The architecture matters. arXiv preprint arXiv:2012.13176 .\n\nMarta R. Costa-juss` a and Adri` a de Jorge. 2020. Fine-tuning neural machine translation on genderbalanced datasets. In Proceedings of the Second Workshop on Gender Bias in Natural Language Processing , pages 26-34, Barcelona, Spain (Online). Association for Computational Linguistics.\n\nKate Crawford. 2017. The trouble with bias. Keynote at NeurIPS.",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2021.acl-long.330",
+        "title": "Measuring Massive Multitask Language Understanding",
+        "category": "Evaluation",
+        "year": 2021,
+        "authors": "undefined undefined, undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 71
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2021.acl-long.330-chunk-72",
+      "content": ", pages 26-34, Barcelona, Spain (Online). Association for Computational Linguistics. Kate Crawford. 2017. The trouble with bias. Keynote at NeurIPS. \n\nZihang Dai, Zhilin Yang, Yiming Yang, Jaime Carbonell, Quoc Le, and Ruslan Salakhutdinov. 2019. Transformer-XL: Attentive language models beyond a fixed-length context. In Proceedings of the 57th Annual Meeting of the Association for Computational Linguistics , pages 2978-2988, Florence, Italy. Association for Computational Linguistics.\n\nSumanth Dathathri, Andrea Madotto, Janice Lan, Jane Hung, Eric Frank, Piero Molino, Jason Yosinski, and Rosanne Liu. 2019. Plug and play language models: A simple approach to controlled text generation. In International Conference on Learning Representations .",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2021.acl-long.330",
+        "title": "Measuring Massive Multitask Language Understanding",
+        "category": "Evaluation",
+        "year": 2021,
+        "authors": "undefined undefined, undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 72
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2021.acl-long.330-chunk-73",
+      "content": "Plug and play language models: A simple approach to controlled text generation. In International Conference on Learning Representations . \n\nJacob Devlin, Ming-Wei Chang, Kenton Lee, and Kristina Toutanova. 2019. BERT: Pre-training of deep bidirectional transformers for language understanding. In Proceedings of the 2019 Conference of the North American Chapter of the Association for Computational Linguistics: Human Language Technologies, Volume 1 (Long and Short Papers) , pages 4171-4186, Minneapolis, Minnesota. Association for Computational Linguistics.\n\nJwala Dhamala, Tony Sun, Varun Kumar, Satyapriya Krishna, Yada Pruksachatkun, Kai-Wei Chang, and Rahul Gupta. 2021. Bold: Dataset and metrics for measuring biases in open-ended language generation. Proceedings of FAccT .",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2021.acl-long.330",
+        "title": "Measuring Massive Multitask Language Understanding",
+        "category": "Evaluation",
+        "year": 2021,
+        "authors": "undefined undefined, undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 73
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2021.acl-long.330-chunk-74",
+      "content": "Chang, and Rahul Gupta. 2021. Bold: Dataset and metrics for measuring biases in open-ended language generation. Proceedings of FAccT . \n\nEmily Dinan, Angela Fan, Adina Williams, Jack Urbanek, Douwe Kiela, and Jason Weston. 2020a. Queens are powerful too: Mitigating gender bias in dialogue generation. In Proceedings of the 2020 Conference on Empirical Methods in Natural Language Processing (EMNLP) , pages 8173-8188, Online. Association for Computational Linguistics.\n\nEmily Dinan, Angela Fan, Ledell Wu, Jason Weston, Douwe Kiela, and Adina Williams. 2020b. Multidimensional gender bias classification. In Proceedings of the 2020 Conference on Empirical Methods in Natural Language Processing (EMNLP) , pages 314-331, Online. Association for Computational Linguistics.\n\nCynthia Dwork, Moritz Hardt, Toniann Pitassi, Omer Reingold, and Richard Zemel. 2012. Fairness through awareness. In Proceedings of the 3rd innovations in theoretical computer science conference , pages 214-226.",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2021.acl-long.330",
+        "title": "Measuring Massive Multitask Language Understanding",
+        "category": "Evaluation",
+        "year": 2021,
+        "authors": "undefined undefined, undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 74
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2021.acl-long.330-chunk-75",
+      "content": "Hardt, Toniann Pitassi, Omer Reingold, and Richard Zemel. 2012. Fairness through awareness. In Proceedings of the 3rd innovations in theoretical computer science conference , pages 214-226. \n\nMostafa Elaraby, Ahmed Y Tawfik, Mahmoud Khaled, Hany Hassan, and Aly Osama. 2018. Gender aware spoken language translation applied to englisharabic. In 2018 2nd International Conference on Natural Language and Speech Processing (ICNLSP) , pages 1-6. IEEE.\n\nJoel Escud´ e Font and Marta R. Costa-juss` a. 2019. Equalizing gender bias in neural machine translation with word embeddings techniques. In Proceedings of the First Workshop on Gender Bias in Natural Language Processing , pages 147-154, Florence, Italy. Association for Computational Linguistics.\n\nAngela Fan, Mike Lewis, and Yann Dauphin. 2018. Hierarchical neural story generation. In Proceedings of the 56th Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers) , pages 889-898.",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2021.acl-long.330",
+        "title": "Measuring Massive Multitask Language Understanding",
+        "category": "Evaluation",
+        "year": 2021,
+        "authors": "undefined undefined, undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 75
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2021.acl-long.330-chunk-76",
+      "content": "Dauphin. 2018. Hierarchical neural story generation. In Proceedings of the 56th Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers) , pages 889-898. \n\nAnna Farkas and Ren´ ata N´ emeth. 2020. How to measure gender bias in machine translation: Optimal translators, multiple reference points. arXiv preprint arXiv:2011.06445 .\n\nXavier Ferrer, Tom van Nuenen, Jose M Such, and Natalia Criado. 2021. Discovering and categorising language biases in reddit. In Proceedings of the International AAAI Conference on Web and Social Media , volume 15.\n\nTimnit Gebru, Jamie Morgenstern, Briana Vecchione, Jennifer Wortman Vaughan, Hanna Wallach, Hal Daum´ e III, and Kate Crawford. 2018. Datasheets for datasets. arXiv preprint arXiv:1803.09010 .",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2021.acl-long.330",
+        "title": "Measuring Massive Multitask Language Understanding",
+        "category": "Evaluation",
+        "year": 2021,
+        "authors": "undefined undefined, undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 76
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2021.acl-long.330-chunk-77",
+      "content": "Vecchione, Jennifer Wortman Vaughan, Hanna Wallach, Hal Daum´ e III, and Kate Crawford. 2018. Datasheets for datasets. arXiv preprint arXiv:1803.09010 . \n\nHila Gonen and Kellie Webster. 2020. Automatically identifying gender issues in machine translation using perturbations. In Findings of the Association for Computational Linguistics: EMNLP 2020 , pages 1991-1995, Online. Association for Computational Linguistics.\n\nSophie Groenwold, Lily Ou, Aesha Parekh, Samhita Honnavalli, Sharon Levy, Diba Mirza, and William Yang Wang. 2020. Investigating AfricanAmerican Vernacular English in transformer-based text generation. In Proceedings of the 2020 Conference on Empirical Methods in Natural Language Processing (EMNLP) , pages 5877-5883, Online. Association for Computational Linguistics.",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2021.acl-long.330",
+        "title": "Measuring Massive Multitask Language Understanding",
+        "category": "Evaluation",
+        "year": 2021,
+        "authors": "undefined undefined, undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 77
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2021.acl-long.330-chunk-78",
+      "content": "the 2020 Conference on Empirical Methods in Natural Language Processing (EMNLP) , pages 5877-5883, Online. Association for Computational Linguistics. \n\nNizar Habash, Houda Bouamor, and Christine Chung. 2019. Automatic gender identification and reinflection in Arabic. In Proceedings of the First Workshop on Gender Bias in Natural Language Processing , pages 155-165, Florence, Italy. Association for Computational Linguistics.\n\nMoritz Hardt, Eric Price, and Nati Srebro. 2016. Equality of opportunity in supervised learning. In Advances in neural information processing systems , pages 3315-3323.\n\nTatsunori Hashimoto, Megha Srivastava, Hongseok Namkoong, and Percy Liang. 2018. Fairness without demographics in repeated loss minimization. In International Conference on Machine Learning , pages 1929-1938. PMLR.",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2021.acl-long.330",
+        "title": "Measuring Massive Multitask Language Understanding",
+        "category": "Evaluation",
+        "year": 2021,
+        "authors": "undefined undefined, undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 78
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2021.acl-long.330-chunk-79",
+      "content": "Percy Liang. 2018. Fairness without demographics in repeated loss minimization. In International Conference on Machine Learning , pages 1929-1938. PMLR. \n\nPeter Henderson, Koustuv Sinha, Nicolas AngelardGontier, Nan Rosemary Ke, Genevieve Fried, Ryan Lowe, and Joelle Pineau. 2018. Ethical challenges in data-driven dialogue systems. In Proceedings of the 2018 AAAI/ACM Conference on AI, Ethics, and Society , pages 123-129.\n\nAri Holtzman, Jan Buys, Li Du, Maxwell Forbes, and Yejin Choi. 2019. The curious case of neural text degeneration. In International Conference on Learning Representations .\n\nDirk Hovy, Federico Bianchi, and Tommaso Fornaciari. 2020. 'you sound just like your father' commercial machine translation systems include stylistic biases. In Proceedings of the 58th Annual Meeting of the Association for Computational Linguistics , pages 1686-1690, Online. Association for Computational Linguistics.",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2021.acl-long.330",
+        "title": "Measuring Massive Multitask Language Understanding",
+        "category": "Evaluation",
+        "year": 2021,
+        "authors": "undefined undefined, undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 79
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2021.acl-long.330-chunk-80",
+      "content": "include stylistic biases. In Proceedings of the 58th Annual Meeting of the Association for Computational Linguistics , pages 1686-1690, Online. Association for Computational Linguistics. \n\nPo-Sen Huang, Huan Zhang, Ray Jiang, Robert Stanforth, Johannes Welbl, Jack Rae, Vishal Maini, Dani Yogatama, and Pushmeet Kohli. 2020. Reducing sentiment bias in language models via counterfactual evaluation. In Findings of the Association for Computational Linguistics: EMNLP 2020 , pages 65-83, Online. Association for Computational Linguistics.\n\nClayton Hutto and Eric Gilbert. 2014. Vader: A parsimonious rule-based model for sentiment analysis of social media text. In Proceedings of the International AAAI Conference on Web and Social Media , volume 8.",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2021.acl-long.330",
+        "title": "Measuring Massive Multitask Language Understanding",
+        "category": "Evaluation",
+        "year": 2021,
+        "authors": "undefined undefined, undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 80
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2021.acl-long.330-chunk-81",
+      "content": "analysis of social media text. In Proceedings of the International AAAI Conference on Web and Social Media , volume 8. \n\n- Matthew Kay, Cynthia Matuszek, and Sean A Munson. 2015. Unequal representation and gender stereotypes in image search results for occupations. In\n- Proceedings of the 33rd Annual ACM Conference on Human Factors in Computing Systems , pages 38193828.\n\nSvetlana Kiritchenko and Saif Mohammad. 2018. Examining gender and race bias in two hundred sentiment analysis systems. In Proceedings of the Seventh Joint Conference on Lexical and Computational Semantics , pages 43-53.\n\nSvetlana Kiritchenko, Isar Nejadgholi, and Kathleen C Fraser. 2020. Confronting abusive language online: A survey from the ethical and human rights perspective. arXiv preprint arXiv:2012.12305 .",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2021.acl-long.330",
+        "title": "Measuring Massive Multitask Language Understanding",
+        "category": "Evaluation",
+        "year": 2021,
+        "authors": "undefined undefined, undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 81
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2021.acl-long.330-chunk-82",
+      "content": "and Kathleen C Fraser. 2020. Confronting abusive language online: A survey from the ethical and human rights perspective. arXiv preprint arXiv:2012.12305 . \n\nHannah Kirk, Yennie Jun, Haider Iqbal, Elias Benussi, Filippo Volpin, Frederic A Dreyer, Aleksandar Shtedritski, and Yuki M Asano. 2021. How true is gpt2? an empirical analysis of intersectional occupational biases. arXiv preprint arXiv:2102.04130 .\n\nTom Kocmi, Tomasz Limisiewicz, and Gabriel Stanovsky. 2020. Gender coreference and bias evaluation at WMT 2020. In Proceedings of the Fifth Conference on Machine Translation , pages 357-364, Online. Association for Computational Linguistics.\n\nBen Krause, Akhilesh Deepak Gotmare, Bryan McCann, Nitish Shirish Keskar, Shafiq Joty, Richard Socher, and Nazneen Fatema Rajani. 2020. Gedi: Generative discriminator guided sequence generation. arXiv preprint arXiv:2009.06367 .",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2021.acl-long.330",
+        "title": "Measuring Massive Multitask Language Understanding",
+        "category": "Evaluation",
+        "year": 2021,
+        "authors": "undefined undefined, undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 82
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2021.acl-long.330-chunk-83",
+      "content": "McCann, Nitish Shirish Keskar, Shafiq Joty, Richard Socher, and Nazneen Fatema Rajani. 2020. Gedi: Generative discriminator guided sequence generation. arXiv preprint arXiv:2009.06367 . \n\nSharon Levy, Michael Saxon, and William Yang Wang. 2021. The truth is out there: Investigating conspiracy theories in text generation. In Findings of The Joint Conference of the 59th Annual Meeting of the Association for Computational Linguistics and the 11th International Joint Conference on Natural Language Processing .\n\nAlisa Liu, Maarten Sap, Ximing Lu, Swabha Swayamdipta, Chandra Bhagavatula, Noah A Smith, and Yejin Choi. 2021. On-the-fly controlled text generation with experts and anti-experts. In The Joint Conference of the 59th Annual Meeting of the Association for Computational Linguistics and the 11th International Joint Conference on Natural Language Processing .",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2021.acl-long.330",
+        "title": "Measuring Massive Multitask Language Understanding",
+        "category": "Evaluation",
+        "year": 2021,
+        "authors": "undefined undefined, undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 83
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2021.acl-long.330-chunk-84",
+      "content": "Conference of the 59th Annual Meeting of the Association for Computational Linguistics and the 11th International Joint Conference on Natural Language Processing . \n\nHaochen Liu, Jamell Dacon, Wenqi Fan, Hui Liu, Zitao Liu, and Jiliang Tang. 2020a. Does gender matter? towards fairness in dialogue systems. In Proceedings of the 28th International Conference on Computational Linguistics , pages 4403-4416, Barcelona, Spain (Online). International Committee on Computational Linguistics.\n\nHaochen Liu, Wentao Wang, Yiqi Wang, Hui Liu, Zitao Liu, and Jiliang Tang. 2020b. Mitigating gender bias for neural dialogue generation with adversarial learning. In Proceedings of the 2020 Conference on Empirical Methods in Natural Language Processing (EMNLP) , pages 893-903, Online. Association for Computational Linguistics.",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2021.acl-long.330",
+        "title": "Measuring Massive Multitask Language Understanding",
+        "category": "Evaluation",
+        "year": 2021,
+        "authors": "undefined undefined, undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 84
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2021.acl-long.330-chunk-85",
+      "content": "Proceedings of the 2020 Conference on Empirical Methods in Natural Language Processing (EMNLP) , pages 893-903, Online. Association for Computational Linguistics. \n\n- Kaiji Lu, Piotr Mardziel, Fangjing Wu, Preetam Amancharla, and Anupam Datta. 2020. Gender bias in neural natural language processing. In Logic, Language, and Security , pages 189-202. Springer.\n\nLi Lucy and David Bamman. 2021. Gender and representation bias in gpt-3 generated stories. In Proceedings of the Third Workshop on Narrative Understanding , pages 48-55.\n\nXinyao Ma, Maarten Sap, Hannah Rashkin, and Yejin Choi. 2020. PowerTransformer: Unsupervised controllable revision for biased language correction. In Proceedings of the 2020 Conference on Empirical Methods in Natural Language Processing (EMNLP) , pages 7426-7441, Online. Association for Computational Linguistics.",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2021.acl-long.330",
+        "title": "Measuring Massive Multitask Language Understanding",
+        "category": "Evaluation",
+        "year": 2021,
+        "authors": "undefined undefined, undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 85
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2021.acl-long.330-chunk-86",
+      "content": "In Proceedings of the 2020 Conference on Empirical Methods in Natural Language Processing (EMNLP) , pages 7426-7441, Online. Association for Computational Linguistics. \n\nAmit Moryossef, Roee Aharoni, and Yoav Goldberg. 2019. Filling gender &amp; number gaps in neural machine translation with black-box context injection. In Proceedings of the First Workshop on Gender Bias in Natural Language Processing , pages 49-54, Florence, Italy. Association for Computational Linguistics.\n\nDebora Nozza, Federico Bianchi, and Dirk Hovy. 2021. Honest: Measuring hurtful sentence completion in language models. In Proceedings of the 2021 Conference of the North American Chapter of the Association for Computational Linguistics: Human Language Technologies , pages 2398-2406.\n\nThuy Ong. 2017. Facebook apologizes after wrong translation sees Palestinian man arrested for posting 'good morning' .",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2021.acl-long.330",
+        "title": "Measuring Massive Multitask Language Understanding",
+        "category": "Evaluation",
+        "year": 2021,
+        "authors": "undefined undefined, undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 86
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2021.acl-long.330-chunk-87",
+      "content": "Human Language Technologies , pages 2398-2406. Thuy Ong. 2017. Facebook apologizes after wrong translation sees Palestinian man arrested for posting 'good morning' . \n\nJi Ho Park, Jamin Shin, and Pascale Fung. 2018. Reducing gender bias in abusive language detection. In Proceedings of the 2018 Conference on Empirical Methods in Natural Language Processing , pages 2799-2804.\n\nAmandalynne Paullada, Inioluwa Deborah Raji, Emily M Bender, Emily Denton, and Alex Hanna. 2020. Data and its (dis) contents: A survey of dataset development and use in machine learning research. arXiv preprint arXiv:2012.05345 .\n\nXiangyu Peng, Siyan Li, Spencer Frazier, and Mark Riedl. 2020. Reducing non-normative text generation from language models. In Proceedings of the 13th International Conference on Natural Language Generation , pages 374-383, Dublin, Ireland. Association for Computational Linguistics.",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2021.acl-long.330",
+        "title": "Measuring Massive Multitask Language Understanding",
+        "category": "Evaluation",
+        "year": 2021,
+        "authors": "undefined undefined, undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 87
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2021.acl-long.330-chunk-88",
+      "content": "generation from language models. In Proceedings of the 13th International Conference on Natural Language Generation , pages 374-383, Dublin, Ireland. Association for Computational Linguistics. \n\n- Marcelo OR Prates, Pedro H Avelar, and Lu´ ıs C Lamb. 2019. Assessing gender bias in machine translation: a case study with google translate. Neural Computing and Applications , pages 1-19.\n- Reid Pryzant, Richard Diehl Martinez, Nathan Dass, Sadao Kurohashi, Dan Jurafsky, and Diyi Yang. 2020. Automatically neutralizing subjective bias in text. In Proceedings of the AAAI Conference on Artificial Intelligence , volume 34, pages 480-489.\n- Yusu Qian, Urwa Muaz, Ben Zhang, and Jae Won Hyun. 2019. Reducing gender bias in word-level language models with a gender-equalizing loss function. In Proceedings of the 57th Annual Meeting of the Association for Computational Linguistics: Student Research Workshop , pages 223-228, Florence, Italy. Association for Computational Linguistics.\n- Alec Radford, Karthik Narasimhan, Tim Salimans, and Ilya Sutskever. 2018. Improving language understanding by generative pre-training.",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2021.acl-long.330",
+        "title": "Measuring Massive Multitask Language Understanding",
+        "category": "Evaluation",
+        "year": 2021,
+        "authors": "undefined undefined, undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 88
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2021.acl-long.330-chunk-89",
+      "content": "Linguistics: Student Research Workshop , pages 223-228, Florence, Italy. Association for Computational Linguistics. - Alec Radford, Karthik Narasimhan, Tim Salimans, and Ilya Sutskever. 2018. Improving language understanding by generative pre-training. \n\nAlec Radford, Jeffrey Wu, Rewon Child, David Luan, Dario Amodei, and Ilya Sutskever. 2019. Language models are unsupervised multitask learners. OpenAI blog , 1(8):9.\n\nColin Raffel, Noam Shazeer, Adam Roberts, Katherine Lee, Sharan Narang, Michael Matena, Yanqi Zhou, Wei Li, and Peter J Liu. 2020. Exploring the limits of transfer learning with a unified text-to-text transformer. Journal of Machine Learning Research , 21:1-67.\n\nAdithya Renduchintala and Adina Williams. 2021. Investigating failures of automatic translation in the case of unambiguous gender. arXiv preprint arXiv:2104.07838 .",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2021.acl-long.330",
+        "title": "Measuring Massive Multitask Language Understanding",
+        "category": "Evaluation",
+        "year": 2021,
+        "authors": "undefined undefined, undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 89
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2021.acl-long.330-chunk-90",
+      "content": "21:1-67. Adithya Renduchintala and Adina Williams. 2021. Investigating failures of automatic translation in the case of unambiguous gender. arXiv preprint arXiv:2104.07838 . \n\n- Nicholas Roberts, Davis Liang, Graham Neubig, and Zachary C Lipton. 2020. Decoding and diversity in machine translation. arXiv preprint arXiv:2011.13477 .\n\nNithya Sambasivan, Erin Arnesen, Ben Hutchinson, Tulsee Doshi, and Vinodkumar Prabhakaran. 2021. Re-imagining algorithmic fairness in india and beyond. Proceedings of FAccT .\n\nDanielle Saunders and Bill Byrne. 2020. Reducing gender bias in neural machine translation as a domain adaptation problem. In Proceedings of the 58th Annual Meeting of the Association for Computational Linguistics , pages 7724-7736, Online. Association for Computational Linguistics.",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2021.acl-long.330",
+        "title": "Measuring Massive Multitask Language Understanding",
+        "category": "Evaluation",
+        "year": 2021,
+        "authors": "undefined undefined, undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 90
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2021.acl-long.330-chunk-91",
+      "content": "Proceedings of the 58th Annual Meeting of the Association for Computational Linguistics , pages 7724-7736, Online. Association for Computational Linguistics. \n\nDanielle Saunders, Rosie Sallis, and Bill Byrne. 2020. Neural machine translation doesn't translate gender coreference right unless you make it. In Proceedings of the Second Workshop on Gender Bias in Natural Language Processing , pages 35-43, Barcelona, Spain (Online). Association for Computational Linguistics.\n\n- Danielle Saunders, Rosie Sallis, and Bill Byrne. 2021. First the worst: Finding better gender translations during beam search. arXiv preprint arXiv:2104.07429 .\n- Beatrice Savoldi, Marco Gaido, Luisa Bentivogli, Matteo Negri, and Marco Turchi. 2021. Gender bias in machine translation. In Transactions of the Association for Computational Linguistics .",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2021.acl-long.330",
+        "title": "Measuring Massive Multitask Language Understanding",
+        "category": "Evaluation",
+        "year": 2021,
+        "authors": "undefined undefined, undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 91
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2021.acl-long.330-chunk-92",
+      "content": "Bentivogli, Matteo Negri, and Marco Turchi. 2021. Gender bias in machine translation. In Transactions of the Association for Computational Linguistics . \n\nTimo Schick, Sahana Udupa, and Hinrich Sch¨ utze. 2021. Self-diagnosis and self-debiasing: A proposal for reducing corpus-based bias in nlp. arXiv preprint arXiv:2103.00453 .\n\nDeven Santosh Shah, H. Andrew Schwartz, and Dirk Hovy. 2020. Predictive biases in natural language processing models: A conceptual framework and overview. In Proceedings of the 58th Annual Meeting of the Association for Computational Linguistics , pages 5248-5264, Online. Association for Computational Linguistics.\n\nEmily Sheng, Josh Arnold, Zhou Yu, Kai-Wei Chang, and Nanyun Peng. 2021a. Revealing persona biases in dialogue systems. arXiv preprint arXiv:2104.08728 .",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2021.acl-long.330",
+        "title": "Measuring Massive Multitask Language Understanding",
+        "category": "Evaluation",
+        "year": 2021,
+        "authors": "undefined undefined, undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 92
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2021.acl-long.330-chunk-93",
+      "content": "Sheng, Josh Arnold, Zhou Yu, Kai-Wei Chang, and Nanyun Peng. 2021a. Revealing persona biases in dialogue systems. arXiv preprint arXiv:2104.08728 . \n\nEmily Sheng, Kai-Wei Chang, Prem Natarajan, and Nanyun Peng. 2019. The woman worked as a babysitter: On biases in language generation. In Proceedings of the 2019 Conference on Empirical Methods in Natural Language Processing and the 9th International Joint Conference on Natural Language Processing (EMNLP-IJCNLP) , pages 3398-3403.\n\nEmily Sheng, Kai-Wei Chang, Prem Natarajan, and Nanyun Peng. 2020. Towards Controllable Biases in Language Generation. In Findings of the Association for Computational Linguistics: EMNLP 2020 , pages 3239-3254, Online. Association for Computational Linguistics.",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2021.acl-long.330",
+        "title": "Measuring Massive Multitask Language Understanding",
+        "category": "Evaluation",
+        "year": 2021,
+        "authors": "undefined undefined, undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 93
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2021.acl-long.330-chunk-94",
+      "content": "Generation. In Findings of the Association for Computational Linguistics: EMNLP 2020 , pages 3239-3254, Online. Association for Computational Linguistics. \n\nEmily Sheng, Kai-Wei Chang, Premkumar Natarajan, and Nanyun Peng. 2021b. 'nice try, kiddo': Investigating ad hominems in dialogue responses. In Proceedings of the 2021 Conference of the North American Chapter of the Association for Computational Linguistics: Human Language Technologies .\n\nEmily Sheng and David Uthus. 2020. Investigating societal biases in a poetry composition system. In Proceedings of the Second Workshop on Gender Bias in Natural Language Processing , pages 93-106, Barcelona, Spain (Online). Association for Computational Linguistics.",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2021.acl-long.330",
+        "title": "Measuring Massive Multitask Language Understanding",
+        "category": "Evaluation",
+        "year": 2021,
+        "authors": "undefined undefined, undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 94
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2021.acl-long.330-chunk-95",
+      "content": "Workshop on Gender Bias in Natural Language Processing , pages 93-106, Barcelona, Spain (Online). Association for Computational Linguistics. \n\nVered Shwartz, Rachel Rudinger, and Oyvind Tafjord. 2020. 'you are grounded!': Latent name artifacts in pre-trained language models. In Proceedings of the 2020 Conference on Empirical Methods in Natural Language Processing (EMNLP) , pages 6850-6861, Online. Association for Computational Linguistics.\n\nAndrew Silva, Pradyumna Tambwekar, and Matthew Gombolay. 2021. Towards a comprehensive understanding and accurate evaluation of societal biases in pre-trained transformers. In Proceedings of the 2021 Conference of the North American Chapter of the Association for Computational Linguistics: Human Language Technologies , pages 2383-2389.\n\nIrene Solaiman, Miles Brundage, Jack Clark, Amanda Askell, Ariel Herbert-Voss, Jeff Wu, Alec Radford, Gretchen Krueger, Jong Wook Kim, Sarah",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2021.acl-long.330",
+        "title": "Measuring Massive Multitask Language Understanding",
+        "category": "Evaluation",
+        "year": 2021,
+        "authors": "undefined undefined, undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 95
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2021.acl-long.330-chunk-96",
+      "content": ", pages 2383-2389. Irene Solaiman, Miles Brundage, Jack Clark, Amanda Askell, Ariel Herbert-Voss, Jeff Wu, Alec Radford, Gretchen Krueger, Jong Wook Kim, Sarah \n\nKreps, et al. 2019. Release strategies and the social impacts of language models. arXiv preprint arXiv:1908.09203 .\n\nArt¯ urs Stafanoviˇ cs, M¯ arcis Pinnis, and Toms Bergmanis. 2020. Mitigating gender bias in machine translation with target gender annotations. In Proceedings of the Fifth Conference on Machine Translation , pages 629-638, Online. Association for Computational Linguistics.\n\nGabriel Stanovsky, Noah A. Smith, and Luke Zettlemoyer. 2019. Evaluating gender bias in machine translation. In Proceedings of the 57th Annual Meeting of the Association for Computational Linguistics , pages 1679-1684, Florence, Italy. Association for Computational Linguistics.",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2021.acl-long.330",
+        "title": "Measuring Massive Multitask Language Understanding",
+        "category": "Evaluation",
+        "year": 2021,
+        "authors": "undefined undefined, undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 96
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2021.acl-long.330-chunk-97",
+      "content": "In Proceedings of the 57th Annual Meeting of the Association for Computational Linguistics , pages 1679-1684, Florence, Italy. Association for Computational Linguistics. \n\nTony Sun, Andrew Gaut, Shirlyn Tang, Yuxin Huang, Mai ElSherief, Jieyu Zhao, Diba Mirza, Elizabeth Belding, Kai-Wei Chang, and William Yang Wang. 2019. Mitigating gender bias in natural language processing: Literature review. In Proceedings of the 57th Annual Meeting of the Association for Computational Linguistics , pages 1630-1640, Florence, Italy. Association for Computational Linguistics.\n\nTony Sun, Kellie Webster, Apu Shah, William Yang Wang, and Melvin Johnson. 2021. They, them, theirs: Rewriting with gender-neutral english. arXiv preprint arXiv:2102.06788 .\n\nAlex Tamkin, Miles Brundage, Jack Clark, and Deep Ganguli. 2021. Understanding the capabilities, limitations, and societal impact of large language models. arXiv preprint arXiv:2102.02503 .",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2021.acl-long.330",
+        "title": "Measuring Massive Multitask Language Understanding",
+        "category": "Evaluation",
+        "year": 2021,
+        "authors": "undefined undefined, undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 97
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2021.acl-long.330-chunk-98",
+      "content": "Tamkin, Miles Brundage, Jack Clark, and Deep Ganguli. 2021. Understanding the capabilities, limitations, and societal impact of large language models. arXiv preprint arXiv:2102.02503 . \n\nMarcus Tomalin, Bill Byrne, Shauna Concannon, Danielle Saunders, and Stefanie Ullmann. 2021. The practical ethics of bias reduction in machine translation: why domain adaptation is better than data debiasing. Ethics and Information Technology , pages 1-15.\n\nEva Vanmassenhove, Christian Hardmeier, and Andy Way. 2018. Getting gender right in neural machine translation. In Proceedings of the 2018 Conference on Empirical Methods in Natural Language Processing , pages 3003-3008, Brussels, Belgium. Association for Computational Linguistics.\n\nAshish Vaswani, Noam Shazeer, Niki Parmar, Jakob Uszkoreit, Llion Jones, Aidan N Gomez, Łukasz Kaiser, and Illia Polosukhin. 2017. Attention is all you need. In Advances in neural information processing systems , pages 5998-6008.",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2021.acl-long.330",
+        "title": "Measuring Massive Multitask Language Understanding",
+        "category": "Evaluation",
+        "year": 2021,
+        "authors": "undefined undefined, undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 98
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2021.acl-long.330-chunk-99",
+      "content": "Jones, Aidan N Gomez, Łukasz Kaiser, and Illia Polosukhin. 2017. Attention is all you need. In Advances in neural information processing systems , pages 5998-6008. \n\nJesse Vig, Sebastian Gehrmann, Yonatan Belinkov, Sharon Qian, Daniel Nevo, Yaron Singer, and Stuart Shieber. 2020. Investigating gender bias in language models using causal mediation analysis. Advances in Neural Information Processing Systems , 33.\n\nEric Wallace, Shi Feng, Nikhil Kandpal, Matt Gardner, and Sameer Singh. 2019. Universal adversarial triggers for attacking and analyzing NLP. In Proceedings of the 2019 Conference on Empirical Methods\n\nin Natural Language Processing and the 9th International Joint Conference on Natural Language Processing (EMNLP-IJCNLP) , pages 2153-2162, Hong Kong, China. Association for Computational Linguistics.",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2021.acl-long.330",
+        "title": "Measuring Massive Multitask Language Understanding",
+        "category": "Evaluation",
+        "year": 2021,
+        "authors": "undefined undefined, undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 99
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2021.acl-long.330-chunk-100",
+      "content": "and the 9th International Joint Conference on Natural Language Processing (EMNLP-IJCNLP) , pages 2153-2162, Hong Kong, China. Association for Computational Linguistics. \n\n- Alex Wang and Kyunghyun Cho. 2019. BERT has a mouth, and it must speak: BERT as a Markov random field language model. In Proceedings of the Workshop on Methods for Optimizing and Evaluating Neural Language Generation , pages 30-36, Minneapolis, Minnesota. Association for Computational Linguistics.\n- Zhilin Yang, Zihang Dai, Yiming Yang, Jaime Carbonell, Russ R Salakhutdinov, and Quoc V Le. 2019. Xlnet: Generalized autoregressive pretraining for language understanding. In Advances in neural information processing systems , pages 5753-5763.\n- Catherine Yeo and Alyssa Chen. 2020. Defining and evaluating fair natural language generation. In Proceedings of the The Fourth Widening Natural Language Processing Workshop , pages 107-109, Seattle, USA. Association for Computational Linguistics.\n- Yizhe Zhang, Siqi Sun, Michel Galley, Yen-Chun Chen, Chris Brockett, Xiang Gao, Jianfeng Gao, Jingjing Liu, and Bill Dolan. 2020. DIALOGPT : Largescale generative pre-training for conversational response generation. In Proceedings of the 58th Annual Meeting of the Association for Computational Linguistics: System Demonstrations , pages 270278, Online. Association for Computational Linguistics.\n- Jieyu Zhao, Yichao Zhou, Zeyu Li, Wei Wang, and KaiWei Chang. 2018. Learning gender-neutral word embeddings. In Proceedings of the 2018 Conference on Empirical Methods in Natural Language Processing , pages 4847-4853, Brussels, Belgium. Association for Computational Linguistics.\n- Ran Zmigrod, Sabrina J. Mielke, Hanna Wallach, and Ryan Cotterell. 2019. Counterfactual data augmentation for mitigating gender stereotypes in languages with rich morphology. In Proceedings of the 57th Annual Meeting of the Association for Computational Linguistics , pages 1651-1661, Florence, Italy. Association for Computational Linguistics.",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2021.acl-long.330",
+        "title": "Measuring Massive Multitask Language Understanding",
+        "category": "Evaluation",
+        "year": 2021,
+        "authors": "undefined undefined, undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 100
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2021.acl-long.330-chunk-101",
+      "content": "4847-4853, Brussels, Belgium. Association for Computational Linguistics. - Ran Zmigrod, Sabrina J. Mielke, Hanna Wallach, and Ryan Cotterell. 2019. Counterfactual data augmentation for mitigating gender stereotypes in languages with rich morphology. In Proceedings of the 57th Annual Meeting of the Association for Computational Linguistics , pages 1651-1661, Florence, Italy. Association for Computational Linguistics. \n\n## A Appendices\n\n## A.1 Evaluating Biases Across Decoding Techniques and Metrics",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2021.acl-long.330",
+        "title": "Measuring Massive Multitask Language Understanding",
+        "category": "Evaluation",
+        "year": 2021,
+        "authors": "undefined undefined, undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 101
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2021.acl-long.330-chunk-102",
+      "content": "## A Appendices ## A.1 Evaluating Biases Across Decoding Techniques and Metrics \n\nTo gain more insight into biases from different decoding techniques, we examine autocomplete generations from GPT (110M params), GPT-2 (small, 117M params), and XLNet (base, 110M params), using the decoding techniques described in Section 4.3 through the Transformers 19 library. We use standard parameters of b = 16 for beam search, k = 40 with a temperature of 0 . 7 for topk sampling, and p = 0 . 95 for nucleus sampling (Holtzman et al., 2019). In terms of bias metrics, we use existing NLG bias metrics: regard ratio (Sheng et al., 2019), sentiment ratio (Groenwold et al., 2020), individual and group fairness through sentiment (IF/GF) (Huang et al., 2020), and a gendered word co-occurrence scores (Bordia and Bowman, 2019). For all sentiment scores, we use the rule-based sentiment analyzer, V ADER (Hutto and Gilbert, 2014). 20 We run all our experiments on an RTX 2080Ti GPU. Generation takes from a couple of minutes to a few hours, depending on the number of samples generated.",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2021.acl-long.330",
+        "title": "Measuring Massive Multitask Language Understanding",
+        "category": "Evaluation",
+        "year": 2021,
+        "authors": "undefined undefined, undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 102
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2021.acl-long.330-chunk-103",
+      "content": "ADER (Hutto and Gilbert, 2014). 20 We run all our experiments on an RTX 2080Ti GPU. Generation takes from a couple of minutes to a few hours, depending on the number of samples generated. \n\nRegard Ratios Sheng et al. (2019) introduce 10 prompts to induce occupation- and respect-related generations (e.g., [BLANK] worked as , [BLANK] was thought of as ) and six demographics ( Black , White , man , woman , gay , straight ) to fill in the [BLANK] , for a total of 60 prompts. The authors define regard as the social perception towards a demographic, collect human annotations, and release a BERT-based regard classifier. 21 We follow the original work in reporting percentages of negative, neutral, and positive regard scores per demographic. For the deterministic search methods, we do not report scores since there are only 10 samples per demographic. For the stochastic sampling methods, we generate 1000 samples per demographic. Additionally, we use the regard classifier released by the authors for our evaluations-while we acknowledge that this classifier could also have biases, we believe it is still worthwhile to use it to compare text generated from different decoding techniques.",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2021.acl-long.330",
+        "title": "Measuring Massive Multitask Language Understanding",
+        "category": "Evaluation",
+        "year": 2021,
+        "authors": "undefined undefined, undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 103
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2021.acl-long.330-chunk-104",
+      "content": "we use the regard classifier released by the authors for our evaluations-while we acknowledge that this classifier could also have biases, we believe it is still worthwhile to use it to compare text generated from different decoding techniques. \n\n19 https://huggingface.co/transformers\n\n20 Kiritchenko and Mohammad (2018) show that sentiment classifiers can exhibit biases. We use V ADER since 1) it does not rely on learned associations and thus may be less prone to biases, and 2) it has been used to measure biases in previous works (Sheng et al., 2019; Groenwold et al., 2020).\n\n21 https://github.com/ewsheng/nlg-bias\n\n## Sentiment Ratios for AAE and WAE Prompts",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2021.acl-long.330",
+        "title": "Measuring Massive Multitask Language Understanding",
+        "category": "Evaluation",
+        "year": 2021,
+        "authors": "undefined undefined, undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 104
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2021.acl-long.330-chunk-105",
+      "content": "works (Sheng et al., 2019; Groenwold et al., 2020). 21 https://github.com/ewsheng/nlg-bias ## Sentiment Ratios for AAE and WAE Prompts \n\nGroenwold et al. (2020) curate a parallel set of 2,019 AAE and 2,019 WAE prompts and use sentiment classifiers to label text generated from the prompts. Similar to Sheng et al. (2019), this work also reports percentages of negative, neutral, and positive scores. The VADER sentiment analyzer that we use reports scores in the range of [-1, 1]. When reporting ratios, we use splits recommended by the authors (Hutto and Gilbert, 2014) to categorize sentiment values into negative (value &lt; = -0 . 05 ), neutral ( -0 . 05 &lt; value &lt; 0 . 05 ), and positive (value &gt; =0 . 05 ) bins. When reporting average values, we calculate from the unrounded scores from VADER. We generate one sample per prompt for all decoding techniques.",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2021.acl-long.330",
+        "title": "Measuring Massive Multitask Language Understanding",
+        "category": "Evaluation",
+        "year": 2021,
+        "authors": "undefined undefined, undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 105
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2021.acl-long.330-chunk-106",
+      "content": "&gt; =0 . 05 ) bins. When reporting average values, we calculate from the unrounded scores from VADER. We generate one sample per prompt for all decoding techniques. \n\nIndividual and Group Fairness Through Sentiment Huang et al. (2020) evaluate fairness across countries, occupations, and genders (binary, as defined through Western names typical of a gender) by first defining 10 templates per dimension (e.g., People from [BLANK] are ). For each dimension, they also define a list of dimension instances (e.g., Syria as a country) to fill in the [BLANK] . In total, there are 730 prompts across the three attributes. For our experiments, we generate one sample per prompt.",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2021.acl-long.330",
+        "title": "Measuring Massive Multitask Language Understanding",
+        "category": "Evaluation",
+        "year": 2021,
+        "authors": "undefined undefined, undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 106
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2021.acl-long.330-chunk-107",
+      "content": "[BLANK] . In total, there are 730 prompts across the three attributes. For our experiments, we generate one sample per prompt. \n\nThe authors define the individual fairness metric by '...averaging the Wasserstein-1 distance between the sentiment score distribution of every evaluation sentence and each of its counterfactual sentences across all templates.' For example, we would compute the distance between the sentiment distributions of the text generated from the template People from [BLANK] are for each of the country choices for [ BLANK] , and sum up the distance scores for all pairs across all templates.",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2021.acl-long.330",
+        "title": "Measuring Massive Multitask Language Understanding",
+        "category": "Evaluation",
+        "year": 2021,
+        "authors": "undefined undefined, undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 107
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2021.acl-long.330-chunk-108",
+      "content": "country choices for [ BLANK] , and sum up the distance scores for all pairs across all templates. \n\nFor group fairness , the authors calculate the average of the 'Wasserstein-1 distance between the sentiment distributions of all generated sentences of inputs from [a] subgroup, and that over the entire evaluation set'. Here, a subgroup means each country, occupation, or binary gender. For example, we compare the distance between the sentiment distribution of text generated for Syria (across all templates) and the sentiment distribution of text generated for all countries.\n\nWe use Huang et al. (2020)'s prefix templates and fairness metrics exactly as defined in the original work, so we refer readers to the original work for more details.",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2021.acl-long.330",
+        "title": "Measuring Massive Multitask Language Understanding",
+        "category": "Evaluation",
+        "year": 2021,
+        "authors": "undefined undefined, undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 108
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2021.acl-long.330-chunk-109",
+      "content": "templates and fairness metrics exactly as defined in the original work, so we refer readers to the original work for more details. \n\nGendered Word Co-occurrence Scores This score is based on the one proposed by Bordia and Bowman (2019), though we use different gendered word lists and evaluate over all text generated for the other bias metrics, downsampling if necessary so that the amount and sources of generated text are consistent across decoding techniques. First, we obtain the lists of female words and male words from Zhao et al. (2018) and add gendered pronouns ( he , she , his , him , her ) to the respective lists. For each word in the aggregated sample set, we calculate the probability of the word given any of the female words (in a context window of 20 words before and after a word) and similarly the probability of the word given any of the male words. We then take the absolute value of the log ratio of the first probability to the second, and report the average and standard deviation across all nongendered words. More concretely, given the set of female gendered words f , the set of male gendered words m , unique non-gendered words w ∈ W in a dataset, and the probability of a word given any of the set g of gendered words P ( w | g ) , we calculate the mean",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2021.acl-long.330",
+        "title": "Measuring Massive Multitask Language Understanding",
+        "category": "Evaluation",
+        "year": 2021,
+        "authors": "undefined undefined, undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 109
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2021.acl-long.330-chunk-110",
+      "content": "words f , the set of male gendered words m , unique non-gendered words w ∈ W in a dataset, and the probability of a word given any of the set g of gendered words P ( w | g ) , we calculate the mean \n\n<!-- formula-not-decoded -->\n\nand standard deviation\n\n<!-- formula-not-decoded -->",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2021.acl-long.330",
+        "title": "Measuring Massive Multitask Language Understanding",
+        "category": "Evaluation",
+        "year": 2021,
+        "authors": "undefined undefined, undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 110
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2021.acl-long.330-chunk-111",
+      "content": "mean <!-- formula-not-decoded --> and standard deviation <!-- formula-not-decoded --> \n\nSupplementary Results Supplementary to the experimental results described in the main text, Table 2 presents quantitative results. Table 3 shows regard ratios for the other demographic groups originally included in the evaluation by Sheng et al. (2019). Additionally, Table 4 presents average lengths and vocabulary sizes of the samples used in the IF/GF evaluations to estimate text diversity. These results, combined with examples of generated text in Table 5, provide evidence that the decoding techniques differ in terms of generated text diversity, and that diversity is very much correlated with the bias metrics IF, GF, and gendered word co-occurrence scores. Although this correlation is to be expected from the metric formulation, this study raises relevant questions of whether bias metrics should be correlated with text diversity, and whether bias evaluations should use more comprehensive metrics.",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2021.acl-long.330",
+        "title": "Measuring Massive Multitask Language Understanding",
+        "category": "Evaluation",
+        "year": 2021,
+        "authors": "undefined undefined, undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 111
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2021.acl-long.330-chunk-112",
+      "content": "from the metric formulation, this study raises relevant questions of whether bias metrics should be correlated with text diversity, and whether bias evaluations should use more comprehensive metrics. \n\n| Model   | Decode   | Regard          | Regard          | Sentiment      | Sentiment      | IF ↓   | GF ↓   | Gendered Score ↓   |\n|---------|----------|-----------------|-----------------|----------------|----------------|--------|--------|--------------------|\n| Model   |          | Black           | White           | AAE            | WAE            |        |        |                    |\n| GPT     | Greedy   | -               | -               | 13-73-14(0.01) | 17-67-16(0.01) | 0.15   | 0.09   | 1.98 ± 2.34        |\n| GPT     | Beam     | -               | -               | 10-77-13(0.01) | 13-71-16(0.03) | 0.12   | 0.07   | 1.91 ± 2.35        |\n| GPT     | Top- k   | 33-55-12(-0.20) | 22-55-23(0.01)  | 13-70-17(0.02) | 16-63-21(0.03) | 0.27   | 0.09   | 2.07 ± 2.32        |\n| GPT     | Nucleus  | 35-53-12(-0.23) | 30-54-16(-0.14) | 16-63-21(0.03) | 18-59-23(0.02) | 0.33   | 0.10   | 2.10 ± 2.28        |\n| GPT-2   | Greedy   | -               | -               | 15-63-22(0.03) | 14-64-23(0.06) | 0.19   | 0.07   | 1.91 ± 2.39        |\n| GPT-2   | Beam     | -               | -               | 14-67-18(0.02) | 12-70-18(0.04) | 0.19   | 0.07   | 1.90 ± 2.45        |\n| GPT-2   | Top- k   | 35-49-16(-0.19) | 24-48-28(0.04)  | 17-57-26(0.05) | 17-57-26(0.06) | 0.32   | 0.10   | 2.00 ± 2.36        |\n| GPT-2   | Nucleus  | 46-42-12(-0.33) | 36-45-19(-0.16) | 20-49-31(0.06) | 17-54-29(0.06) | 0.36   | 0.12   | 2.00 ± 2.27        |\n| XLNet   | Greedy   | -               | -               | 09-76-15(0.03) | 11-68-21(0.05) | 0.13   | 0.09   | 1.89 ± 2.34        |\n| XLNet   | Beam     | -               | -               | 04-88-08(0.02) | 06-83-11(0.03) | 0.08   | 0.04   | 1.85 ± 2.31        |\n| XLNet   | Top- k   | 23-63-14(-0.10) | 14-69-17(0.02)  | 10-72-19(0.05) | 13-61-26(0.07) | 0.27   | 0.10   | 1.96 ± 2.30        |\n| XLNet   | Nucleus  | 35-49-16(-0.20) | 29-56-14(-0.15) | 14-63-23(0.05) | 15-58-27(0.06) | 0.30   | 0.11   | 1.97 ± 2.27        |",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2021.acl-long.330",
+        "title": "Measuring Massive Multitask Language Understanding",
+        "category": "Evaluation",
+        "year": 2021,
+        "authors": "undefined undefined, undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 112
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2021.acl-long.330-chunk-113",
+      "content": "XLNet | Beam | - | - | 04-88-08(0.02) | 06-83-11(0.03) | 0.08 | 0.04 | 1.85 ± 2.31 | | XLNet | Top- k | 23-63-14(-0.10) | 14-69-17(0.02) | 10-72-19(0.05) | 13-61-26(0.07) | 0.27 | 0.10 | 1.96 ± 2.30 | | XLNet | Nucleus | 35-49-16(-0.20) | 29-56-14(-0.15) | 14-63-23(0.05) | 15-58-27(0.06) | 0.30 | 0.11 | 1.97 ± 2.27 | \n\nTable 2: Bias evaluations for various decoding algorithms, models, and metrics. Regard scores (Sheng et al., 2019) and sentiment scores (Groenwold et al., 2020) are reported in distribution percentages of negative-neutralpositive(avg value) . Individual fairness (IF) and group fairness (GF) scores (Huang et al., 2020) compare sentiment distributions of generated text across demographics. Gendered (word co-occurrence) scores are reported in terms of mean ± stdev of the absolute log ratio of the probabilities: P ( word | female terms ) to P ( word | male terms ) (Bordia and Bowman, 2019). Search-based results for regard are omitted due to lack of enough prompts to generate from. Results indicate 1) nucleus sampling generates more text with negative regard, 2) decoding choices are similar for AAE/WAE sentiments though sampling generates more positive sentiment overall, 3) beam search has relatively lower bias as measured by IF, GF, and gendered word co-occurrence scores, followed closely by greedy search, and then topk and nucleus sampling.",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2021.acl-long.330",
+        "title": "Measuring Massive Multitask Language Understanding",
+        "category": "Evaluation",
+        "year": 2021,
+        "authors": "undefined undefined, undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 113
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2021.acl-long.330-chunk-114",
+      "content": "regard, 2) decoding choices are similar for AAE/WAE sentiments though sampling generates more positive sentiment overall, 3) beam search has relatively lower bias as measured by IF, GF, and gendered word co-occurrence scores, followed closely by greedy search, and then topk and nucleus sampling. \n\nTable 3: Regard score bias evaluation results across decoding techniques for demographics: man , woman , gay , and straight , reported in distribution percentages of negative-neutral-positive(avg value) .",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2021.acl-long.330",
+        "title": "Measuring Massive Multitask Language Understanding",
+        "category": "Evaluation",
+        "year": 2021,
+        "authors": "undefined undefined, undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 114
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2021.acl-long.330-chunk-115",
+      "content": "gay , and straight , reported in distribution percentages of negative-neutral-positive(avg value) . \n\n| Model   | Decoding   | Demographic   | Scores                        |\n|---------|------------|---------------|-------------------------------|\n| GPT     | Top- k     | man           | 24-51-25(0.01) 21-52-27(0.06) |\n|         |            | woman         |                               |\n|         |            | gay           | 31-52-17(-0.14)               |\n|         |            | straight      | 22-54-24(0.02)                |\n|         | Nucleus    | man           | 33-50-17(-0.16)               |\n|         |            | woman         | 29-53-18(-0.11)               |\n|         |            | gay           | 38-48-13(-0.25)               |\n|         |            | straight      | 29-54-17(-0.13)               |\n| GPT-2   | Top- k     | man           | 31-48-21(-0.09)               |\n|         |            | woman         | 21-49-30(0.10)                |\n|         |            | gay           | 53-32-15(-0.39)               |\n|         |            | straight      | 18-49-33(0.15)                |\n|         | Nucleus    | man           | 36-47-17(-0.20)               |\n|         |            | woman         | 30-54-17(-0.13)               |\n|         |            | gay           | 53-35-11(-0.42)               |\n|         |            | straight      | 31-50-20(-0.11)               |\n| XLNet   | Top- k     | man           | 24-54-22(-0.02)               |\n|         |            | woman         | 12-63-25(0.14)                |\n|         |            | gay           | 50-44-06(-0.44)               |\n|         |            | straight      | 21-55-24(0.03)                |\n|         | Nucleus    | man           | 28-55-16(-0.12)               |\n|         |            | woman         | 24-57-20(-0.04)               |\n|         |            | gay           | 43-45-11(-0.32)               |\n|         |            | straight      | 26-55-20(-0.06)               |",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2021.acl-long.330",
+        "title": "Measuring Massive Multitask Language Understanding",
+        "category": "Evaluation",
+        "year": 2021,
+        "authors": "undefined undefined, undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 115
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2021.acl-long.330-chunk-116",
+      "content": "| 50-44-06(-0.44) | | | | straight | 21-55-24(0.03) | | | Nucleus | man | 28-55-16(-0.12) | | | | woman | 24-57-20(-0.04) | | | | gay | 43-45-11(-0.32) | | | | straight | 26-55-20(-0.06) | \n\nTable 4: Quantitative values to estimate text diversity : Average lengths (in words) of IF/GF evaluation samples (prompt + generated text) and vocabulary size across all samples show that generated text diversity increases for decoding techniques in the following order: beam, greedy, topk , nucleus.",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2021.acl-long.330",
+        "title": "Measuring Massive Multitask Language Understanding",
+        "category": "Evaluation",
+        "year": 2021,
+        "authors": "undefined undefined, undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 116
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2021.acl-long.330-chunk-117",
+      "content": "generated text diversity increases for decoding techniques in the following order: beam, greedy, topk , nucleus. \n\n| Model   | Decoding   |   Avg. Length | Vocab Size   |\n|---------|------------|---------------|--------------|\n| GPT     | Greedy     |          11.4 | 440          |\n|         | Beam       |          10.2 | 349          |\n|         | Top- k     |          12.9 | 1,235        |\n|         | Nucleus    |          14.3 | 2,074        |\n| GPT-2   | Greedy     |          15.8 | 880          |\n|         | Beam       |          15.1 | 845          |\n|         | Top- k     |          17.7 | 2,117        |\n|         | Nucleus    |          18.2 | 3,443        |\n| XLNet   | Greedy     |          12.1 | 537          |\n|         | Beam       |           8.1 | 217          |\n|         | Top- k     |          14.6 | 1,685        |\n|         | Nucleus    |          16.4 | 2,991        |",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2021.acl-long.330",
+        "title": "Measuring Massive Multitask Language Understanding",
+        "category": "Evaluation",
+        "year": 2021,
+        "authors": "undefined undefined, undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 117
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2021.acl-long.330-chunk-118",
+      "content": "| | Beam | 8.1 | 217 | | | Top- k | 14.6 | 1,685 | | | Nucleus | 16.4 | 2,991 | \n\nTable 5: Samples generated from different decoding techniques for different bias metrics. The sampling techniques result in more diverse generated text.",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2021.acl-long.330",
+        "title": "Measuring Massive Multitask Language Understanding",
+        "category": "Evaluation",
+        "year": 2021,
+        "authors": "undefined undefined, undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 118
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2021.acl-long.330-chunk-119",
+      "content": "sampling techniques result in more diverse generated text. \n\n| Model   | Decoding   | Metric                 | Generated Text                                                                                                                                                                                                                                                                                                                                              |\n|---------|------------|------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|\n| GPT     | Greedy     | Regard Sentiment IF/GF | The Black person was known for his ability to read minds. this lil girl aint going to win im the king of this world. Raven is known for her ability to read people.                                                                                                                                                                                         |\n| GPT     | Beam       | Regard Sentiment IF/GF | The Black person was known for. this lil girl aint going to win im the king of this f**kin' world. Raven is known for her ability to read people.                                                                                                                                                                                                           |\n| GPT     | Top- k     | Regard Sentiment IF/GF | The Black person was known for its vicious, ruthless nature. this lil girl aint going to win im the king of this place Raven is known for her courage and resilience.                                                                                                                                                                                       |\n| GPT     | Nucleus    | Regard Sentiment IF/GF | The Black person was known for giving a disposition when something had a forced birth. this lil girl aint going to win im the king of this land, everyone is goin to go sit down and see mister krampus have his say. Raven is known for her archery skills.                                                                                                |\n| GPT-2   | Greedy     | Regard Sentiment IF/GF | The Black person was known for his ability to manipulate the minds of others. this lil girl aint going to win im the king of this world. Raven is known for her ability to create a new type of weapon, and she has been known to use it to create new weapons.                                                                                             |\n| GPT-2   | Beam       | Regard Sentiment IF/GF | The Black person was known for his blackness, but he was also known for his blackness. this lil girl aint going to win im the king of this world. Raven is known for her ability to turn the tide of battle.                                                                                                                                                |\n| GPT-2   | Top- k     | Regard Sentiment IF/GF | The Black person was known for his dark hair and the way he'd look at others. this lil girl aint going to win im the king of this country' she said. Raven is known for her ability to use her magic to transform the wind into a giant windstorm.                                                                                                          |\n| GPT-2   | Nucleus    | Regard Sentiment IF/GF | The Black person was known for his terrible behavior after many years of marriage. this lil girl aint going to win im the king of this country', she chided, gung-ho. Raven is known for her dislike of Marge, while she also revealed to Laura that she often wondered why, when she was first told about Kate's mission, the weather was always horrible. |\n| XLNet   | Greedy     | Regard Sentiment IF/GF | The Black person was known for his 'black' skin. this lil girl aint going to win im the king of this world. Raven is known for her '''''''''''''''''''                                                                                                                                                                                                      |\n| XLNet   | Beam       | Regard Sentiment IF/GF | The Black person was known for their. this lil girl aint going to win im the king of this world. Raven is known for her work.                                                                                                                                                                                                                               |\n| XLNet   | Top- k     | Regard Sentiment IF/GF | The Black person was known for being a bit of an 'indie'. this lil girl aint going to win im the king of this country. Raven is known for her 'The Big Bad' nickname, 'Big Bad'.                                                                                                                                                                            |\n| XLNet   | Nucleus    | Regard Sentiment IF/GF | The Black person was known for his icy attitude to his fellow human beings, and they were ungraded by their race. this lil girl aint going to win im the king of this 1% double wind. Raven is known for her intelligence, and her reactions to celebrant trends were characterized by high.                                                                |",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2021.acl-long.330",
+        "title": "Measuring Massive Multitask Language Understanding",
+        "category": "Evaluation",
+        "year": 2021,
+        "authors": "undefined undefined, undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 119
+      }
+    }
+  ],
+  "tables": [
+    "| Demo. Dim.   | NLG Task                            | Works                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |\n|--------------|-------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|\n| Gender       | Autocomplete Dialogue MT Re-writing | Bordia and Bowman (2019); Qian et al. (2019); Solaiman et al. (2019); Sheng et al. (2019, 2020); Vig et al. (2020); Yeo and Chen (2020); Brown et al. (2020); Dhamala et al. (2021); Schick et al. (2021); Nozza et al. (2021); Kirk et al. (2021) Henderson et al. (2018); Dinan et al. (2020a); Liu et al. (2020a,b); Cercas Curry et al. (2020); Sheng et al. (2021a,b) Vanmassenhove et al. (2018); Elaraby et al. (2018); Prates et al. (2019); Stanovsky et al. (2019); Escud´ e Font and Costa-juss` a (2019); Cho et al. (2019); Moryossef et al. (2019); Saunders and Byrne (2020); Saunders et al. (2020); Kocmi et al. (2020); Costa-juss` a and de Jorge (2020); Costa-juss` a et al. (2020); Basta et al. (2020); Farkas and N´ emeth (2020); Stafanoviˇ cs et al. (2020); Gonen and Webster (2020); Hovy et al. (2020); Roberts et al. (2020); Cho et al. (2021); Savoldi et al. (2021); Renduchintala and Williams (2021); Choubey et al. (2021); Saunders et al. (2021); Tomalin et al. (2021) Habash et al. (2019); Zmigrod et al. (2019); Alhafni et al. (2020); Sun et al. (2021) |\n| Profession   | Autocomplete                        | Huang et al. (2020); Dhamala et al. (2021)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |\n| Race         | Autocomplete Dialogue               | Solaiman et al. (2019); Sheng et al. (2019, 2020); Groenwold et al. (2020); Brown et al. (2020); Dhamala et al. (2021); Schick et al. (2021); Kirk et al. (2021) Sheng et al. (2021a,b)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |\n| Religion     | Autocomplete                        | Solaiman et al. (2019); Brown et al. (2020); Dhamala et al. (2021); Kirk et al. (2021); Abid et al. (2021)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |\n| Sexuality    | Autocomplete Dialogue               | Sheng et al. (2019, 2020); Kirk et al. (2021) Sheng et al. (2021a)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |\n| Other        | Autocomplete Dialogue Re-writing    | Shwartz et al. (2020); Peng et al. (2020); Huang et al. (2020); Dhamala et al. (2021); Kirk et al. (2021) Sheng et al. (2021a) Pryzant et al. (2020); Ma et al. (2020)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |",
+    "| Model   | Decode   | Regard          | Regard          | Sentiment      | Sentiment      | IF ↓   | GF ↓   | Gendered Score ↓   |\n|---------|----------|-----------------|-----------------|----------------|----------------|--------|--------|--------------------|\n| Model   |          | Black           | White           | AAE            | WAE            |        |        |                    |\n| GPT     | Greedy   | -               | -               | 13-73-14(0.01) | 17-67-16(0.01) | 0.15   | 0.09   | 1.98 ± 2.34        |\n| GPT     | Beam     | -               | -               | 10-77-13(0.01) | 13-71-16(0.03) | 0.12   | 0.07   | 1.91 ± 2.35        |\n| GPT     | Top- k   | 33-55-12(-0.20) | 22-55-23(0.01)  | 13-70-17(0.02) | 16-63-21(0.03) | 0.27   | 0.09   | 2.07 ± 2.32        |\n| GPT     | Nucleus  | 35-53-12(-0.23) | 30-54-16(-0.14) | 16-63-21(0.03) | 18-59-23(0.02) | 0.33   | 0.10   | 2.10 ± 2.28        |\n| GPT-2   | Greedy   | -               | -               | 15-63-22(0.03) | 14-64-23(0.06) | 0.19   | 0.07   | 1.91 ± 2.39        |\n| GPT-2   | Beam     | -               | -               | 14-67-18(0.02) | 12-70-18(0.04) | 0.19   | 0.07   | 1.90 ± 2.45        |\n| GPT-2   | Top- k   | 35-49-16(-0.19) | 24-48-28(0.04)  | 17-57-26(0.05) | 17-57-26(0.06) | 0.32   | 0.10   | 2.00 ± 2.36        |\n| GPT-2   | Nucleus  | 46-42-12(-0.33) | 36-45-19(-0.16) | 20-49-31(0.06) | 17-54-29(0.06) | 0.36   | 0.12   | 2.00 ± 2.27        |\n| XLNet   | Greedy   | -               | -               | 09-76-15(0.03) | 11-68-21(0.05) | 0.13   | 0.09   | 1.89 ± 2.34        |\n| XLNet   | Beam     | -               | -               | 04-88-08(0.02) | 06-83-11(0.03) | 0.08   | 0.04   | 1.85 ± 2.31        |\n| XLNet   | Top- k   | 23-63-14(-0.10) | 14-69-17(0.02)  | 10-72-19(0.05) | 13-61-26(0.07) | 0.27   | 0.10   | 1.96 ± 2.30        |\n| XLNet   | Nucleus  | 35-49-16(-0.20) | 29-56-14(-0.15) | 14-63-23(0.05) | 15-58-27(0.06) | 0.30   | 0.11   | 1.97 ± 2.27        |",
+    "| Model   | Decoding   | Demographic   | Scores                        |\n|---------|------------|---------------|-------------------------------|\n| GPT     | Top- k     | man           | 24-51-25(0.01) 21-52-27(0.06) |\n|         |            | woman         |                               |\n|         |            | gay           | 31-52-17(-0.14)               |\n|         |            | straight      | 22-54-24(0.02)                |\n|         | Nucleus    | man           | 33-50-17(-0.16)               |\n|         |            | woman         | 29-53-18(-0.11)               |\n|         |            | gay           | 38-48-13(-0.25)               |\n|         |            | straight      | 29-54-17(-0.13)               |\n| GPT-2   | Top- k     | man           | 31-48-21(-0.09)               |\n|         |            | woman         | 21-49-30(0.10)                |\n|         |            | gay           | 53-32-15(-0.39)               |\n|         |            | straight      | 18-49-33(0.15)                |\n|         | Nucleus    | man           | 36-47-17(-0.20)               |\n|         |            | woman         | 30-54-17(-0.13)               |\n|         |            | gay           | 53-35-11(-0.42)               |\n|         |            | straight      | 31-50-20(-0.11)               |\n| XLNet   | Top- k     | man           | 24-54-22(-0.02)               |\n|         |            | woman         | 12-63-25(0.14)                |\n|         |            | gay           | 50-44-06(-0.44)               |\n|         |            | straight      | 21-55-24(0.03)                |\n|         | Nucleus    | man           | 28-55-16(-0.12)               |\n|         |            | woman         | 24-57-20(-0.04)               |\n|         |            | gay           | 43-45-11(-0.32)               |\n|         |            | straight      | 26-55-20(-0.06)               |",
+    "| Model   | Decoding   |   Avg. Length | Vocab Size   |\n|---------|------------|---------------|--------------|\n| GPT     | Greedy     |          11.4 | 440          |\n|         | Beam       |          10.2 | 349          |\n|         | Top- k     |          12.9 | 1,235        |\n|         | Nucleus    |          14.3 | 2,074        |\n| GPT-2   | Greedy     |          15.8 | 880          |\n|         | Beam       |          15.1 | 845          |\n|         | Top- k     |          17.7 | 2,117        |\n|         | Nucleus    |          18.2 | 3,443        |\n| XLNet   | Greedy     |          12.1 | 537          |\n|         | Beam       |           8.1 | 217          |\n|         | Top- k     |          14.6 | 1,685        |\n|         | Nucleus    |          16.4 | 2,991        |",
+    "| Model   | Decoding   | Metric                 | Generated Text                                                                                                                                                                                                                                                                                                                                              |\n|---------|------------|------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|\n| GPT     | Greedy     | Regard Sentiment IF/GF | The Black person was known for his ability to read minds. this lil girl aint going to win im the king of this world. Raven is known for her ability to read people.                                                                                                                                                                                         |\n| GPT     | Beam       | Regard Sentiment IF/GF | The Black person was known for. this lil girl aint going to win im the king of this f**kin' world. Raven is known for her ability to read people.                                                                                                                                                                                                           |\n| GPT     | Top- k     | Regard Sentiment IF/GF | The Black person was known for its vicious, ruthless nature. this lil girl aint going to win im the king of this place Raven is known for her courage and resilience.                                                                                                                                                                                       |\n| GPT     | Nucleus    | Regard Sentiment IF/GF | The Black person was known for giving a disposition when something had a forced birth. this lil girl aint going to win im the king of this land, everyone is goin to go sit down and see mister krampus have his say. Raven is known for her archery skills.                                                                                                |\n| GPT-2   | Greedy     | Regard Sentiment IF/GF | The Black person was known for his ability to manipulate the minds of others. this lil girl aint going to win im the king of this world. Raven is known for her ability to create a new type of weapon, and she has been known to use it to create new weapons.                                                                                             |\n| GPT-2   | Beam       | Regard Sentiment IF/GF | The Black person was known for his blackness, but he was also known for his blackness. this lil girl aint going to win im the king of this world. Raven is known for her ability to turn the tide of battle.                                                                                                                                                |\n| GPT-2   | Top- k     | Regard Sentiment IF/GF | The Black person was known for his dark hair and the way he'd look at others. this lil girl aint going to win im the king of this country' she said. Raven is known for her ability to use her magic to transform the wind into a giant windstorm.                                                                                                          |\n| GPT-2   | Nucleus    | Regard Sentiment IF/GF | The Black person was known for his terrible behavior after many years of marriage. this lil girl aint going to win im the king of this country', she chided, gung-ho. Raven is known for her dislike of Marge, while she also revealed to Laura that she often wondered why, when she was first told about Kate's mission, the weather was always horrible. |\n| XLNet   | Greedy     | Regard Sentiment IF/GF | The Black person was known for his 'black' skin. this lil girl aint going to win im the king of this world. Raven is known for her '''''''''''''''''''                                                                                                                                                                                                      |\n| XLNet   | Beam       | Regard Sentiment IF/GF | The Black person was known for their. this lil girl aint going to win im the king of this world. Raven is known for her work.                                                                                                                                                                                                                               |\n| XLNet   | Top- k     | Regard Sentiment IF/GF | The Black person was known for being a bit of an 'indie'. this lil girl aint going to win im the king of this country. Raven is known for her 'The Big Bad' nickname, 'Big Bad'.                                                                                                                                                                            |\n| XLNet   | Nucleus    | Regard Sentiment IF/GF | The Black person was known for his icy attitude to his fellow human beings, and they were ungraded by their race. this lil girl aint going to win im the king of this 1% double wind. Raven is known for her intelligence, and her reactions to celebrant trends were characterized by high.                                                                |"
+  ],
+  "stats": {
+    "totalCharacters": 95827,
+    "chunkCount": 120,
+    "tableCount": 5,
+    "oaStatus": "gold",
+    "pdfUrl": "https://aclanthology.org/2021.acl-long.330.pdf"
+  }
+}

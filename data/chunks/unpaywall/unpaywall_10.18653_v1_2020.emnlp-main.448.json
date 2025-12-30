@@ -1,0 +1,1088 @@
+{
+  "doi": "10.18653/v1/2020.emnlp-main.448",
+  "title": "BLEU: a Method for Automatic Evaluation of Machine Translation",
+  "category": "Evaluation",
+  "year": 2020,
+  "paper": {
+    "doi": "10.18653/v1/2020.emnlp-main.448",
+    "doi_url": "https://doi.org/10.18653/v1/2020.emnlp-main.448",
+    "title": "Consistency of a Recurrent Language Model With Respect to Incomplete Decoding",
+    "genre": "proceedings-article",
+    "is_paratext": false,
+    "published_date": "2020-01-01",
+    "year": 2020,
+    "journal_name": "Proceedings of the 2020 Conference on Empirical Methods in Natural Language Processing (EMNLP)",
+    "journal_issns": null,
+    "journal_issn_l": null,
+    "journal_is_oa": false,
+    "journal_is_in_doaj": null,
+    "publisher": "Association for Computational Linguistics",
+    "is_oa": true,
+    "oa_status": "gold",
+    "has_repository_copy": null,
+    "best_oa_location": {
+      "url": "https://www.aclweb.org/anthology/2020.emnlp-main.448.pdf",
+      "url_for_pdf": "https://www.aclweb.org/anthology/2020.emnlp-main.448.pdf",
+      "url_for_landing_page": "https://doi.org/10.18653/v1/2020.emnlp-main.448",
+      "evidence": "deprecated",
+      "license": "cc-by",
+      "version": "publishedVersion",
+      "host_type": null,
+      "is_best": true,
+      "pmh_id": null,
+      "endpoint_id": null,
+      "repository_institution": null,
+      "oa_date": "2020-01-01",
+      "updated": "deprecated"
+    },
+    "first_oa_location": {
+      "url": "https://www.aclweb.org/anthology/2020.emnlp-main.448.pdf",
+      "url_for_pdf": "https://www.aclweb.org/anthology/2020.emnlp-main.448.pdf",
+      "url_for_landing_page": "https://doi.org/10.18653/v1/2020.emnlp-main.448",
+      "evidence": "deprecated",
+      "license": "cc-by",
+      "version": "publishedVersion",
+      "host_type": null,
+      "is_best": true,
+      "pmh_id": null,
+      "endpoint_id": null,
+      "repository_institution": null,
+      "oa_date": "2020-01-01",
+      "updated": "deprecated"
+    },
+    "oa_locations": [
+      {
+        "url": "https://www.aclweb.org/anthology/2020.emnlp-main.448.pdf",
+        "url_for_pdf": "https://www.aclweb.org/anthology/2020.emnlp-main.448.pdf",
+        "url_for_landing_page": "https://doi.org/10.18653/v1/2020.emnlp-main.448",
+        "evidence": "deprecated",
+        "license": "cc-by",
+        "version": "publishedVersion",
+        "host_type": null,
+        "is_best": true,
+        "pmh_id": null,
+        "endpoint_id": null,
+        "repository_institution": null,
+        "oa_date": "2020-01-01",
+        "updated": "deprecated"
+      }
+    ],
+    "oa_locations_embargoed": [],
+    "data_standard": 2,
+    "z_authors": [
+      {
+        "author_position": "first",
+        "raw_author_name": "Sean Welleck",
+        "is_corresponding": true,
+        "raw_affiliation_strings": [
+          "New York University"
+        ]
+      },
+      {
+        "author_position": "additional",
+        "raw_author_name": "Ilia Kulikov",
+        "is_corresponding": false,
+        "raw_affiliation_strings": [
+          "New York University"
+        ]
+      },
+      {
+        "author_position": "additional",
+        "raw_author_name": "Jaedeok Kim",
+        "is_corresponding": false,
+        "raw_affiliation_strings": [
+          "Samsung Research"
+        ]
+      },
+      {
+        "author_position": "additional",
+        "raw_author_name": "Richard Yuanzhe Pang",
+        "is_corresponding": false,
+        "raw_affiliation_strings": [
+          "New York University"
+        ]
+      },
+      {
+        "author_position": "last",
+        "raw_author_name": "Kyunghyun Cho",
+        "is_corresponding": false,
+        "raw_affiliation_strings": [
+          "New York University",
+          "CIFAR Associate Fellow"
+        ]
+      }
+    ],
+    "updated": "2025-08-26T03:46:05Z"
+  },
+  "chunks": [
+    {
+      "id": "unpaywall-10.18653_v1_2020.emnlp-main.448-chunk-0",
+      "content": "## Consistency of a Recurrent Language Model With Respect to Incomplete Decoding\n\nSean Welleck 1 ∗ Ilia Kulikov 1 ∗ Jaedeok Kim 2 † Richard Yuanzhe Pang 1 Kyunghyun Cho 1 , 3\n\n1 New York University 2 Samsung Research 3 CIFAR Associate Fellow\n\n## Abstract",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2020.emnlp-main.448",
+        "title": "BLEU: a Method for Automatic Evaluation of Machine Translation",
+        "category": "Evaluation",
+        "year": 2020,
+        "authors": "undefined undefined, undefined undefined, undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 0
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2020.emnlp-main.448-chunk-1",
+      "content": "Samsung Research 3 CIFAR Associate Fellow ## Abstract \n\nDespite strong performance on a variety of tasks, neural sequence models trained with maximum likelihood have been shown to exhibit issues such as length bias and degenerate repetition. We study the related issue of receiving infinite-length sequences from a recurrent language model when using common decoding algorithms. To analyze this issue, we first define inconsistency of a decoding algorithm, meaning that the algorithm can yield an infinite-length sequence that has zero probability under the model. We prove that commonly used incomplete decoding algorithms - greedy search, beam search, topk sampling, and nucleus sampling - are inconsistent, despite the fact that recurrent language models are trained to produce sequences of finite length. Based on these insights, we propose two remedies which address inconsistency: consistent variants of topk and nucleus sampling, and a selfterminating recurrent language model. Empirical results show that inconsistency occurs in practice, and that the proposed methods prevent inconsistency.",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2020.emnlp-main.448",
+        "title": "BLEU: a Method for Automatic Evaluation of Machine Translation",
+        "category": "Evaluation",
+        "year": 2020,
+        "authors": "undefined undefined, undefined undefined, undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 1
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2020.emnlp-main.448-chunk-2",
+      "content": "address inconsistency: consistent variants of topk and nucleus sampling, and a selfterminating recurrent language model. Empirical results show that inconsistency occurs in practice, and that the proposed methods prevent inconsistency. \n\n## 1 Introduction\n\nNeural sequence models trained with maximum likelihood estimation (MLE) have become a standard approach to modeling sequences in a variety of natural language applications such as machine translation (Bahdanau et al., 2015), dialogue modeling (Vinyals et al., 2015), and language modeling (Radford et al., 2019). Despite this success, MLEtrained neural sequence models have been shown to exhibit issues such as length bias (Sountsov and Sarawagi, 2016; Stahlberg and Byrne, 2019) and degenerate repetition (Holtzman et al., 2019).\n\n∗ Equal contribution. Correspondence to: Sean Welleck wellecks@nyu.edu .\n\n† Work done at New York University.",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2020.emnlp-main.448",
+        "title": "BLEU: a Method for Automatic Evaluation of Machine Translation",
+        "category": "Evaluation",
+        "year": 2020,
+        "authors": "undefined undefined, undefined undefined, undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 2
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2020.emnlp-main.448-chunk-3",
+      "content": "2019) and degenerate repetition (Holtzman et al., 2019). ∗ Equal contribution. Correspondence to: Sean Welleck wellecks@nyu.edu . † Work done at New York University. \n\nThese issues are suspected to be related to the maximum likelihood objective's local normalization, which results in a discrepancy between the learned model's distribution and the distribution induced by the decoding algorithm used to generate sequences (Lafferty et al., 2001; Andor et al., 2016). This has prompted the development of alternative decoding methods (Wu et al., 2016; Holtzman et al., 2019) and training objectives (Murray and Chiang, 2018; Welleck et al., 2019). In this paper, we formalize and study this discrepancy between the model and the decoding algorithm.",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2020.emnlp-main.448",
+        "title": "BLEU: a Method for Automatic Evaluation of Machine Translation",
+        "category": "Evaluation",
+        "year": 2020,
+        "authors": "undefined undefined, undefined undefined, undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 3
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2020.emnlp-main.448-chunk-4",
+      "content": "2018; Welleck et al., 2019). In this paper, we formalize and study this discrepancy between the model and the decoding algorithm. \n\nWe begin by formally defining recurrent neural language models , a family that encompasses neural models used in practice, such as recurrent neural networks (Elman, 1990; Cho et al., 2014; Hochreiter and Schmidhuber, 1997), and transformers (Vaswani et al., 2017). Next, we formally define a decoding algorithm - a function that induces a distribution over sequences given a recurrent language model and a context distribution - which is used to obtain probable sequences from a model. In this paper, we show that the distribution induced by a decoding algorithm can contradict this intended use; instead, the decoding algorithm may return improbable, infinite-length sequences.",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2020.emnlp-main.448",
+        "title": "BLEU: a Method for Automatic Evaluation of Machine Translation",
+        "category": "Evaluation",
+        "year": 2020,
+        "authors": "undefined undefined, undefined undefined, undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 4
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2020.emnlp-main.448-chunk-5",
+      "content": "we show that the distribution induced by a decoding algorithm can contradict this intended use; instead, the decoding algorithm may return improbable, infinite-length sequences. \n\nOur main finding is that a sequence which receives zero probability under a recurrent language model's distribution can receive nonzero probability under the distribution induced by a decoding algorithm. This occurs when the recurrent language model always ranks the sequence termination token outside of the set of tokens considered at each decoding step, yielding an infinite-length, zero probability sequence. This holds whenever the decoding algorithm is incomplete , in the sense that the algorithm excludes tokens from consideration at each step of decoding, which is the case for common methods such as greedy search, beam search, topk sampling (Fan et al., 2018), and nucleus sampling",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2020.emnlp-main.448",
+        "title": "BLEU: a Method for Automatic Evaluation of Machine Translation",
+        "category": "Evaluation",
+        "year": 2020,
+        "authors": "undefined undefined, undefined undefined, undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 5
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2020.emnlp-main.448-chunk-6",
+      "content": "step of decoding, which is the case for common methods such as greedy search, beam search, topk sampling (Fan et al., 2018), and nucleus sampling \n\n(Holtzman et al., 2019). We formalize our main finding using the notion of consistency (Chen et al., 2017) - whether a distribution assigns probability mass only to finite sequences - and prove that a consistent recurrent language model paired with an incomplete decoding algorithm can induce an inconsistent sequence distribution.\n\nBased on the insight that inconsistency occurs due to the behavior of the termination token under incomplete decoding, we develop two methods for addressing inconsistency. First, we propose consistent sampling methods which guarantee that the termination token is not excluded from selection during decoding. Second, we introduce a self-terminating recurrent language model which ensures that the termination token is eventually ranked above all others, guaranteeing consistency under incomplete decoding.",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2020.emnlp-main.448",
+        "title": "BLEU: a Method for Automatic Evaluation of Machine Translation",
+        "category": "Evaluation",
+        "year": 2020,
+        "authors": "undefined undefined, undefined undefined, undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 6
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2020.emnlp-main.448-chunk-7",
+      "content": "selection during decoding. Second, we introduce a self-terminating recurrent language model which ensures that the termination token is eventually ranked above all others, guaranteeing consistency under incomplete decoding. \n\nTo empirically measure inconsistency, we decode sequences from trained recurrent language models and measure the proportion of sequences with lengths far exceeding the maximum training sequence length. Our experiments on the Wikitext2 dataset (Merity et al., 2016) suggest that inconsistency occurs in practice when using incomplete decoding methods, while the proposed consistent sampling methods and self-terminating model parameterization prevent inconsistency and maintain language modeling quality.",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2020.emnlp-main.448",
+        "title": "BLEU: a Method for Automatic Evaluation of Machine Translation",
+        "category": "Evaluation",
+        "year": 2020,
+        "authors": "undefined undefined, undefined undefined, undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 7
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2020.emnlp-main.448-chunk-8",
+      "content": "while the proposed consistent sampling methods and self-terminating model parameterization prevent inconsistency and maintain language modeling quality. \n\nThe theoretical analysis reveals defects of existing decoding algorithms, providing a way to develop future models, inference procedures, and learning algorithms. We present methods related to sampling and model parameterization, but there are more directions for future investigation; we close with directions related to sequence-level learning.\n\n## 2 Background\n\nWe begin our discussion by establishing background definitions. First, we define a sequence which is the main object of our investigation.\n\nDefinition 2.1 (Sequence) . A sequence Y is an ordered collection of items from a predefined finite vocabulary V . A sequence of finite length always ends with a special token 〈 eos 〉 ∈ V that only appears at the end of a sequence.",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2020.emnlp-main.448",
+        "title": "BLEU: a Method for Automatic Evaluation of Machine Translation",
+        "category": "Evaluation",
+        "year": 2020,
+        "authors": "undefined undefined, undefined undefined, undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 8
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2020.emnlp-main.448-chunk-9",
+      "content": "A sequence of finite length always ends with a special token 〈 eos 〉 ∈ V that only appears at the end of a sequence. \n\nEach model we consider generates a sequence conditioned on context information, such as a prefix in sentence completion. To consider this, we define a context distribution.\n\nDefinition 2.2 (Context distribution) . Acontext distribution p ( C ) is a probability distribution defined over a set C . An element C ∈ C is called a context.\n\n## 2.1 Recurrent Language Models\n\nA recurrent language model is an autoregressive model of a sequence distribution, where each conditional probability is parameterized with a neural network. Importantly, we assume that all tokens in a sequence are dependent on each other under a recurrent language model. This allows us to avoid cases in which the model degenerates to a Markovian language model, such as an n -gram model with a finite n .",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2020.emnlp-main.448",
+        "title": "BLEU: a Method for Automatic Evaluation of Machine Translation",
+        "category": "Evaluation",
+        "year": 2020,
+        "authors": "undefined undefined, undefined undefined, undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 9
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2020.emnlp-main.448-chunk-10",
+      "content": "recurrent language model. This allows us to avoid cases in which the model degenerates to a Markovian language model, such as an n -gram model with a finite n . \n\nDefinition 2.3 (Recurrent language model) . A recurrent language model p θ is a neural network that computes the following at each time step:\n\n<!-- formula-not-decoded -->\n\nwhere h t = f θ ( y t , h t -1 ) and h 0 = g θ ( C ) , and u, c, θ are parameters. A recurrent language model thereby computes the probability of a sequence Y = ( y 1 , . . . , y T ) by\n\n<!-- formula-not-decoded -->\n\nwhere y &lt;t = ( y 1 , . . . , y t -1 ) . This distribution satisfies y i glyph[negationslash] ⊥ ⊥ y j | C, ∀ i &lt; j .\n\nPractical variants of the recurrent language model differ by the choice of transition function f θ (Elman, 1990; Hochreiter and Schmidhuber, 1997; Cho et al., 2014; Vaswani et al., 2017). The use of softmax (Bridle, 1990) implies that every unique token in the vocabulary is considered at every location of a sequence.",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2020.emnlp-main.448",
+        "title": "BLEU: a Method for Automatic Evaluation of Machine Translation",
+        "category": "Evaluation",
+        "year": 2020,
+        "authors": "undefined undefined, undefined undefined, undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 10
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2020.emnlp-main.448-chunk-11",
+      "content": "function f θ (Elman, 1990; Hochreiter and Schmidhuber, 1997; Cho et al., 2014; Vaswani et al., 2017). The use of softmax (Bridle, 1990) implies that every unique token in the vocabulary is considered at every location of a sequence. \n\nRemark 2.1. Under the conditional distribution of a recurrent LM, every token v ∈ V is assigned a positive probability, implying that 0 &lt; p θ ( v | y &lt;t , C ) &lt; 1 . Any finite sequence is probable under a recurrent LM under any context, i.e., p θ ( Y | C ) &gt; 0 for any sequence Y of finite length.\n\n## 2.2 Decoding Algorithms\n\nBecause it is intractable to decode the most probable sequence, it is necessary in practice to use an approximate decoding algorithm.\n\nDefinition 2.4 (Decoding algorithm) . A decoding algorithm F ( p θ , C ) is a function that generates\n\na sequence ˜ Y given a recurrent language model p θ and context C . Let q F denote the distribution induced by the decoding algorithm F .",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2020.emnlp-main.448",
+        "title": "BLEU: a Method for Automatic Evaluation of Machine Translation",
+        "category": "Evaluation",
+        "year": 2020,
+        "authors": "undefined undefined, undefined undefined, undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 11
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2020.emnlp-main.448-chunk-12",
+      "content": ") is a function that generates a sequence ˜ Y given a recurrent language model p θ and context C . Let q F denote the distribution induced by the decoding algorithm F . \n\nWe consider two families of decoding algorithms. In our analysis we only consider algorithms that decode in a single pass, forward in time, without modifying previously selected tokens.\n\nStochastic decoding. The first family consists of stochastic algorithms. Among them, ancestral sampling is asymptotically unbiased and can be used for finding the most probable sequence, although with high variance.\n\nDefinition 2.5 (Ancestral sampling) . Ancestral sampling F anc generates a sequence from a recurrent language model p θ given context C by recursively sampling from p θ ( y t | ˜ y &lt;t , C ) until ˜ y t = 〈 eos 〉 : ˜ y t ∼ p θ ( y t | ˜ y &lt;t , C ) .",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2020.emnlp-main.448",
+        "title": "BLEU: a Method for Automatic Evaluation of Machine Translation",
+        "category": "Evaluation",
+        "year": 2020,
+        "authors": "undefined undefined, undefined undefined, undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 12
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2020.emnlp-main.448-chunk-13",
+      "content": "&lt;t , C ) until ˜ y t = 〈 eos 〉 : ˜ y t ∼ p θ ( y t | ˜ y &lt;t , C ) . \n\nTo avoid the high variance, two approximate stochastic decoding algorithms have recently been proposed and tested with recurrent language models. Topk sampling considers only a subset of the k most probable tokens from the vocabulary at a time, while nucleus sampling considers only the minimal subset of most probable tokens whose total probability is higher than a predefined threshold.\n\nDefinition 2.6 (Topk sampling (Fan et al., 2018)) . Topk sampling F top-k generates a sequence from a recurrent language model p θ given context C by recursively sampling from:\n\n<!-- formula-not-decoded -->\n\n<!-- formula-not-decoded -->",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2020.emnlp-main.448",
+        "title": "BLEU: a Method for Automatic Evaluation of Machine Translation",
+        "category": "Evaluation",
+        "year": 2020,
+        "authors": "undefined undefined, undefined undefined, undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 13
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2020.emnlp-main.448-chunk-14",
+      "content": "top-k generates a sequence from a recurrent language model p θ given context C by recursively sampling from: <!-- formula-not-decoded --> <!-- formula-not-decoded --> \n\nDefinition 2.7 (Nucleus sampling (Holtzman et al., 2019)) . Nucleus sampling F nucµ generates a sequence from a recurrent language model p θ given context C by recursively sampling from the following proposal distribution. Let v 1 , . . . , v | V | denote tokens in V such that p θ ( v i | y &lt;t , C ) ≥ p θ ( v j | y &lt;t , C ) for all i &lt; j , and define\n\n<!-- formula-not-decoded -->\n\nwhere V µ = { v 1 , · · · , v k µ } with\n\n<!-- formula-not-decoded -->\n\nDeterministic decoding. The other family consists of deterministic decoding algorithms, where a token is selected deterministically according to a rule at each decoding step. The most naive algorithm, called greedy decoding, simply takes the most probable token at each step.",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2020.emnlp-main.448",
+        "title": "BLEU: a Method for Automatic Evaluation of Machine Translation",
+        "category": "Evaluation",
+        "year": 2020,
+        "authors": "undefined undefined, undefined undefined, undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 14
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2020.emnlp-main.448-chunk-15",
+      "content": "deterministic decoding algorithms, where a token is selected deterministically according to a rule at each decoding step. The most naive algorithm, called greedy decoding, simply takes the most probable token at each step. \n\nDefinition 2.8 (Greedy decoding) . Greedy decoding F greedy generates a sequence from a recurrent language model p θ given context C by recursively selecting the most likely token from p θ ( y t | ˜ y &lt;t , C ) until ˜ y t = 〈 eos 〉 :\n\n<!-- formula-not-decoded -->\n\nIn contrast to greedy decoding, beam search with width k , F beam-k, operates on the level of partial sequences or prefixes. Starting from a set of empty prefixes, at each iteration a new prefix set is formed by expanding each prefix with each possible token, then choosing the k highest scoring expanded prefixes; refer to Appendix A for a formal definition.",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2020.emnlp-main.448",
+        "title": "BLEU: a Method for Automatic Evaluation of Machine Translation",
+        "category": "Evaluation",
+        "year": 2020,
+        "authors": "undefined undefined, undefined undefined, undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 15
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2020.emnlp-main.448-chunk-16",
+      "content": "new prefix set is formed by expanding each prefix with each possible token, then choosing the k highest scoring expanded prefixes; refer to Appendix A for a formal definition. \n\nIncompleteness. Other than ancestral sampling, the decoding algorithms above are incomplete in that they only consider a strict subset of the full vocabulary V at each time step, aside from the trivial case of k = | V | . 1\n\nDefinition 2.9 (Incomplete Decoding) . A decoding algorithm F is incomplete when for each context C and prefix y &lt;t , there is a strict subset V ′ t glyph[subsetnoteql] V such that\n\n<!-- formula-not-decoded -->\n\n## 3 Consistency of a Decoding Algorithm",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2020.emnlp-main.448",
+        "title": "BLEU: a Method for Automatic Evaluation of Machine Translation",
+        "category": "Evaluation",
+        "year": 2020,
+        "authors": "undefined undefined, undefined undefined, undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 16
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2020.emnlp-main.448-chunk-17",
+      "content": "is a strict subset V ′ t glyph[subsetnoteql] V such that <!-- formula-not-decoded --> ## 3 Consistency of a Decoding Algorithm \n\nDefinition of consistency. A recurrent language model p θ may assign a positive probability to an infinitely long sequence, in which case we call the model inconsistent. This notion of consistency was raised and analyzed earlier, for instance by Booth and Thompson (1973) and Chen et al. (2017), in terms of whether the distribution induced by p θ is concentrated on finite sequences. We extend their definition to account for the context C .\n\nDefinition 3.1 (Consistency of a recurrent language model) . A recurrent language model is consistent under a context distribution p ( C ) if p θ ( | Y | = ∞ ) = 0 . Otherwise, the recurrent language model is said to be inconsistent.\n\n1 Nucleus sampling is incomplete when for every context C and prefix y &lt;t , min v ∈ V p θ ( v | y &lt;t , C ) &lt; 1 -µ.",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2020.emnlp-main.448",
+        "title": "BLEU: a Method for Automatic Evaluation of Machine Translation",
+        "category": "Evaluation",
+        "year": 2020,
+        "authors": "undefined undefined, undefined undefined, undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 17
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2020.emnlp-main.448-chunk-18",
+      "content": "inconsistent. 1 Nucleus sampling is incomplete when for every context C and prefix y &lt;t , min v ∈ V p θ ( v | y &lt;t , C ) &lt; 1 -µ. \n\nAny sequence decoded from a consistent model for a given context is guaranteed to terminate.\n\nLemma 3.1. If a recurrent LM p θ is consistent, p θ ( | Y | = ∞| C ) = 0 for any probable context C . 2\n\nNext, we establish a practical condition under which a recurrent language model is consistent.\n\nLemma 3.2. A recurrent LM p θ is consistent if ‖ h t ‖ p is uniformly bounded for some p ≥ 1 .\n\nProof sketch. If ‖ h t ‖ p is bounded, then each u glyph[latticetop] v h t is bounded, hence p θ ( 〈 eos 〉 | y &lt;t , C ) &gt; ξ &gt; 0 for a constant ξ . Thus p θ ( | Y | = ∞ ) ≤ lim t →∞ (1 -ξ ) t = 0 , meaning that p θ is consistent.",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2020.emnlp-main.448",
+        "title": "BLEU: a Method for Automatic Evaluation of Machine Translation",
+        "category": "Evaluation",
+        "year": 2020,
+        "authors": "undefined undefined, undefined undefined, undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 18
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2020.emnlp-main.448-chunk-19",
+      "content": "ξ &gt; 0 for a constant ξ . Thus p θ ( | Y | = ∞ ) ≤ lim t →∞ (1 -ξ ) t = 0 , meaning that p θ is consistent. \n\nAlthough this condition is practical because layer normalization or bounded activation functions (Elman, 1990; Cho et al., 2014; Vaswani et al., 2017) result in bounded h t , we show that even if a recurrent language model is consistent, a decoding algorithm may produce an infinite-length sequence. We formalize this discrepancy using the consistency of a decoding algorithm.\n\nDefinition 3.2 (Consistency of a decoding algorithm) . A decoding algorithm F is consistent with respect to a consistent recurrent language model p θ under a context distribution p ( C ) if the decoding algorithm F preserves the consistency of the model p θ , that is, q F ( | Y | = ∞ ) = 0 .",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2020.emnlp-main.448",
+        "title": "BLEU: a Method for Automatic Evaluation of Machine Translation",
+        "category": "Evaluation",
+        "year": 2020,
+        "authors": "undefined undefined, undefined undefined, undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 19
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2020.emnlp-main.448-chunk-20",
+      "content": ") if the decoding algorithm F preserves the consistency of the model p θ , that is, q F ( | Y | = ∞ ) = 0 . \n\nWhen a consistent recurrent language model p θ and a decoding algorithm F induce a consistent distribution q F , we say that p θ paired with F is consistent. For instance, any consistent recurrent language model paired with ancestral sampling is consistent, because the induced distribution q F anc is the same as the distribution of the original model. We also have an analogue of Lemma 3.1.\n\nLemma 3.3. A consistent decoding algorithm with respect to a consistent recurrent LM decodes only probable sequences. That is, if q F ( Y | C ) &gt; 0 , then p θ ( Y | C ) &gt; 0 for any probable context C .",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2020.emnlp-main.448",
+        "title": "BLEU: a Method for Automatic Evaluation of Machine Translation",
+        "category": "Evaluation",
+        "year": 2020,
+        "authors": "undefined undefined, undefined undefined, undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 20
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2020.emnlp-main.448-chunk-21",
+      "content": "if q F ( Y | C ) &gt; 0 , then p θ ( Y | C ) &gt; 0 for any probable context C . \n\nInconsistency of incomplete decoding. Any incomplete decoding algorithm (Definition 2.9) can be inconsistent regardless of the context distribution, because there is a recurrent LM that places 〈 eos 〉 outside of V ′ t at every step of decoding. To show this, we construct a consistent recurrent language model whose distribution induced by an incomplete decoding algorithm is inconsistent.\n\n2 Proofs of Lemmas 3.1-3.3 are in Appendix B.\n\nFigure 1: A depiction of the model's sequence distribution (light grey, solid border) and the decoder's induced sequence distribution (dark grey, dotted border). The white and black rectangles depict the set of all finite and infinite sequences, respectively. We prove that under practical conditions, any incomplete decoding algorithm may be inconsistent with respect to a consistent model, as depicted.\n\n<!-- image -->",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2020.emnlp-main.448",
+        "title": "BLEU: a Method for Automatic Evaluation of Machine Translation",
+        "category": "Evaluation",
+        "year": 2020,
+        "authors": "undefined undefined, undefined undefined, undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 21
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2020.emnlp-main.448-chunk-22",
+      "content": "all finite and infinite sequences, respectively. We prove that under practical conditions, any incomplete decoding algorithm may be inconsistent with respect to a consistent model, as depicted. <!-- image --> \n\nTheorem 3.4 (Inconsistency of an incomplete decoding algorithm) . There exists a consistent recurrent LM p θ from which an incomplete decoding algorithm F , that considers only up to ( | V | -1) -most likely tokens according to p θ ( y t | y &lt;t , C ) at each step t , finds an infinite-length sequence ˜ Y with probability 1, i.e., q F ( | Y | = ∞ ) = 1 .\n\nProof. We prove this theorem by constructing a tanh recurrent network. We define the recurrent function f θ as\n\n<!-- formula-not-decoded -->",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2020.emnlp-main.448",
+        "title": "BLEU: a Method for Automatic Evaluation of Machine Translation",
+        "category": "Evaluation",
+        "year": 2020,
+        "authors": "undefined undefined, undefined undefined, undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 22
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2020.emnlp-main.448-chunk-23",
+      "content": "= 1 . Proof. We prove this theorem by constructing a tanh recurrent network. We define the recurrent function f θ as <!-- formula-not-decoded --> \n\nwhere e ( y t ) ∈ R | V | is a one-hot representation of y t , W h ∈ R d × d where every entry is positive, and I is an identity matrix of size | V | × | V | . h 0 = g θ ( C ) is constructed to consist of positive values only. Because each element of | h t | is bounded by 1, the constructed recurrent language model p θ is consistent by Lemma 3.2.\n\nWe set u v (see Definition 2.3) to\n\n<!-- formula-not-decoded -->\n\nglyph[negationslash]\n\nwhere v = 〈 eos 〉 , all elements of ¯ u v are positive, all elements of ¯ u 〈 eos 〉 are negative, and e ( v ) is a one-hot representation of v . c v is set to zero.\n\nThis defines a valid recurrent language model (Definition 2.3), since the conditional distribution at each time t is influenced by all the previous tokens. More specifically, the logit of a token v",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2020.emnlp-main.448",
+        "title": "BLEU: a Method for Automatic Evaluation of Machine Translation",
+        "category": "Evaluation",
+        "year": 2020,
+        "authors": "undefined undefined, undefined undefined, undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 23
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2020.emnlp-main.448-chunk-24",
+      "content": ". c v is set to zero. This defines a valid recurrent language model (Definition 2.3), since the conditional distribution at each time t is influenced by all the previous tokens. More specifically, the logit of a token v \n\ndepends on ∑ t t ′ =1 1 ( y t ′ = v ) , where 1 is an indicator function.\n\nThis recurrent language model always outputs positive logits for non-〈 eos 〉 tokens, and outputs negative logits for the 〈 eos 〉 token. This implies p ( 〈 eos 〉 | y &lt;t , C ) &lt; p ( v | y &lt;t , C ) for all v ∈ V \\ {〈 eos 〉} . This means that 〈 eos 〉 is always ranked last at each time step, so an incomplete decoding algorithm that considers at most ( | V | -1) most probable tokens at each time step from p θ ( y t | y &lt;t , C ) cannot decode 〈 eos 〉 and thus always decodes an infinitely long sequence ˆ Y , i.e., q F ( | Y | = ∞| C ) = 1 for any context C . It yields q F ( | Y | = ∞ ) = 1 , while p θ ( | Y | = ∞ ) = 0 due to consistency of the model p θ .",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2020.emnlp-main.448",
+        "title": "BLEU: a Method for Automatic Evaluation of Machine Translation",
+        "category": "Evaluation",
+        "year": 2020,
+        "authors": "undefined undefined, undefined undefined, undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 24
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2020.emnlp-main.448-chunk-25",
+      "content": "∞| C ) = 1 for any context C . It yields q F ( | Y | = ∞ ) = 1 , while p θ ( | Y | = ∞ ) = 0 due to consistency of the model p θ . \n\nGreedy decoding, beam search, topk sampling, and nucleus sampling are all inconsistent according to this theorem.\n\n## 4 Fixing the inconsistency\n\nIn this section, we consider two ways to prevent inconsistency arising from incomplete decoding algorithms. First, we introduce consistent versions of topk and nucleus sampling. Second, we introduce the self-terminating recurrent language model , which is consistent when paired with any of the decoding algorithms considered in this paper.\n\n## 4.1 Consistent Sampling Algorithms",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2020.emnlp-main.448",
+        "title": "BLEU: a Method for Automatic Evaluation of Machine Translation",
+        "category": "Evaluation",
+        "year": 2020,
+        "authors": "undefined undefined, undefined undefined, undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 25
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2020.emnlp-main.448-chunk-26",
+      "content": "language model , which is consistent when paired with any of the decoding algorithms considered in this paper. ## 4.1 Consistent Sampling Algorithms \n\nThe proof of Theorem 3.4 suggests that the inconsistency of incomplete decoding algorithms arises from the fact that 〈 eos 〉 may be excluded indefinitely from the set of top-ranked tokens. We propose a simple modification to topk and nucleus sampling that forces 〈 eos 〉 to be included at each step of decoding. First, we give a condition for when a particular model p θ paired with a decoding algorithm F is consistent.\n\nTheorem 4.1. Suppose a recurrent LM p θ has uniformly bounded ‖ h t ‖ p for some p ≥ 1 . If a decoding algorithm F satisfies q F ( 〈 eos 〉 | y &lt;t , C ) ≥ p θ ( 〈 eos 〉 | y &lt;t , C ) for every prefix y &lt;t and context C , then the decoding algorithm F is consistent with respect to the model p θ . 3\n\nWe define consistent variants of topk and nucleus sampling which satisfy this condition.",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2020.emnlp-main.448",
+        "title": "BLEU: a Method for Automatic Evaluation of Machine Translation",
+        "category": "Evaluation",
+        "year": 2020,
+        "authors": "undefined undefined, undefined undefined, undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 26
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2020.emnlp-main.448-chunk-27",
+      "content": "prefix y &lt;t and context C , then the decoding algorithm F is consistent with respect to the model p θ . 3 We define consistent variants of topk and nucleus sampling which satisfy this condition. \n\nDefinition 4.1 (Consistent topk sampling) . Consistent topk sampling is topk sampling with the\n\n3 See Appendix C for the proof.\n\nFigure 2: The self-terminating recurrent LM uses the layer shown in grey instead of the standard softmax layer. The layer takes logits ( u glyph[latticetop] · h t ), the previous step's 〈 eos 〉 probability ( p 〈 eos 〉 t -1 ), and a hyper-parameter glyph[epsilon1] ∈ (0 , 1) . The layer computes α using Definition 4.3, which determines the 〈 eos 〉 probability ( p 〈 eos 〉 t ∈ ( glyph[epsilon1], 1) ), and guarantees that p 〈 eos 〉 t &gt; p 〈 eos 〉 t -1 . The remaining probability mass is allocated to the non-〈 eos 〉 tokens.\n\n<!-- image -->\n\nfollowing modified proposal distribution:\n\n<!-- formula-not-decoded -->\n\n<!-- formula-not-decoded -->",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2020.emnlp-main.448",
+        "title": "BLEU: a Method for Automatic Evaluation of Machine Translation",
+        "category": "Evaluation",
+        "year": 2020,
+        "authors": "undefined undefined, undefined undefined, undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 27
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2020.emnlp-main.448-chunk-28",
+      "content": "t &gt; p 〈 eos 〉 t -1 . The remaining probability mass is allocated to the non-〈 eos 〉 tokens. <!-- image --> following modified proposal distribution: <!-- formula-not-decoded --> <!-- formula-not-decoded --> \n\nDefinition 4.2 (Consistent nucleus sampling) . Consistent nucleus sampling is nucleus sampling with the following modified proposal distribution:\n\n<!-- formula-not-decoded -->\n\nThe induced probability of 〈 eos 〉 under these two algorithms is always equal to or larger than the model's probability. By Theorem 4.1, these algorithms are consistent with respect to any consistent recurrent language model.\n\n## 4.2 Self-Terminating Recurrent LM\n\nAlthough these consistent sampling algorithms can be used with any recurrent language model, their stochastic nature may not be suitable for finding a single, highly probable sequence. To avoid this limitation, we propose the self-terminating recurrent language model (STRLM).",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2020.emnlp-main.448",
+        "title": "BLEU: a Method for Automatic Evaluation of Machine Translation",
+        "category": "Evaluation",
+        "year": 2020,
+        "authors": "undefined undefined, undefined undefined, undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 28
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2020.emnlp-main.448-chunk-29",
+      "content": "their stochastic nature may not be suitable for finding a single, highly probable sequence. To avoid this limitation, we propose the self-terminating recurrent language model (STRLM). \n\nDefinition 4.3 (Self-terminating recurrent language model) . A self-terminating recurrent language model computes the following conditional\n\nprobability at each time step:\n\n<!-- formula-not-decoded -->\n\n<!-- formula-not-decoded -->\n\n<!-- formula-not-decoded -->\n\nwith σ : R → [0 , 1 -ε ] and ε ∈ (0 , 1) . h t is computed as in the original recurrent LM.\n\nThe underlying idea is that the probability of 〈 eos 〉 increases monotonically, since\n\n<!-- formula-not-decoded -->\n\nConsequently, the STRLM is consistent when paired with greedy decoding or beam search; see Appendix C for formal statements and proofs.\n\n## 5 Empirical Validation",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2020.emnlp-main.448",
+        "title": "BLEU: a Method for Automatic Evaluation of Machine Translation",
+        "category": "Evaluation",
+        "year": 2020,
+        "authors": "undefined undefined, undefined undefined, undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 29
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2020.emnlp-main.448-chunk-30",
+      "content": "the STRLM is consistent when paired with greedy decoding or beam search; see Appendix C for formal statements and proofs. ## 5 Empirical Validation \n\nThe theoretical results rely on the existence of a model that results in inconsistency; it remains to be shown that inconsistency with respect to incomplete decoding occurs with recurrent language models encountered in practice. Moreover, while the proposed methods carry theoretical guarantees in terms of consistency, we must check whether they retain language modeling quality. To do so, we perform experiments using a sequence completion task. In each experiment, we use the beginning of a sequence as context, then decode continuations from a trained recurrent LM and measure the proportion of non-terminated sequences in order to approximately measure inconsistency. The first experiment ( § 5.1) shows that inconsistency occurs in practice, and the second experiment ( § 5.2) shows the effectiveness of the proposed approaches. Our third experiment ( § 5.3) shows that inconsistency also occurs frequently in GPT-2, a large-scale transformer language model. 4",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2020.emnlp-main.448",
+        "title": "BLEU: a Method for Automatic Evaluation of Machine Translation",
+        "category": "Evaluation",
+        "year": 2020,
+        "authors": "undefined undefined, undefined undefined, undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 30
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2020.emnlp-main.448-chunk-31",
+      "content": "the second experiment ( § 5.2) shows the effectiveness of the proposed approaches. Our third experiment ( § 5.3) shows that inconsistency also occurs frequently in GPT-2, a large-scale transformer language model. 4 \n\nSequence completion. We evaluate recurrent language models on a sequence completion task, which has previously been used to evaluate the effectiveness of sequence models, e.g., Sutskever et al. (2011); Graves (2013); Radford et al. (2019); Holtzman et al. (2019); Welleck et al. (2019). Sequence completion is a general setting for studying\n\n4 Code available at https://github.com/uralik/ consistency-lm .\n\nthe behavior of language models, encompassing machine translation (Bahdanau et al., 2015), story generation (Fan et al., 2018), and dialogue modeling (Vinyals et al., 2015). The task consists of decoding a continuation ˆ Y ∼ F ( p θ , C ) given a lengthk prefix C = ( c 1 , . . . , c k ) , resulting in a completion ( c 1 , . . . , c k , ˆ y 1 . . . , ˆ y T ) .",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2020.emnlp-main.448",
+        "title": "BLEU: a Method for Automatic Evaluation of Machine Translation",
+        "category": "Evaluation",
+        "year": 2020,
+        "authors": "undefined undefined, undefined undefined, undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 31
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2020.emnlp-main.448-chunk-32",
+      "content": ". . , c k ) , resulting in a completion ( c 1 , . . . , c k , ˆ y 1 . . . , ˆ y T ) . \n\nDataset. Our first two experiments use Wikitext2 (Merity et al., 2016), which consists of paragraphs from English Wikipedia, since it has frequently been used to evaluate language models (Grave et al., 2017; Melis et al., 2018; Merity et al., 2018). We consider both word and BPE 5 tokenization. We split each paragraph into sentences using Spacy 6 . We split each sequence, using the first k tokens as a context and the remaining tokens as a continuation. To ensure that each sequence contains a prefix, we prepend padding tokens to make it length k . Special 〈 bos 〉 and 〈 eos 〉 tokens are inserted at the beginning and end of each sequence. We use k = 10 . Table 7 contains dataset statistics.",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2020.emnlp-main.448",
+        "title": "BLEU: a Method for Automatic Evaluation of Machine Translation",
+        "category": "Evaluation",
+        "year": 2020,
+        "authors": "undefined undefined, undefined undefined, undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 32
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2020.emnlp-main.448-chunk-33",
+      "content": ". Special 〈 bos 〉 and 〈 eos 〉 tokens are inserted at the beginning and end of each sequence. We use k = 10 . Table 7 contains dataset statistics. \n\nContext distribution. We define empirical context distributions with prefixes from the train, valid, and test sets: p ( C ; D ) = 1 |D| ∑ |D| n =1 1 ( C = C ( n ) ) , where D = { ( C ( n ) , Y ( n ) ) } N n =1 is a dataset split.\n\nEvaluation metrics. We use finite sequences to approximately measure the consistency of a model paired with a decoding algorithm, since decoding an infinite-length sequence is impossible. We use the proportion of decoded continuations that are longer than a predefined limit,\n\n<!-- formula-not-decoded -->",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2020.emnlp-main.448",
+        "title": "BLEU: a Method for Automatic Evaluation of Machine Translation",
+        "category": "Evaluation",
+        "year": 2020,
+        "authors": "undefined undefined, undefined undefined, undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 33
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2020.emnlp-main.448-chunk-34",
+      "content": "decoding algorithm, since decoding an infinite-length sequence is impossible. We use the proportion of decoded continuations that are longer than a predefined limit, <!-- formula-not-decoded --> \n\nwhere ˆ Y ( n ) ∼ F ( p θ , C ( n ) ) for each context C ( n ) in D . We call r L the non-termination ratio of the decoding algorithm F for an underlying model and context distribution. A value of r L greater than zero means that some sequences did not terminate within L steps. When L is infinity, this implies that the model paired with the decoding algorithm is inconsistent. In practice, we use a finite L that is substantially larger than the maximum training sequence length, and we interpret a non-zero r L as evidence that the model paired with the decoding algorithm is inconsistent. We use L = 1500 , more than 10 times the max training sequence length.\n\n5 github.com/huggingface/tokenizers\n\n6 https://spacy.io/",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2020.emnlp-main.448",
+        "title": "BLEU: a Method for Automatic Evaluation of Machine Translation",
+        "category": "Evaluation",
+        "year": 2020,
+        "authors": "undefined undefined, undefined undefined, undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 34
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2020.emnlp-main.448-chunk-35",
+      "content": "as evidence that the model paired with the decoding algorithm is inconsistent. We use L = 1500 , more than 10 times the max training sequence length. 5 github.com/huggingface/tokenizers 6 https://spacy.io/ \n\nIn each experiment, we report the mean and standard deviation of metrics across 10 independent initializations. Unless specified otherwise, we report metrics using the test context distribution, since the train, valid, and randomly generated context distributions had similar results.\n\nTraining. We train recurrent language models for sequence completion with maximum likelihood, using the loss L ( p θ , Y ) = -∑ T t =1 log p θ ( y t | y &lt;t , c 1 , . . . , c k ) , where Y = ( c 1 , . . . , c k , y 1 , . . . , y T ) . This amounts to running the full training sequence through a recurrent model and zeroing the loss for the first k tokens, so that the first k steps correspond to learning a g θ that encodes the context.",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2020.emnlp-main.448",
+        "title": "BLEU: a Method for Automatic Evaluation of Machine Translation",
+        "category": "Evaluation",
+        "year": 2020,
+        "authors": "undefined undefined, undefined undefined, undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 35
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2020.emnlp-main.448-chunk-36",
+      "content": "to running the full training sequence through a recurrent model and zeroing the loss for the first k tokens, so that the first k steps correspond to learning a g θ that encodes the context. \n\nModels. We consider recurrent neural networks with hyperbolic tangent activations ( tanh -RNN; Elman, 1990) and LSTM units (LSTM-RNN; Hochreiter and Schmidhuber, 1997). We perform an initial hyper-parameter sweep and select the best set of hyper-parameters for each of tanh -RNN and LSTM-RNN based on the validation perplexities. 7 With this best set of hyperparameters, we train each of these models with 10 different initializations. The choice of tanh and LSTM RNNs implies that all of the recurrent language models that we train are consistent according to Lemma 3.2. Our LSTM models achieve similar test perplexity ( 91 . 86 ± 0 . 4 , word tokenization) to those reported in previous work (Merity et al., 2018); see Appendix D.",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2020.emnlp-main.448",
+        "title": "BLEU: a Method for Automatic Evaluation of Machine Translation",
+        "category": "Evaluation",
+        "year": 2020,
+        "authors": "undefined undefined, undefined undefined, undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 36
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2020.emnlp-main.448-chunk-37",
+      "content": "LSTM models achieve similar test perplexity ( 91 . 86 ± 0 . 4 , word tokenization) to those reported in previous work (Merity et al., 2018); see Appendix D. \n\nAdditionally, we train self-terminating tanh -RNN and LSTM-RNN variants (Definition 4.3) at various values of ε , which controls a lower bound on the termination probability at each step. We use σ ( x ) = (1 -ε ) · sigmoid ( x ) . We use the hyperparameters selected in the preceding grid search. Below, we consider BPE tokenization; similar conclusions held for word tokenization. 8\n\n## 5.1 Inconsistency of Recurrent LMs\n\nIn this experiment, we demonstrate evidence of inconsistency with incomplete decoding methods. Table 1 shows non-termination ratios for the recurrent language models using the decoding algorithms considered in this work. Decoding with ancestral sampling always resulted in sequences that terminated within L steps, since the induced distribution is the same as that of the consistent model.",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2020.emnlp-main.448",
+        "title": "BLEU: a Method for Automatic Evaluation of Machine Translation",
+        "category": "Evaluation",
+        "year": 2020,
+        "authors": "undefined undefined, undefined undefined, undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 37
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2020.emnlp-main.448-chunk-38",
+      "content": "algorithms considered in this work. Decoding with ancestral sampling always resulted in sequences that terminated within L steps, since the induced distribution is the same as that of the consistent model. \n\n7 Refer to Appendix D for the hyper-parameter ranges.\n\n8 Refer to Appendix for results with word tokenization.\n\nTable 1: Non-termination ratio ( r L (%)) of decoded sequences using ancestral sampling, incomplete, and consistent decoding methods.",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2020.emnlp-main.448",
+        "title": "BLEU: a Method for Automatic Evaluation of Machine Translation",
+        "category": "Evaluation",
+        "year": 2020,
+        "authors": "undefined undefined, undefined undefined, undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 38
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2020.emnlp-main.448-chunk-39",
+      "content": "(%)) of decoded sequences using ancestral sampling, incomplete, and consistent decoding methods. \n\n|                        | tanh -RNN    | LSTM-RNN    |\n|------------------------|--------------|-------------|\n| ancestral              | 0.00 ± 0.0   | 0.00 ± 0.0  |\n| greedy                 | 12.35 ± 5.18 | 1.53 ± 1.41 |\n| beam-2                 | 1.38 ± 0.95  | 0.07 ± 0.06 |\n| beam-4                 | 0.25 ± 0.19  | 0.00 ± 0.01 |\n| topk-2                 | 0.01 ± 0.01  | 0.01 ± 0.01 |\n| topk-4                 | 0.00 ± 0.0   | 0.00 ± 0.01 |\n| nucleus-0.2            | 0.06 ± 0.02  | 0.13 ± 0.15 |\n| nucleus-0.4            | 0.04 ± 0.02  | 0.02 ± 0.01 |\n| consistent topk-2      | 0.00 ± 0.0   | 0.00 ± 0.01 |\n| consistent topk-4      | 0.00 ± 0.0   | 0.00 ± 0.0  |\n| consistent nucleus-0.2 | 0.04 ± 0.02  | 0.01 ± 0.01 |\n| consistent nucleus-0.4 | 0.02 ± 0.02  | 0.01 ± 0.01 |",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2020.emnlp-main.448",
+        "title": "BLEU: a Method for Automatic Evaluation of Machine Translation",
+        "category": "Evaluation",
+        "year": 2020,
+        "authors": "undefined undefined, undefined undefined, undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 39
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2020.emnlp-main.448-chunk-40",
+      "content": "0.0 | 0.00 ± 0.0 | | consistent nucleus-0.2 | 0.04 ± 0.02 | 0.01 ± 0.01 | | consistent nucleus-0.4 | 0.02 ± 0.02 | 0.01 ± 0.01 | \n\nOn the other hand, the non-zero non-termination ratios for the incomplete decoding algorithms suggest inconsistency with respect to each algorithm, providing evidence for Theorem 3.4.\n\nUsing greedy decoding, roughly 12% of all contexts resulted in a non-terminating continuation with the tanh -RNN, and roughly 1% with the LSTM-RNN. Nucleus sampling also produced non-terminating sequences with the tanh -RNN (0.06%, nuc-0.2) and LSTM-RNN (0.13%, nuc0.2). Topk sampling yielded a small number of non-terminating samples. In general, nontermination approaches zero as k and µ increase, since 〈 eos 〉 has a lower chance of being excluded.",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2020.emnlp-main.448",
+        "title": "BLEU: a Method for Automatic Evaluation of Machine Translation",
+        "category": "Evaluation",
+        "year": 2020,
+        "authors": "undefined undefined, undefined undefined, undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 40
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2020.emnlp-main.448-chunk-41",
+      "content": "of non-terminating samples. In general, nontermination approaches zero as k and µ increase, since 〈 eos 〉 has a lower chance of being excluded. \n\nBeam search produced non-terminating sequences with both the tanh -RNN and LSTM-RNN models. This means that 〈 eos 〉 was outside of the top tokens (determined by the beam width) considered at each step, since in our experiments we terminated the beam search when a single beam prefix contained 〈 eos 〉 . Larger beam widths reduce non-termination, similar to increasing k or µ .\n\n## 5.2 Consistency of the Proposed Methods",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2020.emnlp-main.448",
+        "title": "BLEU: a Method for Automatic Evaluation of Machine Translation",
+        "category": "Evaluation",
+        "year": 2020,
+        "authors": "undefined undefined, undefined undefined, undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 41
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2020.emnlp-main.448-chunk-42",
+      "content": "beam widths reduce non-termination, similar to increasing k or µ . ## 5.2 Consistency of the Proposed Methods \n\nConsistent sampling. Table 1 shows that consistent nucleus and topk sampling ( § 4.1) resulted in only terminating sequences, except for a few cases that we attribute to the finite limit L used to measure the non-termination ratio. Consistent nucleus paired with tanh -RNN did not reduce r L as much as when it was paired with LSTM-RNN. Example continuations are shown in Table 2. On prefixes that led to non-termination with the baseline method, the quality tends to improve with the consistent variant since the continuation now termi-\n\nTable 2: Continuations with consistent nucleus sampling ( µ = 0 . 2 ) and self-terminating LSTM ( glyph[epsilon1] = 10 -3 ).",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2020.emnlp-main.448",
+        "title": "BLEU: a Method for Automatic Evaluation of Machine Translation",
+        "category": "Evaluation",
+        "year": 2020,
+        "authors": "undefined undefined, undefined undefined, undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 42
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2020.emnlp-main.448-chunk-43",
+      "content": "now termi- Table 2: Continuations with consistent nucleus sampling ( µ = 0 . 2 ) and self-terminating LSTM ( glyph[epsilon1] = 10 -3 ). \n\n| Prefix nucleus c-nucleus   | One Direction delivered a performance of ' Kiss You ' , and the album 's second album , ' The X @-@ Files ' , ' The A. ' , ' The Preder ' , ' We 've Have You ' , ' I 've You Wanna Stay ' , ' The Dream ' , ' The Bide ' , ' My Achievement ', ' The B. B. ' , ' A Life ' . . . ' , and ' My Boo ' was released on September 29 , 2010 . 〈 eos 〉                                                                                           |\n|----------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|\n| Prefix nucleus c-nucleus   | Boulter starred in two films in 2008 , and the band 's music , and ' The Rise of Monkey ' , ' The One With the Way ' , ' The ' Always ' , ' ' Always Your ' , ' The Wift ' , ' The Baste ' , ' The Special With ' , ' The Way ' , ' The Special With You ' . . . and the latter was released in the United States . 〈 eos 〉                                                                                                                 |\n| Prefix Baseline STRLM      | This period of unhappiness was the making of the ' most important ' of the ' mad ' , and the ' ' most important ' of the ' ' ' , ' the most important ' , and the ' devil ' , ' The ' , ' The One ' , ' The One ' , ' The One ' , ' The One ' , ' The One ' , ' The One ' , ' The One ' , ' The One ' , ' The One ' , ' The One ' , ' The One ' , ' The One ' , ' The One ' , ' The One ' . . . the first commandment of the poem . 〈 eos 〉 |\n| Prefix Baseline STRLM      | Du Fu 's mother died shortly after he was a member of the Order of the Order of the Order of the Order of the Order of the Order of the Order of the Order of the Order of the Republic of the Republic of the Republic of the Republic of the Republic of . . . a member of the Order of the British Empire . 〈 eos 〉                                                                                                                      |",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2020.emnlp-main.448",
+        "title": "BLEU: a Method for Automatic Evaluation of Machine Translation",
+        "category": "Evaluation",
+        "year": 2020,
+        "authors": "undefined undefined, undefined undefined, undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 43
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2020.emnlp-main.448-chunk-44",
+      "content": "commandment of the poem . 〈 eos 〉 | | Prefix Baseline STRLM | Du Fu 's mother died shortly after he was a member of the Order of the Order of the Order of the Order of the Order of the Order of the Order of the Order of the Order of the Republic of the Republic of the Republic of the Republic of the Republic of . . . a member of the Order of the British Empire . 〈 eos 〉 | \n\nnates. Note that since the model's non-〈 eos 〉 token probabilities at each step are only modified by a multiplicative constant, the sampling process can still enter a repetitive cycle (e.g., when the constant is close to 1), though it is guaranteed to terminate.",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2020.emnlp-main.448",
+        "title": "BLEU: a Method for Automatic Evaluation of Machine Translation",
+        "category": "Evaluation",
+        "year": 2020,
+        "authors": "undefined undefined, undefined undefined, undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 44
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2020.emnlp-main.448-chunk-45",
+      "content": "multiplicative constant, the sampling process can still enter a repetitive cycle (e.g., when the constant is close to 1), though it is guaranteed to terminate. \n\nSelf-terminating RLM. As seen in Table 3, the self-terminating recurrent language models are consistent with respect to greedy decoding, at the expense of perplexity compared to the vanilla model. The value of ε from Definition 4.3, which controls a lower-bound on termination probability at each step, influences both r L and perplexity. When ε is too large ( ε = 10 -2 ), perplexity degrades. When ε is too small ( ε = 10 -4 ), the lower-bound grows slowly, so 〈 eos 〉 is not guaranteed to be top-ranked within L steps, resulting in a positive r L . An ε of 10 -3 balanced consistency and language modeling quality, with a zero non-termination ratio and perplexity within 8 points of the baseline.",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2020.emnlp-main.448",
+        "title": "BLEU: a Method for Automatic Evaluation of Machine Translation",
+        "category": "Evaluation",
+        "year": 2020,
+        "authors": "undefined undefined, undefined undefined, undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 45
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2020.emnlp-main.448-chunk-46",
+      "content": "a positive r L . An ε of 10 -3 balanced consistency and language modeling quality, with a zero non-termination ratio and perplexity within 8 points of the baseline. \n\nAs shown in Figure 3, the self-terminating model matches the data length distribution better than the baseline. Example decoded sequences are shown in Table 2. For prefixes that led to nontermination with the baseline, the self-terminating models yields finite sequences with reasonable quality. The examples suggest that some cases of degenerate repetition (Holtzman et al., 2019; Welleck et al., 2019) are attributed to inconsistency.\n\n## 5.3 Inconsistency of GPT-2\n\nWe perform a final experiment with GPT-2 117M, a transformer language model pre-trained with maximum likelihood on WebText, a collection of\n\nTable 3: Non-termination ratio ( r L (%)) of greedydecoded sequences and test perplexity for STRLMs.",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2020.emnlp-main.448",
+        "title": "BLEU: a Method for Automatic Evaluation of Machine Translation",
+        "category": "Evaluation",
+        "year": 2020,
+        "authors": "undefined undefined, undefined undefined, undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 46
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2020.emnlp-main.448-chunk-47",
+      "content": "model pre-trained with maximum likelihood on WebText, a collection of Table 3: Non-termination ratio ( r L (%)) of greedydecoded sequences and test perplexity for STRLMs. \n\n| ST                | glyph[epsilon1]      | r L (%)                              | perplexity                             |\n|-------------------|----------------------|--------------------------------------|----------------------------------------|\n| tanh -RNN ! ! ! 7 | 10 - 2 10 - 3 10 - 4 | 00.00 ± 0.0 00.00 ± 0.0 00.02 ± 0.02 | 229.09 ± 9.2 191.63 ± 1.4 188.36 ± 2.2 |\n|                   | -                    | 12.35 ± 5.2                          | 186.44 ± 1.4                           |\n| LSTM ! ! ! 7      | 10 - 2               | 0.00 ± 0.0                           | 219.71 ± 9.2                           |\n|                   | 10 - 3               | 0.00 ± 0.0                           | 186.04 ± 1.6                           |\n|                   | 10 - 4               | 0.18 ± 0.35                          | 183.57 ± 2.3                           |\n|                   | -                    | 1.48 ± 1.43                          | 178.19 ± 1.3                           |",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2020.emnlp-main.448",
+        "title": "BLEU: a Method for Automatic Evaluation of Machine Translation",
+        "category": "Evaluation",
+        "year": 2020,
+        "authors": "undefined undefined, undefined undefined, undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 47
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2020.emnlp-main.448-chunk-48",
+      "content": "1.6 | | | 10 - 4 | 0.18 ± 0.35 | 183.57 ± 2.3 | | | - | 1.48 ± 1.43 | 178.19 ± 1.3 | \n\nFigure 3: Lengths of generated sequences using greedy decoding from vanilla and self-terminating LSTMs.\n\n<!-- image -->\n\nscraped web pages (see Radford et al. (2019)). GPT-2 has been observed to produce repetitive text with greedy and beam search (Holtzman et al., 2019).\n\nExperimental setup. We use the Wikitext-103 dataset (Merity et al., 2016), a large-scale collec-\n\ntion of Wikipedia articles with over 100 million words and 260 thousand unique tokens. We split the dataset into sequences according to the dataset's newline boundaries, then split each sequence into a context C and continuation Y , resulting in a dataset of ( C, Y ) pairs. Each continuation ends in a special 〈 eos 〉 token. We use a context size of k = 10 tokens, and discard sequences that are length k or shorter. The resulting dataset contains 874,556 training, 1,896 validation, and 2,162 test pairs.",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2020.emnlp-main.448",
+        "title": "BLEU: a Method for Automatic Evaluation of Machine Translation",
+        "category": "Evaluation",
+        "year": 2020,
+        "authors": "undefined undefined, undefined undefined, undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 48
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2020.emnlp-main.448-chunk-49",
+      "content": "〉 token. We use a context size of k = 10 tokens, and discard sequences that are length k or shorter. The resulting dataset contains 874,556 training, 1,896 validation, and 2,162 test pairs. \n\nWe fine-tune the pre-trained GPT-2 model using maximum likelihood for 400k steps, and select the model state with the lowest validation perplexity (evaluated every 5k steps). Each training batch contains a maximum of 1024 total tokens. We use the implementation and default hyper-parameters from the transformers library (Wolf et al., 2019). We fine-tune the self-terminating GPT-2 models in a similar manner, starting from the pre-trained GPT2 model and using the same hyper-parameters.",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2020.emnlp-main.448",
+        "title": "BLEU: a Method for Automatic Evaluation of Machine Translation",
+        "category": "Evaluation",
+        "year": 2020,
+        "authors": "undefined undefined, undefined undefined, undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 49
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2020.emnlp-main.448-chunk-50",
+      "content": "fine-tune the self-terminating GPT-2 models in a similar manner, starting from the pre-trained GPT2 model and using the same hyper-parameters. \n\nEach model is evaluated using greedy decoding with a maximum sequence length of 500, which was selected so that each decoded validation batch could fit in GPU memory. We define the nontermination ratio ( r L ) using L = 500 ; this limit is more strict than the limit used in the preceding experiments (1500), yet still allows us to see large differences in generation behavior between the model and the ground truth (e.g. see Figure 4).",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2020.emnlp-main.448",
+        "title": "BLEU: a Method for Automatic Evaluation of Machine Translation",
+        "category": "Evaluation",
+        "year": 2020,
+        "authors": "undefined undefined, undefined undefined, undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 50
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2020.emnlp-main.448-chunk-51",
+      "content": "to see large differences in generation behavior between the model and the ground truth (e.g. see Figure 4). \n\nResults. Table 4 shows the non-termination ratio and perplexity of the baseline and self-terminating GPT-2 models. The self-terminating variant prevents non-termination, at the cost of perplexity. The model here uses glyph[epsilon1] = 2 . 5 × 10 -3 , which we selected after observing that at higher values of glyph[epsilon1] , e.g. 1 . 0 × 10 -3 , the self-terminating model generated sequences longer than the limit used to determine termination (500). Figure 4 shows the length distributions of the baseline GPT-2 continuations and those of the self-terminating GPT-2. The GPT2 117M model generates many sequences at or near the maximum sequence length (500), unlike the ground-truth data. Introducing self-termination shifts the mass towards shorter sequences, whose lengths are also present in the ground-truth data.\n\n## 6 Future Directions",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2020.emnlp-main.448",
+        "title": "BLEU: a Method for Automatic Evaluation of Machine Translation",
+        "category": "Evaluation",
+        "year": 2020,
+        "authors": "undefined undefined, undefined undefined, undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 51
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2020.emnlp-main.448-chunk-52",
+      "content": "sequence length (500), unlike the ground-truth data. Introducing self-termination shifts the mass towards shorter sequences, whose lengths are also present in the ground-truth data. ## 6 Future Directions \n\nThe methods we proposed in this paper resolve inconsistency by changing the decoding algorithm or model parameterization. Another approach is to address inconsistency in the learning phase. One\n\nTable 4: Non-termination ratio ( r L (%)) of greedydecoded sequences and perplexity for GPT2-117M and the self-terminating variant (ST) on Wikitext-103.\n\n|              |   r L (%) |   perplexity |\n|--------------|-----------|--------------|\n| GPT2-117M    |     37.91 |        20.92 |\n| GPT2-117M ST |      0    |        27.25 |",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2020.emnlp-main.448",
+        "title": "BLEU: a Method for Automatic Evaluation of Machine Translation",
+        "category": "Evaluation",
+        "year": 2020,
+        "authors": "undefined undefined, undefined undefined, undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 52
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2020.emnlp-main.448-chunk-53",
+      "content": "| perplexity | |--------------|-----------|--------------| | GPT2-117M | 37.91 | 20.92 | | GPT2-117M ST | 0 | 27.25 | \n\ninteresting direction is to investigate whether the lack of decoding in maximum likelihood learning is a cause of inconsistency. Maximum likelihood learning fits the model p θ using the data distribution, whereas a decoded sequence from the trained model follows the distribution q F induced by a decoding algorithm. Sequence-level learning, however, uses a decoding algorithm during training (e.g., Ranzato et al. (2016)), which we hypothesize can result in a good sequence generator that is consistent with respect to incomplete decoding.\n\n## 7 Conclusion",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2020.emnlp-main.448",
+        "title": "BLEU: a Method for Automatic Evaluation of Machine Translation",
+        "category": "Evaluation",
+        "year": 2020,
+        "authors": "undefined undefined, undefined undefined, undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 53
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2020.emnlp-main.448-chunk-54",
+      "content": "hypothesize can result in a good sequence generator that is consistent with respect to incomplete decoding. ## 7 Conclusion \n\nWe extended the notion of consistency of a recurrent language model put forward by Chen et al. (2017) to incorporate a decoding algorithm, and used it to analyze the discrepancy between a model and the distribution induced by a decoding algorithm. We proved that incomplete decoding is inconsistent, and proposed two methods to prevent this: consistent decoding and the self-terminating recurrent language model. Using a sequence completion task, we confirmed that empirical inconsistency occurs in practice, and that each method prevents inconsistency while maintaining the quality of generated sequences. We suspect the absence of decoding in maximum likelihood estimation as a cause behind this inconsistency, and suggest investigating sequence-level learning as an alternative.\n\n## Acknowledgements",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2020.emnlp-main.448",
+        "title": "BLEU: a Method for Automatic Evaluation of Machine Translation",
+        "category": "Evaluation",
+        "year": 2020,
+        "authors": "undefined undefined, undefined undefined, undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 54
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2020.emnlp-main.448-chunk-55",
+      "content": "We suspect the absence of decoding in maximum likelihood estimation as a cause behind this inconsistency, and suggest investigating sequence-level learning as an alternative. ## Acknowledgements \n\nWe thank Chris Dyer, Noah Smith and Kevin Knight for valuable discussions. This work was supported by NSF Award 1922658 NRT-HDR: FUTURE Foundations, Translation, and Responsibility for Data Science; Samsung Advanced Institute of Technology (Next Generation Deep Learning: from pattern recognition to AI); and Samsung Research (Improving Deep Learning using Latent Structure). KC thanks eBay and NVIDIA for their support.\n\n## References\n\nDaniel Andor, Chris Alberti, David Weiss, Aliaksei Severyn, Alessandro Presta, Kuzman Ganchev, Slav Petrov, and Michael Collins. 2016. Globally normalized transition-based neural networks. In 54th Annual Meeting of the Association for Computational Linguistics, ACL 2016 - Long Papers , volume 4, pages 2442-2452.",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2020.emnlp-main.448",
+        "title": "BLEU: a Method for Automatic Evaluation of Machine Translation",
+        "category": "Evaluation",
+        "year": 2020,
+        "authors": "undefined undefined, undefined undefined, undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 55
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2020.emnlp-main.448-chunk-56",
+      "content": "Globally normalized transition-based neural networks. In 54th Annual Meeting of the Association for Computational Linguistics, ACL 2016 - Long Papers , volume 4, pages 2442-2452. \n\n- Dzmitry Bahdanau, Kyunghyun Cho, and Yoshua Bengio. 2015. Neural machine translation by jointly learning to align and translate. In 3rd International Conference on Learning Representations, ICLR 2015, San Diego, CA, USA, May 7-9, 2015, Conference Track Proceedings .\n\nT. L. Booth and R. A. Thompson. 1973. Applying probability measures to abstract languages. IEEE Transactions on Computers , C-22(5):442-450.\n\n- John S Bridle. 1990. Probabilistic interpretation of feedforward classification network outputs, with relationships to statistical pattern recognition. In Neurocomputing , pages 227-236. Springer.\n\nYining Chen, Sorcha Gilroy, Andreas Maletti, Jonathan May, and Kevin Knight. 2017. Recurrent neural networks as weighted language recognizers. arXiv preprint arXiv:1711.05408 .",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2020.emnlp-main.448",
+        "title": "BLEU: a Method for Automatic Evaluation of Machine Translation",
+        "category": "Evaluation",
+        "year": 2020,
+        "authors": "undefined undefined, undefined undefined, undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 56
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2020.emnlp-main.448-chunk-57",
+      "content": "227-236. Springer. Yining Chen, Sorcha Gilroy, Andreas Maletti, Jonathan May, and Kevin Knight. 2017. Recurrent neural networks as weighted language recognizers. arXiv preprint arXiv:1711.05408 . \n\n- Kyunghyun Cho, Bart van Merri¨ enboer, Dzmitry Bahdanau, and Yoshua Bengio. 2014. On the properties of neural machine translation: Encoder-decoder approaches. In Proceedings of SSST-8, Eighth Workshop on Syntax, Semantics and Structure in Statistical Translation , pages 103-111, Doha, Qatar. Association for Computational Linguistics.\n- Jeffrey L Elman. 1990. Finding structure in time. Cognitive science , 14(2):179-211.\n- Angela Fan, Mike Lewis, and Yann Dauphin. 2018. Hierarchical neural story generation. arXiv preprint arXiv:1805.04833 .\n- Edouard Grave, Armand Joulin, and Nicolas Usunier. 2017. Improving neural language models with a continuous cache. In 5th International Conference on Learning Representations, ICLR 2017 - Conference Track Proceedings .\n- Alex Graves. 2013. Generating sequences with recurrent neural networks. arXiv preprint arXiv:1308.0850 .\n- Sepp Hochreiter and J¨ urgen Schmidhuber. 1997. Long short-term memory. Neural Computation , 9(8):1735-1780.\n- Ari Holtzman, Jan Buys, Maxwell Forbes, and Yejin Choi. 2019. The curious case of neural text degeneration. arXiv preprint arXiv:1904.09751 .\n- John Lafferty, Andrew McCallum, and Fernando C N Pereira. 2001. Conditional random fields: Probabilistic models for segmenting and labeling sequence data. ICML '01 Proceedings of the Eighteenth International Conference on Machine Learning .",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2020.emnlp-main.448",
+        "title": "BLEU: a Method for Automatic Evaluation of Machine Translation",
+        "category": "Evaluation",
+        "year": 2020,
+        "authors": "undefined undefined, undefined undefined, undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 57
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2020.emnlp-main.448-chunk-58",
+      "content": "of neural text degeneration. arXiv preprint arXiv:1904.09751 . - John Lafferty, Andrew McCallum, and Fernando C N Pereira. 2001. Conditional random fields: Probabilistic models for segmenting and labeling sequence data. ICML '01 Proceedings of the Eighteenth International Conference on Machine Learning . \n\nG´ abor Melis, Chris Dyer, and Phil Blunsom. 2018. On the state of the art of evaluation in neural language models. In 6th International Conference on Learning Representations, ICLR 2018 - Conference Track Proceedings .",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2020.emnlp-main.448",
+        "title": "BLEU: a Method for Automatic Evaluation of Machine Translation",
+        "category": "Evaluation",
+        "year": 2020,
+        "authors": "undefined undefined, undefined undefined, undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 58
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2020.emnlp-main.448-chunk-59",
+      "content": "In 6th International Conference on Learning Representations, ICLR 2018 - Conference Track Proceedings . \n\n- Stephen Merity, Nitish Shirish Keskar, and Richard Socher. 2018. Regularizing and optimizing LSTM language models. In 6th International Conference on Learning Representations, ICLR 2018 - Conference Track Proceedings .\n- Stephen Merity, Caiming Xiong, James Bradbury, and Richard Socher. 2016. Pointer sentinel mixture models. ArXiv , abs/1609.07843.\n- Kenton Murray and David Chiang. 2018. Correcting length bias in neural machine translation. In Proceedings of the Third Conference on Machine Translation: Research Papers , pages 212-223, Brussels, Belgium. Association for Computational Linguistics.\n- Alec Radford, Jeffrey Wu, Rewon Child, David Luan, Dario Amodei, and Ilya Sutskever. 2019. Language models are unsupervised multitask learners. OpenAI Blog , 1(8):9.\n- Marc'Aurelio Ranzato, Sumit Chopra, Michael Auli, and Wojciech Zaremba. 2016. Sequence level training with recurrent neural networks. In 4th International Conference on Learning Representations, ICLR 2016, San Juan, Puerto Rico, May 2-4, 2016, Conference Track Proceedings .\n- Pavel Sountsov and Sunita Sarawagi. 2016. Length bias in encoder decoder models and a case for global conditioning. In Proceedings of the 2016 Conference on Empirical Methods in Natural Language Processing , pages 1516-1525, Austin, Texas. Association for Computational Linguistics.",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2020.emnlp-main.448",
+        "title": "BLEU: a Method for Automatic Evaluation of Machine Translation",
+        "category": "Evaluation",
+        "year": 2020,
+        "authors": "undefined undefined, undefined undefined, undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 59
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2020.emnlp-main.448-chunk-60",
+      "content": "Sountsov and Sunita Sarawagi. 2016. Length bias in encoder decoder models and a case for global conditioning. In Proceedings of the 2016 Conference on Empirical Methods in Natural Language Processing , pages 1516-1525, Austin, Texas. Association for Computational Linguistics. \n\nFelix Stahlberg and Bill Byrne. 2019. On NMT search errors and model errors: Cat got your tongue? In Proceedings of the 2019 Conference on Empirical Methods in Natural Language Processing and the 9th International Joint Conference on Natural Language Processing (EMNLP-IJCNLP) , pages 33543360, Hong Kong, China. Association for Computational Linguistics.\n\n- Ilya Sutskever, James Martens, and Geoffrey Hinton. 2011. Generating text with recurrent neural networks. In Proceedings of the 28th International Conference on Machine Learning, ICML 2011 .\n\nAshish Vaswani, Noam Shazeer, Niki Parmar, Jakob Uszkoreit, Llion Jones, Aidan N. Gomez, Łukasz Kaiser, and Illia Polosukhin. 2017. Attention is all",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2020.emnlp-main.448",
+        "title": "BLEU: a Method for Automatic Evaluation of Machine Translation",
+        "category": "Evaluation",
+        "year": 2020,
+        "authors": "undefined undefined, undefined undefined, undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 60
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2020.emnlp-main.448-chunk-61",
+      "content": "Machine Learning, ICML 2011 . Ashish Vaswani, Noam Shazeer, Niki Parmar, Jakob Uszkoreit, Llion Jones, Aidan N. Gomez, Łukasz Kaiser, and Illia Polosukhin. 2017. Attention is all \n\nyou need. In Advances in Neural Information Processing Systems .",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2020.emnlp-main.448",
+        "title": "BLEU: a Method for Automatic Evaluation of Machine Translation",
+        "category": "Evaluation",
+        "year": 2020,
+        "authors": "undefined undefined, undefined undefined, undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 61
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2020.emnlp-main.448-chunk-62",
+      "content": "in Neural Information Processing Systems . \n\n- Oriol Vinyals, Google Quoc, and V Le. 2015. A Neural Conversational Model. In ICML Deep Learning Workshop .\n- Sean Welleck, Ilia Kulikov, Stephen Roller, Emily Dinan, Kyunghyun Cho, and Jason Weston. 2019. Neural text generation with unlikelihood training. arXiv preprint arXiv:1908.04319 .\n- Thomas Wolf, Lysandre Debut, Victor Sanh, Julien Chaumond, Clement Delangue, Anthony Moi, Pierric Cistac, Tim Rault, R´ emi Louf, Morgan Funtowicz, et al. 2019. Transformers: State-of-theart natural language processing. arXiv preprint arXiv:1910.03771 .\n- Yonghui Wu, Mike Schuster, Zhifeng Chen, Quoc V Le, Mohammad Norouzi, Wolfgang Macherey, Maxim Krikun, Yuan Cao, Qin Gao, Klaus Macherey, et al. 2016. Google's neural machine translation system: Bridging the gap between human and machine translation. arXiv preprint arXiv:1609.08144 .\n\n## A Additional Definitions",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2020.emnlp-main.448",
+        "title": "BLEU: a Method for Automatic Evaluation of Machine Translation",
+        "category": "Evaluation",
+        "year": 2020,
+        "authors": "undefined undefined, undefined undefined, undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 62
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2020.emnlp-main.448-chunk-63",
+      "content": "Macherey, et al. 2016. Google's neural machine translation system: Bridging the gap between human and machine translation. arXiv preprint arXiv:1609.08144 . ## A Additional Definitions \n\nIn contrast to greedy decoding, beam search with width k , F beam-k, operates on the level of partial sequences or prefixes.\n\nDefinition A.1 (Prefix) . A prefix ρ t is an ordered collection of items from V . The score of a prefix is\n\n<!-- formula-not-decoded -->\n\nwhere ρ t [ τ ] is a token at time τ from ρ t .\n\nStarting from a set of empty prefixes, at each iteration a new prefix set is formed by expanding each prefix, then choosing the k highest scoring expanded prefixes.",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2020.emnlp-main.448",
+        "title": "BLEU: a Method for Automatic Evaluation of Machine Translation",
+        "category": "Evaluation",
+        "year": 2020,
+        "authors": "undefined undefined, undefined undefined, undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 63
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2020.emnlp-main.448-chunk-64",
+      "content": "prefixes, at each iteration a new prefix set is formed by expanding each prefix, then choosing the k highest scoring expanded prefixes. \n\nDefinition A.2 (Beam search) . Beam search with width k , F beam -k , generates a sequence from a recurrent language model p θ by maintaining a sizek prefix set P top t . Starting with P top 0 = ∅ , at each iteration t ∈ { 1 , 2 , . . . } beam search forms a new prefix set P top t by expanding the current set, P t = ⋃ ρ ∈ P top t -1 { ρ ◦ v | v ∈ V } (where ρ ◦ v is concatenation), then choosing the k highest scoring elements: P top t = arg top-k ρ ∈ P t s ( ρ ) . Any ρ ∈ P top t end- ing with 〈 eos 〉 is restricted from being expanded further, and is added to a set S . Beam search ends when S contains k sequences, and returns the highest scoring sequence in S .\n\n## B Proof of Lemmas in Section 3\n\nLemma 3.1. If a recurrent language model p θ is consistent, p θ ( | Y | = ∞| C ) = 0 for any probable context C .",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2020.emnlp-main.448",
+        "title": "BLEU: a Method for Automatic Evaluation of Machine Translation",
+        "category": "Evaluation",
+        "year": 2020,
+        "authors": "undefined undefined, undefined undefined, undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 64
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2020.emnlp-main.448-chunk-65",
+      "content": "highest scoring sequence in S . ## B Proof of Lemmas in Section 3 Lemma 3.1. If a recurrent language model p θ is consistent, p θ ( | Y | = ∞| C ) = 0 for any probable context C . \n\nProof. Suppose there exists a probable context ˜ C such that p θ ( | Y | = ∞| ˜ C ) &gt; 0 . Then\n\n<!-- formula-not-decoded -->\n\nwhich contradicts the consistency of the model p θ .\n\nLemma 3.2. A recurrent language model p θ is consistent if ‖ h t ‖ p is uniformly bounded for some p ≥ 1 .\n\nProof. Let B &gt; 0 be an upper bound such that ‖ h t ‖ p &lt; B for all t . Let q be the conjugate of p satisfying 1 /p +1 /q = 1 . Then we have from H¨ older's inequality, for all v ∈ V and t ,\n\n<!-- formula-not-decoded -->\n\nwhere u + = max v ∈ V ‖ u v ‖ q . Note that\n\n<!-- formula-not-decoded -->\n\nwhere c + = max v ∈ V c v . For a given y &lt;t and context C ,\n\n<!-- formula-not-decoded -->\n\nand it follows that p θ ( 〈 eos 〉 | y &lt;t , C ) &gt; ξ &gt; 0 for some strictly positive constant ξ . Then",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2020.emnlp-main.448",
+        "title": "BLEU: a Method for Automatic Evaluation of Machine Translation",
+        "category": "Evaluation",
+        "year": 2020,
+        "authors": "undefined undefined, undefined undefined, undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 65
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2020.emnlp-main.448-chunk-66",
+      "content": "∈ V c v . For a given y &lt;t and context C , <!-- formula-not-decoded --> and it follows that p θ ( 〈 eos 〉 | y &lt;t , C ) &gt; ξ &gt; 0 for some strictly positive constant ξ . Then \n\n<!-- formula-not-decoded -->\n\nand hence p θ is consistent.\n\nLemma 3.3. A consistent decoding algorithm with respect to a consistent recurrent language model decodes only probable sequences. That is, if q F ( Y | C ) &gt; 0 , then p θ ( Y | C ) &gt; 0 for any probable context C .\n\nProof. Suppose there exists a decoded sequence ˜ Y by F and probable context ˜ C such that q F ( ˜ Y | ˜ C ) &gt; 0 but p θ ( ˜ Y | ˜ C ) = 0 . By Remark 2.1, the sequence ˜ Y is of infinite length and thus q F ( | Y | = ∞| ˜ C ) ≥ q F ( ˜ Y | ˜ C ) &gt; 0 , which contradicts the consistency of q F by Lemma 3.1.\n\n## C Proofs for Section 4",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2020.emnlp-main.448",
+        "title": "BLEU: a Method for Automatic Evaluation of Machine Translation",
+        "category": "Evaluation",
+        "year": 2020,
+        "authors": "undefined undefined, undefined undefined, undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 66
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2020.emnlp-main.448-chunk-67",
+      "content": "( | Y | = ∞| ˜ C ) ≥ q F ( ˜ Y | ˜ C ) &gt; 0 , which contradicts the consistency of q F by Lemma 3.1. ## C Proofs for Section 4 \n\nTheorem 4.1. Suppose a recurrent LM p θ has uniformly bounded ‖ h t ‖ p for some p ≥ 1 . If a decoding algorithm F satisfies q F ( 〈 eos 〉 | y &lt;t , C ) ≥ p θ ( 〈 eos 〉 | y &lt;t , C ) for every prefix y &lt;t and context C , then the decoding algorithm F is consistent with respect to the model p θ .\n\nProof. By Lemma 3.2 the model p θ is consistent and p θ ( 〈 eos 〉 | y &lt;t , C ) &gt; ξ for some positive value ξ . Thus, q F ( 〈 eos 〉 | y &lt;t , C ) ≥ p θ ( 〈 eos 〉 | y &lt;t , C ) &gt; ξ . For t ≥ 1 , glyph[negationslash]\n\n<!-- formula-not-decoded -->\n\nglyph[negationslash]\n\nTaking the limit t → ∞ and expectation over C , we have\n\n<!-- formula-not-decoded -->\n\nfrom which the decoding algorithm is consistent.\n\nTheorem 4.2. Greedy decoding is consistent with respect to any self-terminating recurrent LM.",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2020.emnlp-main.448",
+        "title": "BLEU: a Method for Automatic Evaluation of Machine Translation",
+        "category": "Evaluation",
+        "year": 2020,
+        "authors": "undefined undefined, undefined undefined, undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 67
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2020.emnlp-main.448-chunk-68",
+      "content": "1 , glyph[negationslash] <!-- formula-not-decoded --> glyph[negationslash] Taking the limit t → ∞ and expectation over C , we have <!-- formula-not-decoded --> from which the decoding algorithm is consistent. Theorem 4.2. Greedy decoding is consistent with respect to any self-terminating recurrent LM. \n\nProof. Let p 〈 eos 〉 t denote p θ ( 〈 eos 〉 | y &lt;t , C ) and a 〈 eos 〉 t denote u glyph[latticetop] 〈 eos 〉 h t + c 〈 eos 〉 . By Definition 4.3 we have\n\n<!-- formula-not-decoded -->\n\nTake B = -log 2 / log(1 -glyph[epsilon1] ) . We then have p 〈 eos 〉 t &gt; 1 / 2 for all t &gt; B , which implies that 〈 eos 〉 is always the most probable token after time step B . Hence, the sequence length is less than B with probability 1.\n\nTheorem 4.3. Beam search with width k , F beam -k , is consistent with respect to any STRLM.\n\nProof. Let S ( ρ ) be the sizek set of sequences kept by F beam -k that start with a prefix ρ .",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2020.emnlp-main.448",
+        "title": "BLEU: a Method for Automatic Evaluation of Machine Translation",
+        "category": "Evaluation",
+        "year": 2020,
+        "authors": "undefined undefined, undefined undefined, undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 68
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2020.emnlp-main.448-chunk-69",
+      "content": "k , F beam -k , is consistent with respect to any STRLM. Proof. Let S ( ρ ) be the sizek set of sequences kept by F beam -k that start with a prefix ρ . \n\nTake B = -log 2 / log(1 -glyph[epsilon1] ) as in the proof of Theorem 4.2. Suppose that there exists at least one prefix ˆ ρ ∈ P top B which does not end with 〈 eos 〉 .\n\nWe first want to show that ˆ ρ induces at most k more steps in beam search with width k , that is, Y ∈ S (ˆ ρ ) implies | Y | ≤ B + k .\n\nWe know from the proof of Theorem 4.2 that an STRLM p θ satisfies: for any context C and v ∈ V \\ {〈 eos 〉} ,\n\n<!-- formula-not-decoded -->\n\nglyph[negationslash]\n\nFor any subsequence y = ( y 1 , . . . , y l ) with y 1 = 〈 eos 〉 ,\n\n<!-- formula-not-decoded -->\n\nThus, ˆ ρ ◦ 〈 eos 〉 is the most probable sequence among sequences starting with the prefix ˆ ρ , and it follows that ˆ ρ ◦ 〈 eos 〉 ∈ S (ˆ ρ ) .",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2020.emnlp-main.448",
+        "title": "BLEU: a Method for Automatic Evaluation of Machine Translation",
+        "category": "Evaluation",
+        "year": 2020,
+        "authors": "undefined undefined, undefined undefined, undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 69
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2020.emnlp-main.448-chunk-70",
+      "content": ", <!-- formula-not-decoded --> Thus, ˆ ρ ◦ 〈 eos 〉 is the most probable sequence among sequences starting with the prefix ˆ ρ , and it follows that ˆ ρ ◦ 〈 eos 〉 ∈ S (ˆ ρ ) . \n\nThus, in S (ˆ ρ ) , there are ( k -1) sequences starting with ˆ ρ ◦ v for v ∈ V \\ {〈 eos 〉} . By the same argument, at each step at least one sequence ending with 〈 eos 〉 is added to S (ˆ ρ ) , and therefore at time step ( B + k ) , k sequences ending with 〈 eos 〉 are in S (ˆ ρ ) .\n\nNote that the result set S by F beam -k (Definition 2.11) satisfies\n\n<!-- formula-not-decoded -->\n\nSince each ρ ∈ P top B induces sequences of length at most B + k , we have\n\n<!-- formula-not-decoded -->\n\nTaking the expectation over C yields the consistency of the model p θ .\n\nTable 5: Grid search specification. The values selected for the LSTM-RNN and tanh -RNN models are shown in bold and italics, respectively (word tokenization).",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2020.emnlp-main.448",
+        "title": "BLEU: a Method for Automatic Evaluation of Machine Translation",
+        "category": "Evaluation",
+        "year": 2020,
+        "authors": "undefined undefined, undefined undefined, undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 70
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2020.emnlp-main.448-chunk-71",
+      "content": "Taking the expectation over C yields the consistency of the model p θ . Table 5: Grid search specification. The values selected for the LSTM-RNN and tanh -RNN models are shown in bold and italics, respectively (word tokenization). \n\n| Parameter              | Values                |\n|------------------------|-----------------------|\n| Hidden Size            | { 256 , 512 , 1024 }  |\n| Dropout                | { 0 . 1 , 0.3 , 0.5 } |\n| Embedding Weight Tying | { True , False }      |\n\n## D Additional Results and Experiment Details\n\nTraining. Each model is trained on a single Nvidia P40 GPU for up to 100 epochs, stopping when validation perplexity does not decrease for 10 consecutive epochs.\n\nHyper-parameters. Tables 5,6 show the grid search specifications. All models were 2 layers and were trained with the Adam optimizer.\n\nModel perplexities. Tables 10, 11 shows train and test perplexities for the tanh -RNN and LSTMRNN models using word and BPE tokenization, respectively.",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2020.emnlp-main.448",
+        "title": "BLEU: a Method for Automatic Evaluation of Machine Translation",
+        "category": "Evaluation",
+        "year": 2020,
+        "authors": "undefined undefined, undefined undefined, undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 71
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2020.emnlp-main.448-chunk-72",
+      "content": "and were trained with the Adam optimizer. Model perplexities. Tables 10, 11 shows train and test perplexities for the tanh -RNN and LSTMRNN models using word and BPE tokenization, respectively. \n\nAdditional example continuations. Table 12 shows additional greedy-decoded continuations using a self-terminating LSTM-RNN and the baseline LSTM-RNN with BPE tokenization.\n\nGPT-2 length distributions. Figure 4 shows the length distributions of ground-truth continuations, continuations from GPT-2 117M, and continuations from the self-terminating GPT-2 117M.\n\n<!-- image -->\n\nFigure 4: Lengths of ground-truth and greedy-decoded continuations from the baseline GPT-2 117M and selfterminating GPT-2 117M models ( glyph[epsilon1] = 0 . 0025 ).\n\n| Parameter              | Values                |\n|------------------------|-----------------------|\n| Hidden Size            | { 256 , 512 , 1024 }  |\n| Dropout                | { 0 . 1 , 0.3 , 0.5 } |\n| Embedding Weight Tying | { True , False }      |",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2020.emnlp-main.448",
+        "title": "BLEU: a Method for Automatic Evaluation of Machine Translation",
+        "category": "Evaluation",
+        "year": 2020,
+        "authors": "undefined undefined, undefined undefined, undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 72
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2020.emnlp-main.448-chunk-73",
+      "content": "1024 } | | Dropout | { 0 . 1 , 0.3 , 0.5 } | | Embedding Weight Tying | { True , False } | \n\nTable 6: Grid search specification. The values selected for the LSTM-RNN and tanh -RNN models are shown in bold and italics, respectively (BPE tokenization).\n\n| Type   |   # Train |   # Valid |   # Test |   | V | |   Avg. len |\n|--------|-----------|-----------|----------|---------|------------|\n| Word   |     78274 |      8464 |     9708 |   33182 |         24 |\n| BPE    |     83344 |      8721 |    10156 |   19483 |         28 |\n\nTable 7: Wikitext2 statistics.\n\n|             | tanh -RNN   | LSTM-RNN   |\n|-------------|-------------|------------|\n| ancestral   | 0.00 ± 0.0  | 0.00 ± 0.0 |\n| greedy      | 6.07 ± 5.6  | 1.03 ± 0.3 |\n| beam-2      | 1.21 ± 0.3  | 0.07 ± 0.1 |\n| beam-4      | 0.29 ± 0.1  | 0.00 ± 0.0 |\n| topk-2      | 0.84 ± 0.8  | 0.00 ± 0.0 |\n| topk-4      | 0.02 ± 0.0  | 0.00 ± 0.0 |\n| nucleus-0.2 | 2.49 ± 0.2  | 0.76 ± 0.3 |\n| nucleus-0.4 | 0.32 ± 0.1  | 0.22 ± 0.1 |",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2020.emnlp-main.448",
+        "title": "BLEU: a Method for Automatic Evaluation of Machine Translation",
+        "category": "Evaluation",
+        "year": 2020,
+        "authors": "undefined undefined, undefined undefined, undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 73
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2020.emnlp-main.448-chunk-74",
+      "content": "| 0.00 ± 0.0 | | topk-4 | 0.02 ± 0.0 | 0.00 ± 0.0 | | nucleus-0.2 | 2.49 ± 0.2 | 0.76 ± 0.3 | | nucleus-0.4 | 0.32 ± 0.1 | 0.22 ± 0.1 | \n\nTable 8: Non-termination ratio ( r L (%)) of decoded sequences using ancestral sampling and incomplete decoding methods (word tokenization).\n\nTable 9: Non-termination ratio ( r L (%)) of greedydecoded sequences and test perplexity for selfterminating recurrent models (word tokenization).",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2020.emnlp-main.448",
+        "title": "BLEU: a Method for Automatic Evaluation of Machine Translation",
+        "category": "Evaluation",
+        "year": 2020,
+        "authors": "undefined undefined, undefined undefined, undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 74
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2020.emnlp-main.448-chunk-75",
+      "content": "L (%)) of greedydecoded sequences and test perplexity for selfterminating recurrent models (word tokenization). \n\n| ST                                                      | glyph[epsilon1] r L (%)                                           | perplexity                                                       |\n|---------------------------------------------------------|-------------------------------------------------------------------|------------------------------------------------------------------|\n| ! 10 - 2 ! 10 - 3 ! 10 - 4 - ! 10 - 2 ! 10 - 3 ! 10 - 4 | 0.00 ± 0.0 0.00 ± 0.0 1.04 ± 0.6 6.07 ± 5.6 0.00 ± 0.0 0.00 ± 0.0 | 150.07 ± 2.7 138.01 ± 0.6 138.67 ± 1.8 136.57 ± 1.8 101.24 ± 0.3 |\n| 7                                                       |                                                                   |                                                                  |\n| -                                                       |                                                                   |                                                                  |\n|                                                         |                                                                   | 94.33 ± 0.6                                                      |\n|                                                         | 0.94 ± 0.5                                                        | 94.15 ± 0.8                                                      |\n| 7                                                       | 1.03 ± 0.3                                                        | 91.86 ± 0.4                                                      |",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2020.emnlp-main.448",
+        "title": "BLEU: a Method for Automatic Evaluation of Machine Translation",
+        "category": "Evaluation",
+        "year": 2020,
+        "authors": "undefined undefined, undefined undefined, undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 75
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2020.emnlp-main.448-chunk-76",
+      "content": "± 0.6 | | | 0.94 ± 0.5 | 94.15 ± 0.8 | | 7 | 1.03 ± 0.3 | 91.86 ± 0.4 | \n\nTable 10: Perplexities of trained recurrent language models (word tokenization).\n\n| model               | context    | perplexity              |\n|---------------------|------------|-------------------------|\n| tanh -RNN tanh -RNN | train test | 91.54 ± 7.9 ±           |\n| LSTM-RNN LSTM-RNN   | train test | 136.57 1.8              |\n|                     |            | 45.80 ± 2.5 91.86 ± 0.4 |\n\nTable 11: Perplexities of trained recurrent language models (BPE tokenization).\n\n| model               | context    | perplexity               |\n|---------------------|------------|--------------------------|\n| tanh -RNN tanh -RNN | train test | 61.20 ± 1.2 186.44 ± 1.4 |\n| LSTM-RNN LSTM-RNN   | train test | 72.72 ± 2.4 178.39 ±     |\n|                     |            | 1.2                      |",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2020.emnlp-main.448",
+        "title": "BLEU: a Method for Automatic Evaluation of Machine Translation",
+        "category": "Evaluation",
+        "year": 2020,
+        "authors": "undefined undefined, undefined undefined, undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 76
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2020.emnlp-main.448-chunk-77",
+      "content": "± 1.2 186.44 ± 1.4 | | LSTM-RNN LSTM-RNN | train test | 72.72 ± 2.4 178.39 ± | | | | 1.2 | \n\nTable 12: More continuations with consistent nucleus sampling ( µ = 0 . 2 ) and self-terminating LSTM ( glyph[epsilon1] = 10 -3 ) with BPE tokenization.",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2020.emnlp-main.448",
+        "title": "BLEU: a Method for Automatic Evaluation of Machine Translation",
+        "category": "Evaluation",
+        "year": 2020,
+        "authors": "undefined undefined, undefined undefined, undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 77
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2020.emnlp-main.448-chunk-78",
+      "content": "( glyph[epsilon1] = 10 -3 ) with BPE tokenization. \n\n| Prefix nucleus c-nucleus   | Payne was quoted as saying : ' With the album 's ' album , ' The Predious ' , ' The One With the Wind ' , ' I 've Ever 't Have You 's My Way ' , ' I 've Ever It 's Johnny ' , ' The Predes ' , ' ' Always ' , ' The Predatory Was ' , ' The Dream ' , ' The Baste ' , ' ' Always Boy ' , ' My Drum ' , ' The Simpsons ' , ' ' Always Man ', ' The ' Sweet Night ' , . . . 's ' album , ' The Predious ' , ' The One With the Wind ' , ' I 've Ever 't Have You 's My Way ' 〈 eos 〉                                                                                                                                                     |\n|----------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|\n| Prefix nucleus c-nucleus   | In a 2006 interview , fellow actor Ben Whish 's father , a young actor , and a romantic relationship with the show , ' The One Where the The Simpsons ' , ' The Pape ' , ' The Next Generation ' , ' The Sixth Extinction ' , ' We 't You Wanna Stay ' , ' The Dream ' , ' The Predator ' , ' The Collection ' , ' The Big Lear ' , ' The Predor ' , ' The Predation ' , ' My Blue ' , ' The Simpsons ' , ' The Sixth Extinction ' , ' My Love ' , ' The Rise of the Year ' , ' The Simpsons ' , ' The Predator ' , ' My Dream ' , . . . was the first time in the film , and was published in the same episode of the season . 〈 eos 〉 |\n| Prefix                     | Most of what is known of Du Fu 's                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |\n| Baseline STRLM             | ' the ' , the ' ' great ' , the ' ' ' , ' the most important ' , ' the most important ' , ' Ode to the Nightingale ' , ' Ode to the Nightingale ' , ' Ode to the Nightingale ' , ' Ode to the Nightingale ' , ' Ode to the Nightingale ' , ' Ode to the Nightingale ' , ' Ode to the Nightingale ' , ' Ode to the Nightingale ' , . . . Coty , was a ' one of the most important ' of the American science fiction . 〈 eos 〉                                                                                                                                                                                                            |\n| Prefix                     | He was relieved by Yan Wu , a friend and the first wife of the Order of the Order of the Order of the Order of the Order of the Republic of the Republic of the Republic of the Republic of the Republic of the Republic of the Republic of the Republic of the Republic of the Republic of the Republic of the Republic of the Republic . . .                                                                                                                                                                                                                                                                                          |\n| Baseline                   |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |\n| STRLM                      | the wife of the Royal Navy . 〈 eos 〉                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2020.emnlp-main.448",
+        "title": "BLEU: a Method for Automatic Evaluation of Machine Translation",
+        "category": "Evaluation",
+        "year": 2020,
+        "authors": "undefined undefined, undefined undefined, undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 78
+      }
+    }
+  ],
+  "tables": [
+    "|                        | tanh -RNN    | LSTM-RNN    |\n|------------------------|--------------|-------------|\n| ancestral              | 0.00 ± 0.0   | 0.00 ± 0.0  |\n| greedy                 | 12.35 ± 5.18 | 1.53 ± 1.41 |\n| beam-2                 | 1.38 ± 0.95  | 0.07 ± 0.06 |\n| beam-4                 | 0.25 ± 0.19  | 0.00 ± 0.01 |\n| topk-2                 | 0.01 ± 0.01  | 0.01 ± 0.01 |\n| topk-4                 | 0.00 ± 0.0   | 0.00 ± 0.01 |\n| nucleus-0.2            | 0.06 ± 0.02  | 0.13 ± 0.15 |\n| nucleus-0.4            | 0.04 ± 0.02  | 0.02 ± 0.01 |\n| consistent topk-2      | 0.00 ± 0.0   | 0.00 ± 0.01 |\n| consistent topk-4      | 0.00 ± 0.0   | 0.00 ± 0.0  |\n| consistent nucleus-0.2 | 0.04 ± 0.02  | 0.01 ± 0.01 |\n| consistent nucleus-0.4 | 0.02 ± 0.02  | 0.01 ± 0.01 |",
+    "| Prefix nucleus c-nucleus   | One Direction delivered a performance of ' Kiss You ' , and the album 's second album , ' The X @-@ Files ' , ' The A. ' , ' The Preder ' , ' We 've Have You ' , ' I 've You Wanna Stay ' , ' The Dream ' , ' The Bide ' , ' My Achievement ', ' The B. B. ' , ' A Life ' . . . ' , and ' My Boo ' was released on September 29 , 2010 . 〈 eos 〉                                                                                           |\n|----------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|\n| Prefix nucleus c-nucleus   | Boulter starred in two films in 2008 , and the band 's music , and ' The Rise of Monkey ' , ' The One With the Way ' , ' The ' Always ' , ' ' Always Your ' , ' The Wift ' , ' The Baste ' , ' The Special With ' , ' The Way ' , ' The Special With You ' . . . and the latter was released in the United States . 〈 eos 〉                                                                                                                 |\n| Prefix Baseline STRLM      | This period of unhappiness was the making of the ' most important ' of the ' mad ' , and the ' ' most important ' of the ' ' ' , ' the most important ' , and the ' devil ' , ' The ' , ' The One ' , ' The One ' , ' The One ' , ' The One ' , ' The One ' , ' The One ' , ' The One ' , ' The One ' , ' The One ' , ' The One ' , ' The One ' , ' The One ' , ' The One ' , ' The One ' . . . the first commandment of the poem . 〈 eos 〉 |\n| Prefix Baseline STRLM      | Du Fu 's mother died shortly after he was a member of the Order of the Order of the Order of the Order of the Order of the Order of the Order of the Order of the Order of the Republic of the Republic of the Republic of the Republic of the Republic of . . . a member of the Order of the British Empire . 〈 eos 〉                                                                                                                      |",
+    "| ST                | glyph[epsilon1]      | r L (%)                              | perplexity                             |\n|-------------------|----------------------|--------------------------------------|----------------------------------------|\n| tanh -RNN ! ! ! 7 | 10 - 2 10 - 3 10 - 4 | 00.00 ± 0.0 00.00 ± 0.0 00.02 ± 0.02 | 229.09 ± 9.2 191.63 ± 1.4 188.36 ± 2.2 |\n|                   | -                    | 12.35 ± 5.2                          | 186.44 ± 1.4                           |\n| LSTM ! ! ! 7      | 10 - 2               | 0.00 ± 0.0                           | 219.71 ± 9.2                           |\n|                   | 10 - 3               | 0.00 ± 0.0                           | 186.04 ± 1.6                           |\n|                   | 10 - 4               | 0.18 ± 0.35                          | 183.57 ± 2.3                           |\n|                   | -                    | 1.48 ± 1.43                          | 178.19 ± 1.3                           |",
+    "|              |   r L (%) |   perplexity |\n|--------------|-----------|--------------|\n| GPT2-117M    |     37.91 |        20.92 |\n| GPT2-117M ST |      0    |        27.25 |",
+    "| Parameter              | Values                |\n|------------------------|-----------------------|\n| Hidden Size            | { 256 , 512 , 1024 }  |\n| Dropout                | { 0 . 1 , 0.3 , 0.5 } |\n| Embedding Weight Tying | { True , False }      |",
+    "| Parameter              | Values                |\n|------------------------|-----------------------|\n| Hidden Size            | { 256 , 512 , 1024 }  |\n| Dropout                | { 0 . 1 , 0.3 , 0.5 } |\n| Embedding Weight Tying | { True , False }      |",
+    "| Type   |   # Train |   # Valid |   # Test |   | V | |   Avg. len |\n|--------|-----------|-----------|----------|---------|------------|\n| Word   |     78274 |      8464 |     9708 |   33182 |         24 |\n| BPE    |     83344 |      8721 |    10156 |   19483 |         28 |",
+    "|             | tanh -RNN   | LSTM-RNN   |\n|-------------|-------------|------------|\n| ancestral   | 0.00 ± 0.0  | 0.00 ± 0.0 |\n| greedy      | 6.07 ± 5.6  | 1.03 ± 0.3 |\n| beam-2      | 1.21 ± 0.3  | 0.07 ± 0.1 |\n| beam-4      | 0.29 ± 0.1  | 0.00 ± 0.0 |\n| topk-2      | 0.84 ± 0.8  | 0.00 ± 0.0 |\n| topk-4      | 0.02 ± 0.0  | 0.00 ± 0.0 |\n| nucleus-0.2 | 2.49 ± 0.2  | 0.76 ± 0.3 |\n| nucleus-0.4 | 0.32 ± 0.1  | 0.22 ± 0.1 |",
+    "| ST                                                      | glyph[epsilon1] r L (%)                                           | perplexity                                                       |\n|---------------------------------------------------------|-------------------------------------------------------------------|------------------------------------------------------------------|\n| ! 10 - 2 ! 10 - 3 ! 10 - 4 - ! 10 - 2 ! 10 - 3 ! 10 - 4 | 0.00 ± 0.0 0.00 ± 0.0 1.04 ± 0.6 6.07 ± 5.6 0.00 ± 0.0 0.00 ± 0.0 | 150.07 ± 2.7 138.01 ± 0.6 138.67 ± 1.8 136.57 ± 1.8 101.24 ± 0.3 |\n| 7                                                       |                                                                   |                                                                  |\n| -                                                       |                                                                   |                                                                  |\n|                                                         |                                                                   | 94.33 ± 0.6                                                      |\n|                                                         | 0.94 ± 0.5                                                        | 94.15 ± 0.8                                                      |\n| 7                                                       | 1.03 ± 0.3                                                        | 91.86 ± 0.4                                                      |",
+    "| model               | context    | perplexity              |\n|---------------------|------------|-------------------------|\n| tanh -RNN tanh -RNN | train test | 91.54 ± 7.9 ±           |\n| LSTM-RNN LSTM-RNN   | train test | 136.57 1.8              |\n|                     |            | 45.80 ± 2.5 91.86 ± 0.4 |",
+    "| model               | context    | perplexity               |\n|---------------------|------------|--------------------------|\n| tanh -RNN tanh -RNN | train test | 61.20 ± 1.2 186.44 ± 1.4 |\n| LSTM-RNN LSTM-RNN   | train test | 72.72 ± 2.4 178.39 ±     |\n|                     |            | 1.2                      |",
+    "| Prefix nucleus c-nucleus   | Payne was quoted as saying : ' With the album 's ' album , ' The Predious ' , ' The One With the Wind ' , ' I 've Ever 't Have You 's My Way ' , ' I 've Ever It 's Johnny ' , ' The Predes ' , ' ' Always ' , ' The Predatory Was ' , ' The Dream ' , ' The Baste ' , ' ' Always Boy ' , ' My Drum ' , ' The Simpsons ' , ' ' Always Man ', ' The ' Sweet Night ' , . . . 's ' album , ' The Predious ' , ' The One With the Wind ' , ' I 've Ever 't Have You 's My Way ' 〈 eos 〉                                                                                                                                                     |\n|----------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|\n| Prefix nucleus c-nucleus   | In a 2006 interview , fellow actor Ben Whish 's father , a young actor , and a romantic relationship with the show , ' The One Where the The Simpsons ' , ' The Pape ' , ' The Next Generation ' , ' The Sixth Extinction ' , ' We 't You Wanna Stay ' , ' The Dream ' , ' The Predator ' , ' The Collection ' , ' The Big Lear ' , ' The Predor ' , ' The Predation ' , ' My Blue ' , ' The Simpsons ' , ' The Sixth Extinction ' , ' My Love ' , ' The Rise of the Year ' , ' The Simpsons ' , ' The Predator ' , ' My Dream ' , . . . was the first time in the film , and was published in the same episode of the season . 〈 eos 〉 |\n| Prefix                     | Most of what is known of Du Fu 's                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |\n| Baseline STRLM             | ' the ' , the ' ' great ' , the ' ' ' , ' the most important ' , ' the most important ' , ' Ode to the Nightingale ' , ' Ode to the Nightingale ' , ' Ode to the Nightingale ' , ' Ode to the Nightingale ' , ' Ode to the Nightingale ' , ' Ode to the Nightingale ' , ' Ode to the Nightingale ' , ' Ode to the Nightingale ' , . . . Coty , was a ' one of the most important ' of the American science fiction . 〈 eos 〉                                                                                                                                                                                                            |\n| Prefix                     | He was relieved by Yan Wu , a friend and the first wife of the Order of the Order of the Order of the Order of the Order of the Republic of the Republic of the Republic of the Republic of the Republic of the Republic of the Republic of the Republic of the Republic of the Republic of the Republic of the Republic of the Republic . . .                                                                                                                                                                                                                                                                                          |\n| Baseline                   |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |\n| STRLM                      | the wife of the Royal Navy . 〈 eos 〉                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |"
+  ],
+  "stats": {
+    "totalCharacters": 60970,
+    "chunkCount": 79,
+    "tableCount": 12,
+    "oaStatus": "gold",
+    "pdfUrl": "https://www.aclweb.org/anthology/2020.emnlp-main.448.pdf"
+  }
+}

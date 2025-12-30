@@ -1,0 +1,4285 @@
+{
+  "metadata": {
+    "generatedAt": "2025-12-30T01:42:47.895Z",
+    "engine": "YAGOKORO GraphRAG",
+    "totalPapers": 241,
+    "totalEntities": 244,
+    "totalRelations": 229
+  },
+  "entities": [
+    {
+      "name": "Deep reinforcement learning",
+      "type": "AIModel",
+      "confidence": 0.9,
+      "description": "A sophisticated machine learning technique for training agents to make a sequence of decisions in an environment."
+    },
+    {
+      "name": "human preferences",
+      "type": "InputType",
+      "confidence": 0.8,
+      "description": "Non-expert human feedback used to define goals between pairs of trajectory segments."
+    },
+    {
+      "name": "Atari games",
+      "type": "ApplicationArea",
+      "confidence": 0.7,
+      "description": "Video games used as a testbed for reinforcement learning algorithms."
+    },
+    {
+      "name": "simulated robot locomotion",
+      "type": "ApplicationArea",
+      "confidence": 0.8,
+      "description": "Simulated robotic movement tasks used to evaluate the effectiveness of the approach."
+    },
+    {
+      "name": "Transformer",
+      "type": "AIModel",
+      "confidence": 0.9,
+      "description": "A new simple network architecture based solely on attention mechanisms"
+    },
+    {
+      "name": "attention mechanism",
+      "type": "Technique",
+      "confidence": 0.8,
+      "description": "A component in the Transformer model that connects the encoder and decoder"
+    },
+    {
+      "name": "BERT",
+      "type": "AIModel",
+      "confidence": 0.9,
+      "description": "A new language representation model designed to pre-train deep bidirectional representations from unlabeled text"
+    },
+    {
+      "name": "GLUE",
+      "type": "Concept",
+      "confidence": 0.8,
+      "description": "A benchmark for natural language understanding tasks"
+    },
+    {
+      "name": "MultiNLI",
+      "type": "Concept",
+      "confidence": 0.8,
+      "description": "A natural language inference dataset"
+    },
+    {
+      "name": "SQuAD",
+      "type": "Concept",
+      "confidence": 0.8,
+      "description": "A reading comprehension dataset"
+    },
+    {
+      "name": "Scaling Laws",
+      "type": "AIModel",
+      "confidence": 0.8,
+      "description": "Empirical scaling laws for language model performance on the cross-entropy loss"
+    },
+    {
+      "name": "Overfitting",
+      "type": "AIEntity",
+      "confidence": 0.7,
+      "description": "Dependence of overfitting on model/dataset size"
+    },
+    {
+      "name": "Training Speed",
+      "type": "AIEntity",
+      "confidence": 0.6,
+      "description": "Dependence of training speed on model size"
+    },
+    {
+      "name": "Retrieval-Augmented Generation",
+      "type": "AIModel",
+      "confidence": 0.8,
+      "description": "A method to enhance the performance of large pre-trained language models on knowledge-intensive NLP tasks by allowing them to access and manipulate external knowledge."
+    },
+    {
+      "name": "Language Models are Few-Shot Learners",
+      "type": "Concept",
+      "confidence": 0.8,
+      "description": "The title of the research paper"
+    },
+    {
+      "name": "GPT-3",
+      "type": "AIModel",
+      "confidence": 0.9,
+      "description": "A large autoregressive language model with 175 billion parameters"
+    },
+    {
+      "name": "few-shot learning",
+      "type": "Concept",
+      "confidence": 0.8,
+      "description": "A method where models learn from a small number of examples or instructions"
+    },
+    {
+      "name": "NLP tasks and benchmarks",
+      "type": "Concept",
+      "confidence": 0.7,
+      "description": "Natural Language Processing tasks and evaluation standards"
+    },
+    {
+      "name": "Denoising Diffusion Probabilistic Models",
+      "type": "AIModel",
+      "confidence": 0.9,
+      "description": "A class of latent variable models inspired by considerations from nonequilibrium thermodynamics, used for high-quality image synthesis."
+    },
+    {
+      "name": "Vision Transformer",
+      "type": "AIModel",
+      "confidence": 0.9,
+      "description": "A transformer-based model applied directly to sequences of image patches for image recognition tasks."
+    },
+    {
+      "name": "ImageNet",
+      "type": "Concept",
+      "confidence": 0.9,
+      "description": "A large-scale visual database for use in machine learning research."
+    },
+    {
+      "name": "CIFAR-100",
+      "type": "Concept",
+      "confidence": 0.85,
+      "description": "A dataset of 60,000 32x32 color images belonging to 100 classes, usually used for benchmarking image classification algorithms."
+    },
+    {
+      "name": "VTAB",
+      "type": "Concept",
+      "confidence": 0.75,
+      "description": "A suite of vision tasks and benchmarks for evaluating the performance of computer vision models."
+    },
+    {
+      "name": "Switch Transformers",
+      "type": "AIModel",
+      "confidence": 0.9,
+      "description": "A new model that addresses complexity, communication costs, and training instability in Mixture of Experts (MoE) models."
+    },
+    {
+      "name": "Mixture of Experts (MoE)",
+      "type": "AIConcept",
+      "confidence": 0.8,
+      "description": "A method where different parameters are selected for each incoming example, resulting in a sparsely-activated model with many parameters but constant computational cost."
+    },
+    {
+      "name": "Learning Transferable Visual Models From Natural Language Supervision",
+      "type": "AIModel",
+      "confidence": 0.8,
+      "description": "A method for training computer vision systems using raw textual data as supervision to learn generalizable image representations."
+    },
+    {
+      "name": "LoRA",
+      "type": "Technique",
+      "confidence": 0.9,
+      "description": "Low-Rank Adaptation technique for large language models"
+    },
+    {
+      "name": "GPT-3 175B",
+      "type": "AIModel",
+      "confidence": 0.8,
+      "description": "A large language model from Anthropic"
+    },
+    {
+      "name": "Adam",
+      "type": "Technique",
+      "confidence": 0.8,
+      "description": "An optimization algorithm used in training machine learning models"
+    },
+    {
+      "name": "RoBERTa",
+      "type": "AIModel",
+      "confidence": 0.9,
+      "description": "A pre-trained language model from Facebook AI Research"
+    },
+    {
+      "name": "DeBERTa",
+      "type": "AIModel",
+      "confidence": 0.85,
+      "description": "A variant of BERT with improved performance on downstream tasks"
+    },
+    {
+      "name": "GPT-2",
+      "type": "AIModel",
+      "confidence": 0.9,
+      "description": "A generative pre-trained transformer model from OpenAI"
+    },
+    {
+      "name": "Microsoft",
+      "type": "Organization",
+      "confidence": 0.85,
+      "description": "The company that released the LoRA package"
+    },
+    {
+      "name": "PyTorch",
+      "type": "Technique",
+      "confidence": 0.7,
+      "description": "An open-source machine learning library developed by Facebook AI"
+    },
+    {
+      "name": "RETRO",
+      "type": "AIModel",
+      "confidence": 0.9,
+      "description": "Retrieval-Enhanced Transformer"
+    },
+    {
+      "name": "Bert retriever",
+      "type": "Component",
+      "confidence": 0.8,
+      "description": "A frozen Bert model used as a retriever in the RETRO system"
+    },
+    {
+      "name": "Latent Diffusion Models",
+      "type": "AIModel",
+      "confidence": 0.9,
+      "description": "A type of diffusion model operating in latent space"
+    },
+    {
+      "name": "diffusion models (DMs)",
+      "type": "AIModel",
+      "confidence": 0.85,
+      "description": "Models used for image synthesis and generation"
+    },
+    {
+      "name": "OpenAI",
+      "type": "Organization",
+      "confidence": 0.7,
+      "description": "Not explicitly mentioned but implied by context of AI research"
+    },
+    {
+      "name": "pixel space",
+      "type": "Concept",
+      "confidence": 0.8,
+      "description": "The original space where diffusion models typically operate directly"
+    },
+    {
+      "name": "cross-attention layers",
+      "type": "Technique",
+      "confidence": 0.9,
+      "description": "A method introduced into the model architecture to enhance its capabilities"
+    },
+    {
+      "name": "RoFormer",
+      "type": "AIModel",
+      "confidence": 0.8,
+      "description": "Enhanced Transformer with Rotary Position Embedding"
+    },
+    {
+      "name": "Rotary Position Embedding (RoPE)",
+      "type": "Technique",
+      "confidence": 0.9,
+      "description": "A novel method to effectively leverage positional information in transformer-based language models"
+    },
+    {
+      "name": "transformer model",
+      "type": "AIModel",
+      "confidence": 0.9,
+      "description": "A type of AI model introduced by Vaswani et al."
+    },
+    {
+      "name": "Vaswani et al.",
+      "type": "Person",
+      "confidence": 0.8,
+      "description": "Researchers who introduced the transformer model"
+    },
+    {
+      "name": "ALiBi",
+      "type": "Technique",
+      "confidence": 0.9,
+      "description": "A position method that biases query-key attention scores with a penalty proportional to their distance"
+    },
+    {
+      "name": "1.3 billion parameter model",
+      "type": "AIModel",
+      "confidence": 0.7,
+      "description": "An AI model with 1.3 billion parameters trained on input sequences of length 1024"
+    },
+    {
+      "name": "sinusoidal position embedding model",
+      "type": "AIModel",
+      "confidence": 0.8,
+      "description": "A model using sinusoidal position embeddings trained on inputs of length 2048"
+    },
+    {
+      "name": "WikiText-103 benchmark",
+      "type": "Concept",
+      "confidence": 0.7,
+      "description": "A benchmark used to evaluate the performance of different position methods"
+    },
+    {
+      "name": "Codex",
+      "type": "AIModel",
+      "confidence": 0.9,
+      "description": "A GPT language model fine-tuned on publicly available code from GitHub"
+    },
+    {
+      "name": "GitHub Copilot",
+      "type": "Technique",
+      "confidence": 0.8,
+      "description": "A production version of Codex that powers a feature in GitHub"
+    },
+    {
+      "name": "HumanEval",
+      "type": "Concept",
+      "confidence": 0.9,
+      "description": "An evaluation set released to measure functional correctness for synthesizing programs from docstrings"
+    },
+    {
+      "name": "GPT-J",
+      "type": "AIModel",
+      "confidence": 0.85,
+      "description": "Another GPT language model that solves 11.4% of the problems on HumanEval"
+    },
+    {
+      "name": "prompt-based learning",
+      "type": "AIModel",
+      "confidence": 0.8,
+      "description": "A new paradigm in natural language processing that uses language models to perform prediction tasks by modifying the original input into a textual string prompt with unfilled slots."
+    },
+    {
+      "name": "FLAN",
+      "type": "AIModel",
+      "confidence": 0.9,
+      "description": "A finetuned language model described in the paper"
+    },
+    {
+      "name": "instruction tuning",
+      "type": "Technique",
+      "confidence": 0.8,
+      "description": "The method of finetuning language models on tasks described via instructions"
+    },
+    {
+      "name": "137B parameter pretrained language model",
+      "type": "AIModel",
+      "confidence": 0.7,
+      "description": "A large pretrained language model used as the base for instruction tuning"
+    },
+    {
+      "name": "60 NLP tasks",
+      "type": "Concept",
+      "confidence": 0.8,
+      "description": "The number of natural language processing tasks used in the instruction-tuning process"
+    },
+    {
+      "name": "25 tasks",
+      "type": "Concept",
+      "confidence": 0.7,
+      "description": "The number of tasks on which FLAN was evaluated"
+    },
+    {
+      "name": "175B GPT-3",
+      "type": "AIModel",
+      "confidence": 0.8,
+      "description": "A large language model for comparison with the instruction-tuned model"
+    },
+    {
+      "name": "few-shot GPT-3",
+      "type": "AIModel",
+      "confidence": 0.6,
+      "description": "A version of GPT-3 trained with a few examples"
+    },
+    {
+      "name": "ANLI",
+      "type": "Concept",
+      "confidence": 0.7,
+      "description": "A natural language inference dataset used in the evaluation"
+    },
+    {
+      "name": "RTE",
+      "type": "Concept",
+      "confidence": 0.6,
+      "description": "A reading comprehension and text entailment dataset used in the evaluation"
+    },
+    {
+      "name": "BoolQ",
+      "type": "Concept",
+      "confidence": 0.5,
+      "description": "A boolean question answering dataset used in the evaluation"
+    },
+    {
+      "name": "AI2-ARC",
+      "type": "Concept",
+      "confidence": 0.6,
+      "description": "A reading comprehension dataset from AI2 used in the evaluation"
+    },
+    {
+      "name": "OpenbookQA",
+      "type": "Concept",
+      "confidence": 0.5,
+      "description": "A question answering dataset with commonsense reasoning required used in the evaluation"
+    },
+    {
+      "name": "StoryCloze",
+      "type": "Concept",
+      "confidence": 0.6,
+      "description": "A story completion task used in the evaluation"
+    },
+    {
+      "name": "Chain-of-Thought Prompting",
+      "type": "Technique",
+      "confidence": 0.9,
+      "description": "A method for prompting large language models to generate intermediate reasoning steps."
+    },
+    {
+      "name": "large language models",
+      "type": "AIModel",
+      "confidence": 0.8,
+      "description": "Refers to powerful AI models capable of complex reasoning tasks."
+    },
+    {
+      "name": "GSM8K benchmark",
+      "type": "Concept",
+      "confidence": 0.7,
+      "description": "A benchmark for evaluating math word problem solving abilities."
+    },
+    {
+      "name": "finetuned GPT-3",
+      "type": "AIModel",
+      "confidence": 0.8,
+      "description": "A version of the GPT-3 model that has been fine-tuned for a specific task."
+    },
+    {
+      "name": "InstructGPT",
+      "type": "AIModel",
+      "confidence": 0.9,
+      "description": "A model fine-tuned using human feedback to align with user intent"
+    },
+    {
+      "name": "RLHF",
+      "type": "Technique",
+      "confidence": 0.7,
+      "description": "Reinforcement Learning from Human Feedback technique used in the paper"
+    },
+    {
+      "name": "Chinchilla",
+      "type": "AIModel",
+      "confidence": 0.8,
+      "description": "A predicted compute-optimal model"
+    },
+    {
+      "name": "PaLM",
+      "type": "AIModel",
+      "confidence": 0.9,
+      "description": "A large language model trained by Google"
+    },
+    {
+      "name": "Pathways Language Model PaLM",
+      "type": "AIModel",
+      "confidence": 0.9,
+      "description": "The specific model name"
+    },
+    {
+      "name": "Pathways",
+      "type": "Technique",
+      "confidence": 0.7,
+      "description": "A new ML system used for efficient training across multiple TPU Pods"
+    },
+    {
+      "name": "TPU v4",
+      "type": "Technique",
+      "confidence": 0.8,
+      "description": "A type of Tensor Processing Unit used for training the model"
+    },
+    {
+      "name": "BIG-bench",
+      "type": "Concept",
+      "confidence": 0.9,
+      "description": "A benchmark suite recently released for evaluating AI models"
+    },
+    {
+      "name": "Reinforcement Learning from Human Feedback",
+      "type": "AIModel",
+      "confidence": 0.9,
+      "description": "A method used to finetune language models to act as helpful and harmless assistants"
+    },
+    {
+      "name": "Preference Modeling",
+      "type": "AIModel",
+      "confidence": 0.8,
+      "description": "Used in conjunction with RLHF for alignment training"
+    },
+    {
+      "name": "Flamingo",
+      "type": "AIModel",
+      "confidence": 0.9,
+      "description": "A Visual Language Model for Few-Shot Learning"
+    },
+    {
+      "name": "Imagen",
+      "type": "AIModel",
+      "confidence": 0.9,
+      "description": "A text-to-image diffusion model with high photorealism and language understanding"
+    },
+    {
+      "name": "T5",
+      "type": "AIModel",
+      "confidence": 0.8,
+      "description": "A large language model used for text encoding in Imagen"
+    },
+    {
+      "name": "COCO",
+      "type": "Concept",
+      "confidence": 0.7,
+      "description": "A dataset used to evaluate image quality and alignment"
+    },
+    {
+      "name": "DrawBench",
+      "type": "Technique",
+      "confidence": 0.8,
+      "description": "A benchmark for evaluating text-to-image models"
+    },
+    {
+      "name": "VQ-GAN+CLIP",
+      "type": "AIModel",
+      "confidence": 0.7,
+      "description": "A recent method compared against Imagen in the DrawBench benchmark"
+    },
+    {
+      "name": "DALL-E 2",
+      "type": "AIModel",
+      "confidence": 0.7,
+      "description": "A text-to-image generation model compared against Imagen"
+    },
+    {
+      "name": "FlashAttention",
+      "type": "AIModel",
+      "confidence": 0.9,
+      "description": "An IO-aware exact attention algorithm that reduces memory reads/writes between GPU high bandwidth memory (HBM) and on-chip SRAM."
+    },
+    {
+      "name": "Emergent Abilities",
+      "type": "Concept",
+      "confidence": 0.9,
+      "description": "An unpredictable phenomenon where certain abilities appear in larger language models but are absent in smaller ones."
+    },
+    {
+      "name": "ReAct",
+      "type": "AIModel",
+      "confidence": 0.9,
+      "description": "A method for interleaving reasoning and acting in language models"
+    },
+    {
+      "name": "LLMs",
+      "type": "Concept",
+      "confidence": 0.8,
+      "description": "Large Language Models"
+    },
+    {
+      "name": "action plan generation",
+      "type": "Technique",
+      "confidence": 0.8,
+      "description": "A method for generating task-specific actions"
+    },
+    {
+      "name": "HotpotQA",
+      "type": "Concept",
+      "confidence": 0.7,
+      "description": "A question answering benchmark"
+    },
+    {
+      "name": "Fever",
+      "type": "Concept",
+      "confidence": 0.7,
+      "description": "A fact verification benchmark"
+    },
+    {
+      "name": "ALFWorld",
+      "type": "Concept",
+      "confidence": 0.6,
+      "description": "An interactive decision making benchmark"
+    },
+    {
+      "name": "WebShop",
+      "type": "Concept",
+      "confidence": 0.6,
+      "description": "An interactive decision making benchmark"
+    },
+    {
+      "name": "Holistic Evaluation of Language Models",
+      "type": "AIModel",
+      "confidence": 0.8,
+      "description": "HELM is designed to improve the transparency of language models by taxonomizing use cases and metrics, and adopting a multi-metric approach to measure various aspects such as accuracy, calibration, robustness, fairness, bias, toxicity, and efficiency."
+    },
+    {
+      "name": "Constitutional AI",
+      "type": "AIModel",
+      "confidence": 0.8,
+      "description": "A method for training an AI assistant through self-improvement without human labels identifying harmful outputs, with oversight provided by a list of rules or principles."
+    },
+    {
+      "name": "harmless AI assistant",
+      "type": "AIEntity",
+      "confidence": 0.7,
+      "description": "An AI model trained to avoid harmful outputs through self-critique and revision processes."
+    },
+    {
+      "name": "Self-Instruct",
+      "type": "AIModel",
+      "confidence": 0.9,
+      "description": "A framework for improving instruction-following capabilities of pretrained language models"
+    },
+    {
+      "name": "Super-NaturalInstructions",
+      "type": "Concept",
+      "confidence": 0.8,
+      "description": "A dataset used to evaluate the performance of language models on new tasks"
+    },
+    {
+      "name": "InstructGPT-001",
+      "type": "AIModel",
+      "confidence": 0.9,
+      "description": "A model trained with private user data and human annotations"
+    },
+    {
+      "name": "GPT3",
+      "type": "AIModel",
+      "confidence": 0.85,
+      "description": "A pretrained language model used in the study"
+    },
+    {
+      "name": "yizhongw",
+      "type": "Person",
+      "confidence": 0.7,
+      "description": "The author of the paper"
+    },
+    {
+      "name": "GPTQ",
+      "type": "AIModel",
+      "confidence": 0.9,
+      "description": "A new one-shot weight quantization method for generative pre-trained transformers"
+    },
+    {
+      "name": "Generative Pre-trained Transformer",
+      "type": "AIModel",
+      "confidence": 0.8,
+      "description": "Models known as GPT or OPT, used for complex language modelling tasks"
+    },
+    {
+      "name": "speculative decoding",
+      "type": "AIModel",
+      "confidence": 0.8,
+      "description": "An algorithm to sample from autoregressive models faster without any changes to the outputs, by computing several tokens in parallel."
+    },
+    {
+      "name": "Transformers",
+      "type": "AIModel",
+      "confidence": 0.9,
+      "description": "A type of large autoregressive model used for inference."
+    },
+    {
+      "name": "Minerva",
+      "type": "AIModel",
+      "confidence": 0.9,
+      "description": "A large language model pretrained on general natural language data and further trained on technical content."
+    },
+    {
+      "name": "state-of-the-art models",
+      "type": "Concept",
+      "confidence": 0.7,
+      "description": "Refers to the current best-performing models in terms of performance on specific tasks."
+    },
+    {
+      "name": "quantitative reasoning",
+      "type": "Concept",
+      "confidence": 0.8,
+      "description": "The ability to solve problems involving numbers and mathematical concepts."
+    },
+    {
+      "name": "technical benchmarks",
+      "type": "Concept",
+      "confidence": 0.7,
+      "description": "Performance metrics or tests designed for technical tasks."
+    },
+    {
+      "name": "undergraduate-level problems",
+      "type": "Concept",
+      "confidence": 0.8,
+      "description": "Problems typically found in undergraduate courses across various scientific disciplines."
+    },
+    {
+      "name": "instruction finetuning",
+      "type": "AIModel",
+      "confidence": 0.9,
+      "description": "A method of training language models on a collection of datasets phrased as instructions"
+    },
+    {
+      "name": "Flan-PaLM 540B",
+      "type": "AIModel",
+      "confidence": 0.8,
+      "description": "An AI model that has been instruction-finetuned on 1,800 tasks and outperforms PaLM 540B by a large margin"
+    },
+    {
+      "name": "E5",
+      "type": "AIModel",
+      "confidence": 0.9,
+      "description": "A family of state-of-the-art text embeddings trained in a contrastive manner with weak supervision signals."
+    },
+    {
+      "name": "CCPairs",
+      "type": "Concept",
+      "confidence": 0.7,
+      "description": "A curated large-scale text pair dataset used for training E5."
+    },
+    {
+      "name": "BEIR",
+      "type": "Concept",
+      "confidence": 0.8,
+      "description": "A benchmark suite for evaluating retrieval models."
+    },
+    {
+      "name": "MTEB",
+      "type": "Concept",
+      "confidence": 0.8,
+      "description": "A benchmark suite for evaluating text embedding models."
+    },
+    {
+      "name": "BM25",
+      "type": "Technique",
+      "confidence": 0.7,
+      "description": "A retrieval model used as a baseline in the BEIR benchmark."
+    },
+    {
+      "name": "task vector",
+      "type": "AIModel",
+      "confidence": 0.8,
+      "description": "A direction in the weight space of a pre-trained model that improves performance on a specific task."
+    },
+    {
+      "name": "fine-tuning",
+      "type": "Technique",
+      "confidence": 0.7,
+      "description": "The process of adapting a pre-trained model for a specific downstream task through additional training."
+    },
+    {
+      "name": "Constitutional AI",
+      "type": "Concept",
+      "confidence": 0.9,
+      "description": "A method for training a harmless AI assistant through self-improvement and feedback without human labels identifying harmful outputs"
+    },
+    {
+      "name": "RL from AI Feedback (RLAIF)",
+      "type": "Technique",
+      "confidence": 0.8,
+      "description": "A reinforcement learning technique using AI preferences as the reward signal"
+    },
+    {
+      "name": "supervised learning",
+      "type": "Technique",
+      "confidence": 0.7,
+      "description": "A phase of training where the model is fine-tuned on revised responses"
+    },
+    {
+      "name": "reinforcement learning",
+      "type": "Technique",
+      "confidence": 0.8,
+      "description": "A phase of training where the model learns from a dataset of AI preferences evaluated by another model"
+    },
+    {
+      "name": "Large language models",
+      "type": "Concept",
+      "confidence": 0.9,
+      "description": "A general term for AI models capable of understanding and generating human-like text."
+    },
+    {
+      "name": "LMs",
+      "type": "AIModel",
+      "confidence": 0.8,
+      "description": "Abbreviation for Large language models."
+    },
+    {
+      "name": "in-context learning",
+      "type": "Concept",
+      "confidence": 0.9,
+      "description": "A method where a model learns to perform a new task by conditioning on input-label pairs without explicit training."
+    },
+    {
+      "name": "demonstrations",
+      "type": "Technique",
+      "confidence": 0.8,
+      "description": "Input-label pairs used for in-context learning."
+    },
+    {
+      "name": "ground truth demonstrations",
+      "type": "Technique",
+      "confidence": 0.8,
+      "description": "Demonstrations that are assumed to be correct or accurate."
+    },
+    {
+      "name": "randomly replacing labels in the demonstrations",
+      "type": "Technique",
+      "confidence": 0.7,
+      "description": "A method used to test the impact of label accuracy on model performance."
+    },
+    {
+      "name": "classification and multi-choce tasks",
+      "type": "Concept",
+      "confidence": 0.8,
+      "description": "Types of tasks that involve categorizing inputs into predefined categories or selecting multiple correct answers from a set of options."
+    },
+    {
+      "name": "models including GPT-3",
+      "type": "AIModel",
+      "confidence": 0.7,
+      "description": "A reference to various models, with GPT-3 being one of them."
+    },
+    {
+      "name": "self-consistency",
+      "type": "AIModel",
+      "confidence": 0.8,
+      "description": "A new decoding strategy proposed in this paper to improve chain-of-thought reasoning in language models by sampling diverse reasoning paths and selecting the most consistent answer."
+    },
+    {
+      "name": "few-shot learners",
+      "type": "Technique",
+      "confidence": 0.8,
+      "description": "A method where the model learns from a few examples"
+    },
+    {
+      "name": "chain of thought (CoT) prompting",
+      "type": "Technique",
+      "confidence": 0.9,
+      "description": "A technique for eliciting complex multi-step reasoning through step-by-step answer examples"
+    },
+    {
+      "name": "arithmetics",
+      "type": "Concept",
+      "confidence": 0.8,
+      "description": "Mathematical problems involving arithmetic operations"
+    },
+    {
+      "name": "symbolic reasoning",
+      "type": "Concept",
+      "confidence": 0.7,
+      "description": "Reasoning about abstract symbols and their relationships"
+    },
+    {
+      "name": "Last Letter",
+      "type": "Concept",
+      "confidence": 0.8,
+      "description": "A symbolic reasoning task"
+    },
+    {
+      "name": "Coin Flip",
+      "type": "Concept",
+      "confidence": 0.8,
+      "description": "A symbolic reasoning task"
+    },
+    {
+      "name": "Date Understanding",
+      "type": "Concept",
+      "confidence": 0.7,
+      "description": "A logical reasoning task"
+    },
+    {
+      "name": "Tracking Shuffled Objects",
+      "type": "Concept",
+      "confidence": 0.7,
+      "description": "A logical reasoning task"
+    },
+    {
+      "name": "MultiArith",
+      "type": "Concept",
+      "confidence": 0.8,
+      "description": "An arithmetic benchmark task"
+    },
+    {
+      "name": "GSM8K",
+      "type": "Concept",
+      "confidence": 0.8,
+      "description": "A symbolic reasoning benchmark task"
+    },
+    {
+      "name": "AQUA-RAT",
+      "type": "Concept",
+      "confidence": 0.7,
+      "description": "A logical reasoning benchmark task"
+    },
+    {
+      "name": "SVAMP",
+      "type": "Concept",
+      "confidence": 0.7,
+      "description": "A logical reasoning benchmark task"
+    },
+    {
+      "name": "InstructGPT model (text-davinci-002)",
+      "type": "AIModel",
+      "confidence": 0.9,
+      "description": "A large language model used in experiments"
+    },
+    {
+      "name": "CoT prompting",
+      "type": "Technique",
+      "confidence": 0.9,
+      "description": "Chain-of-thought prompting with two major paradigms"
+    },
+    {
+      "name": "attention",
+      "type": "Technique",
+      "confidence": 0.7,
+      "description": "A method for focusing on relevant information in the input"
+    },
+    {
+      "name": "Meta",
+      "type": "Organization",
+      "confidence": 0.8,
+      "description": "A technology company known for its work in AI research"
+    },
+    {
+      "name": "Amazon",
+      "type": "Organization",
+      "confidence": 0.9,
+      "description": "A company that develops Auto-CoT method"
+    },
+    {
+      "name": "Auto-CoT",
+      "type": "Technique",
+      "confidence": 0.95,
+      "description": "An automatic CoT prompting method proposed in the paper"
+    },
+    {
+      "name": "Automatic Prompt Engineer (APE)",
+      "type": "AIModel",
+      "confidence": 0.85,
+      "description": "A system for automatic instruction generation and selection"
+    },
+    {
+      "name": "human annotators",
+      "type": "Person",
+      "confidence": 0.8,
+      "description": "Individuals who manually create effective prompts for language models"
+    },
+    {
+      "name": "BLIP-2",
+      "type": "AIModel",
+      "confidence": 0.9,
+      "description": "A pre-training strategy for vision-language tasks"
+    },
+    {
+      "name": "Flamingo80B",
+      "type": "AIModel",
+      "confidence": 0.8,
+      "description": "A large language model used as a comparison"
+    },
+    {
+      "name": "VQAv2",
+      "type": "Concept",
+      "confidence": 0.7,
+      "description": "A vision-questions and answers dataset"
+    },
+    {
+      "name": "ControlNet",
+      "type": "AIModel",
+      "confidence": 0.9,
+      "description": "A neural network architecture to add spatial conditioning controls to large, pretrained text-to-image diffusion models."
+    },
+    {
+      "name": "Stable Diffusion",
+      "type": "AIModel",
+      "confidence": 0.8,
+      "description": "A text-to-image diffusion model used in the experiments."
+    },
+    {
+      "name": "LLaMA",
+      "type": "AIModel",
+      "confidence": 0.9,
+      "description": "A collection of foundation language models ranging from 7B to 65B parameters"
+    },
+    {
+      "name": "Chinchilla-70B",
+      "type": "AIModel",
+      "confidence": 0.8,
+      "description": "Competes with LLaMA-65B in performance"
+    },
+    {
+      "name": "PaLM-540B",
+      "type": "AIModel",
+      "confidence": 0.8,
+      "description": "Competes with LLaMA-65B in performance"
+    },
+    {
+      "name": "GPT-4",
+      "type": "AIModel",
+      "confidence": 0.9,
+      "description": "A large-scale, multimodal model which can accept image and text inputs and produce text outputs."
+    },
+    {
+      "name": "LLM",
+      "type": "Concept",
+      "confidence": 0.8,
+      "description": "Large Language Models"
+    },
+    {
+      "name": "LLaVA",
+      "type": "AIModel",
+      "confidence": 0.9,
+      "description": "Large Language and Vision Assistant"
+    },
+    {
+      "name": "Science QA",
+      "type": "Concept",
+      "confidence": 0.85,
+      "description": "A dataset for science question answering"
+    },
+    {
+      "name": "Tree of Thoughts",
+      "type": "AIModel",
+      "confidence": 0.8,
+      "description": "A new framework for language model inference that enables exploration over coherent units of text (thoughts) to solve problems"
+    },
+    {
+      "name": "Chain of Thought",
+      "type": "Approach",
+      "confidence": 0.7,
+      "description": "A popular prompting approach generalized by the Tree of Thoughts framework"
+    },
+    {
+      "name": "Llama 2",
+      "type": "AIModel",
+      "confidence": 0.9,
+      "description": "A collection of pretrained and fine-tuned large language models"
+    },
+    {
+      "name": "Llama 2-Chat",
+      "type": "AIModel",
+      "confidence": 0.9,
+      "description": "Fine-tuned LLMs optimized for dialogue use cases"
+    },
+    {
+      "name": "Mistral 7B",
+      "type": "AIModel",
+      "confidence": 0.9,
+      "description": "A 7-billion-parameter language model engineered for superior performance and efficiency"
+    },
+    {
+      "name": "Mistral 7B -- Instruct",
+      "type": "AIModel",
+      "confidence": 0.8,
+      "description": "A fine-tuned version of Mistral 7B designed to follow instructions"
+    },
+    {
+      "name": "Gemini",
+      "type": "AIModel",
+      "confidence": 0.9,
+      "description": "A family of multimodal models that includes Ultra, Pro, and Nano sizes."
+    },
+    {
+      "name": "Ultra",
+      "type": "AIModel",
+      "confidence": 0.8,
+      "description": "The most capable model in the Gemini family."
+    },
+    {
+      "name": "Pro",
+      "type": "AIModel",
+      "confidence": 0.8,
+      "description": "A size variant of the Gemini models."
+    },
+    {
+      "name": "Nano",
+      "type": "AIModel",
+      "confidence": 0.8,
+      "description": "A size variant of the Gemini models."
+    },
+    {
+      "name": "MMLU",
+      "type": "Concept",
+      "confidence": 0.7,
+      "description": "A benchmark for evaluating language understanding and reasoning abilities."
+    },
+    {
+      "name": "Google AI Studio",
+      "type": "Organization",
+      "confidence": 0.6,
+      "description": "A service mentioned in the context of Gemini model deployment."
+    },
+    {
+      "name": "Cloud Vertex AI",
+      "type": "Organization",
+      "confidence": 0.6,
+      "description": "Another service for deploying Gemini models."
+    },
+    {
+      "name": "HuggingGPT",
+      "type": "AIModel",
+      "confidence": 0.9,
+      "description": "An LLM-powered agent that leverages LLMs (e.g., ChatGPT) to connect various AI models."
+    },
+    {
+      "name": "ChatGPT",
+      "type": "AIModel",
+      "confidence": 0.8,
+      "description": "A large language model used in HuggingGPT for connecting different AI models."
+    },
+    {
+      "name": "LIMA",
+      "type": "AIModel",
+      "confidence": 0.9,
+      "description": "Less Is More for Alignment"
+    },
+    {
+      "name": "Voyager",
+      "type": "AIModel",
+      "confidence": 0.9,
+      "description": "An LLM-powered embodied lifelong learning agent in Minecraft"
+    },
+    {
+      "name": "Minecraft",
+      "type": "Concept",
+      "confidence": 0.7,
+      "description": "A video game environment for the agent to interact with"
+    },
+    {
+      "name": "Minedojo",
+      "type": "Organization",
+      "confidence": 0.6,
+      "description": "The organization that likely hosts the open-source codebase and prompts for Voyager"
+    },
+    {
+      "name": "Direct Preference Optimization",
+      "type": "AIModel",
+      "confidence": 0.7,
+      "description": "A method for gaining steerability in large-scale unsupervised language models"
+    },
+    {
+      "name": "MATH",
+      "type": "Concept",
+      "confidence": 0.8,
+      "description": "A challenging dataset for mathematical problems"
+    },
+    {
+      "name": "PRM800K",
+      "type": "AIModel",
+      "confidence": 0.7,
+      "description": "A dataset of 800,000 step-level human feedback labels used to train a reward model"
+    },
+    {
+      "name": "Activation-aware Weight Quantization",
+      "type": "AIModel",
+      "confidence": 0.9,
+      "description": "AWQ is a hardware-friendly approach for LLM low-bit weight-only quantization."
+    },
+    {
+      "name": "Falcon LLM",
+      "type": "AIModel",
+      "confidence": 0.8,
+      "description": "A large language model"
+    },
+    {
+      "name": "RefinedWeb Dataset",
+      "type": "Dataset",
+      "confidence": 0.9,
+      "description": "A dataset for training Falcon LLM using web data"
+    },
+    {
+      "name": "LLM-as-a-judge",
+      "type": "AIModel",
+      "confidence": 0.8,
+      "description": "A strong language model used to evaluate other models on open-ended questions."
+    },
+    {
+      "name": "Language Models Augmented with Long-Term Memory",
+      "type": "AIModel",
+      "confidence": 0.9,
+      "description": "A framework that enables LLMs to memorize long history"
+    },
+    {
+      "name": "LongMem",
+      "type": "AIModel",
+      "confidence": 0.9,
+      "description": "The proposed framework for augmenting language models with long-term memory"
+    },
+    {
+      "name": "LLMs",
+      "type": "AIModel",
+      "confidence": 0.8,
+      "description": "Existing large language models with input length limitations"
+    },
+    {
+      "name": "phi-1",
+      "type": "AIModel",
+      "confidence": 0.9,
+      "description": "A new large language model for code"
+    },
+    {
+      "name": "phi-1-base",
+      "type": "AIModel",
+      "confidence": 0.8,
+      "description": "The model before the finetuning stage on a dataset of coding exercises"
+    },
+    {
+      "name": "phi-1-small",
+      "type": "AIModel",
+      "confidence": 0.8,
+      "description": "A smaller model with 350M parameters trained with the same pipeline as phi-1"
+    },
+    {
+      "name": "Transformer",
+      "type": "Technique",
+      "confidence": 0.7,
+      "description": "The architecture used in phi-1"
+    },
+    {
+      "name": "GPT-3.5",
+      "type": "AIModel",
+      "confidence": 0.8,
+      "description": "Used for generating synthetic textbooks and exercises"
+    },
+    {
+      "name": "MBPP",
+      "type": "Concept",
+      "confidence": 0.8,
+      "description": "Another benchmark for evaluating code generation models"
+    },
+    {
+      "name": "Position Interpolation",
+      "type": "Technique",
+      "confidence": 0.9,
+      "description": "A method for extending the context window size of RoPE-based pretrained LLMs."
+    },
+    {
+      "name": "RoPE-based pretrained LLMs",
+      "type": "AIModel",
+      "confidence": 0.8,
+      "description": "Large Language Models that use Rotational Position Embedding."
+    },
+    {
+      "name": "LLaMA models",
+      "type": "AIModel",
+      "confidence": 0.9,
+      "description": "A family of large language models developed by Alibaba Cloud."
+    },
+    {
+      "name": "passkey retrieval",
+      "type": "Concept",
+      "confidence": 0.8,
+      "description": "The process of retrieving passkeys from long documents or contexts."
+    },
+    {
+      "name": "language modeling",
+      "type": "Concept",
+      "confidence": 0.9,
+      "description": "A task in natural language processing where the model predicts the next word in a sequence given the previous words."
+    },
+    {
+      "name": "long document summarization",
+      "type": "Concept",
+      "confidence": 0.8,
+      "description": "The process of creating a concise summary from a long document or text."
+    },
+    {
+      "name": "LLaMA 7B to 65B",
+      "type": "AIModel",
+      "confidence": 0.8,
+      "description": "A range of LLaMA models with different sizes, from 7 billion parameters to 65 billion parameters."
+    },
+    {
+      "name": "Lost in the Middle",
+      "type": "Concept",
+      "confidence": 0.7,
+      "description": "A concept about the performance of language models on tasks requiring long context"
+    },
+    {
+      "name": "multi-document question answering",
+      "type": "Concept",
+      "confidence": 0.8,
+      "description": "A task involving answering questions based on multiple documents"
+    },
+    {
+      "name": "key-value retrieval",
+      "type": "Concept",
+      "confidence": 0.75,
+      "description": "A task of retrieving key-value pairs from input contexts"
+    },
+    {
+      "name": "aligned language models",
+      "type": "Concept",
+      "confidence": 0.8,
+      "description": "Language models that have been aligned to prevent undesirable generation."
+    },
+    {
+      "name": "jailbreaks",
+      "type": "Concept",
+      "confidence": 0.7,
+      "description": "Attacks against large language models designed to bypass alignment measures."
+    },
+    {
+      "name": "LLM",
+      "type": "AIModel",
+      "confidence": 0.9,
+      "description": "Large Language Model."
+    },
+    {
+      "name": "Vicuna-7B and 13B",
+      "type": "AIModel",
+      "confidence": 0.8,
+      "description": "Specific models used in the research."
+    },
+    {
+      "name": "greedy and gradient-based search techniques",
+      "type": "Technique",
+      "confidence": 0.9,
+      "description": "Methods used to automatically generate adversarial suffixes."
+    },
+    {
+      "name": "adversarial attack suffix",
+      "type": "Concept",
+      "confidence": 0.8,
+      "description": "A sequence of text designed to induce objectionable content from aligned language models."
+    },
+    {
+      "name": "ToolLLM",
+      "type": "AIModel",
+      "confidence": 0.9,
+      "description": "A general tool-use framework for large language models"
+    },
+    {
+      "name": "ToolBench",
+      "type": "Concept",
+      "confidence": 0.8,
+      "description": "An instruction-tuning dataset for tool use constructed using ChatGPT"
+    },
+    {
+      "name": "RapidAPI Hub",
+      "type": "Organization",
+      "confidence": 0.7,
+      "description": "A platform for accessing and using APIs"
+    },
+    {
+      "name": "depth-first search-based decision tree algorithm",
+      "type": "Technique",
+      "confidence": 0.8,
+      "description": "A novel algorithm developed to enhance the reasoning capabilities of LLMs"
+    },
+    {
+      "name": "ToolEval",
+      "type": "Concept",
+      "confidence": 0.7,
+      "description": "An automatic evaluator for evaluating the tool-use capabilities of LLMs"
+    },
+    {
+      "name": "AutoGen",
+      "type": "AIModel",
+      "confidence": 0.9,
+      "description": "An open-source framework for building LLM applications via multiple agents that can converse with each other to accomplish tasks."
+    },
+    {
+      "name": "Instruction Tuning",
+      "type": "AIModelTechnique",
+      "confidence": 0.9,
+      "description": "A crucial technique to enhance the capabilities and controllability of large language models (LLMs) by further training them on a dataset consisting of (instruction, output) pairs in a supervised fashion."
+    },
+    {
+      "name": "YaRN",
+      "type": "Technique",
+      "confidence": 0.9,
+      "description": "A compute-efficient method to extend the context window of large language models"
+    },
+    {
+      "name": "Rotary Position Embeddings (RoPE)",
+      "type": "Concept",
+      "confidence": 0.85,
+      "description": "A technique for encoding positional information in transformer-based language models"
+    },
+    {
+      "name": "jquesnelle",
+      "type": "Person",
+      "confidence": 0.8,
+      "description": "The author who made the models available online"
+    },
+    {
+      "name": "OPRO",
+      "type": "Technique",
+      "confidence": 0.9,
+      "description": "Optimization by PROmpting"
+    },
+    {
+      "name": "large language models (LLMs)",
+      "type": "AIModel",
+      "confidence": 0.85,
+      "description": "A general term for advanced AI models used in optimization tasks"
+    },
+    {
+      "name": "linear regression",
+      "type": "Concept",
+      "confidence": 0.9,
+      "description": "A statistical method used to model the relationship between a dependent variable and one or more independent variables"
+    },
+    {
+      "name": "traveling salesman problems",
+      "type": "Concept",
+      "confidence": 0.85,
+      "description": "A classic optimization problem in computer science"
+    },
+    {
+      "name": "prompt optimization",
+      "type": "Technique",
+      "confidence": 0.9,
+      "description": "The process of finding instructions to maximize task accuracy using prompts"
+    },
+    {
+      "name": "Big-Bench Hard tasks",
+      "type": "Concept",
+      "confidence": 0.9,
+      "description": "A set of challenging tasks designed to test the capabilities of AI systems"
+    },
+    {
+      "name": "Google DeepMind",
+      "type": "Organization",
+      "confidence": 0.85,
+      "description": "The organization that hosts the code for OPRO"
+    },
+    {
+      "name": "TinyStories",
+      "type": "AIModel",
+      "confidence": 0.9,
+      "description": "A 10 million parameter model that can produce coherent English."
+    },
+    {
+      "name": "phi-1.5",
+      "type": "AIModel",
+      "confidence": 0.9,
+      "description": "A new 1.3 billion parameter model with performance on natural language tasks comparable to models 5x larger."
+    },
+    {
+      "name": "PagedAttention",
+      "type": "AIModel",
+      "confidence": 0.8,
+      "description": "An attention algorithm inspired by virtual memory and paging techniques in operating systems"
+    },
+    {
+      "name": "vLLM",
+      "type": "AIModel",
+      "confidence": 0.7,
+      "description": "An LLM serving system that achieves near-zero waste in KV cache memory and flexible sharing of KV cache"
+    },
+    {
+      "name": "Fine-tuning Aligned Language Models Compromises Safety",
+      "type": "Concept",
+      "confidence": 0.9,
+      "description": "A concept discussing the risks associated with fine-tuning language models."
+    },
+    {
+      "name": "GPT-3.5 Turbo",
+      "type": "AIModel",
+      "confidence": 0.8,
+      "description": "A model from OpenAI"
+    },
+    {
+      "name": "red teaming studies",
+      "type": "Technique",
+      "confidence": 0.7,
+      "description": "A method for security testing"
+    },
+    {
+      "name": "safety alignment infrastructures",
+      "type": "Concept",
+      "confidence": 0.8,
+      "description": "Systems designed to ensure the safety of AI models during inference."
+    }
+  ],
+  "relations": [
+    {
+      "type": "USES_TECHNIQUE",
+      "sourceId": "e1",
+      "targetId": "e2",
+      "confidence": 0.8
+    },
+    {
+      "type": "EVALUATED_ON",
+      "sourceId": "e1",
+      "targetId": "e3",
+      "confidence": 0.9
+    },
+    {
+      "type": "EVALUATED_ON",
+      "sourceId": "e1",
+      "targetId": "e4",
+      "confidence": 0.9
+    },
+    {
+      "type": "USES_TECHNIQUE",
+      "sourceId": "e5",
+      "targetId": "e6",
+      "confidence": 0.9
+    },
+    {
+      "type": "DEVELOPED_BY",
+      "sourceId": "e7",
+      "targetId": "e2",
+      "confidence": 0.9
+    },
+    {
+      "type": "RELATED_TO",
+      "sourceId": "e7",
+      "targetId": "e8",
+      "confidence": 0.8
+    },
+    {
+      "type": "RELATED_TO",
+      "sourceId": "e7",
+      "targetId": "e9",
+      "confidence": 0.8
+    },
+    {
+      "type": "RELATED_TO",
+      "sourceId": "e7",
+      "targetId": "e10",
+      "confidence": 0.8
+    },
+    {
+      "type": "DERIVED_FROM",
+      "sourceId": "e11",
+      "targetId": "e12",
+      "confidence": 0.8
+    },
+    {
+      "type": "RELATED_TO",
+      "sourceId": "e11",
+      "targetId": "e13",
+      "confidence": 0.7
+    },
+    {
+      "type": "USES_TECHNIQUE",
+      "sourceId": "e16",
+      "targetId": "e17",
+      "confidence": 0.8
+    },
+    {
+      "type": "EVALUATED_ON",
+      "sourceId": "e16",
+      "targetId": "e18",
+      "confidence": 0.9
+    },
+    {
+      "type": "DEVELOPED_BY",
+      "sourceId": "e15",
+      "targetId": "e16",
+      "confidence": 0.9
+    },
+    {
+      "type": "USES_TECHNIQUE",
+      "sourceId": "e20",
+      "targetId": "e5",
+      "confidence": 0.9
+    },
+    {
+      "type": "EVALUATED_ON",
+      "sourceId": "e20",
+      "targetId": "e21",
+      "confidence": 0.8
+    },
+    {
+      "type": "EVALUATED_ON",
+      "sourceId": "e20",
+      "targetId": "e22",
+      "confidence": 0.8
+    },
+    {
+      "type": "EVALuated_on",
+      "sourceId": "e20",
+      "targetId": "e23",
+      "confidence": 0.8
+    },
+    {
+      "type": "USES_TECHNIQUE",
+      "sourceId": "e24",
+      "targetId": "e25",
+      "confidence": 0.8
+    },
+    {
+      "type": "USES_TECHNIQUE",
+      "sourceId": "e27",
+      "targetId": "e34",
+      "confidence": 0.8
+    },
+    {
+      "type": "DERIVED_FROM",
+      "sourceId": "e27",
+      "targetId": "e28",
+      "confidence": 0.9
+    },
+    {
+      "type": "EVALUATED_ON",
+      "sourceId": "e27",
+      "targetId": "e30",
+      "confidence": 0.8
+    },
+    {
+      "type": "EVALUATED_ON",
+      "sourceId": "e27",
+      "targetId": "e31",
+      "confidence": 0.8
+    },
+    {
+      "type": "EVALUATED_ON",
+      "sourceId": "e27",
+      "targetId": "e32",
+      "confidence": 0.8
+    },
+    {
+      "type": "DERIVED_FROM",
+      "sourceId": "e27",
+      "targetId": "e33",
+      "confidence": 0.9
+    },
+    {
+      "type": "USES_TECHNIQUE",
+      "sourceId": "e35",
+      "targetId": "e36",
+      "confidence": 0.8
+    },
+    {
+      "type": "USES_TECHNIQUE",
+      "sourceId": "e37",
+      "targetId": "e41",
+      "confidence": 0.8
+    },
+    {
+      "type": "DERIVED_FROM",
+      "sourceId": "e37",
+      "targetId": "e38",
+      "confidence": 0.9
+    },
+    {
+      "type": "USES_TECHNIQUE",
+      "sourceId": "e37",
+      "targetId": "e40",
+      "confidence": 0.7
+    },
+    {
+      "type": "USED_BY",
+      "sourceId": "e39",
+      "targetId": "e37",
+      "confidence": 0.8
+    },
+    {
+      "type": "DERIVED_FROM",
+      "sourceId": "e38",
+      "targetId": "e37",
+      "confidence": 0.9
+    },
+    {
+      "type": "USE_IN",
+      "sourceId": "e37",
+      "targetId": "e40",
+      "confidence": 0.6
+    },
+    {
+      "type": "IMPROVES_PERFORMANCE_OF",
+      "sourceId": "e41",
+      "targetId": "e37",
+      "confidence": 0.8
+    },
+    {
+      "type": "USES_TECHNIQUE",
+      "sourceId": "e42",
+      "targetId": "e43",
+      "confidence": 0.9
+    },
+    {
+      "type": "DEVELOPED_BY",
+      "sourceId": "e46",
+      "targetId": "e45",
+      "confidence": 0.9
+    },
+    {
+      "type": "USES_TECHNIQUE",
+      "sourceId": "e46",
+      "targetId": "e46",
+      "confidence": 0.8
+    },
+    {
+      "type": "DERIVED_FROM",
+      "sourceId": "e47",
+      "targetId": "e44",
+      "confidence": 0.9
+    },
+    {
+      "type": "USES_TECHNIQUE",
+      "sourceId": "e46",
+      "targetId": "e48",
+      "confidence": 0.8
+    },
+    {
+      "type": "EVALUATED_ON",
+      "sourceId": "e46",
+      "targetId": "e49",
+      "confidence": 0.9
+    },
+    {
+      "type": "DEVELOPED_BY",
+      "sourceId": "e50",
+      "targetId": "e16",
+      "confidence": 0.9
+    },
+    {
+      "type": "DERIVED_FROM",
+      "sourceId": "e50",
+      "targetId": "e53",
+      "confidence": 0.8
+    },
+    {
+      "type": "USES_TECHNIQUE",
+      "sourceId": "e50",
+      "targetId": "e51",
+      "confidence": 0.9
+    },
+    {
+      "type": "EVALUATED_ON",
+      "sourceId": "e50",
+      "targetId": "e52",
+      "confidence": 0.9
+    },
+    {
+      "type": "POWERED_BY",
+      "sourceId": "e51",
+      "targetId": "e50",
+      "confidence": 0.8
+    },
+    {
+      "type": "SOLVES",
+      "sourceId": "e50",
+      "targetId": "e52",
+      "confidence": 0.7
+    },
+    {
+      "type": "SOLVES",
+      "sourceId": "e53",
+      "targetId": "e52",
+      "confidence": 0.1
+    },
+    {
+      "type": "SOLVES",
+      "sourceId": "e53",
+      "targetId": "e52",
+      "confidence": 0.8
+    },
+    {
+      "type": "USES_TECHNIQUE",
+      "sourceId": "e55",
+      "targetId": "e56",
+      "confidence": 0.9
+    },
+    {
+      "type": "DERIVED_FROM",
+      "sourceId": "e55",
+      "targetId": "e57",
+      "confidence": 0.8
+    },
+    {
+      "type": "EVALUATED_ON",
+      "sourceId": "e55",
+      "targetId": "e58",
+      "confidence": 0.9
+    },
+    {
+      "type": "EVALUATED_ON",
+      "sourceId": "e51",
+      "targetId": "e59",
+      "confidence": 0.8
+    },
+    {
+      "type": "DERIVED_FROM",
+      "sourceId": "e61",
+      "targetId": "e60",
+      "confidence": 0.7
+    },
+    {
+      "type": "RELATED_TO",
+      "sourceId": "e52",
+      "targetId": "e62",
+      "confidence": 0.8
+    },
+    {
+      "type": "RELATED_TO",
+      "sourceId": "e52",
+      "targetId": "e63",
+      "confidence": 0.8
+    },
+    {
+      "type": "RELATED_TO",
+      "sourceId": "e52",
+      "targetId": "e64",
+      "confidence": 0.8
+    },
+    {
+      "type": "RELATED_TO",
+      "sourceId": "e68",
+      "targetId": "e69",
+      "confidence": 0.8
+    },
+    {
+      "type": "RELATED_TO",
+      "sourceId": "e70",
+      "targetId": "e71",
+      "confidence": 0.8
+    },
+    {
+      "type": "DEVELOPED_BY",
+      "sourceId": "e72",
+      "targetId": "e39",
+      "confidence": 0.9
+    },
+    {
+      "type": "USES_TECHNIQUE",
+      "sourceId": "e72",
+      "targetId": "e73",
+      "confidence": 0.85
+    },
+    {
+      "type": "DERIVED_FROM",
+      "sourceId": "e72",
+      "targetId": "e16",
+      "confidence": 0.8
+    },
+    {
+      "type": "EVALUATED_ON",
+      "sourceId": "e72",
+      "targetId": "e17",
+      "confidence": 0.7
+    },
+    {
+      "type": "DEVELOPED_BY",
+      "sourceId": "e75",
+      "targetId": "e39",
+      "confidence": 0.8
+    },
+    {
+      "type": "PART_OF",
+      "sourceId": "e76",
+      "targetId": "e75",
+      "confidence": 0.9
+    },
+    {
+      "type": "USES_TECHNIQUE",
+      "sourceId": "e75",
+      "targetId": "e77",
+      "confidence": 0.8
+    },
+    {
+      "type": "USES_TECHNIQUE",
+      "sourceId": "e75",
+      "targetId": "e78",
+      "confidence": 0.8
+    },
+    {
+      "type": "DERIVED_FROM",
+      "sourceId": "e79",
+      "targetId": "e17",
+      "confidence": 0.7
+    },
+    {
+      "type": "EVALUATED_ON",
+      "sourceId": "e75",
+      "targetId": "e79",
+      "confidence": 0.6
+    },
+    {
+      "type": "USES_TECHNIQUE",
+      "sourceId": "e80",
+      "targetId": "e81",
+      "confidence": 0.9
+    },
+    {
+      "type": "DEVELOPED_BY",
+      "sourceId": "e83",
+      "targetId": "e37",
+      "confidence": 0.7
+    },
+    {
+      "type": "USES_TECHNIQUE",
+      "sourceId": "e83",
+      "targetId": "e86",
+      "confidence": 0.7
+    },
+    {
+      "type": "DERIVED_FROM",
+      "sourceId": "e83",
+      "targetId": "e84",
+      "confidence": 0.7
+    },
+    {
+      "type": "EVALUATED_ON",
+      "sourceId": "e83",
+      "targetId": "e85",
+      "confidence": 0.7
+    },
+    {
+      "type": "RELATED_TO",
+      "sourceId": "e83",
+      "targetId": "e87",
+      "confidence": 0.7
+    },
+    {
+      "type": "RELATED_TO",
+      "sourceId": "e83",
+      "targetId": "e88",
+      "confidence": 0.7
+    },
+    {
+      "type": "RELATED_TO",
+      "sourceId": "e90",
+      "targetId": "e69",
+      "confidence": 0.8
+    },
+    {
+      "type": "USES_TECHNIQUE",
+      "sourceId": "e91",
+      "targetId": "e68",
+      "confidence": 0.9
+    },
+    {
+      "type": "USES_TECHNIQUE",
+      "sourceId": "e91",
+      "targetId": "e93",
+      "confidence": 0.9
+    },
+    {
+      "type": "EVALUATED_ON",
+      "sourceId": "e91",
+      "targetId": "e94",
+      "confidence": 0.9
+    },
+    {
+      "type": "EVALuated_on",
+      "sourceId": "e91",
+      "targetId": "e95",
+      "confidence": 0.9
+    },
+    {
+      "type": "EVALuated_on",
+      "sourceId": "e91",
+      "targetId": "e96",
+      "confidence": 0.9
+    },
+    {
+      "type": "EVALuated_on",
+      "sourceId": "e91",
+      "targetId": "e97",
+      "confidence": 0.9
+    },
+    {
+      "type": "DEVELOPED_BY",
+      "sourceId": "e99",
+      "targetId": "e100",
+      "confidence": 0.9
+    },
+    {
+      "type": "DEVELOPED_BY",
+      "sourceId": "e101",
+      "targetId": "e105",
+      "confidence": 0.9
+    },
+    {
+      "type": "USES_TECHNIQUE",
+      "sourceId": "e101",
+      "targetId": "e102",
+      "confidence": 0.85
+    },
+    {
+      "type": "DERIVED_FROM",
+      "sourceId": "e103",
+      "targetId": "e101",
+      "confidence": 0.8
+    },
+    {
+      "type": "DERIVED_FROM",
+      "sourceId": "e104",
+      "targetId": "e101",
+      "confidence": 0.75
+    },
+    {
+      "type": "EVALUATED_ON",
+      "sourceId": "e101",
+      "targetId": "e102",
+      "confidence": 0.9
+    },
+    {
+      "type": "EVALUATED_ON",
+      "sourceId": "e103",
+      "targetId": "e104",
+      "confidence": 0.8
+    },
+    {
+      "type": "EVALUATED_ON",
+      "sourceId": "e101",
+      "targetId": "e103",
+      "confidence": 0.75
+    },
+    {
+      "type": "USES_TECHNIQUE",
+      "sourceId": "e106",
+      "targetId": "e107",
+      "confidence": 0.9
+    },
+    {
+      "type": "USES_TECHNIQUE",
+      "sourceId": "e108",
+      "targetId": "e109",
+      "confidence": 0.9
+    },
+    {
+      "type": "DEVELOPED_BY",
+      "sourceId": "e114",
+      "targetId": "e110",
+      "confidence": 0.8
+    },
+    {
+      "type": "USES_TECHNIQUE",
+      "sourceId": "e110",
+      "targetId": "e112",
+      "confidence": 0.9
+    },
+    {
+      "type": "EVALUATED_ON",
+      "sourceId": "e110",
+      "targetId": "e113",
+      "confidence": 0.9
+    },
+    {
+      "type": "RELATED_TO",
+      "sourceId": "e110",
+      "targetId": "e111",
+      "confidence": 0.8
+    },
+    {
+      "type": "USES_TECHNIQUE",
+      "sourceId": "e91",
+      "targetId": "e68",
+      "confidence": 0.9
+    },
+    {
+      "type": "USES_TECHNIQUE",
+      "sourceId": "e91",
+      "targetId": "e93",
+      "confidence": 0.9
+    },
+    {
+      "type": "EVALUATED_ON",
+      "sourceId": "e91",
+      "targetId": "e94",
+      "confidence": 0.9
+    },
+    {
+      "type": "EVALuated_on",
+      "sourceId": "e91",
+      "targetId": "e95",
+      "confidence": 0.9
+    },
+    {
+      "type": "EVALuated_on",
+      "sourceId": "e91",
+      "targetId": "e96",
+      "confidence": 0.9
+    },
+    {
+      "type": "EVALuated_on",
+      "sourceId": "e91",
+      "targetId": "e97",
+      "confidence": 0.9
+    },
+    {
+      "type": "USES_TECHNIQUE",
+      "sourceId": "e115",
+      "targetId": "e116",
+      "confidence": 0.8
+    },
+    {
+      "type": "DEVELOPED_BY",
+      "sourceId": "e117",
+      "targetId": "e118",
+      "confidence": 0.9
+    },
+    {
+      "type": "USES_TECHNIQUE",
+      "sourceId": "e117",
+      "targetId": "e121",
+      "confidence": 0.9
+    },
+    {
+      "type": "EVALUATED_ON",
+      "sourceId": "e117",
+      "targetId": "e119",
+      "confidence": 0.9
+    },
+    {
+      "type": "EVALUATED_ON",
+      "sourceId": "e117",
+      "targetId": "e120",
+      "confidence": 0.9
+    },
+    {
+      "type": "USES_TECHNIQUE",
+      "sourceId": "e122",
+      "targetId": "e123",
+      "confidence": 0.8
+    },
+    {
+      "type": "DEVELOPED_BY",
+      "sourceId": "e124",
+      "targetId": "e125",
+      "confidence": 0.8
+    },
+    {
+      "type": "USE_TECHNIQUE",
+      "sourceId": "e124",
+      "targetId": "e126",
+      "confidence": 0.9
+    },
+    {
+      "type": "USE_TECHNIQUE",
+      "sourceId": "e124",
+      "targetId": "e127",
+      "confidence": 0.9
+    },
+    {
+      "type": "USES_TECHNIQUE",
+      "sourceId": "e128",
+      "targetId": "e130",
+      "confidence": 0.9
+    },
+    {
+      "type": "USES_TECHNIQUE",
+      "sourceId": "e128",
+      "targetId": "e131",
+      "confidence": 0.9
+    },
+    {
+      "type": "DERIVED_FROM",
+      "sourceId": "e128",
+      "targetId": "e16",
+      "confidence": 0.9
+    },
+    {
+      "type": "EVALUATED_ON",
+      "sourceId": "e128",
+      "targetId": "e134",
+      "confidence": 0.9
+    },
+    {
+      "type": "USES_TECHNIQUE",
+      "sourceId": "e128",
+      "targetId": "e132",
+      "confidence": 0.9
+    },
+    {
+      "type": "USES_TECHNIQUE",
+      "sourceId": "e128",
+      "targetId": "e133",
+      "confidence": 0.9
+    },
+    {
+      "type": "DERIVED_FROM",
+      "sourceId": "e128",
+      "targetId": "e135",
+      "confidence": 0.9
+    },
+    {
+      "type": "USES_TECHNIQUE",
+      "sourceId": "e136",
+      "targetId": "e68",
+      "confidence": 0.9
+    },
+    {
+      "type": "USES_TECHNIQUE",
+      "sourceId": "e128",
+      "targetId": "e137",
+      "confidence": 0.9
+    },
+    {
+      "type": "USES_TECHNIQUE",
+      "sourceId": "e128",
+      "targetId": "e138",
+      "confidence": 0.9
+    },
+    {
+      "type": "DERIVED_FROM",
+      "sourceId": "e146",
+      "targetId": "e128",
+      "confidence": 0.9
+    },
+    {
+      "type": "EVALUATED_ON",
+      "sourceId": "e128",
+      "targetId": "e145",
+      "confidence": 0.9
+    },
+    {
+      "type": "RELATED_TO",
+      "sourceId": "e128",
+      "targetId": "e143",
+      "confidence": 0.9
+    },
+    {
+      "type": "RELATED_TO",
+      "sourceId": "e128",
+      "targetId": "e144",
+      "confidence": 0.9
+    },
+    {
+      "type": "USES_TECHNIQUE",
+      "sourceId": "e128",
+      "targetId": "e68",
+      "confidence": 0.9
+    },
+    {
+      "type": "USES_TECHNIQUE",
+      "sourceId": "e128",
+      "targetId": "e150",
+      "confidence": 0.9
+    },
+    {
+      "type": "DERIVED_FROM",
+      "sourceId": "e128",
+      "targetId": "e73",
+      "confidence": 0.8
+    },
+    {
+      "type": "USE_TECHNIQUE",
+      "sourceId": "e128",
+      "targetId": "e151",
+      "confidence": 0.8
+    },
+    {
+      "type": "EVALUATED_ON",
+      "sourceId": "e128",
+      "targetId": "e16",
+      "confidence": 0.9
+    },
+    {
+      "type": "DERIVED_FROM",
+      "sourceId": "e128",
+      "targetId": "e27",
+      "confidence": 0.7
+    },
+    {
+      "type": "RELATED_TO",
+      "sourceId": "e128",
+      "targetId": "e39",
+      "confidence": 0.8
+    },
+    {
+      "type": "RELATED_TO",
+      "sourceId": "e128",
+      "targetId": "e152",
+      "confidence": 0.8
+    },
+    {
+      "type": "RELATED_TO",
+      "sourceId": "e128",
+      "targetId": "e153",
+      "confidence": 0.8
+    },
+    {
+      "type": "USES_TECHNIQUE",
+      "sourceId": "e128",
+      "targetId": "e155",
+      "confidence": 0.9
+    },
+    {
+      "type": "DERIVED_FROM",
+      "sourceId": "e155",
+      "targetId": "e39",
+      "confidence": 0.7
+    },
+    {
+      "type": "EVALUATED_ON",
+      "sourceId": "e155",
+      "targetId": "e128",
+      "confidence": 0.8
+    },
+    {
+      "type": "RELATED_TO",
+      "sourceId": "e128",
+      "targetId": "e156",
+      "confidence": 0.6
+    },
+    {
+      "type": "DEVELOPED_BY",
+      "sourceId": "e157",
+      "targetId": "e159",
+      "confidence": 0.8
+    },
+    {
+      "type": "OUTPERFORMS",
+      "sourceId": "e157",
+      "targetId": "e158",
+      "confidence": 0.9
+    },
+    {
+      "type": "EVALUATED_ON",
+      "sourceId": "e157",
+      "targetId": "e159",
+      "confidence": 0.9
+    },
+    {
+      "type": "DEVELOPED_BY",
+      "sourceId": "e160",
+      "targetId": "e160",
+      "confidence": 0.9
+    },
+    {
+      "type": "USES_TECHNIQUE",
+      "sourceId": "e160",
+      "targetId": "e161",
+      "confidence": 0.8
+    },
+    {
+      "type": "DEVELOPED_BY",
+      "sourceId": "e162",
+      "targetId": "e39",
+      "confidence": 0.9
+    },
+    {
+      "type": "RELATED_TO",
+      "sourceId": "e162",
+      "targetId": "e16",
+      "confidence": 0.8
+    },
+    {
+      "type": "RELATED_TO",
+      "sourceId": "e162",
+      "targetId": "e163",
+      "confidence": 0.8
+    },
+    {
+      "type": "RELATED_TO",
+      "sourceId": "e162",
+      "targetId": "e164",
+      "confidence": 0.8
+    },
+    {
+      "type": "DEVELOPED_BY",
+      "sourceId": "e167",
+      "targetId": "e165",
+      "confidence": 0.9
+    },
+    {
+      "type": "USED_TECHNIQUE",
+      "sourceId": "e167",
+      "targetId": "e166",
+      "confidence": 0.8
+    },
+    {
+      "type": "EVALUATED_ON",
+      "sourceId": "e167",
+      "targetId": "e168",
+      "confidence": 0.7
+    },
+    {
+      "type": "DERIVED_FROM",
+      "sourceId": "e167",
+      "targetId": "e166",
+      "confidence": 0.8
+    },
+    {
+      "type": "DEVELOPED_BY",
+      "sourceId": "e169",
+      "targetId": "e170",
+      "confidence": 0.9
+    },
+    {
+      "type": "DEVELOPED_BY",
+      "sourceId": "e171",
+      "targetId": "e39",
+      "confidence": 0.9
+    },
+    {
+      "type": "DERIVED_FROM",
+      "sourceId": "e172",
+      "targetId": "e171",
+      "confidence": 0.8
+    },
+    {
+      "type": "DEVELOPED_BY",
+      "sourceId": "e173",
+      "targetId": "e174",
+      "confidence": 0.9
+    },
+    {
+      "type": "DERIVED_FROM",
+      "sourceId": "e174",
+      "targetId": "e173",
+      "confidence": 0.9
+    },
+    {
+      "type": "DEVELOPED_BY",
+      "sourceId": "e175",
+      "targetId": "e180",
+      "confidence": 0.9
+    },
+    {
+      "type": "PART_OF",
+      "sourceId": "e175",
+      "targetId": "e176",
+      "confidence": 0.9
+    },
+    {
+      "type": "PART_OF",
+      "sourceId": "e175",
+      "targetId": "e177",
+      "confidence": 0.9
+    },
+    {
+      "type": "PART_OF",
+      "sourceId": "e175",
+      "targetId": "e178",
+      "confidence": 0.9
+    },
+    {
+      "type": "EVALUATED_ON",
+      "sourceId": "e176",
+      "targetId": "e179",
+      "confidence": 0.9
+    },
+    {
+      "type": "EVALUATED_ON",
+      "sourceId": "e177",
+      "targetId": "e179",
+      "confidence": 0.9
+    },
+    {
+      "type": "EVALUATED_ON",
+      "sourceId": "e178",
+      "targetId": "e179",
+      "confidence": 0.9
+    },
+    {
+      "type": "DEVELOPED_BY",
+      "sourceId": "e182",
+      "targetId": "e183",
+      "confidence": 0.9
+    },
+    {
+      "type": "USES_TECHNIQUE",
+      "sourceId": "e165",
+      "targetId": "e73",
+      "confidence": 0.8
+    },
+    {
+      "type": "DERIVED_FROM",
+      "sourceId": "e162",
+      "targetId": "e39",
+      "confidence": 0.7
+    },
+    {
+      "type": "USES_TECHNIQUE",
+      "sourceId": "e165",
+      "targetId": "e39",
+      "confidence": 0.9
+    },
+    {
+      "type": "PART_OF",
+      "sourceId": "e165",
+      "targetId": "e162",
+      "confidence": 0.8
+    },
+    {
+      "type": "RELATED_TO",
+      "sourceId": "e17",
+      "targetId": "e165",
+      "confidence": 0.6
+    },
+    {
+      "type": "DEVELOPED_BY",
+      "sourceId": "e167",
+      "targetId": "e165",
+      "confidence": 0.9
+    },
+    {
+      "type": "USE_TECHNIQUE",
+      "sourceId": "e167",
+      "targetId": "e166",
+      "confidence": 0.8
+    },
+    {
+      "type": "EVALUATED_ON",
+      "sourceId": "e167",
+      "targetId": "e168",
+      "confidence": 0.7
+    },
+    {
+      "type": "DEVELOPED_BY",
+      "sourceId": "e184",
+      "targetId": "e162",
+      "confidence": 0.9
+    },
+    {
+      "type": "DEVELOPED_BY",
+      "sourceId": "e185",
+      "targetId": "e165",
+      "confidence": 0.9
+    },
+    {
+      "type": "USES_TECHNIQUE",
+      "sourceId": "e185",
+      "targetId": "e166",
+      "confidence": 0.9
+    },
+    {
+      "type": "PART_OF",
+      "sourceId": "e185",
+      "targetId": "e186",
+      "confidence": 0.9
+    },
+    {
+      "type": "USES_TECHNIQUE",
+      "sourceId": "e188",
+      "targetId": "e73",
+      "confidence": 0.9
+    },
+    {
+      "type": "USES_TECHNIQUE",
+      "sourceId": "e189",
+      "targetId": "e190",
+      "confidence": 0.7
+    },
+    {
+      "type": "USES_TECHNIQUE",
+      "sourceId": "e192",
+      "targetId": "e193",
+      "confidence": 0.8
+    },
+    {
+      "type": "DEVELOPED_BY",
+      "sourceId": "e195",
+      "targetId": "e39",
+      "confidence": 0.8
+    },
+    {
+      "type": "DERIVED_FROM",
+      "sourceId": "e196",
+      "targetId": "e195",
+      "confidence": 0.9
+    },
+    {
+      "type": "PART_OF",
+      "sourceId": "e197",
+      "targetId": "e195",
+      "confidence": 0.9
+    },
+    {
+      "type": "DEVELOPED_BY",
+      "sourceId": "e198",
+      "targetId": "e204",
+      "confidence": 0.9
+    },
+    {
+      "type": "USES_TECHNIQUE",
+      "sourceId": "e198",
+      "targetId": "e201",
+      "confidence": 0.9
+    },
+    {
+      "type": "DERIVED_FROM",
+      "sourceId": "e199",
+      "targetId": "e198",
+      "confidence": 0.9
+    },
+    {
+      "type": "DERIVED_FROM",
+      "sourceId": "e200",
+      "targetId": "e198",
+      "confidence": 0.9
+    },
+    {
+      "type": "EVALUATED_ON",
+      "sourceId": "e198",
+      "targetId": "e52",
+      "confidence": 0.9
+    },
+    {
+      "type": "EVALUATED_ON",
+      "sourceId": "e198",
+      "targetId": "e203",
+      "confidence": 0.9
+    },
+    {
+      "type": "USES_TECHNIQUE",
+      "sourceId": "e205",
+      "targetId": "e204",
+      "confidence": 0.9
+    },
+    {
+      "type": "DERIVED_FROM",
+      "sourceId": "e206",
+      "targetId": "e210",
+      "confidence": 0.8
+    },
+    {
+      "type": "EVALUATED_ON",
+      "sourceId": "e204",
+      "targetId": "e207",
+      "confidence": 0.9
+    },
+    {
+      "type": "EVALUATED_ON",
+      "sourceId": "e204",
+      "targetId": "e208",
+      "confidence": 0.9
+    },
+    {
+      "type": "EVALUATED_ON",
+      "sourceId": "e204",
+      "targetId": "e209",
+      "confidence": 0.9
+    },
+    {
+      "type": "RELATED_TO",
+      "sourceId": "e211",
+      "targetId": "e212",
+      "confidence": 0.8
+    },
+    {
+      "type": "RELATED_TO",
+      "sourceId": "e211",
+      "targetId": "e213",
+      "confidence": 0.8
+    },
+    {
+      "type": "EVALUATED_ON",
+      "sourceId": "e211",
+      "targetId": "e27",
+      "confidence": 0.9
+    },
+    {
+      "type": "EVALUATED_ON",
+      "sourceId": "e211",
+      "targetId": "e73",
+      "confidence": 0.9
+    },
+    {
+      "type": "USES_TECHNIQUE",
+      "sourceId": "e219",
+      "targetId": "e218",
+      "confidence": 0.9
+    },
+    {
+      "type": "DERIVED_FROM",
+      "sourceId": "e217",
+      "targetId": "e216",
+      "confidence": 0.85
+    },
+    {
+      "type": "RELATED_TO",
+      "sourceId": "e214",
+      "targetId": "e215",
+      "confidence": 0.8
+    },
+    {
+      "type": "EVALUATED_ON",
+      "sourceId": "e219",
+      "targetId": "e217",
+      "confidence": 0.95
+    },
+    {
+      "type": "DEVELOPED_BY",
+      "sourceId": "e220",
+      "targetId": "e162",
+      "confidence": 0.8
+    },
+    {
+      "type": "USE_TECHNIQUE",
+      "sourceId": "e220",
+      "targetId": "e223",
+      "confidence": 0.9
+    },
+    {
+      "type": "DERIVED_FROM",
+      "sourceId": "e220",
+      "targetId": "e221",
+      "confidence": 0.7
+    },
+    {
+      "type": "EVALUATED_ON",
+      "sourceId": "e220",
+      "targetId": "e224",
+      "confidence": 0.8
+    },
+    {
+      "type": "COLLECTED_BY",
+      "sourceId": "e221",
+      "targetId": "e222",
+      "confidence": 0.6
+    },
+    {
+      "type": "GENERATED_BY",
+      "sourceId": "e221",
+      "targetId": "e183",
+      "confidence": 0.5
+    },
+    {
+      "type": "USES_TECHNIQUE",
+      "sourceId": "e227",
+      "targetId": "e228",
+      "confidence": 0.9
+    },
+    {
+      "type": "DEVELOPED_BY",
+      "sourceId": "e227",
+      "targetId": "e162",
+      "confidence": 0.85
+    },
+    {
+      "type": "RELATED_TO",
+      "sourceId": "e227",
+      "targetId": "e229",
+      "confidence": 0.8
+    },
+    {
+      "type": "USES_TECHNIQUE",
+      "sourceId": "e230",
+      "targetId": "e231",
+      "confidence": 0.9
+    },
+    {
+      "type": "RELATED_TO",
+      "sourceId": "e230",
+      "targetId": "e232",
+      "confidence": 0.8
+    },
+    {
+      "type": "RELATED_TO",
+      "sourceId": "e230",
+      "targetId": "e233",
+      "confidence": 0.8
+    },
+    {
+      "type": "USE_TECHNIQUE",
+      "sourceId": "e234",
+      "targetId": "e230",
+      "confidence": 0.9
+    },
+    {
+      "type": "EVALUATED_ON",
+      "sourceId": "e230",
+      "targetId": "e146",
+      "confidence": 0.9
+    },
+    {
+      "type": "EVALUATED_ON",
+      "sourceId": "e230",
+      "targetId": "e235",
+      "confidence": 0.8
+    },
+    {
+      "type": "DEVELOPED_BY",
+      "sourceId": "e230",
+      "targetId": "e236",
+      "confidence": 0.7
+    },
+    {
+      "type": "DERIVED_FROM",
+      "sourceId": "e238",
+      "targetId": "e198",
+      "confidence": 0.9
+    },
+    {
+      "type": "DERIVED_FROM",
+      "sourceId": "e238",
+      "targetId": "e237",
+      "confidence": 0.9
+    },
+    {
+      "type": "USE_TECHNIQUE",
+      "sourceId": "e238",
+      "targetId": "e237",
+      "confidence": 0.9
+    },
+    {
+      "type": "USE_TECHNIQUE",
+      "sourceId": "e238",
+      "targetId": "e198",
+      "confidence": 0.9
+    },
+    {
+      "type": "PART_OF",
+      "sourceId": "e238",
+      "targetId": "Title: Textbooks Are All You Need II: phi-1.5 technical report",
+      "confidence": 0.9
+    },
+    {
+      "type": "USES_TECHNIQUE",
+      "sourceId": "e240",
+      "targetId": "e239",
+      "confidence": 0.8
+    },
+    {
+      "type": "DERIVED_FROM",
+      "sourceId": "e240",
+      "targetId": "e239",
+      "confidence": 0.9
+    },
+    {
+      "type": "DEVELOPED_BY",
+      "sourceId": "e241",
+      "targetId": "e152",
+      "confidence": 0.9
+    },
+    {
+      "type": "USES_TECHNIQUE",
+      "sourceId": "e241",
+      "targetId": "e39",
+      "confidence": 0.8
+    },
+    {
+      "type": "DERIVED_FROM",
+      "sourceId": "e241",
+      "targetId": "e242",
+      "confidence": 0.7
+    },
+    {
+      "type": "RELATED_TO",
+      "sourceId": "e241",
+      "targetId": "e162",
+      "confidence": 0.8
+    },
+    {
+      "type": "USES_TECHNIQUE",
+      "sourceId": "e241",
+      "targetId": "e243",
+      "confidence": 0.9
+    },
+    {
+      "type": "DERIVED_FROM",
+      "sourceId": "e241",
+      "targetId": "e27",
+      "confidence": 0.7
+    },
+    {
+      "type": "RELATED_TO",
+      "sourceId": "e241",
+      "targetId": "e45",
+      "confidence": 0.8
+    }
+  ],
+  "papers": [
+    {
+      "title": "Deep reinforcement learning from human preferences",
+      "arxivId": "1706.03741",
+      "year": 2017,
+      "category": "アラインメント・安全性"
+    },
+    {
+      "title": "Attention Is All You Need",
+      "arxivId": "1706.03762",
+      "year": 2017,
+      "category": "Transformer基盤"
+    },
+    {
+      "title": "BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding",
+      "arxivId": "1810.04805",
+      "year": 2018,
+      "category": "Transformer基盤"
+    },
+    {
+      "title": "Scaling Laws for Neural Language Models",
+      "arxivId": "2001.08361",
+      "year": 2020,
+      "category": "効率的学習・スケーリング"
+    },
+    {
+      "title": "Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks",
+      "arxivId": "2005.11401",
+      "year": 2020,
+      "category": "RAG・知識統合"
+    },
+    {
+      "title": "Language Models are Few-Shot Learners",
+      "arxivId": "2005.14165",
+      "year": 2020,
+      "category": "大規模言語モデル"
+    },
+    {
+      "title": "Denoising Diffusion Probabilistic Models",
+      "arxivId": "2006.11239",
+      "year": 2020,
+      "category": "拡散モデル・画像生成"
+    },
+    {
+      "title": "An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale",
+      "arxivId": "2010.11929",
+      "year": 2020,
+      "category": "Transformer基盤"
+    },
+    {
+      "title": "Array programming with NumPy",
+      "year": 2020,
+      "category": "Language Model"
+    },
+    {
+      "title": "Beyond Accuracy: Behavioral Testing of NLP Models with CheckList",
+      "year": 2020,
+      "category": "Evaluation"
+    },
+    {
+      "title": "BART: Denoising Sequence-to-Sequence Pre-training for Natural Language Generation, Translation, and Comprehension",
+      "year": 2020,
+      "category": "RAG"
+    },
+    {
+      "title": "Unsupervised Cross-lingual Representation Learning at Scale",
+      "year": 2020,
+      "category": "Architecture"
+    },
+    {
+      "title": "AutoPrompt: Eliciting Knowledge from Language Models with Automatically Generated Prompts",
+      "year": 2020,
+      "category": "RAG"
+    },
+    {
+      "title": "Consistency of a Recurrent Language Model With Respect to Incomplete Decoding",
+      "year": 2020,
+      "category": "Evaluation"
+    },
+    {
+      "title": "RealToxicityPrompts: Evaluating Neural Toxic Degeneration in Language Models",
+      "year": 2020,
+      "category": "Safety"
+    },
+    {
+      "title": "Switch Transformers: Scaling to Trillion Parameter Models with Simple and Efficient Sparsity",
+      "arxivId": "2101.03961",
+      "year": 2021,
+      "category": "効率的学習・スケーリング"
+    },
+    {
+      "title": "Learning Transferable Visual Models From Natural Language Supervision",
+      "arxivId": "2103.00020",
+      "year": 2021,
+      "category": "マルチモーダル"
+    },
+    {
+      "title": "LoRA: Low-Rank Adaptation of Large Language Models",
+      "arxivId": "2106.09685",
+      "year": 2021,
+      "category": "効率的学習・スケーリング"
+    },
+    {
+      "title": "Improving language models by retrieving from trillions of tokens",
+      "arxivId": "2112.04426",
+      "year": 2021,
+      "category": "RAG・知識統合"
+    },
+    {
+      "title": "High-Resolution Image Synthesis with Latent Diffusion Models",
+      "arxivId": "2112.10752",
+      "year": 2021,
+      "category": "拡散モデル・画像生成"
+    },
+    {
+      "title": "Highly accurate protein structure prediction with AlphaFold",
+      "year": 2021,
+      "category": "Science"
+    },
+    {
+      "title": "Societal Biases in Language Generation: Progress and Challenges",
+      "year": 2021,
+      "category": "Evaluation"
+    },
+    {
+      "title": "StereoSet: Measuring stereotypical bias in pretrained language models",
+      "year": 2021,
+      "category": "RAG"
+    },
+    {
+      "title": "The Power of Scale for Parameter-Efficient Prompt Tuning",
+      "year": 2021,
+      "category": "Vision"
+    },
+    {
+      "title": "RoFormer: Enhanced Transformer with Rotary Position Embedding",
+      "arxivId": "2104.09864",
+      "year": 2021,
+      "category": "LLM"
+    },
+    {
+      "title": "Train Short, Test Long: Attention with Linear Biases Enables Input Length Extrapolation",
+      "arxivId": "2108.12409",
+      "year": 2021,
+      "category": "LLM"
+    },
+    {
+      "title": "Evaluating Large Language Models Trained on Code",
+      "arxivId": "2107.03374",
+      "year": 2021,
+      "category": "LLM"
+    },
+    {
+      "title": "Pre-train, Prompt, and Predict: A Systematic Survey of Prompting Methods in Natural Language Processing",
+      "arxivId": "2107.13586",
+      "year": 2021,
+      "category": "promptEngineering"
+    },
+    {
+      "title": "Finetuned Language Models Are Zero-Shot Learners",
+      "arxivId": "2109.01652",
+      "year": 2021,
+      "category": "promptEngineering"
+    },
+    {
+      "title": "Chain-of-Thought Prompting Elicits Reasoning in Large Language Models",
+      "arxivId": "2201.11903",
+      "year": 2022,
+      "category": "プロンプティング・推論"
+    },
+    {
+      "title": "Training language models to follow instructions with human feedback",
+      "arxivId": "2203.02155",
+      "year": 2022,
+      "category": "アラインメント・安全性"
+    },
+    {
+      "title": "Training Compute-Optimal Large Language Models",
+      "arxivId": "2203.15556",
+      "year": 2022,
+      "category": "効率的学習・スケーリング"
+    },
+    {
+      "title": "PaLM: Scaling Language Modeling with Pathways",
+      "arxivId": "2204.02311",
+      "year": 2022,
+      "category": "大規模言語モデル"
+    },
+    {
+      "title": "Training a Helpful and Harmless Assistant with Reinforcement Learning from Human Feedback",
+      "arxivId": "2204.05862",
+      "year": 2022,
+      "category": "アラインメント・安全性"
+    },
+    {
+      "title": "Flamingo: a Visual Language Model for Few-Shot Learning",
+      "arxivId": "2204.14198",
+      "year": 2022,
+      "category": "マルチモーダル"
+    },
+    {
+      "title": "Photorealistic Text-to-Image Diffusion Models with Deep Language Understanding",
+      "arxivId": "2205.11487",
+      "year": 2022,
+      "category": "拡散モデル・画像生成"
+    },
+    {
+      "title": "FlashAttention: Fast and Memory-Efficient Exact Attention with IO-Awareness",
+      "arxivId": "2205.14135",
+      "year": 2022,
+      "category": "効率的学習・スケーリング"
+    },
+    {
+      "title": "Emergent Abilities of Large Language Models",
+      "arxivId": "2206.07682",
+      "year": 2022,
+      "category": "創発能力・評価"
+    },
+    {
+      "title": "ReAct: Synergizing Reasoning and Acting in Language Models",
+      "arxivId": "2210.03629",
+      "year": 2022,
+      "category": "プロンプティング・推論"
+    },
+    {
+      "title": "Holistic Evaluation of Language Models",
+      "arxivId": "2211.09110",
+      "year": 2022,
+      "category": "創発能力・評価"
+    },
+    {
+      "title": "Constitutional AI: Harmlessness from AI Feedback",
+      "arxivId": "2212.08073",
+      "year": 2022,
+      "category": "アラインメント・安全性"
+    },
+    {
+      "title": "Self-Instruct: Aligning Language Models with Self-Generated Instructions",
+      "arxivId": "2212.10560",
+      "year": 2022,
+      "category": "プロンプティング・推論"
+    },
+    {
+      "title": "AdapLeR: Speeding up Inference by Adaptive Length Reduction",
+      "year": 2022,
+      "category": "RLHF"
+    },
+    {
+      "title": "Cross-Task Generalization via Natural Language Crowdsourcing Instructions",
+      "year": 2022,
+      "category": "Efficient Training"
+    },
+    {
+      "title": "When is BERT Multilingual? Isolating Crucial Ingredients for Cross-lingual Transfer",
+      "year": 2022,
+      "category": "Prompting"
+    },
+    {
+      "title": "FlashAttention: Fast and Memory-Efficient Exact Attention with IO-Awareness",
+      "arxivId": "2205.14135",
+      "year": 2022,
+      "category": "LLM"
+    },
+    {
+      "title": "GPTQ: Accurate Post-Training Quantization for Generative Pre-trained Transformers",
+      "arxivId": "2210.17323",
+      "year": 2022,
+      "category": "LLM"
+    },
+    {
+      "title": "Fast Inference from Transformers via Speculative Decoding",
+      "arxivId": "2211.17192",
+      "year": 2022,
+      "category": "LLM"
+    },
+    {
+      "title": "Solving Quantitative Reasoning Problems with Language Models",
+      "arxivId": "2206.14858",
+      "year": 2022,
+      "category": "LLM"
+    },
+    {
+      "title": "ReAct: Synergizing Reasoning and Acting in Language Models",
+      "arxivId": "2210.03629",
+      "year": 2022,
+      "category": "LLM"
+    },
+    {
+      "title": "Scaling Instruction-Finetuned Language Models",
+      "arxivId": "2210.11416",
+      "year": 2022,
+      "category": "LLM"
+    },
+    {
+      "title": "Text Embeddings by Weakly-Supervised Contrastive Pre-training",
+      "arxivId": "2212.03533",
+      "year": 2022,
+      "category": "LLM"
+    },
+    {
+      "title": "Editing Models with Task Arithmetic",
+      "arxivId": "2212.04089",
+      "year": 2022,
+      "category": "LLM"
+    },
+    {
+      "title": "Constitutional AI: Harmlessness from AI Feedback",
+      "arxivId": "2212.08073",
+      "year": 2022,
+      "category": "LLM"
+    },
+    {
+      "title": "Rethinking the Role of Demonstrations: What Makes In-Context Learning Work?",
+      "arxivId": "2202.12837",
+      "year": 2022,
+      "category": "promptEngineering"
+    },
+    {
+      "title": "Self-Consistency Improves Chain of Thought Reasoning in Language Models",
+      "arxivId": "2203.11171",
+      "year": 2022,
+      "category": "reasoning"
+    },
+    {
+      "title": "Large Language Models are Zero-Shot Reasoners",
+      "arxivId": "2205.11916",
+      "year": 2022,
+      "category": "reasoning"
+    },
+    {
+      "title": "Automatic Chain of Thought Prompting in Large Language Models",
+      "arxivId": "2210.03493",
+      "year": 2022,
+      "category": "reasoning"
+    },
+    {
+      "title": "Large Language Models Are Human-Level Prompt Engineers",
+      "arxivId": "2211.01910",
+      "year": 2022,
+      "category": "promptEngineering"
+    },
+    {
+      "title": "BLIP-2: Bootstrapping Language-Image Pre-training with Frozen Image Encoders and Large Language Models",
+      "arxivId": "2301.12597",
+      "year": 2023,
+      "category": "マルチモーダル"
+    },
+    {
+      "title": "Adding Conditional Control to Text-to-Image Diffusion Models",
+      "arxivId": "2302.05543",
+      "year": 2023,
+      "category": "拡散モデル・画像生成"
+    },
+    {
+      "title": "LLaMA: Open and Efficient Foundation Language Models",
+      "arxivId": "2302.13971",
+      "year": 2023,
+      "category": "大規模言語モデル"
+    },
+    {
+      "title": "GPT-4 Technical Report",
+      "arxivId": "2303.08774",
+      "year": 2023,
+      "category": "創発能力・評価"
+    },
+    {
+      "title": "Visual Instruction Tuning",
+      "arxivId": "2304.08485",
+      "year": 2023,
+      "category": "マルチモーダル"
+    },
+    {
+      "title": "Tree of Thoughts: Deliberate Problem Solving with Large Language Models",
+      "arxivId": "2305.10601",
+      "year": 2023,
+      "category": "プロンプティング・推論"
+    },
+    {
+      "title": "Llama 2: Open Foundation and Fine-Tuned Chat Models",
+      "arxivId": "2307.09288",
+      "year": 2023,
+      "category": "大規模言語モデル"
+    },
+    {
+      "title": "Mistral 7B",
+      "arxivId": "2310.06825",
+      "year": 2023,
+      "category": "大規模言語モデル"
+    },
+    {
+      "title": "Gemini: A Family of Highly Capable Multimodal Models",
+      "arxivId": "2312.11805",
+      "year": 2023,
+      "category": "大規模言語モデル"
+    },
+    {
+      "title": "HuggingGPT: Solving AI Tasks with ChatGPT and its Friends in Hugging Face",
+      "arxivId": "2303.17580",
+      "year": 2023,
+      "category": "LLM"
+    },
+    {
+      "title": "Instruction Tuning with GPT-4",
+      "arxivId": "2304.03277",
+      "year": 2023,
+      "category": "LLM"
+    },
+    {
+      "title": "Visual Instruction Tuning",
+      "arxivId": "2304.08485",
+      "year": 2023,
+      "category": "LLM"
+    },
+    {
+      "title": "Tree of Thoughts: Deliberate Problem Solving with Large Language Models",
+      "arxivId": "2305.10601",
+      "year": 2023,
+      "category": "LLM"
+    },
+    {
+      "title": "LIMA: Less Is More for Alignment",
+      "arxivId": "2305.11206",
+      "year": 2023,
+      "category": "LLM"
+    },
+    {
+      "title": "Voyager: An Open-Ended Embodied Agent with Large Language Models",
+      "arxivId": "2305.16291",
+      "year": 2023,
+      "category": "LLM"
+    },
+    {
+      "title": "Direct Preference Optimization: Your Language Model is Secretly a Reward Model",
+      "arxivId": "2305.18290",
+      "year": 2023,
+      "category": "LLM"
+    },
+    {
+      "title": "Let's Verify Step by Step",
+      "arxivId": "2305.20050",
+      "year": 2023,
+      "category": "LLM"
+    },
+    {
+      "title": "AWQ: Activation-aware Weight Quantization for LLM Compression and Acceleration",
+      "arxivId": "2306.00978",
+      "year": 2023,
+      "category": "LLM"
+    },
+    {
+      "title": "The RefinedWeb Dataset for Falcon LLM: Outperforming Curated Corpora with Web Data, and Web Data Only",
+      "arxivId": "2306.01116",
+      "year": 2023,
+      "category": "LLM"
+    },
+    {
+      "title": "Orca: Progressive Learning from Complex Explanation Traces of GPT-4",
+      "arxivId": "2306.02707",
+      "year": 2023,
+      "category": "LLM"
+    },
+    {
+      "title": "Judging LLM-as-a-Judge with MT-Bench and Chatbot Arena",
+      "arxivId": "2306.05685",
+      "year": 2023,
+      "category": "LLM"
+    },
+    {
+      "title": "Augmenting Language Models with Long-Term Memory",
+      "arxivId": "2306.07174",
+      "year": 2023,
+      "category": "LLM"
+    },
+    {
+      "title": "Textbooks Are All You Need",
+      "arxivId": "2306.11644",
+      "year": 2023,
+      "category": "LLM"
+    },
+    {
+      "title": "Extending Context Window of Large Language Models via Positional Interpolation",
+      "arxivId": "2306.15595",
+      "year": 2023,
+      "category": "LLM"
+    },
+    {
+      "title": "Lost in the Middle: How Language Models Use Long Contexts",
+      "arxivId": "2307.03172",
+      "year": 2023,
+      "category": "LLM"
+    },
+    {
+      "title": "FlashAttention-2: Faster Attention with Better Parallelism and Work Partitioning",
+      "arxivId": "2307.08691",
+      "year": 2023,
+      "category": "LLM"
+    },
+    {
+      "title": "Universal and Transferable Adversarial Attacks on Aligned Language Models",
+      "arxivId": "2307.15043",
+      "year": 2023,
+      "category": "LLM"
+    },
+    {
+      "title": "ToolLLM: Facilitating Large Language Models to Master 16000+ Real-world APIs",
+      "arxivId": "2307.16789",
+      "year": 2023,
+      "category": "LLM"
+    },
+    {
+      "title": "AutoGen: Enabling Next-Gen LLM Applications via Multi-Agent Conversation",
+      "arxivId": "2308.08155",
+      "year": 2023,
+      "category": "LLM"
+    },
+    {
+      "title": "Instruction Tuning for Large Language Models: A Survey",
+      "arxivId": "2308.10792",
+      "year": 2023,
+      "category": "LLM"
+    },
+    {
+      "title": "YaRN: Efficient Context Window Extension of Large Language Models",
+      "arxivId": "2309.00071",
+      "year": 2023,
+      "category": "LLM"
+    },
+    {
+      "title": "Large Language Models as Optimizers",
+      "arxivId": "2309.03409",
+      "year": 2023,
+      "category": "LLM"
+    },
+    {
+      "title": "Textbooks Are All You Need II: phi-1.5 technical report",
+      "arxivId": "2309.05463",
+      "year": 2023,
+      "category": "LLM"
+    },
+    {
+      "title": "Efficient Memory Management for Large Language Model Serving with PagedAttention",
+      "arxivId": "2309.06180",
+      "year": 2023,
+      "category": "LLM"
+    },
+    {
+      "title": "Fine-tuning Aligned Language Models Compromises Safety, Even When Users Do Not Intend To!",
+      "arxivId": "2310.03693",
+      "year": 2023,
+      "category": "LLM"
+    },
+    {
+      "title": "Improved Baselines with Visual Instruction Tuning",
+      "arxivId": "2310.03744",
+      "year": 2023,
+      "category": "LLM"
+    },
+    {
+      "title": "Language Agent Tree Search Unifies Reasoning Acting and Planning in Language Models",
+      "arxivId": "2310.04406",
+      "year": 2023,
+      "category": "LLM"
+    },
+    {
+      "title": "Catastrophic Jailbreak of Open-source LLMs via Exploiting Generation",
+      "arxivId": "2310.06987",
+      "year": 2023,
+      "category": "LLM"
+    },
+    {
+      "title": "MemGPT: Towards LLMs as Operating Systems",
+      "arxivId": "2310.08560",
+      "year": 2023,
+      "category": "LLM"
+    },
+    {
+      "title": "BitNet: Scaling 1-bit Transformers for Large Language Models",
+      "arxivId": "2310.11453",
+      "year": 2023,
+      "category": "LLM"
+    },
+    {
+      "title": "Self-RAG: Learning to Retrieve, Generate, and Critique through Self-Reflection",
+      "arxivId": "2310.11511",
+      "year": 2023,
+      "category": "LLM"
+    },
+    {
+      "title": "A General Theoretical Paradigm to Understand Learning from Human Preferences",
+      "arxivId": "2310.12036",
+      "year": 2023,
+      "category": "LLM"
+    },
+    {
+      "title": "GPQA: A Graduate-Level Google-Proof Q&A Benchmark",
+      "arxivId": "2311.12022",
+      "year": 2023,
+      "category": "LLM"
+    },
+    {
+      "title": "Mamba: Linear-Time Sequence Modeling with Selective State Spaces",
+      "arxivId": "2312.00752",
+      "year": 2023,
+      "category": "LLM"
+    },
+    {
+      "title": "Retrieval-Augmented Generation for Large Language Models: A Survey",
+      "arxivId": "2312.10997",
+      "year": 2023,
+      "category": "LLM"
+    },
+    {
+      "title": "Gemini: A Family of Highly Capable Multimodal Models",
+      "arxivId": "2312.11805",
+      "year": 2023,
+      "category": "LLM"
+    },
+    {
+      "title": "REPLUG: Retrieval-Augmented Black-Box Language Models",
+      "arxivId": "2301.12652",
+      "year": 2023,
+      "category": "LLM"
+    },
+    {
+      "title": "Accelerating Large Language Model Decoding with Speculative Sampling",
+      "arxivId": "2302.01318",
+      "year": 2023,
+      "category": "LLM"
+    },
+    {
+      "title": "A Prompt Pattern Catalog to Enhance Prompt Engineering with ChatGPT",
+      "arxivId": "2302.11382",
+      "year": 2023,
+      "category": "LLM"
+    },
+    {
+      "title": "Learning to Compress Prompts with Gist Tokens",
+      "arxivId": "2304.08467",
+      "year": 2023,
+      "category": "LLM"
+    },
+    {
+      "title": "WizardLM: Empowering large pre-trained language models to follow complex instructions",
+      "arxivId": "2304.12244",
+      "year": 2023,
+      "category": "LLM"
+    },
+    {
+      "title": "FrugalGPT: How to Use Large Language Models While Reducing Cost and Improving Performance",
+      "arxivId": "2305.05176",
+      "year": 2023,
+      "category": "LLM"
+    },
+    {
+      "title": "StarCoder: may the source be with you!",
+      "arxivId": "2305.06161",
+      "year": 2023,
+      "category": "LLM"
+    },
+    {
+      "title": "SpeechGPT: Empowering Large Language Models with Intrinsic Cross-Modal Conversational Abilities",
+      "arxivId": "2305.11000",
+      "year": 2023,
+      "category": "LLM"
+    },
+    {
+      "title": "Enhancing Chat Language Models by Scaling High-quality Instructional Conversations",
+      "arxivId": "2305.14233",
+      "year": 2023,
+      "category": "LLM"
+    },
+    {
+      "title": "Query Rewriting for Retrieval-Augmented Large Language Models",
+      "arxivId": "2305.14283",
+      "year": 2023,
+      "category": "LLM"
+    },
+    {
+      "title": "QLoRA: Efficient Finetuning of Quantized LLMs",
+      "arxivId": "2305.14314",
+      "year": 2023,
+      "category": "LLM"
+    },
+    {
+      "title": "Improving Factuality and Reasoning in Language Models through Multiagent Debate",
+      "arxivId": "2305.14325",
+      "year": 2023,
+      "category": "LLM"
+    },
+    {
+      "title": "Reasoning with Language Model is Planning with World Model",
+      "arxivId": "2305.14992",
+      "year": 2023,
+      "category": "LLM"
+    },
+    {
+      "title": "Spoken Question Answering and Speech Continuation Using Spectrogram-Powered LLM",
+      "arxivId": "2305.15255",
+      "year": 2023,
+      "category": "LLM"
+    },
+    {
+      "title": "TIES-Merging: Resolving Interference When Merging Models",
+      "arxivId": "2306.01708",
+      "year": 2023,
+      "category": "LLM"
+    },
+    {
+      "title": "Video-LLaMA: An Instruction-tuned Audio-Visual Language Model for Video Understanding",
+      "arxivId": "2306.02858",
+      "year": 2023,
+      "category": "LLM"
+    },
+    {
+      "title": "Can Large Language Models Infer Causation from Correlation?",
+      "arxivId": "2306.05836",
+      "year": 2023,
+      "category": "LLM"
+    },
+    {
+      "title": "MiniLLM: Knowledge Distillation of Large Language Models",
+      "arxivId": "2306.08543",
+      "year": 2023,
+      "category": "LLM"
+    },
+    {
+      "title": "Explore, Establish, Exploit: Red Teaming Language Models from Scratch",
+      "arxivId": "2306.09442",
+      "year": 2023,
+      "category": "LLM"
+    },
+    {
+      "title": "AudioPaLM: A Large Language Model That Can Speak and Listen",
+      "arxivId": "2306.12925",
+      "year": 2023,
+      "category": "LLM"
+    },
+    {
+      "title": "Llama 2: Open Foundation and Fine-Tuned Chat Models",
+      "arxivId": "2307.09288",
+      "year": 2023,
+      "category": "LLM"
+    },
+    {
+      "title": "The Hitchhiker's Guide to Program Analysis: A Journey with Large Language Models",
+      "arxivId": "2308.00245",
+      "year": 2023,
+      "category": "LLM"
+    },
+    {
+      "title": "Continual Pre-Training of Large Language Models: How to (re)warm your model?",
+      "arxivId": "2308.04014",
+      "year": 2023,
+      "category": "LLM"
+    },
+    {
+      "title": "Self-Alignment with Instruction Backtranslation",
+      "arxivId": "2308.06259",
+      "year": 2023,
+      "category": "LLM"
+    },
+    {
+      "title": "OctoPack: Instruction Tuning Code Large Language Models",
+      "arxivId": "2308.07124",
+      "year": 2023,
+      "category": "LLM"
+    },
+    {
+      "title": "WizardMath: Empowering Mathematical Reasoning for Large Language Models via Reinforced Evol-Instruct",
+      "arxivId": "2308.09583",
+      "year": 2023,
+      "category": "LLM"
+    },
+    {
+      "title": "Code Llama: Open Foundation Models for Code",
+      "arxivId": "2308.12950",
+      "year": 2023,
+      "category": "LLM"
+    },
+    {
+      "title": "MAmmoTH: Building Math Generalist Models through Hybrid Instruction Tuning",
+      "arxivId": "2309.05653",
+      "year": 2023,
+      "category": "LLM"
+    },
+    {
+      "title": "Efficient Memory Management for Large Language Model Serving with PagedAttention",
+      "arxivId": "2309.06180",
+      "year": 2023,
+      "category": "LLM"
+    },
+    {
+      "title": "Large Language Models for Compiler Optimization",
+      "arxivId": "2309.07062",
+      "year": 2023,
+      "category": "LLM"
+    },
+    {
+      "title": "RAIN: Your Language Models Can Align Themselves without Finetuning",
+      "arxivId": "2309.07124",
+      "year": 2023,
+      "category": "LLM"
+    },
+    {
+      "title": "Adapting Large Language Models to Domains via Reading Comprehension",
+      "arxivId": "2309.09530",
+      "year": 2023,
+      "category": "LLM"
+    },
+    {
+      "title": "MetaMath: Bootstrap Your Own Mathematical Questions for Large Language Models",
+      "arxivId": "2309.12284",
+      "year": 2023,
+      "category": "LLM"
+    },
+    {
+      "title": "Promptbreeder: Self-Referential Self-Improvement Via Prompt Evolution",
+      "arxivId": "2309.16797",
+      "year": 2023,
+      "category": "LLM"
+    },
+    {
+      "title": "Making Retrieval-Augmented Language Models Robust to Irrelevant Context",
+      "arxivId": "2310.01558",
+      "year": 2023,
+      "category": "LLM"
+    },
+    {
+      "title": "Compressing Context to Enhance Inference Efficiency of Large Language Models",
+      "arxivId": "2310.06201",
+      "year": 2023,
+      "category": "LLM"
+    },
+    {
+      "title": "Mistral 7B",
+      "arxivId": "2310.06825",
+      "year": 2023,
+      "category": "LLM"
+    },
+    {
+      "title": "Retrieve Anything To Augment Large Language Models",
+      "arxivId": "2310.07554",
+      "year": 2023,
+      "category": "LLM"
+    },
+    {
+      "title": "Jailbreaking Black Box Large Language Models in Twenty Queries",
+      "arxivId": "2310.08419",
+      "year": 2023,
+      "category": "LLM"
+    },
+    {
+      "title": "Llemma: An Open Language Model For Mathematics",
+      "arxivId": "2310.10631",
+      "year": 2023,
+      "category": "LLM"
+    },
+    {
+      "title": "Zephyr: Direct Distillation of LM Alignment",
+      "arxivId": "2310.16944",
+      "year": 2023,
+      "category": "LLM"
+    },
+    {
+      "title": "MM-VID: Advancing Video Understanding with GPT-4V(ision)",
+      "arxivId": "2310.19773",
+      "year": 2023,
+      "category": "LLM"
+    },
+    {
+      "title": "FlashDecoding++: Faster Large Language Model Inference on GPUs",
+      "arxivId": "2311.01282",
+      "year": 2023,
+      "category": "LLM"
+    },
+    {
+      "title": "Language Models are Super Mario: Absorbing Abilities from Homologous Models as a Free Lunch",
+      "arxivId": "2311.03099",
+      "year": 2023,
+      "category": "LLM"
+    },
+    {
+      "title": "Video-LLaVA: Learning United Visual Representation by Alignment Before Projection",
+      "arxivId": "2311.10122",
+      "year": 2023,
+      "category": "LLM"
+    },
+    {
+      "title": "Orca 2: Teaching Small Language Models How to Reason",
+      "arxivId": "2311.11045",
+      "year": 2023,
+      "category": "LLM"
+    },
+    {
+      "title": "LM-Cocktail: Resilient Tuning of Language Models via Model Merging",
+      "arxivId": "2311.13534",
+      "year": 2023,
+      "category": "LLM"
+    },
+    {
+      "title": "Gemini: A Family of Highly Capable Multimodal Models",
+      "arxivId": "2312.11805",
+      "year": 2023,
+      "category": "LLM"
+    },
+    {
+      "title": "Improving Text Embeddings with Large Language Models",
+      "arxivId": "2401.00368",
+      "year": 2023,
+      "category": "LLM"
+    },
+    {
+      "title": "Toolformer: Language Models Can Teach Themselves to Use Tools",
+      "arxivId": "2302.04761",
+      "year": 2023,
+      "category": "autonomousAgents"
+    },
+    {
+      "title": "ChatGPT Prompt Patterns for Improving Code Quality, Refactoring, Requirements Elicitation, and Software Design",
+      "arxivId": "2303.07839",
+      "year": 2023,
+      "category": "promptEngineering"
+    },
+    {
+      "title": "Reflexion: Language Agents with Verbal Reinforcement Learning",
+      "arxivId": "2303.11366",
+      "year": 2023,
+      "category": "autonomousAgents"
+    },
+    {
+      "title": "CAMEL: Communicative Agents for \"Mind\" Exploration of Large Language Model Society",
+      "arxivId": "2303.17760",
+      "year": 2023,
+      "category": "autonomousAgents"
+    },
+    {
+      "title": "Generative Agents: Interactive Simulacra of Human Behavior",
+      "arxivId": "2304.03442",
+      "year": 2023,
+      "category": "multiAgent"
+    },
+    {
+      "title": "Tool Learning with Foundation Models",
+      "arxivId": "2304.08354",
+      "year": 2023,
+      "category": "autonomousAgents"
+    },
+    {
+      "title": "Automatic Prompt Optimization with \"Gradient Descent\" and Beam Search",
+      "arxivId": "2305.03495",
+      "year": 2023,
+      "category": "promptEngineering"
+    },
+    {
+      "title": "OlaGPT: Empowering LLMs With Human-like Problem-Solving Abilities",
+      "arxivId": "2305.16334",
+      "year": 2023,
+      "category": "autonomousAgents"
+    },
+    {
+      "title": "Encouraging Divergent Thinking in Large Language Models through Multi-Agent Debate",
+      "arxivId": "2305.19118",
+      "year": 2023,
+      "category": "multiAgent"
+    },
+    {
+      "title": "ChatDev: Communicative Agents for Software Development",
+      "arxivId": "2307.07924",
+      "year": 2023,
+      "category": "multiAgent"
+    },
+    {
+      "title": "WebArena: A Realistic Web Environment for Building Autonomous Agents",
+      "arxivId": "2307.13854",
+      "year": 2023,
+      "category": "autonomousAgents"
+    },
+    {
+      "title": "MetaGPT: Meta Programming for A Multi-Agent Collaborative Framework",
+      "arxivId": "2308.00352",
+      "year": 2023,
+      "category": "multiAgent"
+    },
+    {
+      "title": "Graph of Thoughts: Solving Elaborate Problems with Large Language Models",
+      "arxivId": "2308.09687",
+      "year": 2023,
+      "category": "reasoning"
+    },
+    {
+      "title": "A Survey on Large Language Model based Autonomous Agents",
+      "arxivId": "2308.11432",
+      "year": 2023,
+      "category": "autonomousAgents"
+    },
+    {
+      "title": "The Rise and Potential of Large Language Model Based Agents: A Survey",
+      "arxivId": "2309.07864",
+      "year": 2023,
+      "category": "multiAgent"
+    },
+    {
+      "title": "Agents: An Open-source Framework for Autonomous Language Agents",
+      "arxivId": "2309.07870",
+      "year": 2023,
+      "category": "autonomousAgents"
+    },
+    {
+      "title": "Large Language Models Cannot Self-Correct Reasoning Yet",
+      "arxivId": "2310.01798",
+      "year": 2023,
+      "category": "reasoning"
+    },
+    {
+      "title": "Exploring Collaboration Mechanisms for LLM Agents: A Social Psychology View",
+      "arxivId": "2310.02124",
+      "year": 2023,
+      "category": "multiAgent"
+    },
+    {
+      "title": "Amortizing intractable inference in large language models",
+      "arxivId": "2310.04363",
+      "year": 2023,
+      "category": "autonomousAgents"
+    },
+    {
+      "title": "Eureka: Human-Level Reward Design via Coding Large Language Models",
+      "arxivId": "2310.12931",
+      "year": 2023,
+      "category": "autonomousAgents"
+    },
+    {
+      "title": "A Survey on Hallucination in Large Language Models: Principles, Taxonomy, Challenges, and Open Questions",
+      "arxivId": "2311.05232",
+      "year": 2023,
+      "category": "reasoning"
+    },
+    {
+      "title": "Autonomous Large Language Model Agents Enabling Intent-Driven Mobile GUI Testing",
+      "arxivId": "2311.08649",
+      "year": 2023,
+      "category": "multiAgent"
+    },
+    {
+      "title": "Can Generalist Foundation Models Outcompete Special-Purpose Tuning? Case Study in Medicine",
+      "arxivId": "2311.16452",
+      "year": 2023,
+      "category": "promptEngineering"
+    },
+    {
+      "title": "Beyond Human Data: Scaling Self-Training for Problem-Solving with Language Models",
+      "arxivId": "2312.06585",
+      "year": 2023,
+      "category": "autonomousAgents"
+    },
+    {
+      "title": "Experiential Co-Learning of Software-Developing Agents",
+      "arxivId": "2312.17025",
+      "year": 2023,
+      "category": "multiAgent"
+    },
+    {
+      "title": "Mixtral of Experts",
+      "arxivId": "2401.04088",
+      "year": 2024,
+      "category": "大規模言語モデル"
+    },
+    {
+      "title": "From Local to Global: A Graph RAG Approach to Query-Focused Summarization",
+      "arxivId": "2404.16130",
+      "year": 2024,
+      "category": "RAG・知識統合"
+    },
+    {
+      "title": "LLM Maybe LongLM: Self-Extend LLM Context Window Without Tuning",
+      "arxivId": "2401.01325",
+      "year": 2024,
+      "category": "LLM"
+    },
+    {
+      "title": "MoE-Mamba: Efficient Selective State Space Models with Mixture of Experts",
+      "arxivId": "2401.04081",
+      "year": 2024,
+      "category": "LLM"
+    },
+    {
+      "title": "Mixtral of Experts",
+      "arxivId": "2401.04088",
+      "year": 2024,
+      "category": "LLM"
+    },
+    {
+      "title": "DeepSeekMoE: Towards Ultimate Expert Specialization in Mixture-of-Experts Language Models",
+      "arxivId": "2401.06066",
+      "year": 2024,
+      "category": "LLM"
+    },
+    {
+      "title": "Self-Rewarding Language Models",
+      "arxivId": "2401.10020",
+      "year": 2024,
+      "category": "LLM"
+    },
+    {
+      "title": "RAPTOR: Recursive Abstractive Processing for Tree-Organized Retrieval",
+      "arxivId": "2401.18059",
+      "year": 2024,
+      "category": "LLM"
+    },
+    {
+      "title": "KTO: Model Alignment as Prospect Theoretic Optimization",
+      "arxivId": "2402.01306",
+      "year": 2024,
+      "category": "LLM"
+    },
+    {
+      "title": "Understanding Reasoning Ability of Language Models From the Perspective of Reasoning Paths Aggregation",
+      "arxivId": "2402.03268",
+      "year": 2024,
+      "category": "LLM"
+    },
+    {
+      "title": "RAG-Fusion: a New Take on Retrieval-Augmented Generation",
+      "arxivId": "2402.03367",
+      "year": 2024,
+      "category": "LLM"
+    },
+    {
+      "title": "Scaling Laws for Fine-Grained Mixture of Experts",
+      "arxivId": "2402.07871",
+      "year": 2024,
+      "category": "LLM"
+    },
+    {
+      "title": "World Model on Million-Length Video And Language With Blockwise RingAttention",
+      "arxivId": "2402.08268",
+      "year": 2024,
+      "category": "LLM"
+    },
+    {
+      "title": "Efficient Multimodal Learning from Data-centric Perspective",
+      "arxivId": "2402.11530",
+      "year": 2024,
+      "category": "LLM"
+    },
+    {
+      "title": "The Era of 1-bit LLMs: All Large Language Models are in 1.58 Bits",
+      "arxivId": "2402.17764",
+      "year": 2024,
+      "category": "LLM"
+    },
+    {
+      "title": "Data Interpreter: An LLM Agent For Data Science",
+      "arxivId": "2402.18679",
+      "year": 2024,
+      "category": "LLM"
+    },
+    {
+      "title": "ORPO: Monolithic Preference Optimization without Reference Model",
+      "arxivId": "2403.07691",
+      "year": 2024,
+      "category": "LLM"
+    },
+    {
+      "title": "Gemma: Open Models Based on Gemini Research and Technology",
+      "arxivId": "2403.08295",
+      "year": 2024,
+      "category": "LLM"
+    },
+    {
+      "title": "MM1: Methods, Analysis & Insights from Multimodal LLM Pre-training",
+      "arxivId": "2403.09611",
+      "year": 2024,
+      "category": "LLM"
+    },
+    {
+      "title": "RewardBench: Evaluating Reward Models for Language Modeling",
+      "arxivId": "2403.13787",
+      "year": 2024,
+      "category": "LLM"
+    },
+    {
+      "title": "A Survey on Retrieval-Augmented Text Generation for Large Language Models",
+      "arxivId": "2404.10981",
+      "year": 2024,
+      "category": "LLM"
+    },
+    {
+      "title": "Phi-3 Technical Report: A Highly Capable Language Model Locally on Your Phone",
+      "arxivId": "2404.14219",
+      "year": 2024,
+      "category": "LLM"
+    },
+    {
+      "title": "Transformers are SSMs: Generalized Models and Efficient Algorithms Through Structured State Space Duality",
+      "arxivId": "2405.21060",
+      "year": 2024,
+      "category": "LLM"
+    },
+    {
+      "title": "The Llama 3 Herd of Models",
+      "arxivId": "2407.21783",
+      "year": 2024,
+      "category": "LLM"
+    },
+    {
+      "title": "TinyLlama: An Open-Source Small Language Model",
+      "arxivId": "2401.02385",
+      "year": 2024,
+      "category": "LLM"
+    },
+    {
+      "title": "DeepSeek LLM: Scaling Open-Source Language Models with Longtermism",
+      "arxivId": "2401.02954",
+      "year": 2024,
+      "category": "LLM"
+    },
+    {
+      "title": "Probabilistic Mobility Load Balancing for Multi-band 5G and Beyond Networks",
+      "arxivId": "2401.13792",
+      "year": 2024,
+      "category": "LLM"
+    },
+    {
+      "title": "DeepSeek-Coder: When the Large Language Model Meets Programming -- The Rise of Code Intelligence",
+      "arxivId": "2401.14196",
+      "year": 2024,
+      "category": "LLM"
+    },
+    {
+      "title": "On Prompt-Driven Safeguarding for Large Language Models",
+      "arxivId": "2401.18018",
+      "year": 2024,
+      "category": "LLM"
+    },
+    {
+      "title": "DeepSeekMath: Pushing the Limits of Mathematical Reasoning in Open Language Models",
+      "arxivId": "2402.03300",
+      "year": 2024,
+      "category": "LLM"
+    },
+    {
+      "title": "Implicit Diffusion: Efficient Optimization through Stochastic Sampling",
+      "arxivId": "2402.05468",
+      "year": 2024,
+      "category": "LLM"
+    },
+    {
+      "title": "Multilingual E5 Text Embeddings: A Technical Report",
+      "arxivId": "2402.05672",
+      "year": 2024,
+      "category": "LLM"
+    },
+    {
+      "title": "Smaug: Fixing Failure Modes of Preference Optimisation with DPO-Positive",
+      "arxivId": "2402.13228",
+      "year": 2024,
+      "category": "LLM"
+    },
+    {
+      "title": "MobileLLM: Optimizing Sub-billion Parameter Language Models for On-Device Use Cases",
+      "arxivId": "2402.14905",
+      "year": 2024,
+      "category": "LLM"
+    },
+    {
+      "title": "Debug like a Human: A Large Language Model Debugger via Verifying Runtime Execution Step-by-step",
+      "arxivId": "2402.16906",
+      "year": 2024,
+      "category": "LLM"
+    },
+    {
+      "title": "StarCoder 2 and The Stack v2: The Next Generation",
+      "arxivId": "2402.19173",
+      "year": 2024,
+      "category": "LLM"
+    },
+    {
+      "title": "Yi: Open Foundation Models by 01.AI",
+      "arxivId": "2403.04652",
+      "year": 2024,
+      "category": "LLM"
+    },
+    {
+      "title": "Gemini 1.5: Unlocking multimodal understanding across millions of tokens of context",
+      "arxivId": "2403.05530",
+      "year": 2024,
+      "category": "LLM"
+    },
+    {
+      "title": "RAFT: Adapting Language Model to Domain Specific RAG",
+      "arxivId": "2403.10131",
+      "year": 2024,
+      "category": "LLM"
+    },
+    {
+      "title": "Model Stock: All we need is just a few fine-tuned models",
+      "arxivId": "2403.19522",
+      "year": 2024,
+      "category": "LLM"
+    },
+    {
+      "title": "A Survey on Efficient Inference for Large Language Models",
+      "arxivId": "2404.14294",
+      "year": 2024,
+      "category": "LLM"
+    },
+    {
+      "title": "DeepSeek-V2: A Strong, Economical, and Efficient Mixture-of-Experts Language Model",
+      "arxivId": "2405.04434",
+      "year": 2024,
+      "category": "LLM"
+    },
+    {
+      "title": "Long Code Arena: a Set of Benchmarks for Long-Context Code Models",
+      "arxivId": "2406.11612",
+      "year": 2024,
+      "category": "LLM"
+    },
+    {
+      "title": "ChatGLM: A Family of Large Language Models from GLM-130B to GLM-4 All Tools",
+      "arxivId": "2406.12793",
+      "year": 2024,
+      "category": "LLM"
+    },
+    {
+      "title": "Qwen2 Technical Report",
+      "arxivId": "2407.10671",
+      "year": 2024,
+      "category": "LLM"
+    },
+    {
+      "title": "Spectra: Surprising Effectiveness of Pretraining Ternary Language Models at Scale",
+      "arxivId": "2407.12327",
+      "year": 2024,
+      "category": "LLM"
+    },
+    {
+      "title": "The Impact of Reasoning Step Length on Large Language Models",
+      "arxivId": "2401.04925",
+      "year": 2024,
+      "category": "reasoning"
+    },
+    {
+      "title": "AgentBoard: An Analytical Evaluation Board of Multi-turn LLM Agents",
+      "arxivId": "2401.13178",
+      "year": 2024,
+      "category": "autonomousAgents"
+    },
+    {
+      "title": "Understanding the planning of LLM agents: A survey",
+      "arxivId": "2402.02716",
+      "year": 2024,
+      "category": "autonomousAgents"
+    },
+    {
+      "title": "More Agents Is All You Need",
+      "arxivId": "2402.05120",
+      "year": 2024,
+      "category": "multiAgent"
+    },
+    {
+      "title": "A Systematic Survey of Prompt Engineering in Large Language Models: Techniques and Applications",
+      "arxivId": "2402.07927",
+      "year": 2024,
+      "category": "promptEngineering"
+    },
+    {
+      "title": "Trial and Error: Exploration-Based Trajectory Optimization for LLM Agents",
+      "arxivId": "2403.02502",
+      "year": 2024,
+      "category": "multiAgent"
+    },
+    {
+      "title": "Cradle: Empowering Foundation Agents Towards General Computer Control",
+      "arxivId": "2403.03186",
+      "year": 2024,
+      "category": "autonomousAgents"
+    },
+    {
+      "title": "Quiet-STaR: Language Models Can Teach Themselves to Think Before Speaking",
+      "arxivId": "2403.09629",
+      "year": 2024,
+      "category": "reasoning"
+    },
+    {
+      "title": "Polaris: A Safety-focused LLM Constellation Architecture for Healthcare",
+      "arxivId": "2403.13313",
+      "year": 2024,
+      "category": "autonomousAgents"
+    },
+    {
+      "title": "Many-Shot In-Context Learning",
+      "arxivId": "2404.11018",
+      "year": 2024,
+      "category": "autonomousAgents"
+    },
+    {
+      "title": "SWE-agent: Agent-Computer Interfaces Enable Automated Software Engineering",
+      "arxivId": "2405.15793",
+      "year": 2024,
+      "category": "autonomousAgents"
+    },
+    {
+      "title": "Mixture-of-Agents Enhances Large Language Model Capabilities",
+      "arxivId": "2406.04692",
+      "year": 2024,
+      "category": "multiAgent"
+    },
+    {
+      "title": "The Prompt Report: A Systematic Survey of Prompt Engineering Techniques",
+      "arxivId": "2406.06608",
+      "year": 2024,
+      "category": "promptEngineering"
+    },
+    {
+      "title": "Abstraction-of-Thought Makes Language Models Better Reasoners",
+      "arxivId": "2406.12442",
+      "year": 2024,
+      "category": "reasoning"
+    },
+    {
+      "title": "AI Agents That Matter",
+      "arxivId": "2407.01502",
+      "year": 2024,
+      "category": "autonomousAgents"
+    },
+    {
+      "title": "Inference Scaling Laws: An Empirical Analysis of Compute-Optimal Inference for Problem-Solving with Language Models",
+      "arxivId": "2408.00724",
+      "year": 2024,
+      "category": "reasoning"
+    }
+  ]
+}

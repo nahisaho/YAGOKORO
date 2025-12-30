@@ -1,0 +1,71 @@
+# Dependencies
+node_modules/
+.pnpm-store/
+
+# Build outputs
+dist/
+build/
+*.tsbuildinfo
+
+# Test coverage
+coverage/
+.nyc_output/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Environment
+.env
+.env.local
+.env.*.local
+!.env.example
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+pnpm-debug.log*
+
+# Runtime data
+pids/
+*.pid
+*.seed
+*.pid.lock
+
+# Docker
+docker/data/
+docker/logs/
+
+# Temporary files
+tmp/
+temp/
+.cache/
+
+# Neo4j
+neo4j/data/
+neo4j/logs/
+neo4j/plugins/
+
+# Qdrant
+qdrant/storage/
+qdrant/snapshots/
+
+# Test artifacts
+test-results/
+playwright-report/
+
+# Documentation build
+docs/.vitepress/dist/
+docs/.vitepress/cache/
+
+# Package manager
+.pnpm-debug.log
+.venv/

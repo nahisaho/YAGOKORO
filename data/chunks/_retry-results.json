@@ -1,0 +1,36 @@
+{
+  "timestamp": "2025-12-29T13:36:19.809Z",
+  "summary": {
+    "total": 5,
+    "successful": 5,
+    "failed": 0,
+    "totalChunks": 3182
+  },
+  "results": [
+    {
+      "arxivId": "2005.14165",
+      "status": "success",
+      "chunks": 451
+    },
+    {
+      "arxivId": "2307.09288",
+      "status": "success",
+      "chunks": 499
+    },
+    {
+      "arxivId": "2204.02311",
+      "status": "success",
+      "chunks": 479
+    },
+    {
+      "arxivId": "2103.00020",
+      "status": "success",
+      "chunks": 623
+    },
+    {
+      "arxivId": "2211.09110",
+      "status": "success",
+      "chunks": 1130
+    }
+  ]
+}

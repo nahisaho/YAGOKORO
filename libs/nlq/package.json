@@ -1,0 +1,36 @@
+{
+  "name": "@yagokoro/nlq",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Natural Language Query processing for YAGOKORO GraphRAG system",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": ["dist"],
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "test": "vitest run",
+    "test:unit": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
+    "typecheck": "tsc --noEmit",
+    "clean": "rm -rf dist coverage"
+  },
+  "dependencies": {
+    "@yagokoro/domain": "workspace:*",
+    "@yagokoro/neo4j": "workspace:*",
+    "@yagokoro/vector": "workspace:*",
+    "zod": "^3.24.1"
+  },
+  "devDependencies": {
+    "vitest": "^2.1.8"
+  },
+  "keywords": ["nlq", "natural-language", "cypher", "query", "graphrag"]
+}

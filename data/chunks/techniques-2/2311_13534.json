@@ -1,0 +1,1594 @@
+{
+  "paper": {
+    "id": "2311.13534v4",
+    "title": "LM-Cocktail: Resilient Tuning of Language Models via Model Merging",
+    "abstract": "The pre-trained language models are continually fine-tuned to better support downstream applications. However, this operation may result in significant performance degeneration on general tasks beyond the targeted domain. To overcome this problem, we propose LM-Cocktail which enables the fine-tuned model to stay resilient in general perspectives. Our method is conducted in the form of model merging, where the fine-tuned language model is merged with the pre-trained base model or the peer models from other domains through weighted average. Despite simplicity, LM-Cocktail is surprisingly effective: the resulted model is able to achieve a strong empirical performance in the whole scope of general tasks while preserving a superior capacity in its targeted domain. We conduct comprehensive experiments with LLama and BGE model on popular benchmarks, including FLAN, MMLU, MTEB, whose results validate the efficacy of our proposed method. The code and checkpoints are available at https://github.com/FlagOpen/FlagEmbedding/tree/master/LM_Cocktail.",
+    "authors": [
+      "Shitao Xiao",
+      "Zheng Liu",
+      "Peitian Zhang",
+      "Xingrun Xing"
+    ],
+    "published": "2023-11-22T17:14:54.000Z",
+    "updated": "2023-12-08T16:45:22.000Z",
+    "primaryCategory": "cs.CL",
+    "categories": [
+      "cs.CL",
+      "cs.AI",
+      "cs.IR"
+    ],
+    "pdfUrl": "https://arxiv.org/pdf/2311.13534v4",
+    "absUrl": "https://arxiv.org/abs/2311.13534v4"
+  },
+  "chunks": [
+    {
+      "id": "2311.13534v4-chunk-0",
+      "content": "Shitao Xiao ♠ Zheng Liu ♠∗ Peitian Zhang ♠ Xingrun Xing ♣\n\n♠ Beijing Academy of Artificial Intelligence\n\n♣\n\nInstitute of Automation, Chinese Academy of Sciences stxiao@baai.ac.cn {zhengliu1026,namespace.pt}@gmail.com\n\nxingxingrun2023@ia.ac.cn",
+      "metadata": {
+        "source": "arxiv:2311.13534v4",
+        "title": "LM-Cocktail: Resilient Tuning of Language Models via Model Merging",
+        "authors": [
+          "Shitao Xiao",
+          "Zheng Liu",
+          "Peitian Zhang",
+          "Xingrun Xing"
+        ],
+        "section": "LM-Cocktail: Resilient Tuning of Language Models via Model Merging",
+        "chunkIndex": 0,
+        "totalChunks": 90
+      }
+    },
+    {
+      "id": "2311.13534v4-chunk-1",
+      "content": "The pre-trained language models are continually fine-tuned to better support downstream applications. However, this operation may result in significant performance degeneration on general tasks beyond the targeted domain. To overcome this problem, we propose LM-Cocktail which enables the fine-tuned model to stay resilient in general perspectives. Our method is conducted in the form of model merging, where the fine-tuned language model is merged with the pre-trained base model or the peer models from other domains through weighted average. Despite simplicity, LM-Cocktail is surprisingly effective: the resulted model is able to achieve a strong empirical performance in the whole scope of general tasks while preserving a superior capacity in its targeted domain. We conduct comprehensive experiments with LLama and BGE models on popular benchmarks, including FLAN, MMLU, MTEB, whose results validate the efficacy of our proposed method.",
+      "metadata": {
+        "source": "arxiv:2311.13534v4",
+        "title": "LM-Cocktail: Resilient Tuning of Language Models via Model Merging",
+        "authors": [
+          "Shitao Xiao",
+          "Zheng Liu",
+          "Peitian Zhang",
+          "Xingrun Xing"
+        ],
+        "section": "Abstract",
+        "chunkIndex": 1,
+        "totalChunks": 90
+      }
+    },
+    {
+      "id": "2311.13534v4-chunk-2",
+      "content": "ty in its targeted domain. We conduct comprehensive experiments with LLama and BGE models on popular benchmarks, including FLAN, MMLU, MTEB, whose results validate the efficacy of our proposed method. The code and checkpoints are available at https://github.com/FlagOpen/FlagEmbedding.",
+      "metadata": {
+        "source": "arxiv:2311.13534v4",
+        "title": "LM-Cocktail: Resilient Tuning of Language Models via Model Merging",
+        "authors": [
+          "Shitao Xiao",
+          "Zheng Liu",
+          "Peitian Zhang",
+          "Xingrun Xing"
+        ],
+        "section": "Abstract",
+        "chunkIndex": 2,
+        "totalChunks": 90
+      }
+    },
+    {
+      "id": "2311.13534v4-chunk-3",
+      "content": "Language models (LM) are fundamental pillars of artificial intelligence and natural language processing. Thanks to the considerable expansion of training scale and model size (Devlin et al., 2018; Liu et al., 2019; Raffel et al., 2020; Radford et al., 2019; Brown et al., 2020), language models have made remarkable breakthroughs on a wide variety of NLP tasks, including representation, understanding, reasoning, and generation. In recent years, language models have been used as a crucial building block for many applications, such as information retrieval, conversational systems, and autonomous AI agents. In many of the applications, language models are frequently used via the 'pre-training and fine-tuning' paradigm. Particularly, a generalist LM is pre-trained in the first place through an\n\n∗ Correspondence author",
+      "metadata": {
+        "source": "arxiv:2311.13534v4",
+        "title": "LM-Cocktail: Resilient Tuning of Language Models via Model Merging",
+        "authors": [
+          "Shitao Xiao",
+          "Zheng Liu",
+          "Peitian Zhang",
+          "Xingrun Xing"
+        ],
+        "section": "1 Introduction",
+        "chunkIndex": 3,
+        "totalChunks": 90
+      }
+    },
+    {
+      "id": "2311.13534v4-chunk-4",
+      "content": "e applications, language models are frequently used via the 'pre-training and fine-tuning' paradigm. Particularly, a generalist LM is pre-trained in the first place through an\n\n∗ Correspondence author\n\nunsupervised or general-purpose supervised learning process (Brown et al., 2020; Touvron et al., 2023; Wei et al., 2022, 2021; Ouyang et al., 2022); then, the pre-trained generalist model is fine-tuned to be a specialist model for a down-stream task on top of certain in-domain data.\n\nDespite the improved performance in each particular application, the fine-tuning operation could lead to severe degeneration of LM's general capabilities beyond the targeted domain. Such a phenomenon is commonly referred as catastrophic forgetting (Goodfellow et al., 2013; Kirkpatrick et al., 2017; Thompson et al., 2019; Chen et al., 2020).",
+      "metadata": {
+        "source": "arxiv:2311.13534v4",
+        "title": "LM-Cocktail: Resilient Tuning of Language Models via Model Merging",
+        "authors": [
+          "Shitao Xiao",
+          "Zheng Liu",
+          "Peitian Zhang",
+          "Xingrun Xing"
+        ],
+        "section": "1 Introduction",
+        "chunkIndex": 4,
+        "totalChunks": 90
+      }
+    },
+    {
+      "id": "2311.13534v4-chunk-5",
+      "content": "apabilities beyond the targeted domain. Such a phenomenon is commonly referred as catastrophic forgetting (Goodfellow et al., 2013; Kirkpatrick et al., 2017; Thompson et al., 2019; Chen et al., 2020). As shown in Figure 1, fine-tuning Llama model on the target task can significantly improve its performance on the target task, but decrease its performance on other unrelated tasks. In many real-world scenarios, catastrophic forgetting is unwelcome because language models need to exhibit both specialist and generalist characteristics simultaneously(Roziere et al., 2023; Chen et al., 2021; Singhal et al., 2022).\n\nThe combat against catastrophic forgetting represents a sustained campaign within the machine learning communities, where numerous approaches have been continually proposed in recent years. There are two representative strategies which are widely adopted as the designing logic by many existing methods.",
+      "metadata": {
+        "source": "arxiv:2311.13534v4",
+        "title": "LM-Cocktail: Resilient Tuning of Language Models via Model Merging",
+        "authors": [
+          "Shitao Xiao",
+          "Zheng Liu",
+          "Peitian Zhang",
+          "Xingrun Xing"
+        ],
+        "section": "1 Introduction",
+        "chunkIndex": 5,
+        "totalChunks": 90
+      }
+    },
+    {
+      "id": "2311.13534v4-chunk-6",
+      "content": "communities, where numerous approaches have been continually proposed in recent years. There are two representative strategies which are widely adopted as the designing logic by many existing methods. One strategy is to rely on experience replay, where the model is learned with the mixed training data from both the new task and the previous tasks (Rolnick et al., 2019; Shin et al., 2017). The other strategy is to leverage regularization, where the changes in predictions or weights are regularized between the newly fine-tuned model and the historical pre-trained one (Kirkpatrick et al., 2017; Li and Hoiem, 2017; Rannen et al., 2017). However, it remains to explore more effective methods in the context of fine-tuned language models given the practical constraints of the existing methods. On one hand, it is infeasible to fully collect",
+      "metadata": {
+        "source": "arxiv:2311.13534v4",
+        "title": "LM-Cocktail: Resilient Tuning of Language Models via Model Merging",
+        "authors": [
+          "Shitao Xiao",
+          "Zheng Liu",
+          "Peitian Zhang",
+          "Xingrun Xing"
+        ],
+        "section": "1 Introduction",
+        "chunkIndex": 6,
+        "totalChunks": 90
+      }
+    },
+    {
+      "id": "2311.13534v4-chunk-7",
+      "content": "wever, it remains to explore more effective methods in the context of fine-tuned language models given the practical constraints of the existing methods. On one hand, it is infeasible to fully collect\n\nFigure 1: The illustration of LM-Cocktail. Fine-tuning for the target task will lead to severe degeneration of LM's general capabilities beyond the targeted domain. LM-Cocktail can increase accuracy on new target tasks while maintaining its accuracy on other tasks.\n\n<!-- image -->\n\nthe training samples for all previous tasks, and have the model trained over again on the historical data once a new task is presented. On the other hand, the regularization may result in major changes to the existing fine-tuning operations, which could be incompatible with the well-established fine-tuning pipeline.",
+      "metadata": {
+        "source": "arxiv:2311.13534v4",
+        "title": "LM-Cocktail: Resilient Tuning of Language Models via Model Merging",
+        "authors": [
+          "Shitao Xiao",
+          "Zheng Liu",
+          "Peitian Zhang",
+          "Xingrun Xing"
+        ],
+        "section": "1 Introduction",
+        "chunkIndex": 7,
+        "totalChunks": 90
+      }
+    },
+    {
+      "id": "2311.13534v4-chunk-8",
+      "content": "task is presented. On the other hand, the regularization may result in major changes to the existing fine-tuning operations, which could be incompatible with the well-established fine-tuning pipeline.\n\nIn this work, we aim to design an effective framework to confront catastrophic forgetting, which will enable the fine-tuned language models to stay resilient in general tasks. Besides, we also expect the new framework to be more practical, which means it must be simple to conduct and fully compatible with the common model training workflow.\n\nWith these considerations, we propose a new approach, called LM-Cocktail, which continually adapts well-fine-tuned language models on top of model merging (Wortsman et al., 2022a). LMCocktail is a general paradigm, which can work under several different conditions. In the simplest form, it directly merges the fine-tuned model with the pre-trained base model to improve the general capabilities of the fine-tuned model.",
+      "metadata": {
+        "source": "arxiv:2311.13534v4",
+        "title": "LM-Cocktail: Resilient Tuning of Language Models via Model Merging",
+        "authors": [
+          "Shitao Xiao",
+          "Zheng Liu",
+          "Peitian Zhang",
+          "Xingrun Xing"
+        ],
+        "section": "1 Introduction",
+        "chunkIndex": 8,
+        "totalChunks": 90
+      }
+    },
+    {
+      "id": "2311.13534v4-chunk-9",
+      "content": "can work under several different conditions. In the simplest form, it directly merges the fine-tuned model with the pre-trained base model to improve the general capabilities of the fine-tuned model. It can further accommodate more peer models fine-tuned for other general domains, and result in stronger empirical performances on top of merging weights estimated by few-shot validation examples. Finally, even at the absence of fine-tuning data, the merging strategy can be still applied to the remaining pretrained base model and the fine-tuned models in other general domains for a competitive resilience.\n\nOur proposed method leads to a couple of immediate advantages given its working mechanism. First of all, LM-Cocktail is extremely simple : the mixing weights can be directly derived from validation samples where no expensive training operations are needed.",
+      "metadata": {
+        "source": "arxiv:2311.13534v4",
+        "title": "LM-Cocktail: Resilient Tuning of Language Models via Model Merging",
+        "authors": [
+          "Shitao Xiao",
+          "Zheng Liu",
+          "Peitian Zhang",
+          "Xingrun Xing"
+        ],
+        "section": "1 Introduction",
+        "chunkIndex": 9,
+        "totalChunks": 90
+      }
+    },
+    {
+      "id": "2311.13534v4-chunk-10",
+      "content": "tages given its working mechanism. First of all, LM-Cocktail is extremely simple : the mixing weights can be directly derived from validation samples where no expensive training operations are needed. Secondly, LM-Cocktail is fully compatible with the existing training pipeline, knowing that it simply works as a post-refinement step following the fine-tuning process. Above all, LM-Cocktail is empirically competitive . According to our evaluations on three representative benchmarks, including FLAN (Wei et al., 2021), MMLU (Hendrycks et al., 2020), and MTEB (Muennighoff et al., 2022), LM-Cocktail achieves a strong resilience in general domain tasks while preserving a superior fine-tuning performance on its targeted domain. Finally, LM-Cocktail turns out to be universally applicable: it can substantially contribute to both the decoder-based LM in language generation tasks and the encoder-based LM in language representation tasks.",
+      "metadata": {
+        "source": "arxiv:2311.13534v4",
+        "title": "LM-Cocktail: Resilient Tuning of Language Models via Model Merging",
+        "authors": [
+          "Shitao Xiao",
+          "Zheng Liu",
+          "Peitian Zhang",
+          "Xingrun Xing"
+        ],
+        "section": "1 Introduction",
+        "chunkIndex": 10,
+        "totalChunks": 90
+      }
+    },
+    {
+      "id": "2311.13534v4-chunk-11",
+      "content": "ubstantially contribute to both the decoder-based LM in language generation tasks and the encoder-based LM in language representation tasks.",
+      "metadata": {
+        "source": "arxiv:2311.13534v4",
+        "title": "LM-Cocktail: Resilient Tuning of Language Models via Model Merging",
+        "authors": [
+          "Shitao Xiao",
+          "Zheng Liu",
+          "Peitian Zhang",
+          "Xingrun Xing"
+        ],
+        "section": "1 Introduction",
+        "chunkIndex": 11,
+        "totalChunks": 90
+      }
+    },
+    {
+      "id": "2311.13534v4-chunk-12",
+      "content": "As a prerequisite condition, we are given a base language model, denoted as M b , which are well pre-trained for general applications. Typical examples of the base model can be Llama-Chat (Touvron et al., 2023) and FLAN-PaLM (Chung et al., 2022), which are LLMs learned from massive unsupervised learning and general-purse supervised fine-tuning. The base LM is continually fine-tuned to support one targeted down-stream task ( t ) with domain-specific training samples X t , which results in the fine-tuned model for the corresponding task: M t .\n\nHowever, the fine-tuned model M t is prone to degenerate empirical performances (catastrophic forgetting) on other general domains beyond the targeted domain t . The goal of LM-Cocktail is to maintain the general capabilities when fine-tuning on the target task. The core of LM-Cocktail is combining multiple models (with the same architecture but different weights) into a unified one by aggregating the weights from different models.",
+      "metadata": {
+        "source": "arxiv:2311.13534v4",
+        "title": "LM-Cocktail: Resilient Tuning of Language Models via Model Merging",
+        "authors": [
+          "Shitao Xiao",
+          "Zheng Liu",
+          "Peitian Zhang",
+          "Xingrun Xing"
+        ],
+        "section": "2.1 General Paradigm",
+        "chunkIndex": 12,
+        "totalChunks": 90
+      }
+    },
+    {
+      "id": "2311.13534v4-chunk-13",
+      "content": "-tuning on the target task. The core of LM-Cocktail is combining multiple models (with the same architecture but different weights) into a unified one by aggregating the weights from different models. In this way, the resilient fine-tuned model can integrate the strengths from multiple individual models.\n\nTo derive the appropriate model merging strategy for LM-Cocktail, there are two fundamental problems to solve: 1) which group of candidate models to merge, 2) how to determine the merging weights. Knowing that the resilient fine-tuned LM is to restore the degenerated performances in general domains, there are two sources of candidate models to consider. One source is the pre-trained base model M b , the other source is the entire group of fine-tuned models in other domains ( {M d } D ). Without loss of generality, we derive the following form of merging function:\n\n<!-- formula-not-decoded -->",
+      "metadata": {
+        "source": "arxiv:2311.13534v4",
+        "title": "LM-Cocktail: Resilient Tuning of Language Models via Model Merging",
+        "authors": [
+          "Shitao Xiao",
+          "Zheng Liu",
+          "Peitian Zhang",
+          "Xingrun Xing"
+        ],
+        "section": "2.1 General Paradigm",
+        "chunkIndex": 13,
+        "totalChunks": 90
+      }
+    },
+    {
+      "id": "2311.13534v4-chunk-14",
+      "content": "b , the other source is the entire group of fine-tuned models in other domains ( {M d } D ). Without loss of generality, we derive the following form of merging function:\n\n<!-- formula-not-decoded -->\n\nwhere M r is the resilient-tuned model, α is a hyperparameter whose default value is 0.5, and w i indicates the merging weight which has been normalized: ∑ i w i = 1 . For our case, we require the resilient-tuned model to preserve strong capacity as the directly fine-tuned model in its targeted domain while improving the general domain performance. Therefore, the candidate models' performances in the targeted domain are the critical indicators of merging weights. Based on this intuition, we introduce the following form of weight computation:\n\n<!-- formula-not-decoded -->\n\nIn this function, L ( M i , E t ) stands for the prediction loss of candidate model M i on the few-shot examples E t from the targeted domain t , τ is the temperature to control the smoothness.",
+      "metadata": {
+        "source": "arxiv:2311.13534v4",
+        "title": "LM-Cocktail: Resilient Tuning of Language Models via Model Merging",
+        "authors": [
+          "Shitao Xiao",
+          "Zheng Liu",
+          "Peitian Zhang",
+          "Xingrun Xing"
+        ],
+        "section": "2.1 General Paradigm",
+        "chunkIndex": 14,
+        "totalChunks": 90
+      }
+    },
+    {
+      "id": "2311.13534v4-chunk-15",
+      "content": "d -->\n\nIn this function, L ( M i , E t ) stands for the prediction loss of candidate model M i on the few-shot examples E t from the targeted domain t , τ is the temperature to control the smoothness. That is to say, the larger loss on the targeted domain, the smaller weight is allocated to the candidate model. So we can give lower coefficients to models that perform very badly in the target task. The few-shot examples are a tiny group of hold-back samples from the targeted domain. According to our empirical study, 5-shot examples have been sufficiently competitive throughout different settings.",
+      "metadata": {
+        "source": "arxiv:2311.13534v4",
+        "title": "LM-Cocktail: Resilient Tuning of Language Models via Model Merging",
+        "authors": [
+          "Shitao Xiao",
+          "Zheng Liu",
+          "Peitian Zhang",
+          "Xingrun Xing"
+        ],
+        "section": "2.1 General Paradigm",
+        "chunkIndex": 15,
+        "totalChunks": 90
+      }
+    },
+    {
+      "id": "2311.13534v4-chunk-16",
+      "content": "The general form of LM-Cocktail in Eq 1 requires the presence of three elements: the base model M b , the fine-tuned model for the targeted domain M t , and the fine-tuned models in other general domains {M d } D . Nevertheless, the general requirement can be largely relaxed to accommodate different real-world settings. Here, we introduce two common variational forms to confront the situations where either diverse general-domain specialists or targeted domain fine-tuning is not available.\n\n- Mono-Specialist . When the diverse fine-tuned models in general domains are absent, the merging function is simplified as the combination of base model M b and the mono-specialist model from the targeted domain M t :\n\n<!-- formula-not-decoded -->\n\nGiven that fine-tuned model M t typically exhibits significantly lower loss compared to other models, we did not employ Eqn 2 to calculate weights; instead, we introduce a hyperparameter α .",
+      "metadata": {
+        "source": "arxiv:2311.13534v4",
+        "title": "LM-Cocktail: Resilient Tuning of Language Models via Model Merging",
+        "authors": [
+          "Shitao Xiao",
+          "Zheng Liu",
+          "Peitian Zhang",
+          "Xingrun Xing"
+        ],
+        "section": "2.2 Variations",
+        "chunkIndex": 16,
+        "totalChunks": 90
+      }
+    },
+    {
+      "id": "2311.13534v4-chunk-17",
+      "content": "oded -->\n\nGiven that fine-tuned model M t typically exhibits significantly lower loss compared to other models, we did not employ Eqn 2 to calculate weights; instead, we introduce a hyperparameter α . Experimental results demonstrate that simply setting α to 0.5 yields promising outcomes.\n\n- Without Fine-tuning . The fine-tuning in the targeted domain can be constrained due to the absence of domain-specific data or computation resources. In this situation, the merging function is transformed into the combination of base model and fine-tuned model from general domains:\n\n<!-- formula-not-decoded -->\n\nIn this place, we assume the few-shot examples E t for merging weights (Eq. 2) are always available, which is a very moderate condition in practice. In this manner, we obviate the need for training any new models; instead, by incurring minimal costs, we can seamlessly integrate existing models to obtain a model tailored for downstream tasks.",
+      "metadata": {
+        "source": "arxiv:2311.13534v4",
+        "title": "LM-Cocktail: Resilient Tuning of Language Models via Model Merging",
+        "authors": [
+          "Shitao Xiao",
+          "Zheng Liu",
+          "Peitian Zhang",
+          "Xingrun Xing"
+        ],
+        "section": "2.2 Variations",
+        "chunkIndex": 17,
+        "totalChunks": 90
+      }
+    },
+    {
+      "id": "2311.13534v4-chunk-18",
+      "content": "ing any new models; instead, by incurring minimal costs, we can seamlessly integrate existing models to obtain a model tailored for downstream tasks.",
+      "metadata": {
+        "source": "arxiv:2311.13534v4",
+        "title": "LM-Cocktail: Resilient Tuning of Language Models via Model Merging",
+        "authors": [
+          "Shitao Xiao",
+          "Zheng Liu",
+          "Peitian Zhang",
+          "Xingrun Xing"
+        ],
+        "section": "2.2 Variations",
+        "chunkIndex": 18,
+        "totalChunks": 90
+      }
+    },
+    {
+      "id": "2311.13534v4-chunk-19",
+      "content": "We conducted experiments with two types of models: decoder-based LM and encoder-based LM. We fine-tuned 9 encoder-based models and 9 decoderbased models separately, and then evaluated the performance of fine-tuned models and resilient-tuned models. Following are the detailed experimental settings.",
+      "metadata": {
+        "source": "arxiv:2311.13534v4",
+        "title": "LM-Cocktail: Resilient Tuning of Language Models via Model Merging",
+        "authors": [
+          "Shitao Xiao",
+          "Zheng Liu",
+          "Peitian Zhang",
+          "Xingrun Xing"
+        ],
+        "section": "3 Experimental setup",
+        "chunkIndex": 19,
+        "totalChunks": 90
+      }
+    },
+    {
+      "id": "2311.13534v4-chunk-20",
+      "content": "- Base Model . We use Llama-2-chat-7b 1 (Touvron et al., 2023) as the base model, which has an impressive zero-shot ability on various tasks.\n- Fine-tune . We use the datasets collected by (Cheng et al., 2023; Wang et al., 2023), which consist of 30 tasks from FLAN (Wei et al., 2022). We select 9 different tasks from it to fine-tune the\n\n1 https://huggingface.co/meta-llama/Llama-2-7b-chat-hf\n\nTable 1: A comparative performance analysis between base model Llama, fine-tuned model, and resilient-tuned model via LM-Cocktail. LM-Cocktail 2 is produced by merging the base model and fine-tuned model, while LM-Cocktail 10 merges fine-tuned model, base model, and other models fine-tuned on 8 different tasks. There are a total of 30 test tasks, and \"Others tasks\" refers to the remaining 29 tasks after the corresponding task is removed.",
+      "metadata": {
+        "source": "arxiv:2311.13534v4",
+        "title": "LM-Cocktail: Resilient Tuning of Language Models via Model Merging",
+        "authors": [
+          "Shitao Xiao",
+          "Zheng Liu",
+          "Peitian Zhang",
+          "Xingrun Xing"
+        ],
+        "section": "3.1 Decoder-based LM",
+        "chunkIndex": 20,
+        "totalChunks": 90
+      }
+    },
+    {
+      "id": "2311.13534v4-chunk-21",
+      "content": "ed model, base model, and other models fine-tuned on 8 different tasks. There are a total of 30 test tasks, and \"Others tasks\" refers to the remaining 29 tasks after the corresponding task is removed.\n\n| Fine-tune on   | Performance on   |   Llama |   Fine-tuned |   LM-Cocktail 2 |   LM-Cocktail 10 |\n|----------------|------------------|---------|--------------|-----------------|------------------|\n| AG News        | AG News          |   40.8  |        94.42 |           94.46 |            94.41 |\n| AG News        | Other tasks      |   46.8  |        38.58 |           47.73 |            48.32 |\n| Common Gen     | Common Gen       |   21.14 |        39.2  |           41.22 |            41.45 |\n| Common Gen     | Other tasks      |   47.48 |        46.9  |           50.88 |            58.57 |\n| MNLI           | MNLI             |   32.14 |        87.9  |           88.88 |            89.23 |\n| MNLI           | Other tasks      |   47.1  |        47.49 |           53.53 |            56.31",
+      "metadata": {
+        "source": "arxiv:2311.13534v4",
+        "title": "LM-Cocktail: Resilient Tuning of Language Models via Model Merging",
+        "authors": [
+          "Shitao Xiao",
+          "Zheng Liu",
+          "Peitian Zhang",
+          "Xingrun Xing"
+        ],
+        "section": "3.1 Decoder-based LM",
+        "chunkIndex": 21,
+        "totalChunks": 90
+      }
+    },
+    {
+      "id": "2311.13534v4-chunk-22",
+      "content": "|\n| MNLI           | MNLI             |   32.14 |        87.9  |           88.88 |            89.23 |\n| MNLI           | Other tasks      |   47.1  |        47.49 |           53.53 |            56.31 |\n| Winogrande     | Winogrande       |   60.93 |        75.45 |           77.9  |            77.03 |\n| Winogrande     | Other tasks      |   46.11 |        47.33 |           50.52 |            58.52 |\n| MRPC           | MRPC             |   31.86 |        85.78 |           73.77 |            80.88 |\n| MRPC           | Other tasks      |   47.11 |        36.45 |           39.56 |            42.77 |\n| NQ             | NQ               |    0    |        29.09 |           29.25 |            29.64 |\n| NQ             | Other tasks      |   48.21 |        52.19 |           54.58 |            60.28 |\n| SQuAD          | SQuAD            |    0.06 |        86.77 |           85.67 |            86.94 |\n| SQuAD          | Other tasks      |   48.21 |        49.48 |           51.64 |            54.09",
+      "metadata": {
+        "source": "arxiv:2311.13534v4",
+        "title": "LM-Cocktail: Resilient Tuning of Language Models via Model Merging",
+        "authors": [
+          "Shitao Xiao",
+          "Zheng Liu",
+          "Peitian Zhang",
+          "Xingrun Xing"
+        ],
+        "section": "3.1 Decoder-based LM",
+        "chunkIndex": 22,
+        "totalChunks": 90
+      }
+    },
+    {
+      "id": "2311.13534v4-chunk-23",
+      "content": "|\n| SQuAD          | SQuAD            |    0.06 |        86.77 |           85.67 |            86.94 |\n| SQuAD          | Other tasks      |   48.21 |        49.48 |           51.64 |            54.09 |\n| SST2           | SST2             |   63.3  |        95.53 |           96.56 |            96.56 |\n| SST2           | Other tasks      |   46.02 |        38.94 |           41.63 |            45.03 |\n| Hellaswag      | Hellaswag        |   71.58 |        77.2  |           79    |            78.61 |\n| Hellaswag      | Other tasks      |   45.74 |        46.1  |           48.95 |            57.87 |\n\nbase model, including NQ, SQuAD, Hellaswag, SST2, Winogrande, CommonGen, MRPC, AG News, and MNLI. For more information of training data please refer to Appendix A. The fine-tuned code is based on FastChat package 2 . The learning rate is 2e-5, the batch size is 128, and the max number of epochs is 3.",
+      "metadata": {
+        "source": "arxiv:2311.13534v4",
+        "title": "LM-Cocktail: Resilient Tuning of Language Models via Model Merging",
+        "authors": [
+          "Shitao Xiao",
+          "Zheng Liu",
+          "Peitian Zhang",
+          "Xingrun Xing"
+        ],
+        "section": "3.1 Decoder-based LM",
+        "chunkIndex": 23,
+        "totalChunks": 90
+      }
+    },
+    {
+      "id": "2311.13534v4-chunk-24",
+      "content": "more information of training data please refer to Appendix A. The fine-tuned code is based on FastChat package 2 . The learning rate is 2e-5, the batch size is 128, and the max number of epochs is 3.\n\n- Evaluation . We evaluate the performance on the test set of 30 tasks collected by (Cheng et al., 2023; Wang et al., 2023). The test data for fine-tuning tasks (NQ, SQuAD, Hellaswag, SST2, Winogrande, CommonGen, MRPC, AG News, and MNLI) are also included in this collection. The detailed metric for each task can refer to (Wang et al., 2023). Besides, we also conduct experiments on additional tasks from MMLU datasets, which is a widely used benchmark for LLMs.",
+      "metadata": {
+        "source": "arxiv:2311.13534v4",
+        "title": "LM-Cocktail: Resilient Tuning of Language Models via Model Merging",
+        "authors": [
+          "Shitao Xiao",
+          "Zheng Liu",
+          "Peitian Zhang",
+          "Xingrun Xing"
+        ],
+        "section": "3.1 Decoder-based LM",
+        "chunkIndex": 24,
+        "totalChunks": 90
+      }
+    },
+    {
+      "id": "2311.13534v4-chunk-25",
+      "content": "- Base Model . We choose the bge-base-v 1 . 5 embedding model 3 (Xiao et al., 2023) as the base model for embedding tasks, which can map text into embedding representation.\n- Fine-tune . We select 9 datasets from sentence\n\n2 https://github.com/lm-sys/FastChat\n\n3 https://huggingface.co/BAAI/bge-base-en-v1.5\n\ntransformers repo 4 , including GooAQ, Yahoo Answers, MSMarco, Stack Exchange, ELI5, SQuAD, AmazonQA, Quora, HotpotQA. Appendix A shows the details of training data. We fine-tune BGE model on these datasets with FlagEmbedding tool 5 . We use the AdamW optimizer with a learning rate of 2e-5. The batch size is 256, and the temperature for contrastive learning is 0.02.\n\n- Evaluation . We evaluate the models with the 15 retrieval tasks in mteb benchmark (Muennighoff et al., 2022), and use NDCG@10 as the evaluation metric. The test data of 3 fine-tuning tasks: MSMarco, HotpotQA and Quora are included in this benchmark.",
+      "metadata": {
+        "source": "arxiv:2311.13534v4",
+        "title": "LM-Cocktail: Resilient Tuning of Language Models via Model Merging",
+        "authors": [
+          "Shitao Xiao",
+          "Zheng Liu",
+          "Peitian Zhang",
+          "Xingrun Xing"
+        ],
+        "section": "3.2 Encoder-based LM",
+        "chunkIndex": 25,
+        "totalChunks": 90
+      }
+    },
+    {
+      "id": "2311.13534v4-chunk-26",
+      "content": "etrieval tasks in mteb benchmark (Muennighoff et al., 2022), and use NDCG@10 as the evaluation metric. The test data of 3 fine-tuning tasks: MSMarco, HotpotQA and Quora are included in this benchmark. For the purpose of facilitating training and testing across various tasks, we don't add the default query instruction from (Xiao et al., 2023).",
+      "metadata": {
+        "source": "arxiv:2311.13534v4",
+        "title": "LM-Cocktail: Resilient Tuning of Language Models via Model Merging",
+        "authors": [
+          "Shitao Xiao",
+          "Zheng Liu",
+          "Peitian Zhang",
+          "Xingrun Xing"
+        ],
+        "section": "3.2 Encoder-based LM",
+        "chunkIndex": 26,
+        "totalChunks": 90
+      }
+    },
+    {
+      "id": "2311.13534v4-chunk-27",
+      "content": "In this section, we show the experimental results and represent the key findings. Firstly, we compare the performance of fine-tuned models and resilienttuned models. Next, we evaluate the performance of LM-Cocktail when fine-tuning on target task is unavailable. Finally, we investigate the impact of\n\n4 https://huggingface.co/datasets/sentencetransformers/embedding-training-data\n\n5 https://github.com/FlagOpen/FlagEmbedding\n\nTable 2: A comparative performance analysis between base model BGE, fine-tuned model, and resilient-tuned model via LM-Cocktail. LM-Cocktail 2 is produced by merging the base model and fine-tuned model, while LM-Cocktail 10 merges fine-tuned model, base model, and other models fine-tuned on 8 different tasks. There are a total of 15 test tasks, and \"Others tasks\" refers to the remaining 14 tasks after the corresponding task is removed.",
+      "metadata": {
+        "source": "arxiv:2311.13534v4",
+        "title": "LM-Cocktail: Resilient Tuning of Language Models via Model Merging",
+        "authors": [
+          "Shitao Xiao",
+          "Zheng Liu",
+          "Peitian Zhang",
+          "Xingrun Xing"
+        ],
+        "section": "4 Experimental Results",
+        "chunkIndex": 27,
+        "totalChunks": 90
+      }
+    },
+    {
+      "id": "2311.13534v4-chunk-28",
+      "content": "ed model, base model, and other models fine-tuned on 8 different tasks. There are a total of 15 test tasks, and \"Others tasks\" refers to the remaining 14 tasks after the corresponding task is removed.\n\n| Fine-tune on   | Performance on   |   BGE |   Fine-tuned |   LM-Cocktail 2 |   LM-Cocktail 10 |\n|----------------|------------------|-------|--------------|-----------------|------------------|\n| HotpotQA       | HotpotQA         | 71.81 |        75.96 |           74.78 |            74.67 |\n| HotpotQA       | Other tasks      | 49.81 |        47.49 |           49.98 |            50.64 |\n| Quora          | Quora            | 88.9  |        90.31 |           89.93 |            89.81 |\n| Quora          | Other tasks      | 48.59 |        47.43 |           48.09 |            49.11 |\n| MSMarco        | MSMarco          | 41.15 |        42.23 |           42.01 |            41.88 |\n| MSMarco        | Other tasks      | 52    |        51.98 |           52.71 |            53.22 |",
+      "metadata": {
+        "source": "arxiv:2311.13534v4",
+        "title": "LM-Cocktail: Resilient Tuning of Language Models via Model Merging",
+        "authors": [
+          "Shitao Xiao",
+          "Zheng Liu",
+          "Peitian Zhang",
+          "Xingrun Xing"
+        ],
+        "section": "4 Experimental Results",
+        "chunkIndex": 28,
+        "totalChunks": 90
+      }
+    },
+    {
+      "id": "2311.13534v4-chunk-29",
+      "content": "11 |\n| MSMarco        | MSMarco          | 41.15 |        42.23 |           42.01 |            41.88 |\n| MSMarco        | Other tasks      | 52    |        51.98 |           52.71 |            53.22 |\n\nweight α and the number of examples.",
+      "metadata": {
+        "source": "arxiv:2311.13534v4",
+        "title": "LM-Cocktail: Resilient Tuning of Language Models via Model Merging",
+        "authors": [
+          "Shitao Xiao",
+          "Zheng Liu",
+          "Peitian Zhang",
+          "Xingrun Xing"
+        ],
+        "section": "4 Experimental Results",
+        "chunkIndex": 29,
+        "totalChunks": 90
+      }
+    },
+    {
+      "id": "2311.13534v4-chunk-30",
+      "content": "Our experiments compare the performance of base models, corresponding fine-tuned models, and models resilient-tuned via LM-Cocktail. For each fine-tuned model, we measure its performance on the specific target task as well as its performance on other tasks. We also tested models resilient-tuned using our method, which include two variants: (1) LM-Cocktail 2 : merge the fine-tuned model with the base model; (2) LM-Cocktail 10 : merge 10 models, including model fine-tuned on target task, base model, other the remaining eight fine-tuned models from section 3.1. We have summarized the results in Table 1 and 2. For detailed results for each test task please refer to Appendix B.1.",
+      "metadata": {
+        "source": "arxiv:2311.13534v4",
+        "title": "LM-Cocktail: Resilient Tuning of Language Models via Model Merging",
+        "authors": [
+          "Shitao Xiao",
+          "Zheng Liu",
+          "Peitian Zhang",
+          "Xingrun Xing"
+        ],
+        "section": "4.1 Overall Comparison",
+        "chunkIndex": 30,
+        "totalChunks": 90
+      }
+    },
+    {
+      "id": "2311.13534v4-chunk-31",
+      "content": "From Table 1, we have following observations: (1) the fine-tuned model demonstrates significant improvement over the base model in the corresponding task. For example, the model fine-tuned on AG News achieves an accuracy of 94.42% in the corresponding task, whereas the base model only achieves 40.9% accuracy on the same task. (2) However, this gain comes at a cost: in other tasks, the fine-tuned model often lags behind the performance of the base model. For example, the accuracy of the fine-tuned model on other tasks is only 38.58%, substantially lower than the 46.8% accuracy of the base model. (3) In contrast, LMCocktail 2 maintains effectiveness in its corresponding task (94.46% in AG News task) while also demonstrating competitive performance in other tasks (47.73%). And LM-Cocktail 10 further enhances the performance of other tasks (the accuracy increases from 38.58% to 48.32% after merging).",
+      "metadata": {
+        "source": "arxiv:2311.13534v4",
+        "title": "LM-Cocktail: Resilient Tuning of Language Models via Model Merging",
+        "authors": [
+          "Shitao Xiao",
+          "Zheng Liu",
+          "Peitian Zhang",
+          "Xingrun Xing"
+        ],
+        "section": "4.1.1 Analysis on decoder-based LM",
+        "chunkIndex": 31,
+        "totalChunks": 90
+      }
+    },
+    {
+      "id": "2311.13534v4-chunk-32",
+      "content": "ile also demonstrating competitive performance in other tasks (47.73%). And LM-Cocktail 10 further enhances the performance of other tasks (the accuracy increases from 38.58% to 48.32% after merging). In most of the cases, LM-Cocktail 2 and LM-Cocktail 10 even outperform the base model on other tasks. This finding demonstrates that our approach can integrate the strengths of models to be merged, and even surpass them in performance. (4) Besides, fine-tuning on some tasks (e.g., NQ) can enhance performance not only on the corresponding task but also on other tasks; our proposed method remains effective on these tasks: LMCocktail achieves higher accuracy both in target task and other tasks. These findings demonstrate the versatility of our approach.",
+      "metadata": {
+        "source": "arxiv:2311.13534v4",
+        "title": "LM-Cocktail: Resilient Tuning of Language Models via Model Merging",
+        "authors": [
+          "Shitao Xiao",
+          "Zheng Liu",
+          "Peitian Zhang",
+          "Xingrun Xing"
+        ],
+        "section": "4.1.1 Analysis on decoder-based LM",
+        "chunkIndex": 32,
+        "totalChunks": 90
+      }
+    },
+    {
+      "id": "2311.13534v4-chunk-33",
+      "content": "The results of encoder models are shown in Table 2. We can observe the same trend in the section 4.1.1: The fine-tuned model achieves significant improvement over the base model in the corresponding task but has a lower accuracy on other unrelated tasks. LM-Cocktail 2 significantly enhances performance in downstream tasks while maintaining performance in other unrelated tasks. LM-Cocktail 10 further improves the general ability by merging the models fine-tuned on different tasks. These results show the applicability of LM-Cocktail for both generative models and representation models, validating the universality of our proposed methodology.",
+      "metadata": {
+        "source": "arxiv:2311.13534v4",
+        "title": "LM-Cocktail: Resilient Tuning of Language Models via Model Merging",
+        "authors": [
+          "Shitao Xiao",
+          "Zheng Liu",
+          "Peitian Zhang",
+          "Xingrun Xing"
+        ],
+        "section": "4.1.2 Analysis on encoder-based LM",
+        "chunkIndex": 33,
+        "totalChunks": 90
+      }
+    },
+    {
+      "id": "2311.13534v4-chunk-34",
+      "content": "In many scenarios, fine-tuning on the target domain is not always available. For example, if there is not enough training dataset for a new task, fine-tuning a specialist model specific to this task is unfeasible. Besides, fine-tuning a separate model for each task is costly and inflexible, especially when fine-tuning large language models. We report the performance of LM-Cocktail without fine-tuning in Table 3 and 4",
+      "metadata": {
+        "source": "arxiv:2311.13534v4",
+        "title": "LM-Cocktail: Resilient Tuning of Language Models via Model Merging",
+        "authors": [
+          "Shitao Xiao",
+          "Zheng Liu",
+          "Peitian Zhang",
+          "Xingrun Xing"
+        ],
+        "section": "4.2 LM-Cocktail without Fine-tuning",
+        "chunkIndex": 34,
+        "totalChunks": 90
+      }
+    },
+    {
+      "id": "2311.13534v4-chunk-35",
+      "content": "To evaluate the performance on tasks which haven't been seen in fine-tuning, we introduce additional\n\nTable 3: Results of merging decoder models from other tasks.\n\n| Dataset                                                   | Llama       | Llama-ICL   | Multitask-learning   | LM-Cocktail blackbox   | LM-Cocktail   | LM-Cocktail' u blackbox   | LM-Cocktail u   |\n|-----------------------------------------------------------|-------------|-------------|----------------------|------------------------|---------------|---------------------------|-----------------|\n| Avg                                                       | 45.87       | 46.65       | 32.88                | 42.28                  | 48.01         | 47.46                     | 48.21           |\n| abstract-algebra                                          | 28.0        | 30.0        | 21.0                 | 29.0                   | 35.0          | 33.0                      | 34.0            |\n| anatomy",
+      "metadata": {
+        "source": "arxiv:2311.13534v4",
+        "title": "LM-Cocktail: Resilient Tuning of Language Models via Model Merging",
+        "authors": [
+          "Shitao Xiao",
+          "Zheng Liu",
+          "Peitian Zhang",
+          "Xingrun Xing"
+        ],
+        "section": "4.2.1 Analysis on Decoder-based LM",
+        "chunkIndex": 35,
+        "totalChunks": 90
+      }
+    },
+    {
+      "id": "2311.13534v4-chunk-36",
+      "content": "| 28.0        | 30.0        | 21.0                 | 29.0                   | 35.0          | 33.0                      | 34.0            |\n| anatomy                                                   | 42.96       | 42.22       | 34.07                | 45.19                  | 46.67         | 46.67                     | 48.15           |\n| astronomy                                                 | 44.08       | 48.03       | 34.21                | 46.05                  | 46.05         | 44.08                     | 47.37           |\n| business-ethics                                           | 42.0        | 42.0        | 41.0                 | 50.0                   | 46.0          | 52.0                      | 48.0            |\n| clinical-knowledge                                        | 50.57       | 51.32       | 39.62                | 47.92                  | 51.32         | 51.7                      | 51.32           |\n| college-biology",
+      "metadata": {
+        "source": "arxiv:2311.13534v4",
+        "title": "LM-Cocktail: Resilient Tuning of Language Models via Model Merging",
+        "authors": [
+          "Shitao Xiao",
+          "Zheng Liu",
+          "Peitian Zhang",
+          "Xingrun Xing"
+        ],
+        "section": "4.2.1 Analysis on Decoder-based LM",
+        "chunkIndex": 36,
+        "totalChunks": 90
+      }
+    },
+    {
+      "id": "2311.13534v4-chunk-37",
+      "content": "| 50.57       | 51.32       | 39.62                | 47.92                  | 51.32         | 51.7                      | 51.32           |\n| college-biology                                           | 50.0        | 52.78       | 27.08                | 41.67                  | 52.08         | 49.31                     | 51.39           |\n| college-chemistry                                         | 23.0        | 26.0        | 31.0                 | 19.0                   | 29.0          | 29.0                      | 29.0            |\n| college-computer-science                                  | 29.0        | 37.0        | 37.0                 | 33.0                   | 46.0          | 43.0                      | 45.0            |\n| college-mathematics                                       | 29.0        | 33.0        | 36.0                 | 29.0                   | 31.0          | 35.0                      | 31.0            |\n| college-medicine",
+      "metadata": {
+        "source": "arxiv:2311.13534v4",
+        "title": "LM-Cocktail: Resilient Tuning of Language Models via Model Merging",
+        "authors": [
+          "Shitao Xiao",
+          "Zheng Liu",
+          "Peitian Zhang",
+          "Xingrun Xing"
+        ],
+        "section": "4.2.1 Analysis on Decoder-based LM",
+        "chunkIndex": 37,
+        "totalChunks": 90
+      }
+    },
+    {
+      "id": "2311.13534v4-chunk-38",
+      "content": "| 29.0        | 33.0        | 36.0                 | 29.0                   | 31.0          | 35.0                      | 31.0            |\n| college-medicine                                          | 38.15       | 40.46       | 31.79                | 28.32                  | 40.46         | 39.31                     | 40.46           |\n| college-physics                                           | 21.57       | 24.51       | 20.59                | 21.57                  | 19.61         | 19.61                     | 19.61           |\n| computer-security                                         | 59.0        | 54.0        | 40.0                 | 59.0                   | 55.0          | 49.0                      | 57.0            |\n| conceptual-physics                                        | 38.3        | 38.72       | 29.79                | 38.72                  | 39.57         | 39.57                     | 40.0            |\n| econometrics",
+      "metadata": {
+        "source": "arxiv:2311.13534v4",
+        "title": "LM-Cocktail: Resilient Tuning of Language Models via Model Merging",
+        "authors": [
+          "Shitao Xiao",
+          "Zheng Liu",
+          "Peitian Zhang",
+          "Xingrun Xing"
+        ],
+        "section": "4.2.1 Analysis on Decoder-based LM",
+        "chunkIndex": 38,
+        "totalChunks": 90
+      }
+    },
+    {
+      "id": "2311.13534v4-chunk-39",
+      "content": "| 38.3        | 38.72       | 29.79                | 38.72                  | 39.57         | 39.57                     | 40.0            |\n| econometrics                                              | 28.95       | 33.33       | 22.81                | 28.07                  | 26.32         | 35.09                     | 28.07           |\n| electrical-engineering                                    | 42.76       | 43.45       | 34.48                | 33.1                   | 46.9          | 44.14                     | 47.59           |\n| elementary-mathematics                                    | 27.25       | 28.04       | 21.16                | 28.84                  | 26.46         | 26.72                     | 26.72           |\n| formal-logic                                              | 22.22       | 25.4        | 35.71                | 28.57                  | 25.4          | 24.6                      | 25.4            |\n| global-facts",
+      "metadata": {
+        "source": "arxiv:2311.13534v4",
+        "title": "LM-Cocktail: Resilient Tuning of Language Models via Model Merging",
+        "authors": [
+          "Shitao Xiao",
+          "Zheng Liu",
+          "Peitian Zhang",
+          "Xingrun Xing"
+        ],
+        "section": "4.2.1 Analysis on Decoder-based LM",
+        "chunkIndex": 39,
+        "totalChunks": 90
+      }
+    },
+    {
+      "id": "2311.13534v4-chunk-40",
+      "content": "| 22.22       | 25.4        | 35.71                | 28.57                  | 25.4          | 24.6                      | 25.4            |\n| global-facts                                              | 41.0        | 31.0        | 26.0                 | 37.0                   | 35.0          | 33.0                      | 35.0            |\n| high-school-biology                                       | 46.45       | 52.58       | 33.23                | 35.16                  | 53.87         | 53.55                     | 53.87           |\n| high-school-chemistry                                     | 30.54       | 33.99       | 21.67                | 30.05                  | 32.02         | 32.51                     | 31.53           |\n| high-school-computer-science                              | 39.0        | 46.0        | 30.0                 | 37.0                   | 40.0          | 41.0                      | 40.0            |\n| high-school-european-history",
+      "metadata": {
+        "source": "arxiv:2311.13534v4",
+        "title": "LM-Cocktail: Resilient Tuning of Language Models via Model Merging",
+        "authors": [
+          "Shitao Xiao",
+          "Zheng Liu",
+          "Peitian Zhang",
+          "Xingrun Xing"
+        ],
+        "section": "4.2.1 Analysis on Decoder-based LM",
+        "chunkIndex": 40,
+        "totalChunks": 90
+      }
+    },
+    {
+      "id": "2311.13534v4-chunk-41",
+      "content": "| 39.0        | 46.0        | 30.0                 | 37.0                   | 40.0          | 41.0                      | 40.0            |\n| high-school-european-history                              | 60.61       | 56.97       | 32.12                | 51.52                  | 63.03         | 63.64                     | 64.85           |\n| high-school-geography high-school-government-and-politics | 57.07       | 59.6 67.36  | 33.33                | 55.56                  | 60.1 70.98    | 61.62 66.84               | 59.09 70.98     |\n| high-school-macroeconomics                                | 70.47 39.23 | 41.54       | 38.34 31.79          | 39.38 38.21            | 45.64         |                           |                 |\n|                                                           |             | 23.7        | 22.96                | 25.19                  | 24.81         | 44.1                      | 44.87           |\n| high-school-mathematics high-schoo",
+      "metadata": {
+        "source": "arxiv:2311.13534v4",
+        "title": "LM-Cocktail: Resilient Tuning of Language Models via Model Merging",
+        "authors": [
+          "Shitao Xiao",
+          "Zheng Liu",
+          "Peitian Zhang",
+          "Xingrun Xing"
+        ],
+        "section": "4.2.1 Analysis on Decoder-based LM",
+        "chunkIndex": 41,
+        "totalChunks": 90
+      }
+    },
+    {
+      "id": "2311.13534v4-chunk-42",
+      "content": "|             | 23.7        | 22.96                | 25.19                  | 24.81         | 44.1                      | 44.87           |\n| high-school-mathematics high-school-microeconomics        | 26.3 36.55  | 43.7        | 31.93                | 36.55                  | 41.6          | 24.44 40.34               | 24.81 41.6      |\n| high-school-physics                                       | 25.83       | 28.48       | 29.8                 | 27.81                  | 29.14         | 30.46                     | 29.14           |\n| high-school-psychology                                    | 59.63       | 64.04       | 33.94                | 60.0                   | 65.32         | 65.87                     | 64.77           |\n| high-school-statistics                                    | 23.61       | 31.48       | 36.57                | 25.46                  | 28.24         | 30.09                     | 28.7            |\n| high-school-us-history",
+      "metadata": {
+        "source": "arxiv:2311.13534v4",
+        "title": "LM-Cocktail: Resilient Tuning of Language Models via Model Merging",
+        "authors": [
+          "Shitao Xiao",
+          "Zheng Liu",
+          "Peitian Zhang",
+          "Xingrun Xing"
+        ],
+        "section": "4.2.1 Analysis on Decoder-based LM",
+        "chunkIndex": 42,
+        "totalChunks": 90
+      }
+    },
+    {
+      "id": "2311.13534v4-chunk-43",
+      "content": "| 23.61       | 31.48       | 36.57                | 25.46                  | 28.24         | 30.09                     | 28.7            |\n| high-school-us-history                                    | 65.2        | 66.18       | 38.24                | 65.2                   | 65.69         | 66.67                     | 64.71           |\n| high-school-world-history                                 | 61.18       | 66.24       | 35.02                | 57.81                  | 66.24         | 65.82                     | 65.4            |\n|                                                           |             |             |                      |                        | 58.74         | 54.26                     | 58.74           |\n| human-aging human-sexuality                               | 58.74       | 57.4        | 36.77                | 55.61                  | 57.25         | 55.73                     | 56.49           |\n| international-law",
+      "metadata": {
+        "source": "arxiv:2311.13534v4",
+        "title": "LM-Cocktail: Resilient Tuning of Language Models via Model Merging",
+        "authors": [
+          "Shitao Xiao",
+          "Zheng Liu",
+          "Peitian Zhang",
+          "Xingrun Xing"
+        ],
+        "section": "4.2.1 Analysis on Decoder-based LM",
+        "chunkIndex": 43,
+        "totalChunks": 90
+      }
+    },
+    {
+      "id": "2311.13534v4-chunk-44",
+      "content": "| 58.74       | 57.4        | 36.77                | 55.61                  | 57.25         | 55.73                     | 56.49           |\n| international-law                                         | 54.96 59.5  | 48.09 57.02 | 38.17 42.15          | 29.01 48.76            | 61.16         |                           | 60.33           |\n| jurisprudence                                             | 55.56       | 57.41       | 34.26                | 52.78                  | 49.07         | 58.68 50.93               | 50.93           |\n| logical-fallacies                                         | 58.28       | 53.99       | 29.45                | 57.67                  | 55.21         | 55.83                     | 54.6            |\n| machine-learning                                          | 36.61       | 35.71       | 28.57                | 33.04                  | 39.29         | 41.07                     | 41.96           |\n| management",
+      "metadata": {
+        "source": "arxiv:2311.13534v4",
+        "title": "LM-Cocktail: Resilient Tuning of Language Models via Model Merging",
+        "authors": [
+          "Shitao Xiao",
+          "Zheng Liu",
+          "Peitian Zhang",
+          "Xingrun Xing"
+        ],
+        "section": "4.2.1 Analysis on Decoder-based LM",
+        "chunkIndex": 44,
+        "totalChunks": 90
+      }
+    },
+    {
+      "id": "2311.13534v4-chunk-45",
+      "content": "| 36.61       | 35.71       | 28.57                | 33.04                  | 39.29         | 41.07                     | 41.96           |\n| management                                                | 64.08       | 67.96       | 43.69                | 61.17                  | 68.93         | 66.99                     | 68.93           |\n| marketing                                                 | 73.5        | 74.36       | 48.29                | 73.5                   | 76.5          | 70.94                     | 76.07           |\n| medical-genetics                                          | 46.0        | 53.0        | 32.0                 | 49.0                   | 50.0          | 51.0                      | 49.0            |\n| miscellaneous                                             | 66.16       | 66.54 52.89 | 38.19 28.32          | 65.13 44.22            | 68.58         | 65.52 49.13               | 69.6 50.0       |\n| moral-disputes",
+      "metadata": {
+        "source": "arxiv:2311.13534v4",
+        "title": "LM-Cocktail: Resilient Tuning of Language Models via Model Merging",
+        "authors": [
+          "Shitao Xiao",
+          "Zheng Liu",
+          "Peitian Zhang",
+          "Xingrun Xing"
+        ],
+        "section": "4.2.1 Analysis on Decoder-based LM",
+        "chunkIndex": 45,
+        "totalChunks": 90
+      }
+    },
+    {
+      "id": "2311.13534v4-chunk-46",
+      "content": "| 66.16       | 66.54 52.89 | 38.19 28.32          | 65.13 44.22            | 68.58         | 65.52 49.13               | 69.6 50.0       |\n| moral-disputes                                            | 50.87       |             |                      |                        | 49.42         |                           |                 |\n| moral-scenarios                                           | 24.25       | 21.34       | 24.8                 | 23.35                  | 24.25         | 24.25                     | 24.25           |\n| nutrition                                                 | 50.0        | 51.96       | 40.85                | 47.71                  | 54.58         | 50.0                      | 54.9            |\n| philosophy                                                | 51.77       | 56.91       | 30.87                | 47.59                  | 54.02         | 53.7                      | 53.05           |\n| prehistory",
+      "metadata": {
+        "source": "arxiv:2311.13534v4",
+        "title": "LM-Cocktail: Resilient Tuning of Language Models via Model Merging",
+        "authors": [
+          "Shitao Xiao",
+          "Zheng Liu",
+          "Peitian Zhang",
+          "Xingrun Xing"
+        ],
+        "section": "4.2.1 Analysis on Decoder-based LM",
+        "chunkIndex": 46,
+        "totalChunks": 90
+      }
+    },
+    {
+      "id": "2311.13534v4-chunk-47",
+      "content": "| 51.77       | 56.91       | 30.87                | 47.59                  | 54.02         | 53.7                      | 53.05           |\n| prehistory                                                | 51.85       | 56.79       | 31.79                | 51.85                  | 51.85         | 49.38                     | 51.23           |\n| professional-accounting                                   | 34.75       | 35.46       | 29.08                | 34.75                  | 37.23         | 36.52                     | 37.94           |\n| professional-law                                          | 34.55       | 33.31       | 27.71                | 31.03                  | 36.11         | 36.31                     | 36.05           |\n| professional-medicine                                     | 40.44       | 34.19       | 29.41                | 25.37                  | 43.01         | 44.85                     | 43.75           |\n| professional-psychology",
+      "metadata": {
+        "source": "arxiv:2311.13534v4",
+        "title": "LM-Cocktail: Resilient Tuning of Language Models via Model Merging",
+        "authors": [
+          "Shitao Xiao",
+          "Zheng Liu",
+          "Peitian Zhang",
+          "Xingrun Xing"
+        ],
+        "section": "4.2.1 Analysis on Decoder-based LM",
+        "chunkIndex": 47,
+        "totalChunks": 90
+      }
+    },
+    {
+      "id": "2311.13534v4-chunk-48",
+      "content": "| 40.44       | 34.19       | 29.41                | 25.37                  | 43.01         | 44.85                     | 43.75           |\n| professional-psychology                                   | 44.93       | 47.55       | 29.74                | 42.32                  |               | 44.61                     | 45.59           |\n| public-relations                                          | 53.64 49.8  | 51.82       | 30.0                 |                        | 45.92         | 54.55                     | 56.36 56.33     |\n| security-studies                                          |             | 45.71       | 27.76 46.27          | 38.18 48.57            | 56.36 55.1    | 57.14 74.63               | 72.14           |\n| sociology                                                 | 71.14 73.0  | 57.21       |                      | 47.76                  | 71.64 71.0    |                           | 73.0            |\n| us-foreign-policy virology",
+      "metadata": {
+        "source": "arxiv:2311.13534v4",
+        "title": "LM-Cocktail: Resilient Tuning of Language Models via Model Merging",
+        "authors": [
+          "Shitao Xiao",
+          "Zheng Liu",
+          "Peitian Zhang",
+          "Xingrun Xing"
+        ],
+        "section": "4.2.1 Analysis on Decoder-based LM",
+        "chunkIndex": 48,
+        "totalChunks": 90
+      }
+    },
+    {
+      "id": "2311.13534v4-chunk-49",
+      "content": "| 71.14 73.0  | 57.21       |                      | 47.76                  | 71.64 71.0    |                           | 73.0            |\n| us-foreign-policy virology                                | 45.78       | 68.0 43.37  | 42.0 34.34           | 67.0 43.98             | 46.39         | 67.0 42.77                | 46.99           |\n| world-religions                                           | 64.91       | 67.84       | 37.43                | 61.99                  | 70.18         | 67.84                     | 70.18           |\n\ntasks from MMLU benchmark. There are 57 tasks in MMLU, which are different from the fine-tuning tasks in section 3.1. We use the evaluation script and five-shot examples from the widely used framework EleutherAI 6 .\n\nThe results are summarized in Table 3. 'LlamaICL' indicates the results using in-context learning with five examples.",
+      "metadata": {
+        "source": "arxiv:2311.13534v4",
+        "title": "LM-Cocktail: Resilient Tuning of Language Models via Model Merging",
+        "authors": [
+          "Shitao Xiao",
+          "Zheng Liu",
+          "Peitian Zhang",
+          "Xingrun Xing"
+        ],
+        "section": "4.2.1 Analysis on Decoder-based LM",
+        "chunkIndex": 49,
+        "totalChunks": 90
+      }
+    },
+    {
+      "id": "2311.13534v4-chunk-50",
+      "content": "ation script and five-shot examples from the widely used framework EleutherAI 6 .\n\nThe results are summarized in Table 3. 'LlamaICL' indicates the results using in-context learning with five examples. For Multitask-learning, we merge all training data from 9 fine-tune tasks (see section 3.1) and fine-tune the Llama on this multitask datasets. For LM-Cocktial, we use the official 5 examples to compute weights and tune a new model for each task by merging 9 finetuned models and the base model. Inspired by LoraHub (Huang et al., 2023), we also compare an alternative method to compute weight: using black-box optimization in (Huang et al., 2023) to\n\n6 https://github.com/EleutherAI/lm-evaluation-harness\n\nfind the optimal weight assignment. We use LMCocktail blackbox to denote this variant. Besides, we aggregate all examples from each task to compute merging weights, and produce a unified model named LM-Cocktail u for all tasks, rather than generate a separate model for each task.",
+      "metadata": {
+        "source": "arxiv:2311.13534v4",
+        "title": "LM-Cocktail: Resilient Tuning of Language Models via Model Merging",
+        "authors": [
+          "Shitao Xiao",
+          "Zheng Liu",
+          "Peitian Zhang",
+          "Xingrun Xing"
+        ],
+        "section": "4.2.1 Analysis on Decoder-based LM",
+        "chunkIndex": 50,
+        "totalChunks": 90
+      }
+    },
+    {
+      "id": "2311.13534v4-chunk-51",
+      "content": "riant. Besides, we aggregate all examples from each task to compute merging weights, and produce a unified model named LM-Cocktail u for all tasks, rather than generate a separate model for each task.\n\nThere are some key findings:\n\n- The performance of multitask-learning is inferior to the original llama model. This shows fine-tuning will compromise the overall generality of the original model, and also indicates there is no direct correlation between these fine-tuning datasets and the tasks listed on the MMLU.\n- LM-Cocktail achieves higher accuracy than the Llama and Llama-ICL. Despite there are no fine-tuning datasets related to MMLU tasks, our approach demonstrates a significant\n\nTable 4: Results of merging decoder models from other tasks.\n\n| Dataset      |   BGE |   Multitask-learning |   LM-Cocktail blackbox |   LM-Cocktail |   LM-Cocktail' u blackbox |   LM-Cocktail u |\n|--------------|-------|----------------------|------------------------|---------------|-----------------------",
+      "metadata": {
+        "source": "arxiv:2311.13534v4",
+        "title": "LM-Cocktail: Resilient Tuning of Language Models via Model Merging",
+        "authors": [
+          "Shitao Xiao",
+          "Zheng Liu",
+          "Peitian Zhang",
+          "Xingrun Xing"
+        ],
+        "section": "4.2.1 Analysis on Decoder-based LM",
+        "chunkIndex": 51,
+        "totalChunks": 90
+      }
+    },
+    {
+      "id": "2311.13534v4-chunk-52",
+      "content": "|   LM-Cocktail blackbox |   LM-Cocktail |   LM-Cocktail' u blackbox |   LM-Cocktail u |\n|--------------|-------|----------------------|------------------------|---------------|---------------------------|-----------------|\n| ArguAna      | 63.61 |                59.18 |                  61.43 |         64.34 |                     65.07 |           64.31 |\n| ClimateFEVER | 29.51 |                25.8  |                  10.65 |         29.5  |                     29.94 |           29.17 |\n| DBPedia      | 40.56 |                39.77 |                  21.13 |         40.37 |                     40.46 |           40.83 |\n| FEVER        | 83.66 |                73.76 |                  83.91 |         86.07 |                     84.21 |           86.1  |\n| FiQA2018     | 39.11 |                41.7  |                  38.53 |         41.89 |                     39.2  |           42.05 |\n| NFCorpus     | 36.83 |                37.49 |                  36.99 |         37.66 |",
+      "metadata": {
+        "source": "arxiv:2311.13534v4",
+        "title": "LM-Cocktail: Resilient Tuning of Language Models via Model Merging",
+        "authors": [
+          "Shitao Xiao",
+          "Zheng Liu",
+          "Peitian Zhang",
+          "Xingrun Xing"
+        ],
+        "section": "4.2.1 Analysis on Decoder-based LM",
+        "chunkIndex": 52,
+        "totalChunks": 90
+      }
+    },
+    {
+      "id": "2311.13534v4-chunk-53",
+      "content": "41.7  |                  38.53 |         41.89 |                     39.2  |           42.05 |\n| NFCorpus     | 36.83 |                37.49 |                  36.99 |         37.66 |                     36.7  |           37.64 |\n| NQ           | 51.05 |                53.25 |                  50.95 |         53.47 |                     50.75 |           53.4  |\n| SCIDOCS      | 21.48 |                21.04 |                  21.87 |         22.55 |                     21.95 |           22.31 |\n| SciFact      | 73.81 |                73.82 |                  74.31 |         75.14 |                     73.31 |           75.12 |\n| Touche2020   | 19.54 |                22.96 |                  19.31 |         20.9  |                     20.56 |           20.54 |\n| TRECCOVID    | 67.18 |                74.51 |                  71.73 |         71.19 |                     71.3  |           70.32 |\n| CQADupstack  | 41.04 |                42.74 |                  39.72 |         43.03 |",
+      "metadata": {
+        "source": "arxiv:2311.13534v4",
+        "title": "LM-Cocktail: Resilient Tuning of Language Models via Model Merging",
+        "authors": [
+          "Shitao Xiao",
+          "Zheng Liu",
+          "Peitian Zhang",
+          "Xingrun Xing"
+        ],
+        "section": "4.2.1 Analysis on Decoder-based LM",
+        "chunkIndex": 53,
+        "totalChunks": 90
+      }
+    },
+    {
+      "id": "2311.13534v4-chunk-54",
+      "content": "74.51 |                  71.73 |         71.19 |                     71.3  |           70.32 |\n| CQADupstack  | 41.04 |                42.74 |                  39.72 |         43.03 |                     40.9  |           43.03 |\n| Avg          | 47.28 |                47.17 |                  44.21 |         48.84 |                     47.86 |           48.73 |\n\nimprovement in performance via merging finetuned models. LM-Cocktail merely involves recombining existing models without the need for additional model training. Furthermore, it does not introduce any latency to the inference process, while the Llama-ICL needs to process more tokens because of the added fewshot prompt.\n\n- In comparison to black-box optimization, our method to compute weight is simpler yet highly effective.",
+      "metadata": {
+        "source": "arxiv:2311.13534v4",
+        "title": "LM-Cocktail: Resilient Tuning of Language Models via Model Merging",
+        "authors": [
+          "Shitao Xiao",
+          "Zheng Liu",
+          "Peitian Zhang",
+          "Xingrun Xing"
+        ],
+        "section": "4.2.1 Analysis on Decoder-based LM",
+        "chunkIndex": 54,
+        "totalChunks": 90
+      }
+    },
+    {
+      "id": "2311.13534v4-chunk-55",
+      "content": "process, while the Llama-ICL needs to process more tokens because of the added fewshot prompt.\n\n- In comparison to black-box optimization, our method to compute weight is simpler yet highly effective. We observed that black-box optimization methods struggle to ensure the sum of weights equals 1, leading to suboptimal performance.\n- The unified model LM-Cocktail u also shows superior performance, which demonstrates the proposed method is capable of simultaneously handling multiple new tasks. Besides, we further investigate the impact of the number of examples in section 4.4.",
+      "metadata": {
+        "source": "arxiv:2311.13534v4",
+        "title": "LM-Cocktail: Resilient Tuning of Language Models via Model Merging",
+        "authors": [
+          "Shitao Xiao",
+          "Zheng Liu",
+          "Peitian Zhang",
+          "Xingrun Xing"
+        ],
+        "section": "4.2.1 Analysis on Decoder-based LM",
+        "chunkIndex": 55,
+        "totalChunks": 90
+      }
+    },
+    {
+      "id": "2311.13534v4-chunk-56",
+      "content": "Following the setting in section 4.2.1, we compare the performance of the original BGE model, multitask-learning model, and LM-Cocktail with different methods to mix models. We collect 9 fine-tuned models from section 3.2. For evaluation, we excluded tasks which has been fine-tuned in section 3.2 (i.e., HotpotQA, MSMATCO, and Quora). As reported in Table 4, LM-Cocktail achieves higher accuracy than other models. It demonstrates that we can improve the accuracy of the new task by only mixing existing language models.",
+      "metadata": {
+        "source": "arxiv:2311.13534v4",
+        "title": "LM-Cocktail: Resilient Tuning of Language Models via Model Merging",
+        "authors": [
+          "Shitao Xiao",
+          "Zheng Liu",
+          "Peitian Zhang",
+          "Xingrun Xing"
+        ],
+        "section": "4.2.2 Analysis on Encoder-based LM",
+        "chunkIndex": 56,
+        "totalChunks": 90
+      }
+    },
+    {
+      "id": "2311.13534v4-chunk-57",
+      "content": "In this section, we conduct a performance comparison under various weights α . To eliminate the influence of other factors, we conducted experiments in the simplest configuration: merging the fine-tuned model and base model based on the weight α .\n\nThe results of decoders are shown in Figure 2, and the results of encoder models can be seen in Appendix B.2. We incrementally varied the hyperparameter α from 0 to 1, and evaluated the model's performance on the target task as well as other unrelated tasks. It can be observed that by changing the weights of the fine-tuned model, we can significantly improve the accuracy on other tasks, even surpassing that of the base model, while ensuring that the accuracy on the target task does not decline.\n\nFigure 2: Performance with different α .\n\n<!-- image -->",
+      "metadata": {
+        "source": "arxiv:2311.13534v4",
+        "title": "LM-Cocktail: Resilient Tuning of Language Models via Model Merging",
+        "authors": [
+          "Shitao Xiao",
+          "Zheng Liu",
+          "Peitian Zhang",
+          "Xingrun Xing"
+        ],
+        "section": "4.3 Impact of Weight α",
+        "chunkIndex": 57,
+        "totalChunks": 90
+      }
+    },
+    {
+      "id": "2311.13534v4-chunk-58",
+      "content": "Additionally, we investigate the effect of the number of examples. Given some specialist models from other tasks, LM-Cocktail needs a few examples for new task to compute the merging weights, and merge these specialist models via weighted sum. Then the merged model can be used to enhance the model fine-tuned on new task or directly perform the new task. In this section, we evaluate the performance of merged models on new tasks following the setting in section 4.2. For decoderbased model, a total of 285 examples are provided\n\nin MMLU datasets, and we randomly sample 5, 50, and 100 examples from the entire set to merge the specialist models, and test their performance. For encoder-based model, there are a total of 115 examples, and we also sample a subset to evaluate its performance. The average metric is reported in Table 5.",
+      "metadata": {
+        "source": "arxiv:2311.13534v4",
+        "title": "LM-Cocktail: Resilient Tuning of Language Models via Model Merging",
+        "authors": [
+          "Shitao Xiao",
+          "Zheng Liu",
+          "Peitian Zhang",
+          "Xingrun Xing"
+        ],
+        "section": "4.4 Analysis on Number of Examples",
+        "chunkIndex": 58,
+        "totalChunks": 90
+      }
+    },
+    {
+      "id": "2311.13534v4-chunk-59",
+      "content": "list models, and test their performance. For encoder-based model, there are a total of 115 examples, and we also sample a subset to evaluate its performance. The average metric is reported in Table 5.\n\n| Model Type   |     5 |    50 |   100 |   All |\n|--------------|-------|-------|-------|-------|\n| Decoder      | 47.61 | 48.13 | 48.2  | 48.21 |\n| Encoder      | 48.67 | 48.76 | 48.77 | 48.73 |\n\nTable 5: The performance with different number of examples\n\nAs shown in Table 5, Our approach achieves satisfactory performance using only five examples, and performance further improves with an increase in the number of examples. However, beyond fifty examples, the performance improvement becomes significantly limited.",
+      "metadata": {
+        "source": "arxiv:2311.13534v4",
+        "title": "LM-Cocktail: Resilient Tuning of Language Models via Model Merging",
+        "authors": [
+          "Shitao Xiao",
+          "Zheng Liu",
+          "Peitian Zhang",
+          "Xingrun Xing"
+        ],
+        "section": "4.4 Analysis on Number of Examples",
+        "chunkIndex": 59,
+        "totalChunks": 90
+      }
+    },
+    {
+      "id": "2311.13534v4-chunk-60",
+      "content": "Fine-tuning large-scale pre-trained language models with task-specific labeled data can further enhance their corresponding abilities, which become commonplace in natural language processing (Dodge et al., 2020). However, catastrophic forgetting problem generally exists in the continual fine-tuning of different language models (Luo et al., 2023): Fine-tuning can improve the performance of the target domain, but significantly undermine the language models' general capabilities beyond their target domain. One solution is to add the data from previous tasks to maintain the previous abilities (Rolnick et al., 2019; Shin et al., 2017; Rebuffi et al., 2017). Some regularization-based methods also have been proposed to alleviate this problem, where the updating of model parameters is regularized to preserve the general capability of the pre-trained model(Kirkpatrick et al., 2017; Li and Hoiem, 2017; Rannen et al., 2017).",
+      "metadata": {
+        "source": "arxiv:2311.13534v4",
+        "title": "LM-Cocktail: Resilient Tuning of Language Models via Model Merging",
+        "authors": [
+          "Shitao Xiao",
+          "Zheng Liu",
+          "Peitian Zhang",
+          "Xingrun Xing"
+        ],
+        "section": "5.1 Fine-tuning of Language Model",
+        "chunkIndex": 60,
+        "totalChunks": 90
+      }
+    },
+    {
+      "id": "2311.13534v4-chunk-61",
+      "content": "iate this problem, where the updating of model parameters is regularized to preserve the general capability of the pre-trained model(Kirkpatrick et al., 2017; Li and Hoiem, 2017; Rannen et al., 2017). Different from adding previous data, our method has no additional costs for training. Moreover, unlike regularizationbased methods, our proposed method requires no modification to the standard fine-tuning process.",
+      "metadata": {
+        "source": "arxiv:2311.13534v4",
+        "title": "LM-Cocktail: Resilient Tuning of Language Models via Model Merging",
+        "authors": [
+          "Shitao Xiao",
+          "Zheng Liu",
+          "Peitian Zhang",
+          "Xingrun Xing"
+        ],
+        "section": "5.1 Fine-tuning of Language Model",
+        "chunkIndex": 61,
+        "totalChunks": 90
+      }
+    },
+    {
+      "id": "2311.13534v4-chunk-62",
+      "content": "Ensembling the outputs of many models is a popular technique for improving the accuracy of deep learning models (Lakshminarayanan et al., 2017;\n\nOvadia et al., 2019; Hastie et al., 2009). However, this method requires each model to do a separate inference, which significantly increases computational costs. Instead of ensembling the outputs of models, model merging averages the weights of multiple models to improve the performance of a single model, which requires no extra computation at inference time (Wortsman et al., 2022a; Ilharco et al., 2022a). Wortsman et al. (Wortsman et al., 2022a) find that averaging the weights of models fine-tuned with different hyper-parameter configurations can often improve accuracy. Some researchers propose more complex methods to align the parameters of different models and merge them (Nguyen et al., 2021; Matena and Raffel, 2022; Jin et al., 2022).",
+      "metadata": {
+        "source": "arxiv:2311.13534v4",
+        "title": "LM-Cocktail: Resilient Tuning of Language Models via Model Merging",
+        "authors": [
+          "Shitao Xiao",
+          "Zheng Liu",
+          "Peitian Zhang",
+          "Xingrun Xing"
+        ],
+        "section": "5.2 Model Merging",
+        "chunkIndex": 62,
+        "totalChunks": 90
+      }
+    },
+    {
+      "id": "2311.13534v4-chunk-63",
+      "content": "s can often improve accuracy. Some researchers propose more complex methods to align the parameters of different models and merge them (Nguyen et al., 2021; Matena and Raffel, 2022; Jin et al., 2022). Prateek et.al and Yu et.al propose to delete the redundant values in the delta parameter before model merging (Yadav et al., 2023; Yu et al., 2023). These methods may also be helpful for the LM-Cocktail, and we leave them for future work.\n\nOne direction relevant to our work is applying model merging in robust fine-tuning. Wortsman et al. (Wortsman et al., 2022b) and Ilharco (Ilharco et al., 2022b) both find that the fine-tuned clip (Radford et al., 2021) model substantially improves accuracy on a given target distribution but reduces robustness to distribution shifts. To address this problem, they use a manually set coefficient to merge the fine-tuned model and the base model.",
+      "metadata": {
+        "source": "arxiv:2311.13534v4",
+        "title": "LM-Cocktail: Resilient Tuning of Language Models via Model Merging",
+        "authors": [
+          "Shitao Xiao",
+          "Zheng Liu",
+          "Peitian Zhang",
+          "Xingrun Xing"
+        ],
+        "section": "5.2 Model Merging",
+        "chunkIndex": 63,
+        "totalChunks": 90
+      }
+    },
+    {
+      "id": "2311.13534v4-chunk-64",
+      "content": "es accuracy on a given target distribution but reduces robustness to distribution shifts. To address this problem, they use a manually set coefficient to merge the fine-tuned model and the base model. Unlike these methods, we propose to utilize not only the base pre-trained model but also the specialist models from other tasks. In this way, our proposed method further improves the general capabilities and even can function in situations where fine-tuning is not feasible. Besides, we utilize a simple method to compute the merging weights for different models automatically.\n\nThe other related direction is utilizing model merging to do cross-task generalization. Most of these methods focus on merging parameterefficient modules (e.g., LoRA (Hu et al., 2021), soft prompt(Lester et al., 2021)). Ponti et al.(Ponti et al., 2023) introduce a latent-skill model, where they train a binary vector as router function to select skill modules for each task and then average the parameters of modules.",
+      "metadata": {
+        "source": "arxiv:2311.13534v4",
+        "title": "LM-Cocktail: Resilient Tuning of Language Models via Model Merging",
+        "authors": [
+          "Shitao Xiao",
+          "Zheng Liu",
+          "Peitian Zhang",
+          "Xingrun Xing"
+        ],
+        "section": "5.2 Model Merging",
+        "chunkIndex": 64,
+        "totalChunks": 90
+      }
+    },
+    {
+      "id": "2311.13534v4-chunk-65",
+      "content": ". Ponti et al.(Ponti et al., 2023) introduce a latent-skill model, where they train a binary vector as router function to select skill modules for each task and then average the parameters of modules. For the target task, Wu et al. (Wu et al., 2023) and Lv et al. (Lv et al., 2023) aggregate the parameters of lightweight task-specific experts which are learned from similar tasks. Some works also have been proposed to merge prompt embeddings from lots of source tasks to the target domain (Vu et al., 2021; Poth et al., 2021; Sun et al., 2023). The latest work is LoRAHub (Huang et al., 2023). Given a few examples, it uses the black-box optimization tool Shiwa (Liu et al., 2020) to combine multiple existing fine-tuned LoRA modules and generate a new LoRA module for the target task. In contrast to the above methods, we merge fine-tuned models and the base model with the aim of maintaining the general capabilities after finetuning.",
+      "metadata": {
+        "source": "arxiv:2311.13534v4",
+        "title": "LM-Cocktail: Resilient Tuning of Language Models via Model Merging",
+        "authors": [
+          "Shitao Xiao",
+          "Zheng Liu",
+          "Peitian Zhang",
+          "Xingrun Xing"
+        ],
+        "section": "5.2 Model Merging",
+        "chunkIndex": 65,
+        "totalChunks": 90
+      }
+    },
+    {
+      "id": "2311.13534v4-chunk-66",
+      "content": "d generate a new LoRA module for the target task. In contrast to the above methods, we merge fine-tuned models and the base model with the aim of maintaining the general capabilities after finetuning. Meanwhile, to ensure performance on the target task, we employ losses from a small set of examples to filter out models that perform poorly on the target task. Besides, we merge the entire model instead of the parameter-efficient modules.",
+      "metadata": {
+        "source": "arxiv:2311.13534v4",
+        "title": "LM-Cocktail: Resilient Tuning of Language Models via Model Merging",
+        "authors": [
+          "Shitao Xiao",
+          "Zheng Liu",
+          "Peitian Zhang",
+          "Xingrun Xing"
+        ],
+        "section": "5.2 Model Merging",
+        "chunkIndex": 66,
+        "totalChunks": 90
+      }
+    },
+    {
+      "id": "2311.13534v4-chunk-67",
+      "content": "In this work, we introduce the LM-Cocktail, a simple method to improve performance on target tasks without decreasing accuracy on other unrelated tasks. LM-Cocktail produces a resilient-tuned model by weighted averaging the parameters from different models: the model fine-tuned on the target task, the pre-trained base model, and the peer models from other domains. The empirical results on both decoder and encoder models demonstrate that LM-Cocktail can achieve strong performance in the whole scope of general tasks while preserving a superior capacity in its targeted domain. We further demonstrated the effectiveness of LM-Cocktail when unable to fine-tune on domain-specific data. In such cases, our approach can merge existing models based on very few examples to enhance the accuracy of the target task.",
+      "metadata": {
+        "source": "arxiv:2311.13534v4",
+        "title": "LM-Cocktail: Resilient Tuning of Language Models via Model Merging",
+        "authors": [
+          "Shitao Xiao",
+          "Zheng Liu",
+          "Peitian Zhang",
+          "Xingrun Xing"
+        ],
+        "section": "6 Conclusion",
+        "chunkIndex": 67,
+        "totalChunks": 90
+      }
+    },
+    {
+      "id": "2311.13534v4-chunk-68",
+      "content": "- Tom Brown, Benjamin Mann, Nick Ryder, Melanie Subbiah, Jared D Kaplan, Prafulla Dhariwal, Arvind Neelakantan, Pranav Shyam, Girish Sastry, Amanda Askell, et al. 2020. Language models are few-shot learners. Advances in neural information processing systems , 33:1877-1901.\n- Mark Chen, Jerry Tworek, Heewoo Jun, Qiming Yuan, Henrique Ponde de Oliveira Pinto, Jared Kaplan, Harri Edwards, Yuri Burda, Nicholas Joseph, Greg Brockman, et al. 2021. Evaluating large language models trained on code. arXiv preprint arXiv:2107.03374 .\n- Sanyuan Chen, Yutai Hou, Yiming Cui, Wanxiang Che, Ting Liu, and Xiangzhan Yu. 2020. Recall and learn: Fine-tuning deep pretrained language models with less forgetting. arXiv preprint arXiv:2004.12651 .\n- Daixuan Cheng, Shaohan Huang, Junyu Bi, Yuefeng Zhan, Jianfeng Liu, Yujing Wang, Hao Sun, Furu Wei, Denvy Deng, and Qi Zhang. 2023.",
+      "metadata": {
+        "source": "arxiv:2311.13534v4",
+        "title": "LM-Cocktail: Resilient Tuning of Language Models via Model Merging",
+        "authors": [
+          "Shitao Xiao",
+          "Zheng Liu",
+          "Peitian Zhang",
+          "Xingrun Xing"
+        ],
+        "section": "References",
+        "chunkIndex": 68,
+        "totalChunks": 90
+      }
+    },
+    {
+      "id": "2311.13534v4-chunk-69",
+      "content": "age models with less forgetting. arXiv preprint arXiv:2004.12651 .\n- Daixuan Cheng, Shaohan Huang, Junyu Bi, Yuefeng Zhan, Jianfeng Liu, Yujing Wang, Hao Sun, Furu Wei, Denvy Deng, and Qi Zhang. 2023. Uprise: Universal prompt retrieval for improving zero-shot evaluation.\n- Hyung Won Chung, Le Hou, Shayne Longpre, Barret Zoph, Yi Tay, William Fedus, Eric Li, Xuezhi Wang, Mostafa Dehghani, Siddhartha Brahma, et al. 2022. Scaling instruction-finetuned language models. arXiv preprint arXiv:2210.11416 .\n- Jacob Devlin, Ming-Wei Chang, Kenton Lee, and Kristina Toutanova. 2018. Bert: Pre-training of deep bidirectional transformers for language understanding. arXiv preprint arXiv:1810.04805 .\n- Jesse Dodge, Gabriel Ilharco, Roy Schwartz, Ali Farhadi, Hannaneh Hajishirzi, and Noah Smith. 2020. Fine-tuning pretrained language models: Weight initializations, data orders, and early stopping.",
+      "metadata": {
+        "source": "arxiv:2311.13534v4",
+        "title": "LM-Cocktail: Resilient Tuning of Language Models via Model Merging",
+        "authors": [
+          "Shitao Xiao",
+          "Zheng Liu",
+          "Peitian Zhang",
+          "Xingrun Xing"
+        ],
+        "section": "References",
+        "chunkIndex": 69,
+        "totalChunks": 90
+      }
+    },
+    {
+      "id": "2311.13534v4-chunk-70",
+      "content": ".\n- Jesse Dodge, Gabriel Ilharco, Roy Schwartz, Ali Farhadi, Hannaneh Hajishirzi, and Noah Smith. 2020. Fine-tuning pretrained language models: Weight initializations, data orders, and early stopping. arXiv preprint arXiv:2002.06305 .\n- Ian J Goodfellow, Mehdi Mirza, Da Xiao, Aaron Courville, and Yoshua Bengio. 2013. An empirical investigation of catastrophic forgetting in gradient-based neural networks. arXiv preprint arXiv:1312.6211 .\n- Trevor Hastie, Robert Tibshirani, Jerome H Friedman, and Jerome H Friedman. 2009. The elements of statistical learning: data mining, inference, and prediction , volume 2. Springer.\n- Dan Hendrycks, Collin Burns, Steven Basart, Andy Zou, Mantas Mazeika, Dawn Song, and Jacob Steinhardt. 2020. Measuring massive multitask language understanding. arXiv preprint arXiv:2009.03300 .\n- Edward J Hu, Yelong Shen, Phillip Wallis, Zeyuan Allen-Zhu, Yuanzhi Li, Shean Wang, Lu Wang, and Weizhu Chen. 2021. Lora: Low-rank adaptation of large language models.",
+      "metadata": {
+        "source": "arxiv:2311.13534v4",
+        "title": "LM-Cocktail: Resilient Tuning of Language Models via Model Merging",
+        "authors": [
+          "Shitao Xiao",
+          "Zheng Liu",
+          "Peitian Zhang",
+          "Xingrun Xing"
+        ],
+        "section": "References",
+        "chunkIndex": 70,
+        "totalChunks": 90
+      }
+    },
+    {
+      "id": "2311.13534v4-chunk-71",
+      "content": "iv preprint arXiv:2009.03300 .\n- Edward J Hu, Yelong Shen, Phillip Wallis, Zeyuan Allen-Zhu, Yuanzhi Li, Shean Wang, Lu Wang, and Weizhu Chen. 2021. Lora: Low-rank adaptation of large language models. arXiv preprint arXiv:2106.09685 .\n- Chengsong Huang, Qian Liu, Bill Yuchen Lin, Tianyu Pang, Chao Du, and Min Lin. 2023. Lorahub: Efficient cross-task generalization via dynamic lora composition.\n- Gabriel Ilharco, Marco Tulio Ribeiro, Mitchell Wortsman, Suchin Gururangan, Ludwig Schmidt, Hannaneh Hajishirzi, and Ali Farhadi. 2022a. Editing models with task arithmetic. arXiv preprint arXiv:2212.04089 .\n- Gabriel Ilharco, Mitchell Wortsman, Samir Yitzhak Gadre, Shuran Song, Hannaneh Hajishirzi, Simon Kornblith, Ali Farhadi, and Ludwig Schmidt. 2022b. Patching open-vocabulary models by interpolating weights. In Advances in Neural Information Processing Systems .\n- Xisen Jin, Xiang Ren, Daniel Preotiuc-Pietro, and Pengxiang Cheng. 2022.",
+      "metadata": {
+        "source": "arxiv:2311.13534v4",
+        "title": "LM-Cocktail: Resilient Tuning of Language Models via Model Merging",
+        "authors": [
+          "Shitao Xiao",
+          "Zheng Liu",
+          "Peitian Zhang",
+          "Xingrun Xing"
+        ],
+        "section": "References",
+        "chunkIndex": 71,
+        "totalChunks": 90
+      }
+    },
+    {
+      "id": "2311.13534v4-chunk-72",
+      "content": "midt. 2022b. Patching open-vocabulary models by interpolating weights. In Advances in Neural Information Processing Systems .\n- Xisen Jin, Xiang Ren, Daniel Preotiuc-Pietro, and Pengxiang Cheng. 2022. Dataless knowledge fusion by merging weights of language models. arXiv preprint arXiv:2212.09849 .\n- James Kirkpatrick, Razvan Pascanu, Neil Rabinowitz, Joel Veness, Guillaume Desjardins, Andrei A Rusu, Kieran Milan, John Quan, Tiago Ramalho, Agnieszka Grabska-Barwinska, et al. 2017. Overcoming catastrophic forgetting in neural networks. Proceedings of the national academy of sciences , 114(13):3521-3526.\n- Balaji Lakshminarayanan, Alexander Pritzel, and Charles Blundell. 2017. Simple and scalable predictive uncertainty estimation using deep ensembles. Advances in neural information processing systems , 30.\n- Brian Lester, Rami Al-Rfou, and Noah Constant. 2021. The power of scale for parameter-efficient prompt tuning. arXiv preprint arXiv:2104.08691 .\n- Zhizhong Li and Derek Hoiem. 2017.",
+      "metadata": {
+        "source": "arxiv:2311.13534v4",
+        "title": "LM-Cocktail: Resilient Tuning of Language Models via Model Merging",
+        "authors": [
+          "Shitao Xiao",
+          "Zheng Liu",
+          "Peitian Zhang",
+          "Xingrun Xing"
+        ],
+        "section": "References",
+        "chunkIndex": 72,
+        "totalChunks": 90
+      }
+    },
+    {
+      "id": "2311.13534v4-chunk-73",
+      "content": "ng systems , 30.\n- Brian Lester, Rami Al-Rfou, and Noah Constant. 2021. The power of scale for parameter-efficient prompt tuning. arXiv preprint arXiv:2104.08691 .\n- Zhizhong Li and Derek Hoiem. 2017. Learning without forgetting. IEEE transactions on pattern analysis and machine intelligence , 40(12):2935-2947.\n- Jialin Liu, Antoine Moreau, Mike Preuss, Jeremy Rapin, Baptiste Roziere, Fabien Teytaud, and Olivier Teytaud. 2020. Versatile black-box optimization. In Proceedings of the 2020 Genetic and Evolutionary Computation Conference , pages 620-628.\n- Yinhan Liu, Myle Ott, Naman Goyal, Jingfei Du, Mandar Joshi, Danqi Chen, Omer Levy, Mike Lewis, Luke Zettlemoyer, and Veselin Stoyanov. 2019. Roberta: A robustly optimized bert pretraining approach. arXiv preprint arXiv:1907.11692 .\n- Yun Luo, Zhen Yang, Fandong Meng, Yafu Li, Jie Zhou, and Yue Zhang. 2023. An empirical study of catastrophic forgetting in large language models during continual fine-tuning.",
+      "metadata": {
+        "source": "arxiv:2311.13534v4",
+        "title": "LM-Cocktail: Resilient Tuning of Language Models via Model Merging",
+        "authors": [
+          "Shitao Xiao",
+          "Zheng Liu",
+          "Peitian Zhang",
+          "Xingrun Xing"
+        ],
+        "section": "References",
+        "chunkIndex": 73,
+        "totalChunks": 90
+      }
+    },
+    {
+      "id": "2311.13534v4-chunk-74",
+      "content": "rint arXiv:1907.11692 .\n- Yun Luo, Zhen Yang, Fandong Meng, Yafu Li, Jie Zhou, and Yue Zhang. 2023. An empirical study of catastrophic forgetting in large language models during continual fine-tuning. arXiv preprint arXiv:2308.08747 .\n- Xingtai Lv, Ning Ding, Yujia Qin, Zhiyuan Liu, and Maosong Sun. 2023. Parameter-efficient weight ensembling facilitates task-level knowledge transfer. In Proceedings of the 61st Annual Meeting of the Association for Computational Linguistics (Volume 2: Short Papers) , pages 270-282, Toronto, Canada. Association for Computational Linguistics.\n- Michael S Matena and Colin Raffel. 2022. Merging models with fisher-weighted averaging. In Advances in Neural Information Processing Systems .\n- Niklas Muennighoff, Nouamane Tazi, Loïc Magne, and Nils Reimers. 2022. Mteb: Massive text embedding benchmark. arXiv preprint arXiv:2210.07316 .\n- Dang Nguyen, Khai Nguyen, Nhat Ho, Dinh Phung, and Hung Bui. 2021.",
+      "metadata": {
+        "source": "arxiv:2311.13534v4",
+        "title": "LM-Cocktail: Resilient Tuning of Language Models via Model Merging",
+        "authors": [
+          "Shitao Xiao",
+          "Zheng Liu",
+          "Peitian Zhang",
+          "Xingrun Xing"
+        ],
+        "section": "References",
+        "chunkIndex": 74,
+        "totalChunks": 90
+      }
+    },
+    {
+      "id": "2311.13534v4-chunk-75",
+      "content": "ghoff, Nouamane Tazi, Loïc Magne, and Nils Reimers. 2022. Mteb: Massive text embedding benchmark. arXiv preprint arXiv:2210.07316 .\n- Dang Nguyen, Khai Nguyen, Nhat Ho, Dinh Phung, and Hung Bui. 2021. Model fusion of heterogeneous neural networks via cross-layer alignment. arXiv preprint arXiv:2110.15538 .\n- Long Ouyang, Jeffrey Wu, Xu Jiang, Diogo Almeida, Carroll Wainwright, Pamela Mishkin, Chong Zhang, Sandhini Agarwal, Katarina Slama, Alex Ray, et al. 2022. Training language models to follow instructions with human feedback. Advances in Neural Information Processing Systems , 35:27730-27744.\n- Yaniv Ovadia, Emily Fertig, Jie Ren, Zachary Nado, David Sculley, Sebastian Nowozin, Joshua Dillon, Balaji Lakshminarayanan, and Jasper Snoek. 2019. Can you trust your model's uncertainty? evaluating predictive uncertainty under dataset shift. Advances in neural information processing systems , 32.\n- Edoardo Maria Ponti, Alessandro Sordoni, Yoshua Bengio, and Siva Reddy. 2023.",
+      "metadata": {
+        "source": "arxiv:2311.13534v4",
+        "title": "LM-Cocktail: Resilient Tuning of Language Models via Model Merging",
+        "authors": [
+          "Shitao Xiao",
+          "Zheng Liu",
+          "Peitian Zhang",
+          "Xingrun Xing"
+        ],
+        "section": "References",
+        "chunkIndex": 75,
+        "totalChunks": 90
+      }
+    },
+    {
+      "id": "2311.13534v4-chunk-76",
+      "content": "ertainty? evaluating predictive uncertainty under dataset shift. Advances in neural information processing systems , 32.\n- Edoardo Maria Ponti, Alessandro Sordoni, Yoshua Bengio, and Siva Reddy. 2023. Combining parameterefficient modules for task-level generalisation. In Proceedings of the 17th Conference of the European Chapter of the Association for Computational Linguistics , pages 687-702.\n- Clifton Poth, Jonas Pfeiffer, Andreas Rücklé, and Iryna Gurevych. 2021. What to pre-train on? efficient intermediate task selection. arXiv preprint arXiv:2104.08247 .\n- Alec Radford, Jong Wook Kim, Chris Hallacy, Aditya Ramesh, Gabriel Goh, Sandhini Agarwal, Girish Sastry, Amanda Askell, Pamela Mishkin, Jack Clark, et al. 2021. Learning transferable visual models from natural language supervision. In International conference on machine learning , pages 8748-8763. PMLR.\n- Alec Radford, Jeffrey Wu, Rewon Child, David Luan, Dario Amodei, Ilya Sutskever, et al. 2019.",
+      "metadata": {
+        "source": "arxiv:2311.13534v4",
+        "title": "LM-Cocktail: Resilient Tuning of Language Models via Model Merging",
+        "authors": [
+          "Shitao Xiao",
+          "Zheng Liu",
+          "Peitian Zhang",
+          "Xingrun Xing"
+        ],
+        "section": "References",
+        "chunkIndex": 76,
+        "totalChunks": 90
+      }
+    },
+    {
+      "id": "2311.13534v4-chunk-77",
+      "content": "m natural language supervision. In International conference on machine learning , pages 8748-8763. PMLR.\n- Alec Radford, Jeffrey Wu, Rewon Child, David Luan, Dario Amodei, Ilya Sutskever, et al. 2019. Language models are unsupervised multitask learners. OpenAI blog , 1(8):9.\n- Colin Raffel, Noam Shazeer, Adam Roberts, Katherine Lee, Sharan Narang, Michael Matena, Yanqi Zhou, Wei Li, and Peter J Liu. 2020. Exploring the limits of transfer learning with a unified text-to-text transformer. The Journal of Machine Learning Research , 21(1):5485-5551.\n- Amal Rannen, Rahaf Aljundi, Matthew B Blaschko, and Tinne Tuytelaars. 2017. Encoder based lifelong learning. In Proceedings of the IEEE international conference on computer vision , pages 1320-1328.\n- Sylvestre-Alvise Rebuffi, Alexander Kolesnikov, Georg Sperl, and Christoph H Lampert. 2017. icarl: Incremental classifier and representation learning.",
+      "metadata": {
+        "source": "arxiv:2311.13534v4",
+        "title": "LM-Cocktail: Resilient Tuning of Language Models via Model Merging",
+        "authors": [
+          "Shitao Xiao",
+          "Zheng Liu",
+          "Peitian Zhang",
+          "Xingrun Xing"
+        ],
+        "section": "References",
+        "chunkIndex": 77,
+        "totalChunks": 90
+      }
+    },
+    {
+      "id": "2311.13534v4-chunk-78",
+      "content": "onference on computer vision , pages 1320-1328.\n- Sylvestre-Alvise Rebuffi, Alexander Kolesnikov, Georg Sperl, and Christoph H Lampert. 2017. icarl: Incremental classifier and representation learning. In Proceedings of the IEEE conference on Computer Vision and Pattern Recognition , pages 2001-2010.\n- David Rolnick, Arun Ahuja, Jonathan Schwarz, Timothy Lillicrap, and Gregory Wayne. 2019. Experience replay for continual learning. Advances in Neural Information Processing Systems , 32.\n- Baptiste Roziere, Jonas Gehring, Fabian Gloeckle, Sten Sootla, Itai Gat, Xiaoqing Ellen Tan, Yossi Adi, Jingyu Liu, Tal Remez, Jérémy Rapin, et al. 2023. Code llama: Open foundation models for code. arXiv preprint arXiv:2308.12950 .\n- Hanul Shin, Jung Kwon Lee, Jaehong Kim, and Jiwon Kim. 2017. Continual learning with deep generative replay.",
+      "metadata": {
+        "source": "arxiv:2311.13534v4",
+        "title": "LM-Cocktail: Resilient Tuning of Language Models via Model Merging",
+        "authors": [
+          "Shitao Xiao",
+          "Zheng Liu",
+          "Peitian Zhang",
+          "Xingrun Xing"
+        ],
+        "section": "References",
+        "chunkIndex": 78,
+        "totalChunks": 90
+      }
+    },
+    {
+      "id": "2311.13534v4-chunk-79",
+      "content": "al. 2023. Code llama: Open foundation models for code. arXiv preprint arXiv:2308.12950 .\n- Hanul Shin, Jung Kwon Lee, Jaehong Kim, and Jiwon Kim. 2017. Continual learning with deep generative replay. Advances in neural information processing systems , 30.\n- Karan Singhal, Shekoofeh Azizi, Tao Tu, S Sara Mahdavi, Jason Wei, Hyung Won Chung, Nathan Scales, Ajay Tanwani, Heather Cole-Lewis, Stephen Pfohl, et al. 2022. Large language models encode clinical knowledge. arXiv preprint arXiv:2212.13138 .\n- Tianxiang Sun, Zhengfu He, Qin Zhu, Xipeng Qiu, and Xuan-Jing Huang. 2023. Multitask pre-training of modular prompt for chinese few-shot learning. In Proceedings of the 61st Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers) , pages 11156-11172.\n- Brian Thompson, Jeremy Gwinnup, Huda Khayrallah, Kevin Duh, and Philipp Koehn. 2019. Overcoming catastrophic forgetting during domain adaptation of neural machine translation.",
+      "metadata": {
+        "source": "arxiv:2311.13534v4",
+        "title": "LM-Cocktail: Resilient Tuning of Language Models via Model Merging",
+        "authors": [
+          "Shitao Xiao",
+          "Zheng Liu",
+          "Peitian Zhang",
+          "Xingrun Xing"
+        ],
+        "section": "References",
+        "chunkIndex": 79,
+        "totalChunks": 90
+      }
+    },
+    {
+      "id": "2311.13534v4-chunk-80",
+      "content": ") , pages 11156-11172.\n- Brian Thompson, Jeremy Gwinnup, Huda Khayrallah, Kevin Duh, and Philipp Koehn. 2019. Overcoming catastrophic forgetting during domain adaptation of neural machine translation. In Proceedings of the 2019 Conference of the North American Chapter of the Association for Computational Linguistics: Human Language Technologies, Volume 1 (Long and Short Papers) , pages 2062-2068.\n- Hugo Touvron, Louis Martin, Kevin Stone, Peter Albert, Amjad Almahairi, Yasmine Babaei, Nikolay Bashlykov, Soumya Batra, Prajjwal Bhargava, Shruti Bhosale, Dan Bikel, Lukas Blecher, Cristian Canton Ferrer, Moya Chen, Guillem Cucurull, David Esiobu, Jude Fernandes, Jeremy Fu, Wenyin Fu, Brian Fuller, Cynthia Gao, Vedanuj Goswami, Naman Goyal, Anthony Hartshorn, Saghar Hosseini, Rui Hou, Hakan Inan, Marcin Kardas, Viktor Kerkez, Madian Khabsa, Isabel Kloumann, Artem Korenev, Punit Singh Koura, Marie-Anne Lachaux, Thibaut Lavril, Jenya Lee, Diana Liskovich, Yinghai Lu, Yuning Mao, Xavier Martin",
+      "metadata": {
+        "source": "arxiv:2311.13534v4",
+        "title": "LM-Cocktail: Resilient Tuning of Language Models via Model Merging",
+        "authors": [
+          "Shitao Xiao",
+          "Zheng Liu",
+          "Peitian Zhang",
+          "Xingrun Xing"
+        ],
+        "section": "References",
+        "chunkIndex": 80,
+        "totalChunks": 90
+      }
+    },
+    {
+      "id": "2311.13534v4-chunk-81",
+      "content": "n, Marcin Kardas, Viktor Kerkez, Madian Khabsa, Isabel Kloumann, Artem Korenev, Punit Singh Koura, Marie-Anne Lachaux, Thibaut Lavril, Jenya Lee, Diana Liskovich, Yinghai Lu, Yuning Mao, Xavier Martinet, Todor Mihaylov, Pushkar Mishra, Igor Molybog, Yixin Nie, Andrew Poulton, Jeremy Reizenstein, Rashi Rungta, Kalyan Saladi, Alan Schelten, Ruan Silva, Eric Michael Smith, Ranjan Subramanian, Xiaoqing Ellen Tan, Binh Tang, Ross Taylor, Adina Williams, Jian Xiang Kuan, Puxin Xu, Zheng Yan, Iliyan Zarov, Yuchen Zhang, Angela Fan, Melanie Kambadur, Sharan Narang, Aurelien Rodriguez, Robert Stojnic, Sergey Edunov, and Thomas Scialom. 2023. Llama 2: Open foundation and finetuned chat models.\n- Tu Vu, Brian Lester, Noah Constant, Rami Al-Rfou, and Daniel Cer. 2021. Spot: Better frozen model adaptation through soft prompt transfer. arXiv preprint arXiv:2110.07904 .\n- Liang Wang, Nan Yang, and Furu Wei. 2023.",
+      "metadata": {
+        "source": "arxiv:2311.13534v4",
+        "title": "LM-Cocktail: Resilient Tuning of Language Models via Model Merging",
+        "authors": [
+          "Shitao Xiao",
+          "Zheng Liu",
+          "Peitian Zhang",
+          "Xingrun Xing"
+        ],
+        "section": "References",
+        "chunkIndex": 81,
+        "totalChunks": 90
+      }
+    },
+    {
+      "id": "2311.13534v4-chunk-82",
+      "content": "ter, Noah Constant, Rami Al-Rfou, and Daniel Cer. 2021. Spot: Better frozen model adaptation through soft prompt transfer. arXiv preprint arXiv:2110.07904 .\n- Liang Wang, Nan Yang, and Furu Wei. 2023. Learning to retrieve in-context examples for large language models.\n- Jason Wei, Maarten Bosma, Vincent Zhao, Kelvin Guu, Adams Wei Yu, Brian Lester, Nan Du, Andrew M. Dai, and Quoc V Le. 2022. Finetuned language models are zero-shot learners. In International Conference on Learning Representations .\n- Jason Wei, Maarten Bosma, Vincent Y Zhao, Kelvin Guu, Adams Wei Yu, Brian Lester, Nan Du, Andrew M Dai, and Quoc V Le. 2021. Finetuned language models are zero-shot learners. arXiv preprint arXiv:2109.01652 .\n- Mitchell Wortsman, Gabriel Ilharco, Samir Ya Gadre, Rebecca Roelofs, Raphael Gontijo-Lopes, Ari S Morcos, Hongseok Namkoong, Ali Farhadi, Yair Carmon, Simon Kornblith, and Ludwig Schmidt. 2022a.",
+      "metadata": {
+        "source": "arxiv:2311.13534v4",
+        "title": "LM-Cocktail: Resilient Tuning of Language Models via Model Merging",
+        "authors": [
+          "Shitao Xiao",
+          "Zheng Liu",
+          "Peitian Zhang",
+          "Xingrun Xing"
+        ],
+        "section": "References",
+        "chunkIndex": 82,
+        "totalChunks": 90
+      }
+    },
+    {
+      "id": "2311.13534v4-chunk-83",
+      "content": "2 .\n- Mitchell Wortsman, Gabriel Ilharco, Samir Ya Gadre, Rebecca Roelofs, Raphael Gontijo-Lopes, Ari S Morcos, Hongseok Namkoong, Ali Farhadi, Yair Carmon, Simon Kornblith, and Ludwig Schmidt. 2022a. Model soups: averaging weights of multiple finetuned models improves accuracy without increasing inference time. In Proceedings of the 39th International Conference on Machine Learning , volume 162 of Proceedings of Machine Learning Research , pages 23965-23998. PMLR.\n- Mitchell Wortsman, Gabriel Ilharco, Jong Wook Kim, Mike Li, Simon Kornblith, Rebecca Roelofs, Raphael Gontijo Lopes, Hannaneh Hajishirzi, Ali Farhadi, Hongseok Namkoong, et al. 2022b. Robust fine-tuning of zero-shot models. In Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition , pages 7959-7971.\n- Chengyue Wu, Teng Wang, Yixiao Ge, Zeyu Lu, Ruisong Zhou, Ying Shan, and Ping Luo. 2023. pituning: Transferring multimodal foundation models with optimal multi-task interpolation.",
+      "metadata": {
+        "source": "arxiv:2311.13534v4",
+        "title": "LM-Cocktail: Resilient Tuning of Language Models via Model Merging",
+        "authors": [
+          "Shitao Xiao",
+          "Zheng Liu",
+          "Peitian Zhang",
+          "Xingrun Xing"
+        ],
+        "section": "References",
+        "chunkIndex": 83,
+        "totalChunks": 90
+      }
+    },
+    {
+      "id": "2311.13534v4-chunk-84",
+      "content": ", pages 7959-7971.\n- Chengyue Wu, Teng Wang, Yixiao Ge, Zeyu Lu, Ruisong Zhou, Ying Shan, and Ping Luo. 2023. pituning: Transferring multimodal foundation models with optimal multi-task interpolation. In International Conference on Machine Learning , pages 37713-37727. PMLR.\n- Shitao Xiao, Zheng Liu, Peitian Zhang, and Niklas Muennighoff. 2023. C-pack: Packaged resources to advance general chinese embedding.\n- Prateek Yadav, Derek Tam, Leshem Choshen, Colin Raffel, and Mohit Bansal. 2023. Resolving interference when merging models. arXiv preprint arXiv:2306.01708 .\n- Le Yu, Bowen Yu, Haiyang Yu, Fei Huang, and Yongbin Li. 2023. Language models are super mario: Absorbing abilities from homologous models as a free lunch. arXiv preprint arXiv:2311.03099 .",
+      "metadata": {
+        "source": "arxiv:2311.13534v4",
+        "title": "LM-Cocktail: Resilient Tuning of Language Models via Model Merging",
+        "authors": [
+          "Shitao Xiao",
+          "Zheng Liu",
+          "Peitian Zhang",
+          "Xingrun Xing"
+        ],
+        "section": "References",
+        "chunkIndex": 84,
+        "totalChunks": 90
+      }
+    },
+    {
+      "id": "2311.13534v4-chunk-85",
+      "content": "We fine-tune the Llama model on 9 different datasets, whose details are shown in Table 6. The details of datasets used to fine-tune BGE are shown in Table 7.\n\n| Dataset    | # train   | # test   | Metric      |\n|------------|-----------|----------|-------------|\n| NQ         | 30,000    | 3,610    | Exact Match |\n| SQuAD      | 30,000    | 10,570   | Exact Match |\n| Hellaswag  | 30,000    | 10,042   | Accuracy    |\n| SST2       | 30,000    | 872      | Accuracy    |\n| Winogrande | 30,000    | 1,267    | Accuracy    |\n| CommenGen  | 30,000    | 4,018    | ROUGE-L     |\n| MRPC       | 3,668     | 408      | Accuracy    |\n| AG News    | 30,000    | 7600     | Accuracy    |\n| MNLI       | 30,000    | 9,815    | Accuracy    |\n\nTable 6: Statistics for the datasets used to fine-tune Llama.\n\nTable 7: Statistics for the datasets used to fine-tune BGE.",
+      "metadata": {
+        "source": "arxiv:2311.13534v4",
+        "title": "LM-Cocktail: Resilient Tuning of Language Models via Model Merging",
+        "authors": [
+          "Shitao Xiao",
+          "Zheng Liu",
+          "Peitian Zhang",
+          "Xingrun Xing"
+        ],
+        "section": "A Datasets used in fine-tuning",
+        "chunkIndex": 85,
+        "totalChunks": 90
+      }
+    },
+    {
+      "id": "2311.13534v4-chunk-86",
+      "content": "7600     | Accuracy    |\n| MNLI       | 30,000    | 9,815    | Accuracy    |\n\nTable 6: Statistics for the datasets used to fine-tune Llama.\n\nTable 7: Statistics for the datasets used to fine-tune BGE.\n\n| Dataset       | # train   | # test   | Metric   |\n|---------------|-----------|----------|----------|\n| GooAQ         | 3,012,496 | -        | -        |\n| YahooAnswers  | 1,198,260 | -        | -        |\n| MSMarco       | 485,823   | 6,980    | NDCG@10  |\n| StackExchange | 293,951   | -        | -        |\n| ELI5          | 319,912   | -        | -        |\n| SQuAD         | 86,701    | -        | -        |\n| AmazonQA      | 1,095,290 | -        | -        |\n| Quora         | 60,202    | 10,000   | NDCG@10  |\n| HotpotQA      | 84,516    | 7,405    | NDCG@10  |",
+      "metadata": {
+        "source": "arxiv:2311.13534v4",
+        "title": "LM-Cocktail: Resilient Tuning of Language Models via Model Merging",
+        "authors": [
+          "Shitao Xiao",
+          "Zheng Liu",
+          "Peitian Zhang",
+          "Xingrun Xing"
+        ],
+        "section": "A Datasets used in fine-tuning",
+        "chunkIndex": 86,
+        "totalChunks": 90
+      }
+    },
+    {
+      "id": "2311.13534v4-chunk-87",
+      "content": "The detailed results for each task are reported in Table 8 and 9.",
+      "metadata": {
+        "source": "arxiv:2311.13534v4",
+        "title": "LM-Cocktail: Resilient Tuning of Language Models via Model Merging",
+        "authors": [
+          "Shitao Xiao",
+          "Zheng Liu",
+          "Peitian Zhang",
+          "Xingrun Xing"
+        ],
+        "section": "B.1 Detailed results for each task",
+        "chunkIndex": 87,
+        "totalChunks": 90
+      }
+    },
+    {
+      "id": "2311.13534v4-chunk-88",
+      "content": "The performance of encoder-based LMs with different merging weight are shown in Figure 3.\n\nFigure 3: Performance of encoder-based LMs with different merging weights.\n\n<!-- image -->\n\nTable 8: The detailed results of base model, fine-tuned model, and resilient-tuned model via LM-Cocktail. We use the name of task to denote the model fine-tuned on this task (e.g., AG News in the first row represent the model fine-tuned on AG News dataset). LM-Cocktail 2 is produced by merging the base model and fine-tuned model, while LM-Cocktail 10 merges fine-tuned model, base model, and other models fine-tuned on 8 different tasks.\n\n<!-- image -->\n\nTable 9: The detailed results of base model, fine-tuned model, and resilient-tuned model via LM-Cocktail. We use the name of task to denote the model fine-tuned on this task (e.g., HotpotQA in the first row represent the model fine-tuned on HotpotQA dataset).",
+      "metadata": {
+        "source": "arxiv:2311.13534v4",
+        "title": "LM-Cocktail: Resilient Tuning of Language Models via Model Merging",
+        "authors": [
+          "Shitao Xiao",
+          "Zheng Liu",
+          "Peitian Zhang",
+          "Xingrun Xing"
+        ],
+        "section": "B.2 Impact of α for encoder-based LM",
+        "chunkIndex": 88,
+        "totalChunks": 90
+      }
+    },
+    {
+      "id": "2311.13534v4-chunk-89",
+      "content": "el, and resilient-tuned model via LM-Cocktail. We use the name of task to denote the model fine-tuned on this task (e.g., HotpotQA in the first row represent the model fine-tuned on HotpotQA dataset). LM-Cocktail 2 is produced by merging the base model and fine-tuned model, while LM-Cocktail 10 merges fine-tuned model, base model, and other models fine-tuned on 8 different tasks.\n\n<!-- image -->",
+      "metadata": {
+        "source": "arxiv:2311.13534v4",
+        "title": "LM-Cocktail: Resilient Tuning of Language Models via Model Merging",
+        "authors": [
+          "Shitao Xiao",
+          "Zheng Liu",
+          "Peitian Zhang",
+          "Xingrun Xing"
+        ],
+        "section": "B.2 Impact of α for encoder-based LM",
+        "chunkIndex": 89,
+        "totalChunks": 90
+      }
+    }
+  ],
+  "fullText": "## LM-Cocktail: Resilient Tuning of Language Models via Model Merging\n\nShitao Xiao ♠ Zheng Liu ♠∗ Peitian Zhang ♠ Xingrun Xing ♣\n\n♠ Beijing Academy of Artificial Intelligence\n\n♣\n\nInstitute of Automation, Chinese Academy of Sciences stxiao@baai.ac.cn {zhengliu1026,namespace.pt}@gmail.com\n\nxingxingrun2023@ia.ac.cn\n\n## Abstract\n\nThe pre-trained language models are continually fine-tuned to better support downstream applications. However, this operation may result in significant performance degeneration on general tasks beyond the targeted domain. To overcome this problem, we propose LM-Cocktail which enables the fine-tuned model to stay resilient in general perspectives. Our method is conducted in the form of model merging, where the fine-tuned language model is merged with the pre-trained base model or the peer models from other domains through weighted average. Despite simplicity, LM-Cocktail is surprisingly effective: the resulted model is able to achieve a strong empirical performance in the whole scope of general tasks while preserving a superior capacity in its targeted domain. We conduct comprehensive experiments with LLama and BGE models on popular benchmarks, including FLAN, MMLU, MTEB, whose results validate the efficacy of our proposed method. The code and checkpoints are available at https://github.com/FlagOpen/FlagEmbedding.\n\n## 1 Introduction\n\nLanguage models (LM) are fundamental pillars of artificial intelligence and natural language processing. Thanks to the considerable expansion of training scale and model size (Devlin et al., 2018; Liu et al., 2019; Raffel et al., 2020; Radford et al., 2019; Brown et al., 2020), language models have made remarkable breakthroughs on a wide variety of NLP tasks, including representation, understanding, reasoning, and generation. In recent years, language models have been used as a crucial building block for many applications, such as information retrieval, conversational systems, and autonomous AI agents. In many of the applications, language models are frequently used via the 'pre-training and fine-tuning' paradigm. Particularly, a generalist LM is pre-trained in the first place through an\n\n∗ Correspondence author\n\nunsupervised or general-purpose supervised learning process (Brown et al., 2020; Touvron et al., 2023; Wei et al., 2022, 2021; Ouyang et al., 2022); then, the pre-trained generalist model is fine-tuned to be a specialist model for a down-stream task on top of certain in-domain data.\n\nDespite the improved performance in each particular application, the fine-tuning operation could lead to severe degeneration of LM's general capabilities beyond the targeted domain. Such a phenomenon is commonly referred as catastrophic forgetting (Goodfellow et al., 2013; Kirkpatrick et al., 2017; Thompson et al., 2019; Chen et al., 2020). As shown in Figure 1, fine-tuning Llama model on the target task can significantly improve its performance on the target task, but decrease its performance on other unrelated tasks. In many real-world scenarios, catastrophic forgetting is unwelcome because language models need to exhibit both specialist and generalist characteristics simultaneously(Roziere et al., 2023; Chen et al., 2021; Singhal et al., 2022).\n\nThe combat against catastrophic forgetting represents a sustained campaign within the machine learning communities, where numerous approaches have been continually proposed in recent years. There are two representative strategies which are widely adopted as the designing logic by many existing methods. One strategy is to rely on experience replay, where the model is learned with the mixed training data from both the new task and the previous tasks (Rolnick et al., 2019; Shin et al., 2017). The other strategy is to leverage regularization, where the changes in predictions or weights are regularized between the newly fine-tuned model and the historical pre-trained one (Kirkpatrick et al., 2017; Li and Hoiem, 2017; Rannen et al., 2017). However, it remains to explore more effective methods in the context of fine-tuned language models given the practical constraints of the existing methods. On one hand, it is infeasible to fully collect\n\nFigure 1: The illustration of LM-Cocktail. Fine-tuning for the target task will lead to severe degeneration of LM's general capabilities beyond the targeted domain. LM-Cocktail can increase accuracy on new target tasks while maintaining its accuracy on other tasks.\n\n<!-- image -->\n\nthe training samples for all previous tasks, and have the model trained over again on the historical data once a new task is presented. On the other hand, the regularization may result in major changes to the existing fine-tuning operations, which could be incompatible with the well-established fine-tuning pipeline.\n\nIn this work, we aim to design an effective framework to confront catastrophic forgetting, which will enable the fine-tuned language models to stay resilient in general tasks. Besides, we also expect the new framework to be more practical, which means it must be simple to conduct and fully compatible with the common model training workflow.\n\nWith these considerations, we propose a new approach, called LM-Cocktail, which continually adapts well-fine-tuned language models on top of model merging (Wortsman et al., 2022a). LMCocktail is a general paradigm, which can work under several different conditions. In the simplest form, it directly merges the fine-tuned model with the pre-trained base model to improve the general capabilities of the fine-tuned model. It can further accommodate more peer models fine-tuned for other general domains, and result in stronger empirical performances on top of merging weights estimated by few-shot validation examples. Finally, even at the absence of fine-tuning data, the merging strategy can be still applied to the remaining pretrained base model and the fine-tuned models in other general domains for a competitive resilience.\n\nOur proposed method leads to a couple of immediate advantages given its working mechanism. First of all, LM-Cocktail is extremely simple : the mixing weights can be directly derived from validation samples where no expensive training operations are needed. Secondly, LM-Cocktail is fully compatible with the existing training pipeline, knowing that it simply works as a post-refinement step following the fine-tuning process. Above all, LM-Cocktail is empirically competitive . According to our evaluations on three representative benchmarks, including FLAN (Wei et al., 2021), MMLU (Hendrycks et al., 2020), and MTEB (Muennighoff et al., 2022), LM-Cocktail achieves a strong resilience in general domain tasks while preserving a superior fine-tuning performance on its targeted domain. Finally, LM-Cocktail turns out to be universally applicable: it can substantially contribute to both the decoder-based LM in language generation tasks and the encoder-based LM in language representation tasks.\n\n## 2 LM-Cocktail\n\n## 2.1 General Paradigm\n\nAs a prerequisite condition, we are given a base language model, denoted as M b , which are well pre-trained for general applications. Typical examples of the base model can be Llama-Chat (Touvron et al., 2023) and FLAN-PaLM (Chung et al., 2022), which are LLMs learned from massive unsupervised learning and general-purse supervised fine-tuning. The base LM is continually fine-tuned to support one targeted down-stream task ( t ) with domain-specific training samples X t , which results in the fine-tuned model for the corresponding task: M t .\n\nHowever, the fine-tuned model M t is prone to degenerate empirical performances (catastrophic forgetting) on other general domains beyond the targeted domain t . The goal of LM-Cocktail is to maintain the general capabilities when fine-tuning on the target task. The core of LM-Cocktail is combining multiple models (with the same architecture but different weights) into a unified one by aggregating the weights from different models. In this way, the resilient fine-tuned model can integrate the strengths from multiple individual models.\n\nTo derive the appropriate model merging strategy for LM-Cocktail, there are two fundamental problems to solve: 1) which group of candidate models to merge, 2) how to determine the merging weights. Knowing that the resilient fine-tuned LM is to restore the degenerated performances in general domains, there are two sources of candidate models to consider. One source is the pre-trained base model M b , the other source is the entire group of fine-tuned models in other domains ( {M d } D ). Without loss of generality, we derive the following form of merging function:\n\n<!-- formula-not-decoded -->\n\nwhere M r is the resilient-tuned model, α is a hyperparameter whose default value is 0.5, and w i indicates the merging weight which has been normalized: ∑ i w i = 1 . For our case, we require the resilient-tuned model to preserve strong capacity as the directly fine-tuned model in its targeted domain while improving the general domain performance. Therefore, the candidate models' performances in the targeted domain are the critical indicators of merging weights. Based on this intuition, we introduce the following form of weight computation:\n\n<!-- formula-not-decoded -->\n\nIn this function, L ( M i , E t ) stands for the prediction loss of candidate model M i on the few-shot examples E t from the targeted domain t , τ is the temperature to control the smoothness. That is to say, the larger loss on the targeted domain, the smaller weight is allocated to the candidate model. So we can give lower coefficients to models that perform very badly in the target task. The few-shot examples are a tiny group of hold-back samples from the targeted domain. According to our empirical study, 5-shot examples have been sufficiently competitive throughout different settings.\n\n## 2.2 Variations\n\nThe general form of LM-Cocktail in Eq 1 requires the presence of three elements: the base model M b , the fine-tuned model for the targeted domain M t , and the fine-tuned models in other general domains {M d } D . Nevertheless, the general requirement can be largely relaxed to accommodate different real-world settings. Here, we introduce two common variational forms to confront the situations where either diverse general-domain specialists or targeted domain fine-tuning is not available.\n\n- Mono-Specialist . When the diverse fine-tuned models in general domains are absent, the merging function is simplified as the combination of base model M b and the mono-specialist model from the targeted domain M t :\n\n<!-- formula-not-decoded -->\n\nGiven that fine-tuned model M t typically exhibits significantly lower loss compared to other models, we did not employ Eqn 2 to calculate weights; instead, we introduce a hyperparameter α . Experimental results demonstrate that simply setting α to 0.5 yields promising outcomes.\n\n- Without Fine-tuning . The fine-tuning in the targeted domain can be constrained due to the absence of domain-specific data or computation resources. In this situation, the merging function is transformed into the combination of base model and fine-tuned model from general domains:\n\n<!-- formula-not-decoded -->\n\nIn this place, we assume the few-shot examples E t for merging weights (Eq. 2) are always available, which is a very moderate condition in practice. In this manner, we obviate the need for training any new models; instead, by incurring minimal costs, we can seamlessly integrate existing models to obtain a model tailored for downstream tasks.\n\n## 3 Experimental setup\n\nWe conducted experiments with two types of models: decoder-based LM and encoder-based LM. We fine-tuned 9 encoder-based models and 9 decoderbased models separately, and then evaluated the performance of fine-tuned models and resilient-tuned models. Following are the detailed experimental settings.\n\n## 3.1 Decoder-based LM\n\n- Base Model . We use Llama-2-chat-7b 1 (Touvron et al., 2023) as the base model, which has an impressive zero-shot ability on various tasks.\n- Fine-tune . We use the datasets collected by (Cheng et al., 2023; Wang et al., 2023), which consist of 30 tasks from FLAN (Wei et al., 2022). We select 9 different tasks from it to fine-tune the\n\n1 https://huggingface.co/meta-llama/Llama-2-7b-chat-hf\n\nTable 1: A comparative performance analysis between base model Llama, fine-tuned model, and resilient-tuned model via LM-Cocktail. LM-Cocktail 2 is produced by merging the base model and fine-tuned model, while LM-Cocktail 10 merges fine-tuned model, base model, and other models fine-tuned on 8 different tasks. There are a total of 30 test tasks, and \"Others tasks\" refers to the remaining 29 tasks after the corresponding task is removed.\n\n| Fine-tune on   | Performance on   |   Llama |   Fine-tuned |   LM-Cocktail 2 |   LM-Cocktail 10 |\n|----------------|------------------|---------|--------------|-----------------|------------------|\n| AG News        | AG News          |   40.8  |        94.42 |           94.46 |            94.41 |\n| AG News        | Other tasks      |   46.8  |        38.58 |           47.73 |            48.32 |\n| Common Gen     | Common Gen       |   21.14 |        39.2  |           41.22 |            41.45 |\n| Common Gen     | Other tasks      |   47.48 |        46.9  |           50.88 |            58.57 |\n| MNLI           | MNLI             |   32.14 |        87.9  |           88.88 |            89.23 |\n| MNLI           | Other tasks      |   47.1  |        47.49 |           53.53 |            56.31 |\n| Winogrande     | Winogrande       |   60.93 |        75.45 |           77.9  |            77.03 |\n| Winogrande     | Other tasks      |   46.11 |        47.33 |           50.52 |            58.52 |\n| MRPC           | MRPC             |   31.86 |        85.78 |           73.77 |            80.88 |\n| MRPC           | Other tasks      |   47.11 |        36.45 |           39.56 |            42.77 |\n| NQ             | NQ               |    0    |        29.09 |           29.25 |            29.64 |\n| NQ             | Other tasks      |   48.21 |        52.19 |           54.58 |            60.28 |\n| SQuAD          | SQuAD            |    0.06 |        86.77 |           85.67 |            86.94 |\n| SQuAD          | Other tasks      |   48.21 |        49.48 |           51.64 |            54.09 |\n| SST2           | SST2             |   63.3  |        95.53 |           96.56 |            96.56 |\n| SST2           | Other tasks      |   46.02 |        38.94 |           41.63 |            45.03 |\n| Hellaswag      | Hellaswag        |   71.58 |        77.2  |           79    |            78.61 |\n| Hellaswag      | Other tasks      |   45.74 |        46.1  |           48.95 |            57.87 |\n\nbase model, including NQ, SQuAD, Hellaswag, SST2, Winogrande, CommonGen, MRPC, AG News, and MNLI. For more information of training data please refer to Appendix A. The fine-tuned code is based on FastChat package 2 . The learning rate is 2e-5, the batch size is 128, and the max number of epochs is 3.\n\n- Evaluation . We evaluate the performance on the test set of 30 tasks collected by (Cheng et al., 2023; Wang et al., 2023). The test data for fine-tuning tasks (NQ, SQuAD, Hellaswag, SST2, Winogrande, CommonGen, MRPC, AG News, and MNLI) are also included in this collection. The detailed metric for each task can refer to (Wang et al., 2023). Besides, we also conduct experiments on additional tasks from MMLU datasets, which is a widely used benchmark for LLMs.\n\n## 3.2 Encoder-based LM\n\n- Base Model . We choose the bge-base-v 1 . 5 embedding model 3 (Xiao et al., 2023) as the base model for embedding tasks, which can map text into embedding representation.\n- Fine-tune . We select 9 datasets from sentence\n\n2 https://github.com/lm-sys/FastChat\n\n3 https://huggingface.co/BAAI/bge-base-en-v1.5\n\ntransformers repo 4 , including GooAQ, Yahoo Answers, MSMarco, Stack Exchange, ELI5, SQuAD, AmazonQA, Quora, HotpotQA. Appendix A shows the details of training data. We fine-tune BGE model on these datasets with FlagEmbedding tool 5 . We use the AdamW optimizer with a learning rate of 2e-5. The batch size is 256, and the temperature for contrastive learning is 0.02.\n\n- Evaluation . We evaluate the models with the 15 retrieval tasks in mteb benchmark (Muennighoff et al., 2022), and use NDCG@10 as the evaluation metric. The test data of 3 fine-tuning tasks: MSMarco, HotpotQA and Quora are included in this benchmark. For the purpose of facilitating training and testing across various tasks, we don't add the default query instruction from (Xiao et al., 2023).\n\n## 4 Experimental Results\n\nIn this section, we show the experimental results and represent the key findings. Firstly, we compare the performance of fine-tuned models and resilienttuned models. Next, we evaluate the performance of LM-Cocktail when fine-tuning on target task is unavailable. Finally, we investigate the impact of\n\n4 https://huggingface.co/datasets/sentencetransformers/embedding-training-data\n\n5 https://github.com/FlagOpen/FlagEmbedding\n\nTable 2: A comparative performance analysis between base model BGE, fine-tuned model, and resilient-tuned model via LM-Cocktail. LM-Cocktail 2 is produced by merging the base model and fine-tuned model, while LM-Cocktail 10 merges fine-tuned model, base model, and other models fine-tuned on 8 different tasks. There are a total of 15 test tasks, and \"Others tasks\" refers to the remaining 14 tasks after the corresponding task is removed.\n\n| Fine-tune on   | Performance on   |   BGE |   Fine-tuned |   LM-Cocktail 2 |   LM-Cocktail 10 |\n|----------------|------------------|-------|--------------|-----------------|------------------|\n| HotpotQA       | HotpotQA         | 71.81 |        75.96 |           74.78 |            74.67 |\n| HotpotQA       | Other tasks      | 49.81 |        47.49 |           49.98 |            50.64 |\n| Quora          | Quora            | 88.9  |        90.31 |           89.93 |            89.81 |\n| Quora          | Other tasks      | 48.59 |        47.43 |           48.09 |            49.11 |\n| MSMarco        | MSMarco          | 41.15 |        42.23 |           42.01 |            41.88 |\n| MSMarco        | Other tasks      | 52    |        51.98 |           52.71 |            53.22 |\n\nweight α and the number of examples.\n\n## 4.1 Overall Comparison\n\nOur experiments compare the performance of base models, corresponding fine-tuned models, and models resilient-tuned via LM-Cocktail. For each fine-tuned model, we measure its performance on the specific target task as well as its performance on other tasks. We also tested models resilient-tuned using our method, which include two variants: (1) LM-Cocktail 2 : merge the fine-tuned model with the base model; (2) LM-Cocktail 10 : merge 10 models, including model fine-tuned on target task, base model, other the remaining eight fine-tuned models from section 3.1. We have summarized the results in Table 1 and 2. For detailed results for each test task please refer to Appendix B.1.\n\n## 4.1.1 Analysis on decoder-based LM\n\nFrom Table 1, we have following observations: (1) the fine-tuned model demonstrates significant improvement over the base model in the corresponding task. For example, the model fine-tuned on AG News achieves an accuracy of 94.42% in the corresponding task, whereas the base model only achieves 40.9% accuracy on the same task. (2) However, this gain comes at a cost: in other tasks, the fine-tuned model often lags behind the performance of the base model. For example, the accuracy of the fine-tuned model on other tasks is only 38.58%, substantially lower than the 46.8% accuracy of the base model. (3) In contrast, LMCocktail 2 maintains effectiveness in its corresponding task (94.46% in AG News task) while also demonstrating competitive performance in other tasks (47.73%). And LM-Cocktail 10 further enhances the performance of other tasks (the accuracy increases from 38.58% to 48.32% after merging). In most of the cases, LM-Cocktail 2 and LM-Cocktail 10 even outperform the base model on other tasks. This finding demonstrates that our approach can integrate the strengths of models to be merged, and even surpass them in performance. (4) Besides, fine-tuning on some tasks (e.g., NQ) can enhance performance not only on the corresponding task but also on other tasks; our proposed method remains effective on these tasks: LMCocktail achieves higher accuracy both in target task and other tasks. These findings demonstrate the versatility of our approach.\n\n## 4.1.2 Analysis on encoder-based LM\n\nThe results of encoder models are shown in Table 2. We can observe the same trend in the section 4.1.1: The fine-tuned model achieves significant improvement over the base model in the corresponding task but has a lower accuracy on other unrelated tasks. LM-Cocktail 2 significantly enhances performance in downstream tasks while maintaining performance in other unrelated tasks. LM-Cocktail 10 further improves the general ability by merging the models fine-tuned on different tasks. These results show the applicability of LM-Cocktail for both generative models and representation models, validating the universality of our proposed methodology.\n\n## 4.2 LM-Cocktail without Fine-tuning\n\nIn many scenarios, fine-tuning on the target domain is not always available. For example, if there is not enough training dataset for a new task, fine-tuning a specialist model specific to this task is unfeasible. Besides, fine-tuning a separate model for each task is costly and inflexible, especially when fine-tuning large language models. We report the performance of LM-Cocktail without fine-tuning in Table 3 and 4\n\n## 4.2.1 Analysis on Decoder-based LM\n\nTo evaluate the performance on tasks which haven't been seen in fine-tuning, we introduce additional\n\nTable 3: Results of merging decoder models from other tasks.\n\n| Dataset                                                   | Llama       | Llama-ICL   | Multitask-learning   | LM-Cocktail blackbox   | LM-Cocktail   | LM-Cocktail' u blackbox   | LM-Cocktail u   |\n|-----------------------------------------------------------|-------------|-------------|----------------------|------------------------|---------------|---------------------------|-----------------|\n| Avg                                                       | 45.87       | 46.65       | 32.88                | 42.28                  | 48.01         | 47.46                     | 48.21           |\n| abstract-algebra                                          | 28.0        | 30.0        | 21.0                 | 29.0                   | 35.0          | 33.0                      | 34.0            |\n| anatomy                                                   | 42.96       | 42.22       | 34.07                | 45.19                  | 46.67         | 46.67                     | 48.15           |\n| astronomy                                                 | 44.08       | 48.03       | 34.21                | 46.05                  | 46.05         | 44.08                     | 47.37           |\n| business-ethics                                           | 42.0        | 42.0        | 41.0                 | 50.0                   | 46.0          | 52.0                      | 48.0            |\n| clinical-knowledge                                        | 50.57       | 51.32       | 39.62                | 47.92                  | 51.32         | 51.7                      | 51.32           |\n| college-biology                                           | 50.0        | 52.78       | 27.08                | 41.67                  | 52.08         | 49.31                     | 51.39           |\n| college-chemistry                                         | 23.0        | 26.0        | 31.0                 | 19.0                   | 29.0          | 29.0                      | 29.0            |\n| college-computer-science                                  | 29.0        | 37.0        | 37.0                 | 33.0                   | 46.0          | 43.0                      | 45.0            |\n| college-mathematics                                       | 29.0        | 33.0        | 36.0                 | 29.0                   | 31.0          | 35.0                      | 31.0            |\n| college-medicine                                          | 38.15       | 40.46       | 31.79                | 28.32                  | 40.46         | 39.31                     | 40.46           |\n| college-physics                                           | 21.57       | 24.51       | 20.59                | 21.57                  | 19.61         | 19.61                     | 19.61           |\n| computer-security                                         | 59.0        | 54.0        | 40.0                 | 59.0                   | 55.0          | 49.0                      | 57.0            |\n| conceptual-physics                                        | 38.3        | 38.72       | 29.79                | 38.72                  | 39.57         | 39.57                     | 40.0            |\n| econometrics                                              | 28.95       | 33.33       | 22.81                | 28.07                  | 26.32         | 35.09                     | 28.07           |\n| electrical-engineering                                    | 42.76       | 43.45       | 34.48                | 33.1                   | 46.9          | 44.14                     | 47.59           |\n| elementary-mathematics                                    | 27.25       | 28.04       | 21.16                | 28.84                  | 26.46         | 26.72                     | 26.72           |\n| formal-logic                                              | 22.22       | 25.4        | 35.71                | 28.57                  | 25.4          | 24.6                      | 25.4            |\n| global-facts                                              | 41.0        | 31.0        | 26.0                 | 37.0                   | 35.0          | 33.0                      | 35.0            |\n| high-school-biology                                       | 46.45       | 52.58       | 33.23                | 35.16                  | 53.87         | 53.55                     | 53.87           |\n| high-school-chemistry                                     | 30.54       | 33.99       | 21.67                | 30.05                  | 32.02         | 32.51                     | 31.53           |\n| high-school-computer-science                              | 39.0        | 46.0        | 30.0                 | 37.0                   | 40.0          | 41.0                      | 40.0            |\n| high-school-european-history                              | 60.61       | 56.97       | 32.12                | 51.52                  | 63.03         | 63.64                     | 64.85           |\n| high-school-geography high-school-government-and-politics | 57.07       | 59.6 67.36  | 33.33                | 55.56                  | 60.1 70.98    | 61.62 66.84               | 59.09 70.98     |\n| high-school-macroeconomics                                | 70.47 39.23 | 41.54       | 38.34 31.79          | 39.38 38.21            | 45.64         |                           |                 |\n|                                                           |             | 23.7        | 22.96                | 25.19                  | 24.81         | 44.1                      | 44.87           |\n| high-school-mathematics high-school-microeconomics        | 26.3 36.55  | 43.7        | 31.93                | 36.55                  | 41.6          | 24.44 40.34               | 24.81 41.6      |\n| high-school-physics                                       | 25.83       | 28.48       | 29.8                 | 27.81                  | 29.14         | 30.46                     | 29.14           |\n| high-school-psychology                                    | 59.63       | 64.04       | 33.94                | 60.0                   | 65.32         | 65.87                     | 64.77           |\n| high-school-statistics                                    | 23.61       | 31.48       | 36.57                | 25.46                  | 28.24         | 30.09                     | 28.7            |\n| high-school-us-history                                    | 65.2        | 66.18       | 38.24                | 65.2                   | 65.69         | 66.67                     | 64.71           |\n| high-school-world-history                                 | 61.18       | 66.24       | 35.02                | 57.81                  | 66.24         | 65.82                     | 65.4            |\n|                                                           |             |             |                      |                        | 58.74         | 54.26                     | 58.74           |\n| human-aging human-sexuality                               | 58.74       | 57.4        | 36.77                | 55.61                  | 57.25         | 55.73                     | 56.49           |\n| international-law                                         | 54.96 59.5  | 48.09 57.02 | 38.17 42.15          | 29.01 48.76            | 61.16         |                           | 60.33           |\n| jurisprudence                                             | 55.56       | 57.41       | 34.26                | 52.78                  | 49.07         | 58.68 50.93               | 50.93           |\n| logical-fallacies                                         | 58.28       | 53.99       | 29.45                | 57.67                  | 55.21         | 55.83                     | 54.6            |\n| machine-learning                                          | 36.61       | 35.71       | 28.57                | 33.04                  | 39.29         | 41.07                     | 41.96           |\n| management                                                | 64.08       | 67.96       | 43.69                | 61.17                  | 68.93         | 66.99                     | 68.93           |\n| marketing                                                 | 73.5        | 74.36       | 48.29                | 73.5                   | 76.5          | 70.94                     | 76.07           |\n| medical-genetics                                          | 46.0        | 53.0        | 32.0                 | 49.0                   | 50.0          | 51.0                      | 49.0            |\n| miscellaneous                                             | 66.16       | 66.54 52.89 | 38.19 28.32          | 65.13 44.22            | 68.58         | 65.52 49.13               | 69.6 50.0       |\n| moral-disputes                                            | 50.87       |             |                      |                        | 49.42         |                           |                 |\n| moral-scenarios                                           | 24.25       | 21.34       | 24.8                 | 23.35                  | 24.25         | 24.25                     | 24.25           |\n| nutrition                                                 | 50.0        | 51.96       | 40.85                | 47.71                  | 54.58         | 50.0                      | 54.9            |\n| philosophy                                                | 51.77       | 56.91       | 30.87                | 47.59                  | 54.02         | 53.7                      | 53.05           |\n| prehistory                                                | 51.85       | 56.79       | 31.79                | 51.85                  | 51.85         | 49.38                     | 51.23           |\n| professional-accounting                                   | 34.75       | 35.46       | 29.08                | 34.75                  | 37.23         | 36.52                     | 37.94           |\n| professional-law                                          | 34.55       | 33.31       | 27.71                | 31.03                  | 36.11         | 36.31                     | 36.05           |\n| professional-medicine                                     | 40.44       | 34.19       | 29.41                | 25.37                  | 43.01         | 44.85                     | 43.75           |\n| professional-psychology                                   | 44.93       | 47.55       | 29.74                | 42.32                  |               | 44.61                     | 45.59           |\n| public-relations                                          | 53.64 49.8  | 51.82       | 30.0                 |                        | 45.92         | 54.55                     | 56.36 56.33     |\n| security-studies                                          |             | 45.71       | 27.76 46.27          | 38.18 48.57            | 56.36 55.1    | 57.14 74.63               | 72.14           |\n| sociology                                                 | 71.14 73.0  | 57.21       |                      | 47.76                  | 71.64 71.0    |                           | 73.0            |\n| us-foreign-policy virology                                | 45.78       | 68.0 43.37  | 42.0 34.34           | 67.0 43.98             | 46.39         | 67.0 42.77                | 46.99           |\n| world-religions                                           | 64.91       | 67.84       | 37.43                | 61.99                  | 70.18         | 67.84                     | 70.18           |\n\ntasks from MMLU benchmark. There are 57 tasks in MMLU, which are different from the fine-tuning tasks in section 3.1. We use the evaluation script and five-shot examples from the widely used framework EleutherAI 6 .\n\nThe results are summarized in Table 3. 'LlamaICL' indicates the results using in-context learning with five examples. For Multitask-learning, we merge all training data from 9 fine-tune tasks (see section 3.1) and fine-tune the Llama on this multitask datasets. For LM-Cocktial, we use the official 5 examples to compute weights and tune a new model for each task by merging 9 finetuned models and the base model. Inspired by LoraHub (Huang et al., 2023), we also compare an alternative method to compute weight: using black-box optimization in (Huang et al., 2023) to\n\n6 https://github.com/EleutherAI/lm-evaluation-harness\n\nfind the optimal weight assignment. We use LMCocktail blackbox to denote this variant. Besides, we aggregate all examples from each task to compute merging weights, and produce a unified model named LM-Cocktail u for all tasks, rather than generate a separate model for each task.\n\nThere are some key findings:\n\n- The performance of multitask-learning is inferior to the original llama model. This shows fine-tuning will compromise the overall generality of the original model, and also indicates there is no direct correlation between these fine-tuning datasets and the tasks listed on the MMLU.\n- LM-Cocktail achieves higher accuracy than the Llama and Llama-ICL. Despite there are no fine-tuning datasets related to MMLU tasks, our approach demonstrates a significant\n\nTable 4: Results of merging decoder models from other tasks.\n\n| Dataset      |   BGE |   Multitask-learning |   LM-Cocktail blackbox |   LM-Cocktail |   LM-Cocktail' u blackbox |   LM-Cocktail u |\n|--------------|-------|----------------------|------------------------|---------------|---------------------------|-----------------|\n| ArguAna      | 63.61 |                59.18 |                  61.43 |         64.34 |                     65.07 |           64.31 |\n| ClimateFEVER | 29.51 |                25.8  |                  10.65 |         29.5  |                     29.94 |           29.17 |\n| DBPedia      | 40.56 |                39.77 |                  21.13 |         40.37 |                     40.46 |           40.83 |\n| FEVER        | 83.66 |                73.76 |                  83.91 |         86.07 |                     84.21 |           86.1  |\n| FiQA2018     | 39.11 |                41.7  |                  38.53 |         41.89 |                     39.2  |           42.05 |\n| NFCorpus     | 36.83 |                37.49 |                  36.99 |         37.66 |                     36.7  |           37.64 |\n| NQ           | 51.05 |                53.25 |                  50.95 |         53.47 |                     50.75 |           53.4  |\n| SCIDOCS      | 21.48 |                21.04 |                  21.87 |         22.55 |                     21.95 |           22.31 |\n| SciFact      | 73.81 |                73.82 |                  74.31 |         75.14 |                     73.31 |           75.12 |\n| Touche2020   | 19.54 |                22.96 |                  19.31 |         20.9  |                     20.56 |           20.54 |\n| TRECCOVID    | 67.18 |                74.51 |                  71.73 |         71.19 |                     71.3  |           70.32 |\n| CQADupstack  | 41.04 |                42.74 |                  39.72 |         43.03 |                     40.9  |           43.03 |\n| Avg          | 47.28 |                47.17 |                  44.21 |         48.84 |                     47.86 |           48.73 |\n\nimprovement in performance via merging finetuned models. LM-Cocktail merely involves recombining existing models without the need for additional model training. Furthermore, it does not introduce any latency to the inference process, while the Llama-ICL needs to process more tokens because of the added fewshot prompt.\n\n- In comparison to black-box optimization, our method to compute weight is simpler yet highly effective. We observed that black-box optimization methods struggle to ensure the sum of weights equals 1, leading to suboptimal performance.\n- The unified model LM-Cocktail u also shows superior performance, which demonstrates the proposed method is capable of simultaneously handling multiple new tasks. Besides, we further investigate the impact of the number of examples in section 4.4.\n\n## 4.2.2 Analysis on Encoder-based LM\n\nFollowing the setting in section 4.2.1, we compare the performance of the original BGE model, multitask-learning model, and LM-Cocktail with different methods to mix models. We collect 9 fine-tuned models from section 3.2. For evaluation, we excluded tasks which has been fine-tuned in section 3.2 (i.e., HotpotQA, MSMATCO, and Quora). As reported in Table 4, LM-Cocktail achieves higher accuracy than other models. It demonstrates that we can improve the accuracy of the new task by only mixing existing language models.\n\n## 4.3 Impact of Weight α\n\nIn this section, we conduct a performance comparison under various weights α . To eliminate the influence of other factors, we conducted experiments in the simplest configuration: merging the fine-tuned model and base model based on the weight α .\n\nThe results of decoders are shown in Figure 2, and the results of encoder models can be seen in Appendix B.2. We incrementally varied the hyperparameter α from 0 to 1, and evaluated the model's performance on the target task as well as other unrelated tasks. It can be observed that by changing the weights of the fine-tuned model, we can significantly improve the accuracy on other tasks, even surpassing that of the base model, while ensuring that the accuracy on the target task does not decline.\n\nFigure 2: Performance with different α .\n\n<!-- image -->\n\n## 4.4 Analysis on Number of Examples\n\nAdditionally, we investigate the effect of the number of examples. Given some specialist models from other tasks, LM-Cocktail needs a few examples for new task to compute the merging weights, and merge these specialist models via weighted sum. Then the merged model can be used to enhance the model fine-tuned on new task or directly perform the new task. In this section, we evaluate the performance of merged models on new tasks following the setting in section 4.2. For decoderbased model, a total of 285 examples are provided\n\nin MMLU datasets, and we randomly sample 5, 50, and 100 examples from the entire set to merge the specialist models, and test their performance. For encoder-based model, there are a total of 115 examples, and we also sample a subset to evaluate its performance. The average metric is reported in Table 5.\n\n| Model Type   |     5 |    50 |   100 |   All |\n|--------------|-------|-------|-------|-------|\n| Decoder      | 47.61 | 48.13 | 48.2  | 48.21 |\n| Encoder      | 48.67 | 48.76 | 48.77 | 48.73 |\n\nTable 5: The performance with different number of examples\n\nAs shown in Table 5, Our approach achieves satisfactory performance using only five examples, and performance further improves with an increase in the number of examples. However, beyond fifty examples, the performance improvement becomes significantly limited.\n\n## 5 Related Work\n\n## 5.1 Fine-tuning of Language Model\n\nFine-tuning large-scale pre-trained language models with task-specific labeled data can further enhance their corresponding abilities, which become commonplace in natural language processing (Dodge et al., 2020). However, catastrophic forgetting problem generally exists in the continual fine-tuning of different language models (Luo et al., 2023): Fine-tuning can improve the performance of the target domain, but significantly undermine the language models' general capabilities beyond their target domain. One solution is to add the data from previous tasks to maintain the previous abilities (Rolnick et al., 2019; Shin et al., 2017; Rebuffi et al., 2017). Some regularization-based methods also have been proposed to alleviate this problem, where the updating of model parameters is regularized to preserve the general capability of the pre-trained model(Kirkpatrick et al., 2017; Li and Hoiem, 2017; Rannen et al., 2017). Different from adding previous data, our method has no additional costs for training. Moreover, unlike regularizationbased methods, our proposed method requires no modification to the standard fine-tuning process.\n\n## 5.2 Model Merging\n\nEnsembling the outputs of many models is a popular technique for improving the accuracy of deep learning models (Lakshminarayanan et al., 2017;\n\nOvadia et al., 2019; Hastie et al., 2009). However, this method requires each model to do a separate inference, which significantly increases computational costs. Instead of ensembling the outputs of models, model merging averages the weights of multiple models to improve the performance of a single model, which requires no extra computation at inference time (Wortsman et al., 2022a; Ilharco et al., 2022a). Wortsman et al. (Wortsman et al., 2022a) find that averaging the weights of models fine-tuned with different hyper-parameter configurations can often improve accuracy. Some researchers propose more complex methods to align the parameters of different models and merge them (Nguyen et al., 2021; Matena and Raffel, 2022; Jin et al., 2022). Prateek et.al and Yu et.al propose to delete the redundant values in the delta parameter before model merging (Yadav et al., 2023; Yu et al., 2023). These methods may also be helpful for the LM-Cocktail, and we leave them for future work.\n\nOne direction relevant to our work is applying model merging in robust fine-tuning. Wortsman et al. (Wortsman et al., 2022b) and Ilharco (Ilharco et al., 2022b) both find that the fine-tuned clip (Radford et al., 2021) model substantially improves accuracy on a given target distribution but reduces robustness to distribution shifts. To address this problem, they use a manually set coefficient to merge the fine-tuned model and the base model. Unlike these methods, we propose to utilize not only the base pre-trained model but also the specialist models from other tasks. In this way, our proposed method further improves the general capabilities and even can function in situations where fine-tuning is not feasible. Besides, we utilize a simple method to compute the merging weights for different models automatically.\n\nThe other related direction is utilizing model merging to do cross-task generalization. Most of these methods focus on merging parameterefficient modules (e.g., LoRA (Hu et al., 2021), soft prompt(Lester et al., 2021)). Ponti et al.(Ponti et al., 2023) introduce a latent-skill model, where they train a binary vector as router function to select skill modules for each task and then average the parameters of modules. For the target task, Wu et al. (Wu et al., 2023) and Lv et al. (Lv et al., 2023) aggregate the parameters of lightweight task-specific experts which are learned from similar tasks. Some works also have been proposed to merge prompt embeddings from lots of source tasks to the target domain (Vu et al., 2021; Poth et al., 2021; Sun et al., 2023). The latest work is LoRAHub (Huang et al., 2023). Given a few examples, it uses the black-box optimization tool Shiwa (Liu et al., 2020) to combine multiple existing fine-tuned LoRA modules and generate a new LoRA module for the target task. In contrast to the above methods, we merge fine-tuned models and the base model with the aim of maintaining the general capabilities after finetuning. Meanwhile, to ensure performance on the target task, we employ losses from a small set of examples to filter out models that perform poorly on the target task. Besides, we merge the entire model instead of the parameter-efficient modules.\n\n## 6 Conclusion\n\nIn this work, we introduce the LM-Cocktail, a simple method to improve performance on target tasks without decreasing accuracy on other unrelated tasks. LM-Cocktail produces a resilient-tuned model by weighted averaging the parameters from different models: the model fine-tuned on the target task, the pre-trained base model, and the peer models from other domains. The empirical results on both decoder and encoder models demonstrate that LM-Cocktail can achieve strong performance in the whole scope of general tasks while preserving a superior capacity in its targeted domain. We further demonstrated the effectiveness of LM-Cocktail when unable to fine-tune on domain-specific data. In such cases, our approach can merge existing models based on very few examples to enhance the accuracy of the target task.\n\n## References\n\n- Tom Brown, Benjamin Mann, Nick Ryder, Melanie Subbiah, Jared D Kaplan, Prafulla Dhariwal, Arvind Neelakantan, Pranav Shyam, Girish Sastry, Amanda Askell, et al. 2020. Language models are few-shot learners. Advances in neural information processing systems , 33:1877-1901.\n- Mark Chen, Jerry Tworek, Heewoo Jun, Qiming Yuan, Henrique Ponde de Oliveira Pinto, Jared Kaplan, Harri Edwards, Yuri Burda, Nicholas Joseph, Greg Brockman, et al. 2021. Evaluating large language models trained on code. arXiv preprint arXiv:2107.03374 .\n- Sanyuan Chen, Yutai Hou, Yiming Cui, Wanxiang Che, Ting Liu, and Xiangzhan Yu. 2020. Recall and learn: Fine-tuning deep pretrained language models with less forgetting. arXiv preprint arXiv:2004.12651 .\n- Daixuan Cheng, Shaohan Huang, Junyu Bi, Yuefeng Zhan, Jianfeng Liu, Yujing Wang, Hao Sun, Furu Wei, Denvy Deng, and Qi Zhang. 2023. Uprise: Universal prompt retrieval for improving zero-shot evaluation.\n- Hyung Won Chung, Le Hou, Shayne Longpre, Barret Zoph, Yi Tay, William Fedus, Eric Li, Xuezhi Wang, Mostafa Dehghani, Siddhartha Brahma, et al. 2022. Scaling instruction-finetuned language models. arXiv preprint arXiv:2210.11416 .\n- Jacob Devlin, Ming-Wei Chang, Kenton Lee, and Kristina Toutanova. 2018. Bert: Pre-training of deep bidirectional transformers for language understanding. arXiv preprint arXiv:1810.04805 .\n- Jesse Dodge, Gabriel Ilharco, Roy Schwartz, Ali Farhadi, Hannaneh Hajishirzi, and Noah Smith. 2020. Fine-tuning pretrained language models: Weight initializations, data orders, and early stopping. arXiv preprint arXiv:2002.06305 .\n- Ian J Goodfellow, Mehdi Mirza, Da Xiao, Aaron Courville, and Yoshua Bengio. 2013. An empirical investigation of catastrophic forgetting in gradient-based neural networks. arXiv preprint arXiv:1312.6211 .\n- Trevor Hastie, Robert Tibshirani, Jerome H Friedman, and Jerome H Friedman. 2009. The elements of statistical learning: data mining, inference, and prediction , volume 2. Springer.\n- Dan Hendrycks, Collin Burns, Steven Basart, Andy Zou, Mantas Mazeika, Dawn Song, and Jacob Steinhardt. 2020. Measuring massive multitask language understanding. arXiv preprint arXiv:2009.03300 .\n- Edward J Hu, Yelong Shen, Phillip Wallis, Zeyuan Allen-Zhu, Yuanzhi Li, Shean Wang, Lu Wang, and Weizhu Chen. 2021. Lora: Low-rank adaptation of large language models. arXiv preprint arXiv:2106.09685 .\n- Chengsong Huang, Qian Liu, Bill Yuchen Lin, Tianyu Pang, Chao Du, and Min Lin. 2023. Lorahub: Efficient cross-task generalization via dynamic lora composition.\n- Gabriel Ilharco, Marco Tulio Ribeiro, Mitchell Wortsman, Suchin Gururangan, Ludwig Schmidt, Hannaneh Hajishirzi, and Ali Farhadi. 2022a. Editing models with task arithmetic. arXiv preprint arXiv:2212.04089 .\n- Gabriel Ilharco, Mitchell Wortsman, Samir Yitzhak Gadre, Shuran Song, Hannaneh Hajishirzi, Simon Kornblith, Ali Farhadi, and Ludwig Schmidt. 2022b. Patching open-vocabulary models by interpolating weights. In Advances in Neural Information Processing Systems .\n- Xisen Jin, Xiang Ren, Daniel Preotiuc-Pietro, and Pengxiang Cheng. 2022. Dataless knowledge fusion by merging weights of language models. arXiv preprint arXiv:2212.09849 .\n- James Kirkpatrick, Razvan Pascanu, Neil Rabinowitz, Joel Veness, Guillaume Desjardins, Andrei A Rusu, Kieran Milan, John Quan, Tiago Ramalho, Agnieszka Grabska-Barwinska, et al. 2017. Overcoming catastrophic forgetting in neural networks. Proceedings of the national academy of sciences , 114(13):3521-3526.\n- Balaji Lakshminarayanan, Alexander Pritzel, and Charles Blundell. 2017. Simple and scalable predictive uncertainty estimation using deep ensembles. Advances in neural information processing systems , 30.\n- Brian Lester, Rami Al-Rfou, and Noah Constant. 2021. The power of scale for parameter-efficient prompt tuning. arXiv preprint arXiv:2104.08691 .\n- Zhizhong Li and Derek Hoiem. 2017. Learning without forgetting. IEEE transactions on pattern analysis and machine intelligence , 40(12):2935-2947.\n- Jialin Liu, Antoine Moreau, Mike Preuss, Jeremy Rapin, Baptiste Roziere, Fabien Teytaud, and Olivier Teytaud. 2020. Versatile black-box optimization. In Proceedings of the 2020 Genetic and Evolutionary Computation Conference , pages 620-628.\n- Yinhan Liu, Myle Ott, Naman Goyal, Jingfei Du, Mandar Joshi, Danqi Chen, Omer Levy, Mike Lewis, Luke Zettlemoyer, and Veselin Stoyanov. 2019. Roberta: A robustly optimized bert pretraining approach. arXiv preprint arXiv:1907.11692 .\n- Yun Luo, Zhen Yang, Fandong Meng, Yafu Li, Jie Zhou, and Yue Zhang. 2023. An empirical study of catastrophic forgetting in large language models during continual fine-tuning. arXiv preprint arXiv:2308.08747 .\n- Xingtai Lv, Ning Ding, Yujia Qin, Zhiyuan Liu, and Maosong Sun. 2023. Parameter-efficient weight ensembling facilitates task-level knowledge transfer. In Proceedings of the 61st Annual Meeting of the Association for Computational Linguistics (Volume 2: Short Papers) , pages 270-282, Toronto, Canada. Association for Computational Linguistics.\n- Michael S Matena and Colin Raffel. 2022. Merging models with fisher-weighted averaging. In Advances in Neural Information Processing Systems .\n- Niklas Muennighoff, Nouamane Tazi, Loïc Magne, and Nils Reimers. 2022. Mteb: Massive text embedding benchmark. arXiv preprint arXiv:2210.07316 .\n- Dang Nguyen, Khai Nguyen, Nhat Ho, Dinh Phung, and Hung Bui. 2021. Model fusion of heterogeneous neural networks via cross-layer alignment. arXiv preprint arXiv:2110.15538 .\n- Long Ouyang, Jeffrey Wu, Xu Jiang, Diogo Almeida, Carroll Wainwright, Pamela Mishkin, Chong Zhang, Sandhini Agarwal, Katarina Slama, Alex Ray, et al. 2022. Training language models to follow instructions with human feedback. Advances in Neural Information Processing Systems , 35:27730-27744.\n- Yaniv Ovadia, Emily Fertig, Jie Ren, Zachary Nado, David Sculley, Sebastian Nowozin, Joshua Dillon, Balaji Lakshminarayanan, and Jasper Snoek. 2019. Can you trust your model's uncertainty? evaluating predictive uncertainty under dataset shift. Advances in neural information processing systems , 32.\n- Edoardo Maria Ponti, Alessandro Sordoni, Yoshua Bengio, and Siva Reddy. 2023. Combining parameterefficient modules for task-level generalisation. In Proceedings of the 17th Conference of the European Chapter of the Association for Computational Linguistics , pages 687-702.\n- Clifton Poth, Jonas Pfeiffer, Andreas Rücklé, and Iryna Gurevych. 2021. What to pre-train on? efficient intermediate task selection. arXiv preprint arXiv:2104.08247 .\n- Alec Radford, Jong Wook Kim, Chris Hallacy, Aditya Ramesh, Gabriel Goh, Sandhini Agarwal, Girish Sastry, Amanda Askell, Pamela Mishkin, Jack Clark, et al. 2021. Learning transferable visual models from natural language supervision. In International conference on machine learning , pages 8748-8763. PMLR.\n- Alec Radford, Jeffrey Wu, Rewon Child, David Luan, Dario Amodei, Ilya Sutskever, et al. 2019. Language models are unsupervised multitask learners. OpenAI blog , 1(8):9.\n- Colin Raffel, Noam Shazeer, Adam Roberts, Katherine Lee, Sharan Narang, Michael Matena, Yanqi Zhou, Wei Li, and Peter J Liu. 2020. Exploring the limits of transfer learning with a unified text-to-text transformer. The Journal of Machine Learning Research , 21(1):5485-5551.\n- Amal Rannen, Rahaf Aljundi, Matthew B Blaschko, and Tinne Tuytelaars. 2017. Encoder based lifelong learning. In Proceedings of the IEEE international conference on computer vision , pages 1320-1328.\n- Sylvestre-Alvise Rebuffi, Alexander Kolesnikov, Georg Sperl, and Christoph H Lampert. 2017. icarl: Incremental classifier and representation learning. In Proceedings of the IEEE conference on Computer Vision and Pattern Recognition , pages 2001-2010.\n- David Rolnick, Arun Ahuja, Jonathan Schwarz, Timothy Lillicrap, and Gregory Wayne. 2019. Experience replay for continual learning. Advances in Neural Information Processing Systems , 32.\n- Baptiste Roziere, Jonas Gehring, Fabian Gloeckle, Sten Sootla, Itai Gat, Xiaoqing Ellen Tan, Yossi Adi, Jingyu Liu, Tal Remez, Jérémy Rapin, et al. 2023. Code llama: Open foundation models for code. arXiv preprint arXiv:2308.12950 .\n- Hanul Shin, Jung Kwon Lee, Jaehong Kim, and Jiwon Kim. 2017. Continual learning with deep generative replay. Advances in neural information processing systems , 30.\n- Karan Singhal, Shekoofeh Azizi, Tao Tu, S Sara Mahdavi, Jason Wei, Hyung Won Chung, Nathan Scales, Ajay Tanwani, Heather Cole-Lewis, Stephen Pfohl, et al. 2022. Large language models encode clinical knowledge. arXiv preprint arXiv:2212.13138 .\n- Tianxiang Sun, Zhengfu He, Qin Zhu, Xipeng Qiu, and Xuan-Jing Huang. 2023. Multitask pre-training of modular prompt for chinese few-shot learning. In Proceedings of the 61st Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers) , pages 11156-11172.\n- Brian Thompson, Jeremy Gwinnup, Huda Khayrallah, Kevin Duh, and Philipp Koehn. 2019. Overcoming catastrophic forgetting during domain adaptation of neural machine translation. In Proceedings of the 2019 Conference of the North American Chapter of the Association for Computational Linguistics: Human Language Technologies, Volume 1 (Long and Short Papers) , pages 2062-2068.\n- Hugo Touvron, Louis Martin, Kevin Stone, Peter Albert, Amjad Almahairi, Yasmine Babaei, Nikolay Bashlykov, Soumya Batra, Prajjwal Bhargava, Shruti Bhosale, Dan Bikel, Lukas Blecher, Cristian Canton Ferrer, Moya Chen, Guillem Cucurull, David Esiobu, Jude Fernandes, Jeremy Fu, Wenyin Fu, Brian Fuller, Cynthia Gao, Vedanuj Goswami, Naman Goyal, Anthony Hartshorn, Saghar Hosseini, Rui Hou, Hakan Inan, Marcin Kardas, Viktor Kerkez, Madian Khabsa, Isabel Kloumann, Artem Korenev, Punit Singh Koura, Marie-Anne Lachaux, Thibaut Lavril, Jenya Lee, Diana Liskovich, Yinghai Lu, Yuning Mao, Xavier Martinet, Todor Mihaylov, Pushkar Mishra, Igor Molybog, Yixin Nie, Andrew Poulton, Jeremy Reizenstein, Rashi Rungta, Kalyan Saladi, Alan Schelten, Ruan Silva, Eric Michael Smith, Ranjan Subramanian, Xiaoqing Ellen Tan, Binh Tang, Ross Taylor, Adina Williams, Jian Xiang Kuan, Puxin Xu, Zheng Yan, Iliyan Zarov, Yuchen Zhang, Angela Fan, Melanie Kambadur, Sharan Narang, Aurelien Rodriguez, Robert Stojnic, Sergey Edunov, and Thomas Scialom. 2023. Llama 2: Open foundation and finetuned chat models.\n- Tu Vu, Brian Lester, Noah Constant, Rami Al-Rfou, and Daniel Cer. 2021. Spot: Better frozen model adaptation through soft prompt transfer. arXiv preprint arXiv:2110.07904 .\n- Liang Wang, Nan Yang, and Furu Wei. 2023. Learning to retrieve in-context examples for large language models.\n- Jason Wei, Maarten Bosma, Vincent Zhao, Kelvin Guu, Adams Wei Yu, Brian Lester, Nan Du, Andrew M. Dai, and Quoc V Le. 2022. Finetuned language models are zero-shot learners. In International Conference on Learning Representations .\n- Jason Wei, Maarten Bosma, Vincent Y Zhao, Kelvin Guu, Adams Wei Yu, Brian Lester, Nan Du, Andrew M Dai, and Quoc V Le. 2021. Finetuned language models are zero-shot learners. arXiv preprint arXiv:2109.01652 .\n- Mitchell Wortsman, Gabriel Ilharco, Samir Ya Gadre, Rebecca Roelofs, Raphael Gontijo-Lopes, Ari S Morcos, Hongseok Namkoong, Ali Farhadi, Yair Carmon, Simon Kornblith, and Ludwig Schmidt. 2022a. Model soups: averaging weights of multiple finetuned models improves accuracy without increasing inference time. In Proceedings of the 39th International Conference on Machine Learning , volume 162 of Proceedings of Machine Learning Research , pages 23965-23998. PMLR.\n- Mitchell Wortsman, Gabriel Ilharco, Jong Wook Kim, Mike Li, Simon Kornblith, Rebecca Roelofs, Raphael Gontijo Lopes, Hannaneh Hajishirzi, Ali Farhadi, Hongseok Namkoong, et al. 2022b. Robust fine-tuning of zero-shot models. In Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition , pages 7959-7971.\n- Chengyue Wu, Teng Wang, Yixiao Ge, Zeyu Lu, Ruisong Zhou, Ying Shan, and Ping Luo. 2023. pituning: Transferring multimodal foundation models with optimal multi-task interpolation. In International Conference on Machine Learning , pages 37713-37727. PMLR.\n- Shitao Xiao, Zheng Liu, Peitian Zhang, and Niklas Muennighoff. 2023. C-pack: Packaged resources to advance general chinese embedding.\n- Prateek Yadav, Derek Tam, Leshem Choshen, Colin Raffel, and Mohit Bansal. 2023. Resolving interference when merging models. arXiv preprint arXiv:2306.01708 .\n- Le Yu, Bowen Yu, Haiyang Yu, Fei Huang, and Yongbin Li. 2023. Language models are super mario: Absorbing abilities from homologous models as a free lunch. arXiv preprint arXiv:2311.03099 .\n\n## A Datasets used in fine-tuning\n\nWe fine-tune the Llama model on 9 different datasets, whose details are shown in Table 6. The details of datasets used to fine-tune BGE are shown in Table 7.\n\n| Dataset    | # train   | # test   | Metric      |\n|------------|-----------|----------|-------------|\n| NQ         | 30,000    | 3,610    | Exact Match |\n| SQuAD      | 30,000    | 10,570   | Exact Match |\n| Hellaswag  | 30,000    | 10,042   | Accuracy    |\n| SST2       | 30,000    | 872      | Accuracy    |\n| Winogrande | 30,000    | 1,267    | Accuracy    |\n| CommenGen  | 30,000    | 4,018    | ROUGE-L     |\n| MRPC       | 3,668     | 408      | Accuracy    |\n| AG News    | 30,000    | 7600     | Accuracy    |\n| MNLI       | 30,000    | 9,815    | Accuracy    |\n\nTable 6: Statistics for the datasets used to fine-tune Llama.\n\nTable 7: Statistics for the datasets used to fine-tune BGE.\n\n| Dataset       | # train   | # test   | Metric   |\n|---------------|-----------|----------|----------|\n| GooAQ         | 3,012,496 | -        | -        |\n| YahooAnswers  | 1,198,260 | -        | -        |\n| MSMarco       | 485,823   | 6,980    | NDCG@10  |\n| StackExchange | 293,951   | -        | -        |\n| ELI5          | 319,912   | -        | -        |\n| SQuAD         | 86,701    | -        | -        |\n| AmazonQA      | 1,095,290 | -        | -        |\n| Quora         | 60,202    | 10,000   | NDCG@10  |\n| HotpotQA      | 84,516    | 7,405    | NDCG@10  |\n\n## B More Experimental Results\n\n## B.1 Detailed results for each task\n\nThe detailed results for each task are reported in Table 8 and 9.\n\n## B.2 Impact of α for encoder-based LM\n\nThe performance of encoder-based LMs with different merging weight are shown in Figure 3.\n\nFigure 3: Performance of encoder-based LMs with different merging weights.\n\n<!-- image -->\n\nTable 8: The detailed results of base model, fine-tuned model, and resilient-tuned model via LM-Cocktail. We use the name of task to denote the model fine-tuned on this task (e.g., AG News in the first row represent the model fine-tuned on AG News dataset). LM-Cocktail 2 is produced by merging the base model and fine-tuned model, while LM-Cocktail 10 merges fine-tuned model, base model, and other models fine-tuned on 8 different tasks.\n\n<!-- image -->\n\nTable 9: The detailed results of base model, fine-tuned model, and resilient-tuned model via LM-Cocktail. We use the name of task to denote the model fine-tuned on this task (e.g., HotpotQA in the first row represent the model fine-tuned on HotpotQA dataset). LM-Cocktail 2 is produced by merging the base model and fine-tuned model, while LM-Cocktail 10 merges fine-tuned model, base model, and other models fine-tuned on 8 different tasks.\n\n<!-- image -->",
+  "tables": [
+    {
+      "index": 0,
+      "markdown": "| Fine-tune on   | Performance on   |   Llama |   Fine-tuned |   LM-Cocktail 2 |   LM-Cocktail 10 |\n|----------------|------------------|---------|--------------|-----------------|------------------|\n| AG News        | AG News          |   40.8  |        94.42 |           94.46 |            94.41 |\n| AG News        | Other tasks      |   46.8  |        38.58 |           47.73 |            48.32 |\n| Common Gen     | Common Gen       |   21.14 |        39.2  |           41.22 |            41.45 |\n| Common Gen     | Other tasks      |   47.48 |        46.9  |           50.88 |            58.57 |\n| MNLI           | MNLI             |   32.14 |        87.9  |           88.88 |            89.23 |\n| MNLI           | Other tasks      |   47.1  |        47.49 |           53.53 |            56.31 |\n| Winogrande     | Winogrande       |   60.93 |        75.45 |           77.9  |            77.03 |\n| Winogrande     | Other tasks      |   46.11 |        47.33 |           50.52 |            58.52 |\n| MRPC           | MRPC             |   31.86 |        85.78 |           73.77 |            80.88 |\n| MRPC           | Other tasks      |   47.11 |        36.45 |           39.56 |            42.77 |\n| NQ             | NQ               |    0    |        29.09 |           29.25 |            29.64 |\n| NQ             | Other tasks      |   48.21 |        52.19 |           54.58 |            60.28 |\n| SQuAD          | SQuAD            |    0.06 |        86.77 |           85.67 |            86.94 |\n| SQuAD          | Other tasks      |   48.21 |        49.48 |           51.64 |            54.09 |\n| SST2           | SST2             |   63.3  |        95.53 |           96.56 |            96.56 |\n| SST2           | Other tasks      |   46.02 |        38.94 |           41.63 |            45.03 |\n| Hellaswag      | Hellaswag        |   71.58 |        77.2  |           79    |            78.61 |\n| Hellaswag      | Other tasks      |   45.74 |        46.1  |           48.95 |            57.87 |"
+    },
+    {
+      "index": 1,
+      "markdown": "| Fine-tune on   | Performance on   |   BGE |   Fine-tuned |   LM-Cocktail 2 |   LM-Cocktail 10 |\n|----------------|------------------|-------|--------------|-----------------|------------------|\n| HotpotQA       | HotpotQA         | 71.81 |        75.96 |           74.78 |            74.67 |\n| HotpotQA       | Other tasks      | 49.81 |        47.49 |           49.98 |            50.64 |\n| Quora          | Quora            | 88.9  |        90.31 |           89.93 |            89.81 |\n| Quora          | Other tasks      | 48.59 |        47.43 |           48.09 |            49.11 |\n| MSMarco        | MSMarco          | 41.15 |        42.23 |           42.01 |            41.88 |\n| MSMarco        | Other tasks      | 52    |        51.98 |           52.71 |            53.22 |"
+    },
+    {
+      "index": 2,
+      "markdown": "| Dataset                                                   | Llama       | Llama-ICL   | Multitask-learning   | LM-Cocktail blackbox   | LM-Cocktail   | LM-Cocktail' u blackbox   | LM-Cocktail u   |\n|-----------------------------------------------------------|-------------|-------------|----------------------|------------------------|---------------|---------------------------|-----------------|\n| Avg                                                       | 45.87       | 46.65       | 32.88                | 42.28                  | 48.01         | 47.46                     | 48.21           |\n| abstract-algebra                                          | 28.0        | 30.0        | 21.0                 | 29.0                   | 35.0          | 33.0                      | 34.0            |\n| anatomy                                                   | 42.96       | 42.22       | 34.07                | 45.19                  | 46.67         | 46.67                     | 48.15           |\n| astronomy                                                 | 44.08       | 48.03       | 34.21                | 46.05                  | 46.05         | 44.08                     | 47.37           |\n| business-ethics                                           | 42.0        | 42.0        | 41.0                 | 50.0                   | 46.0          | 52.0                      | 48.0            |\n| clinical-knowledge                                        | 50.57       | 51.32       | 39.62                | 47.92                  | 51.32         | 51.7                      | 51.32           |\n| college-biology                                           | 50.0        | 52.78       | 27.08                | 41.67                  | 52.08         | 49.31                     | 51.39           |\n| college-chemistry                                         | 23.0        | 26.0        | 31.0                 | 19.0                   | 29.0          | 29.0                      | 29.0            |\n| college-computer-science                                  | 29.0        | 37.0        | 37.0                 | 33.0                   | 46.0          | 43.0                      | 45.0            |\n| college-mathematics                                       | 29.0        | 33.0        | 36.0                 | 29.0                   | 31.0          | 35.0                      | 31.0            |\n| college-medicine                                          | 38.15       | 40.46       | 31.79                | 28.32                  | 40.46         | 39.31                     | 40.46           |\n| college-physics                                           | 21.57       | 24.51       | 20.59                | 21.57                  | 19.61         | 19.61                     | 19.61           |\n| computer-security                                         | 59.0        | 54.0        | 40.0                 | 59.0                   | 55.0          | 49.0                      | 57.0            |\n| conceptual-physics                                        | 38.3        | 38.72       | 29.79                | 38.72                  | 39.57         | 39.57                     | 40.0            |\n| econometrics                                              | 28.95       | 33.33       | 22.81                | 28.07                  | 26.32         | 35.09                     | 28.07           |\n| electrical-engineering                                    | 42.76       | 43.45       | 34.48                | 33.1                   | 46.9          | 44.14                     | 47.59           |\n| elementary-mathematics                                    | 27.25       | 28.04       | 21.16                | 28.84                  | 26.46         | 26.72                     | 26.72           |\n| formal-logic                                              | 22.22       | 25.4        | 35.71                | 28.57                  | 25.4          | 24.6                      | 25.4            |\n| global-facts                                              | 41.0        | 31.0        | 26.0                 | 37.0                   | 35.0          | 33.0                      | 35.0            |\n| high-school-biology                                       | 46.45       | 52.58       | 33.23                | 35.16                  | 53.87         | 53.55                     | 53.87           |\n| high-school-chemistry                                     | 30.54       | 33.99       | 21.67                | 30.05                  | 32.02         | 32.51                     | 31.53           |\n| high-school-computer-science                              | 39.0        | 46.0        | 30.0                 | 37.0                   | 40.0          | 41.0                      | 40.0            |\n| high-school-european-history                              | 60.61       | 56.97       | 32.12                | 51.52                  | 63.03         | 63.64                     | 64.85           |\n| high-school-geography high-school-government-and-politics | 57.07       | 59.6 67.36  | 33.33                | 55.56                  | 60.1 70.98    | 61.62 66.84               | 59.09 70.98     |\n| high-school-macroeconomics                                | 70.47 39.23 | 41.54       | 38.34 31.79          | 39.38 38.21            | 45.64         |                           |                 |\n|                                                           |             | 23.7        | 22.96                | 25.19                  | 24.81         | 44.1                      | 44.87           |\n| high-school-mathematics high-school-microeconomics        | 26.3 36.55  | 43.7        | 31.93                | 36.55                  | 41.6          | 24.44 40.34               | 24.81 41.6      |\n| high-school-physics                                       | 25.83       | 28.48       | 29.8                 | 27.81                  | 29.14         | 30.46                     | 29.14           |\n| high-school-psychology                                    | 59.63       | 64.04       | 33.94                | 60.0                   | 65.32         | 65.87                     | 64.77           |\n| high-school-statistics                                    | 23.61       | 31.48       | 36.57                | 25.46                  | 28.24         | 30.09                     | 28.7            |\n| high-school-us-history                                    | 65.2        | 66.18       | 38.24                | 65.2                   | 65.69         | 66.67                     | 64.71           |\n| high-school-world-history                                 | 61.18       | 66.24       | 35.02                | 57.81                  | 66.24         | 65.82                     | 65.4            |\n|                                                           |             |             |                      |                        | 58.74         | 54.26                     | 58.74           |\n| human-aging human-sexuality                               | 58.74       | 57.4        | 36.77                | 55.61                  | 57.25         | 55.73                     | 56.49           |\n| international-law                                         | 54.96 59.5  | 48.09 57.02 | 38.17 42.15          | 29.01 48.76            | 61.16         |                           | 60.33           |\n| jurisprudence                                             | 55.56       | 57.41       | 34.26                | 52.78                  | 49.07         | 58.68 50.93               | 50.93           |\n| logical-fallacies                                         | 58.28       | 53.99       | 29.45                | 57.67                  | 55.21         | 55.83                     | 54.6            |\n| machine-learning                                          | 36.61       | 35.71       | 28.57                | 33.04                  | 39.29         | 41.07                     | 41.96           |\n| management                                                | 64.08       | 67.96       | 43.69                | 61.17                  | 68.93         | 66.99                     | 68.93           |\n| marketing                                                 | 73.5        | 74.36       | 48.29                | 73.5                   | 76.5          | 70.94                     | 76.07           |\n| medical-genetics                                          | 46.0        | 53.0        | 32.0                 | 49.0                   | 50.0          | 51.0                      | 49.0            |\n| miscellaneous                                             | 66.16       | 66.54 52.89 | 38.19 28.32          | 65.13 44.22            | 68.58         | 65.52 49.13               | 69.6 50.0       |\n| moral-disputes                                            | 50.87       |             |                      |                        | 49.42         |                           |                 |\n| moral-scenarios                                           | 24.25       | 21.34       | 24.8                 | 23.35                  | 24.25         | 24.25                     | 24.25           |\n| nutrition                                                 | 50.0        | 51.96       | 40.85                | 47.71                  | 54.58         | 50.0                      | 54.9            |\n| philosophy                                                | 51.77       | 56.91       | 30.87                | 47.59                  | 54.02         | 53.7                      | 53.05           |\n| prehistory                                                | 51.85       | 56.79       | 31.79                | 51.85                  | 51.85         | 49.38                     | 51.23           |\n| professional-accounting                                   | 34.75       | 35.46       | 29.08                | 34.75                  | 37.23         | 36.52                     | 37.94           |\n| professional-law                                          | 34.55       | 33.31       | 27.71                | 31.03                  | 36.11         | 36.31                     | 36.05           |\n| professional-medicine                                     | 40.44       | 34.19       | 29.41                | 25.37                  | 43.01         | 44.85                     | 43.75           |\n| professional-psychology                                   | 44.93       | 47.55       | 29.74                | 42.32                  |               | 44.61                     | 45.59           |\n| public-relations                                          | 53.64 49.8  | 51.82       | 30.0                 |                        | 45.92         | 54.55                     | 56.36 56.33     |\n| security-studies                                          |             | 45.71       | 27.76 46.27          | 38.18 48.57            | 56.36 55.1    | 57.14 74.63               | 72.14           |\n| sociology                                                 | 71.14 73.0  | 57.21       |                      | 47.76                  | 71.64 71.0    |                           | 73.0            |\n| us-foreign-policy virology                                | 45.78       | 68.0 43.37  | 42.0 34.34           | 67.0 43.98             | 46.39         | 67.0 42.77                | 46.99           |\n| world-religions                                           | 64.91       | 67.84       | 37.43                | 61.99                  | 70.18         | 67.84                     | 70.18           |"
+    },
+    {
+      "index": 3,
+      "markdown": "| Dataset      |   BGE |   Multitask-learning |   LM-Cocktail blackbox |   LM-Cocktail |   LM-Cocktail' u blackbox |   LM-Cocktail u |\n|--------------|-------|----------------------|------------------------|---------------|---------------------------|-----------------|\n| ArguAna      | 63.61 |                59.18 |                  61.43 |         64.34 |                     65.07 |           64.31 |\n| ClimateFEVER | 29.51 |                25.8  |                  10.65 |         29.5  |                     29.94 |           29.17 |\n| DBPedia      | 40.56 |                39.77 |                  21.13 |         40.37 |                     40.46 |           40.83 |\n| FEVER        | 83.66 |                73.76 |                  83.91 |         86.07 |                     84.21 |           86.1  |\n| FiQA2018     | 39.11 |                41.7  |                  38.53 |         41.89 |                     39.2  |           42.05 |\n| NFCorpus     | 36.83 |                37.49 |                  36.99 |         37.66 |                     36.7  |           37.64 |\n| NQ           | 51.05 |                53.25 |                  50.95 |         53.47 |                     50.75 |           53.4  |\n| SCIDOCS      | 21.48 |                21.04 |                  21.87 |         22.55 |                     21.95 |           22.31 |\n| SciFact      | 73.81 |                73.82 |                  74.31 |         75.14 |                     73.31 |           75.12 |\n| Touche2020   | 19.54 |                22.96 |                  19.31 |         20.9  |                     20.56 |           20.54 |\n| TRECCOVID    | 67.18 |                74.51 |                  71.73 |         71.19 |                     71.3  |           70.32 |\n| CQADupstack  | 41.04 |                42.74 |                  39.72 |         43.03 |                     40.9  |           43.03 |\n| Avg          | 47.28 |                47.17 |                  44.21 |         48.84 |                     47.86 |           48.73 |"
+    },
+    {
+      "index": 4,
+      "markdown": "| Model Type   |     5 |    50 |   100 |   All |\n|--------------|-------|-------|-------|-------|\n| Decoder      | 47.61 | 48.13 | 48.2  | 48.21 |\n| Encoder      | 48.67 | 48.76 | 48.77 | 48.73 |"
+    },
+    {
+      "index": 5,
+      "markdown": "| Dataset    | # train   | # test   | Metric      |\n|------------|-----------|----------|-------------|\n| NQ         | 30,000    | 3,610    | Exact Match |\n| SQuAD      | 30,000    | 10,570   | Exact Match |\n| Hellaswag  | 30,000    | 10,042   | Accuracy    |\n| SST2       | 30,000    | 872      | Accuracy    |\n| Winogrande | 30,000    | 1,267    | Accuracy    |\n| CommenGen  | 30,000    | 4,018    | ROUGE-L     |\n| MRPC       | 3,668     | 408      | Accuracy    |\n| AG News    | 30,000    | 7600     | Accuracy    |\n| MNLI       | 30,000    | 9,815    | Accuracy    |"
+    },
+    {
+      "index": 6,
+      "markdown": "| Dataset       | # train   | # test   | Metric   |\n|---------------|-----------|----------|----------|\n| GooAQ         | 3,012,496 | -        | -        |\n| YahooAnswers  | 1,198,260 | -        | -        |\n| MSMarco       | 485,823   | 6,980    | NDCG@10  |\n| StackExchange | 293,951   | -        | -        |\n| ELI5          | 319,912   | -        | -        |\n| SQuAD         | 86,701    | -        | -        |\n| AmazonQA      | 1,095,290 | -        | -        |\n| Quora         | 60,202    | 10,000   | NDCG@10  |\n| HotpotQA      | 84,516    | 7,405    | NDCG@10  |"
+    }
+  ],
+  "stats": {
+    "pages": 14,
+    "chunksCreated": 90,
+    "totalCharacters": 61627,
+    "totalWords": 8397,
+    "numTables": 7,
+    "processingTimeMs": 40622
+  }
+}

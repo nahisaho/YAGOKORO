@@ -1,0 +1,1530 @@
+{
+  "metadata": {
+    "generatedAt": "2025-12-29T22:58:00.939Z",
+    "totalPapers": 193,
+    "totalChunks": 30862
+  },
+  "milestones": [
+    {
+      "year": 2017,
+      "event": "Transformer発表",
+      "paper": "Attention Is All You Need"
+    },
+    {
+      "year": 2018,
+      "event": "BERT発表、事前学習革命",
+      "paper": "BERT"
+    },
+    {
+      "year": 2019,
+      "event": "GPT-2、スケーリング開始",
+      "paper": "GPT-2"
+    },
+    {
+      "year": 2020,
+      "event": "GPT-3、Few-shot学習",
+      "paper": "GPT-3"
+    },
+    {
+      "year": 2021,
+      "event": "CLIP/DALL-E、マルチモーダル時代",
+      "paper": "CLIP, DALL-E, Codex"
+    },
+    {
+      "year": 2022,
+      "event": "ChatGPT、AIの民主化",
+      "paper": "InstructGPT, ChatGPT"
+    },
+    {
+      "year": 2023,
+      "event": "オープンモデル台頭",
+      "paper": "LLaMA, Mistral, GPT-4"
+    },
+    {
+      "year": 2024,
+      "event": "MoE & 効率化",
+      "paper": "Mixtral, Mamba-2, Claude 3"
+    }
+  ],
+  "byYear": {
+    "2017": {
+      "Alignment": [
+        "Deep reinforcement learning from human preferences"
+      ],
+      "Foundation": [
+        "Attention Is All You Need"
+      ]
+    },
+    "2018": {
+      "Foundation": [
+        "BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding"
+      ]
+    },
+    "2020": {
+      "Efficiency": [
+        "Scaling Laws for Neural Language Models"
+      ],
+      "RAG": [
+        "Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks",
+        "BART: Denoising Sequence-to-Sequence Pre-training for Natural Language Generation, Translation, and Comprehension",
+        "AutoPrompt: Eliciting Knowledge from Language Models with Automatically Generated Prompts"
+      ],
+      "LLM": [
+        "Language Models are Few-Shot Learners",
+        "Array programming with NumPy"
+      ],
+      "Multimodal": [
+        "Denoising Diffusion Probabilistic Models"
+      ],
+      "Foundation": [
+        "An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale"
+      ],
+      "Evaluation": [
+        "Beyond Accuracy: Behavioral Testing of NLP Models with CheckList",
+        "Consistency of a Recurrent Language Model With Respect to Incomplete Decoding"
+      ],
+      "Architecture": [
+        "Unsupervised Cross-lingual Representation Learning at Scale"
+      ],
+      "Safety": [
+        "RealToxicityPrompts: Evaluating Neural Toxic Degeneration in Language Models"
+      ]
+    },
+    "2021": {
+      "Efficiency": [
+        "Switch Transformers: Scaling to Trillion Parameter Models with Simple and Efficient Sparsity",
+        "LoRA: Low-Rank Adaptation of Large Language Models"
+      ],
+      "Multimodal": [
+        "Learning Transferable Visual Models From Natural Language Supervision",
+        "High-Resolution Image Synthesis with Latent Diffusion Models",
+        "The Power of Scale for Parameter-Efficient Prompt Tuning"
+      ],
+      "RAG": [
+        "Improving language models by retrieving from trillions of tokens",
+        "StereoSet: Measuring stereotypical bias in pretrained language models"
+      ],
+      "Science": [
+        "Highly accurate protein structure prediction with AlphaFold"
+      ],
+      "Evaluation": [
+        "Societal Biases in Language Generation: Progress and Challenges"
+      ],
+      "Architecture": [
+        "RoFormer: Enhanced Transformer with Rotary Position Embedding"
+      ],
+      "LLM": [
+        "Train Short, Test Long: Attention with Linear Biases Enables Input Length Extrapolation"
+      ],
+      "Code": [
+        "Evaluating Large Language Models Trained on Code"
+      ]
+    },
+    "2022": {
+      "Reasoning": [
+        "Chain-of-Thought Prompting Elicits Reasoning in Large Language Models",
+        "ReAct: Synergizing Reasoning and Acting in Language Models",
+        "Self-Instruct: Aligning Language Models with Self-Generated Instructions",
+        "Solving Quantitative Reasoning Problems with Language Models",
+        "Editing Models with Task Arithmetic"
+      ],
+      "Alignment": [
+        "Training language models to follow instructions with human feedback",
+        "Training a Helpful and Harmless Assistant with Reinforcement Learning from Human Feedback",
+        "Constitutional AI: Harmlessness from AI Feedback",
+        "AdapLeR: Speeding up Inference by Adaptive Length Reduction",
+        "Scaling Instruction-Finetuned Language Models"
+      ],
+      "Efficiency": [
+        "Training Compute-Optimal Large Language Models",
+        "FlashAttention: Fast and Memory-Efficient Exact Attention with IO-Awareness",
+        "Cross-Task Generalization via Natural Language Crowdsourcing Instructions",
+        "FlashAttention: Fast and Memory-Efficient Exact Attention with IO-Awareness",
+        "GPTQ: Accurate Post-Training Quantization for Generative Pre-trained Transformers"
+      ],
+      "LLM": [
+        "PaLM: Scaling Language Modeling with Pathways",
+        "Fast Inference from Transformers via Speculative Decoding"
+      ],
+      "Multimodal": [
+        "Flamingo: a Visual Language Model for Few-Shot Learning",
+        "Photorealistic Text-to-Image Diffusion Models with Deep Language Understanding"
+      ],
+      "Evaluation": [
+        "Emergent Abilities of Large Language Models",
+        "Holistic Evaluation of Language Models"
+      ],
+      "Prompting": [
+        "When is BERT Multilingual? Isolating Crucial Ingredients for Cross-lingual Transfer"
+      ],
+      "Agent": [
+        "ReAct: Synergizing Reasoning and Acting in Language Models"
+      ],
+      "Embedding": [
+        "Text Embeddings by Weakly-Supervised Contrastive Pre-training"
+      ],
+      "Safety": [
+        "Constitutional AI: Harmlessness from AI Feedback"
+      ]
+    },
+    "2023": {
+      "Multimodal": [
+        "BLIP-2: Bootstrapping Language-Image Pre-training with Frozen Image Encoders and Large Language Models",
+        "Adding Conditional Control to Text-to-Image Diffusion Models",
+        "Visual Instruction Tuning",
+        "Visual Instruction Tuning",
+        "Improved Baselines with Visual Instruction Tuning",
+        "Gemini: A Family of Highly Capable Multimodal Models",
+        "SpeechGPT: Empowering Large Language Models with Intrinsic Cross-Modal Conversational Abilities",
+        "Spoken Question Answering and Speech Continuation Using Spectrogram-Powered LLM",
+        "Video-LLaMA: An Instruction-tuned Audio-Visual Language Model for Video Understanding",
+        "AudioPaLM: A Large Language Model That Can Speak and Listen",
+        "MM-VID: Advancing Video Understanding with GPT-4V(ision)",
+        "Video-LLaVA: Learning United Visual Representation by Alignment Before Projection",
+        "Gemini: A Family of Highly Capable Multimodal Models"
+      ],
+      "LLM": [
+        "LLaMA: Open and Efficient Foundation Language Models",
+        "Llama 2: Open Foundation and Fine-Tuned Chat Models",
+        "Mistral 7B",
+        "Gemini: A Family of Highly Capable Multimodal Models",
+        "HuggingGPT: Solving AI Tasks with ChatGPT and its Friends in Hugging Face",
+        "Tree of Thoughts: Deliberate Problem Solving with Large Language Models",
+        "Orca: Progressive Learning from Complex Explanation Traces of GPT-4",
+        "Judging LLM-as-a-Judge with MT-Bench and Chatbot Arena",
+        "Augmenting Language Models with Long-Term Memory",
+        "Textbooks Are All You Need",
+        "Lost in the Middle: How Language Models Use Long Contexts",
+        "Universal and Transferable Adversarial Attacks on Aligned Language Models",
+        "Large Language Models as Optimizers",
+        "Textbooks Are All You Need II: phi-1.5 technical report",
+        "MemGPT: Towards LLMs as Operating Systems",
+        "BitNet: Scaling 1-bit Transformers for Large Language Models",
+        "Self-RAG: Learning to Retrieve, Generate, and Critique through Self-Reflection",
+        "Accelerating Large Language Model Decoding with Speculative Sampling",
+        "FrugalGPT: How to Use Large Language Models While Reducing Cost and Improving Performance",
+        "TIES-Merging: Resolving Interference When Merging Models",
+        "Can Large Language Models Infer Causation from Correlation?",
+        "Explore, Establish, Exploit: Red Teaming Language Models from Scratch",
+        "Continual Pre-Training of Large Language Models: How to (re)warm your model?",
+        "Large Language Models for Compiler Optimization",
+        "RAIN: Your Language Models Can Align Themselves without Finetuning",
+        "Adapting Large Language Models to Domains via Reading Comprehension",
+        "Compressing Context to Enhance Inference Efficiency of Large Language Models",
+        "Mistral 7B",
+        "Retrieve Anything To Augment Large Language Models",
+        "Language Models are Super Mario: Absorbing Abilities from Homologous Models as a Free Lunch",
+        "LM-Cocktail: Resilient Tuning of Language Models via Model Merging"
+      ],
+      "Evaluation": [
+        "GPT-4 Technical Report",
+        "GPQA: A Graduate-Level Google-Proof Q&A Benchmark"
+      ],
+      "Reasoning": [
+        "Tree of Thoughts: Deliberate Problem Solving with Large Language Models",
+        "Let's Verify Step by Step",
+        "Reasoning with Language Model is Planning with World Model",
+        "WizardMath: Empowering Mathematical Reasoning for Large Language Models via Reinforced Evol-Instruct",
+        "MAmmoTH: Building Math Generalist Models through Hybrid Instruction Tuning",
+        "MetaMath: Bootstrap Your Own Mathematical Questions for Large Language Models",
+        "Llemma: An Open Language Model For Mathematics",
+        "Orca 2: Teaching Small Language Models How to Reason"
+      ],
+      "Alignment": [
+        "Instruction Tuning with GPT-4",
+        "LIMA: Less Is More for Alignment",
+        "Direct Preference Optimization: Your Language Model is Secretly a Reward Model",
+        "The RefinedWeb Dataset for Falcon LLM: Outperforming Curated Corpora with Web Data, and Web Data Only",
+        "Instruction Tuning for Large Language Models: A Survey",
+        "A General Theoretical Paradigm to Understand Learning from Human Preferences",
+        "WizardLM: Empowering large pre-trained language models to follow complex instructions",
+        "Enhancing Chat Language Models by Scaling High-quality Instructional Conversations",
+        "Self-Alignment with Instruction Backtranslation",
+        "Zephyr: Direct Distillation of LM Alignment"
+      ],
+      "Agent": [
+        "Voyager: An Open-Ended Embodied Agent with Large Language Models",
+        "ToolLLM: Facilitating Large Language Models to Master 16000+ Real-world APIs",
+        "AutoGen: Enabling Next-Gen LLM Applications via Multi-Agent Conversation",
+        "Language Agent Tree Search Unifies Reasoning Acting and Planning in Language Models",
+        "Improving Factuality and Reasoning in Language Models through Multiagent Debate"
+      ],
+      "Efficiency": [
+        "AWQ: Activation-aware Weight Quantization for LLM Compression and Acceleration",
+        "FlashAttention-2: Faster Attention with Better Parallelism and Work Partitioning",
+        "YaRN: Efficient Context Window Extension of Large Language Models",
+        "Efficient Memory Management for Large Language Model Serving with PagedAttention",
+        "QLoRA: Efficient Finetuning of Quantized LLMs",
+        "MiniLLM: Knowledge Distillation of Large Language Models",
+        "Efficient Memory Management for Large Language Model Serving with PagedAttention",
+        "FlashDecoding++: Faster Large Language Model Inference on GPUs"
+      ],
+      "Architecture": [
+        "Extending Context Window of Large Language Models via Positional Interpolation",
+        "Mamba: Linear-Time Sequence Modeling with Selective State Spaces"
+      ],
+      "Safety": [
+        "Fine-tuning Aligned Language Models Compromises Safety, Even When Users Do Not Intend To!",
+        "Catastrophic Jailbreak of Open-source LLMs via Exploiting Generation",
+        "Jailbreaking Black Box Large Language Models in Twenty Queries"
+      ],
+      "RAG": [
+        "Retrieval-Augmented Generation for Large Language Models: A Survey",
+        "REPLUG: Retrieval-Augmented Black-Box Language Models",
+        "Query Rewriting for Retrieval-Augmented Large Language Models",
+        "Making Retrieval-Augmented Language Models Robust to Irrelevant Context"
+      ],
+      "Prompting": [
+        "A Prompt Pattern Catalog to Enhance Prompt Engineering with ChatGPT",
+        "Learning to Compress Prompts with Gist Tokens",
+        "Promptbreeder: Self-Referential Self-Improvement Via Prompt Evolution"
+      ],
+      "Code": [
+        "StarCoder: may the source be with you!",
+        "The Hitchhiker's Guide to Program Analysis: A Journey with Large Language Models",
+        "OctoPack: Instruction Tuning Code Large Language Models",
+        "Code Llama: Open Foundation Models for Code"
+      ],
+      "Training": [
+        "Llama 2: Open Foundation and Fine-Tuned Chat Models"
+      ],
+      "Embedding": [
+        "Improving Text Embeddings with Large Language Models"
+      ]
+    },
+    "2024": {
+      "LLM": [
+        "Mixtral of Experts",
+        "LLM Maybe LongLM: Self-Extend LLM Context Window Without Tuning",
+        "Mixtral of Experts",
+        "Self-Rewarding Language Models",
+        "The Era of 1-bit LLMs: All Large Language Models are in 1.58 Bits",
+        "Gemma: Open Models Based on Gemini Research and Technology",
+        "Phi-3 Technical Report: A Highly Capable Language Model Locally on Your Phone",
+        "The Llama 3 Herd of Models",
+        "TinyLlama: An Open-Source Small Language Model",
+        "DeepSeek LLM: Scaling Open-Source Language Models with Longtermism",
+        "Probabilistic Mobility Load Balancing for Multi-band 5G and Beyond Networks",
+        "MobileLLM: Optimizing Sub-billion Parameter Language Models for On-Device Use Cases",
+        "Yi: Open Foundation Models by 01.AI",
+        "Qwen2 Technical Report"
+      ],
+      "RAG": [
+        "From Local to Global: A Graph RAG Approach to Query-Focused Summarization",
+        "RAPTOR: Recursive Abstractive Processing for Tree-Organized Retrieval",
+        "RAG-Fusion: a New Take on Retrieval-Augmented Generation",
+        "A Survey on Retrieval-Augmented Text Generation for Large Language Models",
+        "RAFT: Adapting Language Model to Domain Specific RAG"
+      ],
+      "Efficiency": [
+        "MoE-Mamba: Efficient Selective State Space Models with Mixture of Experts",
+        "Transformers are SSMs: Generalized Models and Efficient Algorithms Through Structured State Space Duality",
+        "Implicit Diffusion: Efficient Optimization through Stochastic Sampling",
+        "A Survey on Efficient Inference for Large Language Models",
+        "DeepSeek-V2: A Strong, Economical, and Efficient Mixture-of-Experts Language Model"
+      ],
+      "Architecture": [
+        "DeepSeekMoE: Towards Ultimate Expert Specialization in Mixture-of-Experts Language Models",
+        "Scaling Laws for Fine-Grained Mixture of Experts"
+      ],
+      "Alignment": [
+        "KTO: Model Alignment as Prospect Theoretic Optimization",
+        "ORPO: Monolithic Preference Optimization without Reference Model",
+        "Smaug: Fixing Failure Modes of Preference Optimisation with DPO-Positive"
+      ],
+      "Reasoning": [
+        "Understanding Reasoning Ability of Language Models From the Perspective of Reasoning Paths Aggregation",
+        "DeepSeekMath: Pushing the Limits of Mathematical Reasoning in Open Language Models",
+        "Debug like a Human: A Large Language Model Debugger via Verifying Runtime Execution Step-by-step"
+      ],
+      "Multimodal": [
+        "World Model on Million-Length Video And Language With Blockwise RingAttention",
+        "Efficient Multimodal Learning from Data-centric Perspective",
+        "MM1: Methods, Analysis & Insights from Multimodal LLM Pre-training",
+        "Gemini 1.5: Unlocking multimodal understanding across millions of tokens of context"
+      ],
+      "Agent": [
+        "Data Interpreter: An LLM Agent For Data Science",
+        "ChatGLM: A Family of Large Language Models from GLM-130B to GLM-4 All Tools"
+      ],
+      "Evaluation": [
+        "RewardBench: Evaluating Reward Models for Language Modeling"
+      ],
+      "Code": [
+        "DeepSeek-Coder: When the Large Language Model Meets Programming -- The Rise of Code Intelligence",
+        "StarCoder 2 and The Stack v2: The Next Generation",
+        "Long Code Arena: a Set of Benchmarks for Long-Context Code Models"
+      ],
+      "Prompting": [
+        "On Prompt-Driven Safeguarding for Large Language Models"
+      ],
+      "Embedding": [
+        "Multilingual E5 Text Embeddings: A Technical Report"
+      ],
+      "Training": [
+        "Model Stock: All we need is just a few fine-tuned models",
+        "Spectra: Surprising Effectiveness of Pretraining Ternary Language Models at Scale"
+      ]
+    }
+  },
+  "papers": [
+    {
+      "title": "Deep reinforcement learning from human preferences",
+      "id": "1706.03741",
+      "category": "Alignment",
+      "year": 2017
+    },
+    {
+      "title": "Attention Is All You Need",
+      "id": "1706.03762",
+      "category": "Foundation",
+      "year": 2017
+    },
+    {
+      "title": "BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding",
+      "id": "1810.04805",
+      "category": "Foundation",
+      "year": 2018
+    },
+    {
+      "title": "Scaling Laws for Neural Language Models",
+      "id": "2001.08361",
+      "category": "Efficiency",
+      "year": 2020
+    },
+    {
+      "title": "Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks",
+      "id": "2005.11401",
+      "category": "RAG",
+      "year": 2020
+    },
+    {
+      "title": "Language Models are Few-Shot Learners",
+      "id": "2005.14165",
+      "category": "LLM",
+      "year": 2020
+    },
+    {
+      "title": "Denoising Diffusion Probabilistic Models",
+      "id": "2006.11239",
+      "category": "Multimodal",
+      "year": 2020
+    },
+    {
+      "title": "An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale",
+      "id": "2010.11929",
+      "category": "Foundation",
+      "year": 2020
+    },
+    {
+      "title": "Array programming with NumPy",
+      "id": "10.1038/s41586-020-2649-2",
+      "category": "LLM",
+      "year": 2020
+    },
+    {
+      "title": "Beyond Accuracy: Behavioral Testing of NLP Models with CheckList",
+      "id": "10.18653/v1/2020.acl-main.442",
+      "category": "Evaluation",
+      "year": 2020
+    },
+    {
+      "title": "BART: Denoising Sequence-to-Sequence Pre-training for Natural Language Generation, Translation, and Comprehension",
+      "id": "10.18653/v1/2020.acl-main.703",
+      "category": "RAG",
+      "year": 2020
+    },
+    {
+      "title": "Unsupervised Cross-lingual Representation Learning at Scale",
+      "id": "10.18653/v1/2020.acl-main.747",
+      "category": "Architecture",
+      "year": 2020
+    },
+    {
+      "title": "AutoPrompt: Eliciting Knowledge from Language Models with Automatically Generated Prompts",
+      "id": "10.18653/v1/2020.emnlp-main.346",
+      "category": "RAG",
+      "year": 2020
+    },
+    {
+      "title": "Consistency of a Recurrent Language Model With Respect to Incomplete Decoding",
+      "id": "10.18653/v1/2020.emnlp-main.448",
+      "category": "Evaluation",
+      "year": 2020
+    },
+    {
+      "title": "RealToxicityPrompts: Evaluating Neural Toxic Degeneration in Language Models",
+      "id": "10.18653/v1/2020.findings-emnlp.301",
+      "category": "Safety",
+      "year": 2020
+    },
+    {
+      "title": "Switch Transformers: Scaling to Trillion Parameter Models with Simple and Efficient Sparsity",
+      "id": "2101.03961",
+      "category": "Efficiency",
+      "year": 2021
+    },
+    {
+      "title": "Learning Transferable Visual Models From Natural Language Supervision",
+      "id": "2103.00020",
+      "category": "Multimodal",
+      "year": 2021
+    },
+    {
+      "title": "LoRA: Low-Rank Adaptation of Large Language Models",
+      "id": "2106.09685",
+      "category": "Efficiency",
+      "year": 2021
+    },
+    {
+      "title": "Improving language models by retrieving from trillions of tokens",
+      "id": "2112.04426",
+      "category": "RAG",
+      "year": 2021
+    },
+    {
+      "title": "High-Resolution Image Synthesis with Latent Diffusion Models",
+      "id": "2112.10752",
+      "category": "Multimodal",
+      "year": 2021
+    },
+    {
+      "title": "Highly accurate protein structure prediction with AlphaFold",
+      "id": "10.1038/s41586-021-03819-2",
+      "category": "Science",
+      "year": 2021
+    },
+    {
+      "title": "Societal Biases in Language Generation: Progress and Challenges",
+      "id": "10.18653/v1/2021.acl-long.330",
+      "category": "Evaluation",
+      "year": 2021
+    },
+    {
+      "title": "StereoSet: Measuring stereotypical bias in pretrained language models",
+      "id": "10.18653/v1/2021.acl-long.416",
+      "category": "RAG",
+      "year": 2021
+    },
+    {
+      "title": "The Power of Scale for Parameter-Efficient Prompt Tuning",
+      "id": "10.18653/v1/2021.emnlp-main.243",
+      "category": "Multimodal",
+      "year": 2021
+    },
+    {
+      "title": "RoFormer: Enhanced Transformer with Rotary Position Embedding",
+      "id": "2104.09864",
+      "category": "Architecture",
+      "year": 2021
+    },
+    {
+      "title": "Train Short, Test Long: Attention with Linear Biases Enables Input Length Extrapolation",
+      "id": "2108.12409",
+      "category": "LLM",
+      "year": 2021
+    },
+    {
+      "title": "Evaluating Large Language Models Trained on Code",
+      "id": "2107.03374",
+      "category": "Code",
+      "year": 2021
+    },
+    {
+      "title": "Chain-of-Thought Prompting Elicits Reasoning in Large Language Models",
+      "id": "2201.11903",
+      "category": "Reasoning",
+      "year": 2022
+    },
+    {
+      "title": "Training language models to follow instructions with human feedback",
+      "id": "2203.02155",
+      "category": "Alignment",
+      "year": 2022
+    },
+    {
+      "title": "Training Compute-Optimal Large Language Models",
+      "id": "2203.15556",
+      "category": "Efficiency",
+      "year": 2022
+    },
+    {
+      "title": "PaLM: Scaling Language Modeling with Pathways",
+      "id": "2204.02311",
+      "category": "LLM",
+      "year": 2022
+    },
+    {
+      "title": "Training a Helpful and Harmless Assistant with Reinforcement Learning from Human Feedback",
+      "id": "2204.05862",
+      "category": "Alignment",
+      "year": 2022
+    },
+    {
+      "title": "Flamingo: a Visual Language Model for Few-Shot Learning",
+      "id": "2204.14198",
+      "category": "Multimodal",
+      "year": 2022
+    },
+    {
+      "title": "Photorealistic Text-to-Image Diffusion Models with Deep Language Understanding",
+      "id": "2205.11487",
+      "category": "Multimodal",
+      "year": 2022
+    },
+    {
+      "title": "FlashAttention: Fast and Memory-Efficient Exact Attention with IO-Awareness",
+      "id": "2205.14135",
+      "category": "Efficiency",
+      "year": 2022
+    },
+    {
+      "title": "Emergent Abilities of Large Language Models",
+      "id": "2206.07682",
+      "category": "Evaluation",
+      "year": 2022
+    },
+    {
+      "title": "ReAct: Synergizing Reasoning and Acting in Language Models",
+      "id": "2210.03629",
+      "category": "Reasoning",
+      "year": 2022
+    },
+    {
+      "title": "Holistic Evaluation of Language Models",
+      "id": "2211.09110",
+      "category": "Evaluation",
+      "year": 2022
+    },
+    {
+      "title": "Constitutional AI: Harmlessness from AI Feedback",
+      "id": "2212.08073",
+      "category": "Alignment",
+      "year": 2022
+    },
+    {
+      "title": "Self-Instruct: Aligning Language Models with Self-Generated Instructions",
+      "id": "2212.10560",
+      "category": "Reasoning",
+      "year": 2022
+    },
+    {
+      "title": "AdapLeR: Speeding up Inference by Adaptive Length Reduction",
+      "id": "10.18653/v1/2022.acl-long.1",
+      "category": "Alignment",
+      "year": 2022
+    },
+    {
+      "title": "Cross-Task Generalization via Natural Language Crowdsourcing Instructions",
+      "id": "10.18653/v1/2022.acl-long.244",
+      "category": "Efficiency",
+      "year": 2022
+    },
+    {
+      "title": "When is BERT Multilingual? Isolating Crucial Ingredients for Cross-lingual Transfer",
+      "id": "10.18653/v1/2022.naacl-main.264",
+      "category": "Prompting",
+      "year": 2022
+    },
+    {
+      "title": "FlashAttention: Fast and Memory-Efficient Exact Attention with IO-Awareness",
+      "id": "2205.14135",
+      "category": "Efficiency",
+      "year": 2022
+    },
+    {
+      "title": "GPTQ: Accurate Post-Training Quantization for Generative Pre-trained Transformers",
+      "id": "2210.17323",
+      "category": "Efficiency",
+      "year": 2022
+    },
+    {
+      "title": "Fast Inference from Transformers via Speculative Decoding",
+      "id": "2211.17192",
+      "category": "LLM",
+      "year": 2022
+    },
+    {
+      "title": "Solving Quantitative Reasoning Problems with Language Models",
+      "id": "2206.14858",
+      "category": "Reasoning",
+      "year": 2022
+    },
+    {
+      "title": "ReAct: Synergizing Reasoning and Acting in Language Models",
+      "id": "2210.03629",
+      "category": "Agent",
+      "year": 2022
+    },
+    {
+      "title": "Scaling Instruction-Finetuned Language Models",
+      "id": "2210.11416",
+      "category": "Alignment",
+      "year": 2022
+    },
+    {
+      "title": "Text Embeddings by Weakly-Supervised Contrastive Pre-training",
+      "id": "2212.03533",
+      "category": "Embedding",
+      "year": 2022
+    },
+    {
+      "title": "Editing Models with Task Arithmetic",
+      "id": "2212.04089",
+      "category": "Reasoning",
+      "year": 2022
+    },
+    {
+      "title": "Constitutional AI: Harmlessness from AI Feedback",
+      "id": "2212.08073",
+      "category": "Safety",
+      "year": 2022
+    },
+    {
+      "title": "BLIP-2: Bootstrapping Language-Image Pre-training with Frozen Image Encoders and Large Language Models",
+      "id": "2301.12597",
+      "category": "Multimodal",
+      "year": 2023
+    },
+    {
+      "title": "Adding Conditional Control to Text-to-Image Diffusion Models",
+      "id": "2302.05543",
+      "category": "Multimodal",
+      "year": 2023
+    },
+    {
+      "title": "LLaMA: Open and Efficient Foundation Language Models",
+      "id": "2302.13971",
+      "category": "LLM",
+      "year": 2023
+    },
+    {
+      "title": "GPT-4 Technical Report",
+      "id": "2303.08774",
+      "category": "Evaluation",
+      "year": 2023
+    },
+    {
+      "title": "Visual Instruction Tuning",
+      "id": "2304.08485",
+      "category": "Multimodal",
+      "year": 2023
+    },
+    {
+      "title": "Tree of Thoughts: Deliberate Problem Solving with Large Language Models",
+      "id": "2305.10601",
+      "category": "Reasoning",
+      "year": 2023
+    },
+    {
+      "title": "Llama 2: Open Foundation and Fine-Tuned Chat Models",
+      "id": "2307.09288",
+      "category": "LLM",
+      "year": 2023
+    },
+    {
+      "title": "Mistral 7B",
+      "id": "2310.06825",
+      "category": "LLM",
+      "year": 2023
+    },
+    {
+      "title": "Gemini: A Family of Highly Capable Multimodal Models",
+      "id": "2312.11805",
+      "category": "LLM",
+      "year": 2023
+    },
+    {
+      "title": "HuggingGPT: Solving AI Tasks with ChatGPT and its Friends in Hugging Face",
+      "id": "2303.17580",
+      "category": "LLM",
+      "year": 2023
+    },
+    {
+      "title": "Instruction Tuning with GPT-4",
+      "id": "2304.03277",
+      "category": "Alignment",
+      "year": 2023
+    },
+    {
+      "title": "Visual Instruction Tuning",
+      "id": "2304.08485",
+      "category": "Multimodal",
+      "year": 2023
+    },
+    {
+      "title": "Tree of Thoughts: Deliberate Problem Solving with Large Language Models",
+      "id": "2305.10601",
+      "category": "LLM",
+      "year": 2023
+    },
+    {
+      "title": "LIMA: Less Is More for Alignment",
+      "id": "2305.11206",
+      "category": "Alignment",
+      "year": 2023
+    },
+    {
+      "title": "Voyager: An Open-Ended Embodied Agent with Large Language Models",
+      "id": "2305.16291",
+      "category": "Agent",
+      "year": 2023
+    },
+    {
+      "title": "Direct Preference Optimization: Your Language Model is Secretly a Reward Model",
+      "id": "2305.18290",
+      "category": "Alignment",
+      "year": 2023
+    },
+    {
+      "title": "Let's Verify Step by Step",
+      "id": "2305.20050",
+      "category": "Reasoning",
+      "year": 2023
+    },
+    {
+      "title": "AWQ: Activation-aware Weight Quantization for LLM Compression and Acceleration",
+      "id": "2306.00978",
+      "category": "Efficiency",
+      "year": 2023
+    },
+    {
+      "title": "The RefinedWeb Dataset for Falcon LLM: Outperforming Curated Corpora with Web Data, and Web Data Only",
+      "id": "2306.01116",
+      "category": "Alignment",
+      "year": 2023
+    },
+    {
+      "title": "Orca: Progressive Learning from Complex Explanation Traces of GPT-4",
+      "id": "2306.02707",
+      "category": "LLM",
+      "year": 2023
+    },
+    {
+      "title": "Judging LLM-as-a-Judge with MT-Bench and Chatbot Arena",
+      "id": "2306.05685",
+      "category": "LLM",
+      "year": 2023
+    },
+    {
+      "title": "Augmenting Language Models with Long-Term Memory",
+      "id": "2306.07174",
+      "category": "LLM",
+      "year": 2023
+    },
+    {
+      "title": "Textbooks Are All You Need",
+      "id": "2306.11644",
+      "category": "LLM",
+      "year": 2023
+    },
+    {
+      "title": "Extending Context Window of Large Language Models via Positional Interpolation",
+      "id": "2306.15595",
+      "category": "Architecture",
+      "year": 2023
+    },
+    {
+      "title": "Lost in the Middle: How Language Models Use Long Contexts",
+      "id": "2307.03172",
+      "category": "LLM",
+      "year": 2023
+    },
+    {
+      "title": "FlashAttention-2: Faster Attention with Better Parallelism and Work Partitioning",
+      "id": "2307.08691",
+      "category": "Efficiency",
+      "year": 2023
+    },
+    {
+      "title": "Universal and Transferable Adversarial Attacks on Aligned Language Models",
+      "id": "2307.15043",
+      "category": "LLM",
+      "year": 2023
+    },
+    {
+      "title": "ToolLLM: Facilitating Large Language Models to Master 16000+ Real-world APIs",
+      "id": "2307.16789",
+      "category": "Agent",
+      "year": 2023
+    },
+    {
+      "title": "AutoGen: Enabling Next-Gen LLM Applications via Multi-Agent Conversation",
+      "id": "2308.08155",
+      "category": "Agent",
+      "year": 2023
+    },
+    {
+      "title": "Instruction Tuning for Large Language Models: A Survey",
+      "id": "2308.10792",
+      "category": "Alignment",
+      "year": 2023
+    },
+    {
+      "title": "YaRN: Efficient Context Window Extension of Large Language Models",
+      "id": "2309.00071",
+      "category": "Efficiency",
+      "year": 2023
+    },
+    {
+      "title": "Large Language Models as Optimizers",
+      "id": "2309.03409",
+      "category": "LLM",
+      "year": 2023
+    },
+    {
+      "title": "Textbooks Are All You Need II: phi-1.5 technical report",
+      "id": "2309.05463",
+      "category": "LLM",
+      "year": 2023
+    },
+    {
+      "title": "Efficient Memory Management for Large Language Model Serving with PagedAttention",
+      "id": "2309.06180",
+      "category": "Efficiency",
+      "year": 2023
+    },
+    {
+      "title": "Fine-tuning Aligned Language Models Compromises Safety, Even When Users Do Not Intend To!",
+      "id": "2310.03693",
+      "category": "Safety",
+      "year": 2023
+    },
+    {
+      "title": "Improved Baselines with Visual Instruction Tuning",
+      "id": "2310.03744",
+      "category": "Multimodal",
+      "year": 2023
+    },
+    {
+      "title": "Language Agent Tree Search Unifies Reasoning Acting and Planning in Language Models",
+      "id": "2310.04406",
+      "category": "Agent",
+      "year": 2023
+    },
+    {
+      "title": "Catastrophic Jailbreak of Open-source LLMs via Exploiting Generation",
+      "id": "2310.06987",
+      "category": "Safety",
+      "year": 2023
+    },
+    {
+      "title": "MemGPT: Towards LLMs as Operating Systems",
+      "id": "2310.08560",
+      "category": "LLM",
+      "year": 2023
+    },
+    {
+      "title": "BitNet: Scaling 1-bit Transformers for Large Language Models",
+      "id": "2310.11453",
+      "category": "LLM",
+      "year": 2023
+    },
+    {
+      "title": "Self-RAG: Learning to Retrieve, Generate, and Critique through Self-Reflection",
+      "id": "2310.11511",
+      "category": "LLM",
+      "year": 2023
+    },
+    {
+      "title": "A General Theoretical Paradigm to Understand Learning from Human Preferences",
+      "id": "2310.12036",
+      "category": "Alignment",
+      "year": 2023
+    },
+    {
+      "title": "GPQA: A Graduate-Level Google-Proof Q&A Benchmark",
+      "id": "2311.12022",
+      "category": "Evaluation",
+      "year": 2023
+    },
+    {
+      "title": "Mamba: Linear-Time Sequence Modeling with Selective State Spaces",
+      "id": "2312.00752",
+      "category": "Architecture",
+      "year": 2023
+    },
+    {
+      "title": "Retrieval-Augmented Generation for Large Language Models: A Survey",
+      "id": "2312.10997",
+      "category": "RAG",
+      "year": 2023
+    },
+    {
+      "title": "Gemini: A Family of Highly Capable Multimodal Models",
+      "id": "2312.11805",
+      "category": "Multimodal",
+      "year": 2023
+    },
+    {
+      "title": "REPLUG: Retrieval-Augmented Black-Box Language Models",
+      "id": "2301.12652",
+      "category": "RAG",
+      "year": 2023
+    },
+    {
+      "title": "Accelerating Large Language Model Decoding with Speculative Sampling",
+      "id": "2302.01318",
+      "category": "LLM",
+      "year": 2023
+    },
+    {
+      "title": "A Prompt Pattern Catalog to Enhance Prompt Engineering with ChatGPT",
+      "id": "2302.11382",
+      "category": "Prompting",
+      "year": 2023
+    },
+    {
+      "title": "Learning to Compress Prompts with Gist Tokens",
+      "id": "2304.08467",
+      "category": "Prompting",
+      "year": 2023
+    },
+    {
+      "title": "WizardLM: Empowering large pre-trained language models to follow complex instructions",
+      "id": "2304.12244",
+      "category": "Alignment",
+      "year": 2023
+    },
+    {
+      "title": "FrugalGPT: How to Use Large Language Models While Reducing Cost and Improving Performance",
+      "id": "2305.05176",
+      "category": "LLM",
+      "year": 2023
+    },
+    {
+      "title": "StarCoder: may the source be with you!",
+      "id": "2305.06161",
+      "category": "Code",
+      "year": 2023
+    },
+    {
+      "title": "SpeechGPT: Empowering Large Language Models with Intrinsic Cross-Modal Conversational Abilities",
+      "id": "2305.11000",
+      "category": "Multimodal",
+      "year": 2023
+    },
+    {
+      "title": "Enhancing Chat Language Models by Scaling High-quality Instructional Conversations",
+      "id": "2305.14233",
+      "category": "Alignment",
+      "year": 2023
+    },
+    {
+      "title": "Query Rewriting for Retrieval-Augmented Large Language Models",
+      "id": "2305.14283",
+      "category": "RAG",
+      "year": 2023
+    },
+    {
+      "title": "QLoRA: Efficient Finetuning of Quantized LLMs",
+      "id": "2305.14314",
+      "category": "Efficiency",
+      "year": 2023
+    },
+    {
+      "title": "Improving Factuality and Reasoning in Language Models through Multiagent Debate",
+      "id": "2305.14325",
+      "category": "Agent",
+      "year": 2023
+    },
+    {
+      "title": "Reasoning with Language Model is Planning with World Model",
+      "id": "2305.14992",
+      "category": "Reasoning",
+      "year": 2023
+    },
+    {
+      "title": "Spoken Question Answering and Speech Continuation Using Spectrogram-Powered LLM",
+      "id": "2305.15255",
+      "category": "Multimodal",
+      "year": 2023
+    },
+    {
+      "title": "TIES-Merging: Resolving Interference When Merging Models",
+      "id": "2306.01708",
+      "category": "LLM",
+      "year": 2023
+    },
+    {
+      "title": "Video-LLaMA: An Instruction-tuned Audio-Visual Language Model for Video Understanding",
+      "id": "2306.02858",
+      "category": "Multimodal",
+      "year": 2023
+    },
+    {
+      "title": "Can Large Language Models Infer Causation from Correlation?",
+      "id": "2306.05836",
+      "category": "LLM",
+      "year": 2023
+    },
+    {
+      "title": "MiniLLM: Knowledge Distillation of Large Language Models",
+      "id": "2306.08543",
+      "category": "Efficiency",
+      "year": 2023
+    },
+    {
+      "title": "Explore, Establish, Exploit: Red Teaming Language Models from Scratch",
+      "id": "2306.09442",
+      "category": "LLM",
+      "year": 2023
+    },
+    {
+      "title": "AudioPaLM: A Large Language Model That Can Speak and Listen",
+      "id": "2306.12925",
+      "category": "Multimodal",
+      "year": 2023
+    },
+    {
+      "title": "Llama 2: Open Foundation and Fine-Tuned Chat Models",
+      "id": "2307.09288",
+      "category": "Training",
+      "year": 2023
+    },
+    {
+      "title": "The Hitchhiker's Guide to Program Analysis: A Journey with Large Language Models",
+      "id": "2308.00245",
+      "category": "Code",
+      "year": 2023
+    },
+    {
+      "title": "Continual Pre-Training of Large Language Models: How to (re)warm your model?",
+      "id": "2308.04014",
+      "category": "LLM",
+      "year": 2023
+    },
+    {
+      "title": "Self-Alignment with Instruction Backtranslation",
+      "id": "2308.06259",
+      "category": "Alignment",
+      "year": 2023
+    },
+    {
+      "title": "OctoPack: Instruction Tuning Code Large Language Models",
+      "id": "2308.07124",
+      "category": "Code",
+      "year": 2023
+    },
+    {
+      "title": "WizardMath: Empowering Mathematical Reasoning for Large Language Models via Reinforced Evol-Instruct",
+      "id": "2308.09583",
+      "category": "Reasoning",
+      "year": 2023
+    },
+    {
+      "title": "Code Llama: Open Foundation Models for Code",
+      "id": "2308.12950",
+      "category": "Code",
+      "year": 2023
+    },
+    {
+      "title": "MAmmoTH: Building Math Generalist Models through Hybrid Instruction Tuning",
+      "id": "2309.05653",
+      "category": "Reasoning",
+      "year": 2023
+    },
+    {
+      "title": "Efficient Memory Management for Large Language Model Serving with PagedAttention",
+      "id": "2309.06180",
+      "category": "Efficiency",
+      "year": 2023
+    },
+    {
+      "title": "Large Language Models for Compiler Optimization",
+      "id": "2309.07062",
+      "category": "LLM",
+      "year": 2023
+    },
+    {
+      "title": "RAIN: Your Language Models Can Align Themselves without Finetuning",
+      "id": "2309.07124",
+      "category": "LLM",
+      "year": 2023
+    },
+    {
+      "title": "Adapting Large Language Models to Domains via Reading Comprehension",
+      "id": "2309.09530",
+      "category": "LLM",
+      "year": 2023
+    },
+    {
+      "title": "MetaMath: Bootstrap Your Own Mathematical Questions for Large Language Models",
+      "id": "2309.12284",
+      "category": "Reasoning",
+      "year": 2023
+    },
+    {
+      "title": "Promptbreeder: Self-Referential Self-Improvement Via Prompt Evolution",
+      "id": "2309.16797",
+      "category": "Prompting",
+      "year": 2023
+    },
+    {
+      "title": "Making Retrieval-Augmented Language Models Robust to Irrelevant Context",
+      "id": "2310.01558",
+      "category": "RAG",
+      "year": 2023
+    },
+    {
+      "title": "Compressing Context to Enhance Inference Efficiency of Large Language Models",
+      "id": "2310.06201",
+      "category": "LLM",
+      "year": 2023
+    },
+    {
+      "title": "Mistral 7B",
+      "id": "2310.06825",
+      "category": "LLM",
+      "year": 2023
+    },
+    {
+      "title": "Retrieve Anything To Augment Large Language Models",
+      "id": "2310.07554",
+      "category": "LLM",
+      "year": 2023
+    },
+    {
+      "title": "Jailbreaking Black Box Large Language Models in Twenty Queries",
+      "id": "2310.08419",
+      "category": "Safety",
+      "year": 2023
+    },
+    {
+      "title": "Llemma: An Open Language Model For Mathematics",
+      "id": "2310.10631",
+      "category": "Reasoning",
+      "year": 2023
+    },
+    {
+      "title": "Zephyr: Direct Distillation of LM Alignment",
+      "id": "2310.16944",
+      "category": "Alignment",
+      "year": 2023
+    },
+    {
+      "title": "MM-VID: Advancing Video Understanding with GPT-4V(ision)",
+      "id": "2310.19773",
+      "category": "Multimodal",
+      "year": 2023
+    },
+    {
+      "title": "FlashDecoding++: Faster Large Language Model Inference on GPUs",
+      "id": "2311.01282",
+      "category": "Efficiency",
+      "year": 2023
+    },
+    {
+      "title": "Language Models are Super Mario: Absorbing Abilities from Homologous Models as a Free Lunch",
+      "id": "2311.03099",
+      "category": "LLM",
+      "year": 2023
+    },
+    {
+      "title": "Video-LLaVA: Learning United Visual Representation by Alignment Before Projection",
+      "id": "2311.10122",
+      "category": "Multimodal",
+      "year": 2023
+    },
+    {
+      "title": "Orca 2: Teaching Small Language Models How to Reason",
+      "id": "2311.11045",
+      "category": "Reasoning",
+      "year": 2023
+    },
+    {
+      "title": "LM-Cocktail: Resilient Tuning of Language Models via Model Merging",
+      "id": "2311.13534",
+      "category": "LLM",
+      "year": 2023
+    },
+    {
+      "title": "Gemini: A Family of Highly Capable Multimodal Models",
+      "id": "2312.11805",
+      "category": "Multimodal",
+      "year": 2023
+    },
+    {
+      "title": "Improving Text Embeddings with Large Language Models",
+      "id": "2401.00368",
+      "category": "Embedding",
+      "year": 2023
+    },
+    {
+      "title": "Mixtral of Experts",
+      "id": "2401.04088",
+      "category": "LLM",
+      "year": 2024
+    },
+    {
+      "title": "From Local to Global: A Graph RAG Approach to Query-Focused Summarization",
+      "id": "2404.16130",
+      "category": "RAG",
+      "year": 2024
+    },
+    {
+      "title": "LLM Maybe LongLM: Self-Extend LLM Context Window Without Tuning",
+      "id": "2401.01325",
+      "category": "LLM",
+      "year": 2024
+    },
+    {
+      "title": "MoE-Mamba: Efficient Selective State Space Models with Mixture of Experts",
+      "id": "2401.04081",
+      "category": "Efficiency",
+      "year": 2024
+    },
+    {
+      "title": "Mixtral of Experts",
+      "id": "2401.04088",
+      "category": "LLM",
+      "year": 2024
+    },
+    {
+      "title": "DeepSeekMoE: Towards Ultimate Expert Specialization in Mixture-of-Experts Language Models",
+      "id": "2401.06066",
+      "category": "Architecture",
+      "year": 2024
+    },
+    {
+      "title": "Self-Rewarding Language Models",
+      "id": "2401.10020",
+      "category": "LLM",
+      "year": 2024
+    },
+    {
+      "title": "RAPTOR: Recursive Abstractive Processing for Tree-Organized Retrieval",
+      "id": "2401.18059",
+      "category": "RAG",
+      "year": 2024
+    },
+    {
+      "title": "KTO: Model Alignment as Prospect Theoretic Optimization",
+      "id": "2402.01306",
+      "category": "Alignment",
+      "year": 2024
+    },
+    {
+      "title": "Understanding Reasoning Ability of Language Models From the Perspective of Reasoning Paths Aggregation",
+      "id": "2402.03268",
+      "category": "Reasoning",
+      "year": 2024
+    },
+    {
+      "title": "RAG-Fusion: a New Take on Retrieval-Augmented Generation",
+      "id": "2402.03367",
+      "category": "RAG",
+      "year": 2024
+    },
+    {
+      "title": "Scaling Laws for Fine-Grained Mixture of Experts",
+      "id": "2402.07871",
+      "category": "Architecture",
+      "year": 2024
+    },
+    {
+      "title": "World Model on Million-Length Video And Language With Blockwise RingAttention",
+      "id": "2402.08268",
+      "category": "Multimodal",
+      "year": 2024
+    },
+    {
+      "title": "Efficient Multimodal Learning from Data-centric Perspective",
+      "id": "2402.11530",
+      "category": "Multimodal",
+      "year": 2024
+    },
+    {
+      "title": "The Era of 1-bit LLMs: All Large Language Models are in 1.58 Bits",
+      "id": "2402.17764",
+      "category": "LLM",
+      "year": 2024
+    },
+    {
+      "title": "Data Interpreter: An LLM Agent For Data Science",
+      "id": "2402.18679",
+      "category": "Agent",
+      "year": 2024
+    },
+    {
+      "title": "ORPO: Monolithic Preference Optimization without Reference Model",
+      "id": "2403.07691",
+      "category": "Alignment",
+      "year": 2024
+    },
+    {
+      "title": "Gemma: Open Models Based on Gemini Research and Technology",
+      "id": "2403.08295",
+      "category": "LLM",
+      "year": 2024
+    },
+    {
+      "title": "MM1: Methods, Analysis & Insights from Multimodal LLM Pre-training",
+      "id": "2403.09611",
+      "category": "Multimodal",
+      "year": 2024
+    },
+    {
+      "title": "RewardBench: Evaluating Reward Models for Language Modeling",
+      "id": "2403.13787",
+      "category": "Evaluation",
+      "year": 2024
+    },
+    {
+      "title": "A Survey on Retrieval-Augmented Text Generation for Large Language Models",
+      "id": "2404.10981",
+      "category": "RAG",
+      "year": 2024
+    },
+    {
+      "title": "Phi-3 Technical Report: A Highly Capable Language Model Locally on Your Phone",
+      "id": "2404.14219",
+      "category": "LLM",
+      "year": 2024
+    },
+    {
+      "title": "Transformers are SSMs: Generalized Models and Efficient Algorithms Through Structured State Space Duality",
+      "id": "2405.21060",
+      "category": "Efficiency",
+      "year": 2024
+    },
+    {
+      "title": "The Llama 3 Herd of Models",
+      "id": "2407.21783",
+      "category": "LLM",
+      "year": 2024
+    },
+    {
+      "title": "TinyLlama: An Open-Source Small Language Model",
+      "id": "2401.02385",
+      "category": "LLM",
+      "year": 2024
+    },
+    {
+      "title": "DeepSeek LLM: Scaling Open-Source Language Models with Longtermism",
+      "id": "2401.02954",
+      "category": "LLM",
+      "year": 2024
+    },
+    {
+      "title": "Probabilistic Mobility Load Balancing for Multi-band 5G and Beyond Networks",
+      "id": "2401.13792",
+      "category": "LLM",
+      "year": 2024
+    },
+    {
+      "title": "DeepSeek-Coder: When the Large Language Model Meets Programming -- The Rise of Code Intelligence",
+      "id": "2401.14196",
+      "category": "Code",
+      "year": 2024
+    },
+    {
+      "title": "On Prompt-Driven Safeguarding for Large Language Models",
+      "id": "2401.18018",
+      "category": "Prompting",
+      "year": 2024
+    },
+    {
+      "title": "DeepSeekMath: Pushing the Limits of Mathematical Reasoning in Open Language Models",
+      "id": "2402.03300",
+      "category": "Reasoning",
+      "year": 2024
+    },
+    {
+      "title": "Implicit Diffusion: Efficient Optimization through Stochastic Sampling",
+      "id": "2402.05468",
+      "category": "Efficiency",
+      "year": 2024
+    },
+    {
+      "title": "Multilingual E5 Text Embeddings: A Technical Report",
+      "id": "2402.05672",
+      "category": "Embedding",
+      "year": 2024
+    },
+    {
+      "title": "Smaug: Fixing Failure Modes of Preference Optimisation with DPO-Positive",
+      "id": "2402.13228",
+      "category": "Alignment",
+      "year": 2024
+    },
+    {
+      "title": "MobileLLM: Optimizing Sub-billion Parameter Language Models for On-Device Use Cases",
+      "id": "2402.14905",
+      "category": "LLM",
+      "year": 2024
+    },
+    {
+      "title": "Debug like a Human: A Large Language Model Debugger via Verifying Runtime Execution Step-by-step",
+      "id": "2402.16906",
+      "category": "Reasoning",
+      "year": 2024
+    },
+    {
+      "title": "StarCoder 2 and The Stack v2: The Next Generation",
+      "id": "2402.19173",
+      "category": "Code",
+      "year": 2024
+    },
+    {
+      "title": "Yi: Open Foundation Models by 01.AI",
+      "id": "2403.04652",
+      "category": "LLM",
+      "year": 2024
+    },
+    {
+      "title": "Gemini 1.5: Unlocking multimodal understanding across millions of tokens of context",
+      "id": "2403.05530",
+      "category": "Multimodal",
+      "year": 2024
+    },
+    {
+      "title": "RAFT: Adapting Language Model to Domain Specific RAG",
+      "id": "2403.10131",
+      "category": "RAG",
+      "year": 2024
+    },
+    {
+      "title": "Model Stock: All we need is just a few fine-tuned models",
+      "id": "2403.19522",
+      "category": "Training",
+      "year": 2024
+    },
+    {
+      "title": "A Survey on Efficient Inference for Large Language Models",
+      "id": "2404.14294",
+      "category": "Efficiency",
+      "year": 2024
+    },
+    {
+      "title": "DeepSeek-V2: A Strong, Economical, and Efficient Mixture-of-Experts Language Model",
+      "id": "2405.04434",
+      "category": "Efficiency",
+      "year": 2024
+    },
+    {
+      "title": "Long Code Arena: a Set of Benchmarks for Long-Context Code Models",
+      "id": "2406.11612",
+      "category": "Code",
+      "year": 2024
+    },
+    {
+      "title": "ChatGLM: A Family of Large Language Models from GLM-130B to GLM-4 All Tools",
+      "id": "2406.12793",
+      "category": "Agent",
+      "year": 2024
+    },
+    {
+      "title": "Qwen2 Technical Report",
+      "id": "2407.10671",
+      "category": "LLM",
+      "year": 2024
+    },
+    {
+      "title": "Spectra: Surprising Effectiveness of Pretraining Ternary Language Models at Scale",
+      "id": "2407.12327",
+      "category": "Training",
+      "year": 2024
+    }
+  ]
+}

@@ -1,0 +1,139 @@
+{
+  "timestamp": "2025-12-29T14:03:14.557Z",
+  "email": "research@yagokoro.dev",
+  "doiPapers": {
+    "total": 22,
+    "successful": 14,
+    "skipped": 6,
+    "failed": 2,
+    "chunks": 1125
+  },
+  "searchPapers": {
+    "queries": 5,
+    "successful": 0,
+    "skipped": 0,
+    "failed": 0,
+    "chunks": 0
+  },
+  "totals": {
+    "papers": 14,
+    "chunks": 1125,
+    "characters": 955547
+  },
+  "successful": [
+    {
+      "doi": "10.18653/v1/2020.emnlp-main.346",
+      "title": "Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks",
+      "chunks": 71
+    },
+    {
+      "doi": "10.18653/v1/2021.acl-long.416",
+      "title": "KILT: Knowledge Intensive Language Tasks",
+      "chunks": 85
+    },
+    {
+      "doi": "10.18653/v1/2020.acl-main.703",
+      "title": "Dense Passage Retrieval for Open-Domain Question Answering",
+      "chunks": 62
+    },
+    {
+      "doi": "10.18653/v1/2020.acl-main.747",
+      "title": "Longformer: The Long-Document Transformer",
+      "chunks": 63
+    },
+    {
+      "doi": "10.18653/v1/2022.acl-long.1",
+      "title": "Fine-tuning Language Models from Human Preferences",
+      "chunks": 84
+    },
+    {
+      "doi": "10.18653/v1/2021.emnlp-main.243",
+      "title": "An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale",
+      "chunks": 102
+    },
+    {
+      "doi": "10.18653/v1/2020.acl-main.442",
+      "title": "Beyond Accuracy: Behavioral Testing of NLP Models with CheckList",
+      "chunks": 60
+    },
+    {
+      "doi": "10.18653/v1/2020.emnlp-main.448",
+      "title": "BLEU: a Method for Automatic Evaluation of Machine Translation",
+      "chunks": 79
+    },
+    {
+      "doi": "10.18653/v1/2022.naacl-main.264",
+      "title": "Chain-of-Thought Prompting Elicits Reasoning in Large Language Models",
+      "chunks": 81
+    },
+    {
+      "doi": "10.1038/s41586-021-03819-2",
+      "title": "Highly accurate protein structure prediction with AlphaFold",
+      "chunks": 89
+    },
+    {
+      "doi": "10.1038/s41586-020-2649-2",
+      "title": "Language models are few-shot learners (GPT-3)",
+      "chunks": 54
+    },
+    {
+      "doi": "10.18653/v1/2020.findings-emnlp.301",
+      "title": "RealToxicityPrompts: Evaluating Neural Toxic Degeneration",
+      "chunks": 88
+    },
+    {
+      "doi": "10.18653/v1/2021.acl-long.330",
+      "title": "Measuring Massive Multitask Language Understanding",
+      "chunks": 120
+    },
+    {
+      "doi": "10.18653/v1/2022.acl-long.244",
+      "title": "LoRA: Low-Rank Adaptation of Large Language Models",
+      "chunks": 87
+    }
+  ],
+  "skipped": [
+    {
+      "doi": "10.18653/v1/N19-1423",
+      "title": "BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding",
+      "reason": "Not Open Access or PDF unavailable"
+    },
+    {
+      "doi": "10.5555/3495724.3497205",
+      "title": "Denoising Diffusion Probabilistic Models",
+      "reason": "Not Open Access or PDF unavailable"
+    },
+    {
+      "doi": "10.1126/science.abj6511",
+      "title": "Competitive programming with AlphaCode",
+      "reason": "Not Open Access or PDF unavailable"
+    },
+    {
+      "doi": "10.1038/nature14539",
+      "title": "Deep Learning (LeCun, Bengio, Hinton)",
+      "reason": "Not Open Access or PDF unavailable"
+    },
+    {
+      "doi": "10.5555/3295222.3295349",
+      "title": "Attention is All You Need",
+      "reason": "Not Open Access or PDF unavailable"
+    },
+    {
+      "doi": "10.21437/Interspeech.2021-1965",
+      "title": "wav2vec 2.0: A Framework for Self-Supervised Learning of Speech Representations",
+      "reason": "Not Open Access or PDF unavailable"
+    }
+  ],
+  "failed": [
+    {
+      "doi": "10.1162/tacl_a_00349",
+      "title": "Exploring the Limits of Transfer Learning with a Unified Text-to-Text Transformer (T5)",
+      "error": "PDF download failed: 403"
+    },
+    {
+      "doi": "10.1145/3422622",
+      "title": "Generative Adversarial Networks",
+      "error": "PDF download failed: 403"
+    }
+  ]
+}

@@ -1,0 +1,1574 @@
+{
+  "arxivId": "2006.11239",
+  "title": "Denoising Diffusion Probabilistic Models",
+  "category": "拡散モデル・画像生成",
+  "year": 2020,
+  "paper": {
+    "id": "2006.11239v2",
+    "title": "Denoising Diffusion Probabilistic Models",
+    "abstract": "We present high quality image synthesis results using diffusion probabilistic models, a class of latent variable models inspired by considerations from nonequilibrium thermodynamics. Our best results are obtained by training on a weighted variational bound designed according to a novel connection between diffusion probabilistic models and denoising score matching with Langevin dynamics, and our models naturally admit a progressive lossy decompression scheme that can be interpreted as a generalization of autoregressive decoding. On the unconditional CIFAR10 dataset, we obtain an Inception score of 9.46 and a state-of-the-art FID score of 3.17. On 256x256 LSUN, we obtain sample quality similar to ProgressiveGAN. Our implementation is available at https://github.com/hojonathanho/diffusion",
+    "authors": [
+      "Jonathan Ho",
+      "Ajay Jain",
+      "Pieter Abbeel"
+    ],
+    "published": "2020-06-19T17:24:44.000Z",
+    "updated": "2020-12-16T21:15:05.000Z",
+    "primaryCategory": "cs.LG",
+    "categories": [
+      "cs.LG",
+      "stat.ML"
+    ],
+    "pdfUrl": "https://arxiv.org/pdf/2006.11239v2",
+    "absUrl": "https://arxiv.org/abs/2006.11239v2"
+  },
+  "chunks": [
+    {
+      "id": "2006.11239v2-chunk-0",
+      "content": "Jonathan Ho\n\nUC Berkeley jonathanho@berkeley.edu\n\nAjay Jain\n\nUC Berkeley ajayj@berkeley.edu",
+      "metadata": {
+        "source": "arxiv:2006.11239v2",
+        "title": "Denoising Diffusion Probabilistic Models",
+        "authors": [
+          "Jonathan Ho",
+          "Ajay Jain",
+          "Pieter Abbeel"
+        ],
+        "section": "Denoising Diffusion Probabilistic Models",
+        "chunkIndex": 0,
+        "totalChunks": 95
+      }
+    },
+    {
+      "id": "2006.11239v2-chunk-1",
+      "content": "Wepresent high quality image synthesis results using diffusion probabilistic models, a class of latent variable models inspired by considerations from nonequilibrium thermodynamics. Our best results are obtained by training on a weighted variational bound designed according to a novel connection between diffusion probabilistic models and denoising score matching with Langevin dynamics, and our models naturally admit a progressive lossy decompression scheme that can be interpreted as a generalization of autoregressive decoding. On the unconditional CIFAR10 dataset, we obtain an Inception score of 9.46 and a state-of-the-art FID score of 3.17. On 256x256 LSUN, we obtain sample quality similar to ProgressiveGAN. Our implementation is available at https://github.com/hojonathanho/diffusion .",
+      "metadata": {
+        "source": "arxiv:2006.11239v2",
+        "title": "Denoising Diffusion Probabilistic Models",
+        "authors": [
+          "Jonathan Ho",
+          "Ajay Jain",
+          "Pieter Abbeel"
+        ],
+        "section": "Abstract",
+        "chunkIndex": 1,
+        "totalChunks": 95
+      }
+    },
+    {
+      "id": "2006.11239v2-chunk-2",
+      "content": "Deep generative models of all kinds have recently exhibited high quality samples in a wide variety of data modalities. Generative adversarial networks (GANs), autoregressive models, flows, and variational autoencoders (VAEs) have synthesized striking image and audio samples [14, 27, 3, 58, 38, 25, 10, 32, 44, 57, 26, 33, 45], and there have been remarkable advances in energy-based modeling and score matching that have produced images comparable to those of GANs [11, 55].\n\nFigure 1: Generated samples on CelebA-HQ 256 × 256 (left) and unconditional CIFAR10 (right)\n\n<!-- image -->\n\n34th Conference on Neural Information Processing Systems (NeurIPS 2020), Vancouver, Canada.",
+      "metadata": {
+        "source": "arxiv:2006.11239v2",
+        "title": "Denoising Diffusion Probabilistic Models",
+        "authors": [
+          "Jonathan Ho",
+          "Ajay Jain",
+          "Pieter Abbeel"
+        ],
+        "section": "1 Introduction",
+        "chunkIndex": 2,
+        "totalChunks": 95
+      }
+    },
+    {
+      "id": "2006.11239v2-chunk-3",
+      "content": "UC Berkeley pabbeel@cs.berkeley.edu\n\n&lt;latexi sh\n\n1\\_b\n\n64=\"\n\nLvSgM7PR\n\nI/k uy5\n\no\n\nK\n\npU\n\n&gt;A\n\nE\n\nX\n\nc\n\nV\n\nd\n\nN\n\nF\n\nqG\n\n92\n\njOY\n\n0\n\nQ\n\nCr\n\n3\n\nnzB\n\n8\n\n+\n\nJ\n\nD\n\nT\n\nZw\n\nW\n\nf\n\nH\n\nm\n\n&lt;latexi sh\n\n1\\_b\n\n64=\"XVzP503G8M\n\nLkw\n\nK\n\nZc\n\nJ\n\n&gt;A\n\nCEn\n\n7SgNBF\n\n2\n\nr\n\nfq\n\nY\n\nI\n\nu\n\nQ\n\nv\n\nD\n\ny\n\nj\n\n9\n\nWd\n\n+\n\nmH\n\nO\n\n/R\n\no\n\nU\n\nT\n\np\n\n&lt;latexi sh\n\n1\\_b\n\n64=\"\n\nAZ87UuTm\n\nQoJ\n\n9RGH5\n\n+\n\nCI\n\n&gt;\n\n3\n\nc\n\nV\n\ng\n\nBF\n\nf\n\nS\n\nEywkO\n\nNp\n\nY\n\nM\n\nd\n\n0\n\nv\n\nKz\n\nW\n\nPrD\n\nj\n\n/\n\n2\n\nL\n\nq\n\nn\n\nX\n\n&lt;latexi sh\n\n1\\_b\n\n64=\"7yFrn0YP\n\nu\n\n5dVIvc\n\nT\n\n2z\n\nS/g\n\n&gt;A\n\nB+H\n\nN\n\nwM\n\nEJ\n\nX\n\nWj\n\nR\n\nK\n\nf\n\nmk\n\nU\n\np3\n\nO\n\n9G\n\nC\n\nZ\n\nL\n\n8\n\no\n\nD\n\nq\n\nQ\n\n<!-- image -->\n\n|\n\n-\n\nFigure 2: The directed graphical model considered in this work.\n\nThis paper presents progress in diffusion probabilistic models [53]. A diffusion probabilistic model (which we will call a 'diffusion model' for brevity) is a parameterized Markov chain trained using variational inference to produce samples matching the data after finite time.",
+      "metadata": {
+        "source": "arxiv:2006.11239v2",
+        "title": "Denoising Diffusion Probabilistic Models",
+        "authors": [
+          "Jonathan Ho",
+          "Ajay Jain",
+          "Pieter Abbeel"
+        ],
+        "section": "Pieter Abbeel",
+        "chunkIndex": 3,
+        "totalChunks": 95
+      }
+    },
+    {
+      "id": "2006.11239v2-chunk-4",
+      "content": "ion probabilistic model (which we will call a 'diffusion model' for brevity) is a parameterized Markov chain trained using variational inference to produce samples matching the data after finite time. Transitions of this chain are learned to reverse a diffusion process, which is a Markov chain that gradually adds noise to the data in the opposite direction of sampling until signal is destroyed. When the diffusion consists of small amounts of Gaussian noise, it is sufficient to set the sampling chain transitions to conditional Gaussians too, allowing for a particularly simple neural network parameterization.\n\nDiffusion models are straightforward to define and efficient to train, but to the best of our knowledge, there has been no demonstration that they are capable of generating high quality samples. We show that diffusion models actually are capable of generating high quality samples, sometimes better than the published results on other types of generative models (Section 4).",
+      "metadata": {
+        "source": "arxiv:2006.11239v2",
+        "title": "Denoising Diffusion Probabilistic Models",
+        "authors": [
+          "Jonathan Ho",
+          "Ajay Jain",
+          "Pieter Abbeel"
+        ],
+        "section": "Pieter Abbeel",
+        "chunkIndex": 4,
+        "totalChunks": 95
+      }
+    },
+    {
+      "id": "2006.11239v2-chunk-5",
+      "content": "igh quality samples. We show that diffusion models actually are capable of generating high quality samples, sometimes better than the published results on other types of generative models (Section 4). In addition, we show that a certain parameterization of diffusion models reveals an equivalence with denoising score matching over multiple noise levels during training and with annealed Langevin dynamics during sampling (Section 3.2) [55, 61]. We obtained our best sample quality results using this parameterization (Section 4.2), so we consider this equivalence to be one of our primary contributions.\n\nDespite their sample quality, our models do not have competitive log likelihoods compared to other likelihood-based models (our models do, however, have log likelihoods better than the large estimates annealed importance sampling has been reported to produce for energy based models and score matching [11, 55]).",
+      "metadata": {
+        "source": "arxiv:2006.11239v2",
+        "title": "Denoising Diffusion Probabilistic Models",
+        "authors": [
+          "Jonathan Ho",
+          "Ajay Jain",
+          "Pieter Abbeel"
+        ],
+        "section": "Pieter Abbeel",
+        "chunkIndex": 5,
+        "totalChunks": 95
+      }
+    },
+    {
+      "id": "2006.11239v2-chunk-6",
+      "content": "sed models (our models do, however, have log likelihoods better than the large estimates annealed importance sampling has been reported to produce for energy based models and score matching [11, 55]). We find that the majority of our models' lossless codelengths are consumed to describe imperceptible image details (Section 4.3). We present a more refined analysis of this phenomenon in the language of lossy compression, and we show that the sampling procedure of diffusion models is a type of progressive decoding that resembles autoregressive decoding along a bit ordering that vastly generalizes what is normally possible with autoregressive models.",
+      "metadata": {
+        "source": "arxiv:2006.11239v2",
+        "title": "Denoising Diffusion Probabilistic Models",
+        "authors": [
+          "Jonathan Ho",
+          "Ajay Jain",
+          "Pieter Abbeel"
+        ],
+        "section": "Pieter Abbeel",
+        "chunkIndex": 6,
+        "totalChunks": 95
+      }
+    },
+    {
+      "id": "2006.11239v2-chunk-7",
+      "content": "Diffusion models [53] are latent variable models of the form p θ ( x 0 ) := ∫ p θ ( x 0: T ) d x 1: T , where x 1 , . . . , x T are latents of the same dimensionality as the data x 0 ∼ q ( x 0 ) . The joint distribution p θ ( x 0: T ) is called the reverse process , and it is defined as a Markov chain with learned Gaussian transitions starting at p ( x T ) = N ( x T ; 0 , I ) :\n\n<!-- formula-not-decoded -->\n\nWhat distinguishes diffusion models from other types of latent variable models is that the approximate posterior q ( x 1: T | x 0 ) , called the forward process or diffusion process , is fixed to a Markov chain that gradually adds Gaussian noise to the data according to a variance schedule β 1 , . . . , β T :\n\n<!-- formula-not-decoded -->\n\nTraining is performed by optimizing the usual variational bound on negative log likelihood:\n\n<!-- formula-not-decoded -->\n\n<!-- formula-not-decoded -->",
+      "metadata": {
+        "source": "arxiv:2006.11239v2",
+        "title": "Denoising Diffusion Probabilistic Models",
+        "authors": [
+          "Jonathan Ho",
+          "Ajay Jain",
+          "Pieter Abbeel"
+        ],
+        "section": "2 Background",
+        "chunkIndex": 7,
+        "totalChunks": 95
+      }
+    },
+    {
+      "id": "2006.11239v2-chunk-8",
+      "content": "1 , . . . , β T :\n\n<!-- formula-not-decoded -->\n\nTraining is performed by optimizing the usual variational bound on negative log likelihood:\n\n<!-- formula-not-decoded -->\n\n<!-- formula-not-decoded -->\n\nThe forward process variances β t can be learned by reparameterization [33] or held constant as hyperparameters, and expressiveness of the reverse process is ensured in part by the choice of Gaussian conditionals in p θ ( x t -1 | x t ) , because both processes have the same functional form when β t are small [53]. A notable property of the forward process is that it admits sampling x t at an arbitrary timestep t in closed form: using the notation α t := 1 -β t and ¯ α t := ∏ t s =1 α s , we have\n\nEfficient training is therefore possible by optimizing random terms of L with stochastic gradient descent. Further improvements come from variance reduction by rewriting L (3) as:\n\n<!-- formula-not-decoded -->",
+      "metadata": {
+        "source": "arxiv:2006.11239v2",
+        "title": "Denoising Diffusion Probabilistic Models",
+        "authors": [
+          "Jonathan Ho",
+          "Ajay Jain",
+          "Pieter Abbeel"
+        ],
+        "section": "2 Background",
+        "chunkIndex": 8,
+        "totalChunks": 95
+      }
+    },
+    {
+      "id": "2006.11239v2-chunk-9",
+      "content": "training is therefore possible by optimizing random terms of L with stochastic gradient descent. Further improvements come from variance reduction by rewriting L (3) as:\n\n<!-- formula-not-decoded -->\n\n(See Appendix A for details. The labels on the terms are used in Section 3.) Equation (5) uses KL divergence to directly compare p θ ( x t -1 | x t ) against forward process posteriors, which are tractable when conditioned on x 0 :\n\n<!-- formula-not-decoded -->\n\nConsequently, all KL divergences in Eq. (5) are comparisons between Gaussians, so they can be calculated in a Rao-Blackwellized fashion with closed form expressions instead of high variance Monte Carlo estimates.\n\n<!-- formula-not-decoded -->",
+      "metadata": {
+        "source": "arxiv:2006.11239v2",
+        "title": "Denoising Diffusion Probabilistic Models",
+        "authors": [
+          "Jonathan Ho",
+          "Ajay Jain",
+          "Pieter Abbeel"
+        ],
+        "section": "2 Background",
+        "chunkIndex": 9,
+        "totalChunks": 95
+      }
+    },
+    {
+      "id": "2006.11239v2-chunk-10",
+      "content": "Diffusion models might appear to be a restricted class of latent variable models, but they allow a large number of degrees of freedom in implementation. One must choose the variances β t of the forward process and the model architecture and Gaussian distribution parameterization of the reverse process. To guide our choices, we establish a new explicit connection between diffusion models and denoising score matching (Section 3.2) that leads to a simplified, weighted variational bound objective for diffusion models (Section 3.4). Ultimately, our model design is justified by simplicity and empirical results (Section 4). Our discussion is categorized by the terms of Eq. (5).",
+      "metadata": {
+        "source": "arxiv:2006.11239v2",
+        "title": "Denoising Diffusion Probabilistic Models",
+        "authors": [
+          "Jonathan Ho",
+          "Ajay Jain",
+          "Pieter Abbeel"
+        ],
+        "section": "3 Diffusion models and denoising autoencoders",
+        "chunkIndex": 10,
+        "totalChunks": 95
+      }
+    },
+    {
+      "id": "2006.11239v2-chunk-11",
+      "content": "We ignore the fact that the forward process variances β t are learnable by reparameterization and instead fix them to constants (see Section 4 for details). Thus, in our implementation, the approximate posterior q has no learnable parameters, so L T is a constant during training and can be ignored.",
+      "metadata": {
+        "source": "arxiv:2006.11239v2",
+        "title": "Denoising Diffusion Probabilistic Models",
+        "authors": [
+          "Jonathan Ho",
+          "Ajay Jain",
+          "Pieter Abbeel"
+        ],
+        "section": "3.1 Forward process and L T",
+        "chunkIndex": 11,
+        "totalChunks": 95
+      }
+    },
+    {
+      "id": "2006.11239v2-chunk-12",
+      "content": "Now we discuss our choices in p θ ( x t -1 | x t ) = N ( x t -1 ; µ θ ( x t , t ) , Σ θ ( x t , t )) for 1 &lt; t ≤ T . First, we set Σ θ ( x t , t ) = σ 2 t I to untrained time dependent constants. Experimentally, both σ 2 t = β t and σ 2 t = ˜ β t = 1 -¯ α t -1 1 -¯ α t β t had similar results. The first choice is optimal for x 0 ∼ N ( 0 , I ) , and the second is optimal for x 0 deterministically set to one point. These are the two extreme choices corresponding to upper and lower bounds on reverse process entropy for data with coordinatewise unit variance [53].\n\nSecond, to represent the mean µ θ ( x t , t ) , we propose a specific parameterization motivated by the following analysis of L t . With p θ ( x t -1 | x t ) = N ( x t -1 ; µ θ ( x t , t ) , σ 2 t I ) , we can write:\n\n<!-- formula-not-decoded -->",
+      "metadata": {
+        "source": "arxiv:2006.11239v2",
+        "title": "Denoising Diffusion Probabilistic Models",
+        "authors": [
+          "Jonathan Ho",
+          "Ajay Jain",
+          "Pieter Abbeel"
+        ],
+        "section": "3.2 Reverse process and L 1: T -1",
+        "chunkIndex": 12,
+        "totalChunks": 95
+      }
+    },
+    {
+      "id": "2006.11239v2-chunk-13",
+      "content": ", we propose a specific parameterization motivated by the following analysis of L t . With p θ ( x t -1 | x t ) = N ( x t -1 ; µ θ ( x t , t ) , σ 2 t I ) , we can write:\n\n<!-- formula-not-decoded -->\n\nwhere C is a constant that does not depend on θ . So, we see that the most straightforward parameterization of µ θ is a model that predicts ˜ µ t , the forward process posterior mean. However, we can expand Eq. (8) further by reparameterizing Eq. (4) as x t ( x 0 , glyph[epsilon1] ) = √ ¯ α t x 0 + √ 1 -¯ α t glyph[epsilon1] for glyph[epsilon1] ∼ N ( 0 , I ) and applying the forward process posterior formula (7):\n\n<!-- formula-not-decoded -->\n\n<!-- formula-not-decoded -->\n\n| Algorithm 1 Training                                                                                                                                                                                                                                    | Algorithm 2 Sampling",
+      "metadata": {
+        "source": "arxiv:2006.11239v2",
+        "title": "Denoising Diffusion Probabilistic Models",
+        "authors": [
+          "Jonathan Ho",
+          "Ajay Jain",
+          "Pieter Abbeel"
+        ],
+        "section": "3.2 Reverse process and L 1: T -1",
+        "chunkIndex": 13,
+        "totalChunks": 95
+      }
+    },
+    {
+      "id": "2006.11239v2-chunk-14",
+      "content": "| Algorithm 2 Sampling                                                                                                                                                                                       |\n|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|\n| 1: repeat 2: x 0 ∼ q ( x 0 ) 3: t ∼ Uniform( { 1 , . .",
+      "metadata": {
+        "source": "arxiv:2006.11239v2",
+        "title": "Denoising Diffusion Probabilistic Models",
+        "authors": [
+          "Jonathan Ho",
+          "Ajay Jain",
+          "Pieter Abbeel"
+        ],
+        "section": "3.2 Reverse process and L 1: T -1",
+        "chunkIndex": 14,
+        "totalChunks": 95
+      }
+    },
+    {
+      "id": "2006.11239v2-chunk-15",
+      "content": "----------------------------------------------------------------------------------------------------------------------------------------------|\n| 1: repeat 2: x 0 ∼ q ( x 0 ) 3: t ∼ Uniform( { 1 , . . .,T } ) 4: glyph[epsilon1] ∼ N ( 0 , I ) 5: Take gradient descent step on ∇ θ ∥ ∥ glyph[epsilon1] - glyph[epsilon1] θ ( √ ¯ α t x 0 + √ 1 - ¯ α t glyph[epsilon1] , t ) ∥ ∥ 2 6: until converged | 1: x T ∼ N ( 0 , I ) 2: for t = T, . . . , 1 do 3: z ∼ N ( 0 , I ) if t > 1 , else z = 0 4: x t - 1 = 1 √ α t ( x t - 1 - α t √ 1 - ¯ α t glyph[epsilon1] θ ( x t , t ) ) + σ t z 5: end for 6: return x 0 |\n\nEquation (10) reveals that µ θ must predict 1 √ α t ( x t -β t √ 1 -¯ α t glyph[epsilon1] ) given x t . Since x t is available as input to the model, we may choose the parameterization\n\n<!-- formula-not-decoded -->",
+      "metadata": {
+        "source": "arxiv:2006.11239v2",
+        "title": "Denoising Diffusion Probabilistic Models",
+        "authors": [
+          "Jonathan Ho",
+          "Ajay Jain",
+          "Pieter Abbeel"
+        ],
+        "section": "3.2 Reverse process and L 1: T -1",
+        "chunkIndex": 15,
+        "totalChunks": 95
+      }
+    },
+    {
+      "id": "2006.11239v2-chunk-16",
+      "content": "reveals that µ θ must predict 1 √ α t ( x t -β t √ 1 -¯ α t glyph[epsilon1] ) given x t . Since x t is available as input to the model, we may choose the parameterization\n\n<!-- formula-not-decoded -->\n\nwhere glyph[epsilon1] θ is a function approximator intended to predict glyph[epsilon1] from x t . To sample x t -1 ∼ p θ ( x t -1 | x t ) is to compute x t -1 = 1 √ α t ( x t -β t √ 1 -¯ α t glyph[epsilon1] θ ( x t , t ) ) + σ t z , where z ∼ N ( 0 , I ) . The complete sampling procedure, Algorithm 2, resembles Langevin dynamics with glyph[epsilon1] θ as a learned gradient of the data density. Furthermore, with the parameterization (11), Eq. (10) simplifies to:\n\n<!-- formula-not-decoded -->\n\nwhich resembles denoising score matching over multiple noise scales indexed by t [55]. As Eq. (12) is equal to (one term of) the variational bound for the Langevin-like reverse process (11), we see that optimizing an objective resembling denoising score matching is equivalent to using variational inf",
+      "metadata": {
+        "source": "arxiv:2006.11239v2",
+        "title": "Denoising Diffusion Probabilistic Models",
+        "authors": [
+          "Jonathan Ho",
+          "Ajay Jain",
+          "Pieter Abbeel"
+        ],
+        "section": "3.2 Reverse process and L 1: T -1",
+        "chunkIndex": 16,
+        "totalChunks": 95
+      }
+    },
+    {
+      "id": "2006.11239v2-chunk-17",
+      "content": "equal to (one term of) the variational bound for the Langevin-like reverse process (11), we see that optimizing an objective resembling denoising score matching is equivalent to using variational inference to fit the finite-time marginal of a sampling chain resembling Langevin dynamics.\n\nTo summarize, we can train the reverse process mean function approximator µ θ to predict ˜ µ t , or by modifying its parameterization, we can train it to predict glyph[epsilon1] . (There is also the possibility of predicting x 0 , but we found this to lead to worse sample quality early in our experiments.) We have shown that the glyph[epsilon1] -prediction parameterization both resembles Langevin dynamics and simplifies the diffusion model's variational bound to an objective that resembles denoising score matching.",
+      "metadata": {
+        "source": "arxiv:2006.11239v2",
+        "title": "Denoising Diffusion Probabilistic Models",
+        "authors": [
+          "Jonathan Ho",
+          "Ajay Jain",
+          "Pieter Abbeel"
+        ],
+        "section": "3.2 Reverse process and L 1: T -1",
+        "chunkIndex": 17,
+        "totalChunks": 95
+      }
+    },
+    {
+      "id": "2006.11239v2-chunk-18",
+      "content": "n that the glyph[epsilon1] -prediction parameterization both resembles Langevin dynamics and simplifies the diffusion model's variational bound to an objective that resembles denoising score matching. Nonetheless, it is just another parameterization of p θ ( x t -1 | x t ) , so we verify its effectiveness in Section 4 in an ablation where we compare predicting glyph[epsilon1] against predicting ˜ µ t .",
+      "metadata": {
+        "source": "arxiv:2006.11239v2",
+        "title": "Denoising Diffusion Probabilistic Models",
+        "authors": [
+          "Jonathan Ho",
+          "Ajay Jain",
+          "Pieter Abbeel"
+        ],
+        "section": "3.2 Reverse process and L 1: T -1",
+        "chunkIndex": 18,
+        "totalChunks": 95
+      }
+    },
+    {
+      "id": "2006.11239v2-chunk-19",
+      "content": "We assume that image data consists of integers in { 0 , 1 , . . . , 255 } scaled linearly to [ -1 , 1] . This ensures that the neural network reverse process operates on consistently scaled inputs starting from the standard normal prior p ( x T ) . To obtain discrete log likelihoods, we set the last term of the reverse process to an independent discrete decoder derived from the Gaussian N ( x 0 ; µ θ ( x 1 , 1) , σ 2 1 I ) :\n\nwhere D is the data dimensionality and the i superscript indicates extraction of one coordinate. (It would be straightforward to instead incorporate a more powerful decoder like a conditional autoregressive model, but we leave that to future work.) Similar to the discretized continuous distributions used in V AE decoders and autoregressive models [34, 52], our choice here ensures that the variational bound is a lossless codelength of discrete data, without need of adding noise to the data or incorporating the Jacobian of the scaling operation into the log likeliho",
+      "metadata": {
+        "source": "arxiv:2006.11239v2",
+        "title": "Denoising Diffusion Probabilistic Models",
+        "authors": [
+          "Jonathan Ho",
+          "Ajay Jain",
+          "Pieter Abbeel"
+        ],
+        "section": "3.3 Data scaling, reverse process decoder, and L 0",
+        "chunkIndex": 19,
+        "totalChunks": 95
+      }
+    },
+    {
+      "id": "2006.11239v2-chunk-20",
+      "content": "here ensures that the variational bound is a lossless codelength of discrete data, without need of adding noise to the data or incorporating the Jacobian of the scaling operation into the log likelihood. At the end of sampling, we display µ θ ( x 1 , 1) noiselessly.\n\n<!-- formula-not-decoded -->",
+      "metadata": {
+        "source": "arxiv:2006.11239v2",
+        "title": "Denoising Diffusion Probabilistic Models",
+        "authors": [
+          "Jonathan Ho",
+          "Ajay Jain",
+          "Pieter Abbeel"
+        ],
+        "section": "3.3 Data scaling, reverse process decoder, and L 0",
+        "chunkIndex": 20,
+        "totalChunks": 95
+      }
+    },
+    {
+      "id": "2006.11239v2-chunk-21",
+      "content": "With the reverse process and decoder defined above, the variational bound, consisting of terms derived from Eqs. (12) and (13), is clearly differentiable with respect to θ and is ready to be employed for\n\nTable 1: CIFAR10 results. NLL measured in bits/dim.\n\n| Model                                         | IS              | FID            | NLL Test (Train)   |                                               |                                                                    |                                               |                                               |\n|-----------------------------------------------|-----------------|----------------|--------------------|-----------------------------------------------|--------------------------------------------------------------------|-----------------------------------------------|-----------------------------------------------|\n|                                               |                 |                |",
+      "metadata": {
+        "source": "arxiv:2006.11239v2",
+        "title": "Denoising Diffusion Probabilistic Models",
+        "authors": [
+          "Jonathan Ho",
+          "Ajay Jain",
+          "Pieter Abbeel"
+        ],
+        "section": "3.4 Simplified training objective",
+        "chunkIndex": 21,
+        "totalChunks": 95
+      }
+    },
+    {
+      "id": "2006.11239v2-chunk-22",
+      "content": "----------------------------------------------|-----------------------------------------------|\n|                                               |                 |                |                    | Conditional                                   | Unconditional CIFAR10 reverse parameterization and training objec- |                                               |                                               |\n| EBM [11]                                      | 8 . 30          | 37 . 9         |                    | tive ablation. Blank entries were unstable to | tive ablation. Blank entries were unstable to                      | tive ablation. Blank entries were unstable to | tive ablation. Blank entries were unstable to |\n| JEM [17] BigGAN [3]                           | 8 . 76 9 . 22   | 38 . 4 14 .",
+      "metadata": {
+        "source": "arxiv:2006.11239v2",
+        "title": "Denoising Diffusion Probabilistic Models",
+        "authors": [
+          "Jonathan Ho",
+          "Ajay Jain",
+          "Pieter Abbeel"
+        ],
+        "section": "3.4 Simplified training objective",
+        "chunkIndex": 22,
+        "totalChunks": 95
+      }
+    },
+    {
+      "id": "2006.11239v2-chunk-23",
+      "content": "o                      | tive ablation. Blank entries were unstable to | tive ablation. Blank entries were unstable to |\n| JEM [17] BigGAN [3]                           | 8 . 76 9 . 22   | 38 . 4 14 . 73 |                    |                                               | poor samples with IS                                               |                                               |                                               |\n| Unconditional                                 |                 |                |                    |                                               |                                                                    |                                               |                                               |\n|                                               |                 |                | 5 .",
+      "metadata": {
+        "source": "arxiv:2006.11239v2",
+        "title": "Denoising Diffusion Probabilistic Models",
+        "authors": [
+          "Jonathan Ho",
+          "Ajay Jain",
+          "Pieter Abbeel"
+        ],
+        "section": "3.4 Simplified training objective",
+        "chunkIndex": 23,
+        "totalChunks": 95
+      }
+    },
+    {
+      "id": "2006.11239v2-chunk-24",
+      "content": "|                                               |                                               |\n|                                               |                 |                | 5 . 40             |                                               |                                                                    |                                               |                                               |\n| Diffusion (original) [53] Gated PixelCNN [59] | 4 . 60          |                | ≤ 3 . 03 (2 .      |                                               |                                                                    |                                               |                                               |\n| Sparse Transformer [7]                        |                 | 65 . 93        | 90) 2 . 80         |                                               | 7 . 28 ± 0 . 10 8 . 06 0 .",
+      "metadata": {
+        "source": "arxiv:2006.11239v2",
+        "title": "Denoising Diffusion Probabilistic Models",
+        "authors": [
+          "Jonathan Ho",
+          "Ajay Jain",
+          "Pieter Abbeel"
+        ],
+        "section": "3.4 Simplified training objective",
+        "chunkIndex": 24,
+        "totalChunks": 95
+      }
+    },
+    {
+      "id": "2006.11239v2-chunk-25",
+      "content": "|\n| Sparse Transformer [7]                        |                 | 65 . 93        | 90) 2 . 80         |                                               | 7 . 28 ± 0 . 10 8 . 06 0 . 09                                      |                                               |                                               |\n|                                               |                 |                |                    |                                               | ±                                                                  |                                               |                                               |\n| PixelIQN [43]                                 | 5 . 29          | 49 . 46        |                    |                                               | -                                                                  |                                               |                                               |\n| EBM [11]",
+      "metadata": {
+        "source": "arxiv:2006.11239v2",
+        "title": "Denoising Diffusion Probabilistic Models",
+        "authors": [
+          "Jonathan Ho",
+          "Ajay Jain",
+          "Pieter Abbeel"
+        ],
+        "section": "3.4 Simplified training objective",
+        "chunkIndex": 25,
+        "totalChunks": 95
+      }
+    },
+    {
+      "id": "2006.11239v2-chunk-26",
+      "content": "| -                                                                  |                                               |                                               |\n| EBM [11]                                      | 6 . 78          | 38 . 2         |                    |                                               |                                                                    |                                               |                                               |\n| NCSNv2 [56]                                   |                 | 31 . 75        |                    |                                               |                                                                    |                                               |                                               |\n| NCSN [55]                                     | 8 . 87 ± 0 . 12 | 25 .",
+      "metadata": {
+        "source": "arxiv:2006.11239v2",
+        "title": "Denoising Diffusion Probabilistic Models",
+        "authors": [
+          "Jonathan Ho",
+          "Ajay Jain",
+          "Pieter Abbeel"
+        ],
+        "section": "3.4 Simplified training objective",
+        "chunkIndex": 26,
+        "totalChunks": 95
+      }
+    },
+    {
+      "id": "2006.11239v2-chunk-27",
+      "content": "|                                               |                                               |\n| NCSN [55]                                     | 8 . 87 ± 0 . 12 | 25 . 32        |                    |                                               | -                                                                  |                                               |                                               |\n| SNGAN [39]                                    | 8 . 22 ± 0 . 05 | 21 . 7         |                    |                                               | 7 . 67 ± 0 . 13                                                    |                                               |                                               |\n| SNGAN-DDLS [4]                                | 9 . 09 ± 0 . 10 | 15 . 42        |                    |                                               | 9 . 46 0 .",
+      "metadata": {
+        "source": "arxiv:2006.11239v2",
+        "title": "Denoising Diffusion Probabilistic Models",
+        "authors": [
+          "Jonathan Ho",
+          "Ajay Jain",
+          "Pieter Abbeel"
+        ],
+        "section": "3.4 Simplified training objective",
+        "chunkIndex": 27,
+        "totalChunks": 95
+      }
+    },
+    {
+      "id": "2006.11239v2-chunk-28",
+      "content": "|\n| SNGAN-DDLS [4]                                | 9 . 09 ± 0 . 10 | 15 . 42        |                    |                                               | 9 . 46 0 . 11                                                      |                                               |                                               |\n| StyleGAN2 + ADA (v1) [29]                     | 9 . 74 ± 0 . 05 | 3 . 26         |                    |                                               | ±                                                                  |                                               |                                               |\n| Ours ( , fixed isotropic Σ )                  |                 |                | 69)                |                                               |                                                                    |                                               |                                               |\n| Ours",
+      "metadata": {
+        "source": "arxiv:2006.11239v2",
+        "title": "Denoising Diffusion Probabilistic Models",
+        "authors": [
+          "Jonathan Ho",
+          "Ajay Jain",
+          "Pieter Abbeel"
+        ],
+        "section": "3.4 Simplified training objective",
+        "chunkIndex": 28,
+        "totalChunks": 95
+      }
+    },
+    {
+      "id": "2006.11239v2-chunk-29",
+      "content": "|                                                                    |                                               |                                               |\n| Ours ( )                                      | 11              | 3 . 17         | 3 . 75 (3 . 72)    |                                               |                                                                    |                                               |                                               |\n| simple                                        |                 |                |                    |                                               |                                                                    |                                               |                                               |\n|                                               |                 |                | ≤                  |                                               |",
+      "metadata": {
+        "source": "arxiv:2006.11239v2",
+        "title": "Denoising Diffusion Probabilistic Models",
+        "authors": [
+          "Jonathan Ho",
+          "Ajay Jain",
+          "Pieter Abbeel"
+        ],
+        "section": "3.4 Simplified training objective",
+        "chunkIndex": 29,
+        "totalChunks": 95
+      }
+    },
+    {
+      "id": "2006.11239v2-chunk-30",
+      "content": "|\n|                                               |                 |                | ≤                  |                                               |                                                                    |                                               |                                               |\n|                                               | 9 . 46 ± 0 .    |                |                    |                                               |                                                                    |                                               |                                               |\n| L                                             |                 |                |                    |                                               |                                                                    |                                               |                                               |\n|",
+      "metadata": {
+        "source": "arxiv:2006.11239v2",
+        "title": "Denoising Diffusion Probabilistic Models",
+        "authors": [
+          "Jonathan Ho",
+          "Ajay Jain",
+          "Pieter Abbeel"
+        ],
+        "section": "3.4 Simplified training objective",
+        "chunkIndex": 30,
+        "totalChunks": 95
+      }
+    },
+    {
+      "id": "2006.11239v2-chunk-31",
+      "content": "|                                                                    |                                               |                                               |\n|                                               |                 | 13 . 51        |                    |                                               |                                                                    |                                               |                                               |\n|                                               | 7 . 67 0 .      |                |                    |                                               |                                                                    |                                               |                                               |\n|                                               |                 |                | 3 . 70 (3 .",
+      "metadata": {
+        "source": "arxiv:2006.11239v2",
+        "title": "Denoising Diffusion Probabilistic Models",
+        "authors": [
+          "Jonathan Ho",
+          "Ajay Jain",
+          "Pieter Abbeel"
+        ],
+        "section": "3.4 Simplified training objective",
+        "chunkIndex": 31,
+        "totalChunks": 95
+      }
+    },
+    {
+      "id": "2006.11239v2-chunk-32",
+      "content": "|                                               |                                               |\n|                                               |                 |                | 3 . 70 (3 .        |                                               |                                                                    |                                               |                                               |\n|                                               | 13              |                |                    |                                               |                                                                    |                                               |                                               |\n| L                                             |                 |                |                    |                                               |                                                                    |",
+      "metadata": {
+        "source": "arxiv:2006.11239v2",
+        "title": "Denoising Diffusion Probabilistic Models",
+        "authors": [
+          "Jonathan Ho",
+          "Ajay Jain",
+          "Pieter Abbeel"
+        ],
+        "section": "3.4 Simplified training objective",
+        "chunkIndex": 32,
+        "totalChunks": 95
+      }
+    },
+    {
+      "id": "2006.11239v2-chunk-33",
+      "content": "|                |                    |                                               |                                                                    |                                               |                                               |\n|                                               |                 | ≤              |                    |                                               |                                                                    |                                               |                                               |\n|                                               | ±               |                |                    |                                               |                                                                    |                                               |                                               |",
+      "metadata": {
+        "source": "arxiv:2006.11239v2",
+        "title": "Denoising Diffusion Probabilistic Models",
+        "authors": [
+          "Jonathan Ho",
+          "Ajay Jain",
+          "Pieter Abbeel"
+        ],
+        "section": "3.4 Simplified training objective",
+        "chunkIndex": 33,
+        "totalChunks": 95
+      }
+    },
+    {
+      "id": "2006.11239v2-chunk-34",
+      "content": "|                                                                    |                                               |                                               |\n\ntraining. However, we found it beneficial to sample quality (and simpler to implement) to train on the following variant of the variational bound:\n\n<!-- formula-not-decoded -->\n\nwhere t is uniform between 1 and T . The t = 1 case corresponds to L 0 with the integral in the discrete decoder definition (13) approximated by the Gaussian probability density function times the bin width, ignoring σ 2 1 and edge effects. The t &gt; 1 cases correspond to an unweighted version of Eq. (12), analogous to the loss weighting used by the NCSN denoising score matching model [55]. ( L T does not appear because the forward process variances β t are fixed.) Algorithm 1 displays the complete training procedure with this simplified objective.",
+      "metadata": {
+        "source": "arxiv:2006.11239v2",
+        "title": "Denoising Diffusion Probabilistic Models",
+        "authors": [
+          "Jonathan Ho",
+          "Ajay Jain",
+          "Pieter Abbeel"
+        ],
+        "section": "3.4 Simplified training objective",
+        "chunkIndex": 34,
+        "totalChunks": 95
+      }
+    },
+    {
+      "id": "2006.11239v2-chunk-35",
+      "content": "SN denoising score matching model [55]. ( L T does not appear because the forward process variances β t are fixed.) Algorithm 1 displays the complete training procedure with this simplified objective.\n\nSince our simplified objective (14) discards the weighting in Eq. (12), it is a weighted variational bound that emphasizes different aspects of reconstruction compared to the standard variational bound [18, 22]. In particular, our diffusion process setup in Section 4 causes the simplified objective to down-weight loss terms corresponding to small t . These terms train the network to denoise data with very small amounts of noise, so it is beneficial to down-weight them so that the network can focus on more difficult denoising tasks at larger t terms. We will see in our experiments that this reweighting leads to better sample quality.",
+      "metadata": {
+        "source": "arxiv:2006.11239v2",
+        "title": "Denoising Diffusion Probabilistic Models",
+        "authors": [
+          "Jonathan Ho",
+          "Ajay Jain",
+          "Pieter Abbeel"
+        ],
+        "section": "3.4 Simplified training objective",
+        "chunkIndex": 35,
+        "totalChunks": 95
+      }
+    },
+    {
+      "id": "2006.11239v2-chunk-36",
+      "content": "We set T = 1000 for all experiments so that the number of neural network evaluations needed during sampling matches previous work [53, 55]. We set the forward process variances to constants increasing linearly from β 1 = 10 -4 to β T = 0 . 02 . These constants were chosen to be small relative to data scaled to [ -1 , 1] , ensuring that reverse and forward processes have approximately the same functional form while keeping the signal-to-noise ratio at x T as small as possible ( L T = D KL ( q ( x T | x 0 ) ‖ N ( 0 , I )) ≈ 10 -5 bits per dimension in our experiments).\n\nTo represent the reverse process, we use a U-Net backbone similar to an unmasked PixelCNN++ [52, 48] with group normalization throughout [66]. Parameters are shared across time, which is specified to the network using the Transformer sinusoidal position embedding [60]. We use self-attention at the 16 × 16 feature map resolution [63, 60]. Details are in Appendix B.",
+      "metadata": {
+        "source": "arxiv:2006.11239v2",
+        "title": "Denoising Diffusion Probabilistic Models",
+        "authors": [
+          "Jonathan Ho",
+          "Ajay Jain",
+          "Pieter Abbeel"
+        ],
+        "section": "4 Experiments",
+        "chunkIndex": 36,
+        "totalChunks": 95
+      }
+    },
+    {
+      "id": "2006.11239v2-chunk-37",
+      "content": "Table 1 shows Inception scores, FID scores, and negative log likelihoods (lossless codelengths) on CIFAR10. With our FID score of 3.17, our unconditional model achieves better sample quality than most models in the literature, including class conditional models. Our FID score is computed with respect to the training set, as is standard practice; when we compute it with respect to the test set, the score is 5.24, which is still better than many of the training set FID scores in the literature.\n\nFigure 3: LSUN Church samples. FID= 7 . 89\n\n<!-- image -->",
+      "metadata": {
+        "source": "arxiv:2006.11239v2",
+        "title": "Denoising Diffusion Probabilistic Models",
+        "authors": [
+          "Jonathan Ho",
+          "Ajay Jain",
+          "Pieter Abbeel"
+        ],
+        "section": "4.1 Sample quality",
+        "chunkIndex": 37,
+        "totalChunks": 95
+      }
+    },
+    {
+      "id": "2006.11239v2-chunk-38",
+      "content": "- 1: Send x T ∼ q ( x T | x 0 ) using p ( x T )\n- 2: for t = T -1 , . . . , 2 , 1 do\n- 3: Send x t ∼ q ( x t | x t +1 , x 0 ) using p θ ( x t | x t +1 )\n- 4: end for\n- 5: Send x 0 using p θ ( x 0 | x 1 )\n\nFigure 4: LSUN Bedroom samples. FID= 4 . 90\n\n<!-- image -->",
+      "metadata": {
+        "source": "arxiv:2006.11239v2",
+        "title": "Denoising Diffusion Probabilistic Models",
+        "authors": [
+          "Jonathan Ho",
+          "Ajay Jain",
+          "Pieter Abbeel"
+        ],
+        "section": "Algorithm 3 Sending x 0",
+        "chunkIndex": 38,
+        "totalChunks": 95
+      }
+    },
+    {
+      "id": "2006.11239v2-chunk-39",
+      "content": "- 1: Receive x T using p ( x T )\n- 2: for t = T -1 , . . . , 1 , 0 do\n- 3: Receive x t using p θ ( x t | x t +1 )\n- 4: end for\n- 5: return x 0\n\nWe find that training our models on the true variational bound yields better codelengths than training on the simplified objective, as expected, but the latter yields the best sample quality. See Fig. 1 for CIFAR10 and CelebA-HQ 256 × 256 samples, Fig. 3 and Fig. 4 for LSUN 256 × 256 samples [71], and Appendix D for more.",
+      "metadata": {
+        "source": "arxiv:2006.11239v2",
+        "title": "Denoising Diffusion Probabilistic Models",
+        "authors": [
+          "Jonathan Ho",
+          "Ajay Jain",
+          "Pieter Abbeel"
+        ],
+        "section": "Algorithm 4 Receiving",
+        "chunkIndex": 39,
+        "totalChunks": 95
+      }
+    },
+    {
+      "id": "2006.11239v2-chunk-40",
+      "content": "In Table 2, we show the sample quality effects of reverse process parameterizations and training objectives (Section 3.2). We find that the baseline option of predicting ˜ µ works well only when trained on the true variational bound instead of unweighted mean squared error, a simplified objective akin to Eq. (14). We also see that learning reverse process variances (by incorporating a parameterized diagonal Σ θ ( x t ) into the variational bound) leads to unstable training and poorer sample quality compared to fixed variances. Predicting glyph[epsilon1] , as we proposed, performs approximately as well as predicting ˜ µ when trained on the variational bound with fixed variances, but much better when trained with our simplified objective.",
+      "metadata": {
+        "source": "arxiv:2006.11239v2",
+        "title": "Denoising Diffusion Probabilistic Models",
+        "authors": [
+          "Jonathan Ho",
+          "Ajay Jain",
+          "Pieter Abbeel"
+        ],
+        "section": "4.2 Reverse process parameterization and training objective ablation",
+        "chunkIndex": 40,
+        "totalChunks": 95
+      }
+    },
+    {
+      "id": "2006.11239v2-chunk-41",
+      "content": "Table 1 also shows the codelengths of our CIFAR10 models. The gap between train and test is at most 0.03 bits per dimension, which is comparable to the gaps reported with other likelihood-based models and indicates that our diffusion model is not overfitting (see Appendix D for nearest neighbor visualizations). Still, while our lossless codelengths are better than the large estimates reported for energy based models and score matching using annealed importance sampling [11], they are not competitive with other types of likelihood-based generative models [7].\n\nSince our samples are nonetheless of high quality, we conclude that diffusion models have an inductive bias that makes them excellent lossy compressors. Treating the variational bound terms L 1 + · · · + L T as rate and L 0 as distortion, our CIFAR10 model with the highest quality samples has a rate of 1.78 bits/dim and a distortion of 1.97 bits/dim, which amounts to a root mean squared error of 0.95 on a scale from 0 to 255.",
+      "metadata": {
+        "source": "arxiv:2006.11239v2",
+        "title": "Denoising Diffusion Probabilistic Models",
+        "authors": [
+          "Jonathan Ho",
+          "Ajay Jain",
+          "Pieter Abbeel"
+        ],
+        "section": "4.3 Progressive coding",
+        "chunkIndex": 41,
+        "totalChunks": 95
+      }
+    },
+    {
+      "id": "2006.11239v2-chunk-42",
+      "content": "stortion, our CIFAR10 model with the highest quality samples has a rate of 1.78 bits/dim and a distortion of 1.97 bits/dim, which amounts to a root mean squared error of 0.95 on a scale from 0 to 255. More than half of the lossless codelength describes imperceptible distortions.\n\nProgressive lossy compression We can probe further into the rate-distortion behavior of our model by introducing a progressive lossy code that mirrors the form of Eq. (5): see Algorithms 3 and 4, which assume access to a procedure, such as minimal random coding [19, 20], that can transmit a sample x ∼ q ( x ) using approximately D KL ( q ( x ) ‖ p ( x )) bits on average for any distributions p and q , for which only p is available to the receiver beforehand. When applied to x 0 ∼ q ( x 0 ) , Algorithms 3 and 4 transmit x T , . . . , x 0 in sequence using a total expected codelength equal to Eq. (5). The receiver,\n\nat any time t , has the partial information x t fully available and can progressively estimate:",
+      "metadata": {
+        "source": "arxiv:2006.11239v2",
+        "title": "Denoising Diffusion Probabilistic Models",
+        "authors": [
+          "Jonathan Ho",
+          "Ajay Jain",
+          "Pieter Abbeel"
+        ],
+        "section": "4.3 Progressive coding",
+        "chunkIndex": 42,
+        "totalChunks": 95
+      }
+    },
+    {
+      "id": "2006.11239v2-chunk-43",
+      "content": "ransmit x T , . . . , x 0 in sequence using a total expected codelength equal to Eq. (5). The receiver,\n\nat any time t , has the partial information x t fully available and can progressively estimate:\n\n<!-- formula-not-decoded -->\n\ndue to Eq. (4). (A stochastic reconstruction x 0 ∼ p θ ( x 0 | x t ) is also valid, but we do not consider it here because it makes distortion more difficult to evaluate.) Figure 5 shows the resulting ratedistortion plot on the CIFAR10 test set. At each time t , the distortion is calculated as the root mean squared error √ ‖ x 0 -ˆ x 0 ‖ 2 /D , and the rate is calculated as the cumulative number of bits received so far at time t . The distortion decreases steeply in the low-rate region of the rate-distortion plot, indicating that the majority of the bits are indeed allocated to imperceptible distortions.",
+      "metadata": {
+        "source": "arxiv:2006.11239v2",
+        "title": "Denoising Diffusion Probabilistic Models",
+        "authors": [
+          "Jonathan Ho",
+          "Ajay Jain",
+          "Pieter Abbeel"
+        ],
+        "section": "4.3 Progressive coding",
+        "chunkIndex": 43,
+        "totalChunks": 95
+      }
+    },
+    {
+      "id": "2006.11239v2-chunk-44",
+      "content": "ived so far at time t . The distortion decreases steeply in the low-rate region of the rate-distortion plot, indicating that the majority of the bits are indeed allocated to imperceptible distortions.\n\nFigure 5: Unconditional CIFAR10 test set rate-distortion vs. time. Distortion is measured in root mean squared error on a [0 , 255] scale. See Table 4 for details.\n\n<!-- image -->\n\nProgressive generation We also run a progressive unconditional generation process given by progressive decompression from random bits. In other words, we predict the result of the reverse process, ˆ x 0 , while sampling from the reverse process using Algorithm 2. Figures 6 and 10 show the resulting sample quality of ˆ x 0 over the course of the reverse process. Large scale image features appear first and details appear last. Figure 7 shows stochastic predictions x 0 ∼ p θ ( x 0 | x t ) with x t frozen for various t .",
+      "metadata": {
+        "source": "arxiv:2006.11239v2",
+        "title": "Denoising Diffusion Probabilistic Models",
+        "authors": [
+          "Jonathan Ho",
+          "Ajay Jain",
+          "Pieter Abbeel"
+        ],
+        "section": "4.3 Progressive coding",
+        "chunkIndex": 44,
+        "totalChunks": 95
+      }
+    },
+    {
+      "id": "2006.11239v2-chunk-45",
+      "content": "0 over the course of the reverse process. Large scale image features appear first and details appear last. Figure 7 shows stochastic predictions x 0 ∼ p θ ( x 0 | x t ) with x t frozen for various t . When t is small, all but fine details are preserved, and when t is large, only large scale features are preserved. Perhaps these are hints of conceptual compression [18].\n\nFigure 6: Unconditional CIFAR10 progressive generation ( ˆ x 0 over time, from left to right). Extended samples and sample quality metrics over time in the appendix (Figs. 10 and 14).\n\n<!-- image -->\n\nFigure 7: When conditioned on the same latent, CelebA-HQ 256 × 256 samples share high-level attributes. Bottom-right quadrants are x t , and other quadrants are samples from p θ ( x 0 | x t ) .\n\n<!-- image -->\n\nConnection to autoregressive decoding Note that the variational bound (5) can be rewritten as:\n\n<!-- formula-not-decoded -->",
+      "metadata": {
+        "source": "arxiv:2006.11239v2",
+        "title": "Denoising Diffusion Probabilistic Models",
+        "authors": [
+          "Jonathan Ho",
+          "Ajay Jain",
+          "Pieter Abbeel"
+        ],
+        "section": "4.3 Progressive coding",
+        "chunkIndex": 45,
+        "totalChunks": 95
+      }
+    },
+    {
+      "id": "2006.11239v2-chunk-46",
+      "content": ", and other quadrants are samples from p θ ( x 0 | x t ) .\n\n<!-- image -->\n\nConnection to autoregressive decoding Note that the variational bound (5) can be rewritten as:\n\n<!-- formula-not-decoded -->\n\n(See Appendix A for a derivation.) Now consider setting the diffusion process length T to the dimensionality of the data, defining the forward process so that q ( x t | x 0 ) places all probability mass on x 0 with the first t coordinates masked out (i.e. q ( x t | x t -1 ) masks out the t th coordinate), setting p ( x T ) to place all mass on a blank image, and, for the sake of argument, taking p θ ( x t -1 | x t ) to\n\nFigure 8: Interpolations of CelebA-HQ 256x256 images with 500 timesteps of diffusion.\n\n<!-- image -->\n\nbe a fully expressive conditional distribution. With these choices, D KL ( q ( x T ) ‖ p ( x T )) = 0 , and minimizing D KL ( q ( x t -1 | x t ) ‖ p θ ( x t -1 | x t )) trains p θ to copy coordinates t +1 , . . .",
+      "metadata": {
+        "source": "arxiv:2006.11239v2",
+        "title": "Denoising Diffusion Probabilistic Models",
+        "authors": [
+          "Jonathan Ho",
+          "Ajay Jain",
+          "Pieter Abbeel"
+        ],
+        "section": "4.3 Progressive coding",
+        "chunkIndex": 46,
+        "totalChunks": 95
+      }
+    },
+    {
+      "id": "2006.11239v2-chunk-47",
+      "content": "xpressive conditional distribution. With these choices, D KL ( q ( x T ) ‖ p ( x T )) = 0 , and minimizing D KL ( q ( x t -1 | x t ) ‖ p θ ( x t -1 | x t )) trains p θ to copy coordinates t +1 , . . . , T unchanged and to predict the t th coordinate given t +1 , . . . , T . Thus, training p θ with this particular diffusion is training an autoregressive model.\n\nWe can therefore interpret the Gaussian diffusion model (2) as a kind of autoregressive model with a generalized bit ordering that cannot be expressed by reordering data coordinates. Prior work has shown that such reorderings introduce inductive biases that have an impact on sample quality [38], so we speculate that the Gaussian diffusion serves a similar purpose, perhaps to greater effect since Gaussian noise might be more natural to add to images compared to masking noise.",
+      "metadata": {
+        "source": "arxiv:2006.11239v2",
+        "title": "Denoising Diffusion Probabilistic Models",
+        "authors": [
+          "Jonathan Ho",
+          "Ajay Jain",
+          "Pieter Abbeel"
+        ],
+        "section": "4.3 Progressive coding",
+        "chunkIndex": 47,
+        "totalChunks": 95
+      }
+    },
+    {
+      "id": "2006.11239v2-chunk-48",
+      "content": "ple quality [38], so we speculate that the Gaussian diffusion serves a similar purpose, perhaps to greater effect since Gaussian noise might be more natural to add to images compared to masking noise. Moreover, the Gaussian diffusion length is not restricted to equal the data dimension; for instance, we use T = 1000 , which is less than the dimension of the 32 × 32 × 3 or 256 × 256 × 3 images in our experiments. Gaussian diffusions can be made shorter for fast sampling or longer for model expressiveness.",
+      "metadata": {
+        "source": "arxiv:2006.11239v2",
+        "title": "Denoising Diffusion Probabilistic Models",
+        "authors": [
+          "Jonathan Ho",
+          "Ajay Jain",
+          "Pieter Abbeel"
+        ],
+        "section": "4.3 Progressive coding",
+        "chunkIndex": 48,
+        "totalChunks": 95
+      }
+    },
+    {
+      "id": "2006.11239v2-chunk-49",
+      "content": "We can interpolate source images x 0 , x ′ 0 ∼ q ( x 0 ) in latent space using q as a stochastic encoder, x t , x ′ t ∼ q ( x t | x 0 ) , then decoding the linearly interpolated latent ¯ x t = (1 -λ ) x 0 + λ x ′ 0 into image space by the reverse process, ¯ x 0 ∼ p ( x 0 | ¯ x t ) . In effect, we use the reverse process to remove artifacts from linearly interpolating corrupted versions of the source images, as depicted in Fig. 8 (left). We fixed the noise for different values of λ so x t and x ′ t remain the same. Fig. 8 (right) shows interpolations and reconstructions of original CelebA-HQ 256 × 256 images ( t = 500 ). The reverse process produces high-quality reconstructions, and plausible interpolations that smoothly vary attributes such as pose, skin tone, hairstyle, expression and background, but not eyewear. Larger t results in coarser and more varied interpolations, with novel samples at t = 1000 (Appendix Fig. 9).",
+      "metadata": {
+        "source": "arxiv:2006.11239v2",
+        "title": "Denoising Diffusion Probabilistic Models",
+        "authors": [
+          "Jonathan Ho",
+          "Ajay Jain",
+          "Pieter Abbeel"
+        ],
+        "section": "4.4 Interpolation",
+        "chunkIndex": 49,
+        "totalChunks": 95
+      }
+    },
+    {
+      "id": "2006.11239v2-chunk-50",
+      "content": "While diffusion models might resemble flows [9, 46, 10, 32, 5, 16, 23] and VAEs [33, 47, 37], diffusion models are designed so that q has no parameters and the top-level latent x T has nearly zero mutual information with the data x 0 . Our glyph[epsilon1] -prediction reverse process parameterization establishes a connection between diffusion models and denoising score matching over multiple noise levels with annealed Langevin dynamics for sampling [55, 56]. Diffusion models, however, admit straightforward log likelihood evaluation, and the training procedure explicitly trains the Langevin dynamics sampler using variational inference (see Appendix C for details). The connection also has the reverse implication that a certain weighted form of denoising score matching is the same as variational inference to train a Langevin-like sampler.",
+      "metadata": {
+        "source": "arxiv:2006.11239v2",
+        "title": "Denoising Diffusion Probabilistic Models",
+        "authors": [
+          "Jonathan Ho",
+          "Ajay Jain",
+          "Pieter Abbeel"
+        ],
+        "section": "5 Related Work",
+        "chunkIndex": 50,
+        "totalChunks": 95
+      }
+    },
+    {
+      "id": "2006.11239v2-chunk-51",
+      "content": "Appendix C for details). The connection also has the reverse implication that a certain weighted form of denoising score matching is the same as variational inference to train a Langevin-like sampler. Other methods for learning transition operators of Markov chains include infusion training [2], variational walkback [15], generative stochastic networks [1], and others [50, 54, 36, 42, 35, 65].\n\nBy the known connection between score matching and energy-based modeling, our work could have implications for other recent work on energy-based models [67-69, 12, 70, 13, 11, 41, 17, 8]. Our rate-distortion curves are computed over time in one evaluation of the variational bound, reminiscent of how rate-distortion curves can be computed over distortion penalties in one run of annealed importance sampling [24].",
+      "metadata": {
+        "source": "arxiv:2006.11239v2",
+        "title": "Denoising Diffusion Probabilistic Models",
+        "authors": [
+          "Jonathan Ho",
+          "Ajay Jain",
+          "Pieter Abbeel"
+        ],
+        "section": "5 Related Work",
+        "chunkIndex": 51,
+        "totalChunks": 95
+      }
+    },
+    {
+      "id": "2006.11239v2-chunk-52",
+      "content": "are computed over time in one evaluation of the variational bound, reminiscent of how rate-distortion curves can be computed over distortion penalties in one run of annealed importance sampling [24]. Our progressive decoding argument can be seen in convolutional DRAW and related models [18, 40] and may also lead to more general designs for subscale orderings or sampling strategies for autoregressive models [38, 64].",
+      "metadata": {
+        "source": "arxiv:2006.11239v2",
+        "title": "Denoising Diffusion Probabilistic Models",
+        "authors": [
+          "Jonathan Ho",
+          "Ajay Jain",
+          "Pieter Abbeel"
+        ],
+        "section": "5 Related Work",
+        "chunkIndex": 52,
+        "totalChunks": 95
+      }
+    },
+    {
+      "id": "2006.11239v2-chunk-53",
+      "content": "Wehave presented high quality image samples using diffusion models, and we have found connections among diffusion models and variational inference for training Markov chains, denoising score matching and annealed Langevin dynamics (and energy-based models by extension), autoregressive models, and progressive lossy compression. Since diffusion models seem to have excellent inductive biases for image data, we look forward to investigating their utility in other data modalities and as components in other types of generative models and machine learning systems.",
+      "metadata": {
+        "source": "arxiv:2006.11239v2",
+        "title": "Denoising Diffusion Probabilistic Models",
+        "authors": [
+          "Jonathan Ho",
+          "Ajay Jain",
+          "Pieter Abbeel"
+        ],
+        "section": "6 Conclusion",
+        "chunkIndex": 53,
+        "totalChunks": 95
+      }
+    },
+    {
+      "id": "2006.11239v2-chunk-54",
+      "content": "Our work on diffusion models takes on a similar scope as existing work on other types of deep generative models, such as efforts to improve the sample quality of GANs, flows, autoregressive models, and so forth. Our paper represents progress in making diffusion models a generally useful tool in this family of techniques, so it may serve to amplify any impacts that generative models have had (and will have) on the broader world.\n\nUnfortunately, there are numerous well-known malicious uses of generative models. Sample generation techniques can be employed to produce fake images and videos of high profile figures for political purposes. While fake images were manually created long before software tools were available, generative models such as ours make the process easier. Fortunately, CNN-generated images currently have subtle flaws that allow detection [62], but improvements in generative models may make this more difficult.",
+      "metadata": {
+        "source": "arxiv:2006.11239v2",
+        "title": "Denoising Diffusion Probabilistic Models",
+        "authors": [
+          "Jonathan Ho",
+          "Ajay Jain",
+          "Pieter Abbeel"
+        ],
+        "section": "Broader Impact",
+        "chunkIndex": 54,
+        "totalChunks": 95
+      }
+    },
+    {
+      "id": "2006.11239v2-chunk-55",
+      "content": "odels such as ours make the process easier. Fortunately, CNN-generated images currently have subtle flaws that allow detection [62], but improvements in generative models may make this more difficult. Generative models also reflect the biases in the datasets on which they are trained. As many large datasets are collected from the internet by automated systems, it can be difficult to remove these biases, especially when the images are unlabeled. If samples from generative models trained on these datasets proliferate throughout the internet, then these biases will only be reinforced further.\n\nOn the other hand, diffusion models may be useful for data compression, which, as data becomes higher resolution and as global internet traffic increases, might be crucial to ensure accessibility of the internet to wide audiences.",
+      "metadata": {
+        "source": "arxiv:2006.11239v2",
+        "title": "Denoising Diffusion Probabilistic Models",
+        "authors": [
+          "Jonathan Ho",
+          "Ajay Jain",
+          "Pieter Abbeel"
+        ],
+        "section": "Broader Impact",
+        "chunkIndex": 55,
+        "totalChunks": 95
+      }
+    },
+    {
+      "id": "2006.11239v2-chunk-56",
+      "content": "odels may be useful for data compression, which, as data becomes higher resolution and as global internet traffic increases, might be crucial to ensure accessibility of the internet to wide audiences. Our work might contribute to representation learning on unlabeled raw data for a large range of downstream tasks, from image classification to reinforcement learning, and diffusion models might also become viable for creative uses in art, photography, and music.",
+      "metadata": {
+        "source": "arxiv:2006.11239v2",
+        "title": "Denoising Diffusion Probabilistic Models",
+        "authors": [
+          "Jonathan Ho",
+          "Ajay Jain",
+          "Pieter Abbeel"
+        ],
+        "section": "Broader Impact",
+        "chunkIndex": 56,
+        "totalChunks": 95
+      }
+    },
+    {
+      "id": "2006.11239v2-chunk-57",
+      "content": "This work was supported by ONR PECASE and the NSF Graduate Research Fellowship under grant number DGE-1752814. Google's TensorFlow Research Cloud (TFRC) provided Cloud TPUs.",
+      "metadata": {
+        "source": "arxiv:2006.11239v2",
+        "title": "Denoising Diffusion Probabilistic Models",
+        "authors": [
+          "Jonathan Ho",
+          "Ajay Jain",
+          "Pieter Abbeel"
+        ],
+        "section": "Acknowledgments and Disclosure of Funding",
+        "chunkIndex": 57,
+        "totalChunks": 95
+      }
+    },
+    {
+      "id": "2006.11239v2-chunk-58",
+      "content": "- [1] Guillaume Alain, Yoshua Bengio, Li Yao, Jason Yosinski, Eric Thibodeau-Laufer, Saizheng Zhang, and Pascal Vincent. GSNs: generative stochastic networks. Information and Inference: A Journal of the IMA , 5(2):210-249, 2016.\n- [2] Florian Bordes, Sina Honari, and Pascal Vincent. Learning to generate samples from noise through infusion training. In International Conference on Learning Representations , 2017.\n- [3] Andrew Brock, Jeff Donahue, and Karen Simonyan. Large scale GAN training for high fidelity natural image synthesis. In International Conference on Learning Representations , 2019.\n- [4] Tong Che, Ruixiang Zhang, Jascha Sohl-Dickstein, Hugo Larochelle, Liam Paull, Yuan Cao, and Yoshua Bengio. Your GAN is secretly an energy-based model and you should use discriminator driven latent sampling. arXiv preprint arXiv:2003.06060 , 2020.\n- [5] Tian Qi Chen, Yulia Rubanova, Jesse Bettencourt, and David K Duvenaud. Neural ordinary differential equations.",
+      "metadata": {
+        "source": "arxiv:2006.11239v2",
+        "title": "Denoising Diffusion Probabilistic Models",
+        "authors": [
+          "Jonathan Ho",
+          "Ajay Jain",
+          "Pieter Abbeel"
+        ],
+        "section": "References",
+        "chunkIndex": 58,
+        "totalChunks": 95
+      }
+    },
+    {
+      "id": "2006.11239v2-chunk-59",
+      "content": "d use discriminator driven latent sampling. arXiv preprint arXiv:2003.06060 , 2020.\n- [5] Tian Qi Chen, Yulia Rubanova, Jesse Bettencourt, and David K Duvenaud. Neural ordinary differential equations. In Advances in Neural Information Processing Systems , pages 6571-6583, 2018.\n- [6] Xi Chen, Nikhil Mishra, Mostafa Rohaninejad, and Pieter Abbeel. PixelSNAIL: An improved autoregressive generative model. In International Conference on Machine Learning , pages 863-871, 2018.\n- [7] Rewon Child, Scott Gray, Alec Radford, and Ilya Sutskever. Generating long sequences with sparse transformers. arXiv preprint arXiv:1904.10509 , 2019.\n\n- [8] Yuntian Deng, Anton Bakhtin, Myle Ott, Arthur Szlam, and Marc'Aurelio Ranzato. Residual energy-based models for text generation. arXiv preprint arXiv:2004.11714 , 2020.\n- [9] Laurent Dinh, David Krueger, and Yoshua Bengio. NICE: Non-linear independent components estimation.",
+      "metadata": {
+        "source": "arxiv:2006.11239v2",
+        "title": "Denoising Diffusion Probabilistic Models",
+        "authors": [
+          "Jonathan Ho",
+          "Ajay Jain",
+          "Pieter Abbeel"
+        ],
+        "section": "References",
+        "chunkIndex": 59,
+        "totalChunks": 95
+      }
+    },
+    {
+      "id": "2006.11239v2-chunk-60",
+      "content": "ato. Residual energy-based models for text generation. arXiv preprint arXiv:2004.11714 , 2020.\n- [9] Laurent Dinh, David Krueger, and Yoshua Bengio. NICE: Non-linear independent components estimation. arXiv preprint arXiv:1410.8516 , 2014.\n- [10] Laurent Dinh, Jascha Sohl-Dickstein, and Samy Bengio. Density estimation using Real NVP. arXiv preprint arXiv:1605.08803 , 2016.\n- [11] Yilun Du and Igor Mordatch. Implicit generation and modeling with energy based models. In Advances in Neural Information Processing Systems , pages 3603-3613, 2019.\n- [12] Ruiqi Gao, Yang Lu, Junpei Zhou, Song-Chun Zhu, and Ying Nian Wu. Learning generative ConvNets via multi-grid modeling and sampling. In Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition , pages 9155-9164, 2018.\n- [13] Ruiqi Gao, Erik Nijkamp, Diederik P Kingma, Zhen Xu, Andrew M Dai, and Ying Nian Wu. Flow contrastive estimation of energy-based models.",
+      "metadata": {
+        "source": "arxiv:2006.11239v2",
+        "title": "Denoising Diffusion Probabilistic Models",
+        "authors": [
+          "Jonathan Ho",
+          "Ajay Jain",
+          "Pieter Abbeel"
+        ],
+        "section": "References",
+        "chunkIndex": 60,
+        "totalChunks": 95
+      }
+    },
+    {
+      "id": "2006.11239v2-chunk-61",
+      "content": "Vision and Pattern Recognition , pages 9155-9164, 2018.\n- [13] Ruiqi Gao, Erik Nijkamp, Diederik P Kingma, Zhen Xu, Andrew M Dai, and Ying Nian Wu. Flow contrastive estimation of energy-based models. In Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition , pages 7518-7528, 2020.\n- [14] Ian Goodfellow, Jean Pouget-Abadie, Mehdi Mirza, Bing Xu, David Warde-Farley, Sherjil Ozair, Aaron Courville, and Yoshua Bengio. Generative adversarial nets. In Advances in Neural Information Processing Systems , pages 2672-2680, 2014.\n- [15] Anirudh Goyal, Nan Rosemary Ke, Surya Ganguli, and Yoshua Bengio. Variational walkback: Learning a transition operator as a stochastic recurrent net. In Advances in Neural Information Processing Systems , pages 4392-4402, 2017.\n- [16] Will Grathwohl, Ricky T. Q. Chen, Jesse Bettencourt, and David Duvenaud. FFJORD: Free-form continuous dynamics for scalable reversible generative models.",
+      "metadata": {
+        "source": "arxiv:2006.11239v2",
+        "title": "Denoising Diffusion Probabilistic Models",
+        "authors": [
+          "Jonathan Ho",
+          "Ajay Jain",
+          "Pieter Abbeel"
+        ],
+        "section": "References",
+        "chunkIndex": 61,
+        "totalChunks": 95
+      }
+    },
+    {
+      "id": "2006.11239v2-chunk-62",
+      "content": "essing Systems , pages 4392-4402, 2017.\n- [16] Will Grathwohl, Ricky T. Q. Chen, Jesse Bettencourt, and David Duvenaud. FFJORD: Free-form continuous dynamics for scalable reversible generative models. In International Conference on Learning Representations , 2019.\n- [17] Will Grathwohl, Kuan-Chieh Wang, Joern-Henrik Jacobsen, David Duvenaud, Mohammad Norouzi, and Kevin Swersky. Your classifier is secretly an energy based model and you should treat it like one. In International Conference on Learning Representations , 2020.\n- [18] Karol Gregor, Frederic Besse, Danilo Jimenez Rezende, Ivo Danihelka, and Daan Wierstra. Towards conceptual compression. In Advances In Neural Information Processing Systems , pages 3549-3557, 2016.\n- [19] Prahladh Harsha, Rahul Jain, David McAllester, and Jaikumar Radhakrishnan. The communication complexity of correlation. In Twenty-Second Annual IEEE Conference on Computational Complexity (CCC'07) , pages 10-23.",
+      "metadata": {
+        "source": "arxiv:2006.11239v2",
+        "title": "Denoising Diffusion Probabilistic Models",
+        "authors": [
+          "Jonathan Ho",
+          "Ajay Jain",
+          "Pieter Abbeel"
+        ],
+        "section": "References",
+        "chunkIndex": 62,
+        "totalChunks": 95
+      }
+    },
+    {
+      "id": "2006.11239v2-chunk-63",
+      "content": "rsha, Rahul Jain, David McAllester, and Jaikumar Radhakrishnan. The communication complexity of correlation. In Twenty-Second Annual IEEE Conference on Computational Complexity (CCC'07) , pages 10-23. IEEE, 2007.\n- [20] Marton Havasi, Robert Peharz, and José Miguel Hernández-Lobato. Minimal random code learning: Getting bits back from compressed model parameters. In International Conference on Learning Representations , 2019.\n- [21] Martin Heusel, Hubert Ramsauer, Thomas Unterthiner, Bernhard Nessler, and Sepp Hochreiter. GANs trained by a two time-scale update rule converge to a local Nash equilibrium. In Advances in Neural Information Processing Systems , pages 6626-6637, 2017.\n- [22] Irina Higgins, Loic Matthey, Arka Pal, Christopher Burgess, Xavier Glorot, Matthew Botvinick, Shakir Mohamed, and Alexander Lerchner. beta-VAE: Learning basic visual concepts with a constrained variational framework.",
+      "metadata": {
+        "source": "arxiv:2006.11239v2",
+        "title": "Denoising Diffusion Probabilistic Models",
+        "authors": [
+          "Jonathan Ho",
+          "Ajay Jain",
+          "Pieter Abbeel"
+        ],
+        "section": "References",
+        "chunkIndex": 63,
+        "totalChunks": 95
+      }
+    },
+    {
+      "id": "2006.11239v2-chunk-64",
+      "content": "oic Matthey, Arka Pal, Christopher Burgess, Xavier Glorot, Matthew Botvinick, Shakir Mohamed, and Alexander Lerchner. beta-VAE: Learning basic visual concepts with a constrained variational framework. In International Conference on Learning Representations , 2017.\n- [23] Jonathan Ho, Xi Chen, Aravind Srinivas, Yan Duan, and Pieter Abbeel. Flow++: Improving flow-based generative models with variational dequantization and architecture design. In International Conference on Machine Learning , 2019.\n- [24] Sicong Huang, Alireza Makhzani, Yanshuai Cao, and Roger Grosse. Evaluating lossy compression rates of deep generative models. In International Conference on Machine Learning , 2020.\n- [25] Nal Kalchbrenner, Aaron van den Oord, Karen Simonyan, Ivo Danihelka, Oriol Vinyals, Alex Graves, and Koray Kavukcuoglu. Video pixel networks.",
+      "metadata": {
+        "source": "arxiv:2006.11239v2",
+        "title": "Denoising Diffusion Probabilistic Models",
+        "authors": [
+          "Jonathan Ho",
+          "Ajay Jain",
+          "Pieter Abbeel"
+        ],
+        "section": "References",
+        "chunkIndex": 64,
+        "totalChunks": 95
+      }
+    },
+    {
+      "id": "2006.11239v2-chunk-65",
+      "content": "nternational Conference on Machine Learning , 2020.\n- [25] Nal Kalchbrenner, Aaron van den Oord, Karen Simonyan, Ivo Danihelka, Oriol Vinyals, Alex Graves, and Koray Kavukcuoglu. Video pixel networks. In International Conference on Machine Learning , pages 1771-1779, 2017.\n- [26] Nal Kalchbrenner, Erich Elsen, Karen Simonyan, Seb Noury, Norman Casagrande, Edward Lockhart, Florian Stimberg, Aaron van den Oord, Sander Dieleman, and Koray Kavukcuoglu. Efficient neural audio synthesis. In International Conference on Machine Learning , pages 2410-2419, 2018.\n- [27] Tero Karras, Timo Aila, Samuli Laine, and Jaakko Lehtinen. Progressive growing of GANs for improved quality, stability, and variation. In International Conference on Learning Representations , 2018.\n- [28] Tero Karras, Samuli Laine, and Timo Aila. A style-based generator architecture for generative adversarial networks. In Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition , pages\n\n4401-4410, 2019.",
+      "metadata": {
+        "source": "arxiv:2006.11239v2",
+        "title": "Denoising Diffusion Probabilistic Models",
+        "authors": [
+          "Jonathan Ho",
+          "Ajay Jain",
+          "Pieter Abbeel"
+        ],
+        "section": "References",
+        "chunkIndex": 65,
+        "totalChunks": 95
+      }
+    },
+    {
+      "id": "2006.11239v2-chunk-66",
+      "content": "ine, and Timo Aila. A style-based generator architecture for generative adversarial networks. In Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition , pages\n\n4401-4410, 2019.\n\n- [29] Tero Karras, Miika Aittala, Janne Hellsten, Samuli Laine, Jaakko Lehtinen, and Timo Aila. Training generative adversarial networks with limited data. arXiv preprint arXiv:2006.06676v1 , 2020.\n- [30] Tero Karras, Samuli Laine, Miika Aittala, Janne Hellsten, Jaakko Lehtinen, and Timo Aila. Analyzing and improving the image quality of StyleGAN. In Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition , pages 8110-8119, 2020.\n- [31] Diederik P Kingma and Jimmy Ba. Adam: A method for stochastic optimization. In International Conference on Learning Representations , 2015.\n- [32] Diederik P Kingma and Prafulla Dhariwal. Glow: Generative flow with invertible 1x1 convolutions.",
+      "metadata": {
+        "source": "arxiv:2006.11239v2",
+        "title": "Denoising Diffusion Probabilistic Models",
+        "authors": [
+          "Jonathan Ho",
+          "Ajay Jain",
+          "Pieter Abbeel"
+        ],
+        "section": "References",
+        "chunkIndex": 66,
+        "totalChunks": 95
+      }
+    },
+    {
+      "id": "2006.11239v2-chunk-67",
+      "content": "hod for stochastic optimization. In International Conference on Learning Representations , 2015.\n- [32] Diederik P Kingma and Prafulla Dhariwal. Glow: Generative flow with invertible 1x1 convolutions. In Advances in Neural Information Processing Systems , pages 10215-10224, 2018.\n- [33] Diederik P Kingma and Max Welling. Auto-encoding variational Bayes. arXiv preprint arXiv:1312.6114 , 2013.\n- [34] Diederik P Kingma, Tim Salimans, Rafal Jozefowicz, Xi Chen, Ilya Sutskever, and Max Welling. Improved variational inference with inverse autoregressive flow. In Advances in Neural Information Processing Systems , pages 4743-4751, 2016.\n- [35] John Lawson, George Tucker, Bo Dai, and Rajesh Ranganath. Energy-inspired models: Learning with sampler-induced distributions. In Advances in Neural Information Processing Systems , pages 8501-8513, 2019.\n- [36] Daniel Levy, Matt D. Hoffman, and Jascha Sohl-Dickstein. Generalizing Hamiltonian Monte Carlo with neural networks.",
+      "metadata": {
+        "source": "arxiv:2006.11239v2",
+        "title": "Denoising Diffusion Probabilistic Models",
+        "authors": [
+          "Jonathan Ho",
+          "Ajay Jain",
+          "Pieter Abbeel"
+        ],
+        "section": "References",
+        "chunkIndex": 67,
+        "totalChunks": 95
+      }
+    },
+    {
+      "id": "2006.11239v2-chunk-68",
+      "content": "In Advances in Neural Information Processing Systems , pages 8501-8513, 2019.\n- [36] Daniel Levy, Matt D. Hoffman, and Jascha Sohl-Dickstein. Generalizing Hamiltonian Monte Carlo with neural networks. In International Conference on Learning Representations , 2018.\n- [37] Lars Maaløe, Marco Fraccaro, Valentin Liévin, and Ole Winther. BIVA: A very deep hierarchy of latent variables for generative modeling. In Advances in Neural Information Processing Systems , pages 6548-6558, 2019.\n- [38] Jacob Menick and Nal Kalchbrenner. Generating high fidelity images with subscale pixel networks and multidimensional upscaling. In International Conference on Learning Representations , 2019.\n- [39] Takeru Miyato, Toshiki Kataoka, Masanori Koyama, and Yuichi Yoshida. Spectral normalization for generative adversarial networks. In International Conference on Learning Representations , 2018.\n- [40] Alex Nichol. VQ-DRAW: A sequential discrete VAE.",
+      "metadata": {
+        "source": "arxiv:2006.11239v2",
+        "title": "Denoising Diffusion Probabilistic Models",
+        "authors": [
+          "Jonathan Ho",
+          "Ajay Jain",
+          "Pieter Abbeel"
+        ],
+        "section": "References",
+        "chunkIndex": 68,
+        "totalChunks": 95
+      }
+    },
+    {
+      "id": "2006.11239v2-chunk-69",
+      "content": "and Yuichi Yoshida. Spectral normalization for generative adversarial networks. In International Conference on Learning Representations , 2018.\n- [40] Alex Nichol. VQ-DRAW: A sequential discrete VAE. arXiv preprint arXiv:2003.01599 , 2020.\n- [41] Erik Nijkamp, Mitch Hill, Tian Han, Song-Chun Zhu, and Ying Nian Wu. On the anatomy of MCMC-based maximum likelihood learning of energy-based models. arXiv preprint arXiv:1903.12370 , 2019.\n- [42] Erik Nijkamp, Mitch Hill, Song-Chun Zhu, and Ying Nian Wu. Learning non-convergent non-persistent short-run MCMC toward energy-based model. In Advances in Neural Information Processing Systems , pages 5233-5243, 2019.\n- [43] Georg Ostrovski, Will Dabney, and Remi Munos. Autoregressive quantile networks for generative modeling. In International Conference on Machine Learning , pages 3936-3945, 2018.\n- [44] Ryan Prenger, Rafael Valle, and Bryan Catanzaro. WaveGlow: A flow-based generative network for speech synthesis.",
+      "metadata": {
+        "source": "arxiv:2006.11239v2",
+        "title": "Denoising Diffusion Probabilistic Models",
+        "authors": [
+          "Jonathan Ho",
+          "Ajay Jain",
+          "Pieter Abbeel"
+        ],
+        "section": "References",
+        "chunkIndex": 69,
+        "totalChunks": 95
+      }
+    },
+    {
+      "id": "2006.11239v2-chunk-70",
+      "content": "deling. In International Conference on Machine Learning , pages 3936-3945, 2018.\n- [44] Ryan Prenger, Rafael Valle, and Bryan Catanzaro. WaveGlow: A flow-based generative network for speech synthesis. In ICASSP 2019-2019 IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP) , pages 3617-3621. IEEE, 2019.\n- [45] Ali Razavi, Aaron van den Oord, and Oriol Vinyals. Generating diverse high-fidelity images with VQVAE-2. In Advances in Neural Information Processing Systems , pages 14837-14847, 2019.\n- [46] Danilo Rezende and Shakir Mohamed. Variational inference with normalizing flows. In International Conference on Machine Learning , pages 1530-1538, 2015.\n- [47] Danilo Jimenez Rezende, Shakir Mohamed, and Daan Wierstra. Stochastic backpropagation and approximate inference in deep generative models. In International Conference on Machine Learning , pages 1278-1286, 2014.\n- [48] Olaf Ronneberger, Philipp Fischer, and Thomas Brox.",
+      "metadata": {
+        "source": "arxiv:2006.11239v2",
+        "title": "Denoising Diffusion Probabilistic Models",
+        "authors": [
+          "Jonathan Ho",
+          "Ajay Jain",
+          "Pieter Abbeel"
+        ],
+        "section": "References",
+        "chunkIndex": 70,
+        "totalChunks": 95
+      }
+    },
+    {
+      "id": "2006.11239v2-chunk-71",
+      "content": "backpropagation and approximate inference in deep generative models. In International Conference on Machine Learning , pages 1278-1286, 2014.\n- [48] Olaf Ronneberger, Philipp Fischer, and Thomas Brox. U-Net: Convolutional networks for biomedical image segmentation. In International Conference on Medical Image Computing and Computer-Assisted Intervention , pages 234-241. Springer, 2015.\n- [49] Tim Salimans and Durk P Kingma. Weight normalization: A simple reparameterization to accelerate training of deep neural networks. In Advances in Neural Information Processing Systems , pages 901-909, 2016.\n- [50] Tim Salimans, Diederik Kingma, and Max Welling. Markov Chain Monte Carlo and variational inference: Bridging the gap. In International Conference on Machine Learning , pages 1218-1226, 2015.\n\n- [51] Tim Salimans, Ian Goodfellow, Wojciech Zaremba, Vicki Cheung, Alec Radford, and Xi Chen. Improved techniques for training gans.",
+      "metadata": {
+        "source": "arxiv:2006.11239v2",
+        "title": "Denoising Diffusion Probabilistic Models",
+        "authors": [
+          "Jonathan Ho",
+          "Ajay Jain",
+          "Pieter Abbeel"
+        ],
+        "section": "References",
+        "chunkIndex": 71,
+        "totalChunks": 95
+      }
+    },
+    {
+      "id": "2006.11239v2-chunk-72",
+      "content": "national Conference on Machine Learning , pages 1218-1226, 2015.\n\n- [51] Tim Salimans, Ian Goodfellow, Wojciech Zaremba, Vicki Cheung, Alec Radford, and Xi Chen. Improved techniques for training gans. In Advances in Neural Information Processing Systems , pages 2234-2242, 2016.\n- [52] Tim Salimans, Andrej Karpathy, Xi Chen, and Diederik P Kingma. PixelCNN++: Improving the PixelCNN with discretized logistic mixture likelihood and other modifications. In International Conference on Learning Representations , 2017.\n- [53] Jascha Sohl-Dickstein, Eric Weiss, Niru Maheswaranathan, and Surya Ganguli. Deep unsupervised learning using nonequilibrium thermodynamics. In International Conference on Machine Learning , pages 2256-2265, 2015.\n- [54] Jiaming Song, Shengjia Zhao, and Stefano Ermon. A-NICE-MC: Adversarial training for MCMC. In Advances in Neural Information Processing Systems , pages 5140-5150, 2017.\n- [55] Yang Song and Stefano Ermon.",
+      "metadata": {
+        "source": "arxiv:2006.11239v2",
+        "title": "Denoising Diffusion Probabilistic Models",
+        "authors": [
+          "Jonathan Ho",
+          "Ajay Jain",
+          "Pieter Abbeel"
+        ],
+        "section": "References",
+        "chunkIndex": 72,
+        "totalChunks": 95
+      }
+    },
+    {
+      "id": "2006.11239v2-chunk-73",
+      "content": "ming Song, Shengjia Zhao, and Stefano Ermon. A-NICE-MC: Adversarial training for MCMC. In Advances in Neural Information Processing Systems , pages 5140-5150, 2017.\n- [55] Yang Song and Stefano Ermon. Generative modeling by estimating gradients of the data distribution. In Advances in Neural Information Processing Systems , pages 11895-11907, 2019.\n- [56] Yang Song and Stefano Ermon. Improved techniques for training score-based generative models. arXiv preprint arXiv:2006.09011 , 2020.\n- [57] Aaron van den Oord, Sander Dieleman, Heiga Zen, Karen Simonyan, Oriol Vinyals, Alex Graves, Nal Kalchbrenner, Andrew Senior, and Koray Kavukcuoglu. WaveNet: A generative model for raw audio. arXiv preprint arXiv:1609.03499 , 2016.\n- [58] Aaron van den Oord, Nal Kalchbrenner, and Koray Kavukcuoglu. Pixel recurrent neural networks. International Conference on Machine Learning , 2016.\n- [59] Aaron van den Oord, Nal Kalchbrenner, Oriol Vinyals, Lasse Espeholt, Alex Graves, and Koray Kavukcuoglu.",
+      "metadata": {
+        "source": "arxiv:2006.11239v2",
+        "title": "Denoising Diffusion Probabilistic Models",
+        "authors": [
+          "Jonathan Ho",
+          "Ajay Jain",
+          "Pieter Abbeel"
+        ],
+        "section": "References",
+        "chunkIndex": 73,
+        "totalChunks": 95
+      }
+    },
+    {
+      "id": "2006.11239v2-chunk-74",
+      "content": "u. Pixel recurrent neural networks. International Conference on Machine Learning , 2016.\n- [59] Aaron van den Oord, Nal Kalchbrenner, Oriol Vinyals, Lasse Espeholt, Alex Graves, and Koray Kavukcuoglu. Conditional image generation with PixelCNN decoders. In Advances in Neural Information Processing Systems , pages 4790-4798, 2016.\n- [60] Ashish Vaswani, Noam Shazeer, Niki Parmar, Jakob Uszkoreit, Llion Jones, Aidan N Gomez, Łukasz Kaiser, and Illia Polosukhin. Attention is all you need. In Advances in Neural Information Processing Systems , pages 5998-6008, 2017.\n- [61] Pascal Vincent. A connection between score matching and denoising autoencoders. Neural Computation , 23(7):1661-1674, 2011.\n- [62] Sheng-Yu Wang, Oliver Wang, Richard Zhang, Andrew Owens, and Alexei A Efros. Cnn-generated images are surprisingly easy to spot...for now.",
+      "metadata": {
+        "source": "arxiv:2006.11239v2",
+        "title": "Denoising Diffusion Probabilistic Models",
+        "authors": [
+          "Jonathan Ho",
+          "Ajay Jain",
+          "Pieter Abbeel"
+        ],
+        "section": "References",
+        "chunkIndex": 74,
+        "totalChunks": 95
+      }
+    },
+    {
+      "id": "2006.11239v2-chunk-75",
+      "content": "oencoders. Neural Computation , 23(7):1661-1674, 2011.\n- [62] Sheng-Yu Wang, Oliver Wang, Richard Zhang, Andrew Owens, and Alexei A Efros. Cnn-generated images are surprisingly easy to spot...for now. In Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition , 2020.\n- [63] Xiaolong Wang, Ross Girshick, Abhinav Gupta, and Kaiming He. Non-local neural networks. In Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition , pages 7794-7803, 2018.\n- [64] Auke J Wiggers and Emiel Hoogeboom. Predictive sampling with forecasting autoregressive models. arXiv preprint arXiv:2002.09928 , 2020.\n- [65] Hao Wu, Jonas Köhler, and Frank Noé. Stochastic normalizing flows. arXiv preprint arXiv:2002.06707 , 2020.\n- [66] Yuxin Wu and Kaiming He. Group normalization. In Proceedings of the European Conference on Computer Vision (ECCV) , pages 3-19, 2018.\n- [67] Jianwen Xie, Yang Lu, Song-Chun Zhu, and Yingnian Wu. A theory of generative convnet.",
+      "metadata": {
+        "source": "arxiv:2006.11239v2",
+        "title": "Denoising Diffusion Probabilistic Models",
+        "authors": [
+          "Jonathan Ho",
+          "Ajay Jain",
+          "Pieter Abbeel"
+        ],
+        "section": "References",
+        "chunkIndex": 75,
+        "totalChunks": 95
+      }
+    },
+    {
+      "id": "2006.11239v2-chunk-76",
+      "content": "roup normalization. In Proceedings of the European Conference on Computer Vision (ECCV) , pages 3-19, 2018.\n- [67] Jianwen Xie, Yang Lu, Song-Chun Zhu, and Yingnian Wu. A theory of generative convnet. In International Conference on Machine Learning , pages 2635-2644, 2016.\n- [68] Jianwen Xie, Song-Chun Zhu, and Ying Nian Wu. Synthesizing dynamic patterns by spatial-temporal generative convnet. In Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition , pages 7093-7101, 2017.\n- [69] Jianwen Xie, Zilong Zheng, Ruiqi Gao, Wenguan Wang, Song-Chun Zhu, and Ying Nian Wu. Learning descriptor networks for 3d shape synthesis and analysis. In Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition , pages 8629-8638, 2018.\n- [70] Jianwen Xie, Song-Chun Zhu, and Ying Nian Wu. Learning energy-based spatial-temporal generative convnets for dynamic patterns.",
+      "metadata": {
+        "source": "arxiv:2006.11239v2",
+        "title": "Denoising Diffusion Probabilistic Models",
+        "authors": [
+          "Jonathan Ho",
+          "Ajay Jain",
+          "Pieter Abbeel"
+        ],
+        "section": "References",
+        "chunkIndex": 76,
+        "totalChunks": 95
+      }
+    },
+    {
+      "id": "2006.11239v2-chunk-77",
+      "content": "n Computer Vision and Pattern Recognition , pages 8629-8638, 2018.\n- [70] Jianwen Xie, Song-Chun Zhu, and Ying Nian Wu. Learning energy-based spatial-temporal generative convnets for dynamic patterns. IEEE Transactions on Pattern Analysis and Machine Intelligence , 2019.\n- [71] Fisher Yu, Yinda Zhang, Shuran Song, Ari Seff, and Jianxiong Xiao. LSUN: Construction of a large-scale image dataset using deep learning with humans in the loop. arXiv preprint arXiv:1506.03365 , 2015.\n- [72] Sergey Zagoruyko and Nikos Komodakis. Wide residual networks. arXiv preprint arXiv:1605.07146 , 2016.",
+      "metadata": {
+        "source": "arxiv:2006.11239v2",
+        "title": "Denoising Diffusion Probabilistic Models",
+        "authors": [
+          "Jonathan Ho",
+          "Ajay Jain",
+          "Pieter Abbeel"
+        ],
+        "section": "References",
+        "chunkIndex": 77,
+        "totalChunks": 95
+      }
+    },
+    {
+      "id": "2006.11239v2-chunk-78",
+      "content": "LSUN FID scores for LSUN datasets are included in Table 3. Scores marked with ∗ are reported by StyleGAN2 as baselines, and other scores are reported by their respective authors.\n\nTable 3: FID scores for LSUN 256 × 256 datasets\n\n| Model                    | LSUN Bedroom   | LSUN Church   | LSUN Cat   |\n|--------------------------|----------------|---------------|------------|\n| ProgressiveGAN [27]      | 8.34           | 6.42          | 37.52      |\n| StyleGAN [28]            | 2.65           | 4.21 ∗        | 8.53 ∗     |\n| StyleGAN2 [30]           | -              | 3.86          | 6.93       |\n| Ours ( L simple )        | 6.36           | 7.89          | 19.75      |\n| Ours ( L simple , large) | 4.90           | -             | -          |\n\nProgressive compression Our lossy compression argument in Section 4.3 is only a proof of concept, because Algorithms 3 and 4 depend on a procedure such as minimal random coding [20], which is not tractable for high dimensional data.",
+      "metadata": {
+        "source": "arxiv:2006.11239v2",
+        "title": "Denoising Diffusion Probabilistic Models",
+        "authors": [
+          "Jonathan Ho",
+          "Ajay Jain",
+          "Pieter Abbeel"
+        ],
+        "section": "Extra information",
+        "chunkIndex": 78,
+        "totalChunks": 95
+      }
+    },
+    {
+      "id": "2006.11239v2-chunk-79",
+      "content": "y compression argument in Section 4.3 is only a proof of concept, because Algorithms 3 and 4 depend on a procedure such as minimal random coding [20], which is not tractable for high dimensional data. These algorithms serve as a compression interpretation of the variational bound (5) of Sohl-Dickstein et al. [53], not yet as a practical compression system.\n\nTable 4: Unconditional CIFAR10 test set rate-distortion values (accompanies Fig. 5)\n\n|   Reverse process time ( T - t +1 ) |   Rate (bits/dim) |   Distortion (RMSE [0 , 255] ) |\n|-------------------------------------|-------------------|--------------------------------|\n|                                1000 |           1.77581 |                        0.95136 |\n|                                 900 |           0.11994 |                       12.0228  |\n|                                 800 |           0.05415 |                       18.4748  |\n|                                 700 |           0.02866 |                       24.4366",
+      "metadata": {
+        "source": "arxiv:2006.11239v2",
+        "title": "Denoising Diffusion Probabilistic Models",
+        "authors": [
+          "Jonathan Ho",
+          "Ajay Jain",
+          "Pieter Abbeel"
+        ],
+        "section": "Extra information",
+        "chunkIndex": 79,
+        "totalChunks": 95
+      }
+    },
+    {
+      "id": "2006.11239v2-chunk-80",
+      "content": "12.0228  |\n|                                 800 |           0.05415 |                       18.4748  |\n|                                 700 |           0.02866 |                       24.4366  |\n|                                 600 |           0.01507 |                       30.8095  |\n|                                 500 |           0.00716 |                       38.0324  |\n|                                 400 |           0.00282 |                       46.1277  |\n|                                 300 |           0.00081 |                       54.1883  |\n|                                 200 |           0.00013 |                       60.9717  |\n|                                 100 |           0       |                       67.6012  |",
+      "metadata": {
+        "source": "arxiv:2006.11239v2",
+        "title": "Denoising Diffusion Probabilistic Models",
+        "authors": [
+          "Jonathan Ho",
+          "Ajay Jain",
+          "Pieter Abbeel"
+        ],
+        "section": "Extra information",
+        "chunkIndex": 80,
+        "totalChunks": 95
+      }
+    },
+    {
+      "id": "2006.11239v2-chunk-81",
+      "content": "Below is a derivation of Eq. (5), the reduced variance variational bound for diffusion models. This material is from Sohl-Dickstein et al. [53]; we include it here only for completeness.\n\n<!-- formula-not-decoded -->\n\n<!-- formula-not-decoded -->\n\n<!-- formula-not-decoded -->\n\nThe following is an alternate version of L . It is not tractable to estimate, but it is useful for our discussion in Section 4.3.\n\n<!-- formula-not-decoded -->\n\n<!-- formula-not-decoded -->",
+      "metadata": {
+        "source": "arxiv:2006.11239v2",
+        "title": "Denoising Diffusion Probabilistic Models",
+        "authors": [
+          "Jonathan Ho",
+          "Ajay Jain",
+          "Pieter Abbeel"
+        ],
+        "section": "A Extended derivations",
+        "chunkIndex": 81,
+        "totalChunks": 95
+      }
+    },
+    {
+      "id": "2006.11239v2-chunk-82",
+      "content": "Our neural network architecture follows the backbone of PixelCNN++ [52], which is a U-Net [48] based on a Wide ResNet [72]. We replaced weight normalization [49] with group normalization [66] to make the implementation simpler. Our 32 × 32 models use four feature map resolutions ( 32 × 32 to 4 × 4 ), and our 256 × 256 models use six. All models have two convolutional residual blocks per resolution level and self-attention blocks at the 16 × 16 resolution between the convolutional blocks [6]. Diffusion time t is specified by adding the Transformer sinusoidal position embedding [60] into each residual block. Our CIFAR10 model has 35.7 million parameters, and our LSUN and CelebA-HQ models have 114 million parameters. We also trained a larger variant of the LSUN Bedroom model with approximately 256 million parameters by increasing filter count.",
+      "metadata": {
+        "source": "arxiv:2006.11239v2",
+        "title": "Denoising Diffusion Probabilistic Models",
+        "authors": [
+          "Jonathan Ho",
+          "Ajay Jain",
+          "Pieter Abbeel"
+        ],
+        "section": "B Experimental details",
+        "chunkIndex": 82,
+        "totalChunks": 95
+      }
+    },
+    {
+      "id": "2006.11239v2-chunk-83",
+      "content": "ameters, and our LSUN and CelebA-HQ models have 114 million parameters. We also trained a larger variant of the LSUN Bedroom model with approximately 256 million parameters by increasing filter count.\n\nWe used TPU v3-8 (similar to 8 V100 GPUs) for all experiments. Our CIFAR model trains at 21 steps per second at batch size 128 (10.6 hours to train to completion at 800k steps), and sampling a batch of 256 images takes 17 seconds. Our CelebA-HQ/LSUN (256 2 ) models train at 2.2 steps per second at batch size 64, and sampling a batch of 128 images takes 300 seconds. We trained on CelebA-HQ for 0.5M steps, LSUN Bedroom for 2.4M steps, LSUN Cat for 1.8M steps, and LSUN Church for 1.2M steps. The larger LSUN Bedroom model was trained for 1.15M steps.\n\nApart from an initial choice of hyperparameters early on to make network size fit within memory constraints, we performed the majority of our hyperparameter search to optimize for CIFAR10 sample quality, then transferred the resulting settings",
+      "metadata": {
+        "source": "arxiv:2006.11239v2",
+        "title": "Denoising Diffusion Probabilistic Models",
+        "authors": [
+          "Jonathan Ho",
+          "Ajay Jain",
+          "Pieter Abbeel"
+        ],
+        "section": "B Experimental details",
+        "chunkIndex": 83,
+        "totalChunks": 95
+      }
+    },
+    {
+      "id": "2006.11239v2-chunk-84",
+      "content": "ers early on to make network size fit within memory constraints, we performed the majority of our hyperparameter search to optimize for CIFAR10 sample quality, then transferred the resulting settings over to the other datasets:\n\n- We chose the β t schedule from a set of constant, linear, and quadratic schedules, all constrained so that L T ≈ 0 . We set T = 1000 without a sweep, and we chose a linear schedule from β 1 = 10 -4 to β T = 0 . 02 .\n- We set the dropout rate on CIFAR10 to 0 . 1 by sweeping over the values { 0 . 1 , 0 . 2 , 0 . 3 , 0 . 4 } . Without dropout on CIFAR10, we obtained poorer samples reminiscent of the overfitting artifacts in an unregularized PixelCNN++ [52]. We set dropout rate on the other datasets to zero without sweeping.\n- We used random horizontal flips during training for CIFAR10; we tried training both with and without flips, and found flips to improve sample quality slightly.",
+      "metadata": {
+        "source": "arxiv:2006.11239v2",
+        "title": "Denoising Diffusion Probabilistic Models",
+        "authors": [
+          "Jonathan Ho",
+          "Ajay Jain",
+          "Pieter Abbeel"
+        ],
+        "section": "B Experimental details",
+        "chunkIndex": 84,
+        "totalChunks": 95
+      }
+    },
+    {
+      "id": "2006.11239v2-chunk-85",
+      "content": "her datasets to zero without sweeping.\n- We used random horizontal flips during training for CIFAR10; we tried training both with and without flips, and found flips to improve sample quality slightly. We also used random horizontal flips for all other datasets except LSUN Bedroom.\n- We tried Adam [31] and RMSProp early on in our experimentation process and chose the former. We left the hyperparameters to their standard values. We set the learning rate to 2 × 10 -4 without any sweeping, and we lowered it to 2 × 10 -5 for the 256 × 256 images, which seemed unstable to train with the larger learning rate.\n\n- We set the batch size to 128 for CIFAR10 and 64 for larger images. We did not sweep over these values.\n- We used EMA on model parameters with a decay factor of 0.9999. We did not sweep over this value.",
+      "metadata": {
+        "source": "arxiv:2006.11239v2",
+        "title": "Denoising Diffusion Probabilistic Models",
+        "authors": [
+          "Jonathan Ho",
+          "Ajay Jain",
+          "Pieter Abbeel"
+        ],
+        "section": "B Experimental details",
+        "chunkIndex": 85,
+        "totalChunks": 95
+      }
+    },
+    {
+      "id": "2006.11239v2-chunk-86",
+      "content": "e set the batch size to 128 for CIFAR10 and 64 for larger images. We did not sweep over these values.\n- We used EMA on model parameters with a decay factor of 0.9999. We did not sweep over this value.\n\nFinal experiments were trained once and evaluated throughout training for sample quality. Sample quality scores and log likelihood are reported on the minimum FID value over the course of training. On CIFAR10, we calculated Inception and FID scores on 50000 samples using the original code from the OpenAI [51] and TTUR [21] repositories, respectively. On LSUN, we calculated FID scores on 50000 samples using code from the StyleGAN2 [30] repository. CIFAR10 and CelebA-HQ were loaded as provided by TensorFlow Datasets ( https://www.tensorflow.org/datasets ), and LSUN was prepared using code from StyleGAN. Dataset splits (or lack thereof) are standard from the papers that introduced their usage in a generative modeling context. All details can be found in the source code release.",
+      "metadata": {
+        "source": "arxiv:2006.11239v2",
+        "title": "Denoising Diffusion Probabilistic Models",
+        "authors": [
+          "Jonathan Ho",
+          "Ajay Jain",
+          "Pieter Abbeel"
+        ],
+        "section": "B Experimental details",
+        "chunkIndex": 86,
+        "totalChunks": 95
+      }
+    },
+    {
+      "id": "2006.11239v2-chunk-87",
+      "content": "StyleGAN. Dataset splits (or lack thereof) are standard from the papers that introduced their usage in a generative modeling context. All details can be found in the source code release.",
+      "metadata": {
+        "source": "arxiv:2006.11239v2",
+        "title": "Denoising Diffusion Probabilistic Models",
+        "authors": [
+          "Jonathan Ho",
+          "Ajay Jain",
+          "Pieter Abbeel"
+        ],
+        "section": "B Experimental details",
+        "chunkIndex": 87,
+        "totalChunks": 95
+      }
+    },
+    {
+      "id": "2006.11239v2-chunk-88",
+      "content": "Our model architecture, forward process definition, and prior differ from NCSN [55, 56] in subtle but important ways that improve sample quality, and, notably, we directly train our sampler as a latent variable model rather than adding it after training post-hoc. In greater detail:\n\n1. We use a U-Net with self-attention; NCSN uses a RefineNet with dilated convolutions. We condition all layers on t by adding in the Transformer sinusoidal position embedding, rather than only in normalization layers (NCSNv1) or only at the output (v2).\n2. Diffusion models scale down the data with each forward process step (by a √ 1 -β t factor) so that variance does not grow when adding noise, thus providing consistently scaled inputs to the neural net reverse process. NCSN omits this scaling factor.\n3. Unlike NCSN, our forward process destroys signal ( D KL ( q ( x T | x 0 ) ‖ N ( 0 , I )) ≈ 0 ), ensuring a close match between the prior and aggregate posterior of x T .",
+      "metadata": {
+        "source": "arxiv:2006.11239v2",
+        "title": "Denoising Diffusion Probabilistic Models",
+        "authors": [
+          "Jonathan Ho",
+          "Ajay Jain",
+          "Pieter Abbeel"
+        ],
+        "section": "C Discussion on related work",
+        "chunkIndex": 88,
+        "totalChunks": 95
+      }
+    },
+    {
+      "id": "2006.11239v2-chunk-89",
+      "content": "omits this scaling factor.\n3. Unlike NCSN, our forward process destroys signal ( D KL ( q ( x T | x 0 ) ‖ N ( 0 , I )) ≈ 0 ), ensuring a close match between the prior and aggregate posterior of x T . Also unlike NCSN, our β t are very small, which ensures that the forward process is reversible by a Markov chain with conditional Gaussians. Both of these factors prevent distribution shift when sampling.\n4. Our Langevin-like sampler has coefficients (learning rate, noise scale, etc.) derived rigorously from β t in the forward process. Thus, our training procedure directly trains our sampler to match the data distribution after T steps: it trains the sampler as a latent variable model using variational inference. In contrast, NCSN's sampler coefficients are set by hand post-hoc, and their training procedure is not guaranteed to directly optimize a quality metric of their sampler.",
+      "metadata": {
+        "source": "arxiv:2006.11239v2",
+        "title": "Denoising Diffusion Probabilistic Models",
+        "authors": [
+          "Jonathan Ho",
+          "Ajay Jain",
+          "Pieter Abbeel"
+        ],
+        "section": "C Discussion on related work",
+        "chunkIndex": 89,
+        "totalChunks": 95
+      }
+    },
+    {
+      "id": "2006.11239v2-chunk-90",
+      "content": "Additional samples Figure 11, 13, 16, 17, 18, and 19 show uncurated samples from the diffusion models trained on CelebA-HQ, CIFAR10 and LSUN datasets.\n\nLatent structure and reverse process stochasticity During sampling, both the prior x T ∼ N ( 0 , I ) and Langevin dynamics are stochastic. To understand the significance of the second source of noise, we sampled multiple images conditioned on the same intermediate latent for the CelebA 256 × 256 dataset. Figure 7 shows multiple draws from the reverse process x 0 ∼ p θ ( x 0 | x t ) that share the latent x t for t ∈ { 1000 , 750 , 500 , 250 } . To accomplish this, we run a single reverse chain from an initial draw from the prior. At the intermediate timesteps, the chain is split to sample multiple images. When the chain is split after the prior draw at x T =1000 , the samples differ significantly.",
+      "metadata": {
+        "source": "arxiv:2006.11239v2",
+        "title": "Denoising Diffusion Probabilistic Models",
+        "authors": [
+          "Jonathan Ho",
+          "Ajay Jain",
+          "Pieter Abbeel"
+        ],
+        "section": "D Samples",
+        "chunkIndex": 90,
+        "totalChunks": 95
+      }
+    },
+    {
+      "id": "2006.11239v2-chunk-91",
+      "content": "initial draw from the prior. At the intermediate timesteps, the chain is split to sample multiple images. When the chain is split after the prior draw at x T =1000 , the samples differ significantly. However, when the chain is split after more steps, samples share high-level attributes like gender, hair color, eyewear, saturation, pose and facial expression. This indicates that intermediate latents like x 750 encode these attributes, despite their imperceptibility.\n\nCoarse-to-fine interpolation Figure 9 shows interpolations between a pair of source CelebA 256 × 256 images as we vary the number of diffusion steps prior to latent space interpolation. Increasing the number of diffusion steps destroys more structure in the source images, which the\n\nmodel completes during the reverse process. This allows us to interpolate at both fine granularities and coarse granularities. In the limiting case of 0 diffusion steps, the interpolation mixes source images in pixel space.",
+      "metadata": {
+        "source": "arxiv:2006.11239v2",
+        "title": "Denoising Diffusion Probabilistic Models",
+        "authors": [
+          "Jonathan Ho",
+          "Ajay Jain",
+          "Pieter Abbeel"
+        ],
+        "section": "D Samples",
+        "chunkIndex": 91,
+        "totalChunks": 95
+      }
+    },
+    {
+      "id": "2006.11239v2-chunk-92",
+      "content": "the reverse process. This allows us to interpolate at both fine granularities and coarse granularities. In the limiting case of 0 diffusion steps, the interpolation mixes source images in pixel space. On the other hand, after 1000 diffusion steps, source information is lost and interpolations are novel samples.",
+      "metadata": {
+        "source": "arxiv:2006.11239v2",
+        "title": "Denoising Diffusion Probabilistic Models",
+        "authors": [
+          "Jonathan Ho",
+          "Ajay Jain",
+          "Pieter Abbeel"
+        ],
+        "section": "D Samples",
+        "chunkIndex": 92,
+        "totalChunks": 95
+      }
+    },
+    {
+      "id": "2006.11239v2-chunk-93",
+      "content": "Figure 9: Coarse-to-fine interpolations that vary the number of diffusion steps prior to latent mixing.\n\n<!-- image -->\n\nFigure 10: Unconditional CIFAR10 progressive sampling quality over time\n\n<!-- image -->\n\nFigure 11: CelebA-HQ 256 × 256 generated samples\n\n<!-- image -->\n\n<!-- image -->\n\n(b) Inception feature space nearest neighbors\n\nFigure 12: CelebA-HQ 256 × 256 nearest neighbors, computed on a 100 × 100 crop surrounding the faces. Generated samples are in the leftmost column, and training set nearest neighbors are in the remaining columns.\n\nFigure 13: Unconditional CIFAR10 generated samples\n\n<!-- image -->\n\nFigure 14: Unconditional CIFAR10 progressive generation\n\n<!-- image -->\n\n<!-- image -->\n\n(b) Inception feature space nearest neighbors\n\nFigure 15: Unconditional CIFAR10 nearest neighbors. Generated samples are in the leftmost column, and training set nearest neighbors are in the remaining columns.\n\nFigure 16: LSUN Church generated samples. FID= 7 . 89\n\n<!-- image -->",
+      "metadata": {
+        "source": "arxiv:2006.11239v2",
+        "title": "Denoising Diffusion Probabilistic Models",
+        "authors": [
+          "Jonathan Ho",
+          "Ajay Jain",
+          "Pieter Abbeel"
+        ],
+        "section": "Source Rec. λ =0.1 λ =0.2 λ =0.3 λ =0.4 λ =0.5 λ =0.6 λ =0.7 λ =0.8 λ =0.9 Rec. Source",
+        "chunkIndex": 93,
+        "totalChunks": 95
+      }
+    },
+    {
+      "id": "2006.11239v2-chunk-94",
+      "content": "nearest neighbors. Generated samples are in the leftmost column, and training set nearest neighbors are in the remaining columns.\n\nFigure 16: LSUN Church generated samples. FID= 7 . 89\n\n<!-- image -->\n\nFigure 17: LSUN Bedroom generated samples, large model. FID= 4 . 90\n\n<!-- image -->\n\nFigure 18: LSUN Bedroom generated samples, small model. FID= 6 . 36\n\n<!-- image -->\n\nFigure 19: LSUN Cat generated samples. FID= 19 . 75\n\n<!-- image -->",
+      "metadata": {
+        "source": "arxiv:2006.11239v2",
+        "title": "Denoising Diffusion Probabilistic Models",
+        "authors": [
+          "Jonathan Ho",
+          "Ajay Jain",
+          "Pieter Abbeel"
+        ],
+        "section": "Source Rec. λ =0.1 λ =0.2 λ =0.3 λ =0.4 λ =0.5 λ =0.6 λ =0.7 λ =0.8 λ =0.9 Rec. Source",
+        "chunkIndex": 94,
+        "totalChunks": 95
+      }
+    }
+  ],
+  "tables": [
+    {
+      "index": 0,
+      "markdown": "| Algorithm 1 Training                                                                                                                                                                                                                                    | Algorithm 2 Sampling                                                                                                                                                                                       |\n|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|\n| 1: repeat 2: x 0 ∼ q ( x 0 ) 3: t ∼ Uniform( { 1 , . . .,T } ) 4: glyph[epsilon1] ∼ N ( 0 , I ) 5: Take gradient descent step on ∇ θ ∥ ∥ glyph[epsilon1] - glyph[epsilon1] θ ( √ ¯ α t x 0 + √ 1 - ¯ α t glyph[epsilon1] , t ) ∥ ∥ 2 6: until converged | 1: x T ∼ N ( 0 , I ) 2: for t = T, . . . , 1 do 3: z ∼ N ( 0 , I ) if t > 1 , else z = 0 4: x t - 1 = 1 √ α t ( x t - 1 - α t √ 1 - ¯ α t glyph[epsilon1] θ ( x t , t ) ) + σ t z 5: end for 6: return x 0 |"
+    },
+    {
+      "index": 1,
+      "markdown": "| Model                                         | IS              | FID            | NLL Test (Train)   |                                               |                                                                    |                                               |                                               |\n|-----------------------------------------------|-----------------|----------------|--------------------|-----------------------------------------------|--------------------------------------------------------------------|-----------------------------------------------|-----------------------------------------------|\n|                                               |                 |                |                    | Conditional                                   | Unconditional CIFAR10 reverse parameterization and training objec- |                                               |                                               |\n| EBM [11]                                      | 8 . 30          | 37 . 9         |                    | tive ablation. Blank entries were unstable to | tive ablation. Blank entries were unstable to                      | tive ablation. Blank entries were unstable to | tive ablation. Blank entries were unstable to |\n| JEM [17] BigGAN [3]                           | 8 . 76 9 . 22   | 38 . 4 14 . 73 |                    |                                               | poor samples with IS                                               |                                               |                                               |\n| Unconditional                                 |                 |                |                    |                                               |                                                                    |                                               |                                               |\n|                                               |                 |                | 5 . 40             |                                               |                                                                    |                                               |                                               |\n| Diffusion (original) [53] Gated PixelCNN [59] | 4 . 60          |                | ≤ 3 . 03 (2 .      |                                               |                                                                    |                                               |                                               |\n| Sparse Transformer [7]                        |                 | 65 . 93        | 90) 2 . 80         |                                               | 7 . 28 ± 0 . 10 8 . 06 0 . 09                                      |                                               |                                               |\n|                                               |                 |                |                    |                                               | ±                                                                  |                                               |                                               |\n| PixelIQN [43]                                 | 5 . 29          | 49 . 46        |                    |                                               | -                                                                  |                                               |                                               |\n| EBM [11]                                      | 6 . 78          | 38 . 2         |                    |                                               |                                                                    |                                               |                                               |\n| NCSNv2 [56]                                   |                 | 31 . 75        |                    |                                               |                                                                    |                                               |                                               |\n| NCSN [55]                                     | 8 . 87 ± 0 . 12 | 25 . 32        |                    |                                               | -                                                                  |                                               |                                               |\n| SNGAN [39]                                    | 8 . 22 ± 0 . 05 | 21 . 7         |                    |                                               | 7 . 67 ± 0 . 13                                                    |                                               |                                               |\n| SNGAN-DDLS [4]                                | 9 . 09 ± 0 . 10 | 15 . 42        |                    |                                               | 9 . 46 0 . 11                                                      |                                               |                                               |\n| StyleGAN2 + ADA (v1) [29]                     | 9 . 74 ± 0 . 05 | 3 . 26         |                    |                                               | ±                                                                  |                                               |                                               |\n| Ours ( , fixed isotropic Σ )                  |                 |                | 69)                |                                               |                                                                    |                                               |                                               |\n| Ours ( )                                      | 11              | 3 . 17         | 3 . 75 (3 . 72)    |                                               |                                                                    |                                               |                                               |\n| simple                                        |                 |                |                    |                                               |                                                                    |                                               |                                               |\n|                                               |                 |                | ≤                  |                                               |                                                                    |                                               |                                               |\n|                                               | 9 . 46 ± 0 .    |                |                    |                                               |                                                                    |                                               |                                               |\n| L                                             |                 |                |                    |                                               |                                                                    |                                               |                                               |\n|                                               |                 | 13 . 51        |                    |                                               |                                                                    |                                               |                                               |\n|                                               | 7 . 67 0 .      |                |                    |                                               |                                                                    |                                               |                                               |\n|                                               |                 |                | 3 . 70 (3 .        |                                               |                                                                    |                                               |                                               |\n|                                               | 13              |                |                    |                                               |                                                                    |                                               |                                               |\n| L                                             |                 |                |                    |                                               |                                                                    |                                               |                                               |\n|                                               |                 | ≤              |                    |                                               |                                                                    |                                               |                                               |\n|                                               | ±               |                |                    |                                               |                                                                    |                                               |                                               |"
+    },
+    {
+      "index": 2,
+      "markdown": "| Model                    | LSUN Bedroom   | LSUN Church   | LSUN Cat   |\n|--------------------------|----------------|---------------|------------|\n| ProgressiveGAN [27]      | 8.34           | 6.42          | 37.52      |\n| StyleGAN [28]            | 2.65           | 4.21 ∗        | 8.53 ∗     |\n| StyleGAN2 [30]           | -              | 3.86          | 6.93       |\n| Ours ( L simple )        | 6.36           | 7.89          | 19.75      |\n| Ours ( L simple , large) | 4.90           | -             | -          |"
+    },
+    {
+      "index": 3,
+      "markdown": "|   Reverse process time ( T - t +1 ) |   Rate (bits/dim) |   Distortion (RMSE [0 , 255] ) |\n|-------------------------------------|-------------------|--------------------------------|\n|                                1000 |           1.77581 |                        0.95136 |\n|                                 900 |           0.11994 |                       12.0228  |\n|                                 800 |           0.05415 |                       18.4748  |\n|                                 700 |           0.02866 |                       24.4366  |\n|                                 600 |           0.01507 |                       30.8095  |\n|                                 500 |           0.00716 |                       38.0324  |\n|                                 400 |           0.00282 |                       46.1277  |\n|                                 300 |           0.00081 |                       54.1883  |\n|                                 200 |           0.00013 |                       60.9717  |\n|                                 100 |           0       |                       67.6012  |"
+    }
+  ],
+  "stats": {
+    "pages": 25,
+    "chunksCreated": 95,
+    "totalCharacters": 64848,
+    "totalWords": 9507,
+    "numTables": 4,
+    "processingTimeMs": 52307
+  },
+  "processedAt": "2025-12-29T13:11:59.191Z"
+}

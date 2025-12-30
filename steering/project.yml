@@ -1,0 +1,87 @@
+# MUSUBI Project Configuration
+name: YAGOKORO
+description: AGI実現に向けたLLM・GraphRAG・オントロジー統合システム
+locale: ja
+version: "0.3.0"
+created: 2025-12-28
+updated: 2025-12-29
+
+# Technology Stack
+tech_stack:
+  approach: monorepo-library-first
+  languages:
+    - typescript
+  runtime: node-20-lts
+  package_manager: pnpm
+
+# Architecture
+architecture:
+  pattern: hexagonal-ddd
+  layers:
+    - domain
+    - application
+    - infrastructure
+    - interface
+
+# Libraries
+libraries:
+  core:
+    - name: "@yagokoro/domain"
+      path: "libs/domain"
+      purpose: "ドメインモデル・エンティティ・値オブジェクト"
+    - name: "@yagokoro/graphrag"
+      path: "libs/graphrag"
+      purpose: "GraphRAGコアエンジン（抽出・推論・クエリ）"
+    - name: "@yagokoro/nlq"
+      path: "libs/nlq"
+      purpose: "自然言語クエリ処理（NL→Cypher変換）"
+    - name: "@yagokoro/hallucination"
+      path: "libs/hallucination"
+      purpose: "ハルシネーション検出・整合性チェック"
+  infrastructure:
+    - name: "@yagokoro/neo4j"
+      path: "libs/neo4j"
+      purpose: "Neo4jグラフデータベース接続・リポジトリ"
+    - name: "@yagokoro/vector"
+      path: "libs/vector"
+      purpose: "Qdrantベクトルストア接続・埋め込み"
+  interface:
+    - name: "@yagokoro/mcp"
+      path: "libs/mcp"
+      purpose: "MCPサーバー・ツール・リソース"
+    - name: "@yagokoro/cli"
+      path: "libs/cli"
+      purpose: "CLIコマンド実装"
+
+# Applications
+applications:
+  - name: "yagokoro"
+    path: "apps/yagokoro"
+    purpose: "メインアプリケーション・MCPサーバー"
+
+# Domain Entities
+domain_entities:
+  - AIModel
+  - Benchmark
+  - Community
+  - Concept
+  - Organization
+  - Person
+  - Publication
+  - Technique
+
+# Phase
+current_phase: "Phase 1 - Generative AI系譜GraphRAGシステム"
+phases:
+  - id: 1
+    name: "Generative AI系譜GraphRAGシステム"
+    status: "in-progress"
+  - id: 2
+    name: "オントロジー統合と推論エンジン"
+    status: "planned"
+  - id: 3
+    name: "MCP外部システム連携"
+    status: "planned"
+  - id: 4
+    name: "AGIコア機能"
+    status: "planned"

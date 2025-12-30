@@ -1,0 +1,89 @@
+{
+  "description": "生成AI系譜を構成する主要論文リスト",
+  "categories": {
+    "transformer_foundation": {
+      "name": "Transformer基盤",
+      "papers": [
+        { "arxivId": "1706.03762", "title": "Attention Is All You Need", "year": 2017 },
+        { "arxivId": "1810.04805", "title": "BERT", "year": 2018 },
+        { "arxivId": "2010.11929", "title": "Vision Transformer (ViT)", "year": 2020 }
+      ]
+    },
+    "language_models": {
+      "name": "大規模言語モデル",
+      "papers": [
+        { "arxivId": "2005.14165", "title": "GPT-3: Language Models are Few-Shot Learners", "year": 2020 },
+        { "arxivId": "2302.13971", "title": "LLaMA: Open Foundation Models", "year": 2023 },
+        { "arxivId": "2307.09288", "title": "LLaMA 2", "year": 2023 },
+        { "arxivId": "2204.02311", "title": "PaLM: Scaling Language Modeling", "year": 2022 },
+        { "arxivId": "2312.11805", "title": "Gemini", "year": 2023 },
+        { "arxivId": "2310.06825", "title": "Mistral 7B", "year": 2023 },
+        { "arxivId": "2401.04088", "title": "Mixtral of Experts", "year": 2024 }
+      ]
+    },
+    "alignment_safety": {
+      "name": "アラインメント・安全性",
+      "papers": [
+        { "arxivId": "1706.03741", "title": "Deep RL from Human Preferences (RLHF)", "year": 2017 },
+        { "arxivId": "2203.02155", "title": "InstructGPT: Training with Human Feedback", "year": 2022 },
+        { "arxivId": "2212.08073", "title": "Constitutional AI", "year": 2022 },
+        { "arxivId": "2204.05862", "title": "Training a Helpful and Harmless Assistant", "year": 2022 }
+      ]
+    },
+    "efficient_training": {
+      "name": "効率的学習・スケーリング",
+      "papers": [
+        { "arxivId": "2001.08361", "title": "Scaling Laws for Neural LMs", "year": 2020 },
+        { "arxivId": "2203.15556", "title": "Chinchilla: Training Compute-Optimal LLMs", "year": 2022 },
+        { "arxivId": "2106.09685", "title": "LoRA: Low-Rank Adaptation", "year": 2021 },
+        { "arxivId": "2205.14135", "title": "FlashAttention", "year": 2022 },
+        { "arxivId": "2101.03961", "title": "Switch Transformers (MoE)", "year": 2021 }
+      ]
+    },
+    "prompting_reasoning": {
+      "name": "プロンプティング・推論",
+      "papers": [
+        { "arxivId": "2201.11903", "title": "Chain-of-Thought Prompting", "year": 2022 },
+        { "arxivId": "2212.10560", "title": "Self-Instruct", "year": 2022 },
+        { "arxivId": "2210.03629", "title": "ReAct: Reasoning and Acting", "year": 2022 },
+        { "arxivId": "2305.10601", "title": "Tree of Thoughts", "year": 2023 }
+      ]
+    },
+    "retrieval_augmented": {
+      "name": "RAG・知識統合",
+      "papers": [
+        { "arxivId": "2005.11401", "title": "RAG: Retrieval-Augmented Generation", "year": 2020 },
+        { "arxivId": "2112.04426", "title": "RETRO: Retrieval-Enhanced Transformers", "year": 2021 },
+        { "arxivId": "2404.16130", "title": "From Local to Global: GraphRAG", "year": 2024 }
+      ]
+    },
+    "multimodal": {
+      "name": "マルチモーダル",
+      "papers": [
+        { "arxivId": "2103.00020", "title": "CLIP: Learning Visual Concepts", "year": 2021 },
+        { "arxivId": "2204.14198", "title": "Flamingo: Visual Language Model", "year": 2022 },
+        { "arxivId": "2301.12597", "title": "BLIP-2", "year": 2023 },
+        { "arxivId": "2304.08485", "title": "LLaVA: Visual Instruction Tuning", "year": 2023 }
+      ]
+    },
+    "diffusion_generation": {
+      "name": "拡散モデル・画像生成",
+      "papers": [
+        { "arxivId": "2006.11239", "title": "Denoising Diffusion Probabilistic Models", "year": 2020 },
+        { "arxivId": "2112.10752", "title": "Latent Diffusion Models (Stable Diffusion)", "year": 2021 },
+        { "arxivId": "2205.11487", "title": "Imagen: Text-to-Image Diffusion", "year": 2022 },
+        { "arxivId": "2302.05543", "title": "ControlNet", "year": 2023 }
+      ]
+    },
+    "emergent_capabilities": {
+      "name": "創発能力・評価",
+      "papers": [
+        { "arxivId": "2206.07682", "title": "Emergent Abilities of Large LMs", "year": 2022 },
+        { "arxivId": "2303.08774", "title": "GPT-4 Technical Report", "year": 2023 },
+        { "arxivId": "2211.09110", "title": "Holistic Evaluation (HELM)", "year": 2022 }
+      ]
+    }
+  },
+  "totalPapers": 35,
+  "lastUpdated": "2025-12-29"
+}

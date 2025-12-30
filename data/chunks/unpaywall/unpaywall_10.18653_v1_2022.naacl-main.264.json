@@ -1,0 +1,1091 @@
+{
+  "doi": "10.18653/v1/2022.naacl-main.264",
+  "title": "Chain-of-Thought Prompting Elicits Reasoning in Large Language Models",
+  "category": "Prompting",
+  "year": 2022,
+  "paper": {
+    "doi": "10.18653/v1/2022.naacl-main.264",
+    "doi_url": "https://doi.org/10.18653/v1/2022.naacl-main.264",
+    "title": "When is BERT Multilingual? Isolating Crucial Ingredients for Cross-lingual Transfer",
+    "genre": "proceedings-article",
+    "is_paratext": false,
+    "published_date": "2022-01-01",
+    "year": 2022,
+    "journal_name": "Proceedings of the 2022 Conference of the North American Chapter of the Association for Computational Linguistics: Human Language Technologies",
+    "journal_issns": null,
+    "journal_issn_l": null,
+    "journal_is_oa": false,
+    "journal_is_in_doaj": false,
+    "publisher": "Association for Computational Linguistics",
+    "is_oa": true,
+    "oa_status": "hybrid",
+    "has_repository_copy": false,
+    "best_oa_location": {
+      "url": "https://aclanthology.org/2022.naacl-main.264.pdf",
+      "url_for_pdf": "https://aclanthology.org/2022.naacl-main.264.pdf",
+      "url_for_landing_page": "https://doi.org/10.18653/v1/2022.naacl-main.264",
+      "evidence": "deprecated",
+      "license": "cc-by",
+      "version": "publishedVersion",
+      "host_type": "publisher",
+      "is_best": true,
+      "pmh_id": null,
+      "endpoint_id": null,
+      "repository_institution": null,
+      "oa_date": "2022-01-01",
+      "updated": "deprecated"
+    },
+    "first_oa_location": {
+      "url": "https://aclanthology.org/2022.naacl-main.264.pdf",
+      "url_for_pdf": "https://aclanthology.org/2022.naacl-main.264.pdf",
+      "url_for_landing_page": "https://doi.org/10.18653/v1/2022.naacl-main.264",
+      "evidence": "deprecated",
+      "license": "cc-by",
+      "version": "publishedVersion",
+      "host_type": "publisher",
+      "is_best": true,
+      "pmh_id": null,
+      "endpoint_id": null,
+      "repository_institution": null,
+      "oa_date": "2022-01-01",
+      "updated": "deprecated"
+    },
+    "oa_locations": [
+      {
+        "url": "https://aclanthology.org/2022.naacl-main.264.pdf",
+        "url_for_pdf": "https://aclanthology.org/2022.naacl-main.264.pdf",
+        "url_for_landing_page": "https://doi.org/10.18653/v1/2022.naacl-main.264",
+        "evidence": "deprecated",
+        "license": "cc-by",
+        "version": "publishedVersion",
+        "host_type": "publisher",
+        "is_best": true,
+        "pmh_id": null,
+        "endpoint_id": null,
+        "repository_institution": null,
+        "oa_date": "2022-01-01",
+        "updated": "deprecated"
+      }
+    ],
+    "oa_locations_embargoed": [],
+    "data_standard": 2,
+    "z_authors": [
+      {
+        "author_position": "first",
+        "raw_author_name": "Ameet Deshpande",
+        "is_corresponding": false,
+        "raw_affiliation_strings": [
+          "Department of Computer Science Princeton University, USA"
+        ]
+      },
+      {
+        "author_position": "middle",
+        "raw_author_name": "Partha Talukdar",
+        "is_corresponding": false,
+        "raw_affiliation_strings": [
+          "Google Research India"
+        ]
+      },
+      {
+        "author_position": "last",
+        "raw_author_name": "Karthik Narasimhan",
+        "is_corresponding": false,
+        "raw_affiliation_strings": [
+          "Department of Computer Science Princeton University, USA"
+        ]
+      }
+    ],
+    "updated": "2025-09-30T02:39:23Z"
+  },
+  "chunks": [
+    {
+      "id": "unpaywall-10.18653_v1_2022.naacl-main.264-chunk-0",
+      "content": "## When is BERT Multilingual? Isolating Crucial Ingredients for Cross-lingual Transfer\n\n## Ameet Deshpande\n\nDepartment of Computer Science Princeton University, USA\n\nasd@cs.princeton.edu\n\n## Partha Talukdar\n\nGoogle Research India partha@google.com\n\n## Abstract",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2022.naacl-main.264",
+        "title": "Chain-of-Thought Prompting Elicits Reasoning in Large Language Models",
+        "category": "Prompting",
+        "year": 2022,
+        "authors": "undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 0
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2022.naacl-main.264-chunk-1",
+      "content": "Research India partha@google.com ## Abstract \n\nWhile recent work on multilingual language models has demonstrated their capacity for cross-lingual zero-shot transfer, there is a lack of consensus in the community as to what shared properties between languages enable transfer on downstream tasks. Analyses involving pairs of natural languages are often inconclusive and contradictory since languages simultaneously differ in many linguistic aspects. In this paper, we perform a large-scale empirical study to isolate the effects of various linguistic properties by measuring zeroshot transfer between four diverse natural languages and their counterparts constructed by modifying aspects such as the script, word order, and syntax. Among other things, our experiments show that the absence of sub-word overlap significantly affects zero-shot transfer when languages differ in their word order, and there is a strong correlation between transfer performance and word embedding alignment between languages (e.g., ρ s = 0 . 94 on the task of NLI). Our results call for focus in multilingual models on explicitly improving word embedding alignment between languages rather than relying on its implicit emergence. 1",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2022.naacl-main.264",
+        "title": "Chain-of-Thought Prompting Elicits Reasoning in Large Language Models",
+        "category": "Prompting",
+        "year": 2022,
+        "authors": "undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 1
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2022.naacl-main.264-chunk-2",
+      "content": "s = 0 . 94 on the task of NLI). Our results call for focus in multilingual models on explicitly improving word embedding alignment between languages rather than relying on its implicit emergence. 1 \n\n## 1 Introduction\n\nMultilingual language models like XLM (Conneau et al., 2020a) and Multilingual-BERT (Devlin, 2019) are trained with masked-language modeling (MLM)objective on a combination of raw text from multiple languages. Surprisingly, these models exhibit decent cross-lingual zero-shot transfer, where fine-tuning on a task in a source language translates to good performance for a different language (target).\n\nRequirements for zero-shot transfer Recent studies have provided inconsistent explanations for properties required for zero-shot transfer (hereon,\n\n1 Code is available at https://github.com/ princeton-nlp/MultilingualAnalysis",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2022.naacl-main.264",
+        "title": "Chain-of-Thought Prompting Elicits Reasoning in Large Language Models",
+        "category": "Prompting",
+        "year": 2022,
+        "authors": "undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 2
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2022.naacl-main.264-chunk-3",
+      "content": "zero-shot transfer Recent studies have provided inconsistent explanations for properties required for zero-shot transfer (hereon, 1 Code is available at https://github.com/ princeton-nlp/MultilingualAnalysis \n\nDepartment of Computer Science Princeton University, USA karthikn@cs.princeton.edu transfer). For example, while Wu and Dredze (2019) conclude that sub-word overlap is vital for transfer, K et al. (2020) demonstrate that it is not crucial, although they consider only English as the source language. While Pires et al. (2019) suggest that typological similarity (e.g., similar SVO order) is essential for transfer, other works (Kakwani et al., 2020; Conneau et al., 2020a) successfully build multilingual models for dissimilar languages.",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2022.naacl-main.264",
+        "title": "Chain-of-Thought Prompting Elicits Reasoning in Large Language Models",
+        "category": "Prompting",
+        "year": 2022,
+        "authors": "undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 3
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2022.naacl-main.264-chunk-4",
+      "content": "for transfer, other works (Kakwani et al., 2020; Conneau et al., 2020a) successfully build multilingual models for dissimilar languages. \n\nNeed for systematic analysis A major cause of these discrepancies is a large number of varying properties (e.g., syntax, script, and vocabulary size) between languages, which make isolating crucial ingredients for transfer difficult. Some studies alleviate this issue by creating synthetic languages which differ from natural ones only in specific linguistic properties like script (K et al., 2020; Dufter and Schütze, 2020). However, their focus is only on English as a source language, and the scale of their experiments is small (in number of tasks or pre-training corpora size), thus limiting the scope of their findings to their settings alone.",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2022.naacl-main.264",
+        "title": "Chain-of-Thought Prompting Elicits Reasoning in Large Language Models",
+        "category": "Prompting",
+        "year": 2022,
+        "authors": "undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 4
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2022.naacl-main.264-chunk-5",
+      "content": "their experiments is small (in number of tasks or pre-training corpora size), thus limiting the scope of their findings to their settings alone. \n\nOur approach Weperform a systematic study of cross-lingual transfer on bilingual language models trained on a natural language and a systematically derived counterpart. We choose four diverse natural languages (English, French, Arabic, and Hindi) and create derived variants using four different transformations on structural properties such as inverting or permuting word order, altering scripts, or varying syntax (Section 3.2). We train models on each of the resulting sixteen language pairs, and evaluate zero-shot transfer on four downstream tasks - natural language inference (NLI), namedentity recognition (NER), part-of-speech tagging (POS), and question-answering (QA).\n\n## Our experiments reveal the following:\n\n1. Contrary to previous belief, the absence of subword overlap degrades transfer when languages\n\n## Karthik Narasimhan",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2022.naacl-main.264",
+        "title": "Chain-of-Thought Prompting Elicits Reasoning in Large Language Models",
+        "category": "Prompting",
+        "year": 2022,
+        "authors": "undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 5
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2022.naacl-main.264-chunk-6",
+      "content": "and question-answering (QA). ## Our experiments reveal the following: 1. Contrary to previous belief, the absence of subword overlap degrades transfer when languages ## Karthik Narasimhan \n\n- differ in their word order (e.g., by more than 40 F1 points on POS tagging, (§ 4.1)).\n2. There is a strong correlation between token embedding alignment and zero-shot transfer across different tasks (e.g., ρ s = 0 . 94 , p &lt; . 005 for XNLI, Fig 4).\n3. Using pre-training corpora from similar sources for different languages (e.g., Wikipedia) boosts transfer when compared to corpora from different sources (e.g., 17 F1 points on NER, Fig 3).",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2022.naacl-main.264",
+        "title": "Chain-of-Thought Prompting Elicits Reasoning in Large Language Models",
+        "category": "Prompting",
+        "year": 2022,
+        "authors": "undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 6
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2022.naacl-main.264-chunk-7",
+      "content": "languages (e.g., Wikipedia) boosts transfer when compared to corpora from different sources (e.g., 17 F1 points on NER, Fig 3). \n\nTo our knowledge, we are the first study to quantitatively show that zero-shot transfer between languages is strongly correlated with token embedding alignment ( ρ s = 0 . 94 for NLI). We also show that the current multilingual pre-training methods (Doddapaneni et al., 2021) fall short of aligning embeddings even between simple natural and derived language pairs, leading to failure in zero-shot transfer. Our results call for training objectives that explicitly improve alignment using either supervised (e.g., parallel corpora or bilingual dictionaries) or unsupervised data.\n\n## 2 Related work",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2022.naacl-main.264",
+        "title": "Chain-of-Thought Prompting Elicits Reasoning in Large Language Models",
+        "category": "Prompting",
+        "year": 2022,
+        "authors": "undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 7
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2022.naacl-main.264-chunk-8",
+      "content": "objectives that explicitly improve alignment using either supervised (e.g., parallel corpora or bilingual dictionaries) or unsupervised data. ## 2 Related work \n\nMultilingual pre-training for Transformers The success of monolingual Transformer language models (Devlin et al., 2019; Radford et al., 2018) has driven studies that learn a multilingual language-model (LM) on several languages. Multilingual-BERT (M-BERT) (Devlin, 2019) is a single neural network pre-trained using the masked language-modeling (MLM) objective on a corpus of text from 104 languages. XLM (Conneau and Lample, 2019) introduced translation languagemodeling, which performs MLM on pairs of parallel sentences, thus encouraging alignment between their representations. These models exhibit surprising zero-shot cross-lingual transfer performance (Conneau and Lample, 2019; K et al., 2020), a setup where the model is fine-tuned on a source language and evaluated on a different target language.",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2022.naacl-main.264",
+        "title": "Chain-of-Thought Prompting Elicits Reasoning in Large Language Models",
+        "category": "Prompting",
+        "year": 2022,
+        "authors": "undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 8
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2022.naacl-main.264-chunk-9",
+      "content": "and Lample, 2019; K et al., 2020), a setup where the model is fine-tuned on a source language and evaluated on a different target language. \n\nAnalysis of cross-lingual transfer While Pires et al. (2019), Conneau et al. (2020b), and K et al. (2020) showed that transfer works even without a shared vocabulary between languages, Wu and Dredze (2019) discovered a correlation between sub-word overlap and zero-shot performance. Conneau et al. (2020b) and Artetxe et al. (2020a) showed that shared parameters for languages with different scripts were crucial for transfer. Pires et al. (2019) and (Wu and Dredze, 2019) observed that transfer for NER and POS tagging works better between typologically similar languages. However, a study conducted by Lin et al. (2019) showed that there is no simple rule of thumb to gauge when transfer works between languages. Hsu et al. (2019) observed that changing the syntax (SOV) order of the source to match that of the target does not improve performance.",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2022.naacl-main.264",
+        "title": "Chain-of-Thought Prompting Elicits Reasoning in Large Language Models",
+        "category": "Prompting",
+        "year": 2022,
+        "authors": "undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 9
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2022.naacl-main.264-chunk-10",
+      "content": "to gauge when transfer works between languages. Hsu et al. (2019) observed that changing the syntax (SOV) order of the source to match that of the target does not improve performance. \n\nTransfer between real and synthetic Languages K et al. (2020) create a synthetic language by changing English's script and find that transfer between it and Spanish works even without common sub-words. However, they use only English as their source language, test only on two tasks, and use a single natural-synthetic language pair. Dufter and Schütze (2020) study transfer between English and synthetic English obtained by changing the script, word order, or model delimiters. However, they use a small corpus ( 228 K words) compared to current standards (we use 3 orders more) and measure only embedding similarity and not zero-shot transfer. A contemporary work (Wu et al., 2022) uses synthetic transformations to modify the GLUE dataset (Wang et al., 2018) and analyze properties required for good zero-shot transfer, but they perform their experiments only on English and do not perform token embedding alignment analysis. We show that the latter is crucial for good transfer.",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2022.naacl-main.264",
+        "title": "Chain-of-Thought Prompting Elicits Reasoning in Large Language Models",
+        "category": "Prompting",
+        "year": 2022,
+        "authors": "undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 10
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2022.naacl-main.264-chunk-11",
+      "content": "al., 2018) and analyze properties required for good zero-shot transfer, but they perform their experiments only on English and do not perform token embedding alignment analysis. We show that the latter is crucial for good transfer. \n\n## 3 Approach\n\nWe first provide some background on bilingual language models (Section 3.1), followed by descriptions of our transformations (Section 3.2), and our training and evaluation setup (Section 3.3).\n\n## 3.1 Background\n\nBilingual pre-training The standard setup (Conneau and Lample, 2019) trains a bilingual language model ( Bi-LM ) on raw text corpora from two languages simultaneously. Bi-LM uses the masked language-modeling loss ( L MLM) on the corpora from the two languages ( C 1 , C 2 ) separately with no explicit cross-lingual signal:\n\n<!-- formula-not-decoded -->",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2022.naacl-main.264",
+        "title": "Chain-of-Thought Prompting Elicits Reasoning in Large Language Models",
+        "category": "Prompting",
+        "year": 2022,
+        "authors": "undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 11
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2022.naacl-main.264-chunk-12",
+      "content": "MLM) on the corpora from the two languages ( C 1 , C 2 ) separately with no explicit cross-lingual signal: <!-- formula-not-decoded --> \n\nA shared byte pair encoding tokenizer (Sennrich et al., 2015) is trained on C 1 + C 2 . A single batch contains instances from both languages, but each instance belongs to a single language.",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2022.naacl-main.264",
+        "title": "Chain-of-Thought Prompting Elicits Reasoning in Large Language Models",
+        "category": "Prompting",
+        "year": 2022,
+        "authors": "undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 12
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2022.naacl-main.264-chunk-13",
+      "content": "from both languages, but each instance belongs to a single language. \n\nTable 1: Examples of our transformations applied to different sentences (without sub-word tokenization). Inversion inverts the tokens, Permutation samples a random reordering, and Transliteration changes the script. We use symbols ( ♣ ) to denote words in the new script and mention the corresponding original word in brackets. Syntax stochastically modifies the syntactic structure. In the first example for Syntax , the sentence in Subject-Verb-Object (SVO) order gets transformed to SOV order, and in the second, the sentence in Noun-Adjective (NA) order gets transformed to the AN order. The examples are high probability re-orderings and other ones might be sampled too.",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2022.naacl-main.264",
+        "title": "Chain-of-Thought Prompting Elicits Reasoning in Large Language Models",
+        "category": "Prompting",
+        "year": 2022,
+        "authors": "undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 13
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2022.naacl-main.264-chunk-14",
+      "content": "(NA) order gets transformed to the AN order. The examples are high probability re-orderings and other ones might be sampled too. \n\n| Transformation                                                                          | Instance ( s )                                                                                                       | Transformed instance ( T ( s ))                                                                                                              |\n|-----------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------|\n| Inversion ( T inv ) Permutation ( T perm ) Transliteration ( T trans ) Syntax ( T syn ) | Welcome to NAACL at Seattle This is a conference I am Sam . I am Sara (S) ate (V) apples (O) Une table (N) ronde (A) | Seattle at NAACL to Welcome a This conference is ♣ (I) ♥ (am) ♦ (Sam) ♠ (.) ♣ (I) ♥ (am) Sara (S) apples (O) ate (V) Une ronde (A) table (N) |",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2022.naacl-main.264",
+        "title": "Chain-of-Thought Prompting Elicits Reasoning in Large Language Models",
+        "category": "Prompting",
+        "year": 2022,
+        "authors": "undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 14
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2022.naacl-main.264-chunk-15",
+      "content": "(I) ♥ (am) ♦ (Sam) ♠ (.) ♣ (I) ♥ (am) Sara (S) apples (O) ate (V) Une ronde (A) table (N) | \n\nZero-shot transfer evaluation Consider a bilingual model ( Bi-LM ) pre-trained on two languages, source and target . Zero-shot transfer involves finetuning Bi-LM on downstream task data from source and evaluating on test data from target . This is considered zero-shot because Bi-LM is not fine-tuned on any data belonging to target .\n\n## 3.2 Generating language variants with systematic transformations",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2022.naacl-main.264",
+        "title": "Chain-of-Thought Prompting Elicits Reasoning in Large Language Models",
+        "category": "Prompting",
+        "year": 2022,
+        "authors": "undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 15
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2022.naacl-main.264-chunk-16",
+      "content": "fine-tuned on any data belonging to target . ## 3.2 Generating language variants with systematic transformations \n\nNatural languages typically differ in several ways, like the script, word order, and syntax. To isolate the affect of these properties on zero-shot transfer, we obtain derived language corpora (hereon, derived corpora) from original (natural) language corpora by performing sentence level transformations ( T ) which change particular properties. For example, an ' inversion ' transformation could be used to invert each sentence in the corpus ( Welcome 1 to 2 NAACL 3 ⇒ NAACL 3 to 2 Welcome 1 ). Since the transformation ( T ) is applied on each sentence of the original corpus, the size of the original and the derived corpus is the same. In the following sections, we will use the following notation:\n\n<!-- formula-not-decoded -->\n\nTypes of transformations We consider four transformations which modify different aspects of sentences (examples in Table 1):",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2022.naacl-main.264",
+        "title": "Chain-of-Thought Prompting Elicits Reasoning in Large Language Models",
+        "category": "Prompting",
+        "year": 2022,
+        "authors": "undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 16
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2022.naacl-main.264-chunk-17",
+      "content": "In the following sections, we will use the following notation: <!-- formula-not-decoded --> Types of transformations We consider four transformations which modify different aspects of sentences (examples in Table 1): \n\n1. Inversion ( T inv ): Invert the order of tokens in the sentence, like in Dufter and Schütze\n\n(2020). The first token becomes the last, and vice versa.",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2022.naacl-main.264",
+        "title": "Chain-of-Thought Prompting Elicits Reasoning in Large Language Models",
+        "category": "Prompting",
+        "year": 2022,
+        "authors": "undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 17
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2022.naacl-main.264-chunk-18",
+      "content": "Schütze (2020). The first token becomes the last, and vice versa. \n\n2. Permutation ( T perm ): Permute the order of tokens in a sentence uniformly at random. For a sentence of n tokens, we sample a random ordering with probability 1 n ! .\n4. Syntax ( T syn ): Modify a sentence to match the syntactic properties of a different natural language by re-ordering the dependents of nouns and verbs in the dependency parse. These transformations are stochastic because of the errors in parsing and sampling over possible re-orderings (Wang and Eisner, 2016).\n3. Transliteration ( T trans ): Change the script of all tokens other than the special tokens (like [CLS] ). This creates a derived vocabulary ( V deriv ) with a one-to-one correspondence with the original vocabulary ( V orig ).",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2022.naacl-main.264",
+        "title": "Chain-of-Thought Prompting Elicits Reasoning in Large Language Models",
+        "category": "Prompting",
+        "year": 2022,
+        "authors": "undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 18
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2022.naacl-main.264-chunk-19",
+      "content": "special tokens (like [CLS] ). This creates a derived vocabulary ( V deriv ) with a one-to-one correspondence with the original vocabulary ( V orig ). \n\nThese transformations allow us to systematically evaluate the effect of corresponding properties on zero-shot transfer. We also consider composed transformations ( § 4.2) which consecutively apply two transformations. We note that while real languages typically differ in more than one or two properties considered in our transformations, our methodology remains useful in isolating crucial properties that enable good transfer and can be extended to more transformations.",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2022.naacl-main.264",
+        "title": "Chain-of-Thought Prompting Elicits Reasoning in Large Language Models",
+        "category": "Prompting",
+        "year": 2022,
+        "authors": "undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 19
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2022.naacl-main.264-chunk-20",
+      "content": "remains useful in isolating crucial properties that enable good transfer and can be extended to more transformations. \n\nTransformations for downstream tasks Weobtain the downstream corpus in the derived language ( D deriv ) by applying the same transformation ( T ) used during pre-training on the original downstream corpus ( D orig ). Unlike pre-training corpora which contain raw sentences, instances in downstream tasks contain one or more sentences with annotated labels. For text classification tasks like\n\n<!-- image -->",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2022.naacl-main.264",
+        "title": "Chain-of-Thought Prompting Elicits Reasoning in Large Language Models",
+        "category": "Prompting",
+        "year": 2022,
+        "authors": "undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 20
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2022.naacl-main.264-chunk-21",
+      "content": "one or more sentences with annotated labels. For text classification tasks like <!-- image --> \n\nFigure 1: (a) During pre-training, we 1 obtain the derived language corpus ( C deriv ) by transforming the original language corpus ( C orig ). 2 The two corpora are combined and, 3 a bilingual model ( Bi-LM ) is learned using the MLM objective. (b) During fine-tuning, we 1 obtain the derived dev dataset ( D dev deriv ) by transforming the original dev dataset ( D dev orig ). 2 Bi-LM is fine-tuned on the original train dataset ( D train orig ), and 3 evaluated on D dev deriv , which is the standard zero-shot cross lingual setup.",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2022.naacl-main.264",
+        "title": "Chain-of-Thought Prompting Elicits Reasoning in Large Language Models",
+        "category": "Prompting",
+        "year": 2022,
+        "authors": "undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 21
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2022.naacl-main.264-chunk-22",
+      "content": "dataset ( D train orig ), and 3 evaluated on D dev deriv , which is the standard zero-shot cross lingual setup. \n\n| Evaluation   | Corpus source                           | Corpus source     | Corpus source   |\n|--------------|-----------------------------------------|-------------------|-----------------|\n| Evaluation   | Pre-train                               | Fine-tune (train) | Fine-tune (dev) |\n| BZ           | C orig + C deriv                        | D orig            | D deriv         |\n| BS           | C orig + C deriv                        | D deriv           | D deriv         |\n| MZ           | C orig                                  | D orig            | D deriv         |\n|              | ∆ ( BZ - BS ) = ( BZ ∆ ( MZ - BS ) = MZ | - BS ) - BS       |                 |\n\n(\n\n)",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2022.naacl-main.264",
+        "title": "Chain-of-Thought Prompting Elicits Reasoning in Large Language Models",
+        "category": "Prompting",
+        "year": 2022,
+        "authors": "undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 22
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2022.naacl-main.264-chunk-23",
+      "content": ") = ( BZ ∆ ( MZ - BS ) = MZ | - BS ) - BS | | ( ) \n\nTable 2: Summary of evaluation metrics defined in § 3.3. C and D denote the pre-training and downstream corpus respectively, and their subscript indicates their source ( original or derived ). BZ and MZ represent bilingual and monolingual zero-shot transfer scores, and BS is the supervised learning baseline on derived . The differences in the setting of BZ and other scores are typeset in blue. We use ∆ ( BZ -BS ) and ∆ ( MZ -BS ) (defined in the last two rows) throughout our paper.\n\nNLI, we apply the transformation on each sentence in every dataset instance. For token classification tasks (e.g., NER, POS), any transformation which changes the order of the tokens also changes the order of the labels. We present the mathematical specification in Appendix A.\n\n## 3.3 Model Training and Evaluation",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2022.naacl-main.264",
+        "title": "Chain-of-Thought Prompting Elicits Reasoning in Large Language Models",
+        "category": "Prompting",
+        "year": 2022,
+        "authors": "undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 23
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2022.naacl-main.264-chunk-24",
+      "content": "any transformation which changes the order of the tokens also changes the order of the labels. We present the mathematical specification in Appendix A. ## 3.3 Model Training and Evaluation \n\nWe now describe our pre-training and zero-shot transfer evaluation setup. Figure 1 provides an overview of pre-training and fine-tuning, and Table 2 summarizes the evaluation metrics we use.\n\nPre-training Let C orig and C deriv be the original and derived language pre-training corpora. We train two models for each original -derived pair:\n\n1. Bilingual Model ( Bi-LM ) : A bilingual model pre-trained on the combined corpus ( C orig +\n\nC deriv ) (Figure 1a).\n\n2. Monolingual Model ( Mono-LM ) : A monolingual model trained only on C orig for the same number of steps as Bi-LM 's. MonoLM is used as a baseline to measure zero-shot transfer of a model not pre-trained on derived .",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2022.naacl-main.264",
+        "title": "Chain-of-Thought Prompting Elicits Reasoning in Large Language Models",
+        "category": "Prompting",
+        "year": 2022,
+        "authors": "undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 24
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2022.naacl-main.264-chunk-25",
+      "content": "orig for the same number of steps as Bi-LM 's. MonoLM is used as a baseline to measure zero-shot transfer of a model not pre-trained on derived . \n\nEvaluation Let D train orig and D dev orig be the original language training and development sets for a downstream task, and D train deriv and D dev deriv be the corresponding derived language datasets. For evaluation, we first fine-tune the pre-trained models on a downstream training set and evaluate the resulting model on a development set (Figure 1b). Since our goal is to investigate the extent of zero-shot transfer, we require appropriate lower and upper bounds to make informed conclusions. To this end, we compute three metrics, all on the same development set (summarized in Table 2):",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2022.naacl-main.264",
+        "title": "Chain-of-Thought Prompting Elicits Reasoning in Large Language Models",
+        "category": "Prompting",
+        "year": 2022,
+        "authors": "undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 25
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2022.naacl-main.264-chunk-26",
+      "content": "and upper bounds to make informed conclusions. To this end, we compute three metrics, all on the same development set (summarized in Table 2): \n\n- Bilingual zero-shot transfer ( BZ ) : This is the standard zero-shot transfer score (Conneau and Lample, 2019) which measures how well a bilingual model fine-tuned on D train orig zeroshot transfers to the other language ( D dev deriv ).\n- Monolingual zero-shot transfer ( MZ ) : This measures the zero-shot performance of the baseline Mono-LM , which is not pre-trained on the derived language, by fine-tuning MonoLM on D train orig and evaluating it on D dev deriv .\n- Bilingual supervised synthetic ( BS ) : This is the supervised learning performance on the derived language obtained by fine-tuning BiLM on D train deriv and evaluating it on D dev deriv .\n\nBS uses fine-tuning train data from the derived language and serves as an upper-bound on BZ and MZ",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2022.naacl-main.264",
+        "title": "Chain-of-Thought Prompting Elicits Reasoning in Large Language Models",
+        "category": "Prompting",
+        "year": 2022,
+        "authors": "undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 26
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2022.naacl-main.264-chunk-27",
+      "content": "BiLM on D train deriv and evaluating it on D dev deriv . BS uses fine-tuning train data from the derived language and serves as an upper-bound on BZ and MZ \n\nwhich don't use it. MZ doesn't pre-train on the derived language and serves as a lower-bound on BZ which does pre-train on it. For easier comparison of BZ and MZ with BS (upper-bound), we report the following score differences (Table 2), which are both negative in our experiments.\n\n<!-- formula-not-decoded -->\n\n<!-- formula-not-decoded -->\n\nBZ alone cannot capture the quality of the zeroshot transfer. A large and negative ∆ ( BZ -BS ) implies that bilingual zero-shot transfer is much worse than supervised fine-tuning on derived . Concurrently, ∆ ( BZ -BS ) ≈ ∆ ( MZ -BS ) implies that Bi-LM transfers as poorly as Mono-LM . Thus, good zeroshot transfer is characterized by ∆ ( BZ -BS ) ≈ 0 and ∆ ( BZ -BS ) /greatermuch ∆ ( MZ -BS ) .\n\n## 3.4 Experimental Setup",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2022.naacl-main.264",
+        "title": "Chain-of-Thought Prompting Elicits Reasoning in Large Language Models",
+        "category": "Prompting",
+        "year": 2022,
+        "authors": "undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 27
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2022.naacl-main.264-chunk-28",
+      "content": "Mono-LM . Thus, good zeroshot transfer is characterized by ∆ ( BZ -BS ) ≈ 0 and ∆ ( BZ -BS ) /greatermuch ∆ ( MZ -BS ) . ## 3.4 Experimental Setup \n\nLanguages We choose four diverse natural languages: English (Indo-European, Germanic), French (Indo-European, Romance), Hindi (IndoEuropean, Indo-Iranian), and Arabic (Afro-Asiatic, Semitic), which are represented in the multilingual XTREME benchmark (Hu et al., 2020). For each language, we consider four transformations (Section 3.2) to create derived counterparts, giving us 16 different original-derived pairs in total. For the Syntax transformation, we use Qi et al. (2020) for parsing. We modify the syntax of FR, HI, and AR to that of EN, and the syntax of EN to that of FR.",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2022.naacl-main.264",
+        "title": "Chain-of-Thought Prompting Elicits Reasoning in Large Language Models",
+        "category": "Prompting",
+        "year": 2022,
+        "authors": "undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 28
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2022.naacl-main.264-chunk-29",
+      "content": "parsing. We modify the syntax of FR, HI, and AR to that of EN, and the syntax of EN to that of FR. \n\nDatasets For the pre-training corpus ( C orig ), we use a 500 MB(uncompressed) subset of Wikipedia ( ≈ 100M tokens) for each language. This matches the size of WikiText-103 (Merity et al., 2016), a standard language-modeling dataset. For downstream evaluation, we choose four tasks from the XTREME benchmark (Hu et al., 2020). Table 4 lists all the datasets and their evaluation metrics.",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2022.naacl-main.264",
+        "title": "Chain-of-Thought Prompting Elicits Reasoning in Large Language Models",
+        "category": "Prompting",
+        "year": 2022,
+        "authors": "undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 29
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2022.naacl-main.264-chunk-30",
+      "content": "XTREME benchmark (Hu et al., 2020). Table 4 lists all the datasets and their evaluation metrics. \n\nImplementation Details We use a variant of RoBERTa (Liu et al., 2019) which has 8 layers, 8 heads, and a hidden dimensionality of 512 . We train each model on 500 Ksteps, a batch size of 128 , and a learning rate of 1 e -4 with a linear warmup of 10 K steps. We use an original language vocabulary size of 40000 for all the models and train on 8 Cloud TPU v3 cores for 32 -48 hours. For fine-tuning, we use standard hyperparameters (Appendix F) from the XTREME benchmark and report our scores on the development sets.\n\n## 4 Results",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2022.naacl-main.264",
+        "title": "Chain-of-Thought Prompting Elicits Reasoning in Large Language Models",
+        "category": "Prompting",
+        "year": 2022,
+        "authors": "undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 30
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2022.naacl-main.264-chunk-31",
+      "content": "fine-tuning, we use standard hyperparameters (Appendix F) from the XTREME benchmark and report our scores on the development sets. ## 4 Results \n\nOur experiments reveal several interesting findings for bilingual models including the situational importance of sub-word overlap for zero-shot transfer (§ 4.1, 4.2), the effect of domain mismatch between languages (§ 4.3), and correlation of zero-shot performance with embedding alignment (§ 4.4). We connect our findings to zero-shot transfer results between natural languages in Section 4.5.\n\n## 4.1 Sub-word overlap is not strictly necessary for strong zero-shot transfer",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2022.naacl-main.264",
+        "title": "Chain-of-Thought Prompting Elicits Reasoning in Large Language Models",
+        "category": "Prompting",
+        "year": 2022,
+        "authors": "undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 31
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2022.naacl-main.264-chunk-32",
+      "content": "natural languages in Section 4.5. ## 4.1 Sub-word overlap is not strictly necessary for strong zero-shot transfer \n\nSub-word overlap is the number of common tokens between two different language corpora. If E 1 and E 2 are sets of tokens which appear in the two corpora, then: Sub-word overlap = |E 1 ∩ E 2 | / |E 1 ∪ E 2 | (Pires et al., 2019). The Transliteration transformation ( T trans ) creates original -derived language pairs that have 0% sub-word overlap (equivalently, different scripts), but follow the same word order.",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2022.naacl-main.264",
+        "title": "Chain-of-Thought Prompting Elicits Reasoning in Large Language Models",
+        "category": "Prompting",
+        "year": 2022,
+        "authors": "undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 32
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2022.naacl-main.264-chunk-33",
+      "content": "-derived language pairs that have 0% sub-word overlap (equivalently, different scripts), but follow the same word order. \n\nTable 3 displays ∆ ( BZ -BS ) scores for T trans , averaged over four languages (Appendix B contains a breakdown). We observe that ∆ ( BZ -BS ) ≈ 0 for all tasks while ∆ ( MZ -BS ) is highly negative, implying that zero-shot transfer is strong and on par with supervised learning. This result indicates that zero-shot transfer is possible even when languages with different scripts have similar word orders (in line with K et al. (2020)). However, it is unrealistic for natural languages to differ only in their script and not other properties (e.g., word order).\n\n## 4.2 Absence of sub-word overlap significantly hurts zero-shot performance when languages differ in their word-orders",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2022.naacl-main.264",
+        "title": "Chain-of-Thought Prompting Elicits Reasoning in Large Language Models",
+        "category": "Prompting",
+        "year": 2022,
+        "authors": "undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 33
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2022.naacl-main.264-chunk-34",
+      "content": "in their script and not other properties (e.g., word order). ## 4.2 Absence of sub-word overlap significantly hurts zero-shot performance when languages differ in their word-orders \n\nTo simulate a more realistic scenario, we create original and derived language pairs which differ both in their scripts ( 0% sub-word overlap) and in word order. We achieve this by composing two transformations on the original language corpus, one of which is Transliteration ( T trans ). We experiment with three different compositions, (a) T trans ◦ T inv , (b) T trans ◦ T perm , and (c) T trans ◦ T syn . Here, α ◦ β means that transformation β is applied before α . A composed transformation ( T trans ◦",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2022.naacl-main.264",
+        "title": "Chain-of-Thought Prompting Elicits Reasoning in Large Language Models",
+        "category": "Prompting",
+        "year": 2022,
+        "authors": "undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 34
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2022.naacl-main.264-chunk-35",
+      "content": "T syn . Here, α ◦ β means that transformation β is applied before α . A composed transformation ( T trans ◦ \n\n4 XQuAD is a question-answering task where the correct answer is a contiguous span. We do not report scores on XQuAD for T perm and T syn because they can potentially reorder individual words in the contiguous answer, thus distributing them throughout the transformed sentence and making the question unanswerable. On the other hand, T inv and T trans do not have this issue because they maintain the spans.",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2022.naacl-main.264",
+        "title": "Chain-of-Thought Prompting Elicits Reasoning in Large Language Models",
+        "category": "Prompting",
+        "year": 2022,
+        "authors": "undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 35
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2022.naacl-main.264-chunk-36",
+      "content": "other hand, T inv and T trans do not have this issue because they maintain the spans. \n\nTable 3: (1) Evaluation: We report ∆ ( BZ -BS ) and ∆ ( MZ -BS ) (§ 3.3 and Table 2) for transformations on different tasks, averaged over four languages (EN, FR, HI, AR). We report the breakdown for different languages in Appendix B. BZ , the bilingual zero-shot performance, is reported for reference. (2) Interpreting scores: Smaller (more negative) ∆ ( BZ -BS ) implies worse bilingual zero-shot transfer, whereas ∆ ( BZ -BS ) ≈ 0 implies strong transfer. ∆ ( BZ -BS ) /greatermuch ∆ ( MZ -BS ) implies that bilingual pre-training is extremely useful. Scores are highlighted based on their value (lower scores have a higher intensity of red ). Cases with strong zero-shot transfer ( ∆ ( BZ -BS ) ≈ 0 ) are marked with an asterisk. (3) Trends: T trans exhibits strong transfer on all tasks and languages (high ∆ ( BZ -BS ) scores), and bilingual pre-training is extremely useful ( ∆ ( BZ -BS ) /greatermuch ∆ ( MZ -BS ) ), implying that zero-shot transfer is possible between languages with different scripts but the same word order. T inv and T perm suffer on all tasks (small ∆ ( BZ -BS ) scores) whereas T syn suffers significantly lesser, which provides evidence that local changes to the word order made by Syntax ( T syn ) hurts zero-shot transfer significantly lesser than global changes made by Inversion ( T inv ) and Permutation ( T perm ).",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2022.naacl-main.264",
+        "title": "Chain-of-Thought Prompting Elicits Reasoning in Large Language Models",
+        "category": "Prompting",
+        "year": 2022,
+        "authors": "undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 36
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2022.naacl-main.264-chunk-37",
+      "content": "tasks (small ∆ ( BZ -BS ) scores) whereas T syn suffers significantly lesser, which provides evidence that local changes to the word order made by Syntax ( T syn ) hurts zero-shot transfer significantly lesser than global changes made by Inversion ( T inv ) and Permutation ( T perm ). \n\n| Task      | Inversion ( T inv )   | Inversion ( T inv )   | Inversion ( T inv )   | Permutation ( T perm )   | Permutation ( T perm )   | Permutation ( T perm )   | Syntax ( T syn )   | Syntax ( T syn )   | Syntax ( T syn )   | Syntax ( T syn )   | Transliteration ( T trans )   | Transliteration ( T trans )   | Transliteration ( T trans )   | Transliteration ( T trans )   |\n|-----------|-----------------------|-----------------------|-----------------------|--------------------------|--------------------------|--------------------------|--------------------|--------------------|--------------------|--------------------|-------------------------------|-------------------------------|-------------------------------|-------------------------------|\n| Task      | ∆ ( BZ - BS )         | ∆ ( MZ - BS )         | BZ                    | ∆ ( BZ - BS )            | ∆ ( MZ - BS )            | BZ                       | ∆ ( BZ - BS )      | ∆ ( BZ - BS )      | ∆ ( MZ - BS )      | BZ                 | ∆ ( BZ - BS ) ∆ (             | MZ - BS )                     | BZ                            |                               |\n| XNLI      | -10.2                 | -13.0                 | 58.4                  | -3.6                     | -8.6                     | 62.6                     | -0.9               | /star              | -1.1               | 67.8               | -1.0 /star                    | -36.7                         | 69.3                          |                               |\n| NER       | -49.1                 | -46.7                 | 37.9                  | -26.3                    | -35.4                    | 47.3                     | -14.6              |                    | -16.6              | 62.9               | -1.9 /star                    | -82.6                         | 83.7                          |                               |\n| POS -30.2 |                       | -36.2                 | 64.2                  | -11.2                    | -25.2                    | 73.6                     | -4.4               |                    | -7.6               | 89.4               | -0.4 /star                    | -95.0                         | 95.4                          |                               |\n| XQuAD 4   | -32.8                 | -31.0                 | 22.8                  | - 4                      | -                        | -                        | -                  | 4                  | -                  | -                  | 0.0 /star                     | -55.9                         | 61.2                          |                               |",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2022.naacl-main.264",
+        "title": "Chain-of-Thought Prompting Elicits Reasoning in Large Language Models",
+        "category": "Prompting",
+        "year": 2022,
+        "authors": "undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 37
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2022.naacl-main.264-chunk-38",
+      "content": "| 83.7 | | | POS -30.2 | | -36.2 | 64.2 | -11.2 | -25.2 | 73.6 | -4.4 | | -7.6 | 89.4 | -0.4 /star | -95.0 | 95.4 | | | XQuAD 4 | -32.8 | -31.0 | 22.8 | - 4 | - | - | - | 4 | - | - | 0.0 /star | -55.9 | 61.2 | | \n\nTable 4: XTREME benchmark datasets used for zeroshot transfer evaluation. NLI=Natural Language Inference, NER=Named-entity recognition, POS=Part-ofspeech tagging, QA=Question-Answering.\n\n| Dataset                       | Task   | Metric   |\n|-------------------------------|--------|----------|\n| XNLI (Conneau et al., 2018)   | NLI    | Accuracy |\n| Wikiann (Pan et al., 2017)    | NER    | F1       |\n| UD v2.5 (Nivre et al., 2018)  | POS    | F1       |\n| XQuAD (Artetxe et al., 2020b) | QA     | F1       |\n\nβ ) differs from its second constituent ( β ) in that the former produces a derived language which has 0% sub-word overlap with the original language whereas the latter has a 100% sub-word overlap.",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2022.naacl-main.264",
+        "title": "Chain-of-Thought Prompting Elicits Reasoning in Large Language Models",
+        "category": "Prompting",
+        "year": 2022,
+        "authors": "undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 38
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2022.naacl-main.264-chunk-39",
+      "content": "differs from its second constituent ( β ) in that the former produces a derived language which has 0% sub-word overlap with the original language whereas the latter has a 100% sub-word overlap. \n\nResults Our results (Figure 2, breakdown in Appendix C) show that zero-shot performance is significantly hurt for composed transformations when compared to its constituents. | ∆ ( BZ -BS ) | is much larger for T trans ◦ T inv when compared to T trans or T inv individually. For example, for XNLI, | ∆ ( BZ -BS ) | = 19 for the composed transformation and just 2 and 3 for T trans and T inv individually. T trans ◦ T perm is worse by ≈ 20 points on XNLI and NER, and over 40 points on POS when compared to T perm . T trans ◦ T syn suffers lesser than the other two composed transformations, but it is still worse than T syn by 3 , 6 , and 1 point on XNLI, NER, and POS. In conclusion, the absence of subword overlap significantly degrades zero-shot per- formance in the realistic case of languages with different word orders.",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2022.naacl-main.264",
+        "title": "Chain-of-Thought Prompting Elicits Reasoning in Large Language Models",
+        "category": "Prompting",
+        "year": 2022,
+        "authors": "undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 39
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2022.naacl-main.264-chunk-40",
+      "content": "than T syn by 3 , 6 , and 1 point on XNLI, NER, and POS. In conclusion, the absence of subword overlap significantly degrades zero-shot per- formance in the realistic case of languages with different word orders. \n\n## 4.3 Data from the same domain boosts bilingual performance\n\nPreviously, we considered transformations ( T ) that modified the original pre-training corpus to get a parallel corpus, C deriv = T ( C orig ) , such that there is a one-to-one correspondence between sentences in C orig and C deriv (we call this setting parallel ). Since procuring large parallel corpora is expensive in practice, we consider two other settings which use different corpora for original and derived .",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2022.naacl-main.264",
+        "title": "Chain-of-Thought Prompting Elicits Reasoning in Large Language Models",
+        "category": "Prompting",
+        "year": 2022,
+        "authors": "undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 40
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2022.naacl-main.264-chunk-41",
+      "content": "Since procuring large parallel corpora is expensive in practice, we consider two other settings which use different corpora for original and derived . \n\nSetup Consider two text corpora of the same size, C 1 orig and C 2 orig . We compare two settings: (1) The parallel setting pre-trains a bilingual model on C 1 orig + T ( C 1 orig ) , whereas the (2) non-parallel corpus setting uses C 1 orig + T ( C 2 orig ) . We consider two variants of non-parallel , (1) non-parallel (same) which uses different splits of Wikipedia data (hence, same domain), and (2) non-parallel (diff) which uses Wikipedia data for the original and common crawl data (web text) for the derived language (hence, diff erent domain). We use the Transliteration transformation ( T trans ) to generate the derived language corpus and report | ∆ ( BZ -BS ) | averaged over all languages in Figure 3.",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2022.naacl-main.264",
+        "title": "Chain-of-Thought Prompting Elicits Reasoning in Large Language Models",
+        "category": "Prompting",
+        "year": 2022,
+        "authors": "undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 41
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2022.naacl-main.264-chunk-42",
+      "content": "use the Transliteration transformation ( T trans ) to generate the derived language corpus and report | ∆ ( BZ -BS ) | averaged over all languages in Figure 3. \n\nResults We observe consistently on all tasks that the parallel setting (blue bar) performs better than both the non-parallel settings. Non-parallel (same)",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2022.naacl-main.264",
+        "title": "Chain-of-Thought Prompting Elicits Reasoning in Large Language Models",
+        "category": "Prompting",
+        "year": 2022,
+        "authors": "undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 42
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2022.naacl-main.264-chunk-43",
+      "content": "performs better than both the non-parallel settings. Non-parallel (same) \n\nFigure 2: | ∆ ( BZ -BS ) | for composed transformations (§ 4.2) applied on EN as the original language. Larger scores imply worse zero-shot transfer. T trans = Transliteration , T inv = Inversion , T perm = Permutation , and T syn = Syntax . Sub-word overlap between the original and derived language is 0% when composed transformations are used (e.g. T trans ◦ T inv ) and 100% when the second constituent is used (here, T inv ). We observe that the composed transformations (green bars) do significantly worse than their constituents (blue and orange), showing that T trans ◦ T inv is worse than T inv by over 16 points on XNLI and 42 points on POS, with similar trends for T trans ◦ T perm . T trans ◦ T syn doesn't suffer as much, but its performance degradation when compared to Syntax is still large (ranges between 1 point on POS to 6 points on NER). absence of sub-word overlap significantly hurts performance when languages differ in their word orders.",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2022.naacl-main.264",
+        "title": "Chain-of-Thought Prompting Elicits Reasoning in Large Language Models",
+        "category": "Prompting",
+        "year": 2022,
+        "authors": "undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 43
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2022.naacl-main.264-chunk-44",
+      "content": "but its performance degradation when compared to Syntax is still large (ranges between 1 point on POS to 6 points on NER). absence of sub-word overlap significantly hurts performance when languages differ in their word orders. \n\n<!-- image -->\n\n<!-- image -->\n\n<!-- image -->\n\nperforms better than non-parallel (diff) , with gains ranging between 2 points on XQuAD to 17 points on NER. This result shows that even for original and derived language pairs which differ only in their script, having parallel pre-training corpora leads to the best zero-shot transfer. Since largescale parallel unsupervised data is hard to procure, the best alternative is to use corpora from similar domains (Wikipedia) rather than different ones (Wikipedia v.s. web text).\n\n## 4.4 Zero-shot performance is strongly correlated with embedding alignment",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2022.naacl-main.264",
+        "title": "Chain-of-Thought Prompting Elicits Reasoning in Large Language Models",
+        "category": "Prompting",
+        "year": 2022,
+        "authors": "undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 44
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2022.naacl-main.264-chunk-45",
+      "content": "to use corpora from similar domains (Wikipedia) rather than different ones (Wikipedia v.s. web text). ## 4.4 Zero-shot performance is strongly correlated with embedding alignment \n\nOur previous results ( § 4.2, 4.3) showed cases where zero-shot transfer between languages is poor when there is no sub-word overlap. To investigate this further, we analyze the static word embeddings learned by bilingual models and find that zero-shot transfer between languages is strongly correlated with the alignment between word embeddings for the original and derived languages.\n\nSetup The original and the derived languages have a one-to-one correspondence between their sub-word vocabularies when we use transliteration ( T trans ). For a token embedding in the original -language embedding matrix, its alignment score is 100% if it retrieves the corresponding token embedding in the derived language when a nearestneighbor search is performed, and 0% otherwise.",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2022.naacl-main.264",
+        "title": "Chain-of-Thought Prompting Elicits Reasoning in Large Language Models",
+        "category": "Prompting",
+        "year": 2022,
+        "authors": "undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 45
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2022.naacl-main.264-chunk-46",
+      "content": "embedding matrix, its alignment score is 100% if it retrieves the corresponding token embedding in the derived language when a nearestneighbor search is performed, and 0% otherwise. \n\nWe average the alignment score over all the tokens and call it alignment .\n\nResults We measure the alignment of bilingual models pre-trained on different original -derived language pairs created using transliteration , namely the composed transformations (§ 4.2), parallel , and non-parallel (§ 4.3). We plot the alignment along with the corresponding ∆ ( BZ -BS ) scores for XNLI in Figure 4. Results for other tasks are in Appendix E.",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2022.naacl-main.264",
+        "title": "Chain-of-Thought Prompting Elicits Reasoning in Large Language Models",
+        "category": "Prompting",
+        "year": 2022,
+        "authors": "undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 46
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2022.naacl-main.264-chunk-47",
+      "content": "∆ ( BZ -BS ) scores for XNLI in Figure 4. Results for other tasks are in Appendix E. \n\nWe observe that higher alignment is associated with lower ∆ ( BZ -BS ) , implying better zeroshot transfer. Alignment is lower for composed transformations like T trans ◦ T inv and T trans ◦ T perm which have large and negative ∆ ( BZ -BS ) . Alignment also explains the results in Section 4.3, with non-parallel variants having lower alignment scores than parallel , which is in line with their lower ∆ ( BZ -BS ) . Overall, we find a strong and significant Spearman's rank correlation between alignment and ∆ ( BZ -BS ) , with ρ = 0 . 94 , p &lt; . 005 for XNLI, ρ = 0 . 93 , p &lt; . 005 for NER, and ρ = 0 . 89 , p &lt; . 01 for POS, indicating that increasing the embedding alignment between languages helps improve zero-shot transfer.",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2022.naacl-main.264",
+        "title": "Chain-of-Thought Prompting Elicits Reasoning in Large Language Models",
+        "category": "Prompting",
+        "year": 2022,
+        "authors": "undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 47
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2022.naacl-main.264-chunk-48",
+      "content": ", p &lt; . 005 for NER, and ρ = 0 . 89 , p &lt; . 01 for POS, indicating that increasing the embedding alignment between languages helps improve zero-shot transfer. \n\nFigure 3: | ∆ ( BZ -BS ) | for T trans under different conditions on the source of original and derived language pre-training corpora (hereon, corpora) (§ 4.3), averaged over four languages. Larger values imply worse zero-shot transfer. The breakdown of scores for different languages is in Appendix D. (1) Non-parallel (diff) (green bar), which uses corpora from different domains is worse than (2) Non-parallel (same) (orange bar), which uses different sets of sentences sampled from the same domain, which is in turn worse than (3) Parallel , which uses the same sentences. Having pre-training corpora from the same domain like Wikipedia ( Nonparallel (same) ) gives performance boosts between 2 points for QA to 17 points for NER when compared to Non-parallel (diff) .\n\n<!-- image -->",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2022.naacl-main.264",
+        "title": "Chain-of-Thought Prompting Elicits Reasoning in Large Language Models",
+        "category": "Prompting",
+        "year": 2022,
+        "authors": "undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 48
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2022.naacl-main.264-chunk-49",
+      "content": "the same domain like Wikipedia ( Nonparallel (same) ) gives performance boosts between 2 points for QA to 17 points for NER when compared to Non-parallel (diff) . <!-- image --> \n\n## 4.5 Connections to results on natural language pairs",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2022.naacl-main.264",
+        "title": "Chain-of-Thought Prompting Elicits Reasoning in Large Language Models",
+        "category": "Prompting",
+        "year": 2022,
+        "authors": "undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 49
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2022.naacl-main.264-chunk-50",
+      "content": "Connections to results on natural language pairs \n\nEffect of sub-word overlap In § 4.2, we showed that when languages have different scripts ( 0% subword overlap), zero-shot transfer significantly degrades when they additionally have different word orders. However, the zero-shot transfer is good when languages differ only in the script and have similar or the same word order. This is in line with anecdotal evidence in Pires et al. (2019), where zero-shot transfer works well between English and Bulgarian (different script but same subjectverb-object order - SVO), but is poor between English and Japanese (different script and word order - SVO v.s. SOV). Our result also corroborates findings in Conneau et al. (2020b) that artificially increasing sub-word overlap between natural languages (which have different word orders) improves performance (e.g., 3 points on XNLI).",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2022.naacl-main.264",
+        "title": "Chain-of-Thought Prompting Elicits Reasoning in Large Language Models",
+        "category": "Prompting",
+        "year": 2022,
+        "authors": "undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 50
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2022.naacl-main.264-chunk-51",
+      "content": "in Conneau et al. (2020b) that artificially increasing sub-word overlap between natural languages (which have different word orders) improves performance (e.g., 3 points on XNLI). \n\nEffect of token embedding alignment In § 4.4, we showed that zero-shot transfer is strongly correlated with word embedding alignment between languages. This explains the usefulness of recent stud-",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2022.naacl-main.264",
+        "title": "Chain-of-Thought Prompting Elicits Reasoning in Large Language Models",
+        "category": "Prompting",
+        "year": 2022,
+        "authors": "undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 51
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2022.naacl-main.264-chunk-52",
+      "content": "alignment between languages. This explains the usefulness of recent stud- \n\nFigure 4: ∆ ( BZ -BS ) for Transliteration ( T trans ) variants on XNLI. Larger values (less negative) imply better zero-shot transfer. We see that alignment (§ 4.4) between token embeddings of different languages is correlated with ∆ ( BZ -BS ) , and hence with better zeroshot transfer. For example, T trans ◦ T inv (bottom left) which has poor zero-shot transfer also has lower alignment, whereas Parallel (top right) which has strong transfer is accompanied with higher alignment. We find a strong and statistically significant Spearman's correlation of ρ s = 0 . 94 , p &lt; . 005 on XNLI, ρ s = 0 . 93 , p &lt; . 005 on NER, and ρ s = 0 . 89 , p &lt; . 01 on POS. Plots for other tasks are in Appendix E.\n\n<!-- image -->\n\nies which try to improve multilingual pre-training with the help of auxiliary objectives, which improve word or sentence embedding alignment.",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2022.naacl-main.264",
+        "title": "Chain-of-Thought Prompting Elicits Reasoning in Large Language Models",
+        "category": "Prompting",
+        "year": 2022,
+        "authors": "undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 52
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2022.naacl-main.264-chunk-53",
+      "content": "on POS. Plots for other tasks are in Appendix E. <!-- image --> ies which try to improve multilingual pre-training with the help of auxiliary objectives, which improve word or sentence embedding alignment. \n\nDICT-MLM (Chaudhary et al., 2020) and RelateLM (Khemchandani et al., 2021) require the model to predict cross-lingual synonyms as an auxiliary objective, thus indirectly improving wordembedding alignment and the zero-shot performance on multiple tasks. Hu et al. (2021) add an auxiliary objective that implicitly improves word embedding alignment and show that they can achieve performance similar to larger models. Cao et al. (2019) explicitly improve contextual word embedding alignment with the help of wordlevel alignment information in machine-translated cross-lingual sentence pairs. Since they apply this post hoc and not during pre-training, the improvement, albeit significant, is small ( 2 points on XNLI). While these studies do not fully utilize word and sentence embedding alignment information, our results lead us to posit that they are a step in the right direction and that baking alignment information more explicitly into pre-training will be beneficial.",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2022.naacl-main.264",
+        "title": "Chain-of-Thought Prompting Elicits Reasoning in Large Language Models",
+        "category": "Prompting",
+        "year": 2022,
+        "authors": "undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 53
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2022.naacl-main.264-chunk-54",
+      "content": "utilize word and sentence embedding alignment information, our results lead us to posit that they are a step in the right direction and that baking alignment information more explicitly into pre-training will be beneficial. \n\n## 5 Conclusion",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2022.naacl-main.264",
+        "title": "Chain-of-Thought Prompting Elicits Reasoning in Large Language Models",
+        "category": "Prompting",
+        "year": 2022,
+        "authors": "undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 54
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2022.naacl-main.264-chunk-55",
+      "content": "will be beneficial. ## 5 Conclusion \n\nThrough a systematic study of zero-shot transfer between four diverse natural languages and their counterparts created by modifying specific properties like the script, word order, and syntax, we showed that (1) absence of sub-word overlap hurts zero-shot performance when languages differ in their word order, and (2) zero-shot performance is strongly correlated with word embedding alignment between languages. Some recent studies have implicitly or unknowingly attempted to improve alignment and have shown slight improvements in zero-shot transfer performance. However, our results lead us to posit that explicitly improving word embedding alignment during pre-training by using either supervised (e.g., parallel sentences and translation dictionaries) or unsupervised data will significantly improve zero-shot transfer. Although real languages typically differ in more ways than the set of properties considered in our transformations, our methodology is still useful to help isolate crucial properties for transfer. Future work can experiment with more sophisticated transformations and investigate closer connections with human language pairs.",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2022.naacl-main.264",
+        "title": "Chain-of-Thought Prompting Elicits Reasoning in Large Language Models",
+        "category": "Prompting",
+        "year": 2022,
+        "authors": "undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 55
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2022.naacl-main.264-chunk-56",
+      "content": "in our transformations, our methodology is still useful to help isolate crucial properties for transfer. Future work can experiment with more sophisticated transformations and investigate closer connections with human language pairs. \n\n## Acknowledgments\n\nThis work was funded through a grant from the Chadha Center for Global India at Princeton University. We thank Shunyu Yao, Vishvak Murahari, Tianyu Gao, Sadhika Malladi, and Jens Tuyls for reading our draft and providing valuable comments. We also thank the Google Cloud Research program for computational support in running our experiments.\n\n## References\n\nMikel Artetxe, Sebastian Ruder, and Dani Yogatama. 2020a. On the cross-lingual transferability of monolingual representations. In Proceedings of the 58th Annual Meeting of the Association for Computational Linguistics, ACL 2020, Online, July 5-10, 2020 , pages 4623-4637. Association for Computational Linguistics.",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2022.naacl-main.264",
+        "title": "Chain-of-Thought Prompting Elicits Reasoning in Large Language Models",
+        "category": "Prompting",
+        "year": 2022,
+        "authors": "undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 56
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2022.naacl-main.264-chunk-57",
+      "content": "Proceedings of the 58th Annual Meeting of the Association for Computational Linguistics, ACL 2020, Online, July 5-10, 2020 , pages 4623-4637. Association for Computational Linguistics. \n\nMikel Artetxe, Sebastian Ruder, and Dani Yogatama. 2020b. On the cross-lingual transferability of monolingual representations. Proceedings of the 58th Annual Meeting of the Association for Computational Linguistics .\n\nSamuel Bowman, Christopher Potts, and Christopher D Manning. 2015. Recursive neural networks can learn logical semantics. In Proceedings of the 3rd workshop on continuous vector space models and their compositionality , pages 12-21.\n\nSteven Cao, Nikita Kitaev, and Dan Klein. 2019. Multilingual alignment of contextual word representations. In International Conference on Learning Representations .\n\nAditi Chaudhary, Karthik Raman, Krishna Srinivasan, and Jiecao Chen. 2020. DICT-MLM: improved multilingual pre-training using bilingual dictionaries. CoRR , abs/2010.12566.",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2022.naacl-main.264",
+        "title": "Chain-of-Thought Prompting Elicits Reasoning in Large Language Models",
+        "category": "Prompting",
+        "year": 2022,
+        "authors": "undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 57
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2022.naacl-main.264-chunk-58",
+      "content": "on Learning Representations . Aditi Chaudhary, Karthik Raman, Krishna Srinivasan, and Jiecao Chen. 2020. DICT-MLM: improved multilingual pre-training using bilingual dictionaries. CoRR , abs/2010.12566. \n\nAlexis Conneau, Kartikay Khandelwal, Naman Goyal, Vishrav Chaudhary, Guillaume Wenzek, Francisco Guzmán, Edouard Grave, Myle Ott, Luke Zettlemoyer, and Veselin Stoyanov. 2020a. Unsupervised cross-lingual representation learning at scale. In Proceedings of the 58th Annual Meeting of the Association for Computational Linguistics, ACL 2020, Online, July 5-10, 2020 , pages 8440-8451. Association for Computational Linguistics.\n\nAlexis Conneau and Guillaume Lample. 2019. Crosslingual language model pretraining. In Advances in Neural Information Processing Systems 32: Annual Conference on Neural Information Processing Systems 2019, NeurIPS 2019, December 8-14, 2019, Vancouver, BC, Canada , pages 7057-7067.",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2022.naacl-main.264",
+        "title": "Chain-of-Thought Prompting Elicits Reasoning in Large Language Models",
+        "category": "Prompting",
+        "year": 2022,
+        "authors": "undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 58
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2022.naacl-main.264-chunk-59",
+      "content": "Processing Systems 32: Annual Conference on Neural Information Processing Systems 2019, NeurIPS 2019, December 8-14, 2019, Vancouver, BC, Canada , pages 7057-7067. \n\nAlexis Conneau, Ruty Rinott, Guillaume Lample, Adina Williams, Samuel R. Bowman, Holger Schwenk, and Veselin Stoyanov. 2018. Xnli: Evaluating crosslingual sentence representations. In Proceedings of the 2018 Conference on Empirical Methods in Natural Language Processing . Association for Computational Linguistics.\n\nAlexis Conneau, Shijie Wu, Haoran Li, Luke Zettlemoyer, and Veselin Stoyanov. 2020b. Emerging cross-lingual structure in pretrained language models. In Proceedings of the 58th Annual Meeting of the Association for Computational Linguistics , pages 6022-6034.\n\nJacob Devlin. 2019. Multilingual-BERT. https: //github.com/google-research/bert/ blob/master/multilingual.md . [Online; accessed 20-December-2020].",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2022.naacl-main.264",
+        "title": "Chain-of-Thought Prompting Elicits Reasoning in Large Language Models",
+        "category": "Prompting",
+        "year": 2022,
+        "authors": "undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 59
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2022.naacl-main.264-chunk-60",
+      "content": "of the Association for Computational Linguistics , pages 6022-6034. Jacob Devlin. 2019. Multilingual-BERT. https: //github.com/google-research/bert/ blob/master/multilingual.md . [Online; accessed 20-December-2020]. \n\nJacob Devlin, Ming-Wei Chang, Kenton Lee, and Kristina Toutanova. 2019. Bert: Pre-training of deep bidirectional transformers for language understanding. In Proceedings of the 2019 Conference of the North American Chapter of the Association for Computational Linguistics: Human Language Technologies, Volume 1 (Long and Short Papers) , pages 4171-4186.\n\nSumanth Doddapaneni, Gowtham Ramesh, Anoop Kunchukuttan, Pratyush Kumar, and Mitesh M Khapra. 2021. A primer on pretrained multilingual language models. arXiv preprint arXiv:2107.00676 .",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2022.naacl-main.264",
+        "title": "Chain-of-Thought Prompting Elicits Reasoning in Large Language Models",
+        "category": "Prompting",
+        "year": 2022,
+        "authors": "undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 60
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2022.naacl-main.264-chunk-61",
+      "content": "Kumar, and Mitesh M Khapra. 2021. A primer on pretrained multilingual language models. arXiv preprint arXiv:2107.00676 . \n\n- Philipp Dufter and Hinrich Schütze. 2020. Identifying elements essential for bert's multilinguality. In Proceedings of the 2020 Conference on Empirical Methods in Natural Language Processing (EMNLP) , pages 4423-4437.\n- Tsung-Yuan Hsu, Chi-Liang Liu, and Hung-Yi Lee. 2019. Zero-shot reading comprehension by crosslingual transfer learning with multi-lingual language representation model. In Proceedings of the 2019 Conference on Empirical Methods in Natural Language Processing and the 9th International Joint Conference on Natural Language Processing (EMNLP-IJCNLP) , pages 5933-5940.\n- Junjie Hu, Melvin Johnson, Orhan Firat, Aditya Siddhant, and Graham Neubig. 2021. Explicit alignment objectives for multilingual bidirectional encoders. In Proceedings of the 2021 Conference of the North American Chapter of the Association for Computational Linguistics: Human Language Technologies , pages 3633-3643.\n- Junjie Hu, Sebastian Ruder, Aditya Siddhant, Graham Neubig, Orhan Firat, and Melvin Johnson. 2020. Xtreme: A massively multilingual multitask benchmark for evaluating cross-lingual generalisation. In International Conference on Machine Learning , pages 4411-4421. PMLR.\n- Karthikeyan K, Zihan Wang, Stephen Mayhew, and Dan Roth. 2020. Cross-lingual ability of multilingual BERT: an empirical study. In 8th International Conference on Learning Representations, ICLR 2020, Addis Ababa, Ethiopia, April 26-30, 2020 . OpenReview.net.",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2022.naacl-main.264",
+        "title": "Chain-of-Thought Prompting Elicits Reasoning in Large Language Models",
+        "category": "Prompting",
+        "year": 2022,
+        "authors": "undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 61
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2022.naacl-main.264-chunk-62",
+      "content": "Learning , pages 4411-4421. PMLR. - Karthikeyan K, Zihan Wang, Stephen Mayhew, and Dan Roth. 2020. Cross-lingual ability of multilingual BERT: an empirical study. In 8th International Conference on Learning Representations, ICLR 2020, Addis Ababa, Ethiopia, April 26-30, 2020 . OpenReview.net. \n\nDivyanshu Kakwani, Anoop Kunchukuttan, Satish Golla, NC Gokul, Avik Bhattacharyya, Mitesh M Khapra, and Pratyush Kumar. 2020. inlpsuite: Monolingual corpora, evaluation benchmarks and pre-trained multilingual language models for indian languages. In Proceedings of the 2020 Conference on Empirical Methods in Natural Language Processing: Findings , pages 4948-4961.",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2022.naacl-main.264",
+        "title": "Chain-of-Thought Prompting Elicits Reasoning in Large Language Models",
+        "category": "Prompting",
+        "year": 2022,
+        "authors": "undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 62
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2022.naacl-main.264-chunk-63",
+      "content": "Proceedings of the 2020 Conference on Empirical Methods in Natural Language Processing: Findings , pages 4948-4961. \n\nYash Khemchandani, Sarvesh Mehtani, Vaidehi Patil, Abhijeet Awasthi, Partha Talukdar, and Sunita Sarawagi. 2021. Exploiting language relatedness for low web-resource language model adaptation: An Indic languages study. In Proceedings of the 59th Annual Meeting of the Association for Computational Linguistics and the 11th International Joint Conference on Natural Language Processing (Volume 1: Long Papers) , pages 1312-1323, Online. Association for Computational Linguistics.",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2022.naacl-main.264",
+        "title": "Chain-of-Thought Prompting Elicits Reasoning in Large Language Models",
+        "category": "Prompting",
+        "year": 2022,
+        "authors": "undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 63
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2022.naacl-main.264-chunk-64",
+      "content": "Language Processing (Volume 1: Long Papers) , pages 1312-1323, Online. Association for Computational Linguistics. \n\n- Yu-Hsiang Lin, Chian-Yu Chen, Jean Lee, Zirui Li, Yuyan Zhang, Mengzhou Xia, Shruti Rijhwani, Junxian He, Zhisong Zhang, Xuezhe Ma, et al. 2019. Choosing transfer languages for cross-lingual learning. In Proceedings of the 57th Annual Meeting of the Association for Computational Linguistics , pages 3125-3135.\n- Yinhan Liu, Myle Ott, Naman Goyal, Jingfei Du, Mandar Joshi, Danqi Chen, Omer Levy, Mike Lewis, Luke Zettlemoyer, and Veselin Stoyanov. 2019. Roberta: A robustly optimized bert pretraining approach. arXiv preprint arXiv:1907.11692 .\n- Stephen Merity, Caiming Xiong, James Bradbury, and Richard Socher. 2016. Pointer sentinel mixture models. arXiv preprint arXiv:1609.07843 .\n- Joakim Nivre, Mitchell Abrams, Željko Agi´ c, Lars Ahrenberg, Lene Antonsen, Maria Jesus Aranzabe, Gashaw Arutie, Masayuki Asahara, Luma Ateyah, and Mohammed Attia et al. 2018. Universal dependencies 2.2. LINDAT/CLARIAH-CZ digital library at the Institute of Formal and Applied Linguistics (ÚFAL), Faculty of Mathematics and Physics, Charles University.\n- Xiaoman Pan, Boliang Zhang, Jonathan May, Joel Nothman, Kevin Knight, and Heng Ji. 2017. Crosslingual name tagging and linking for 282 languages. In Proceedings of the 55th Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers) , pages 1946-1958.\n- Telmo Pires, Eva Schlinger, and Dan Garrette. 2019. How multilingual is multilingual bert? In Proceedings of the 57th Annual Meeting of the Association for Computational Linguistics , pages 4996-5001.\n- Peng Qi, Yuhao Zhang, Yuhui Zhang, Jason Bolton, and Christopher D Manning. 2020. Stanza: A python natural language processing toolkit for many human languages. In Proceedings of the 58th Annual Meeting of the Association for Computational Linguistics: System Demonstrations , pages 101108.\n- Alec Radford, Karthik Narasimhan, Tim Salimans, and Ilya Sutskever. 2018. Improving language understanding by generative pre-training.",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2022.naacl-main.264",
+        "title": "Chain-of-Thought Prompting Elicits Reasoning in Large Language Models",
+        "category": "Prompting",
+        "year": 2022,
+        "authors": "undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 64
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2022.naacl-main.264-chunk-65",
+      "content": "Qi, Yuhao Zhang, Yuhui Zhang, Jason Bolton, and Christopher D Manning. 2020. Stanza: A python natural language processing toolkit for many human languages. In Proceedings of the 58th Annual Meeting of the Association for Computational Linguistics: System Demonstrations , pages 101108. - Alec Radford, Karthik Narasimhan, Tim Salimans, and Ilya Sutskever. 2018. Improving language understanding by generative pre-training. \n\nRico Sennrich, Barry Haddow, and Alexandra Birch. 2015. Neural machine translation of rare words with subword units. arXiv preprint arXiv:1508.07909 .\n\n- Alex Wang, Amanpreet Singh, Julian Michael, Felix Hill, Omer Levy, and Samuel R Bowman. 2018. Glue: A multi-task benchmark and analysis platform for natural language understanding. In International Conference on Learning Representations .",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2022.naacl-main.264",
+        "title": "Chain-of-Thought Prompting Elicits Reasoning in Large Language Models",
+        "category": "Prompting",
+        "year": 2022,
+        "authors": "undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 65
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2022.naacl-main.264-chunk-66",
+      "content": "R Bowman. 2018. Glue: A multi-task benchmark and analysis platform for natural language understanding. In International Conference on Learning Representations . \n\nDingquan Wang and Jason Eisner. 2016. The galactic dependencies treebanks: Getting more data by synthesizing new languages. Transactions of the Association for Computational Linguistics , 4:491-505.\n\n- Shijie Wu and Mark Dredze. 2019. Beto, bentz, becas: The surprising cross-lingual effectiveness of BERT. In Proceedings of the 2019 Conference on Empirical Methods in Natural Language Processing and the 9th International Joint Conference on Natural Language Processing, EMNLP-IJCNLP 2019, Hong Kong, China, November 3-7, 2019 , pages 833-844. Association for Computational Linguistics.\n\n- Zhengxuan Wu, Isabel Papadimitriou, and Alex Tamkin. 2022. Oolong: Investigating what makes crosslingual transfer hard with controlled studies. arXiv preprint arXiv:2202.12312 .\n\n## Appendices",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2022.naacl-main.264",
+        "title": "Chain-of-Thought Prompting Elicits Reasoning in Large Language Models",
+        "category": "Prompting",
+        "year": 2022,
+        "authors": "undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 66
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2022.naacl-main.264-chunk-67",
+      "content": "Zhengxuan Wu, Isabel Papadimitriou, and Alex Tamkin. 2022. Oolong: Investigating what makes crosslingual transfer hard with controlled studies. arXiv preprint arXiv:2202.12312 . ## Appendices \n\n## A Mathematical Specification for Transformation of Downstream Datasets\n\nText classification Text classification tasks like news classification or sentiment analysis typically have instances which contain a single sentence and a label. Instances in other classification tasks like natural language inference (NLI) (Bowman et al., 2015) contain two sentences and one label. For such tasks, we apply the transformation ( T ) on each sentence within every instance, and leave the annotated label as is. Therefore, for a dataset of size n which contains m sentences per instance, we have:\n\n<!-- formula-not-decoded -->",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2022.naacl-main.264",
+        "title": "Chain-of-Thought Prompting Elicits Reasoning in Large Language Models",
+        "category": "Prompting",
+        "year": 2022,
+        "authors": "undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 67
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2022.naacl-main.264-chunk-68",
+      "content": "annotated label as is. Therefore, for a dataset of size n which contains m sentences per instance, we have: <!-- formula-not-decoded --> \n\nToken-classification tasks Tasks like namedentity recognition (NER) and part-of-speech tagging (POS tagging) have labels associated with each token in the sentence. For these datasets, we ensure that any transformation ( T ) that changes the order of the tokens also changes the order of the corresponding labels.",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2022.naacl-main.264",
+        "title": "Chain-of-Thought Prompting Elicits Reasoning in Large Language Models",
+        "category": "Prompting",
+        "year": 2022,
+        "authors": "undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 68
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2022.naacl-main.264-chunk-69",
+      "content": "the order of the tokens also changes the order of the corresponding labels. \n\nWe define a few quantities to express the transformation mathematically. Let s i = ( w i 1 , . . . , w ik ) be a sentence comprised of k tokens and y i = ( y i 1 , . . . , y ik ) be labels corresponding to the tokens in the sentence. We define a new transformation ( T aug ) which operates on the label augmented sentence, s aug i = (( w i 1 , y i 1 ) , . . . , ( w ik , y ik )) . Let s aug i [ j ] correspond to the j th element in the sequence, and s aug i [ j ][ word ] and s aug i [ j ][ label ] correspond to the word and label of the j th element. Let T aug ( s aug i )[ j ][ orig ] denote the index of the j th element in the transformed sequence with respect to the original sequence s aug i . Then, the new transformation T aug is such that,\n\n<!-- formula-not-decoded -->\n\n<!-- formula-not-decoded -->\n\nWe transform the dataset using T aug :\n\n<!-- formula-not-decoded -->",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2022.naacl-main.264",
+        "title": "Chain-of-Thought Prompting Elicits Reasoning in Large Language Models",
+        "category": "Prompting",
+        "year": 2022,
+        "authors": "undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 69
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2022.naacl-main.264-chunk-70",
+      "content": "th element in the transformed sequence with respect to the original sequence s aug i . Then, the new transformation T aug is such that, <!-- formula-not-decoded --> <!-- formula-not-decoded --> We transform the dataset using T aug : <!-- formula-not-decoded --> \n\n## B Zero-shot transfer results for different transformations\n\nTable 5 in the appendix is the extended version of Table 3 in the main paper with a breakdown for all languages. It reports ∆ ( BZ -BS ) , ∆ ( MZ -BS ) , and BZ for different languages and transformations considered.\n\n## C Composed Transformations\n\nTable 6 in the appendix presents the breakdown of results in Figure 2 of the main paper. It reports ∆ ( BZ -BS ) scores for composed transformations and their constituents.\n\n## D Comparing different sources for original and derived language corpora",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2022.naacl-main.264",
+        "title": "Chain-of-Thought Prompting Elicits Reasoning in Large Language Models",
+        "category": "Prompting",
+        "year": 2022,
+        "authors": "undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 70
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2022.naacl-main.264-chunk-71",
+      "content": "main paper. It reports ∆ ( BZ -BS ) scores for composed transformations and their constituents. ## D Comparing different sources for original and derived language corpora \n\nTable 8 in the appendix contains the breakdown of results in Figure 3 of the main paper. It reports ∆ ( BZ -BS ) for different languages on different tasks for the settings mentioned in Section 4.3.\n\n## E Alignment Correlation\n\nWe present alignment results (Section 4.4) for all XNLI, NER, and POS in Figure 5. We observe strong correlations between alignment and zeroshot transfer, with ρ s = 0 . 94 , p &lt; . 005 on XNLI, ρ s = 0 . 93 , p &lt; . 005 on NER, and ρ s = 0 . 89 , p &lt; . 01 on POS. We present the raw scores in Table 7.\n\n## F Hyperparameters for XTREME",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2022.naacl-main.264",
+        "title": "Chain-of-Thought Prompting Elicits Reasoning in Large Language Models",
+        "category": "Prompting",
+        "year": 2022,
+        "authors": "undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 71
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2022.naacl-main.264-chunk-72",
+      "content": "NER, and ρ s = 0 . 89 , p &lt; . 01 on POS. We present the raw scores in Table 7. ## F Hyperparameters for XTREME \n\n- XNLI: Learning rate 2e-5 , maximum sequence length - 128, epochs - 5, batch size 32.\n- NER: Learning rate 2e-5 , maximum sequence length - 128, epochs - 10, batch size 32.\n- POS: Learning rate 2e-5 , maximum sequence length - 128, epochs - 10, batch size 32.\n- Tatoeba: Maximum sequence length - 128, pooling strategy - representations from the middle layer ( n 2 ) of the model.\n- XQuAD: Learning rate 3e-5 , maximum sequence length - 384, epochs - 2, document stride - 128, warmup steps - 500, batch size 16, weight decay - 0.0001.",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2022.naacl-main.264",
+        "title": "Chain-of-Thought Prompting Elicits Reasoning in Large Language Models",
+        "category": "Prompting",
+        "year": 2022,
+        "authors": "undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 72
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2022.naacl-main.264-chunk-73",
+      "content": "3e-5 , maximum sequence length - 384, epochs - 2, document stride - 128, warmup steps - 500, batch size 16, weight decay - 0.0001. \n\n| Task   | Language   | Inversion   | Inversion     | Inversion     | Permutation   | Permutation   | Permutation   | Syntax   | Syntax        | Syntax        | Transliteration   | Transliteration   | Transliteration   |\n|--------|------------|-------------|---------------|---------------|---------------|---------------|---------------|----------|---------------|---------------|-------------------|-------------------|-------------------|\n| Task   | Language   | BZ          | ∆ ( BZ - BS ) | ∆ ( MZ - BS ) | BZ            | ∆ ( BZ - BS ) | ∆ ( MZ - BS ) | BZ       | ∆ ( BZ - BS ) | ∆ ( MZ - BS ) | BZ                | ∆ ( BZ - BS )     | ∆ ( MZ - BS )     |\n|        | English    | 73.2        | -3.4          | -14.9         | 68.6          | -5            | -7.7          | 74.1     | -1.8          | -1.5          | 74.1              | -1.7              | -42.5             |\n|        | French     | 62.5        | -9.5          | -8.8          | 68.4          | -1            | -7.6          | 69.6     | -2.2          | -1.4          | 71.6              | -1.6              | -39.9             |\n|        | Hindi      | 43.9        | -15.7         | -15.8         | 51.2          | -6.2          | -13.1         | 61.6     | -0.3          | -1.6          | 63.4              | -0.1              | -29.4             |\n|        | Arabic     | 54          | -12.3         | -12.5         | 62.1          | -2.3          | -6            | 65.9     | 0.7           | 0.3           | 68                | -0.4              | -35.1             |\n|        | Avg.       | 58.4        | -10.2         | -13           | 62.6          | -3.6          | -8.6          | 67.8     | -0.9          | -1.1          | 69.3              | -1.0              | -36.7             |\n|        | English    | 39.8        | -44.5         | -35.9         | 40.2          | -28.5         | -33.2         | 61.1     | -7.8          | -10.3         | 78                | -2.1              | -70.2             |\n|        | French     | 54.5        | -34.4         | -51.3         | 44.4          | -36.0         | -39.8         | 59.6     | -21.9         | -25.9         | 84.3              | -3.1              | -87.4             |\n|        | Hindi      | 19.4        | -63.9         | -63.2         | 38.5          | -21.9         | -37.4         | 64.8     | -8.4          | -7.3          | 84.4              | -0.5              | -82.9             |\n|        | Arabic     | 37.8        | -53.6         | -36.3         | 66.2          | -18.8         | -31.1         | 66.1     | -20.1         | -23           | 88                | -1.9              | -89.9             |\n|        | Avg.       | 37.9        | -49.1         | -46.7         | 47.3          | -26.3         | -35.4         | 62.9     | -14.6         | -16.6         | 83.7              | -1.9              | -82.6             |\n|        | English    | 94.4        | -0.7          | -24.3         | 78.3          | -11.9         | -17.6         | 92.9     | -0.9          | -2.2          | 94.6              | -0.5              | -95.1             |\n|        | French     | 74.3        | -22.7         | -22.9         | 82            | -12.2         | -20.9         | 93.5     | -3.2          | -5.2          | 97.2              | -0.2              | -97.4             |\n|        | Hindi      | 19          | -74.5         | -74.5         | 51            | -14           | -41.8         | 91.6     | -3.3          | -11.3         | 96.5              | -0.1              | -96.6             |\n|        | Arabic     | 69.2        | -23           | -23           | 83.1          | -6.5          | -20.6         | 79.4     | -10           | -11.5         | 93.2              | -0.8              | -90.9             |\n|        | Avg.       | 64.2        | -30.2         | -36.2         | 73.6          | -11.2         | -25.2         | 89.4     | -4.4          | -7.6          | 95.4              | -0.4              | -95.0             |\n|        | English    | 30.4        | -43.2         | -35.5         | -             | -             | -             | -        | -             | -             | 72.4              | -4                | -73               |\n|        | French     | 25.2        | -29.5         | -29.6         | -             | -             | -             | -        | -             | -             | 60.9              | -1                | -55.5             |\n|        | Hindi      | 14.5        | -27.3         | -27.3         | -             | -             | -             | -        | -             | -             | 57.3              | 10.6              | -43.5             |\n|        | Arabic     | 21          | -31.2         | -31.4         | -             | -             | -             | -        | -             | -             | 54                | -0.5              | -51.7             |\n|        | Avg.       | 22.8        | -32.8         | -31.0         |               |               |               |          |               |               | 61.2              | 1.3               | -55.9             |",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2022.naacl-main.264",
+        "title": "Chain-of-Thought Prompting Elicits Reasoning in Large Language Models",
+        "category": "Prompting",
+        "year": 2022,
+        "authors": "undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 73
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2022.naacl-main.264-chunk-74",
+      "content": "| | English | 30.4 | -43.2 | -35.5 | - | - | - | - | - | - | 72.4 | -4 | -73 | | | French | 25.2 | -29.5 | -29.6 | - | - | - | - | - | - | 60.9 | -1 | -55.5 | | | Hindi | 14.5 | -27.3 | -27.3 | - | - | - | - | - | - | 57.3 | 10.6 | -43.5 | | | Arabic | 21 | -31.2 | -31.4 | - | - | - | - | - | - | 54 | -0.5 | -51.7 | | | Avg. | 22.8 | -32.8 | -31.0 | | | | | | | 61.2 | 1.3 | -55.9 | \n\nTable 5: This table is an extended version of Table 3 in the main paper. Smaller (more negative) ∆ ( BZ -BS ) implies worse bilingual zero-shot transfer, whereas ∆ ( BZ -BS ) ≈ 0 implies strong transfer. ∆ ( BZ -BS ) /greatermuch ∆ ( MZ -BS ) implies that bilingual pre-training is extremely useful. Scores are highlighted based on their value (lower scores have a higher intensity of red ). (1) Discussing ∆ ( BZ -BS ) : T trans exhibits strong transfer on all tasks and languages (high ∆ ( BZ -BS ) scores), and bilingual pre-training is extremely useful ( ∆ ( BZ -BS ) /greatermuch ∆ ( MZ -BS ) ), implying that zero-shot transfer is possible between languages with different scripts but the same word order. T inv and T perm suffer on all tasks (small ∆ ( BZ -BS ) scores) whereas T syn suffers significantly lesser, which provides evidence that local changes to the word order made by Syntax ( T syn ) hurts zero-shot transfer significantly lesser than global changes made by Inversion ( T inv ) and Permutation ( T perm ). (1) Discussing ∆ ( MZ -BS ) : ∆ ( BZ -BS ) is much larger than ∆ ( MZ -BS ) for T trans , implying that bilingual pre-training (hereon, pre-training) is extremely useful. ∆ ( BZ -BS ) and ∆ ( MZ -BS ) are similar for T inv and T syn , implying that pre-training is not beneficial for these transformations. ∆ ( BZ -BS ) is slightly larger than ∆ ( MZ -BS ) for T perm , which means that pre-training is moderately useful.",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2022.naacl-main.264",
+        "title": "Chain-of-Thought Prompting Elicits Reasoning in Large Language Models",
+        "category": "Prompting",
+        "year": 2022,
+        "authors": "undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 74
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2022.naacl-main.264-chunk-75",
+      "content": ": ∆ ( BZ -BS ) is much larger than ∆ ( MZ -BS ) for T trans , implying that bilingual pre-training (hereon, pre-training) is extremely useful. ∆ ( BZ -BS ) and ∆ ( MZ -BS ) are similar for T inv and T syn , implying that pre-training is not beneficial for these transformations. ∆ ( BZ -BS ) is slightly larger than ∆ ( MZ -BS ) for T perm , which means that pre-training is moderately useful. \n\n| T                | XNLI   | XNLI          | NER   | NER           | POS   | POS           |\n|------------------|--------|---------------|-------|---------------|-------|---------------|\n| T                | BZ     | ∆ ( BZ - BS ) | BZ    | ∆ ( BZ - BS ) | BZ    | ∆ ( BZ - BS ) |\n| T trans          | 74.1   | -2.1          | 78    | -2.3          | 94.6  | -0.5          |\n| T inv            | 73.2   | -3.4          | 39.8  | -44.5         | 94.4  | -0.7          |\n| T trans ◦ T inv  | 55.7   | -19.2         | 32.5  | -51.5         | 52.2  | -42.7         |\n| T perm           | 68.6   | -5            | 40.2  | -28.5         | 78.3  | -11.9         |\n| T trans ◦ T perm | 44     | -27.7         | 17.1  | -46.3         | 29.5  | -59           |\n| T syn            | 74.1   | -1.8          | 61.1  | -7.8          | 92.9  | -0.9          |\n| trans syn        | 69.8   | -5.7          | 53.5  | -14.2         | 91.5  | -2            |",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2022.naacl-main.264",
+        "title": "Chain-of-Thought Prompting Elicits Reasoning in Large Language Models",
+        "category": "Prompting",
+        "year": 2022,
+        "authors": "undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 75
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2022.naacl-main.264-chunk-76",
+      "content": "◦ T perm | 44 | -27.7 | 17.1 | -46.3 | 29.5 | -59 | | T syn | 74.1 | -1.8 | 61.1 | -7.8 | 92.9 | -0.9 | | trans syn | 69.8 | -5.7 | 53.5 | -14.2 | 91.5 | -2 | \n\nT\n\n◦ T\n\nTable 6: Breakdown of results in Figure 2 of the main paper. BZ is the zero-shot performance. ∆ ( BZ -BS ) , ∆ ( MZ -BS ) , and BZ are described in Section 3.3 and Table 2. Composing transformations always hurts ∆ ( BZ -BS ) when compared to individual transformations.",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2022.naacl-main.264",
+        "title": "Chain-of-Thought Prompting Elicits Reasoning in Large Language Models",
+        "category": "Prompting",
+        "year": 2022,
+        "authors": "undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 76
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2022.naacl-main.264-chunk-77",
+      "content": "in Section 3.3 and Table 2. Composing transformations always hurts ∆ ( BZ -BS ) when compared to individual transformations. \n\n| Transliteration Variant   | ∆ ( BZ - BS ) ( ↑ )   | ∆ ( BZ - BS ) ( ↑ )   | ∆ ( BZ - BS ) ( ↑ )   | Alignment ( ↑ )   |\n|---------------------------|-----------------------|-----------------------|-----------------------|-------------------|\n| Transliteration Variant   | XNLI                  | NER                   | POS                   | Alignment ( ↑ )   |\n| Parallel                  | -2.1                  | -2.3                  | -0.5                  | 90.0              |\n| Trans ◦ Syntax            | -5.7                  | -14.2                 | -2                    | 57.3              |\n| Non-parallel (Same)       | -3.8                  | -4.1                  | -0.7                  | 43.0              |\n| Non-parallel (Diff)       | -5.7                  | -14.3                 | -1.5                  | 11.8              |\n| Trans ◦ Inv               | -19.2                 | -51.5                 | -42.7                 | 0.16              |\n| Trans ◦ Perm              | -27.7                 | -46.3                 | -59                   | 0.01              |",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2022.naacl-main.264",
+        "title": "Chain-of-Thought Prompting Elicits Reasoning in Large Language Models",
+        "category": "Prompting",
+        "year": 2022,
+        "authors": "undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 77
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2022.naacl-main.264-chunk-78",
+      "content": "| 11.8 | | Trans ◦ Inv | -19.2 | -51.5 | -42.7 | 0.16 | | Trans ◦ Perm | -27.7 | -46.3 | -59 | 0.01 | \n\nTable 7: ∆ ( BZ -BS ) and alignment scores for different Transliteration variants. The table contains raw scores for results in Section 4.4 of the main paper. Rows are sorted in descending order based on alignment . We observe strong correlations between alignment and zeroshot transfer, with ρ s = 0 . 94 , p &lt; . 005 on XNLI, ρ s = 0 . 93 , p &lt; . 005 on NER, and ρ s = 0 . 89 , p &lt; . 01 on POS.\n\nTable 8: | ∆ ( BZ -BS ) | for T trans under different conditions on the source of original and derived language pretraining corpora (§ 4.3). Larger values imply worse zero-shot transfer. For all languages: (1) Non-parallel (diff) , which uses corpora from different domains is worse than (2) Non-parallel (same) , which uses different sets of sentences sampled from the same domain, which is in turn worse than (3) Parallel , which uses the same sentences.",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2022.naacl-main.264",
+        "title": "Chain-of-Thought Prompting Elicits Reasoning in Large Language Models",
+        "category": "Prompting",
+        "year": 2022,
+        "authors": "undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 78
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2022.naacl-main.264-chunk-79",
+      "content": "which uses corpora from different domains is worse than (2) Non-parallel (same) , which uses different sets of sentences sampled from the same domain, which is in turn worse than (3) Parallel , which uses the same sentences. \n\n| Language   | XNLI          | NER ∆       | POS ∆       | XQuAD ∆ ( BZ BS )   |\n|------------|---------------|-------------|-------------|---------------------|\n|            | ∆ ( BZ - BS ) | ( BZ - BS ) | ( BZ - BS ) | -                   |\n| English    | -1.7          | -2.1        | -0.5        | -4                  |\n| French     | -1.6          | -3.1        | -0.2        | -1                  |\n| Hindi      | -0.1          | -0.5        | -0.1        | 10.6                |\n| Arabic     | -0.4          | -1.9        | -0.8        | -0.5                |\n| Avg.       | -1.0          | -1.9        | -0.4        | 1.3                 |\n| English    | -3.8          | -4.1        | -0.7        | -6.9                |\n| French     | -1            | -6.3        | -0.5        | -0.9                |\n| Hindi      | -0.4          | -3.1        | -0.2        | 4.5                 |\n| Arabic     | -2            | -6.1        | -1.5        | 0.7                 |\n| Avg.       | -1.8          | -4.9        | -0.7        | -0.6                |\n| English    | -5.7          | -14.3       | -1.5        | -9.3                |\n| French     | -10.9         | -30.3       | -10.5       | -5.2                |\n| Hindi      | -0.5          | -8.6        | -1          | 5                   |\n| Arabic     | -6.3          | -34.7       | -3.7        | -1.9                |\n| Avg.       | -5.9          | -22.0       | -4.2        | -2.9                |",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2022.naacl-main.264",
+        "title": "Chain-of-Thought Prompting Elicits Reasoning in Large Language Models",
+        "category": "Prompting",
+        "year": 2022,
+        "authors": "undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 79
+      }
+    },
+    {
+      "id": "unpaywall-10.18653_v1_2022.naacl-main.264-chunk-80",
+      "content": "-1.5 | -9.3 | | French | -10.9 | -30.3 | -10.5 | -5.2 | | Hindi | -0.5 | -8.6 | -1 | 5 | | Arabic | -6.3 | -34.7 | -3.7 | -1.9 | | Avg. | -5.9 | -22.0 | -4.2 | -2.9 | \n\nFigure 5: Alignment v.s. ∆ ( BZ -BS ) plots for XNLI, NER, and POS. We observe strong correlations between alignment and zero-shot transfer, with ρ s = 0 . 94 , p &lt; . 005 on XNLI, ρ s = 0 . 93 , p &lt; . 005 on NER, and ρ s = 0 . 89 , p &lt; . 01 on POS.\n\n<!-- image -->",
+      "metadata": {
+        "source": "unpaywall:10.18653/v1/2022.naacl-main.264",
+        "title": "Chain-of-Thought Prompting Elicits Reasoning in Large Language Models",
+        "category": "Prompting",
+        "year": 2022,
+        "authors": "undefined undefined, undefined undefined, undefined undefined",
+        "chunkIndex": 80
+      }
+    }
+  ],
+  "tables": [
+    "| Transformation                                                                          | Instance ( s )                                                                                                       | Transformed instance ( T ( s ))                                                                                                              |\n|-----------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------|\n| Inversion ( T inv ) Permutation ( T perm ) Transliteration ( T trans ) Syntax ( T syn ) | Welcome to NAACL at Seattle This is a conference I am Sam . I am Sara (S) ate (V) apples (O) Une table (N) ronde (A) | Seattle at NAACL to Welcome a This conference is ♣ (I) ♥ (am) ♦ (Sam) ♠ (.) ♣ (I) ♥ (am) Sara (S) apples (O) ate (V) Une ronde (A) table (N) |",
+    "| Evaluation   | Corpus source                           | Corpus source     | Corpus source   |\n|--------------|-----------------------------------------|-------------------|-----------------|\n| Evaluation   | Pre-train                               | Fine-tune (train) | Fine-tune (dev) |\n| BZ           | C orig + C deriv                        | D orig            | D deriv         |\n| BS           | C orig + C deriv                        | D deriv           | D deriv         |\n| MZ           | C orig                                  | D orig            | D deriv         |\n|              | ∆ ( BZ - BS ) = ( BZ ∆ ( MZ - BS ) = MZ | - BS ) - BS       |                 |",
+    "| Task      | Inversion ( T inv )   | Inversion ( T inv )   | Inversion ( T inv )   | Permutation ( T perm )   | Permutation ( T perm )   | Permutation ( T perm )   | Syntax ( T syn )   | Syntax ( T syn )   | Syntax ( T syn )   | Syntax ( T syn )   | Transliteration ( T trans )   | Transliteration ( T trans )   | Transliteration ( T trans )   | Transliteration ( T trans )   |\n|-----------|-----------------------|-----------------------|-----------------------|--------------------------|--------------------------|--------------------------|--------------------|--------------------|--------------------|--------------------|-------------------------------|-------------------------------|-------------------------------|-------------------------------|\n| Task      | ∆ ( BZ - BS )         | ∆ ( MZ - BS )         | BZ                    | ∆ ( BZ - BS )            | ∆ ( MZ - BS )            | BZ                       | ∆ ( BZ - BS )      | ∆ ( BZ - BS )      | ∆ ( MZ - BS )      | BZ                 | ∆ ( BZ - BS ) ∆ (             | MZ - BS )                     | BZ                            |                               |\n| XNLI      | -10.2                 | -13.0                 | 58.4                  | -3.6                     | -8.6                     | 62.6                     | -0.9               | /star              | -1.1               | 67.8               | -1.0 /star                    | -36.7                         | 69.3                          |                               |\n| NER       | -49.1                 | -46.7                 | 37.9                  | -26.3                    | -35.4                    | 47.3                     | -14.6              |                    | -16.6              | 62.9               | -1.9 /star                    | -82.6                         | 83.7                          |                               |\n| POS -30.2 |                       | -36.2                 | 64.2                  | -11.2                    | -25.2                    | 73.6                     | -4.4               |                    | -7.6               | 89.4               | -0.4 /star                    | -95.0                         | 95.4                          |                               |\n| XQuAD 4   | -32.8                 | -31.0                 | 22.8                  | - 4                      | -                        | -                        | -                  | 4                  | -                  | -                  | 0.0 /star                     | -55.9                         | 61.2                          |                               |",
+    "| Dataset                       | Task   | Metric   |\n|-------------------------------|--------|----------|\n| XNLI (Conneau et al., 2018)   | NLI    | Accuracy |\n| Wikiann (Pan et al., 2017)    | NER    | F1       |\n| UD v2.5 (Nivre et al., 2018)  | POS    | F1       |\n| XQuAD (Artetxe et al., 2020b) | QA     | F1       |",
+    "| Task   | Language   | Inversion   | Inversion     | Inversion     | Permutation   | Permutation   | Permutation   | Syntax   | Syntax        | Syntax        | Transliteration   | Transliteration   | Transliteration   |\n|--------|------------|-------------|---------------|---------------|---------------|---------------|---------------|----------|---------------|---------------|-------------------|-------------------|-------------------|\n| Task   | Language   | BZ          | ∆ ( BZ - BS ) | ∆ ( MZ - BS ) | BZ            | ∆ ( BZ - BS ) | ∆ ( MZ - BS ) | BZ       | ∆ ( BZ - BS ) | ∆ ( MZ - BS ) | BZ                | ∆ ( BZ - BS )     | ∆ ( MZ - BS )     |\n|        | English    | 73.2        | -3.4          | -14.9         | 68.6          | -5            | -7.7          | 74.1     | -1.8          | -1.5          | 74.1              | -1.7              | -42.5             |\n|        | French     | 62.5        | -9.5          | -8.8          | 68.4          | -1            | -7.6          | 69.6     | -2.2          | -1.4          | 71.6              | -1.6              | -39.9             |\n|        | Hindi      | 43.9        | -15.7         | -15.8         | 51.2          | -6.2          | -13.1         | 61.6     | -0.3          | -1.6          | 63.4              | -0.1              | -29.4             |\n|        | Arabic     | 54          | -12.3         | -12.5         | 62.1          | -2.3          | -6            | 65.9     | 0.7           | 0.3           | 68                | -0.4              | -35.1             |\n|        | Avg.       | 58.4        | -10.2         | -13           | 62.6          | -3.6          | -8.6          | 67.8     | -0.9          | -1.1          | 69.3              | -1.0              | -36.7             |\n|        | English    | 39.8        | -44.5         | -35.9         | 40.2          | -28.5         | -33.2         | 61.1     | -7.8          | -10.3         | 78                | -2.1              | -70.2             |\n|        | French     | 54.5        | -34.4         | -51.3         | 44.4          | -36.0         | -39.8         | 59.6     | -21.9         | -25.9         | 84.3              | -3.1              | -87.4             |\n|        | Hindi      | 19.4        | -63.9         | -63.2         | 38.5          | -21.9         | -37.4         | 64.8     | -8.4          | -7.3          | 84.4              | -0.5              | -82.9             |\n|        | Arabic     | 37.8        | -53.6         | -36.3         | 66.2          | -18.8         | -31.1         | 66.1     | -20.1         | -23           | 88                | -1.9              | -89.9             |\n|        | Avg.       | 37.9        | -49.1         | -46.7         | 47.3          | -26.3         | -35.4         | 62.9     | -14.6         | -16.6         | 83.7              | -1.9              | -82.6             |\n|        | English    | 94.4        | -0.7          | -24.3         | 78.3          | -11.9         | -17.6         | 92.9     | -0.9          | -2.2          | 94.6              | -0.5              | -95.1             |\n|        | French     | 74.3        | -22.7         | -22.9         | 82            | -12.2         | -20.9         | 93.5     | -3.2          | -5.2          | 97.2              | -0.2              | -97.4             |\n|        | Hindi      | 19          | -74.5         | -74.5         | 51            | -14           | -41.8         | 91.6     | -3.3          | -11.3         | 96.5              | -0.1              | -96.6             |\n|        | Arabic     | 69.2        | -23           | -23           | 83.1          | -6.5          | -20.6         | 79.4     | -10           | -11.5         | 93.2              | -0.8              | -90.9             |\n|        | Avg.       | 64.2        | -30.2         | -36.2         | 73.6          | -11.2         | -25.2         | 89.4     | -4.4          | -7.6          | 95.4              | -0.4              | -95.0             |\n|        | English    | 30.4        | -43.2         | -35.5         | -             | -             | -             | -        | -             | -             | 72.4              | -4                | -73               |\n|        | French     | 25.2        | -29.5         | -29.6         | -             | -             | -             | -        | -             | -             | 60.9              | -1                | -55.5             |\n|        | Hindi      | 14.5        | -27.3         | -27.3         | -             | -             | -             | -        | -             | -             | 57.3              | 10.6              | -43.5             |\n|        | Arabic     | 21          | -31.2         | -31.4         | -             | -             | -             | -        | -             | -             | 54                | -0.5              | -51.7             |\n|        | Avg.       | 22.8        | -32.8         | -31.0         |               |               |               |          |               |               | 61.2              | 1.3               | -55.9             |",
+    "| T                | XNLI   | XNLI          | NER   | NER           | POS   | POS           |\n|------------------|--------|---------------|-------|---------------|-------|---------------|\n| T                | BZ     | ∆ ( BZ - BS ) | BZ    | ∆ ( BZ - BS ) | BZ    | ∆ ( BZ - BS ) |\n| T trans          | 74.1   | -2.1          | 78    | -2.3          | 94.6  | -0.5          |\n| T inv            | 73.2   | -3.4          | 39.8  | -44.5         | 94.4  | -0.7          |\n| T trans ◦ T inv  | 55.7   | -19.2         | 32.5  | -51.5         | 52.2  | -42.7         |\n| T perm           | 68.6   | -5            | 40.2  | -28.5         | 78.3  | -11.9         |\n| T trans ◦ T perm | 44     | -27.7         | 17.1  | -46.3         | 29.5  | -59           |\n| T syn            | 74.1   | -1.8          | 61.1  | -7.8          | 92.9  | -0.9          |\n| trans syn        | 69.8   | -5.7          | 53.5  | -14.2         | 91.5  | -2            |",
+    "| Transliteration Variant   | ∆ ( BZ - BS ) ( ↑ )   | ∆ ( BZ - BS ) ( ↑ )   | ∆ ( BZ - BS ) ( ↑ )   | Alignment ( ↑ )   |\n|---------------------------|-----------------------|-----------------------|-----------------------|-------------------|\n| Transliteration Variant   | XNLI                  | NER                   | POS                   | Alignment ( ↑ )   |\n| Parallel                  | -2.1                  | -2.3                  | -0.5                  | 90.0              |\n| Trans ◦ Syntax            | -5.7                  | -14.2                 | -2                    | 57.3              |\n| Non-parallel (Same)       | -3.8                  | -4.1                  | -0.7                  | 43.0              |\n| Non-parallel (Diff)       | -5.7                  | -14.3                 | -1.5                  | 11.8              |\n| Trans ◦ Inv               | -19.2                 | -51.5                 | -42.7                 | 0.16              |\n| Trans ◦ Perm              | -27.7                 | -46.3                 | -59                   | 0.01              |",
+    "| Language   | XNLI          | NER ∆       | POS ∆       | XQuAD ∆ ( BZ BS )   |\n|------------|---------------|-------------|-------------|---------------------|\n|            | ∆ ( BZ - BS ) | ( BZ - BS ) | ( BZ - BS ) | -                   |\n| English    | -1.7          | -2.1        | -0.5        | -4                  |\n| French     | -1.6          | -3.1        | -0.2        | -1                  |\n| Hindi      | -0.1          | -0.5        | -0.1        | 10.6                |\n| Arabic     | -0.4          | -1.9        | -0.8        | -0.5                |\n| Avg.       | -1.0          | -1.9        | -0.4        | 1.3                 |\n| English    | -3.8          | -4.1        | -0.7        | -6.9                |\n| French     | -1            | -6.3        | -0.5        | -0.9                |\n| Hindi      | -0.4          | -3.1        | -0.2        | 4.5                 |\n| Arabic     | -2            | -6.1        | -1.5        | 0.7                 |\n| Avg.       | -1.8          | -4.9        | -0.7        | -0.6                |\n| English    | -5.7          | -14.3       | -1.5        | -9.3                |\n| French     | -10.9         | -30.3       | -10.5       | -5.2                |\n| Hindi      | -0.5          | -8.6        | -1          | 5                   |\n| Arabic     | -6.3          | -34.7       | -3.7        | -1.9                |\n| Avg.       | -5.9          | -22.0       | -4.2        | -2.9                |"
+  ],
+  "stats": {
+    "totalCharacters": 61314,
+    "chunkCount": 81,
+    "tableCount": 8,
+    "oaStatus": "hybrid",
+    "pdfUrl": "https://aclanthology.org/2022.naacl-main.264.pdf"
+  }
+}

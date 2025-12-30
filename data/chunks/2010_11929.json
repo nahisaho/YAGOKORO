@@ -1,0 +1,2709 @@
+{
+  "arxivId": "2010.11929",
+  "title": "Vision Transformer (ViT)",
+  "category": "Transformer基盤",
+  "year": 2020,
+  "paper": {
+    "id": "2010.11929v2",
+    "title": "An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale",
+    "abstract": "While the Transformer architecture has become the de-facto standard for natural language processing tasks, its applications to computer vision remain limited. In vision, attention is either applied in conjunction with convolutional networks, or used to replace certain components of convolutional networks while keeping their overall structure in place. We show that this reliance on CNNs is not necessary and a pure transformer applied directly to sequences of image patches can perform very well on image classification tasks. When pre-trained on large amounts of data and transferred to multiple mid-sized or small image recognition benchmarks (ImageNet, CIFAR-100, VTAB, etc.), Vision Transformer (ViT) attains excellent results compared to state-of-the-art convolutional networks while requiring substantially fewer computational resources to train.",
+    "authors": [
+      "Alexey Dosovitskiy",
+      "Lucas Beyer",
+      "Alexander Kolesnikov",
+      "Dirk Weissenborn",
+      "Xiaohua Zhai",
+      "Thomas Unterthiner",
+      "Mostafa Dehghani",
+      "Matthias Minderer",
+      "Georg Heigold",
+      "Sylvain Gelly",
+      "Jakob Uszkoreit",
+      "Neil Houlsby"
+    ],
+    "published": "2020-10-22T17:55:59.000Z",
+    "updated": "2021-06-03T13:08:56.000Z",
+    "primaryCategory": "cs.CV",
+    "categories": [
+      "cs.CV",
+      "cs.AI",
+      "cs.LG"
+    ],
+    "pdfUrl": "https://arxiv.org/pdf/2010.11929v2",
+    "absUrl": "https://arxiv.org/abs/2010.11929v2"
+  },
+  "chunks": [
+    {
+      "id": "2010.11929v2-chunk-0",
+      "content": "Alexey Dosovitskiy ∗ , † , Lucas Beyer ∗ , Alexander Kolesnikov ∗ , Dirk Weissenborn ∗ ,\n\nXiaohua Zhai ∗ , Thomas Unterthiner, Mostafa Dehghani, Matthias Minderer, Georg Heigold, Sylvain Gelly, Jakob Uszkoreit, Neil Houlsby ∗ , †\n\n∗ equal technical contribution, † equal advising Google Research, Brain Team\n\n{ adosovitskiy, neilhoulsby } @google.com",
+      "metadata": {
+        "source": "arxiv:2010.11929v2",
+        "title": "An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale",
+        "authors": [
+          "Alexey Dosovitskiy",
+          "Lucas Beyer",
+          "Alexander Kolesnikov",
+          "Dirk Weissenborn",
+          "Xiaohua Zhai",
+          "Thomas Unterthiner",
+          "Mostafa Dehghani",
+          "Matthias Minderer",
+          "Georg Heigold",
+          "Sylvain Gelly",
+          "Jakob Uszkoreit",
+          "Neil Houlsby"
+        ],
+        "section": "AN IMAGE IS WORTH 16X16 WORDS: TRANSFORMERS FOR IMAGE RECOGNITION AT SCALE",
+        "chunkIndex": 0,
+        "totalChunks": 105
+      }
+    },
+    {
+      "id": "2010.11929v2-chunk-1",
+      "content": "While the Transformer architecture has become the de-facto standard for natural language processing tasks, its applications to computer vision remain limited. In vision, attention is either applied in conjunction with convolutional networks, or used to replace certain components of convolutional networks while keeping their overall structure in place. We show that this reliance on CNNs is not necessary and a pure transformer applied directly to sequences of image patches can perform very well on image classification tasks. When pre-trained on large amounts of data and transferred to multiple mid-sized or small image recognition benchmarks (ImageNet, CIFAR-100, VTAB, etc.), Vision Transformer (ViT) attains excellent results compared to state-of-the-art convolutional networks while requiring substantially fewer computational resources to train. 1",
+      "metadata": {
+        "source": "arxiv:2010.11929v2",
+        "title": "An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale",
+        "authors": [
+          "Alexey Dosovitskiy",
+          "Lucas Beyer",
+          "Alexander Kolesnikov",
+          "Dirk Weissenborn",
+          "Xiaohua Zhai",
+          "Thomas Unterthiner",
+          "Mostafa Dehghani",
+          "Matthias Minderer",
+          "Georg Heigold",
+          "Sylvain Gelly",
+          "Jakob Uszkoreit",
+          "Neil Houlsby"
+        ],
+        "section": "ABSTRACT",
+        "chunkIndex": 1,
+        "totalChunks": 105
+      }
+    },
+    {
+      "id": "2010.11929v2-chunk-2",
+      "content": "Self-attention-based architectures, in particular Transformers (Vaswani et al., 2017), have become the model of choice in natural language processing (NLP). The dominant approach is to pre-train on a large text corpus and then fine-tune on a smaller task-specific dataset (Devlin et al., 2019). Thanks to Transformers' computational efficiency and scalability, it has become possible to train models of unprecedented size, with over 100B parameters (Brown et al., 2020; Lepikhin et al., 2020). With the models and datasets growing, there is still no sign of saturating performance.\n\nIn computer vision, however, convolutional architectures remain dominant (LeCun et al., 1989; Krizhevsky et al., 2012; He et al., 2016). Inspired by NLP successes, multiple works try combining CNN-like architectures with self-attention (Wang et al., 2018; Carion et al., 2020), some replacing the convolutions entirely (Ramachandran et al., 2019; Wang et al., 2020a).",
+      "metadata": {
+        "source": "arxiv:2010.11929v2",
+        "title": "An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale",
+        "authors": [
+          "Alexey Dosovitskiy",
+          "Lucas Beyer",
+          "Alexander Kolesnikov",
+          "Dirk Weissenborn",
+          "Xiaohua Zhai",
+          "Thomas Unterthiner",
+          "Mostafa Dehghani",
+          "Matthias Minderer",
+          "Georg Heigold",
+          "Sylvain Gelly",
+          "Jakob Uszkoreit",
+          "Neil Houlsby"
+        ],
+        "section": "1 INTRODUCTION",
+        "chunkIndex": 2,
+        "totalChunks": 105
+      }
+    },
+    {
+      "id": "2010.11929v2-chunk-3",
+      "content": "tiple works try combining CNN-like architectures with self-attention (Wang et al., 2018; Carion et al., 2020), some replacing the convolutions entirely (Ramachandran et al., 2019; Wang et al., 2020a). The latter models, while theoretically efficient, have not yet been scaled effectively on modern hardware accelerators due to the use of specialized attention patterns. Therefore, in large-scale image recognition, classic ResNetlike architectures are still state of the art (Mahajan et al., 2018; Xie et al., 2020; Kolesnikov et al., 2020).\n\nInspired by the Transformer scaling successes in NLP, we experiment with applying a standard Transformer directly to images, with the fewest possible modifications. To do so, we split an image into patches and provide the sequence of linear embeddings of these patches as an input to a Transformer. Image patches are treated the same way as tokens (words) in an NLP application. We train the model on image classification in supervised fashion.",
+      "metadata": {
+        "source": "arxiv:2010.11929v2",
+        "title": "An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale",
+        "authors": [
+          "Alexey Dosovitskiy",
+          "Lucas Beyer",
+          "Alexander Kolesnikov",
+          "Dirk Weissenborn",
+          "Xiaohua Zhai",
+          "Thomas Unterthiner",
+          "Mostafa Dehghani",
+          "Matthias Minderer",
+          "Georg Heigold",
+          "Sylvain Gelly",
+          "Jakob Uszkoreit",
+          "Neil Houlsby"
+        ],
+        "section": "1 INTRODUCTION",
+        "chunkIndex": 3,
+        "totalChunks": 105
+      }
+    },
+    {
+      "id": "2010.11929v2-chunk-4",
+      "content": "eddings of these patches as an input to a Transformer. Image patches are treated the same way as tokens (words) in an NLP application. We train the model on image classification in supervised fashion.\n\nWhen trained on mid-sized datasets such as ImageNet without strong regularization, these models yield modest accuracies of a few percentage points below ResNets of comparable size. This seemingly discouraging outcome may be expected: Transformers lack some of the inductive biases\n\n1 Fine-tuning code and pre-trained models are available at https://github.com/ google-research/vision\\_transformer\n\ninherent to CNNs, such as translation equivariance and locality, and therefore do not generalize well when trained on insufficient amounts of data.\n\nHowever, the picture changes if the models are trained on larger datasets (14M-300M images). We find that large scale training trumps inductive bias.",
+      "metadata": {
+        "source": "arxiv:2010.11929v2",
+        "title": "An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale",
+        "authors": [
+          "Alexey Dosovitskiy",
+          "Lucas Beyer",
+          "Alexander Kolesnikov",
+          "Dirk Weissenborn",
+          "Xiaohua Zhai",
+          "Thomas Unterthiner",
+          "Mostafa Dehghani",
+          "Matthias Minderer",
+          "Georg Heigold",
+          "Sylvain Gelly",
+          "Jakob Uszkoreit",
+          "Neil Houlsby"
+        ],
+        "section": "1 INTRODUCTION",
+        "chunkIndex": 4,
+        "totalChunks": 105
+      }
+    },
+    {
+      "id": "2010.11929v2-chunk-5",
+      "content": "ell when trained on insufficient amounts of data.\n\nHowever, the picture changes if the models are trained on larger datasets (14M-300M images). We find that large scale training trumps inductive bias. Our Vision Transformer (ViT) attains excellent results when pre-trained at sufficient scale and transferred to tasks with fewer datapoints. When pre-trained on the public ImageNet-21k dataset or the in-house JFT-300M dataset, ViT approaches or beats state of the art on multiple image recognition benchmarks. In particular, the best model reaches the accuracy of 88 . 55% on ImageNet, 90 . 72% on ImageNet-ReaL, 94 . 55% on CIFAR-100, and 77 . 63% on the VTAB suite of 19 tasks.",
+      "metadata": {
+        "source": "arxiv:2010.11929v2",
+        "title": "An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale",
+        "authors": [
+          "Alexey Dosovitskiy",
+          "Lucas Beyer",
+          "Alexander Kolesnikov",
+          "Dirk Weissenborn",
+          "Xiaohua Zhai",
+          "Thomas Unterthiner",
+          "Mostafa Dehghani",
+          "Matthias Minderer",
+          "Georg Heigold",
+          "Sylvain Gelly",
+          "Jakob Uszkoreit",
+          "Neil Houlsby"
+        ],
+        "section": "1 INTRODUCTION",
+        "chunkIndex": 5,
+        "totalChunks": 105
+      }
+    },
+    {
+      "id": "2010.11929v2-chunk-6",
+      "content": "Transformers were proposed by Vaswani et al. (2017) for machine translation, and have since become the state of the art method in many NLP tasks. Large Transformer-based models are often pre-trained on large corpora and then fine-tuned for the task at hand: BERT (Devlin et al., 2019) uses a denoising self-supervised pre-training task, while the GPT line of work uses language modeling as its pre-training task (Radford et al., 2018; 2019; Brown et al., 2020).\n\nNaive application of self-attention to images would require that each pixel attends to every other pixel. With quadratic cost in the number of pixels, this does not scale to realistic input sizes. Thus, to apply Transformers in the context of image processing, several approximations have been tried in the past. Parmar et al. (2018) applied the self-attention only in local neighborhoods for each query pixel instead of globally.",
+      "metadata": {
+        "source": "arxiv:2010.11929v2",
+        "title": "An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale",
+        "authors": [
+          "Alexey Dosovitskiy",
+          "Lucas Beyer",
+          "Alexander Kolesnikov",
+          "Dirk Weissenborn",
+          "Xiaohua Zhai",
+          "Thomas Unterthiner",
+          "Mostafa Dehghani",
+          "Matthias Minderer",
+          "Georg Heigold",
+          "Sylvain Gelly",
+          "Jakob Uszkoreit",
+          "Neil Houlsby"
+        ],
+        "section": "2 RELATED WORK",
+        "chunkIndex": 6,
+        "totalChunks": 105
+      }
+    },
+    {
+      "id": "2010.11929v2-chunk-7",
+      "content": "e context of image processing, several approximations have been tried in the past. Parmar et al. (2018) applied the self-attention only in local neighborhoods for each query pixel instead of globally. Such local multi-head dot-product self attention blocks can completely replace convolutions (Hu et al., 2019; Ramachandran et al., 2019; Zhao et al., 2020). In a different line of work, Sparse Transformers (Child et al., 2019) employ scalable approximations to global selfattention in order to be applicable to images. An alternative way to scale attention is to apply it in blocks of varying sizes (Weissenborn et al., 2019), in the extreme case only along individual axes (Ho et al., 2019; Wang et al., 2020a). Many of these specialized attention architectures demonstrate promising results on computer vision tasks, but require complex engineering to be implemented efficiently on hardware accelerators.",
+      "metadata": {
+        "source": "arxiv:2010.11929v2",
+        "title": "An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale",
+        "authors": [
+          "Alexey Dosovitskiy",
+          "Lucas Beyer",
+          "Alexander Kolesnikov",
+          "Dirk Weissenborn",
+          "Xiaohua Zhai",
+          "Thomas Unterthiner",
+          "Mostafa Dehghani",
+          "Matthias Minderer",
+          "Georg Heigold",
+          "Sylvain Gelly",
+          "Jakob Uszkoreit",
+          "Neil Houlsby"
+        ],
+        "section": "2 RELATED WORK",
+        "chunkIndex": 7,
+        "totalChunks": 105
+      }
+    },
+    {
+      "id": "2010.11929v2-chunk-8",
+      "content": "020a). Many of these specialized attention architectures demonstrate promising results on computer vision tasks, but require complex engineering to be implemented efficiently on hardware accelerators.\n\nMost related to ours is the model of Cordonnier et al. (2020), which extracts patches of size 2 × 2 from the input image and applies full self-attention on top. This model is very similar to ViT, but our work goes further to demonstrate that large scale pre-training makes vanilla transformers competitive with (or even better than) state-of-the-art CNNs. Moreover, Cordonnier et al. (2020) use a small patch size of 2 × 2 pixels, which makes the model applicable only to small-resolution images, while we handle medium-resolution images as well.\n\nThere has also been a lot of interest in combining convolutional neural networks (CNNs) with forms of self-attention, e.g.",
+      "metadata": {
+        "source": "arxiv:2010.11929v2",
+        "title": "An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale",
+        "authors": [
+          "Alexey Dosovitskiy",
+          "Lucas Beyer",
+          "Alexander Kolesnikov",
+          "Dirk Weissenborn",
+          "Xiaohua Zhai",
+          "Thomas Unterthiner",
+          "Mostafa Dehghani",
+          "Matthias Minderer",
+          "Georg Heigold",
+          "Sylvain Gelly",
+          "Jakob Uszkoreit",
+          "Neil Houlsby"
+        ],
+        "section": "2 RELATED WORK",
+        "chunkIndex": 8,
+        "totalChunks": 105
+      }
+    },
+    {
+      "id": "2010.11929v2-chunk-9",
+      "content": "o small-resolution images, while we handle medium-resolution images as well.\n\nThere has also been a lot of interest in combining convolutional neural networks (CNNs) with forms of self-attention, e.g. by augmenting feature maps for image classification (Bello et al., 2019) or by further processing the output of a CNN using self-attention, e.g. for object detection (Hu et al., 2018; Carion et al., 2020), video processing (Wang et al., 2018; Sun et al., 2019), image classification (Wu et al., 2020), unsupervised object discovery (Locatello et al., 2020), or unified text-vision tasks (Chen et al., 2020c; Lu et al., 2019; Li et al., 2019).\n\nAnother recent related model is image GPT (iGPT) (Chen et al., 2020a), which applies Transformers to image pixels after reducing image resolution and color space.",
+      "metadata": {
+        "source": "arxiv:2010.11929v2",
+        "title": "An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale",
+        "authors": [
+          "Alexey Dosovitskiy",
+          "Lucas Beyer",
+          "Alexander Kolesnikov",
+          "Dirk Weissenborn",
+          "Xiaohua Zhai",
+          "Thomas Unterthiner",
+          "Mostafa Dehghani",
+          "Matthias Minderer",
+          "Georg Heigold",
+          "Sylvain Gelly",
+          "Jakob Uszkoreit",
+          "Neil Houlsby"
+        ],
+        "section": "2 RELATED WORK",
+        "chunkIndex": 9,
+        "totalChunks": 105
+      }
+    },
+    {
+      "id": "2010.11929v2-chunk-10",
+      "content": "; Lu et al., 2019; Li et al., 2019).\n\nAnother recent related model is image GPT (iGPT) (Chen et al., 2020a), which applies Transformers to image pixels after reducing image resolution and color space. The model is trained in an unsupervised fashion as a generative model, and the resulting representation can then be fine-tuned or probed linearly for classification performance, achieving a maximal accuracy of 72% on ImageNet.\n\nOur work adds to the increasing collection of papers that explore image recognition at larger scales than the standard ImageNet dataset. The use of additional data sources allows to achieve state-ofthe-art results on standard benchmarks (Mahajan et al., 2018; Touvron et al., 2019; Xie et al., 2020). Moreover, Sun et al. (2017) study how CNN performance scales with dataset size, and Kolesnikov et al. (2020); Djolonga et al. (2020) perform an empirical exploration of CNN transfer learning from large scale datasets such as ImageNet-21k and JFT-300M.",
+      "metadata": {
+        "source": "arxiv:2010.11929v2",
+        "title": "An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale",
+        "authors": [
+          "Alexey Dosovitskiy",
+          "Lucas Beyer",
+          "Alexander Kolesnikov",
+          "Dirk Weissenborn",
+          "Xiaohua Zhai",
+          "Thomas Unterthiner",
+          "Mostafa Dehghani",
+          "Matthias Minderer",
+          "Georg Heigold",
+          "Sylvain Gelly",
+          "Jakob Uszkoreit",
+          "Neil Houlsby"
+        ],
+        "section": "2 RELATED WORK",
+        "chunkIndex": 10,
+        "totalChunks": 105
+      }
+    },
+    {
+      "id": "2010.11929v2-chunk-11",
+      "content": "ce scales with dataset size, and Kolesnikov et al. (2020); Djolonga et al. (2020) perform an empirical exploration of CNN transfer learning from large scale datasets such as ImageNet-21k and JFT-300M. We focus on these two latter datasets as well, but train Transformers instead of ResNet-based models used in prior works.\n\nFigure 1: Model overview. We split an image into fixed-size patches, linearly embed each of them, add position embeddings, and feed the resulting sequence of vectors to a standard Transformer encoder. In order to perform classification, we use the standard approach of adding an extra learnable 'classification token' to the sequence. The illustration of the Transformer encoder was inspired by Vaswani et al. (2017).\n\n<!-- image -->",
+      "metadata": {
+        "source": "arxiv:2010.11929v2",
+        "title": "An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale",
+        "authors": [
+          "Alexey Dosovitskiy",
+          "Lucas Beyer",
+          "Alexander Kolesnikov",
+          "Dirk Weissenborn",
+          "Xiaohua Zhai",
+          "Thomas Unterthiner",
+          "Mostafa Dehghani",
+          "Matthias Minderer",
+          "Georg Heigold",
+          "Sylvain Gelly",
+          "Jakob Uszkoreit",
+          "Neil Houlsby"
+        ],
+        "section": "2 RELATED WORK",
+        "chunkIndex": 11,
+        "totalChunks": 105
+      }
+    },
+    {
+      "id": "2010.11929v2-chunk-12",
+      "content": "In model design we follow the original Transformer (Vaswani et al., 2017) as closely as possible. An advantage of this intentionally simple setup is that scalable NLP Transformer architectures - and their efficient implementations - can be used almost out of the box.",
+      "metadata": {
+        "source": "arxiv:2010.11929v2",
+        "title": "An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale",
+        "authors": [
+          "Alexey Dosovitskiy",
+          "Lucas Beyer",
+          "Alexander Kolesnikov",
+          "Dirk Weissenborn",
+          "Xiaohua Zhai",
+          "Thomas Unterthiner",
+          "Mostafa Dehghani",
+          "Matthias Minderer",
+          "Georg Heigold",
+          "Sylvain Gelly",
+          "Jakob Uszkoreit",
+          "Neil Houlsby"
+        ],
+        "section": "3 METHOD",
+        "chunkIndex": 12,
+        "totalChunks": 105
+      }
+    },
+    {
+      "id": "2010.11929v2-chunk-13",
+      "content": "An overview of the model is depicted in Figure 1. The standard Transformer receives as input a 1D sequence of token embeddings. To handle 2D images, we reshape the image x ∈ R H × W × C into a sequence of flattened 2D patches x p ∈ R N × ( P 2 · C ) , where ( H,W ) is the resolution of the original image, C is the number of channels, ( P, P ) is the resolution of each image patch, and N = HW/P 2 is the resulting number of patches, which also serves as the effective input sequence length for the Transformer. The Transformer uses constant latent vector size D through all of its layers, so we flatten the patches and map to D dimensions with a trainable linear projection (Eq. 1). We refer to the output of this projection as the patch embeddings.\n\nSimilar to BERT's [class] token, we prepend a learnable embedding to the sequence of embedded patches ( z 0 0 = x class), whose state at the output of the Transformer encoder ( z 0 L ) serves as the image representation y (Eq. 4).",
+      "metadata": {
+        "source": "arxiv:2010.11929v2",
+        "title": "An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale",
+        "authors": [
+          "Alexey Dosovitskiy",
+          "Lucas Beyer",
+          "Alexander Kolesnikov",
+          "Dirk Weissenborn",
+          "Xiaohua Zhai",
+          "Thomas Unterthiner",
+          "Mostafa Dehghani",
+          "Matthias Minderer",
+          "Georg Heigold",
+          "Sylvain Gelly",
+          "Jakob Uszkoreit",
+          "Neil Houlsby"
+        ],
+        "section": "3.1 VISION TRANSFORMER (VIT)",
+        "chunkIndex": 13,
+        "totalChunks": 105
+      }
+    },
+    {
+      "id": "2010.11929v2-chunk-14",
+      "content": "n, we prepend a learnable embedding to the sequence of embedded patches ( z 0 0 = x class), whose state at the output of the Transformer encoder ( z 0 L ) serves as the image representation y (Eq. 4). Both during pre-training and fine-tuning, a classification head is attached to z 0 L . The classification head is implemented by a MLP with one hidden layer at pre-training time and by a single linear layer at fine-tuning time.\n\nPosition embeddings are added to the patch embeddings to retain positional information. We use standard learnable 1D position embeddings, since we have not observed significant performance gains from using more advanced 2D-aware position embeddings (Appendix D.4). The resulting sequence of embedding vectors serves as input to the encoder.\n\nThe Transformer encoder (Vaswani et al., 2017) consists of alternating layers of multiheaded selfattention (MSA, see Appendix A) and MLP blocks (Eq. 2, 3).",
+      "metadata": {
+        "source": "arxiv:2010.11929v2",
+        "title": "An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale",
+        "authors": [
+          "Alexey Dosovitskiy",
+          "Lucas Beyer",
+          "Alexander Kolesnikov",
+          "Dirk Weissenborn",
+          "Xiaohua Zhai",
+          "Thomas Unterthiner",
+          "Mostafa Dehghani",
+          "Matthias Minderer",
+          "Georg Heigold",
+          "Sylvain Gelly",
+          "Jakob Uszkoreit",
+          "Neil Houlsby"
+        ],
+        "section": "3.1 VISION TRANSFORMER (VIT)",
+        "chunkIndex": 14,
+        "totalChunks": 105
+      }
+    },
+    {
+      "id": "2010.11929v2-chunk-15",
+      "content": "ing vectors serves as input to the encoder.\n\nThe Transformer encoder (Vaswani et al., 2017) consists of alternating layers of multiheaded selfattention (MSA, see Appendix A) and MLP blocks (Eq. 2, 3). Layernorm (LN) is applied before every block, and residual connections after every block (Wang et al., 2019; Baevski &amp; Auli, 2019).\n\nThe MLP contains two layers with a GELU non-linearity.\n\n<!-- formula-not-decoded -->\n\n<!-- formula-not-decoded -->\n\n<!-- formula-not-decoded -->\n\ny\n\n= LN(\n\nz\n\n0\n\nL\n\n)\n\n(4)\n\nInductive bias. We note that Vision Transformer has much less image-specific inductive bias than CNNs. In CNNs, locality, two-dimensional neighborhood structure, and translation equivariance are baked into each layer throughout the whole model. In ViT, only MLP layers are local and translationally equivariant, while the self-attention layers are global.",
+      "metadata": {
+        "source": "arxiv:2010.11929v2",
+        "title": "An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale",
+        "authors": [
+          "Alexey Dosovitskiy",
+          "Lucas Beyer",
+          "Alexander Kolesnikov",
+          "Dirk Weissenborn",
+          "Xiaohua Zhai",
+          "Thomas Unterthiner",
+          "Mostafa Dehghani",
+          "Matthias Minderer",
+          "Georg Heigold",
+          "Sylvain Gelly",
+          "Jakob Uszkoreit",
+          "Neil Houlsby"
+        ],
+        "section": "3.1 VISION TRANSFORMER (VIT)",
+        "chunkIndex": 15,
+        "totalChunks": 105
+      }
+    },
+    {
+      "id": "2010.11929v2-chunk-16",
+      "content": "cture, and translation equivariance are baked into each layer throughout the whole model. In ViT, only MLP layers are local and translationally equivariant, while the self-attention layers are global. The two-dimensional neighborhood structure is used very sparingly: in the beginning of the model by cutting the image into patches and at fine-tuning time for adjusting the position embeddings for images of different resolution (as described below). Other than that, the position embeddings at initialization time carry no information about the 2D positions of the patches and all spatial relations between the patches have to be learned from scratch.\n\nHybrid Architecture. As an alternative to raw image patches, the input sequence can be formed from feature maps of a CNN (LeCun et al., 1989). In this hybrid model, the patch embedding projection E (Eq. 1) is applied to patches extracted from a CNN feature map.",
+      "metadata": {
+        "source": "arxiv:2010.11929v2",
+        "title": "An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale",
+        "authors": [
+          "Alexey Dosovitskiy",
+          "Lucas Beyer",
+          "Alexander Kolesnikov",
+          "Dirk Weissenborn",
+          "Xiaohua Zhai",
+          "Thomas Unterthiner",
+          "Mostafa Dehghani",
+          "Matthias Minderer",
+          "Georg Heigold",
+          "Sylvain Gelly",
+          "Jakob Uszkoreit",
+          "Neil Houlsby"
+        ],
+        "section": "3.1 VISION TRANSFORMER (VIT)",
+        "chunkIndex": 16,
+        "totalChunks": 105
+      }
+    },
+    {
+      "id": "2010.11929v2-chunk-17",
+      "content": "the input sequence can be formed from feature maps of a CNN (LeCun et al., 1989). In this hybrid model, the patch embedding projection E (Eq. 1) is applied to patches extracted from a CNN feature map. As a special case, the patches can have spatial size 1x1, which means that the input sequence is obtained by simply flattening the spatial dimensions of the feature map and projecting to the Transformer dimension. The classification input embedding and position embeddings are added as described above.",
+      "metadata": {
+        "source": "arxiv:2010.11929v2",
+        "title": "An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale",
+        "authors": [
+          "Alexey Dosovitskiy",
+          "Lucas Beyer",
+          "Alexander Kolesnikov",
+          "Dirk Weissenborn",
+          "Xiaohua Zhai",
+          "Thomas Unterthiner",
+          "Mostafa Dehghani",
+          "Matthias Minderer",
+          "Georg Heigold",
+          "Sylvain Gelly",
+          "Jakob Uszkoreit",
+          "Neil Houlsby"
+        ],
+        "section": "3.1 VISION TRANSFORMER (VIT)",
+        "chunkIndex": 17,
+        "totalChunks": 105
+      }
+    },
+    {
+      "id": "2010.11929v2-chunk-18",
+      "content": "Typically, we pre-train ViT on large datasets, and fine-tune to (smaller) downstream tasks. For this, we remove the pre-trained prediction head and attach a zero-initialized D × K feedforward layer, where K is the number of downstream classes. It is often beneficial to fine-tune at higher resolution than pre-training (Touvron et al., 2019; Kolesnikov et al., 2020). When feeding images of higher resolution, we keep the patch size the same, which results in a larger effective sequence length. The Vision Transformer can handle arbitrary sequence lengths (up to memory constraints), however, the pre-trained position embeddings may no longer be meaningful. We therefore perform 2D interpolation of the pre-trained position embeddings, according to their location in the original image. Note that this resolution adjustment and patch extraction are the only points at which an inductive bias about the 2D structure of the images is manually injected into the Vision Transformer.",
+      "metadata": {
+        "source": "arxiv:2010.11929v2",
+        "title": "An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale",
+        "authors": [
+          "Alexey Dosovitskiy",
+          "Lucas Beyer",
+          "Alexander Kolesnikov",
+          "Dirk Weissenborn",
+          "Xiaohua Zhai",
+          "Thomas Unterthiner",
+          "Mostafa Dehghani",
+          "Matthias Minderer",
+          "Georg Heigold",
+          "Sylvain Gelly",
+          "Jakob Uszkoreit",
+          "Neil Houlsby"
+        ],
+        "section": "3.2 FINE-TUNING AND HIGHER RESOLUTION",
+        "chunkIndex": 18,
+        "totalChunks": 105
+      }
+    },
+    {
+      "id": "2010.11929v2-chunk-19",
+      "content": "We evaluate the representation learning capabilities of ResNet, Vision Transformer (ViT), and the hybrid. To understand the data requirements of each model, we pre-train on datasets of varying size and evaluate many benchmark tasks. When considering the computational cost of pre-training the model, ViT performs very favourably, attaining state of the art on most recognition benchmarks at a lower pre-training cost. Lastly, we perform a small experiment using self-supervision, and show that self-supervised ViT holds promise for the future.",
+      "metadata": {
+        "source": "arxiv:2010.11929v2",
+        "title": "An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale",
+        "authors": [
+          "Alexey Dosovitskiy",
+          "Lucas Beyer",
+          "Alexander Kolesnikov",
+          "Dirk Weissenborn",
+          "Xiaohua Zhai",
+          "Thomas Unterthiner",
+          "Mostafa Dehghani",
+          "Matthias Minderer",
+          "Georg Heigold",
+          "Sylvain Gelly",
+          "Jakob Uszkoreit",
+          "Neil Houlsby"
+        ],
+        "section": "4 EXPERIMENTS",
+        "chunkIndex": 19,
+        "totalChunks": 105
+      }
+    },
+    {
+      "id": "2010.11929v2-chunk-20",
+      "content": "Datasets. To explore model scalability, we use the ILSVRC-2012 ImageNet dataset with 1k classes and 1.3M images (we refer to it as ImageNet in what follows), its superset ImageNet-21k with 21k classes and 14M images (Deng et al., 2009), and JFT (Sun et al., 2017) with 18k classes and 303M high-resolution images. We de-duplicate the pre-training datasets w.r.t. the test sets of the downstream tasks following Kolesnikov et al. (2020). We transfer the models trained on these dataset to several benchmark tasks: ImageNet on the original validation labels and the cleaned-up ReaL labels (Beyer et al., 2020), CIFAR-10/100 (Krizhevsky, 2009), Oxford-IIIT Pets (Parkhi et al., 2012), and Oxford Flowers-102 (Nilsback &amp; Zisserman, 2008). For these datasets, pre-processing follows Kolesnikov et al. (2020).\n\nTable 1: Details of Vision Transformer model variants.",
+      "metadata": {
+        "source": "arxiv:2010.11929v2",
+        "title": "An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale",
+        "authors": [
+          "Alexey Dosovitskiy",
+          "Lucas Beyer",
+          "Alexander Kolesnikov",
+          "Dirk Weissenborn",
+          "Xiaohua Zhai",
+          "Thomas Unterthiner",
+          "Mostafa Dehghani",
+          "Matthias Minderer",
+          "Georg Heigold",
+          "Sylvain Gelly",
+          "Jakob Uszkoreit",
+          "Neil Houlsby"
+        ],
+        "section": "4.1 SETUP",
+        "chunkIndex": 20,
+        "totalChunks": 105
+      }
+    },
+    {
+      "id": "2010.11929v2-chunk-21",
+      "content": "khi et al., 2012), and Oxford Flowers-102 (Nilsback &amp; Zisserman, 2008). For these datasets, pre-processing follows Kolesnikov et al. (2020).\n\nTable 1: Details of Vision Transformer model variants.\n\n| Model     |   Layers |   Hidden size D |   MLP size |   Heads | Params   |\n|-----------|----------|-----------------|------------|---------|----------|\n| ViT-Base  |       12 |             768 |       3072 |      12 | 86M      |\n| ViT-Large |       24 |            1024 |       4096 |      16 | 307M     |\n| ViT-Huge  |       32 |            1280 |       5120 |      16 | 632M     |\n\nWe also evaluate on the 19-task VTAB classification suite (Zhai et al., 2019b). VTAB evaluates low-data transfer to diverse tasks, using 1 000 training examples per task. The tasks are divided into three groups: Natural - tasks like the above, Pets, CIFAR, etc. Specialized - medical and satellite imagery, and Structured - tasks that require geometric understanding like localization.",
+      "metadata": {
+        "source": "arxiv:2010.11929v2",
+        "title": "An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale",
+        "authors": [
+          "Alexey Dosovitskiy",
+          "Lucas Beyer",
+          "Alexander Kolesnikov",
+          "Dirk Weissenborn",
+          "Xiaohua Zhai",
+          "Thomas Unterthiner",
+          "Mostafa Dehghani",
+          "Matthias Minderer",
+          "Georg Heigold",
+          "Sylvain Gelly",
+          "Jakob Uszkoreit",
+          "Neil Houlsby"
+        ],
+        "section": "4.1 SETUP",
+        "chunkIndex": 21,
+        "totalChunks": 105
+      }
+    },
+    {
+      "id": "2010.11929v2-chunk-22",
+      "content": "divided into three groups: Natural - tasks like the above, Pets, CIFAR, etc. Specialized - medical and satellite imagery, and Structured - tasks that require geometric understanding like localization.\n\nModel Variants. We base ViT configurations on those used for BERT (Devlin et al., 2019), as summarized in Table 1. The 'Base' and 'Large' models are directly adopted from BERT and we add the larger 'Huge' model. In what follows we use brief notation to indicate the model size and the input patch size: for instance, ViT-L/16 means the 'Large' variant with 16 × 16 input patch size. Note that the Transformer's sequence length is inversely proportional to the square of the patch size, thus models with smaller patch size are computationally more expensive.\n\nFor the baseline CNNs, we use ResNet (He et al., 2016), but replace the Batch Normalization layers (Ioffe &amp; Szegedy, 2015) with Group Normalization (Wu &amp; He, 2018), and used standardized convolutions (Qiao et al., 2019).",
+      "metadata": {
+        "source": "arxiv:2010.11929v2",
+        "title": "An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale",
+        "authors": [
+          "Alexey Dosovitskiy",
+          "Lucas Beyer",
+          "Alexander Kolesnikov",
+          "Dirk Weissenborn",
+          "Xiaohua Zhai",
+          "Thomas Unterthiner",
+          "Mostafa Dehghani",
+          "Matthias Minderer",
+          "Georg Heigold",
+          "Sylvain Gelly",
+          "Jakob Uszkoreit",
+          "Neil Houlsby"
+        ],
+        "section": "4.1 SETUP",
+        "chunkIndex": 22,
+        "totalChunks": 105
+      }
+    },
+    {
+      "id": "2010.11929v2-chunk-23",
+      "content": "e ResNet (He et al., 2016), but replace the Batch Normalization layers (Ioffe &amp; Szegedy, 2015) with Group Normalization (Wu &amp; He, 2018), and used standardized convolutions (Qiao et al., 2019). These modifications improve transfer (Kolesnikov et al., 2020), and we denote the modified model 'ResNet (BiT)'. For the hybrids, we feed the intermediate feature maps into ViT with patch size of one 'pixel'. To experiment with different sequence lengths, we either (i) take the output of stage 4 of a regular ResNet50 or (ii) remove stage 4, place the same number of layers in stage 3 (keeping the total number of layers), and take the output of this extended stage 3. Option (ii) results in a 4x longer sequence length, and a more expensive ViT model.\n\nTraining &amp; Fine-tuning. We train all models, including ResNets, using Adam (Kingma &amp; Ba, 2015) with β 1 = 0 . 9 , β 2 = 0 . 999 , a batch size of 4096 and apply a high weight decay of 0 .",
+      "metadata": {
+        "source": "arxiv:2010.11929v2",
+        "title": "An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale",
+        "authors": [
+          "Alexey Dosovitskiy",
+          "Lucas Beyer",
+          "Alexander Kolesnikov",
+          "Dirk Weissenborn",
+          "Xiaohua Zhai",
+          "Thomas Unterthiner",
+          "Mostafa Dehghani",
+          "Matthias Minderer",
+          "Georg Heigold",
+          "Sylvain Gelly",
+          "Jakob Uszkoreit",
+          "Neil Houlsby"
+        ],
+        "section": "4.1 SETUP",
+        "chunkIndex": 23,
+        "totalChunks": 105
+      }
+    },
+    {
+      "id": "2010.11929v2-chunk-24",
+      "content": "el.\n\nTraining &amp; Fine-tuning. We train all models, including ResNets, using Adam (Kingma &amp; Ba, 2015) with β 1 = 0 . 9 , β 2 = 0 . 999 , a batch size of 4096 and apply a high weight decay of 0 . 1 , which we found to be useful for transfer of all models (Appendix D.1 shows that, in contrast to common practices, Adam works slightly better than SGD for ResNets in our setting). We use a linear learning rate warmup and decay, see Appendix B.1 for details. For fine-tuning we use SGD with momentum, batch size 512, for all models, see Appendix B.1.1. For ImageNet results in Table 2, we fine-tuned at higher resolution: 512 for ViT-L/16 and 518 for ViT-H/14, and also used Polyak &amp; Juditsky (1992) averaging with a factor of 0 . 9999 (Ramachandran et al., 2019; Wang et al., 2020b).\n\nMetrics. We report results on downstream datasets either through few-shot or fine-tuning accuracy.",
+      "metadata": {
+        "source": "arxiv:2010.11929v2",
+        "title": "An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale",
+        "authors": [
+          "Alexey Dosovitskiy",
+          "Lucas Beyer",
+          "Alexander Kolesnikov",
+          "Dirk Weissenborn",
+          "Xiaohua Zhai",
+          "Thomas Unterthiner",
+          "Mostafa Dehghani",
+          "Matthias Minderer",
+          "Georg Heigold",
+          "Sylvain Gelly",
+          "Jakob Uszkoreit",
+          "Neil Houlsby"
+        ],
+        "section": "4.1 SETUP",
+        "chunkIndex": 24,
+        "totalChunks": 105
+      }
+    },
+    {
+      "id": "2010.11929v2-chunk-25",
+      "content": "Juditsky (1992) averaging with a factor of 0 . 9999 (Ramachandran et al., 2019; Wang et al., 2020b).\n\nMetrics. We report results on downstream datasets either through few-shot or fine-tuning accuracy. Fine-tuning accuracies capture the performance of each model after fine-tuning it on the respective dataset. Few-shot accuracies are obtained by solving a regularized least-squares regression problem that maps the (frozen) representation of a subset of training images to {-1 , 1 } K target vectors. This formulation allows us to recover the exact solution in closed form. Though we mainly focus on fine-tuning performance, we sometimes use linear few-shot accuracies for fast on-the-fly evaluation where fine-tuning would be too costly.",
+      "metadata": {
+        "source": "arxiv:2010.11929v2",
+        "title": "An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale",
+        "authors": [
+          "Alexey Dosovitskiy",
+          "Lucas Beyer",
+          "Alexander Kolesnikov",
+          "Dirk Weissenborn",
+          "Xiaohua Zhai",
+          "Thomas Unterthiner",
+          "Mostafa Dehghani",
+          "Matthias Minderer",
+          "Georg Heigold",
+          "Sylvain Gelly",
+          "Jakob Uszkoreit",
+          "Neil Houlsby"
+        ],
+        "section": "4.1 SETUP",
+        "chunkIndex": 25,
+        "totalChunks": 105
+      }
+    },
+    {
+      "id": "2010.11929v2-chunk-26",
+      "content": "We first compare our largest models - ViT-H/14 and ViT-L/16 - to state-of-the-art CNNs from the literature. The first comparison point is Big Transfer (BiT) (Kolesnikov et al., 2020), which performs supervised transfer learning with large ResNets. The second is Noisy Student (Xie et al., 2020), which is a large EfficientNet trained using semi-supervised learning on ImageNet and JFT300M with the labels removed. Currently, Noisy Student is the state of the art on ImageNet and BiT-L on the other datasets reported here. All models were trained on TPUv3 hardware, and we report the number of TPUv3-core-days taken to pre-train each of them, that is, the number of TPU v3 cores (2 per chip) used for training multiplied by the training time in days.\n\nTable 2 shows the results. The smaller ViT-L/16 model pre-trained on JFT-300M outperforms BiT-L (which is pre-trained on the same dataset) on all tasks, while requiring substantially less computational resources to train.",
+      "metadata": {
+        "source": "arxiv:2010.11929v2",
+        "title": "An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale",
+        "authors": [
+          "Alexey Dosovitskiy",
+          "Lucas Beyer",
+          "Alexander Kolesnikov",
+          "Dirk Weissenborn",
+          "Xiaohua Zhai",
+          "Thomas Unterthiner",
+          "Mostafa Dehghani",
+          "Matthias Minderer",
+          "Georg Heigold",
+          "Sylvain Gelly",
+          "Jakob Uszkoreit",
+          "Neil Houlsby"
+        ],
+        "section": "4.2 COMPARISON TO STATE OF THE ART",
+        "chunkIndex": 26,
+        "totalChunks": 105
+      }
+    },
+    {
+      "id": "2010.11929v2-chunk-27",
+      "content": "ults. The smaller ViT-L/16 model pre-trained on JFT-300M outperforms BiT-L (which is pre-trained on the same dataset) on all tasks, while requiring substantially less computational resources to train. The larger model, ViT-H/14, further improves the performance, especially on the more challenging datasets - ImageNet, CIFAR-100, and the VTAB suite. Interestingly, this\n\nTable 2: Comparison with state of the art on popular image classification benchmarks. We report mean and standard deviation of the accuracies, averaged over three fine-tuning runs. Vision Transformer models pre-trained on the JFT-300M dataset outperform ResNet-based baselines on all datasets, while taking substantially less computational resources to pre-train. ViT pre-trained on the smaller public ImageNet-21k dataset performs well too. ∗ Slightly improved 88 . 5% result reported in Touvron et al. (2020).",
+      "metadata": {
+        "source": "arxiv:2010.11929v2",
+        "title": "An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale",
+        "authors": [
+          "Alexey Dosovitskiy",
+          "Lucas Beyer",
+          "Alexander Kolesnikov",
+          "Dirk Weissenborn",
+          "Xiaohua Zhai",
+          "Thomas Unterthiner",
+          "Mostafa Dehghani",
+          "Matthias Minderer",
+          "Georg Heigold",
+          "Sylvain Gelly",
+          "Jakob Uszkoreit",
+          "Neil Houlsby"
+        ],
+        "section": "4.2 COMPARISON TO STATE OF THE ART",
+        "chunkIndex": 27,
+        "totalChunks": 105
+      }
+    },
+    {
+      "id": "2010.11929v2-chunk-28",
+      "content": "tantially less computational resources to pre-train. ViT pre-trained on the smaller public ImageNet-21k dataset performs well too. ∗ Slightly improved 88 . 5% result reported in Touvron et al. (2020).\n\n|                    | Ours-JFT (ViT-H/14)                                | Ours-JFT (ViT-L/16)                                                                                                 | Ours-I21k (ViT-L/16)                                                                                    | BiT-L (ResNet152x4)                                                                                           | Noisy Student (EfficientNet-L2)   |\n|--------------------|----------------------------------------------------|---------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------|---------------------------------------------------",
+      "metadata": {
+        "source": "arxiv:2010.11929v2",
+        "title": "An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale",
+        "authors": [
+          "Alexey Dosovitskiy",
+          "Lucas Beyer",
+          "Alexander Kolesnikov",
+          "Dirk Weissenborn",
+          "Xiaohua Zhai",
+          "Thomas Unterthiner",
+          "Mostafa Dehghani",
+          "Matthias Minderer",
+          "Georg Heigold",
+          "Sylvain Gelly",
+          "Jakob Uszkoreit",
+          "Neil Houlsby"
+        ],
+        "section": "4.2 COMPARISON TO STATE OF THE ART",
+        "chunkIndex": 28,
+        "totalChunks": 105
+      }
+    },
+    {
+      "id": "2010.11929v2-chunk-29",
+      "content": "------------------------------------------|---------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------|-----------------------------------|\n| ImageNet ImageNet  | 88 . 55 ± 0 . 04 90 . 72 ± 0 . 05 99 . 50 ± 0 . 06 | 87 . 76 ± 0 . 03 90 . 54 ± 0 . 03 99 . 42 ± 0 . 03 93 . 90 ± 0 . 05 97 . 32 ± 0 . 11 99 . 74 ± 0 . 76 . 28 ± 0 . 46 | 85 . 30 ± 0 . 02 88 . 62 ± 0 . 05 99 . 15 ± 0 . 93 . 25 ± 0 . 94 . 67 ± 0 . 99 . 61 ± 0 . 72 . 72 ± 0 . | 87 . 54 ± 0 . 02 90 . 54 99 . 37 ± 0 . 06 93 . 51 ± 0 . 08 96 . 62 ± 0 . 23 99 . 63 ± 0 . 03 76 . 29 ± 1 . 70 | 88 . 4 / 88 . 5 ∗ 90 . 55 - - - - |\n| ReaL               |                                                    |                                                                                                                     |",
+      "metadata": {
+        "source": "arxiv:2010.11929v2",
+        "title": "An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale",
+        "authors": [
+          "Alexey Dosovitskiy",
+          "Lucas Beyer",
+          "Alexander Kolesnikov",
+          "Dirk Weissenborn",
+          "Xiaohua Zhai",
+          "Thomas Unterthiner",
+          "Mostafa Dehghani",
+          "Matthias Minderer",
+          "Georg Heigold",
+          "Sylvain Gelly",
+          "Jakob Uszkoreit",
+          "Neil Houlsby"
+        ],
+        "section": "4.2 COMPARISON TO STATE OF THE ART",
+        "chunkIndex": 29,
+        "totalChunks": 105
+      }
+    },
+    {
+      "id": "2010.11929v2-chunk-30",
+      "content": "|                                                                                                                     |                                                                                                         |                                                                                                               |                                   |\n| CIFAR-10           |                                                    |                                                                                                                     | 03                                                                                                      |                                                                                                               |                                   |\n| CIFAR-100          | 94 . 55 ± 0 .",
+      "metadata": {
+        "source": "arxiv:2010.11929v2",
+        "title": "An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale",
+        "authors": [
+          "Alexey Dosovitskiy",
+          "Lucas Beyer",
+          "Alexander Kolesnikov",
+          "Dirk Weissenborn",
+          "Xiaohua Zhai",
+          "Thomas Unterthiner",
+          "Mostafa Dehghani",
+          "Matthias Minderer",
+          "Georg Heigold",
+          "Sylvain Gelly",
+          "Jakob Uszkoreit",
+          "Neil Houlsby"
+        ],
+        "section": "4.2 COMPARISON TO STATE OF THE ART",
+        "chunkIndex": 30,
+        "totalChunks": 105
+      }
+    },
+    {
+      "id": "2010.11929v2-chunk-31",
+      "content": "|                                                                                                               |                                   |\n| CIFAR-100          | 94 . 55 ± 0 . 04                                   |                                                                                                                     | 05                                                                                                      |                                                                                                               |                                   |\n| Oxford-IIIT Pets   | 97 . 56 ± 0 . 03                                   |                                                                                                                     | 15                                                                                                      |",
+      "metadata": {
+        "source": "arxiv:2010.11929v2",
+        "title": "An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale",
+        "authors": [
+          "Alexey Dosovitskiy",
+          "Lucas Beyer",
+          "Alexander Kolesnikov",
+          "Dirk Weissenborn",
+          "Xiaohua Zhai",
+          "Thomas Unterthiner",
+          "Mostafa Dehghani",
+          "Matthias Minderer",
+          "Georg Heigold",
+          "Sylvain Gelly",
+          "Jakob Uszkoreit",
+          "Neil Houlsby"
+        ],
+        "section": "4.2 COMPARISON TO STATE OF THE ART",
+        "chunkIndex": 31,
+        "totalChunks": 105
+      }
+    },
+    {
+      "id": "2010.11929v2-chunk-32",
+      "content": "| 15                                                                                                      |                                                                                                               |                                   |\n| Oxford Flowers-102 | 99 . 68 ± 0 . 02                                   | 00                                                                                                                  | 02                                                                                                      |                                                                                                               |                                   |\n| VTAB (19 tasks)    | 77 . 63 ± 0 . 23                                   |                                                                                                                     | 21",
+      "metadata": {
+        "source": "arxiv:2010.11929v2",
+        "title": "An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale",
+        "authors": [
+          "Alexey Dosovitskiy",
+          "Lucas Beyer",
+          "Alexander Kolesnikov",
+          "Dirk Weissenborn",
+          "Xiaohua Zhai",
+          "Thomas Unterthiner",
+          "Mostafa Dehghani",
+          "Matthias Minderer",
+          "Georg Heigold",
+          "Sylvain Gelly",
+          "Jakob Uszkoreit",
+          "Neil Houlsby"
+        ],
+        "section": "4.2 COMPARISON TO STATE OF THE ART",
+        "chunkIndex": 32,
+        "totalChunks": 105
+      }
+    },
+    {
+      "id": "2010.11929v2-chunk-33",
+      "content": "| 21                                                                                                      |                                                                                                               | -                                 |\n| TPUv3-core-days    | 2 . 5 k                                            | 0 . 68 k                                                                                                            | 0 . 23 k                                                                                                | 9 . 9 k                                                                                                       | 12 . 3 k                          |\n\nFigure 2: Breakdown of VTAB performance in Natural , Specialized , and Structured task groups.\n\n<!-- image -->",
+      "metadata": {
+        "source": "arxiv:2010.11929v2",
+        "title": "An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale",
+        "authors": [
+          "Alexey Dosovitskiy",
+          "Lucas Beyer",
+          "Alexander Kolesnikov",
+          "Dirk Weissenborn",
+          "Xiaohua Zhai",
+          "Thomas Unterthiner",
+          "Mostafa Dehghani",
+          "Matthias Minderer",
+          "Georg Heigold",
+          "Sylvain Gelly",
+          "Jakob Uszkoreit",
+          "Neil Houlsby"
+        ],
+        "section": "4.2 COMPARISON TO STATE OF THE ART",
+        "chunkIndex": 33,
+        "totalChunks": 105
+      }
+    },
+    {
+      "id": "2010.11929v2-chunk-34",
+      "content": "| 12 . 3 k                          |\n\nFigure 2: Breakdown of VTAB performance in Natural , Specialized , and Structured task groups.\n\n<!-- image -->\n\nmodel still took substantially less compute to pre-train than prior state of the art. However, we note that pre-training efficiency may be affected not only by the architecture choice, but also other parameters, such as training schedule, optimizer, weight decay, etc. We provide a controlled study of performance vs. compute for different architectures in Section 4.4. Finally, the ViT-L/16 model pre-trained on the public ImageNet-21k dataset performs well on most datasets too, while taking fewer resources to pre-train: it could be trained using a standard cloud TPUv3 with 8 cores in approximately 30 days.",
+      "metadata": {
+        "source": "arxiv:2010.11929v2",
+        "title": "An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale",
+        "authors": [
+          "Alexey Dosovitskiy",
+          "Lucas Beyer",
+          "Alexander Kolesnikov",
+          "Dirk Weissenborn",
+          "Xiaohua Zhai",
+          "Thomas Unterthiner",
+          "Mostafa Dehghani",
+          "Matthias Minderer",
+          "Georg Heigold",
+          "Sylvain Gelly",
+          "Jakob Uszkoreit",
+          "Neil Houlsby"
+        ],
+        "section": "4.2 COMPARISON TO STATE OF THE ART",
+        "chunkIndex": 34,
+        "totalChunks": 105
+      }
+    },
+    {
+      "id": "2010.11929v2-chunk-35",
+      "content": "n the public ImageNet-21k dataset performs well on most datasets too, while taking fewer resources to pre-train: it could be trained using a standard cloud TPUv3 with 8 cores in approximately 30 days.\n\nFigure 2 decomposes the VTAB tasks into their respective groups, and compares to previous SOTA methods on this benchmark: BiT, VIVI - a ResNet co-trained on ImageNet and Youtube (Tschannen et al., 2020), and S4L - supervised plus semi-supervised learning on ImageNet (Zhai et al., 2019a). ViT-H/14 outperforms BiT-R152x4, and other methods, on the Natural and Structured tasks. On the Specialized the performance of the top two models is similar.",
+      "metadata": {
+        "source": "arxiv:2010.11929v2",
+        "title": "An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale",
+        "authors": [
+          "Alexey Dosovitskiy",
+          "Lucas Beyer",
+          "Alexander Kolesnikov",
+          "Dirk Weissenborn",
+          "Xiaohua Zhai",
+          "Thomas Unterthiner",
+          "Mostafa Dehghani",
+          "Matthias Minderer",
+          "Georg Heigold",
+          "Sylvain Gelly",
+          "Jakob Uszkoreit",
+          "Neil Houlsby"
+        ],
+        "section": "4.2 COMPARISON TO STATE OF THE ART",
+        "chunkIndex": 35,
+        "totalChunks": 105
+      }
+    },
+    {
+      "id": "2010.11929v2-chunk-36",
+      "content": "The Vision Transformer performs well when pre-trained on a large JFT-300M dataset. With fewer inductive biases for vision than ResNets, how crucial is the dataset size? We perform two series of experiments.\n\nFirst, we pre-train ViT models on datasets of increasing size: ImageNet, ImageNet-21k, and JFT300M. To boost the performance on the smaller datasets, we optimize three basic regularization parameters - weight decay, dropout, and label smoothing. Figure 3 shows the results after finetuning to ImageNet (results on other datasets are shown in Table 5) 2 . When pre-trained on the smallest dataset, ImageNet, ViT-Large models underperform compared to ViT-Base models, despite (moderate) regularization. With ImageNet-21k pre-training, their performances are similar. Only with JFT-300M, do we see the full benefit of larger models. Figure 3 also shows the performance",
+      "metadata": {
+        "source": "arxiv:2010.11929v2",
+        "title": "An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale",
+        "authors": [
+          "Alexey Dosovitskiy",
+          "Lucas Beyer",
+          "Alexander Kolesnikov",
+          "Dirk Weissenborn",
+          "Xiaohua Zhai",
+          "Thomas Unterthiner",
+          "Mostafa Dehghani",
+          "Matthias Minderer",
+          "Georg Heigold",
+          "Sylvain Gelly",
+          "Jakob Uszkoreit",
+          "Neil Houlsby"
+        ],
+        "section": "4.3 PRE-TRAINING DATA REQUIREMENTS",
+        "chunkIndex": 36,
+        "totalChunks": 105
+      }
+    },
+    {
+      "id": "2010.11929v2-chunk-37",
+      "content": "despite (moderate) regularization. With ImageNet-21k pre-training, their performances are similar. Only with JFT-300M, do we see the full benefit of larger models. Figure 3 also shows the performance\n\n2 Note that the ImageNet pre-trained models are also fine-tuned, but again on ImageNet. This is because the resolution increase during fine-tuning improves the performance.\n\n<!-- image -->\n\nFigure 3: Transfer to ImageNet. While large ViT models perform worse than BiT ResNets (shaded area) when pre-trained on small datasets, they shine when pre-trained on larger datasets. Similarly, larger ViT variants overtake smaller ones as the dataset grows.\n\nFigure 4: Linear few-shot evaluation on ImageNet versus pre-training size. ResNets perform better with smaller pre-training datasets but plateau sooner than ViT, which performs better with larger pre-training. ViT-b is ViT-B with all hidden dimensions halved.\n\n<!-- image -->",
+      "metadata": {
+        "source": "arxiv:2010.11929v2",
+        "title": "An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale",
+        "authors": [
+          "Alexey Dosovitskiy",
+          "Lucas Beyer",
+          "Alexander Kolesnikov",
+          "Dirk Weissenborn",
+          "Xiaohua Zhai",
+          "Thomas Unterthiner",
+          "Mostafa Dehghani",
+          "Matthias Minderer",
+          "Georg Heigold",
+          "Sylvain Gelly",
+          "Jakob Uszkoreit",
+          "Neil Houlsby"
+        ],
+        "section": "4.3 PRE-TRAINING DATA REQUIREMENTS",
+        "chunkIndex": 37,
+        "totalChunks": 105
+      }
+    },
+    {
+      "id": "2010.11929v2-chunk-38",
+      "content": "ResNets perform better with smaller pre-training datasets but plateau sooner than ViT, which performs better with larger pre-training. ViT-b is ViT-B with all hidden dimensions halved.\n\n<!-- image -->\n\nFigure 5: Performance versus pre-training compute for different architectures: Vision Transformers, ResNets, and hybrids. Vision Transformers generally outperform ResNets with the same computational budget. Hybrids improve upon pure Transformers for smaller model sizes, but the gap vanishes for larger models.\n\n<!-- image -->\n\nregion spanned by BiT models of different sizes. The BiT CNNs outperform ViT on ImageNet, but with the larger datasets, ViT overtakes.\n\nSecond, we train our models on random subsets of 9M, 30M, and 90M as well as the full JFT300M dataset. We do not perform additional regularization on the smaller subsets and use the same hyper-parameters for all settings. This way, we assess the intrinsic model properties, and not the effect of regularization.",
+      "metadata": {
+        "source": "arxiv:2010.11929v2",
+        "title": "An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale",
+        "authors": [
+          "Alexey Dosovitskiy",
+          "Lucas Beyer",
+          "Alexander Kolesnikov",
+          "Dirk Weissenborn",
+          "Xiaohua Zhai",
+          "Thomas Unterthiner",
+          "Mostafa Dehghani",
+          "Matthias Minderer",
+          "Georg Heigold",
+          "Sylvain Gelly",
+          "Jakob Uszkoreit",
+          "Neil Houlsby"
+        ],
+        "section": "4.3 PRE-TRAINING DATA REQUIREMENTS",
+        "chunkIndex": 38,
+        "totalChunks": 105
+      }
+    },
+    {
+      "id": "2010.11929v2-chunk-39",
+      "content": "t perform additional regularization on the smaller subsets and use the same hyper-parameters for all settings. This way, we assess the intrinsic model properties, and not the effect of regularization. We do, however, use early-stopping, and report the best validation accuracy achieved during training. To save compute, we report few-shot linear accuracy instead of full finetuning accuracy. Figure 4 contains the results. Vision Transformers overfit more than ResNets with comparable computational cost on smaller datasets. For example, ViT-B/32 is slightly faster than ResNet50; it performs much worse on the 9M subset, but better on 90M+ subsets. The same is true for ResNet152x2 and ViT-L/16. This result reinforces the intuition that the convolutional inductive bias is useful for smaller datasets, but for larger ones, learning the relevant patterns directly from data is sufficient, even beneficial.",
+      "metadata": {
+        "source": "arxiv:2010.11929v2",
+        "title": "An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale",
+        "authors": [
+          "Alexey Dosovitskiy",
+          "Lucas Beyer",
+          "Alexander Kolesnikov",
+          "Dirk Weissenborn",
+          "Xiaohua Zhai",
+          "Thomas Unterthiner",
+          "Mostafa Dehghani",
+          "Matthias Minderer",
+          "Georg Heigold",
+          "Sylvain Gelly",
+          "Jakob Uszkoreit",
+          "Neil Houlsby"
+        ],
+        "section": "4.3 PRE-TRAINING DATA REQUIREMENTS",
+        "chunkIndex": 39,
+        "totalChunks": 105
+      }
+    },
+    {
+      "id": "2010.11929v2-chunk-40",
+      "content": "lt reinforces the intuition that the convolutional inductive bias is useful for smaller datasets, but for larger ones, learning the relevant patterns directly from data is sufficient, even beneficial.\n\nOverall, the few-shot results on ImageNet (Figure 4), as well as the low-data results on VTAB (Table 2) seem promising for very low-data transfer. Further analysis of few-shot properties of ViT is an exciting direction of future work.",
+      "metadata": {
+        "source": "arxiv:2010.11929v2",
+        "title": "An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale",
+        "authors": [
+          "Alexey Dosovitskiy",
+          "Lucas Beyer",
+          "Alexander Kolesnikov",
+          "Dirk Weissenborn",
+          "Xiaohua Zhai",
+          "Thomas Unterthiner",
+          "Mostafa Dehghani",
+          "Matthias Minderer",
+          "Georg Heigold",
+          "Sylvain Gelly",
+          "Jakob Uszkoreit",
+          "Neil Houlsby"
+        ],
+        "section": "4.3 PRE-TRAINING DATA REQUIREMENTS",
+        "chunkIndex": 40,
+        "totalChunks": 105
+      }
+    },
+    {
+      "id": "2010.11929v2-chunk-41",
+      "content": "We perform a controlled scaling study of different models by evaluating transfer performance from JFT-300M. In this setting data size does not bottleneck the models' performances, and we assess performance versus pre-training cost of each model. The model set includes: 7 ResNets, R50x1, R50x2 R101x1, R152x1, R152x2, pre-trained for 7 epochs, plus R152x2 and R200x3 pre-trained for 14 epochs; 6 Vision Transformers, ViT-B/32, B/16, L/32, L/16, pre-trained for 7 epochs, plus L/16 and H/14 pre-trained for 14 epochs; and 5 hybrids, R50+ViT-B/32, B/16, L/32, L/16 pretrained for 7 epochs, plus R50+ViT-L/16 pre-trained for 14 epochs (for hybrids, the number at the end of the model name stands not for the patch size, but for the total dowsampling ratio in the ResNet backbone).\n\nFigure 5 contains the transfer performance versus total pre-training compute (see Appendix D.5 for details on computational costs). Detailed results per model are provided in Table 6 in the Appendix.",
+      "metadata": {
+        "source": "arxiv:2010.11929v2",
+        "title": "An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale",
+        "authors": [
+          "Alexey Dosovitskiy",
+          "Lucas Beyer",
+          "Alexander Kolesnikov",
+          "Dirk Weissenborn",
+          "Xiaohua Zhai",
+          "Thomas Unterthiner",
+          "Mostafa Dehghani",
+          "Matthias Minderer",
+          "Georg Heigold",
+          "Sylvain Gelly",
+          "Jakob Uszkoreit",
+          "Neil Houlsby"
+        ],
+        "section": "4.4 SCALING STUDY",
+        "chunkIndex": 41,
+        "totalChunks": 105
+      }
+    },
+    {
+      "id": "2010.11929v2-chunk-42",
+      "content": "Figure 5 contains the transfer performance versus total pre-training compute (see Appendix D.5 for details on computational costs). Detailed results per model are provided in Table 6 in the Appendix. A few patterns can be observed. First, Vision Transformers dominate ResNets on the performance/compute trade-off. ViT uses approximately 2 -4 × less compute to attain the same performance (average over 5 datasets). Second, hybrids slightly outperform ViT at small computational budgets, but the difference vanishes for larger models. This result is somewhat surprising, since one might expect convolutional local feature processing to assist ViT at any size. Third, Vision Transformers appear not to saturate within the range tried, motivating future scaling efforts.",
+      "metadata": {
+        "source": "arxiv:2010.11929v2",
+        "title": "An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale",
+        "authors": [
+          "Alexey Dosovitskiy",
+          "Lucas Beyer",
+          "Alexander Kolesnikov",
+          "Dirk Weissenborn",
+          "Xiaohua Zhai",
+          "Thomas Unterthiner",
+          "Mostafa Dehghani",
+          "Matthias Minderer",
+          "Georg Heigold",
+          "Sylvain Gelly",
+          "Jakob Uszkoreit",
+          "Neil Houlsby"
+        ],
+        "section": "4.4 SCALING STUDY",
+        "chunkIndex": 42,
+        "totalChunks": 105
+      }
+    },
+    {
+      "id": "2010.11929v2-chunk-43",
+      "content": "To begin to understand how the Vision Transformer processes image data, we analyze its internal representations. The first layer of the Vision Transformer linearly projects the flattened patches into a lower-dimensional space (Eq. 1). Figure 7 (left) shows the top principal components of the the learned embedding filters. The components resemble plausible basis functions for a low-dimensional representation of the fine structure within each patch.\n\nAfter the projection, a learned position embedding is added to the patch representations. Figure 7 (center) shows that the model learns to encode distance within the image in the similarity of position embeddings, i.e. closer patches tend to have more similar position embeddings. Further, the row-column structure appears; patches in the same row/column have similar embeddings. Finally, a sinusoidal structure is sometimes apparent for larger grids (Appendix D).",
+      "metadata": {
+        "source": "arxiv:2010.11929v2",
+        "title": "An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale",
+        "authors": [
+          "Alexey Dosovitskiy",
+          "Lucas Beyer",
+          "Alexander Kolesnikov",
+          "Dirk Weissenborn",
+          "Xiaohua Zhai",
+          "Thomas Unterthiner",
+          "Mostafa Dehghani",
+          "Matthias Minderer",
+          "Georg Heigold",
+          "Sylvain Gelly",
+          "Jakob Uszkoreit",
+          "Neil Houlsby"
+        ],
+        "section": "4.5 INSPECTING VISION TRANSFORMER",
+        "chunkIndex": 43,
+        "totalChunks": 105
+      }
+    },
+    {
+      "id": "2010.11929v2-chunk-44",
+      "content": "tion embeddings. Further, the row-column structure appears; patches in the same row/column have similar embeddings. Finally, a sinusoidal structure is sometimes apparent for larger grids (Appendix D). That the position embeddings learn to represent 2D image topology explains why hand-crafted 2D-aware embedding variants do not yield improvements (Appendix D.4).\n\nSelf-attention allows ViT to integrate information across the entire image even in the lowest layers. We investigate to what degree the network makes use of this capability. Specifically, we compute the average distance in image space across which information is integrated, based on the attention weights (Figure 7, right). This 'attention distance' is analogous to receptive field size in CNNs.\n\nFigure 6: Representative examples of attention from the output token to the input space. See Appendix D.7 for details.\n\n<!-- image -->",
+      "metadata": {
+        "source": "arxiv:2010.11929v2",
+        "title": "An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale",
+        "authors": [
+          "Alexey Dosovitskiy",
+          "Lucas Beyer",
+          "Alexander Kolesnikov",
+          "Dirk Weissenborn",
+          "Xiaohua Zhai",
+          "Thomas Unterthiner",
+          "Mostafa Dehghani",
+          "Matthias Minderer",
+          "Georg Heigold",
+          "Sylvain Gelly",
+          "Jakob Uszkoreit",
+          "Neil Houlsby"
+        ],
+        "section": "4.5 INSPECTING VISION TRANSFORMER",
+        "chunkIndex": 44,
+        "totalChunks": 105
+      }
+    },
+    {
+      "id": "2010.11929v2-chunk-45",
+      "content": "ttention distance' is analogous to receptive field size in CNNs.\n\nFigure 6: Representative examples of attention from the output token to the input space. See Appendix D.7 for details.\n\n<!-- image -->\n\nWe find that some heads attend to most of the image already in the lowest layers, showing that the ability to integrate information globally is indeed used by the model. Other attention heads have consistently small attention distances in the low layers. This highly localized attention is less pronounced in hybrid models that apply a ResNet before the Transformer (Figure 7, right), suggesting that it may serve a similar function as early convolutional layers in CNNs. Further, the attention distance increases with network depth. Globally, we find that the model attends to image regions that are semantically relevant for classification (Figure 6).",
+      "metadata": {
+        "source": "arxiv:2010.11929v2",
+        "title": "An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale",
+        "authors": [
+          "Alexey Dosovitskiy",
+          "Lucas Beyer",
+          "Alexander Kolesnikov",
+          "Dirk Weissenborn",
+          "Xiaohua Zhai",
+          "Thomas Unterthiner",
+          "Mostafa Dehghani",
+          "Matthias Minderer",
+          "Georg Heigold",
+          "Sylvain Gelly",
+          "Jakob Uszkoreit",
+          "Neil Houlsby"
+        ],
+        "section": "4.5 INSPECTING VISION TRANSFORMER",
+        "chunkIndex": 45,
+        "totalChunks": 105
+      }
+    },
+    {
+      "id": "2010.11929v2-chunk-46",
+      "content": "Transformers show impressive performance on NLP tasks. However, much of their success stems not only from their excellent scalability but also from large scale self-supervised pre-training (Devlin",
+      "metadata": {
+        "source": "arxiv:2010.11929v2",
+        "title": "An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale",
+        "authors": [
+          "Alexey Dosovitskiy",
+          "Lucas Beyer",
+          "Alexander Kolesnikov",
+          "Dirk Weissenborn",
+          "Xiaohua Zhai",
+          "Thomas Unterthiner",
+          "Mostafa Dehghani",
+          "Matthias Minderer",
+          "Georg Heigold",
+          "Sylvain Gelly",
+          "Jakob Uszkoreit",
+          "Neil Houlsby"
+        ],
+        "section": "4.6 SELF-SUPERVISION",
+        "chunkIndex": 46,
+        "totalChunks": 105
+      }
+    },
+    {
+      "id": "2010.11929v2-chunk-47",
+      "content": "Figure 7: Left: Filters of the initial linear embedding of RGB values of ViT-L/32. Center: Similarity of position embeddings of ViT-L/32. Tiles show the cosine similarity between the position embedding of the patch with the indicated row and column and the position embeddings of all other patches. Right: Size of attended area by head and network depth. Each dot shows the mean attention distance across images for one of 16 heads at one layer. See Appendix D.7 for details.\n\n<!-- image -->\n\net al., 2019; Radford et al., 2018). We also perform a preliminary exploration on masked patch prediction for self-supervision, mimicking the masked language modeling task used in BERT. With self-supervised pre-training, our smaller ViT-B/16 model achieves 79.9% accuracy on ImageNet, a significant improvement of 2% to training from scratch, but still 4% behind supervised pre-training. Appendix B.1.2 contains further details.",
+      "metadata": {
+        "source": "arxiv:2010.11929v2",
+        "title": "An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale",
+        "authors": [
+          "Alexey Dosovitskiy",
+          "Lucas Beyer",
+          "Alexander Kolesnikov",
+          "Dirk Weissenborn",
+          "Xiaohua Zhai",
+          "Thomas Unterthiner",
+          "Mostafa Dehghani",
+          "Matthias Minderer",
+          "Georg Heigold",
+          "Sylvain Gelly",
+          "Jakob Uszkoreit",
+          "Neil Houlsby"
+        ],
+        "section": "RGB embedding filters (first 28 principal components)",
+        "chunkIndex": 47,
+        "totalChunks": 105
+      }
+    },
+    {
+      "id": "2010.11929v2-chunk-48",
+      "content": "ller ViT-B/16 model achieves 79.9% accuracy on ImageNet, a significant improvement of 2% to training from scratch, but still 4% behind supervised pre-training. Appendix B.1.2 contains further details. We leave exploration of contrastive pre-training (Chen et al., 2020b; He et al., 2020; Bachman et al., 2019; H´ enaff et al., 2020) to future work.",
+      "metadata": {
+        "source": "arxiv:2010.11929v2",
+        "title": "An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale",
+        "authors": [
+          "Alexey Dosovitskiy",
+          "Lucas Beyer",
+          "Alexander Kolesnikov",
+          "Dirk Weissenborn",
+          "Xiaohua Zhai",
+          "Thomas Unterthiner",
+          "Mostafa Dehghani",
+          "Matthias Minderer",
+          "Georg Heigold",
+          "Sylvain Gelly",
+          "Jakob Uszkoreit",
+          "Neil Houlsby"
+        ],
+        "section": "RGB embedding filters (first 28 principal components)",
+        "chunkIndex": 48,
+        "totalChunks": 105
+      }
+    },
+    {
+      "id": "2010.11929v2-chunk-49",
+      "content": "We have explored the direct application of Transformers to image recognition. Unlike prior works using self-attention in computer vision, we do not introduce image-specific inductive biases into the architecture apart from the initial patch extraction step. Instead, we interpret an image as a sequence of patches and process it by a standard Transformer encoder as used in NLP. This simple, yet scalable, strategy works surprisingly well when coupled with pre-training on large datasets. Thus, Vision Transformer matches or exceeds the state of the art on many image classification datasets, whilst being relatively cheap to pre-train.\n\nWhile these initial results are encouraging, many challenges remain. One is to apply ViT to other computer vision tasks, such as detection and segmentation. Our results, coupled with those in Carion et al. (2020), indicate the promise of this approach. Another challenge is to continue exploring selfsupervised pre-training methods.",
+      "metadata": {
+        "source": "arxiv:2010.11929v2",
+        "title": "An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale",
+        "authors": [
+          "Alexey Dosovitskiy",
+          "Lucas Beyer",
+          "Alexander Kolesnikov",
+          "Dirk Weissenborn",
+          "Xiaohua Zhai",
+          "Thomas Unterthiner",
+          "Mostafa Dehghani",
+          "Matthias Minderer",
+          "Georg Heigold",
+          "Sylvain Gelly",
+          "Jakob Uszkoreit",
+          "Neil Houlsby"
+        ],
+        "section": "5 CONCLUSION",
+        "chunkIndex": 49,
+        "totalChunks": 105
+      }
+    },
+    {
+      "id": "2010.11929v2-chunk-50",
+      "content": "ection and segmentation. Our results, coupled with those in Carion et al. (2020), indicate the promise of this approach. Another challenge is to continue exploring selfsupervised pre-training methods. Our initial experiments show improvement from self-supervised pre-training, but there is still large gap between self-supervised and large-scale supervised pretraining. Finally, further scaling of ViT would likely lead to improved performance.",
+      "metadata": {
+        "source": "arxiv:2010.11929v2",
+        "title": "An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale",
+        "authors": [
+          "Alexey Dosovitskiy",
+          "Lucas Beyer",
+          "Alexander Kolesnikov",
+          "Dirk Weissenborn",
+          "Xiaohua Zhai",
+          "Thomas Unterthiner",
+          "Mostafa Dehghani",
+          "Matthias Minderer",
+          "Georg Heigold",
+          "Sylvain Gelly",
+          "Jakob Uszkoreit",
+          "Neil Houlsby"
+        ],
+        "section": "5 CONCLUSION",
+        "chunkIndex": 50,
+        "totalChunks": 105
+      }
+    },
+    {
+      "id": "2010.11929v2-chunk-51",
+      "content": "The work was performed in Berlin, Z¨ urich, and Amsterdam. We thank many colleagues at Google for their help, in particular Andreas Steiner for crucial help with the infrastructure and the opensource release of the code; Joan Puigcerver and Maxim Neumann for help with the large-scale training infrastructure; Dmitry Lepikhin, Aravindh Mahendran, Daniel Keysers, Mario Luˇ ci´ c, Noam Shazeer, Ashish Vaswani, and Colin Raffel for useful discussions.",
+      "metadata": {
+        "source": "arxiv:2010.11929v2",
+        "title": "An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale",
+        "authors": [
+          "Alexey Dosovitskiy",
+          "Lucas Beyer",
+          "Alexander Kolesnikov",
+          "Dirk Weissenborn",
+          "Xiaohua Zhai",
+          "Thomas Unterthiner",
+          "Mostafa Dehghani",
+          "Matthias Minderer",
+          "Georg Heigold",
+          "Sylvain Gelly",
+          "Jakob Uszkoreit",
+          "Neil Houlsby"
+        ],
+        "section": "ACKNOWLEDGEMENTS",
+        "chunkIndex": 51,
+        "totalChunks": 105
+      }
+    },
+    {
+      "id": "2010.11929v2-chunk-52",
+      "content": "Samira Abnar and Willem Zuidema. Quantifying attention flow in transformers. In ACL , 2020.\n\nPhilip Bachman, R Devon Hjelm, and William Buchwalter. Learning representations by maximizing mutual information across views. In NeurIPS , 2019.\n\n- Alexei Baevski and Michael Auli. Adaptive input representations for neural language modeling. In ICLR , 2019.\n- I. Bello, B. Zoph, Q. Le, A. Vaswani, and J. Shlens. Attention augmented convolutional networks. In ICCV , 2019.\n- Lucas Beyer, Olivier J. H´ enaff, Alexander Kolesnikov, Xiaohua Zhai, and A¨ aron van den Oord. Are we done with imagenet? arXiv , 2020.\n- Tom B Brown, Benjamin Mann, Nick Ryder, Melanie Subbiah, Jared Kaplan, Prafulla Dhariwal, Arvind Neelakantan, Pranav Shyam, Girish Sastry, Amanda Askell, et al. Language models are few-shot learners. arXiv , 2020.\n- Nicolas Carion, Francisco Massa, Gabriel Synnaeve, Nicolas Usunier, Alexander Kirillov, and Sergey Zagoruyko. End-to-end object detection with transformers.",
+      "metadata": {
+        "source": "arxiv:2010.11929v2",
+        "title": "An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale",
+        "authors": [
+          "Alexey Dosovitskiy",
+          "Lucas Beyer",
+          "Alexander Kolesnikov",
+          "Dirk Weissenborn",
+          "Xiaohua Zhai",
+          "Thomas Unterthiner",
+          "Mostafa Dehghani",
+          "Matthias Minderer",
+          "Georg Heigold",
+          "Sylvain Gelly",
+          "Jakob Uszkoreit",
+          "Neil Houlsby"
+        ],
+        "section": "REFERENCES",
+        "chunkIndex": 52,
+        "totalChunks": 105
+      }
+    },
+    {
+      "id": "2010.11929v2-chunk-53",
+      "content": "dels are few-shot learners. arXiv , 2020.\n- Nicolas Carion, Francisco Massa, Gabriel Synnaeve, Nicolas Usunier, Alexander Kirillov, and Sergey Zagoruyko. End-to-end object detection with transformers. In ECCV , 2020.\n- Mark Chen, Alec Radford, Rewon Child, Jeff Wu, and Heewoo Jun. Generative pretraining from pixels. In ICML , 2020a.\n- Ting Chen, Simon Kornblith, Mohammad Norouzi, and Geoffrey E. Hinton. A simple framework for contrastive learning of visual representations. In ICML , 2020b.\n- Yen-Chun Chen, Linjie Li, Licheng Yu, Ahmed El Kholy, Faisal Ahmed, Zhe Gan, Yu Cheng, and Jingjing Liu. UNITER: UNiversal Image-TExt Representation Learning. In ECCV , 2020c.\n- Rewon Child, Scott Gray, Alec Radford, and Ilya Sutskever. Generating long sequences with sparse transformers. arXiv , 2019.\n- Jean-Baptiste Cordonnier, Andreas Loukas, and Martin Jaggi. On the relationship between selfattention and convolutional layers. In ICLR , 2020.\n- J. Deng, W. Dong, R. Socher, L.",
+      "metadata": {
+        "source": "arxiv:2010.11929v2",
+        "title": "An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale",
+        "authors": [
+          "Alexey Dosovitskiy",
+          "Lucas Beyer",
+          "Alexander Kolesnikov",
+          "Dirk Weissenborn",
+          "Xiaohua Zhai",
+          "Thomas Unterthiner",
+          "Mostafa Dehghani",
+          "Matthias Minderer",
+          "Georg Heigold",
+          "Sylvain Gelly",
+          "Jakob Uszkoreit",
+          "Neil Houlsby"
+        ],
+        "section": "REFERENCES",
+        "chunkIndex": 53,
+        "totalChunks": 105
+      }
+    },
+    {
+      "id": "2010.11929v2-chunk-54",
+      "content": "rmers. arXiv , 2019.\n- Jean-Baptiste Cordonnier, Andreas Loukas, and Martin Jaggi. On the relationship between selfattention and convolutional layers. In ICLR , 2020.\n- J. Deng, W. Dong, R. Socher, L. Li, Kai Li, and Li Fei-Fei. Imagenet: A large-scale hierarchical image database. In CVPR , 2009.\n- Jacob Devlin, Ming-Wei Chang, Kenton Lee, and Kristina Toutanova. BERT: Pre-training of deep bidirectional transformers for language understanding. In NAACL , 2019.\n- Josip Djolonga, Jessica Yung, Michael Tschannen, Rob Romijnders, Lucas Beyer, Alexander Kolesnikov, Joan Puigcerver, Matthias Minderer, Alexander D'Amour, Dan Moldovan, Sylvan Gelly, Neil Houlsby, Xiaohua Zhai, and Mario Lucic. On robustness and transferability of convolutional neural networks. arXiv , 2020.\n- Kaiming He, Xiangyu Zhang, Shaoqing Ren, and Jian Sun. Deep residual learning for image recognition. In CVPR , 2016.\n- Kaiming He, Haoqi Fan, Yuxin Wu, Saining Xie, and Ross Girshick.",
+      "metadata": {
+        "source": "arxiv:2010.11929v2",
+        "title": "An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale",
+        "authors": [
+          "Alexey Dosovitskiy",
+          "Lucas Beyer",
+          "Alexander Kolesnikov",
+          "Dirk Weissenborn",
+          "Xiaohua Zhai",
+          "Thomas Unterthiner",
+          "Mostafa Dehghani",
+          "Matthias Minderer",
+          "Georg Heigold",
+          "Sylvain Gelly",
+          "Jakob Uszkoreit",
+          "Neil Houlsby"
+        ],
+        "section": "REFERENCES",
+        "chunkIndex": 54,
+        "totalChunks": 105
+      }
+    },
+    {
+      "id": "2010.11929v2-chunk-55",
+      "content": "arXiv , 2020.\n- Kaiming He, Xiangyu Zhang, Shaoqing Ren, and Jian Sun. Deep residual learning for image recognition. In CVPR , 2016.\n- Kaiming He, Haoqi Fan, Yuxin Wu, Saining Xie, and Ross Girshick. Momentum contrast for unsupervised visual representation learning. In CVPR , 2020.\n- Jonathan Ho, Nal Kalchbrenner, Dirk Weissenborn, and Tim Salimans. Axial attention in multidimensional transformers. arXiv , 2019.\n- Han Hu, Jiayuan Gu, Zheng Zhang, Jifeng Dai, and Yichen Wei. Relation networks for object detection. In CVPR , 2018.\n- Han Hu, Zheng Zhang, Zhenda Xie, and Stephen Lin. Local relation networks for image recognition. In ICCV , 2019.\n- Zilong Huang, Xinggang Wang, Yunchao Wei, Lichao Huang, Humphrey Shi, Wenyu Liu, and Thomas S. Huang. Ccnet: Criss-cross attention for semantic segmentation. In ICCV , 2020.\n- Olivier J. H´ enaff, Aravind Srinivas, Jeffrey De Fauw, Ali Razavi, Carl Doersch, S. M. Ali Eslami, and Aaron van den Oord.",
+      "metadata": {
+        "source": "arxiv:2010.11929v2",
+        "title": "An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale",
+        "authors": [
+          "Alexey Dosovitskiy",
+          "Lucas Beyer",
+          "Alexander Kolesnikov",
+          "Dirk Weissenborn",
+          "Xiaohua Zhai",
+          "Thomas Unterthiner",
+          "Mostafa Dehghani",
+          "Matthias Minderer",
+          "Georg Heigold",
+          "Sylvain Gelly",
+          "Jakob Uszkoreit",
+          "Neil Houlsby"
+        ],
+        "section": "REFERENCES",
+        "chunkIndex": 55,
+        "totalChunks": 105
+      }
+    },
+    {
+      "id": "2010.11929v2-chunk-56",
+      "content": "g. Ccnet: Criss-cross attention for semantic segmentation. In ICCV , 2020.\n- Olivier J. H´ enaff, Aravind Srinivas, Jeffrey De Fauw, Ali Razavi, Carl Doersch, S. M. Ali Eslami, and Aaron van den Oord. Data-efficient image recognition with contrastive predictive coding. In ICML , 2020.\n\n- Sergey Ioffe and Christian Szegedy. Batch normalization: Accelerating deep network training by reducing internal covariate shift. 2015.\n- Diederik P. Kingma and Jimmy Ba. Adam: A method for stochastic optimization. In ICLR , 2015.\n- Alexander Kolesnikov, Lucas Beyer, Xiaohua Zhai, Joan Puigcerver, Jessica Yung, Sylvain Gelly, and Neil Houlsby. Big transfer (BiT): General visual representation learning. In ECCV , 2020.\n- Alex Krizhevsky. Learning multiple layers of features from tiny images. Technical report, 2009.\n- Alex Krizhevsky, Ilya Sutskever, and Geoffrey E. Hinton. Imagenet classification with deep convolutional neural networks. In NIPS , 2012.\n- Y. LeCun, B. Boser, J. Denker, D. Henderson, R.",
+      "metadata": {
+        "source": "arxiv:2010.11929v2",
+        "title": "An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale",
+        "authors": [
+          "Alexey Dosovitskiy",
+          "Lucas Beyer",
+          "Alexander Kolesnikov",
+          "Dirk Weissenborn",
+          "Xiaohua Zhai",
+          "Thomas Unterthiner",
+          "Mostafa Dehghani",
+          "Matthias Minderer",
+          "Georg Heigold",
+          "Sylvain Gelly",
+          "Jakob Uszkoreit",
+          "Neil Houlsby"
+        ],
+        "section": "REFERENCES",
+        "chunkIndex": 56,
+        "totalChunks": 105
+      }
+    },
+    {
+      "id": "2010.11929v2-chunk-57",
+      "content": "ort, 2009.\n- Alex Krizhevsky, Ilya Sutskever, and Geoffrey E. Hinton. Imagenet classification with deep convolutional neural networks. In NIPS , 2012.\n- Y. LeCun, B. Boser, J. Denker, D. Henderson, R. Howard, W. Hubbard, and L. Jackel. Backpropagation applied to handwritten zip code recognition. Neural Computation , 1:541-551, 1989.\n- Dmitry Lepikhin, HyoukJoong Lee, Yuanzhong Xu, Dehao Chen, Orhan Firat, Yanping Huang, Maxim Krikun, Noam Shazeer, and Zhifeng Chen. Gshard: Scaling giant models with conditional computation and automatic sharding. arXiv , 2020.\n- Liunian Harold Li, Mark Yatskar, Da Yin, Cho-Jui Hsieh, and Kai-Wei Chang. VisualBERT: A Simple and Performant Baseline for Vision and Language. In Arxiv , 2019.\n- Francesco Locatello, Dirk Weissenborn, Thomas Unterthiner, Aravindh Mahendran, Georg Heigold, Jakob Uszkoreit, Alexey Dosovitskiy, and Thomas Kipf. Object-centric learning with slot attention. arXiv , 2020.\n- Jiasen Lu, Dhruv Batra, Devi Parikh, and Stefan Lee.",
+      "metadata": {
+        "source": "arxiv:2010.11929v2",
+        "title": "An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale",
+        "authors": [
+          "Alexey Dosovitskiy",
+          "Lucas Beyer",
+          "Alexander Kolesnikov",
+          "Dirk Weissenborn",
+          "Xiaohua Zhai",
+          "Thomas Unterthiner",
+          "Mostafa Dehghani",
+          "Matthias Minderer",
+          "Georg Heigold",
+          "Sylvain Gelly",
+          "Jakob Uszkoreit",
+          "Neil Houlsby"
+        ],
+        "section": "REFERENCES",
+        "chunkIndex": 57,
+        "totalChunks": 105
+      }
+    },
+    {
+      "id": "2010.11929v2-chunk-58",
+      "content": "avindh Mahendran, Georg Heigold, Jakob Uszkoreit, Alexey Dosovitskiy, and Thomas Kipf. Object-centric learning with slot attention. arXiv , 2020.\n- Jiasen Lu, Dhruv Batra, Devi Parikh, and Stefan Lee. ViLBERT: Pretraining Task-Agnostic Visiolinguistic Representations for Vision-and-Language Tasks. In NeurIPS . 2019.\n- Dhruv Mahajan, Ross Girshick, Vignesh Ramanathan, Kaiming He, Manohar Paluri, Yixuan Li, Ashwin Bharambe, and Laurens van der Maaten. Exploring the limits of weakly supervised pretraining. In ECCV , 2018.\n- M. Nilsback and A. Zisserman. Automated flower classification over a large number of classes. In ICVGIP , 2008.\n- Omkar M. Parkhi, Andrea Vedaldi, Andrew Zisserman, and C. V. Jawahar. Cats and dogs. In CVPR , 2012.\n- Niki Parmar, Ashish Vaswani, Jakob Uszkoreit, Lukasz Kaiser, Noam Shazeer, Alexander Ku, and Dustin Tran. Image transformer. In ICML , 2018.\n- B. T. Polyak and A. B. Juditsky. Acceleration of stochastic approximation by averaging.",
+      "metadata": {
+        "source": "arxiv:2010.11929v2",
+        "title": "An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale",
+        "authors": [
+          "Alexey Dosovitskiy",
+          "Lucas Beyer",
+          "Alexander Kolesnikov",
+          "Dirk Weissenborn",
+          "Xiaohua Zhai",
+          "Thomas Unterthiner",
+          "Mostafa Dehghani",
+          "Matthias Minderer",
+          "Georg Heigold",
+          "Sylvain Gelly",
+          "Jakob Uszkoreit",
+          "Neil Houlsby"
+        ],
+        "section": "REFERENCES",
+        "chunkIndex": 58,
+        "totalChunks": 105
+      }
+    },
+    {
+      "id": "2010.11929v2-chunk-59",
+      "content": "akob Uszkoreit, Lukasz Kaiser, Noam Shazeer, Alexander Ku, and Dustin Tran. Image transformer. In ICML , 2018.\n- B. T. Polyak and A. B. Juditsky. Acceleration of stochastic approximation by averaging. SIAM Journal on Control and Optimization , 30(4):838-855, 1992. doi: 10.1137/0330046. URL https://doi.org/10.1137/0330046 .\n- Siyuan Qiao, Huiyu Wang, Chenxi Liu, Wei Shen, and Alan Yuille. Weight standardization. arXiv preprint arXiv:1903.10520 , 2019.\n- Alec Radford, Karthik Narasimhan, Tim Salimans, and Ilya Sutskever. Improving language understanding with unsupervised learning. Technical Report , 2018.\n- Alec Radford, Jeff Wu, Rewon Child, David Luan, Dario Amodei, and Ilya Sutskever. Language models are unsupervised multitask learners. Technical Report , 2019.\n- Prajit Ramachandran, Niki Parmar, Ashish Vaswani, Irwan Bello, Anselm Levskaya, and Jon Shlens. Stand-alone self-attention in vision models.",
+      "metadata": {
+        "source": "arxiv:2010.11929v2",
+        "title": "An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale",
+        "authors": [
+          "Alexey Dosovitskiy",
+          "Lucas Beyer",
+          "Alexander Kolesnikov",
+          "Dirk Weissenborn",
+          "Xiaohua Zhai",
+          "Thomas Unterthiner",
+          "Mostafa Dehghani",
+          "Matthias Minderer",
+          "Georg Heigold",
+          "Sylvain Gelly",
+          "Jakob Uszkoreit",
+          "Neil Houlsby"
+        ],
+        "section": "REFERENCES",
+        "chunkIndex": 59,
+        "totalChunks": 105
+      }
+    },
+    {
+      "id": "2010.11929v2-chunk-60",
+      "content": "unsupervised multitask learners. Technical Report , 2019.\n- Prajit Ramachandran, Niki Parmar, Ashish Vaswani, Irwan Bello, Anselm Levskaya, and Jon Shlens. Stand-alone self-attention in vision models. In NeurIPS , 2019.\n- Chen Sun, Abhinav Shrivastava, Saurabh Singh, and Abhinav Gupta. Revisiting unreasonable effectiveness of data in deep learning era. In ICCV , 2017.\n- Chen Sun, Austin Myers, Carl Vondrick, Kevin Murphy, and Cordelia Schmid. Videobert: A joint model for video and language representation learning. In ICCV , 2019.\n\n- Hugo Touvron, Andrea Vedaldi, Matthijs Douze, and Herve Jegou. Fixing the train-test resolution discrepancy. In NeurIPS . 2019.\n- Hugo Touvron, Andrea Vedaldi, Matthijs Douze, and Herve Jegou. Fixing the train-test resolution discrepancy: Fixefficientnet. arXiv preprint arXiv:2003.08237 , 2020.\n- Michael Tschannen, Josip Djolonga, Marvin Ritter, Aravindh Mahendran, Neil Houlsby, Sylvain Gelly, and Mario Lucic.",
+      "metadata": {
+        "source": "arxiv:2010.11929v2",
+        "title": "An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale",
+        "authors": [
+          "Alexey Dosovitskiy",
+          "Lucas Beyer",
+          "Alexander Kolesnikov",
+          "Dirk Weissenborn",
+          "Xiaohua Zhai",
+          "Thomas Unterthiner",
+          "Mostafa Dehghani",
+          "Matthias Minderer",
+          "Georg Heigold",
+          "Sylvain Gelly",
+          "Jakob Uszkoreit",
+          "Neil Houlsby"
+        ],
+        "section": "REFERENCES",
+        "chunkIndex": 60,
+        "totalChunks": 105
+      }
+    },
+    {
+      "id": "2010.11929v2-chunk-61",
+      "content": "t resolution discrepancy: Fixefficientnet. arXiv preprint arXiv:2003.08237 , 2020.\n- Michael Tschannen, Josip Djolonga, Marvin Ritter, Aravindh Mahendran, Neil Houlsby, Sylvain Gelly, and Mario Lucic. Self-supervised learning of video-induced visual invariances. In Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR) , June 2020.\n- Ashish Vaswani, Noam Shazeer, Niki Parmar, Jakob Uszkoreit, Llion Jones, Aidan N Gomez, Łukasz Kaiser, and Illia Polosukhin. Attention is all you need. In NIPS , 2017.\n- Huiyu Wang, Yukun Zhu, Bradley Green, Hartwig Adam, Alan Yuille, and Liang-Chieh Chen. Axial-deeplab: Stand-alone axial-attention for panoptic segmentation. In ECCV , 2020a.\n- Huiyu Wang, Yukun Zhu, Bradley Green, Hartwig Adam, Alan Yuille, and Liang-Chieh Chen. Axial-deeplab: Stand-alone axial-attention for panoptic segmentation. arXiv preprint arXiv:2003.07853 , 2020b.\n- Qiang Wang, Bei Li, Tong Xiao, Jingbo Zhu, Changliang Li, Derek F.",
+      "metadata": {
+        "source": "arxiv:2010.11929v2",
+        "title": "An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale",
+        "authors": [
+          "Alexey Dosovitskiy",
+          "Lucas Beyer",
+          "Alexander Kolesnikov",
+          "Dirk Weissenborn",
+          "Xiaohua Zhai",
+          "Thomas Unterthiner",
+          "Mostafa Dehghani",
+          "Matthias Minderer",
+          "Georg Heigold",
+          "Sylvain Gelly",
+          "Jakob Uszkoreit",
+          "Neil Houlsby"
+        ],
+        "section": "REFERENCES",
+        "chunkIndex": 61,
+        "totalChunks": 105
+      }
+    },
+    {
+      "id": "2010.11929v2-chunk-62",
+      "content": "nd Liang-Chieh Chen. Axial-deeplab: Stand-alone axial-attention for panoptic segmentation. arXiv preprint arXiv:2003.07853 , 2020b.\n- Qiang Wang, Bei Li, Tong Xiao, Jingbo Zhu, Changliang Li, Derek F. Wong, and Lidia S. Chao. Learning deep transformer models for machine translation. In ACL , 2019.\n- Xiaolong Wang, Ross Girshick, Abhinav Gupta, and Kaiming He. Non-local neural networks. In CVPR , 2018.\n- Dirk Weissenborn, Oscar T¨ ackstr¨ om, and Jakob Uszkoreit. Scaling autoregressive video models. In ICLR , 2019.\n- Bichen Wu, Chenfeng Xu, Xiaoliang Dai, Alvin Wan, Peizhao Zhang, Masayoshi Tomizuka, Kurt Keutzer, and Peter Vajda. Visual transformers: Token-based image representation and processing for computer vision. arxiv , 2020.\n- Yuxin Wu and Kaiming He. Group normalization. In ECCV , 2018.\n- Qizhe Xie, Minh-Thang Luong, Eduard Hovy, and Quoc V. Le. Self-training with noisy student improves imagenet classification.",
+      "metadata": {
+        "source": "arxiv:2010.11929v2",
+        "title": "An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale",
+        "authors": [
+          "Alexey Dosovitskiy",
+          "Lucas Beyer",
+          "Alexander Kolesnikov",
+          "Dirk Weissenborn",
+          "Xiaohua Zhai",
+          "Thomas Unterthiner",
+          "Mostafa Dehghani",
+          "Matthias Minderer",
+          "Georg Heigold",
+          "Sylvain Gelly",
+          "Jakob Uszkoreit",
+          "Neil Houlsby"
+        ],
+        "section": "REFERENCES",
+        "chunkIndex": 62,
+        "totalChunks": 105
+      }
+    },
+    {
+      "id": "2010.11929v2-chunk-63",
+      "content": "v , 2020.\n- Yuxin Wu and Kaiming He. Group normalization. In ECCV , 2018.\n- Qizhe Xie, Minh-Thang Luong, Eduard Hovy, and Quoc V. Le. Self-training with noisy student improves imagenet classification. In CVPR , 2020.\n- Xiaohua Zhai, Avital Oliver, Alexander Kolesnikov, and Lucas Beyer. S 4 L: Self-Supervised SemiSupervised Learning. In ICCV , 2019a.\n- Xiaohua Zhai, Joan Puigcerver, Alexander Kolesnikov, Pierre Ruyssen, Carlos Riquelme, Mario Lucic, Josip Djolonga, Andre Susano Pinto, Maxim Neumann, Alexey Dosovitskiy, et al. A large-scale study of representation learning with the visual task adaptation benchmark. arXiv preprint arXiv:1910.04867 , 2019b.\n- Hengshuang Zhao, Jiaya Jia, and Vladlen Koltun. Exploring self-attention for image recognition. In CVPR , 2020.\n\nTable 3: Hyperparameters for training. All models are trained with a batch size of 4096 and learning rate warmup of 10k steps. For ImageNet we found it beneficial to additionally apply gradient clipping at global norm 1.",
+      "metadata": {
+        "source": "arxiv:2010.11929v2",
+        "title": "An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale",
+        "authors": [
+          "Alexey Dosovitskiy",
+          "Lucas Beyer",
+          "Alexander Kolesnikov",
+          "Dirk Weissenborn",
+          "Xiaohua Zhai",
+          "Thomas Unterthiner",
+          "Mostafa Dehghani",
+          "Matthias Minderer",
+          "Georg Heigold",
+          "Sylvain Gelly",
+          "Jakob Uszkoreit",
+          "Neil Houlsby"
+        ],
+        "section": "REFERENCES",
+        "chunkIndex": 63,
+        "totalChunks": 105
+      }
+    },
+    {
+      "id": "2010.11929v2-chunk-64",
+      "content": "ters for training. All models are trained with a batch size of 4096 and learning rate warmup of 10k steps. For ImageNet we found it beneficial to additionally apply gradient clipping at global norm 1. Training resolution is 224.\n\n| Models               | Dataset      | Epochs   | Base LR    | LR decay   |   Weight decay |   Dropout |\n|----------------------|--------------|----------|------------|------------|----------------|-----------|\n| ViT-B/ { 16,32 }     | JFT-300M     | 7        | 8 · 10 - 4 | linear     |           0.1  |       0   |\n| ViT-L/32             | JFT-300M     | 7        | 6 · 10 - 4 | linear     |           0.1  |       0   |\n| ViT-L/16             | JFT-300M     | 7/14     | 4 · 10 - 4 | linear     |           0.1  |       0   |\n| ViT-H/14             | JFT-300M     | 14       | 3 · 10 - 4 | linear     |           0.1  |       0   |\n| R50x { 1,2 }         | JFT-300M     | 7        | 10 - 3     | linear     |           0.1  |       0   |\n| R101x1               | JFT",
+      "metadata": {
+        "source": "arxiv:2010.11929v2",
+        "title": "An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale",
+        "authors": [
+          "Alexey Dosovitskiy",
+          "Lucas Beyer",
+          "Alexander Kolesnikov",
+          "Dirk Weissenborn",
+          "Xiaohua Zhai",
+          "Thomas Unterthiner",
+          "Mostafa Dehghani",
+          "Matthias Minderer",
+          "Georg Heigold",
+          "Sylvain Gelly",
+          "Jakob Uszkoreit",
+          "Neil Houlsby"
+        ],
+        "section": "REFERENCES",
+        "chunkIndex": 64,
+        "totalChunks": 105
+      }
+    },
+    {
+      "id": "2010.11929v2-chunk-65",
+      "content": "14       | 3 · 10 - 4 | linear     |           0.1  |       0   |\n| R50x { 1,2 }         | JFT-300M     | 7        | 10 - 3     | linear     |           0.1  |       0   |\n| R101x1               | JFT-300M     | 7        | 8 · 10 - 4 | linear     |           0.1  |       0   |\n| R152x { 1,2 }        | JFT-300M     | 7        | 6 · 10 - 4 | linear     |           0.1  |       0   |\n| R50+ViT-B/ { 16,32 } | JFT-300M     | 7        | 8 · 10 - 4 | linear     |           0.1  |       0   |\n| R50+ViT-L/32         | JFT-300M     | 7        | 2 · 10 - 4 | linear     |           0.1  |       0   |\n| R50+ViT-L/16         | JFT-300M     | 7/14     | 4 · 10 - 4 | linear     |           0.1  |       0   |\n| ViT-B/ { 16,32 }     | ImageNet-21k | 90       | 10 - 3     | linear     |           0.03 |       0.1 |\n| ViT-L/ { 16,32 }     | ImageNet-21k | 30/90    | 10 - 3     | linear     |           0.03 |       0.1 |\n| ViT- ∗               | ImageNet     | 300      | 3 · 10 - 3 | cosine     |",
+      "metadata": {
+        "source": "arxiv:2010.11929v2",
+        "title": "An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale",
+        "authors": [
+          "Alexey Dosovitskiy",
+          "Lucas Beyer",
+          "Alexander Kolesnikov",
+          "Dirk Weissenborn",
+          "Xiaohua Zhai",
+          "Thomas Unterthiner",
+          "Mostafa Dehghani",
+          "Matthias Minderer",
+          "Georg Heigold",
+          "Sylvain Gelly",
+          "Jakob Uszkoreit",
+          "Neil Houlsby"
+        ],
+        "section": "REFERENCES",
+        "chunkIndex": 65,
+        "totalChunks": 105
+      }
+    },
+    {
+      "id": "2010.11929v2-chunk-66",
+      "content": "0.1 |\n| ViT-L/ { 16,32 }     | ImageNet-21k | 30/90    | 10 - 3     | linear     |           0.03 |       0.1 |\n| ViT- ∗               | ImageNet     | 300      | 3 · 10 - 3 | cosine     |           0.3  |       0.1 |",
+      "metadata": {
+        "source": "arxiv:2010.11929v2",
+        "title": "An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale",
+        "authors": [
+          "Alexey Dosovitskiy",
+          "Lucas Beyer",
+          "Alexander Kolesnikov",
+          "Dirk Weissenborn",
+          "Xiaohua Zhai",
+          "Thomas Unterthiner",
+          "Mostafa Dehghani",
+          "Matthias Minderer",
+          "Georg Heigold",
+          "Sylvain Gelly",
+          "Jakob Uszkoreit",
+          "Neil Houlsby"
+        ],
+        "section": "REFERENCES",
+        "chunkIndex": 66,
+        "totalChunks": 105
+      }
+    },
+    {
+      "id": "2010.11929v2-chunk-67",
+      "content": "Standard qkv self-attention (SA, Vaswani et al. (2017)) is a popular building block for neural architectures. For each element in an input sequence z ∈ R N × D , we compute a weighted sum over all values v in the sequence. The attention weights A ij are based on the pairwise similarity between two elements of the sequence and their respective query q i and key k j representations.\n\n<!-- formula-not-decoded -->\n\n<!-- formula-not-decoded -->\n\n<!-- formula-not-decoded -->\n\nMultihead self-attention (MSA) is an extension of SA in which we run k self-attention operations, called 'heads', in parallel, and project their concatenated outputs. To keep compute and number of parameters constant when changing k , D h (Eq. 5) is typically set to D/k .\n\n<!-- formula-not-decoded -->",
+      "metadata": {
+        "source": "arxiv:2010.11929v2",
+        "title": "An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale",
+        "authors": [
+          "Alexey Dosovitskiy",
+          "Lucas Beyer",
+          "Alexander Kolesnikov",
+          "Dirk Weissenborn",
+          "Xiaohua Zhai",
+          "Thomas Unterthiner",
+          "Mostafa Dehghani",
+          "Matthias Minderer",
+          "Georg Heigold",
+          "Sylvain Gelly",
+          "Jakob Uszkoreit",
+          "Neil Houlsby"
+        ],
+        "section": "A MULTIHEAD SELF-ATTENTION",
+        "chunkIndex": 67,
+        "totalChunks": 105
+      }
+    },
+    {
+      "id": "2010.11929v2-chunk-68",
+      "content": "Table 3 summarizes our training setups for our different models. We found strong regularization to be key when training models from scratch on ImageNet. Dropout, when used, is applied after every dense layer except for the the qkv-projections and directly after adding positional- to patch embeddings. Hybrid models are trained with the exact setup as their ViT counterparts. Finally, all training is done on resolution 224.",
+      "metadata": {
+        "source": "arxiv:2010.11929v2",
+        "title": "An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale",
+        "authors": [
+          "Alexey Dosovitskiy",
+          "Lucas Beyer",
+          "Alexander Kolesnikov",
+          "Dirk Weissenborn",
+          "Xiaohua Zhai",
+          "Thomas Unterthiner",
+          "Mostafa Dehghani",
+          "Matthias Minderer",
+          "Georg Heigold",
+          "Sylvain Gelly",
+          "Jakob Uszkoreit",
+          "Neil Houlsby"
+        ],
+        "section": "B.1 TRAINING",
+        "chunkIndex": 68,
+        "totalChunks": 105
+      }
+    },
+    {
+      "id": "2010.11929v2-chunk-69",
+      "content": "We fine-tune all ViT models using SGD with a momentum of 0.9. We run a small grid search over learning rates, see learning rate ranges in Table 4. To do so, we use small sub-splits from the training set (10% for Pets and Flowers, 2% for CIFAR, 1% ImageNet) as development set and train on the remaining data. For final results we train on the entire training set and evaluate on the respective test data. For fine-tuning ResNets and hybrid models we use the exact same setup, with the only exception of ImageNet where we add another value 0 . 06 to the learning rate sweep. Additionally,\n\nTable 4: Hyperparameters for fine-tuning. All models are fine-tuned with cosine learning rate decay, a batch size of 512, no weight decay, and grad clipping at global norm 1. If not mentioned otherwise, fine-tuning resolution is 384.",
+      "metadata": {
+        "source": "arxiv:2010.11929v2",
+        "title": "An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale",
+        "authors": [
+          "Alexey Dosovitskiy",
+          "Lucas Beyer",
+          "Alexander Kolesnikov",
+          "Dirk Weissenborn",
+          "Xiaohua Zhai",
+          "Thomas Unterthiner",
+          "Mostafa Dehghani",
+          "Matthias Minderer",
+          "Georg Heigold",
+          "Sylvain Gelly",
+          "Jakob Uszkoreit",
+          "Neil Houlsby"
+        ],
+        "section": "B.1.1 FINE-TUNING",
+        "chunkIndex": 69,
+        "totalChunks": 105
+      }
+    },
+    {
+      "id": "2010.11929v2-chunk-70",
+      "content": "-tuning. All models are fine-tuned with cosine learning rate decay, a batch size of 512, no weight decay, and grad clipping at global norm 1. If not mentioned otherwise, fine-tuning resolution is 384.\n\n| Dataset            | Steps   | Base LR                      |\n|--------------------|---------|------------------------------|\n| ImageNet           | 20 000  | { 0.003, 0.01, 0.03, 0.06 }  |\n| CIFAR100           | 10 000  | { 0.001, 0.003, 0.01, 0.03 } |\n| CIFAR10            | 10 000  | { 0.001, 0.003, 0.01, 0.03 } |\n| Oxford-IIIT Pets   | 500     | { 0.001, 0.003, 0.01, 0.03 } |\n| Oxford Flowers-102 | 500     | { 0.001, 0.003, 0.01, 0.03 } |\n| VTAB (19 tasks)    | 2 500   | 0.01                         |\n\nfor ResNets we also run the setup of Kolesnikov et al. (2020) and select the best results across this run and our sweep.",
+      "metadata": {
+        "source": "arxiv:2010.11929v2",
+        "title": "An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale",
+        "authors": [
+          "Alexey Dosovitskiy",
+          "Lucas Beyer",
+          "Alexander Kolesnikov",
+          "Dirk Weissenborn",
+          "Xiaohua Zhai",
+          "Thomas Unterthiner",
+          "Mostafa Dehghani",
+          "Matthias Minderer",
+          "Georg Heigold",
+          "Sylvain Gelly",
+          "Jakob Uszkoreit",
+          "Neil Houlsby"
+        ],
+        "section": "B.1.1 FINE-TUNING",
+        "chunkIndex": 70,
+        "totalChunks": 105
+      }
+    },
+    {
+      "id": "2010.11929v2-chunk-71",
+      "content": "0.01, 0.03 } |\n| VTAB (19 tasks)    | 2 500   | 0.01                         |\n\nfor ResNets we also run the setup of Kolesnikov et al. (2020) and select the best results across this run and our sweep. Finally, if not mentioned otherwise, all fine-tuning experiments run at 384 resolution (running fine-tuning at different resolution than training is common practice (Kolesnikov et al., 2020)).\n\nWhen transferring ViT models to another dataset, we remove the whole head (two linear layers) and replace it by a single, zero-initialized linear layer outputting the number of classes required by the target dataset. We found this to be a little more robust than simply re-initializing the very last layer.\n\nFor VTAB we follow the protocol in Kolesnikov et al. (2020), and use the same hyperparameter setting for all tasks. We use a learning rate of 0 . 01 and train for 2500 steps (Tab. 4).",
+      "metadata": {
+        "source": "arxiv:2010.11929v2",
+        "title": "An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale",
+        "authors": [
+          "Alexey Dosovitskiy",
+          "Lucas Beyer",
+          "Alexander Kolesnikov",
+          "Dirk Weissenborn",
+          "Xiaohua Zhai",
+          "Thomas Unterthiner",
+          "Mostafa Dehghani",
+          "Matthias Minderer",
+          "Georg Heigold",
+          "Sylvain Gelly",
+          "Jakob Uszkoreit",
+          "Neil Houlsby"
+        ],
+        "section": "B.1.1 FINE-TUNING",
+        "chunkIndex": 71,
+        "totalChunks": 105
+      }
+    },
+    {
+      "id": "2010.11929v2-chunk-72",
+      "content": "ery last layer.\n\nFor VTAB we follow the protocol in Kolesnikov et al. (2020), and use the same hyperparameter setting for all tasks. We use a learning rate of 0 . 01 and train for 2500 steps (Tab. 4). We chose this setting by running a small sweep over two learning rates and two schedules, and selecting the setting with the highest VTAB score on the 200-example validation sets. We follow the pre-processing used in Kolesnikov et al. (2020), except that we do not use task-specific input resolutions. Instead we find that Vision Transformer benefits most from a high resolution ( 384 × 384 ) for all tasks.",
+      "metadata": {
+        "source": "arxiv:2010.11929v2",
+        "title": "An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale",
+        "authors": [
+          "Alexey Dosovitskiy",
+          "Lucas Beyer",
+          "Alexander Kolesnikov",
+          "Dirk Weissenborn",
+          "Xiaohua Zhai",
+          "Thomas Unterthiner",
+          "Mostafa Dehghani",
+          "Matthias Minderer",
+          "Georg Heigold",
+          "Sylvain Gelly",
+          "Jakob Uszkoreit",
+          "Neil Houlsby"
+        ],
+        "section": "B.1.1 FINE-TUNING",
+        "chunkIndex": 72,
+        "totalChunks": 105
+      }
+    },
+    {
+      "id": "2010.11929v2-chunk-73",
+      "content": "We employ the masked patch prediction objective for preliminary self-supervision experiments. To do so we corrupt 50% of patch embeddings by either replacing their embeddings with a learnable [mask] embedding (80%), a random other patch embedding (10%) or just keeping them as is (10%). This setup is very similar to the one used for language by Devlin et al. (2019). Finally, we predict the 3-bit, mean color (i.e., 512 colors in total) of every corrupted patch using their respective patch representations.\n\nWe trained our self-supervised model for 1M steps (ca. 14 epochs) with batch size 4096 on JFT. We use Adam, with a base learning rate of 2 · 10 -4 , warmup of 10k steps and cosine learning rate decay. As prediction targets for pretraining we tried the following settings: 1) predicting only the mean, 3bit color (i.e., 1 prediction of 512 colors), 2) predicting a 4 × 4 downsized version of the 16 × 16 patch with 3bit colors in parallel (i.e., 16 predictions of 512 colors), 3) regression",
+      "metadata": {
+        "source": "arxiv:2010.11929v2",
+        "title": "An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale",
+        "authors": [
+          "Alexey Dosovitskiy",
+          "Lucas Beyer",
+          "Alexander Kolesnikov",
+          "Dirk Weissenborn",
+          "Xiaohua Zhai",
+          "Thomas Unterthiner",
+          "Mostafa Dehghani",
+          "Matthias Minderer",
+          "Georg Heigold",
+          "Sylvain Gelly",
+          "Jakob Uszkoreit",
+          "Neil Houlsby"
+        ],
+        "section": "B.1.2 SELF-SUPERVISION",
+        "chunkIndex": 73,
+        "totalChunks": 105
+      }
+    },
+    {
+      "id": "2010.11929v2-chunk-74",
+      "content": "the mean, 3bit color (i.e., 1 prediction of 512 colors), 2) predicting a 4 × 4 downsized version of the 16 × 16 patch with 3bit colors in parallel (i.e., 16 predictions of 512 colors), 3) regression on the full patch using L2 (i.e., 256 regressions on the 3 RGB channels). Surprisingly, we found that all worked quite well, though L2 was slightly worse. We report final results only for option 1) because it has shown best few-shot performance. We also experimented with 15% corruption rate as used by Devlin et al. (2019) but results were also slightly worse on our few-shot metrics.\n\nLastly, we would like to remark that our instantiation of masked patch prediction doesn't require such an enormous amount of pretraining nor a large dataset such as JFT in order to lead to similar performance gains on ImageNet classification. That is, we observed diminishing returns on downstream performance after 100k pretraining steps, and see similar gains when pretraining on ImageNet.",
+      "metadata": {
+        "source": "arxiv:2010.11929v2",
+        "title": "An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale",
+        "authors": [
+          "Alexey Dosovitskiy",
+          "Lucas Beyer",
+          "Alexander Kolesnikov",
+          "Dirk Weissenborn",
+          "Xiaohua Zhai",
+          "Thomas Unterthiner",
+          "Mostafa Dehghani",
+          "Matthias Minderer",
+          "Georg Heigold",
+          "Sylvain Gelly",
+          "Jakob Uszkoreit",
+          "Neil Houlsby"
+        ],
+        "section": "B.1.2 SELF-SUPERVISION",
+        "chunkIndex": 74,
+        "totalChunks": 105
+      }
+    },
+    {
+      "id": "2010.11929v2-chunk-75",
+      "content": "s on ImageNet classification. That is, we observed diminishing returns on downstream performance after 100k pretraining steps, and see similar gains when pretraining on ImageNet.",
+      "metadata": {
+        "source": "arxiv:2010.11929v2",
+        "title": "An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale",
+        "authors": [
+          "Alexey Dosovitskiy",
+          "Lucas Beyer",
+          "Alexander Kolesnikov",
+          "Dirk Weissenborn",
+          "Xiaohua Zhai",
+          "Thomas Unterthiner",
+          "Mostafa Dehghani",
+          "Matthias Minderer",
+          "Georg Heigold",
+          "Sylvain Gelly",
+          "Jakob Uszkoreit",
+          "Neil Houlsby"
+        ],
+        "section": "B.1.2 SELF-SUPERVISION",
+        "chunkIndex": 75,
+        "totalChunks": 105
+      }
+    },
+    {
+      "id": "2010.11929v2-chunk-76",
+      "content": "We report detailed results corresponding to the figures presented in the paper. Table 5 corresponds to Figure 3 from the paper and shows transfer performance of different ViT models pre-trained on datasets of increasing size: ImageNet, ImageNet-21k, and JFT-300M. Table 6 corresponds to\n\nTable 5: Top1 accuracy (in %) of Vision Transformer on various datasets when pre-trained on ImageNet, ImageNet-21k or JFT300M. These values correspond to Figure 3 in the main text. Models are fine-tuned at 384 resolution. Note that the ImageNet results are computed without additional techniques (Polyak averaging and 512 resolution images) used to achieve results in Table 2.\n\n|              |                    |   ViT-B/16 |   ViT-B/32 |   ViT-L/16 |   ViT-L/32 | ViT-H/14   |\n|--------------|--------------------|------------|------------|------------|------------|------------|\n| ImageNet     | CIFAR-10           |      98.13 |      97.77 |      97.86 |      97.94 | -          |\n|              | CIFAR-10",
+      "metadata": {
+        "source": "arxiv:2010.11929v2",
+        "title": "An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale",
+        "authors": [
+          "Alexey Dosovitskiy",
+          "Lucas Beyer",
+          "Alexander Kolesnikov",
+          "Dirk Weissenborn",
+          "Xiaohua Zhai",
+          "Thomas Unterthiner",
+          "Mostafa Dehghani",
+          "Matthias Minderer",
+          "Georg Heigold",
+          "Sylvain Gelly",
+          "Jakob Uszkoreit",
+          "Neil Houlsby"
+        ],
+        "section": "C ADDITIONAL RESULTS",
+        "chunkIndex": 76,
+        "totalChunks": 105
+      }
+    },
+    {
+      "id": "2010.11929v2-chunk-77",
+      "content": "-----|------------|------------|------------|------------|------------|\n| ImageNet     | CIFAR-10           |      98.13 |      97.77 |      97.86 |      97.94 | -          |\n|              | CIFAR-100          |      87.13 |      86.31 |      86.35 |      87.07 | -          |\n|              | ImageNet           |      77.91 |      73.38 |      76.53 |      71.16 | -          |\n|              | ImageNet ReaL      |      83.57 |      79.56 |      82.19 |      77.83 | -          |\n|              | Oxford Flowers-102 |      89.49 |      85.43 |      89.66 |      86.36 | -          |\n|              | Oxford-IIIT-Pets   |      93.81 |      92.04 |      93.64 |      91.35 | -          |\n| ImageNet-21k | CIFAR-10           |      98.95 |      98.79 |      99.16 |      99.13 | 99.27      |\n|              | CIFAR-100          |      91.67 |      91.97 |      93.44 |      93.04 | 93.82      |\n|              | ImageNet           |      83.97 |      81.28 |      85.15 |      80.99 | 85.13      |\n|",
+      "metadata": {
+        "source": "arxiv:2010.11929v2",
+        "title": "An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale",
+        "authors": [
+          "Alexey Dosovitskiy",
+          "Lucas Beyer",
+          "Alexander Kolesnikov",
+          "Dirk Weissenborn",
+          "Xiaohua Zhai",
+          "Thomas Unterthiner",
+          "Mostafa Dehghani",
+          "Matthias Minderer",
+          "Georg Heigold",
+          "Sylvain Gelly",
+          "Jakob Uszkoreit",
+          "Neil Houlsby"
+        ],
+        "section": "C ADDITIONAL RESULTS",
+        "chunkIndex": 77,
+        "totalChunks": 105
+      }
+    },
+    {
+      "id": "2010.11929v2-chunk-78",
+      "content": "| CIFAR-100          |      91.67 |      91.97 |      93.44 |      93.04 | 93.82      |\n|              | ImageNet           |      83.97 |      81.28 |      85.15 |      80.99 | 85.13      |\n|              | ImageNet ReaL      |      88.35 |      86.63 |      88.4  |      85.65 | 88.70      |\n|              | Oxford Flowers-102 |      99.38 |      99.11 |      99.61 |      99.19 | 99.51      |\n|              | Oxford-IIIT-Pets   |      94.43 |      93.02 |      94.73 |      93.09 | 94.82      |\n| JFT-300M     | CIFAR-10           |      99    |      98.61 |      99.38 |      99.19 | 99.50      |\n|              | CIFAR-100          |      91.87 |      90.49 |      94.04 |      92.52 | 94.55      |\n|              | ImageNet           |      84.15 |      80.73 |      87.12 |      84.37 | 88.04      |\n|              | ImageNet ReaL      |      88.85 |      86.27 |      89.99 |      88.28 | 90.33      |\n|              | Oxford Flowers-102 |      99.56 |      99.27 |      99.56 |",
+      "metadata": {
+        "source": "arxiv:2010.11929v2",
+        "title": "An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale",
+        "authors": [
+          "Alexey Dosovitskiy",
+          "Lucas Beyer",
+          "Alexander Kolesnikov",
+          "Dirk Weissenborn",
+          "Xiaohua Zhai",
+          "Thomas Unterthiner",
+          "Mostafa Dehghani",
+          "Matthias Minderer",
+          "Georg Heigold",
+          "Sylvain Gelly",
+          "Jakob Uszkoreit",
+          "Neil Houlsby"
+        ],
+        "section": "C ADDITIONAL RESULTS",
+        "chunkIndex": 78,
+        "totalChunks": 105
+      }
+    },
+    {
+      "id": "2010.11929v2-chunk-79",
+      "content": "7 | 88.04      |\n|              | ImageNet ReaL      |      88.85 |      86.27 |      89.99 |      88.28 | 90.33      |\n|              | Oxford Flowers-102 |      99.56 |      99.27 |      99.56 |      99.45 | 99.68      |\n|              | Oxford-IIIT-Pets   |      95.8  |      93.4  |      97.11 |      95.83 | 97.56      |\n\nTable 6: Detailed results of model scaling experiments. These correspond to Figure 5 in the main paper. We show transfer accuracy on several datasets, as well as the pre-training compute (in exaFLOPs).\n\n|                | Epochs   | ImageNet   | ImageNet ReaL   | CIFAR-10   | CIFAR-100   | Pets   | Flowers   | exaFLOPs   |\n|----------------|----------|------------|-----------------|------------|-------------|--------|-----------|------------|\n| name           |          |            |                 |            |             |        |           |            |\n| ViT-B/32       | 7        | 80.73      | 86.27           | 98.61      | 90.49       | 93.40  | 99.27",
+      "metadata": {
+        "source": "arxiv:2010.11929v2",
+        "title": "An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale",
+        "authors": [
+          "Alexey Dosovitskiy",
+          "Lucas Beyer",
+          "Alexander Kolesnikov",
+          "Dirk Weissenborn",
+          "Xiaohua Zhai",
+          "Thomas Unterthiner",
+          "Mostafa Dehghani",
+          "Matthias Minderer",
+          "Georg Heigold",
+          "Sylvain Gelly",
+          "Jakob Uszkoreit",
+          "Neil Houlsby"
+        ],
+        "section": "C ADDITIONAL RESULTS",
+        "chunkIndex": 79,
+        "totalChunks": 105
+      }
+    },
+    {
+      "id": "2010.11929v2-chunk-80",
+      "content": "|            |                 |            |             |        |           |            |\n| ViT-B/32       | 7        | 80.73      | 86.27           | 98.61      | 90.49       | 93.40  | 99.27     | 55         |\n| ViT-B/16       | 7        | 84.15      | 88.85           | 99.00      | 91.87       | 95.80  | 99.56     | 224        |\n| ViT-L/32       | 7        | 84.37      | 88.28           | 99.19      | 92.52       | 95.83  | 99.45     | 196        |\n| ViT-L/16       | 7        | 86.30      | 89.43           | 99.38      | 93.46       | 96.81  | 99.66     | 783        |\n| ViT-L/16       | 14       | 87.12      | 89.99           | 99.38      | 94.04       | 97.11  | 99.56     | 1567       |\n| ViT-H/14       | 14       | 88.08      | 90.36           | 99.50      | 94.71       | 97.11  | 99.71     | 4262       |\n| ResNet50x1     | 7        | 77.54      | 84.56           | 97.67      | 86.07       | 91.11  | 94.26     | 50         |\n| ResNet50x2     | 7        | 82.12      | 87.94",
+      "metadata": {
+        "source": "arxiv:2010.11929v2",
+        "title": "An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale",
+        "authors": [
+          "Alexey Dosovitskiy",
+          "Lucas Beyer",
+          "Alexander Kolesnikov",
+          "Dirk Weissenborn",
+          "Xiaohua Zhai",
+          "Thomas Unterthiner",
+          "Mostafa Dehghani",
+          "Matthias Minderer",
+          "Georg Heigold",
+          "Sylvain Gelly",
+          "Jakob Uszkoreit",
+          "Neil Houlsby"
+        ],
+        "section": "C ADDITIONAL RESULTS",
+        "chunkIndex": 80,
+        "totalChunks": 105
+      }
+    },
+    {
+      "id": "2010.11929v2-chunk-81",
+      "content": "| 99.71     | 4262       |\n| ResNet50x1     | 7        | 77.54      | 84.56           | 97.67      | 86.07       | 91.11  | 94.26     | 50         |\n| ResNet50x2     | 7        | 82.12      | 87.94           | 98.29      | 89.20       | 93.43  | 97.02     | 199        |\n| ResNet101x1    | 7        | 80.67      | 87.07           | 98.48      | 89.17       | 94.08  | 95.95     | 96         |\n| ResNet152x1    | 7        | 81.88      | 87.96           | 98.82      | 90.22       | 94.17  | 96.94     | 141        |\n| ResNet152x2    | 7        | 84.97      | 89.69           | 99.06      | 92.05       | 95.37  | 98.62     | 563        |\n| ResNet152x2    | 14       | 85.56      | 89.89           | 99.24      | 91.92       | 95.75  | 98.75     | 1126       |\n| ResNet200x3    | 14       | 87.22      | 90.15           | 99.34      | 93.53       | 96.32  | 99.04     | 3306       |\n| R50x1+ViT-B/32 | 7        | 84.90      | 89.15           | 99.01      | 92.24       | 95.75  | 99.46     | 106",
+      "metadata": {
+        "source": "arxiv:2010.11929v2",
+        "title": "An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale",
+        "authors": [
+          "Alexey Dosovitskiy",
+          "Lucas Beyer",
+          "Alexander Kolesnikov",
+          "Dirk Weissenborn",
+          "Xiaohua Zhai",
+          "Thomas Unterthiner",
+          "Mostafa Dehghani",
+          "Matthias Minderer",
+          "Georg Heigold",
+          "Sylvain Gelly",
+          "Jakob Uszkoreit",
+          "Neil Houlsby"
+        ],
+        "section": "C ADDITIONAL RESULTS",
+        "chunkIndex": 81,
+        "totalChunks": 105
+      }
+    },
+    {
+      "id": "2010.11929v2-chunk-82",
+      "content": "| 90.15           | 99.34      | 93.53       | 96.32  | 99.04     | 3306       |\n| R50x1+ViT-B/32 | 7        | 84.90      | 89.15           | 99.01      | 92.24       | 95.75  | 99.46     | 106        |\n| R50x1+ViT-B/16 | 7        | 85.58      | 89.65           | 99.14      | 92.63       | 96.65  | 99.40     | 274        |\n| R50x1+ViT-L/32 | 7        | 85.68      | 89.04           | 99.24      | 92.93       | 96.97  | 99.43     | 246        |\n| R50x1+ViT-L/16 | 7        | 86.60      | 89.72           | 99.18      | 93.64       | 97.03  | 99.40     | 859        |\n| R50x1+ViT-L/16 | 14       | 87.12      | 89.76           | 99.31      | 93.89       | 97.36  | 99.11     | 1668       |\n\nFigure 5 from the paper and shows the transfer performance of ViT, ResNet, and hybrid models of varying size, as well as the estimated computational cost of their pre-training.",
+      "metadata": {
+        "source": "arxiv:2010.11929v2",
+        "title": "An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale",
+        "authors": [
+          "Alexey Dosovitskiy",
+          "Lucas Beyer",
+          "Alexander Kolesnikov",
+          "Dirk Weissenborn",
+          "Xiaohua Zhai",
+          "Thomas Unterthiner",
+          "Mostafa Dehghani",
+          "Matthias Minderer",
+          "Georg Heigold",
+          "Sylvain Gelly",
+          "Jakob Uszkoreit",
+          "Neil Houlsby"
+        ],
+        "section": "C ADDITIONAL RESULTS",
+        "chunkIndex": 82,
+        "totalChunks": 105
+      }
+    },
+    {
+      "id": "2010.11929v2-chunk-83",
+      "content": "ResNets are typically trained with SGD and our use of Adam as optimizer is quite unconventional. Here we show the experiments that motivated this choice. Namely, we compare the fine-tuning\n\nTable 7: Fine-tuning ResNet models pre-trained with Adam and SGD.\n\n|                    | ResNet50   | ResNet50   | ResNet152x2   | ResNet152x2   |\n|--------------------|------------|------------|---------------|---------------|\n| Dataset            | Adam       | SGD        | Adam          | SGD           |\n| ImageNet           | 77 . 54    | 78 . 24    | 84 . 97       | 84 . 37       |\n| CIFAR10            | 97 . 67    | 97 . 46    | 99 . 06       | 99 . 07       |\n| CIFAR100           | 86 . 07    | 85 . 17    | 92 . 05       | 91 . 06       |\n| Oxford-IIIT Pets   | 91 . 11    | 91 . 00    | 95 . 37       | 94 . 79       |\n| Oxford Flowers-102 | 94 . 26    | 92 . 06    | 98 . 62       | 99 . 32       |\n| Average            | 89 . 33    | 88 . 79    | 94 . 01       | 93 . 72       |",
+      "metadata": {
+        "source": "arxiv:2010.11929v2",
+        "title": "An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale",
+        "authors": [
+          "Alexey Dosovitskiy",
+          "Lucas Beyer",
+          "Alexander Kolesnikov",
+          "Dirk Weissenborn",
+          "Xiaohua Zhai",
+          "Thomas Unterthiner",
+          "Mostafa Dehghani",
+          "Matthias Minderer",
+          "Georg Heigold",
+          "Sylvain Gelly",
+          "Jakob Uszkoreit",
+          "Neil Houlsby"
+        ],
+        "section": "D.1 SGD VS. ADAM FOR RESNETS",
+        "chunkIndex": 83,
+        "totalChunks": 105
+      }
+    },
+    {
+      "id": "2010.11929v2-chunk-84",
+      "content": "0    | 95 . 37       | 94 . 79       |\n| Oxford Flowers-102 | 94 . 26    | 92 . 06    | 98 . 62       | 99 . 32       |\n| Average            | 89 . 33    | 88 . 79    | 94 . 01       | 93 . 72       |\n\nFigure 8: Scaling different model dimensions of the Vision Transformer.\n\n<!-- image -->\n\nperformance of two ResNets - 50x1 and 152x2 - pre-trained on JFT with SGD and Adam. For SGD, we use the hyperparameters recommended by Kolesnikov et al. (2020). Results are presented in Table 7. Adam pre-training outperforms SGD pre-training on most datasets and on average. This justifies the choice of Adam as the optimizer used to pre-train ResNets on JFT. Note that the absolute numbers are lower than those reported by Kolesnikov et al. (2020), since we pre-train only for 7 epochs, not 30 .",
+      "metadata": {
+        "source": "arxiv:2010.11929v2",
+        "title": "An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale",
+        "authors": [
+          "Alexey Dosovitskiy",
+          "Lucas Beyer",
+          "Alexander Kolesnikov",
+          "Dirk Weissenborn",
+          "Xiaohua Zhai",
+          "Thomas Unterthiner",
+          "Mostafa Dehghani",
+          "Matthias Minderer",
+          "Georg Heigold",
+          "Sylvain Gelly",
+          "Jakob Uszkoreit",
+          "Neil Houlsby"
+        ],
+        "section": "D.1 SGD VS. ADAM FOR RESNETS",
+        "chunkIndex": 84,
+        "totalChunks": 105
+      }
+    },
+    {
+      "id": "2010.11929v2-chunk-85",
+      "content": "We ran ablations on scaling different dimensions of the Transformer architecture to find out which are best suited for scaling to very large models. Figure 8 shows 5-shot performance on ImageNet for different configurations. All configurations are based on a ViT model with 8 layers, D = 1024 , D MLP = 2048 and a patch size of 32 , the intersection of all lines. We can see that scaling the depth results in the biggest improvements which are clearly visible up until 64 layers. However, diminishing returns are already visible after 16 layers. Interestingly, scaling the width of the network seems to result in the smallest changes. Decreasing the patch size and thus increasing the effective sequence length shows surprisingly robust improvements without introducing parameters. These findings suggest that compute might be a better predictor of performance than the number of parameters, and that scaling should emphasize depth over width if any.",
+      "metadata": {
+        "source": "arxiv:2010.11929v2",
+        "title": "An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale",
+        "authors": [
+          "Alexey Dosovitskiy",
+          "Lucas Beyer",
+          "Alexander Kolesnikov",
+          "Dirk Weissenborn",
+          "Xiaohua Zhai",
+          "Thomas Unterthiner",
+          "Mostafa Dehghani",
+          "Matthias Minderer",
+          "Georg Heigold",
+          "Sylvain Gelly",
+          "Jakob Uszkoreit",
+          "Neil Houlsby"
+        ],
+        "section": "D.2 TRANSFORMER SHAPE",
+        "chunkIndex": 85,
+        "totalChunks": 105
+      }
+    },
+    {
+      "id": "2010.11929v2-chunk-86",
+      "content": "without introducing parameters. These findings suggest that compute might be a better predictor of performance than the number of parameters, and that scaling should emphasize depth over width if any. Overall, we find that scaling all dimensions proportionally results in robust improvements.",
+      "metadata": {
+        "source": "arxiv:2010.11929v2",
+        "title": "An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale",
+        "authors": [
+          "Alexey Dosovitskiy",
+          "Lucas Beyer",
+          "Alexander Kolesnikov",
+          "Dirk Weissenborn",
+          "Xiaohua Zhai",
+          "Thomas Unterthiner",
+          "Mostafa Dehghani",
+          "Matthias Minderer",
+          "Georg Heigold",
+          "Sylvain Gelly",
+          "Jakob Uszkoreit",
+          "Neil Houlsby"
+        ],
+        "section": "D.2 TRANSFORMER SHAPE",
+        "chunkIndex": 86,
+        "totalChunks": 105
+      }
+    },
+    {
+      "id": "2010.11929v2-chunk-87",
+      "content": "In order to stay as close as possible to the original Transformer model, we made use of an additional [class] token, which is taken as image representation. The output of this token is then transformed into a class prediction via a small multi-layer perceptron (MLP) with tanh as non-linearity in the single hidden layer.\n\nThis design is inherited from the Transformer model for text, and we use it throughout the main paper. An initial attempt at using only image-patch embeddings, globally average-pooling (GAP) them, followed by a linear classifier-just like ResNet's final feature map-performed very poorly. However, we found that this is neither due to the extra token, nor to the GAP operation. Instead,\n\n60\n\nFigure 9: Comparison of class-token and global average pooling classifiers. Both work similarly well, but require different learning-rates.\n\n<!-- image -->\n\nTable 8: Results of the ablation study on positional embeddings with ViT-B/16 model evaluated on ImageNet 5-shot linear.",
+      "metadata": {
+        "source": "arxiv:2010.11929v2",
+        "title": "An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale",
+        "authors": [
+          "Alexey Dosovitskiy",
+          "Lucas Beyer",
+          "Alexander Kolesnikov",
+          "Dirk Weissenborn",
+          "Xiaohua Zhai",
+          "Thomas Unterthiner",
+          "Mostafa Dehghani",
+          "Matthias Minderer",
+          "Georg Heigold",
+          "Sylvain Gelly",
+          "Jakob Uszkoreit",
+          "Neil Houlsby"
+        ],
+        "section": "D.3 HEAD TYPE AND CLASS TOKEN",
+        "chunkIndex": 87,
+        "totalChunks": 105
+      }
+    },
+    {
+      "id": "2010.11929v2-chunk-88",
+      "content": "oth work similarly well, but require different learning-rates.\n\n<!-- image -->\n\nTable 8: Results of the ablation study on positional embeddings with ViT-B/16 model evaluated on ImageNet 5-shot linear.\n\n| Pos. Emb.      |   Default/Stem | Every Layer   | Every Layer-Shared   |\n|----------------|----------------|---------------|----------------------|\n| No Pos. Emb.   |        0.61382 | N/A           | N/A                  |\n| 1-D Pos. Emb.  |        0.64206 | 0.63964       | 0.64292              |\n| 2-D Pos. Emb.  |        0.64001 | 0.64046       | 0.64022              |\n| Rel. Pos. Emb. |        0.64032 | N/A           | N/A                  |\n\nthe difference in performance is fully explained by the requirement for a different learning-rate, see Figure 9.",
+      "metadata": {
+        "source": "arxiv:2010.11929v2",
+        "title": "An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale",
+        "authors": [
+          "Alexey Dosovitskiy",
+          "Lucas Beyer",
+          "Alexander Kolesnikov",
+          "Dirk Weissenborn",
+          "Xiaohua Zhai",
+          "Thomas Unterthiner",
+          "Mostafa Dehghani",
+          "Matthias Minderer",
+          "Georg Heigold",
+          "Sylvain Gelly",
+          "Jakob Uszkoreit",
+          "Neil Houlsby"
+        ],
+        "section": "D.3 HEAD TYPE AND CLASS TOKEN",
+        "chunkIndex": 88,
+        "totalChunks": 105
+      }
+    },
+    {
+      "id": "2010.11929v2-chunk-89",
+      "content": "We ran ablations on different ways of encoding spatial information using positional embedding. We tried the following cases:\n\n- Providing no positional information: Considering the inputs as a bag of patches .\n- 1-dimensional positional embedding: Considering the inputs as a sequence of patches in the raster order (default across all other experiments in this paper).\n- 2-dimensional positional embedding: Considering the inputs as a grid of patches in two dimensions. In this case, two sets of embeddings are learned, each for one of the axes, X -embedding, and Y -embedding, each with size D/ 2 . Then, based on the coordinate on the path in the input, we concatenate the X and Y embedding to get the final positional embedding for that patch.\n- Relative positional embeddings: Considering the relative distance between patches to encode the spatial information as instead of their absolute position.",
+      "metadata": {
+        "source": "arxiv:2010.11929v2",
+        "title": "An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale",
+        "authors": [
+          "Alexey Dosovitskiy",
+          "Lucas Beyer",
+          "Alexander Kolesnikov",
+          "Dirk Weissenborn",
+          "Xiaohua Zhai",
+          "Thomas Unterthiner",
+          "Mostafa Dehghani",
+          "Matthias Minderer",
+          "Georg Heigold",
+          "Sylvain Gelly",
+          "Jakob Uszkoreit",
+          "Neil Houlsby"
+        ],
+        "section": "D.4 POSITIONAL EMBEDDING",
+        "chunkIndex": 89,
+        "totalChunks": 105
+      }
+    },
+    {
+      "id": "2010.11929v2-chunk-90",
+      "content": "final positional embedding for that patch.\n- Relative positional embeddings: Considering the relative distance between patches to encode the spatial information as instead of their absolute position. To do so, we use 1dimensional Relative Attention, in which we define the relative distance all possible pairs of patches. Thus, for every given pair (one as query, and the other as key/value in the attention mechanism), we have an offset p q -p k , where each offset is associated with an embedding. Then, we simply run extra attention, where we use the original query (the content of query), but use relative positional embeddings as keys. We then use the logits from the relative attention as a bias term and add it to the logits of the main attention (content-based attention) before applying the softmax.",
+      "metadata": {
+        "source": "arxiv:2010.11929v2",
+        "title": "An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale",
+        "authors": [
+          "Alexey Dosovitskiy",
+          "Lucas Beyer",
+          "Alexander Kolesnikov",
+          "Dirk Weissenborn",
+          "Xiaohua Zhai",
+          "Thomas Unterthiner",
+          "Mostafa Dehghani",
+          "Matthias Minderer",
+          "Georg Heigold",
+          "Sylvain Gelly",
+          "Jakob Uszkoreit",
+          "Neil Houlsby"
+        ],
+        "section": "D.4 POSITIONAL EMBEDDING",
+        "chunkIndex": 90,
+        "totalChunks": 105
+      }
+    },
+    {
+      "id": "2010.11929v2-chunk-91",
+      "content": "e positional embeddings as keys. We then use the logits from the relative attention as a bias term and add it to the logits of the main attention (content-based attention) before applying the softmax.\n\nIn addition to different ways of encoding spatial information, we also tried different ways of incorporating this information in our model. For the 1-dimensional and 2-dimensional positional embeddings, we tried three different cases: (1) add positional embeddings to the inputs right after\n\nFigure 10: Position embeddings of models trained with different hyperparameters.\n\n<!-- image -->\n\nthe stem of them model and before feeding the inputs to the Transformer encoder (default across all other experiments in this paper); (2) learn and add positional embeddings to the inputs at the beginning of each layer; (3) add a learned positional embeddings to the inputs at the beginning of each layer (shared between layers).",
+      "metadata": {
+        "source": "arxiv:2010.11929v2",
+        "title": "An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale",
+        "authors": [
+          "Alexey Dosovitskiy",
+          "Lucas Beyer",
+          "Alexander Kolesnikov",
+          "Dirk Weissenborn",
+          "Xiaohua Zhai",
+          "Thomas Unterthiner",
+          "Mostafa Dehghani",
+          "Matthias Minderer",
+          "Georg Heigold",
+          "Sylvain Gelly",
+          "Jakob Uszkoreit",
+          "Neil Houlsby"
+        ],
+        "section": "D.4 POSITIONAL EMBEDDING",
+        "chunkIndex": 91,
+        "totalChunks": 105
+      }
+    },
+    {
+      "id": "2010.11929v2-chunk-92",
+      "content": "er); (2) learn and add positional embeddings to the inputs at the beginning of each layer; (3) add a learned positional embeddings to the inputs at the beginning of each layer (shared between layers).\n\nTable 8 summarizes the results from this ablation study on a ViT-B/16 model. As we can see, while there is a large gap between the performances of the model with no positional embedding and models with positional embedding, there is little to no difference between different ways of encoding positional information. We speculate that since our Transformer encoder operates on patch-level inputs, as opposed to pixel-level, the differences in how to encode spatial information is less important. More precisely, in patch-level inputs, the spatial dimensions are much smaller than the original pixel-level inputs, e.g., 14 × 14 as opposed to 224 × 224 , and learning to represent the spatial relations in this resolution is equally easy for these different positional encoding strategies.",
+      "metadata": {
+        "source": "arxiv:2010.11929v2",
+        "title": "An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale",
+        "authors": [
+          "Alexey Dosovitskiy",
+          "Lucas Beyer",
+          "Alexander Kolesnikov",
+          "Dirk Weissenborn",
+          "Xiaohua Zhai",
+          "Thomas Unterthiner",
+          "Mostafa Dehghani",
+          "Matthias Minderer",
+          "Georg Heigold",
+          "Sylvain Gelly",
+          "Jakob Uszkoreit",
+          "Neil Houlsby"
+        ],
+        "section": "D.4 POSITIONAL EMBEDDING",
+        "chunkIndex": 92,
+        "totalChunks": 105
+      }
+    },
+    {
+      "id": "2010.11929v2-chunk-93",
+      "content": "ginal pixel-level inputs, e.g., 14 × 14 as opposed to 224 × 224 , and learning to represent the spatial relations in this resolution is equally easy for these different positional encoding strategies. Even so, the specific pattern of position embedding similarity learned by the network depends on the training hyperparameters (Figure 10).\n\nFigure 11: Size of attended area by head and network depth. Attention distance was computed for 128 example images by averaging the distance between the query pixel and all other pixels, weighted by the attention weight. Each dot shows the mean attention distance across images for one of 16 heads at one layer. Image width is 224 pixels.\n\n<!-- image -->",
+      "metadata": {
+        "source": "arxiv:2010.11929v2",
+        "title": "An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale",
+        "authors": [
+          "Alexey Dosovitskiy",
+          "Lucas Beyer",
+          "Alexander Kolesnikov",
+          "Dirk Weissenborn",
+          "Xiaohua Zhai",
+          "Thomas Unterthiner",
+          "Mostafa Dehghani",
+          "Matthias Minderer",
+          "Georg Heigold",
+          "Sylvain Gelly",
+          "Jakob Uszkoreit",
+          "Neil Houlsby"
+        ],
+        "section": "D.4 POSITIONAL EMBEDDING",
+        "chunkIndex": 93,
+        "totalChunks": 105
+      }
+    },
+    {
+      "id": "2010.11929v2-chunk-94",
+      "content": "We are also interested in real-world speed of the architectures on our hardware, which is not always well predicted by theoretical FLOPs due to details like lane widths and cache sizes. For this purpose,\n\nwe perform timing of inference speed for the main models of interest, on a TPUv3 accelerator; the difference between inference and backprop speed is a constant model-independent factor.\n\nFigure 12 (left) shows how many images one core can handle per second, across various input sizes. Every single point refers to the peak performance measured across a wide range of batch-sizes. As can be seen, the theoretical bi-quadratic scaling of ViT with image size only barely starts happening for the largest models at the largest resolutions.\n\nAnother quantity of interest is the largest batch-size each model can fit onto a core, larger being better for scaling to large datasets. Figure 12 (right) shows this quantity for the same set of models.",
+      "metadata": {
+        "source": "arxiv:2010.11929v2",
+        "title": "An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale",
+        "authors": [
+          "Alexey Dosovitskiy",
+          "Lucas Beyer",
+          "Alexander Kolesnikov",
+          "Dirk Weissenborn",
+          "Xiaohua Zhai",
+          "Thomas Unterthiner",
+          "Mostafa Dehghani",
+          "Matthias Minderer",
+          "Georg Heigold",
+          "Sylvain Gelly",
+          "Jakob Uszkoreit",
+          "Neil Houlsby"
+        ],
+        "section": "D.5 EMPIRICAL COMPUTATIONAL COSTS",
+        "chunkIndex": 94,
+        "totalChunks": 105
+      }
+    },
+    {
+      "id": "2010.11929v2-chunk-95",
+      "content": "ther quantity of interest is the largest batch-size each model can fit onto a core, larger being better for scaling to large datasets. Figure 12 (right) shows this quantity for the same set of models. This shows that large ViT models have a clear advantage in terms of memory-efficiency over ResNet models.\n\nFigure 12: Left: Real wall-clock timings of various architectures across input sizes. ViT models have speed comparable to similar ResNets. Right : Largest per-core batch-size fitting on device with various architectures across input sizes. ViT models are clearly more memory-efficient.\n\n<!-- image -->",
+      "metadata": {
+        "source": "arxiv:2010.11929v2",
+        "title": "An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale",
+        "authors": [
+          "Alexey Dosovitskiy",
+          "Lucas Beyer",
+          "Alexander Kolesnikov",
+          "Dirk Weissenborn",
+          "Xiaohua Zhai",
+          "Thomas Unterthiner",
+          "Mostafa Dehghani",
+          "Matthias Minderer",
+          "Georg Heigold",
+          "Sylvain Gelly",
+          "Jakob Uszkoreit",
+          "Neil Houlsby"
+        ],
+        "section": "D.5 EMPIRICAL COMPUTATIONAL COSTS",
+        "chunkIndex": 95,
+        "totalChunks": 105
+      }
+    },
+    {
+      "id": "2010.11929v2-chunk-96",
+      "content": "Axial Attention (Huang et al., 2020; Ho et al., 2019) is a simple, yet effective technique to run selfattention on large inputs that are organized as multidimensional tensors. The general idea of axial attention is to perform multiple attention operations, each along a single axis of the input tensor, instead of applying 1-dimensional attention to the flattened version of the input. In axial attention, each attention mixes information along a particular axis, while keeping information along the other axes independent. Along this line, Wang et al. (2020b) proposed the AxialResNet model in which all the convolutions with kernel size 3 × 3 in a ResNet50 are replaced by axial self-attention, i.e. a row and column attention, augmented by relative positional encoding. We have implemented AxialResNet as a baseline model. 3 .",
+      "metadata": {
+        "source": "arxiv:2010.11929v2",
+        "title": "An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale",
+        "authors": [
+          "Alexey Dosovitskiy",
+          "Lucas Beyer",
+          "Alexander Kolesnikov",
+          "Dirk Weissenborn",
+          "Xiaohua Zhai",
+          "Thomas Unterthiner",
+          "Mostafa Dehghani",
+          "Matthias Minderer",
+          "Georg Heigold",
+          "Sylvain Gelly",
+          "Jakob Uszkoreit",
+          "Neil Houlsby"
+        ],
+        "section": "D.6 AXIAL ATTENTION",
+        "chunkIndex": 96,
+        "totalChunks": 105
+      }
+    },
+    {
+      "id": "2010.11929v2-chunk-97",
+      "content": "rnel size 3 × 3 in a ResNet50 are replaced by axial self-attention, i.e. a row and column attention, augmented by relative positional encoding. We have implemented AxialResNet as a baseline model. 3 .\n\nMoreover, we have modified ViT to process inputs in the 2-dimensional shape, instead of a 1dimensional sequence of patches, and incorporate Axial Transformer blocks, in which instead of a self-attention followed by an MLP, we have a a row-self-attention plus an MLP followed by a column-self-attention plus an MLP.\n\nFigure 13, present the performance of Axial ResNet, Axial-ViT-B/32 and Axial-ViT-B/16 on ImageNet 5shot linear, when pretrained on JFT dataset, verses the pretraining compute, both in terms of number of FLOPs and inference time (example per seconds). As we can see, both Axial-ViT-B/32 and Axial-ViT-B/16 do better than their ViT-B counterpart in terms of performance, but it comes at",
+      "metadata": {
+        "source": "arxiv:2010.11929v2",
+        "title": "An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale",
+        "authors": [
+          "Alexey Dosovitskiy",
+          "Lucas Beyer",
+          "Alexander Kolesnikov",
+          "Dirk Weissenborn",
+          "Xiaohua Zhai",
+          "Thomas Unterthiner",
+          "Mostafa Dehghani",
+          "Matthias Minderer",
+          "Georg Heigold",
+          "Sylvain Gelly",
+          "Jakob Uszkoreit",
+          "Neil Houlsby"
+        ],
+        "section": "D.6 AXIAL ATTENTION",
+        "chunkIndex": 97,
+        "totalChunks": 105
+      }
+    },
+    {
+      "id": "2010.11929v2-chunk-98",
+      "content": "terms of number of FLOPs and inference time (example per seconds). As we can see, both Axial-ViT-B/32 and Axial-ViT-B/16 do better than their ViT-B counterpart in terms of performance, but it comes at\n\n3 Our implementation is based on the open-sourced PyTorch implementation in https://github.com/ csrhddlam/axial-deeplab . In our experiments, we reproduced the scores reported in (Wang et al., 2020b) in terms of accuracy, however, our implementation, similar to the open-source implementation, is very slow on TPUs. Therefore, we were not able to use it for extensive large-scale experiments. These may be unlocked by a carefully optimized implementation.\n\nFigure 13: Performance of Axial-Attention based models, in terms of top-1 accuracy on ImageNet 5-shot linear, versus their speed in terms of number of FLOPs ( left ) and inference time ( left ).\n\n<!-- image -->",
+      "metadata": {
+        "source": "arxiv:2010.11929v2",
+        "title": "An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale",
+        "authors": [
+          "Alexey Dosovitskiy",
+          "Lucas Beyer",
+          "Alexander Kolesnikov",
+          "Dirk Weissenborn",
+          "Xiaohua Zhai",
+          "Thomas Unterthiner",
+          "Mostafa Dehghani",
+          "Matthias Minderer",
+          "Georg Heigold",
+          "Sylvain Gelly",
+          "Jakob Uszkoreit",
+          "Neil Houlsby"
+        ],
+        "section": "D.6 AXIAL ATTENTION",
+        "chunkIndex": 98,
+        "totalChunks": 105
+      }
+    },
+    {
+      "id": "2010.11929v2-chunk-99",
+      "content": "Performance of Axial-Attention based models, in terms of top-1 accuracy on ImageNet 5-shot linear, versus their speed in terms of number of FLOPs ( left ) and inference time ( left ).\n\n<!-- image -->\n\nthe cost of more compute. This is because in Axial-ViT models, each Transformer block with global self-attention is replaced by two Axial Transformer blocks, one with row and one with column selfattention and although the sequence length that self-attention operates on is smaller in axial case, there is a extra MLP per Axial-ViT block. For the AxialResNet, although it looks reasonable in terms of accuracy/compute trade-off (Figure 13, left), the naive implementation is extremely slow on TPUs (Figure 13, right).",
+      "metadata": {
+        "source": "arxiv:2010.11929v2",
+        "title": "An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale",
+        "authors": [
+          "Alexey Dosovitskiy",
+          "Lucas Beyer",
+          "Alexander Kolesnikov",
+          "Dirk Weissenborn",
+          "Xiaohua Zhai",
+          "Thomas Unterthiner",
+          "Mostafa Dehghani",
+          "Matthias Minderer",
+          "Georg Heigold",
+          "Sylvain Gelly",
+          "Jakob Uszkoreit",
+          "Neil Houlsby"
+        ],
+        "section": "D.6 AXIAL ATTENTION",
+        "chunkIndex": 99,
+        "totalChunks": 105
+      }
+    },
+    {
+      "id": "2010.11929v2-chunk-100",
+      "content": "To understand how ViT uses self-attention to integrate information across the image, we analyzed the average distance spanned by attention weights at different layers (Figure 11). This 'attention distance' is analogous to receptive field size in CNNs. Average attention distance is highly variable across heads in lower layers, with some heads attending to much of the image, while others attend to small regions at or near the query location. As depth increases, attention distance increases for all heads. In the second half of the network, most heads attend widely across tokens.",
+      "metadata": {
+        "source": "arxiv:2010.11929v2",
+        "title": "An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale",
+        "authors": [
+          "Alexey Dosovitskiy",
+          "Lucas Beyer",
+          "Alexander Kolesnikov",
+          "Dirk Weissenborn",
+          "Xiaohua Zhai",
+          "Thomas Unterthiner",
+          "Mostafa Dehghani",
+          "Matthias Minderer",
+          "Georg Heigold",
+          "Sylvain Gelly",
+          "Jakob Uszkoreit",
+          "Neil Houlsby"
+        ],
+        "section": "D.7 ATTENTION DISTANCE",
+        "chunkIndex": 100,
+        "totalChunks": 105
+      }
+    },
+    {
+      "id": "2010.11929v2-chunk-101",
+      "content": "To compute maps of the attention from the output token to the input space (Figures 6 and 14), we used Attention Rollout (Abnar &amp; Zuidema, 2020). Briefly, we averaged attention weights of ViTL/16 across all heads and then recursively multiplied the weight matrices of all layers. This accounts for the mixing of attention across tokens through all layers.",
+      "metadata": {
+        "source": "arxiv:2010.11929v2",
+        "title": "An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale",
+        "authors": [
+          "Alexey Dosovitskiy",
+          "Lucas Beyer",
+          "Alexander Kolesnikov",
+          "Dirk Weissenborn",
+          "Xiaohua Zhai",
+          "Thomas Unterthiner",
+          "Mostafa Dehghani",
+          "Matthias Minderer",
+          "Georg Heigold",
+          "Sylvain Gelly",
+          "Jakob Uszkoreit",
+          "Neil Houlsby"
+        ],
+        "section": "D.8 ATTENTION MAPS",
+        "chunkIndex": 101,
+        "totalChunks": 105
+      }
+    },
+    {
+      "id": "2010.11929v2-chunk-102",
+      "content": "Wealso evaluate our flagship ViT-H/14 model on the ObjectNet benchmark following the evaluation setup in Kolesnikov et al. (2020), resulting in 82.1% top-5 accuracy and 61.7% top-1 accuracy.",
+      "metadata": {
+        "source": "arxiv:2010.11929v2",
+        "title": "An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale",
+        "authors": [
+          "Alexey Dosovitskiy",
+          "Lucas Beyer",
+          "Alexander Kolesnikov",
+          "Dirk Weissenborn",
+          "Xiaohua Zhai",
+          "Thomas Unterthiner",
+          "Mostafa Dehghani",
+          "Matthias Minderer",
+          "Georg Heigold",
+          "Sylvain Gelly",
+          "Jakob Uszkoreit",
+          "Neil Houlsby"
+        ],
+        "section": "D.9 OBJECTNET RESULTS",
+        "chunkIndex": 102,
+        "totalChunks": 105
+      }
+    },
+    {
+      "id": "2010.11929v2-chunk-103",
+      "content": "Table 9 shows the scores attained on each of the VTAB-1k tasks.\n\nFigure 14: Further example attention maps as in Figure 6 (random selection).\n\n<!-- image -->\n\nTable 9: Breakdown of VTAB-1k performance across tasks.\n\n<!-- image -->\n\n|                 |   Caltech101 |   CIFAR-100 | DTD       | Flowers102   | Pets      |   Sun397 |   SVHN |   Camelyon |   EuroSAT |   Resisc45 |   Retinopathy |   Clevr-Count |   Clevr-Dist |   DMLab |   dSpr-Loc |   dSpr-Ori |   KITTI-Dist |   sNORB-Azim |   sNORB-Elev |   Mean |\n|-----------------|--------------|-------------|-----------|--------------|-----------|----------|--------|------------|-----------|------------|---------------|---------------|--------------|---------|------------|------------|--------------|--------------|--------------|--------|\n| ViT-H/14 (JFT)  |         95.3 |        85.5 | 75.2 74.3 | 99.7 99.7    | 97.2 96.7 |     65   |   88.9 |       83.3 |      96.7 |       91.4 |          76.6 |          91.7 |         63.8 |    53.1 |",
+      "metadata": {
+        "source": "arxiv:2010.11929v2",
+        "title": "An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale",
+        "authors": [
+          "Alexey Dosovitskiy",
+          "Lucas Beyer",
+          "Alexander Kolesnikov",
+          "Dirk Weissenborn",
+          "Xiaohua Zhai",
+          "Thomas Unterthiner",
+          "Mostafa Dehghani",
+          "Matthias Minderer",
+          "Georg Heigold",
+          "Sylvain Gelly",
+          "Jakob Uszkoreit",
+          "Neil Houlsby"
+        ],
+        "section": "D.10 VTAB BREAKDOWN",
+        "chunkIndex": 103,
+        "totalChunks": 105
+      }
+    },
+    {
+      "id": "2010.11929v2-chunk-104",
+      "content": "ViT-H/14 (JFT)  |         95.3 |        85.5 | 75.2 74.3 | 99.7 99.7    | 97.2 96.7 |     65   |   88.9 |       83.3 |      96.7 |       91.4 |          76.6 |          91.7 |         63.8 |    53.1 |       79.4 |       63.3 |         84.5 |         33.2 |         51.2 |   77.6 |\n| ViT-L/16 (JFT)  |         95.4 |        81.9 |           |              |           |     63.5 |   87.4 |       83.6 |      96.5 |       89.7 |          77.1 |          86.4 |         63.1 |    49.7 |       74.5 |       60.5 |         82.2 |         36.2 |         51.1 |   76.3 |\n| ViT-L/16 (I21k) |         90.8 |        84.1 | 74.1      | 99.3         | 92.7      |     61   |   80.9 |       82.5 |      95.6 |       85.2 |          75.3 |          70.3 |         56.1 |    41.9 |       74.7 |       64.9 |         79.9 |         30.5 |         41.7 |   72.7 |",
+      "metadata": {
+        "source": "arxiv:2010.11929v2",
+        "title": "An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale",
+        "authors": [
+          "Alexey Dosovitskiy",
+          "Lucas Beyer",
+          "Alexander Kolesnikov",
+          "Dirk Weissenborn",
+          "Xiaohua Zhai",
+          "Thomas Unterthiner",
+          "Mostafa Dehghani",
+          "Matthias Minderer",
+          "Georg Heigold",
+          "Sylvain Gelly",
+          "Jakob Uszkoreit",
+          "Neil Houlsby"
+        ],
+        "section": "D.10 VTAB BREAKDOWN",
+        "chunkIndex": 104,
+        "totalChunks": 105
+      }
+    }
+  ],
+  "tables": [
+    {
+      "index": 0,
+      "markdown": "| Model     |   Layers |   Hidden size D |   MLP size |   Heads | Params   |\n|-----------|----------|-----------------|------------|---------|----------|\n| ViT-Base  |       12 |             768 |       3072 |      12 | 86M      |\n| ViT-Large |       24 |            1024 |       4096 |      16 | 307M     |\n| ViT-Huge  |       32 |            1280 |       5120 |      16 | 632M     |"
+    },
+    {
+      "index": 1,
+      "markdown": "|                    | Ours-JFT (ViT-H/14)                                | Ours-JFT (ViT-L/16)                                                                                                 | Ours-I21k (ViT-L/16)                                                                                    | BiT-L (ResNet152x4)                                                                                           | Noisy Student (EfficientNet-L2)   |\n|--------------------|----------------------------------------------------|---------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------|-----------------------------------|\n| ImageNet ImageNet  | 88 . 55 ± 0 . 04 90 . 72 ± 0 . 05 99 . 50 ± 0 . 06 | 87 . 76 ± 0 . 03 90 . 54 ± 0 . 03 99 . 42 ± 0 . 03 93 . 90 ± 0 . 05 97 . 32 ± 0 . 11 99 . 74 ± 0 . 76 . 28 ± 0 . 46 | 85 . 30 ± 0 . 02 88 . 62 ± 0 . 05 99 . 15 ± 0 . 93 . 25 ± 0 . 94 . 67 ± 0 . 99 . 61 ± 0 . 72 . 72 ± 0 . | 87 . 54 ± 0 . 02 90 . 54 99 . 37 ± 0 . 06 93 . 51 ± 0 . 08 96 . 62 ± 0 . 23 99 . 63 ± 0 . 03 76 . 29 ± 1 . 70 | 88 . 4 / 88 . 5 ∗ 90 . 55 - - - - |\n| ReaL               |                                                    |                                                                                                                     |                                                                                                         |                                                                                                               |                                   |\n| CIFAR-10           |                                                    |                                                                                                                     | 03                                                                                                      |                                                                                                               |                                   |\n| CIFAR-100          | 94 . 55 ± 0 . 04                                   |                                                                                                                     | 05                                                                                                      |                                                                                                               |                                   |\n| Oxford-IIIT Pets   | 97 . 56 ± 0 . 03                                   |                                                                                                                     | 15                                                                                                      |                                                                                                               |                                   |\n| Oxford Flowers-102 | 99 . 68 ± 0 . 02                                   | 00                                                                                                                  | 02                                                                                                      |                                                                                                               |                                   |\n| VTAB (19 tasks)    | 77 . 63 ± 0 . 23                                   |                                                                                                                     | 21                                                                                                      |                                                                                                               | -                                 |\n| TPUv3-core-days    | 2 . 5 k                                            | 0 . 68 k                                                                                                            | 0 . 23 k                                                                                                | 9 . 9 k                                                                                                       | 12 . 3 k                          |"
+    },
+    {
+      "index": 2,
+      "markdown": "| Models               | Dataset      | Epochs   | Base LR    | LR decay   |   Weight decay |   Dropout |\n|----------------------|--------------|----------|------------|------------|----------------|-----------|\n| ViT-B/ { 16,32 }     | JFT-300M     | 7        | 8 · 10 - 4 | linear     |           0.1  |       0   |\n| ViT-L/32             | JFT-300M     | 7        | 6 · 10 - 4 | linear     |           0.1  |       0   |\n| ViT-L/16             | JFT-300M     | 7/14     | 4 · 10 - 4 | linear     |           0.1  |       0   |\n| ViT-H/14             | JFT-300M     | 14       | 3 · 10 - 4 | linear     |           0.1  |       0   |\n| R50x { 1,2 }         | JFT-300M     | 7        | 10 - 3     | linear     |           0.1  |       0   |\n| R101x1               | JFT-300M     | 7        | 8 · 10 - 4 | linear     |           0.1  |       0   |\n| R152x { 1,2 }        | JFT-300M     | 7        | 6 · 10 - 4 | linear     |           0.1  |       0   |\n| R50+ViT-B/ { 16,32 } | JFT-300M     | 7        | 8 · 10 - 4 | linear     |           0.1  |       0   |\n| R50+ViT-L/32         | JFT-300M     | 7        | 2 · 10 - 4 | linear     |           0.1  |       0   |\n| R50+ViT-L/16         | JFT-300M     | 7/14     | 4 · 10 - 4 | linear     |           0.1  |       0   |\n| ViT-B/ { 16,32 }     | ImageNet-21k | 90       | 10 - 3     | linear     |           0.03 |       0.1 |\n| ViT-L/ { 16,32 }     | ImageNet-21k | 30/90    | 10 - 3     | linear     |           0.03 |       0.1 |\n| ViT- ∗               | ImageNet     | 300      | 3 · 10 - 3 | cosine     |           0.3  |       0.1 |"
+    },
+    {
+      "index": 3,
+      "markdown": "| Dataset            | Steps   | Base LR                      |\n|--------------------|---------|------------------------------|\n| ImageNet           | 20 000  | { 0.003, 0.01, 0.03, 0.06 }  |\n| CIFAR100           | 10 000  | { 0.001, 0.003, 0.01, 0.03 } |\n| CIFAR10            | 10 000  | { 0.001, 0.003, 0.01, 0.03 } |\n| Oxford-IIIT Pets   | 500     | { 0.001, 0.003, 0.01, 0.03 } |\n| Oxford Flowers-102 | 500     | { 0.001, 0.003, 0.01, 0.03 } |\n| VTAB (19 tasks)    | 2 500   | 0.01                         |"
+    },
+    {
+      "index": 4,
+      "markdown": "|              |                    |   ViT-B/16 |   ViT-B/32 |   ViT-L/16 |   ViT-L/32 | ViT-H/14   |\n|--------------|--------------------|------------|------------|------------|------------|------------|\n| ImageNet     | CIFAR-10           |      98.13 |      97.77 |      97.86 |      97.94 | -          |\n|              | CIFAR-100          |      87.13 |      86.31 |      86.35 |      87.07 | -          |\n|              | ImageNet           |      77.91 |      73.38 |      76.53 |      71.16 | -          |\n|              | ImageNet ReaL      |      83.57 |      79.56 |      82.19 |      77.83 | -          |\n|              | Oxford Flowers-102 |      89.49 |      85.43 |      89.66 |      86.36 | -          |\n|              | Oxford-IIIT-Pets   |      93.81 |      92.04 |      93.64 |      91.35 | -          |\n| ImageNet-21k | CIFAR-10           |      98.95 |      98.79 |      99.16 |      99.13 | 99.27      |\n|              | CIFAR-100          |      91.67 |      91.97 |      93.44 |      93.04 | 93.82      |\n|              | ImageNet           |      83.97 |      81.28 |      85.15 |      80.99 | 85.13      |\n|              | ImageNet ReaL      |      88.35 |      86.63 |      88.4  |      85.65 | 88.70      |\n|              | Oxford Flowers-102 |      99.38 |      99.11 |      99.61 |      99.19 | 99.51      |\n|              | Oxford-IIIT-Pets   |      94.43 |      93.02 |      94.73 |      93.09 | 94.82      |\n| JFT-300M     | CIFAR-10           |      99    |      98.61 |      99.38 |      99.19 | 99.50      |\n|              | CIFAR-100          |      91.87 |      90.49 |      94.04 |      92.52 | 94.55      |\n|              | ImageNet           |      84.15 |      80.73 |      87.12 |      84.37 | 88.04      |\n|              | ImageNet ReaL      |      88.85 |      86.27 |      89.99 |      88.28 | 90.33      |\n|              | Oxford Flowers-102 |      99.56 |      99.27 |      99.56 |      99.45 | 99.68      |\n|              | Oxford-IIIT-Pets   |      95.8  |      93.4  |      97.11 |      95.83 | 97.56      |"
+    },
+    {
+      "index": 5,
+      "markdown": "|                | Epochs   | ImageNet   | ImageNet ReaL   | CIFAR-10   | CIFAR-100   | Pets   | Flowers   | exaFLOPs   |\n|----------------|----------|------------|-----------------|------------|-------------|--------|-----------|------------|\n| name           |          |            |                 |            |             |        |           |            |\n| ViT-B/32       | 7        | 80.73      | 86.27           | 98.61      | 90.49       | 93.40  | 99.27     | 55         |\n| ViT-B/16       | 7        | 84.15      | 88.85           | 99.00      | 91.87       | 95.80  | 99.56     | 224        |\n| ViT-L/32       | 7        | 84.37      | 88.28           | 99.19      | 92.52       | 95.83  | 99.45     | 196        |\n| ViT-L/16       | 7        | 86.30      | 89.43           | 99.38      | 93.46       | 96.81  | 99.66     | 783        |\n| ViT-L/16       | 14       | 87.12      | 89.99           | 99.38      | 94.04       | 97.11  | 99.56     | 1567       |\n| ViT-H/14       | 14       | 88.08      | 90.36           | 99.50      | 94.71       | 97.11  | 99.71     | 4262       |\n| ResNet50x1     | 7        | 77.54      | 84.56           | 97.67      | 86.07       | 91.11  | 94.26     | 50         |\n| ResNet50x2     | 7        | 82.12      | 87.94           | 98.29      | 89.20       | 93.43  | 97.02     | 199        |\n| ResNet101x1    | 7        | 80.67      | 87.07           | 98.48      | 89.17       | 94.08  | 95.95     | 96         |\n| ResNet152x1    | 7        | 81.88      | 87.96           | 98.82      | 90.22       | 94.17  | 96.94     | 141        |\n| ResNet152x2    | 7        | 84.97      | 89.69           | 99.06      | 92.05       | 95.37  | 98.62     | 563        |\n| ResNet152x2    | 14       | 85.56      | 89.89           | 99.24      | 91.92       | 95.75  | 98.75     | 1126       |\n| ResNet200x3    | 14       | 87.22      | 90.15           | 99.34      | 93.53       | 96.32  | 99.04     | 3306       |\n| R50x1+ViT-B/32 | 7        | 84.90      | 89.15           | 99.01      | 92.24       | 95.75  | 99.46     | 106        |\n| R50x1+ViT-B/16 | 7        | 85.58      | 89.65           | 99.14      | 92.63       | 96.65  | 99.40     | 274        |\n| R50x1+ViT-L/32 | 7        | 85.68      | 89.04           | 99.24      | 92.93       | 96.97  | 99.43     | 246        |\n| R50x1+ViT-L/16 | 7        | 86.60      | 89.72           | 99.18      | 93.64       | 97.03  | 99.40     | 859        |\n| R50x1+ViT-L/16 | 14       | 87.12      | 89.76           | 99.31      | 93.89       | 97.36  | 99.11     | 1668       |"
+    },
+    {
+      "index": 6,
+      "markdown": "|                    | ResNet50   | ResNet50   | ResNet152x2   | ResNet152x2   |\n|--------------------|------------|------------|---------------|---------------|\n| Dataset            | Adam       | SGD        | Adam          | SGD           |\n| ImageNet           | 77 . 54    | 78 . 24    | 84 . 97       | 84 . 37       |\n| CIFAR10            | 97 . 67    | 97 . 46    | 99 . 06       | 99 . 07       |\n| CIFAR100           | 86 . 07    | 85 . 17    | 92 . 05       | 91 . 06       |\n| Oxford-IIIT Pets   | 91 . 11    | 91 . 00    | 95 . 37       | 94 . 79       |\n| Oxford Flowers-102 | 94 . 26    | 92 . 06    | 98 . 62       | 99 . 32       |\n| Average            | 89 . 33    | 88 . 79    | 94 . 01       | 93 . 72       |"
+    },
+    {
+      "index": 7,
+      "markdown": "| Pos. Emb.      |   Default/Stem | Every Layer   | Every Layer-Shared   |\n|----------------|----------------|---------------|----------------------|\n| No Pos. Emb.   |        0.61382 | N/A           | N/A                  |\n| 1-D Pos. Emb.  |        0.64206 | 0.63964       | 0.64292              |\n| 2-D Pos. Emb.  |        0.64001 | 0.64046       | 0.64022              |\n| Rel. Pos. Emb. |        0.64032 | N/A           | N/A                  |"
+    },
+    {
+      "index": 8,
+      "markdown": "|                 |   Caltech101 |   CIFAR-100 | DTD       | Flowers102   | Pets      |   Sun397 |   SVHN |   Camelyon |   EuroSAT |   Resisc45 |   Retinopathy |   Clevr-Count |   Clevr-Dist |   DMLab |   dSpr-Loc |   dSpr-Ori |   KITTI-Dist |   sNORB-Azim |   sNORB-Elev |   Mean |\n|-----------------|--------------|-------------|-----------|--------------|-----------|----------|--------|------------|-----------|------------|---------------|---------------|--------------|---------|------------|------------|--------------|--------------|--------------|--------|\n| ViT-H/14 (JFT)  |         95.3 |        85.5 | 75.2 74.3 | 99.7 99.7    | 97.2 96.7 |     65   |   88.9 |       83.3 |      96.7 |       91.4 |          76.6 |          91.7 |         63.8 |    53.1 |       79.4 |       63.3 |         84.5 |         33.2 |         51.2 |   77.6 |\n| ViT-L/16 (JFT)  |         95.4 |        81.9 |           |              |           |     63.5 |   87.4 |       83.6 |      96.5 |       89.7 |          77.1 |          86.4 |         63.1 |    49.7 |       74.5 |       60.5 |         82.2 |         36.2 |         51.1 |   76.3 |\n| ViT-L/16 (I21k) |         90.8 |        84.1 | 74.1      | 99.3         | 92.7      |     61   |   80.9 |       82.5 |      95.6 |       85.2 |          75.3 |          70.3 |         56.1 |    41.9 |       74.7 |       64.9 |         79.9 |         30.5 |         41.7 |   72.7 |"
+    }
+  ],
+  "stats": {
+    "pages": 22,
+    "chunksCreated": 105,
+    "totalCharacters": 73124,
+    "totalWords": 10904,
+    "numTables": 9,
+    "processingTimeMs": 42939
+  },
+  "processedAt": "2025-12-29T12:43:54.068Z"
+}

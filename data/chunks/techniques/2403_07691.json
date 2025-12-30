@@ -1,0 +1,1582 @@
+{
+  "paper": {
+    "id": "2403.07691v2",
+    "title": "ORPO: Monolithic Preference Optimization without Reference Model",
+    "abstract": "While recent preference alignment algorithms for language models have demonstrated promising results, supervised fine-tuning (SFT) remains imperative for achieving successful convergence. In this paper, we study the crucial role of SFT within the context of preference alignment, emphasizing that a minor penalty for the disfavored generation style is sufficient for preference-aligned SFT. Building on this foundation, we introduce a straightforward and innovative reference model-free monolithic odds ratio preference optimization algorithm, ORPO, eliminating the necessity for an additional preference alignment phase. We demonstrate, both empirically and theoretically, that the odds ratio is a sensible choice for contrasting favored and disfavored styles during SFT across the diverse sizes from 125M to 7B. Specifically, fine-tuning Phi-2 (2.7B), Llama-2 (7B), and Mistral (7B) with ORPO on the UltraFeedback alone surpasses the performance of state-of-the-art language models with more than 7B and 13B parameters: achieving up to 12.20% on $\\text{AlpacaEval}_{2.0}$ (Figure 1), 66.19% on IFEval (instruction-level loose, Table 6), and 7.32 in MT-Bench (Figure 12). We release code and model checkpoints for Mistral-ORPO-$α$ (7B) and Mistral-ORPO-$β$ (7B).",
+    "authors": [
+      "Jiwoo Hong",
+      "Noah Lee",
+      "James Thorne"
+    ],
+    "published": "2024-03-12T14:34:08.000Z",
+    "updated": "2024-03-14T07:47:08.000Z",
+    "primaryCategory": "cs.CL",
+    "categories": [
+      "cs.CL",
+      "cs.AI"
+    ],
+    "pdfUrl": "https://arxiv.org/pdf/2403.07691v2",
+    "absUrl": "https://arxiv.org/abs/2403.07691v2"
+  },
+  "chunks": [
+    {
+      "id": "2403.07691v2-chunk-0",
+      "content": "KAIST AI\n\n{jiwoo\\_hong, noah.lee, thorne}@kaist.ac.kr",
+      "metadata": {
+        "source": "arxiv:2403.07691v2",
+        "title": "ORPO: Monolithic Preference Optimization without Reference Model",
+        "authors": [
+          "Jiwoo Hong",
+          "Noah Lee",
+          "James Thorne"
+        ],
+        "section": "Jiwoo Hong Noah Lee James Thorne",
+        "chunkIndex": 0,
+        "totalChunks": 95
+      }
+    },
+    {
+      "id": "2403.07691v2-chunk-1",
+      "content": "While recent preference alignment algorithms for language models have demonstrated promising results, supervised fine-tuning (SFT) remains imperative for achieving successful convergence. In this paper, we study the crucial role of SFT within the context of preference alignment, emphasizing that a minor penalty for the disfavored generation style is sufficient for preference-aligned SFT. Building on this foundation, we introduce a straightforward and innovative reference model-free monolithic odds ratio preference optimization algorithm, ORPO , eliminating the necessity for an additional preference alignment phase. We demonstrate, both empirically and theoretically, that the odds ratio is a sensible choice for contrasting favored and disfavored styles during SFT across the diverse sizes from 125M to 7B.",
+      "metadata": {
+        "source": "arxiv:2403.07691v2",
+        "title": "ORPO: Monolithic Preference Optimization without Reference Model",
+        "authors": [
+          "Jiwoo Hong",
+          "Noah Lee",
+          "James Thorne"
+        ],
+        "section": "Abstract",
+        "chunkIndex": 1,
+        "totalChunks": 95
+      }
+    },
+    {
+      "id": "2403.07691v2-chunk-2",
+      "content": "t phase. We demonstrate, both empirically and theoretically, that the odds ratio is a sensible choice for contrasting favored and disfavored styles during SFT across the diverse sizes from 125M to 7B. Specifically, fine-tuning Phi-2 (2.7B), Llama-2 (7B), and Mistral (7B) with ORPO on the UltraFeedback alone surpasses the performance of state-of-the-art language models with more than 7B and 13B parameters: achieving up to 12.20% on AlpacaEval 2 . 0 (Figure 1), 66.19% on IFEval (instruction-level loose, Table 6), and 7.32 in MT-Bench (Figure 12). We release code 1 and model checkpoints for MistralORPO -α (7B) 2 and MistralORPO -β (7B). 3",
+      "metadata": {
+        "source": "arxiv:2403.07691v2",
+        "title": "ORPO: Monolithic Preference Optimization without Reference Model",
+        "authors": [
+          "Jiwoo Hong",
+          "Noah Lee",
+          "James Thorne"
+        ],
+        "section": "Abstract",
+        "chunkIndex": 2,
+        "totalChunks": 95
+      }
+    },
+    {
+      "id": "2403.07691v2-chunk-3",
+      "content": "Pre-trained language models (PLMs) with vast training corpora such as web texts (Gokaslan and Cohen, 2019; Penedo et al., 2023) or textbooks (Li et al., 2023c) have shown remarkable abilities in diverse natural language processing (NLP) tasks (Brown et al., 2020; Zhang et al., 2022; Touvron et al., 2023; Jiang et al., 2023; Almazrouei et al., 2023). However, the models must undergo further\n\n1 https://github.com/xfactlab/orpo\n\n2 https://huggingface.co/kaist-ai/\n\nmistral-orpo-alpha\n\n3 https://huggingface.co/kaist-ai/ mistral-orpo-beta\n\nFigure 1: AlpacaEval 2 . 0 result of Llama-2 (7B) and Mistral (7B) fine-tuned with ORPO (blue) in comparison to the state-of-the-art models. Notably, MistralORPO -α &amp; β surpasses Zephyr β and Llama-2-Chat (13B) with a single epoch training exclusively on the UltraFeedback.\n\n<!-- image -->\n\ntuning to be usable in general-domain applications, typically through processes such as instruction tuning and preference alignment .",
+      "metadata": {
+        "source": "arxiv:2403.07691v2",
+        "title": "ORPO: Monolithic Preference Optimization without Reference Model",
+        "authors": [
+          "Jiwoo Hong",
+          "Noah Lee",
+          "James Thorne"
+        ],
+        "section": "1 Introduction",
+        "chunkIndex": 3,
+        "totalChunks": 95
+      }
+    },
+    {
+      "id": "2403.07691v2-chunk-4",
+      "content": "epoch training exclusively on the UltraFeedback.\n\n<!-- image -->\n\ntuning to be usable in general-domain applications, typically through processes such as instruction tuning and preference alignment .\n\nInstruction-tuning (Wei et al., 2022; Taori et al., 2023; Wang et al., 2023; Zhou et al., 2023a) trains models to follow task descriptions given in natural language, which enables models to generalize well to previously unseen tasks. However, despite the ability to follow instructions, models may generate harmful or unethical outputs (Carlini et al., 2021; Gehman et al., 2020; Pryzant et al., 2023). To further align these models with human values, additional training is required with pairwise preference data using techniques such as reinforcement learning with human feedback (Ziegler et al., 2020; Stiennon et al., 2022, RLHF) and direct preference optimization (Rafailov et al., 2023, DPO).",
+      "metadata": {
+        "source": "arxiv:2403.07691v2",
+        "title": "ORPO: Monolithic Preference Optimization without Reference Model",
+        "authors": [
+          "Jiwoo Hong",
+          "Noah Lee",
+          "James Thorne"
+        ],
+        "section": "1 Introduction",
+        "chunkIndex": 4,
+        "totalChunks": 95
+      }
+    },
+    {
+      "id": "2403.07691v2-chunk-5",
+      "content": "preference data using techniques such as reinforcement learning with human feedback (Ziegler et al., 2020; Stiennon et al., 2022, RLHF) and direct preference optimization (Rafailov et al., 2023, DPO).\n\nPreference alignment methods have demonstrated success in several downstream tasks beyond reducing harm. For example, improving factuality (Tian et al., 2023; Cheng et al., 2024; Chen and Li, 2024), code-based question answering (Gorbatovski and Kovalchuk, 2024), and machine translation (Ramos et al., 2023). The versatility of alignment algorithms over a wide range of downstream\n\nFigure 2: Comparison of model alignment techniques. ORPO aligns the language model without a reference model in a single-step manner by assigning a weak penalty to the rejected responses and a strong adaptation signal to the chosen responses with a simple log odds ratio term appended to the negative log-likelihood loss.\n\n<!-- image -->",
+      "metadata": {
+        "source": "arxiv:2403.07691v2",
+        "title": "ORPO: Monolithic Preference Optimization without Reference Model",
+        "authors": [
+          "Jiwoo Hong",
+          "Noah Lee",
+          "James Thorne"
+        ],
+        "section": "1 Introduction",
+        "chunkIndex": 5,
+        "totalChunks": 95
+      }
+    },
+    {
+      "id": "2403.07691v2-chunk-6",
+      "content": "ssigning a weak penalty to the rejected responses and a strong adaptation signal to the chosen responses with a simple log odds ratio term appended to the negative log-likelihood loss.\n\n<!-- image -->\n\ntasks highlights the necessity of understanding the alignment procedure and further improving the algorithms in terms of efficiency and performance. However, existing preference alignment methods normally consist of a multi-stage process, as shown in Figure 2, typically requiring a second reference model and a separate warm-up phase with supervised fine-tuning (SFT) (Ziegler et al., 2020; Rafailov et al., 2023; Wu et al., 2023).\n\nIn this paper, we study the role and impact of SFT in pairwise preference datasets for model alignment in Section 3 and propose a simple and novel monolithic alignment method, odds ratio preference optimization ( ORPO ), which efficiently penalizes the model from learning undesired generation styles during SFT in Section 4.",
+      "metadata": {
+        "source": "arxiv:2403.07691v2",
+        "title": "ORPO: Monolithic Preference Optimization without Reference Model",
+        "authors": [
+          "Jiwoo Hong",
+          "Noah Lee",
+          "James Thorne"
+        ],
+        "section": "1 Introduction",
+        "chunkIndex": 6,
+        "totalChunks": 95
+      }
+    },
+    {
+      "id": "2403.07691v2-chunk-7",
+      "content": "se a simple and novel monolithic alignment method, odds ratio preference optimization ( ORPO ), which efficiently penalizes the model from learning undesired generation styles during SFT in Section 4. In contrast to previous works, our approach requires neither an SFT warm-up stage nor a reference model, enabling resource-efficient development of preference-based aligned models.\n\nWe demonstrate the effectiveness of our method with the evaluation of model alignment tasks and popular leaderboards in Section 6.1 and 6.2 by fine-tuning Phi-2 (2.7B), Llama-2 (7B), and Mistral (7B) with ORPO . Then, we conduct controlled experiments comparing ORPO against established methods for model alignment, RLHF, and DPO for different datasets and model sizes in Section 6.3. Along with the post-hoc analysis of generation diversity in Section 6.4, we expound on the theoretical, empirical, and computational justification of utilizing the odds ratio in monolithic preference alignment in Section 7.3.",
+      "metadata": {
+        "source": "arxiv:2403.07691v2",
+        "title": "ORPO: Monolithic Preference Optimization without Reference Model",
+        "authors": [
+          "Jiwoo Hong",
+          "Noah Lee",
+          "James Thorne"
+        ],
+        "section": "1 Introduction",
+        "chunkIndex": 7,
+        "totalChunks": 95
+      }
+    },
+    {
+      "id": "2403.07691v2-chunk-8",
+      "content": "nalysis of generation diversity in Section 6.4, we expound on the theoretical, empirical, and computational justification of utilizing the odds ratio in monolithic preference alignment in Section 7.3. We release the training code and the checkpoints for MistralORPO -α (7B) and MistralORPO -β (7B). These models achieve 7.24 and 7.32 in MT-Bench, 11.33% and 12.20%\n\non AlpacaEval 2 . 0 , and 61.63% and 66.19% in IFEval instruction-level loose accuracy, respectively.",
+      "metadata": {
+        "source": "arxiv:2403.07691v2",
+        "title": "ORPO: Monolithic Preference Optimization without Reference Model",
+        "authors": [
+          "Jiwoo Hong",
+          "Noah Lee",
+          "James Thorne"
+        ],
+        "section": "1 Introduction",
+        "chunkIndex": 8,
+        "totalChunks": 95
+      }
+    },
+    {
+      "id": "2403.07691v2-chunk-9",
+      "content": "Alignment with Reinforcement Learning Reinforcement learning with human feedback (RLHF) commonly applies the Bradley-Terry model (Bradley and Terry, 1952) to estimate the probability of a pairwise competition between two independently evaluated instances. An additional reward model is trained to score instances. Reinforcement learning algorithms such as proximal policy optimization (PPO) (Schulman et al., 2017) are employed to train the model to maximize the score of the reward model for the chosen response, resulting in language models that are trained with human preferences (Ziegler et al., 2020; Stiennon et al., 2022). Notably, Ouyang et al. (2022) demonstrated the scalability and versatility of RLHF for instruction-following language models. Extensions such as language model feedback (RLAIF) could be a viable alternative to human feedback (Bai et al., 2022b; Lee et al., 2023; Pang et al., 2023).",
+      "metadata": {
+        "source": "arxiv:2403.07691v2",
+        "title": "ORPO: Monolithic Preference Optimization without Reference Model",
+        "authors": [
+          "Jiwoo Hong",
+          "Noah Lee",
+          "James Thorne"
+        ],
+        "section": "2 Related Works",
+        "chunkIndex": 9,
+        "totalChunks": 95
+      }
+    },
+    {
+      "id": "2403.07691v2-chunk-10",
+      "content": "for instruction-following language models. Extensions such as language model feedback (RLAIF) could be a viable alternative to human feedback (Bai et al., 2022b; Lee et al., 2023; Pang et al., 2023). However, RLHF faces challenges of extensive hyperparameter searching due to the instability of PPO (Rafailov et al., 2023; Wu et al., 2023) and the sensitivity of the reward models (Gao et al., 2022; Wang et al., 2024). Therefore, there is a crucial need for stable preference alignment algorithms.\n\nAlignment without Reward Model Several techniques for preference alignment mitigate the need for reinforcement learning (Rafailov et al., 2023; Song et al., 2023; Azar et al., 2023; Ethayarajh et al., 2024). Rafailov et al. (2023) introduce direct policy optimization (DPO), which combines the reward modeling stage into the preference learn- ing stage. Azar et al. (2023) prevented potential overfitting problems in DPO through identity preference optimization (IPO). Ethayarajh et al.",
+      "metadata": {
+        "source": "arxiv:2403.07691v2",
+        "title": "ORPO: Monolithic Preference Optimization without Reference Model",
+        "authors": [
+          "Jiwoo Hong",
+          "Noah Lee",
+          "James Thorne"
+        ],
+        "section": "2 Related Works",
+        "chunkIndex": 10,
+        "totalChunks": 95
+      }
+    },
+    {
+      "id": "2403.07691v2-chunk-11",
+      "content": "nes the reward modeling stage into the preference learn- ing stage. Azar et al. (2023) prevented potential overfitting problems in DPO through identity preference optimization (IPO). Ethayarajh et al. (2024) and Cai et al. (2023) proposed Kahneman-Tversky Optimisation (KTO) and Unified Language Model Alignment (ULMA) that does not require the pairwise preference dataset, unlike RLHF and DPO. Song et al. (2023) further suggests incorporation of the softmax value of the reference response set in the negative log-likelihood loss to merge the supervised fine-tuning and preference alignment.\n\nAlignment with Supervised Fine-tuning Preference alignment methods in reinforcement learning (RL) often leverage supervised fine-tuning (SFT) to ensure the stable update of the active policy in relation to the old policy (Schulman et al., 2017). This is because the SFT model is the old policy in the context of RLHF (Ziegler et al., 2020).",
+      "metadata": {
+        "source": "arxiv:2403.07691v2",
+        "title": "ORPO: Monolithic Preference Optimization without Reference Model",
+        "authors": [
+          "Jiwoo Hong",
+          "Noah Lee",
+          "James Thorne"
+        ],
+        "section": "2 Related Works",
+        "chunkIndex": 11,
+        "totalChunks": 95
+      }
+    },
+    {
+      "id": "2403.07691v2-chunk-12",
+      "content": ") to ensure the stable update of the active policy in relation to the old policy (Schulman et al., 2017). This is because the SFT model is the old policy in the context of RLHF (Ziegler et al., 2020). Furthermore, empirical findings indicate that, even in non-RL alignment methods, the SFT model is crucial for achieving convergence to desired results (Rafailov et al., 2023; Tunstall et al., 2023).\n\nIn contrast, there have been approaches to build human-aligned language models by conducting SFT only with filtered datasets (Zhou et al., 2023a; Li et al., 2023a; Haggerty and Chandra, 2024; Zhou et al., 2023b). Zhou et al. (2023a) demonstrated that SFT with a small amount of data with finegrained filtering and curation could be sufficient for building helpful language model assistants. Furthermore, Li et al.",
+      "metadata": {
+        "source": "arxiv:2403.07691v2",
+        "title": "ORPO: Monolithic Preference Optimization without Reference Model",
+        "authors": [
+          "Jiwoo Hong",
+          "Noah Lee",
+          "James Thorne"
+        ],
+        "section": "2 Related Works",
+        "chunkIndex": 12,
+        "totalChunks": 95
+      }
+    },
+    {
+      "id": "2403.07691v2-chunk-13",
+      "content": "Zhou et al. (2023a) demonstrated that SFT with a small amount of data with finegrained filtering and curation could be sufficient for building helpful language model assistants. Furthermore, Li et al. (2023a) and Haggerty and Chandra (2024) proposed an iterative process of finetuning the supervised fine-tuned language models with their own generations after fine-grained selection of aligned generations and Zhou et al. (2023b) suggested that a curated subset of preference dataset is sufficient for alignment. While these works highlight the impact and significance of SFT in the context of alignment, the actual role of SFT and the theoretical background for incorporating preference alignment in SFT remains understudied.",
+      "metadata": {
+        "source": "arxiv:2403.07691v2",
+        "title": "ORPO: Monolithic Preference Optimization without Reference Model",
+        "authors": [
+          "Jiwoo Hong",
+          "Noah Lee",
+          "James Thorne"
+        ],
+        "section": "2 Related Works",
+        "chunkIndex": 13,
+        "totalChunks": 95
+      }
+    },
+    {
+      "id": "2403.07691v2-chunk-14",
+      "content": "We study the behavior of supervised fine-tuning (SFT) as an initial stage of preference alignment methods (Ziegler et al., 2020; Rafailov et al., 2023) through analysis of the loss function in SFT and empirical demonstration of the preference comprehension ability of the trained SFT model. SFT plays a significant role in tailoring the pre-trained language models to the desired domain (Zhou et al.,\n\n2023a; Dong et al., 2024) by increasing the log probabilities of pertinent tokens. Nevertheless, this inadvertently increases the likelihood of generating tokens in undesirable styles, as illustrated in Figure 3. Therefore, it is necessary to develop methods capable of preserving the domain adaptation role of SFT while concurrently discerning and mitigating unwanted generation styles.\n\nAbsence of Penalty in Cross-Entropy Loss The goal of cross-entropy loss model fine-tuning is to penalize the model if the predicted logits for the reference answers are low, as shown in Equation 2.",
+      "metadata": {
+        "source": "arxiv:2403.07691v2",
+        "title": "ORPO: Monolithic Preference Optimization without Reference Model",
+        "authors": [
+          "Jiwoo Hong",
+          "Noah Lee",
+          "James Thorne"
+        ],
+        "section": "3 The Role of Supervised Fine-tuning",
+        "chunkIndex": 14,
+        "totalChunks": 95
+      }
+    },
+    {
+      "id": "2403.07691v2-chunk-15",
+      "content": ".\n\nAbsence of Penalty in Cross-Entropy Loss The goal of cross-entropy loss model fine-tuning is to penalize the model if the predicted logits for the reference answers are low, as shown in Equation 2.\n\n<!-- formula-not-decoded -->\n\n<!-- formula-not-decoded -->\n\nwhere y i is a boolean value that indicates if i th token in the vocabulary set V is a label token, p i refers to the probability of i th token, and m is the length of sequence. Using cross-entropy alone gives no direct penalty or compensation for the logits of non-answer tokens (Lin et al., 2017) as y i will be set to 0. While cross-entropy is generally effective for domain adaptation (Mao et al., 2023), there are no mechanisms to penalize rejected responses when compensating for the chosen responses. Therefore, the log probabilities of the tokens in the rejected responses increase along with the chosen responses, which is not desired from the viewpoint of preference alignment.",
+      "metadata": {
+        "source": "arxiv:2403.07691v2",
+        "title": "ORPO: Monolithic Preference Optimization without Reference Model",
+        "authors": [
+          "Jiwoo Hong",
+          "Noah Lee",
+          "James Thorne"
+        ],
+        "section": "3 The Role of Supervised Fine-tuning",
+        "chunkIndex": 15,
+        "totalChunks": 95
+      }
+    },
+    {
+      "id": "2403.07691v2-chunk-16",
+      "content": "he chosen responses. Therefore, the log probabilities of the tokens in the rejected responses increase along with the chosen responses, which is not desired from the viewpoint of preference alignment.\n\nGeneralization over Both Response Styles We conduct a pilot study to empirically demonstrate the miscalibration of chosen and rejected responses with supervised fine-tuning alone. We fine-tune OPT-350M (Zhang et al., 2022) on the chosen responses only from the HH-RLHF dataset (Bai et al., 2022b). Throughout the training, we monitor the log probability of rejected responses for each batch and report this in Figure 3. Both the log probability of chosen and rejected responses exhibited a simultaneous increase. This can be interpreted from two different perspectives. First, the cross-entropy loss effectively guides the model toward the intended domain (e.g., dialogue).",
+      "metadata": {
+        "source": "arxiv:2403.07691v2",
+        "title": "ORPO: Monolithic Preference Optimization without Reference Model",
+        "authors": [
+          "Jiwoo Hong",
+          "Noah Lee",
+          "James Thorne"
+        ],
+        "section": "3 The Role of Supervised Fine-tuning",
+        "chunkIndex": 16,
+        "totalChunks": 95
+      }
+    },
+    {
+      "id": "2403.07691v2-chunk-17",
+      "content": "nses exhibited a simultaneous increase. This can be interpreted from two different perspectives. First, the cross-entropy loss effectively guides the model toward the intended domain (e.g., dialogue). However, the absence of a penalty for unwanted generations results in rejected responses sometimes having even higher log probabilities than the chosen ones.\n\nFigure 3: Log probabilities for chosen and rejected responses during OPT-350M model fine-tuning on HHRLHF dataset. Despite only chosen responses being used for supervision, rejected responses show a comparable likelihood of generation.\n\n<!-- image -->\n\nPenalizing Undesired Generations Appending an unlikelihood penalty to the loss has demonstrated success in reducing unwanted degenerative traits in models (Welleck et al., 2019; Li et al., 2020).",
+      "metadata": {
+        "source": "arxiv:2403.07691v2",
+        "title": "ORPO: Monolithic Preference Optimization without Reference Model",
+        "authors": [
+          "Jiwoo Hong",
+          "Noah Lee",
+          "James Thorne"
+        ],
+        "section": "3 The Role of Supervised Fine-tuning",
+        "chunkIndex": 17,
+        "totalChunks": 95
+      }
+    },
+    {
+      "id": "2403.07691v2-chunk-18",
+      "content": "-->\n\nPenalizing Undesired Generations Appending an unlikelihood penalty to the loss has demonstrated success in reducing unwanted degenerative traits in models (Welleck et al., 2019; Li et al., 2020). For example, to prevent repetitions , an unwanted token set of previous contexts, k ∈ C recent , is disfavored by adding the following term to (1 -p ( k ) i ) to the loss (such as Equation 2) which penalizes the model for assigning high probabilities to recent tokens. Motivated by SFT ascribing high probabilities to rejected tokens (Figure 3) and the effectiveness of appending penalizing unwanted traits, we design a monolithic preference alignment method that dynamically penalizes the disfavored response for each query without the need for crafting sets of rejected tokens.",
+      "metadata": {
+        "source": "arxiv:2403.07691v2",
+        "title": "ORPO: Monolithic Preference Optimization without Reference Model",
+        "authors": [
+          "Jiwoo Hong",
+          "Noah Lee",
+          "James Thorne"
+        ],
+        "section": "3 The Role of Supervised Fine-tuning",
+        "chunkIndex": 18,
+        "totalChunks": 95
+      }
+    },
+    {
+      "id": "2403.07691v2-chunk-19",
+      "content": "We introduce a novel preference alignment algorithm, Odds Ratio Preference Optimization ( ORPO ), which incorporates an odds ratio-based penalty to the conventional negative log-likelihood (NLL) loss for differentiating the generation styles between favored and disfavored responses.",
+      "metadata": {
+        "source": "arxiv:2403.07691v2",
+        "title": "ORPO: Monolithic Preference Optimization without Reference Model",
+        "authors": [
+          "Jiwoo Hong",
+          "Noah Lee",
+          "James Thorne"
+        ],
+        "section": "4 Odds Ratio Preference Optimization",
+        "chunkIndex": 19,
+        "totalChunks": 95
+      }
+    },
+    {
+      "id": "2403.07691v2-chunk-20",
+      "content": "Given an input sequence x , the average loglikelihood of generating the output sequence y , of length m tokens, is computed as Equation 3. The odds of generating the output sequence y given an input sequence x is defined in Equation 4:\n\n<!-- formula-not-decoded -->\n\n<!-- formula-not-decoded -->\n\nIntuitively, odds θ ( y | x ) = k implies that it is k times more likely for the model θ to generate the output sequence y than not generating it. Thus, the odds ratio of the chosen response y w over the rejected response y l , OR θ ( y w , y l ) , indicates how much more likely it is for the model θ to generate y w than y l given input x , defined in Equation 5.\n\n<!-- formula-not-decoded -->",
+      "metadata": {
+        "source": "arxiv:2403.07691v2",
+        "title": "ORPO: Monolithic Preference Optimization without Reference Model",
+        "authors": [
+          "Jiwoo Hong",
+          "Noah Lee",
+          "James Thorne"
+        ],
+        "section": "4.1 Preliminaries",
+        "chunkIndex": 20,
+        "totalChunks": 95
+      }
+    },
+    {
+      "id": "2403.07691v2-chunk-21",
+      "content": "The objective function of ORPO in Equation 6 consists of two components: 1) supervised fine-tuning (SFT) loss ( L SFT ); 2) relative ratio loss ( L OR ).\n\n<!-- formula-not-decoded -->\n\nL SFT follows the conventional causal language modeling negative log-likelihood (NLL) loss function to maximize the likelihood of generating the reference tokens as previously discussed in Section 3. L OR in Equation 7 maximizes the odds ratio between the likelihood of generating the disfavored response y w and the disfavored response y l . We wrap the log odds ratio with the log sigmoid function so that L OR could be minimized by increasing the log odds ratio between y w and y l .\n\n<!-- formula-not-decoded -->\n\nTogether, L SFT and L OR weighted with λ tailor the pre-trained language model to adapt to the specific subset of the desired domain and disfavor generations in the rejected response sets.",
+      "metadata": {
+        "source": "arxiv:2403.07691v2",
+        "title": "ORPO: Monolithic Preference Optimization without Reference Model",
+        "authors": [
+          "Jiwoo Hong",
+          "Noah Lee",
+          "James Thorne"
+        ],
+        "section": "4.2 Objective Function of ORPO",
+        "chunkIndex": 21,
+        "totalChunks": 95
+      }
+    },
+    {
+      "id": "2403.07691v2-chunk-22",
+      "content": "The gradient of L Ratio further justifies using the odds ratio loss. It comprises two terms: one that penalizes the wrong predictions and one that contrasts between chosen and rejected responses, denoted in Equation 8 4 for d = ( x, y l , y w ) ∼ D .\n\n<!-- formula-not-decoded -->\n\n<!-- formula-not-decoded -->\n\n<!-- formula-not-decoded -->\n\n4 The full derivation for ∇ θ L OR is in Appendix A.\n\nWhen the odds of the favored responses are relatively higher than the disfavored responses, δ ( d ) in Equation 9 will converge to 0. This indicates that the δ ( d ) will play the role of a penalty term, accelerating the parameter updates if the model is more likely to generate the rejected responses.\n\nMeanwhile, h ( d ) in Equation 10 implies a weighted contrast of the two gradients from the chosen and rejected responses. Specifically, 1 -P ( y | x ) in the denominators amplifies the gradients when the corresponding side of the likelihood P ( y | x ) is low.",
+      "metadata": {
+        "source": "arxiv:2403.07691v2",
+        "title": "ORPO: Monolithic Preference Optimization without Reference Model",
+        "authors": [
+          "Jiwoo Hong",
+          "Noah Lee",
+          "James Thorne"
+        ],
+        "section": "4.3 Gradient of ORPO",
+        "chunkIndex": 22,
+        "totalChunks": 95
+      }
+    },
+    {
+      "id": "2403.07691v2-chunk-23",
+      "content": "of the two gradients from the chosen and rejected responses. Specifically, 1 -P ( y | x ) in the denominators amplifies the gradients when the corresponding side of the likelihood P ( y | x ) is low. For the chosen responses, this accelerates the model's adaptation toward the distribution of chosen responses as the likelihood increases.",
+      "metadata": {
+        "source": "arxiv:2403.07691v2",
+        "title": "ORPO: Monolithic Preference Optimization without Reference Model",
+        "authors": [
+          "Jiwoo Hong",
+          "Noah Lee",
+          "James Thorne"
+        ],
+        "section": "4.3 Gradient of ORPO",
+        "chunkIndex": 23,
+        "totalChunks": 95
+      }
+    },
+    {
+      "id": "2403.07691v2-chunk-24",
+      "content": "Models We train a series of OPT models (Zhang et al., 2022) scaling from 125M to 1.3B parameters comparing supervised fine-tuning (SFT), proximal policy optimization (PPO), direct policy optimization (DPO), and compare these to our ORPO . PPO and DPO models were fine-tuned with TRL library (von Werra et al., 2020) on top of SFT models trained for a single epoch on the chosen responses following Rafailov et al. (2023) and Tunstall et al. (2023). We notate this by prepending \"+\" to each algorithm (e.g., +DPO). Additionally, we train Phi-2 (2.7B) (Javaheripi and Bubeck, 2023), a pre-trained language model with promising downstream performance (Beeching et al., 2023), as well as Llama2 (7B) (Touvron et al., 2023) and Mistral (7B) (Jiang et al., 2023). Further training details for each method are in Appendix C.",
+      "metadata": {
+        "source": "arxiv:2403.07691v2",
+        "title": "ORPO: Monolithic Preference Optimization without Reference Model",
+        "authors": [
+          "Jiwoo Hong",
+          "Noah Lee",
+          "James Thorne"
+        ],
+        "section": "5.1 Training Configurations",
+        "chunkIndex": 24,
+        "totalChunks": 95
+      }
+    },
+    {
+      "id": "2403.07691v2-chunk-25",
+      "content": "omising downstream performance (Beeching et al., 2023), as well as Llama2 (7B) (Touvron et al., 2023) and Mistral (7B) (Jiang et al., 2023). Further training details for each method are in Appendix C.\n\nDatasets We test each training configuration and model on two datasets: 1) Anthropic's HH-RLHF (Bai et al., 2022a), 2) Binarized UltraFeedback (Tunstall et al., 2023). We filtered out instances where y w = y l or where y w = ∅ or where y l = ∅ .\n\nReward Models We train OPT-350M and OPT1.3B on each dataset for a single epoch for reward modeling with the objective function in Equation 11 (Ziegler et al., 2020). The OPT-350M reward model was used for PPO, and OPT-1.3B reward model was used to assess the generations of finetuned models. We refer to these reward models as RM-350M and RM-1.3B in Section 6.",
+      "metadata": {
+        "source": "arxiv:2403.07691v2",
+        "title": "ORPO: Monolithic Preference Optimization without Reference Model",
+        "authors": [
+          "Jiwoo Hong",
+          "Noah Lee",
+          "James Thorne"
+        ],
+        "section": "5.1 Training Configurations",
+        "chunkIndex": 25,
+        "totalChunks": 95
+      }
+    },
+    {
+      "id": "2403.07691v2-chunk-26",
+      "content": "In Section 6.1, we evaluate the models using the AlpacaEval 1 . 0 and AlpacaEval 2 . 0 (Li et al., 2023b) benchmarks, comparing ORPO to other instructiontuned models reported in the official leaderboard, 5 including Llama-2 Chat (7B) and (13B) (Touvron et al., 2023), and Zephyr α and β (Almazrouei et al., 2023). Similarly, in Section 6.2, we evaluate the models with MT-Bench (Zheng et al., 2023) and report the results and the scores of the same models reported in the official leaderboard. 6 Using GPT-4 (Achiam et al., 2023) as an evaluator in AlpacaEval 1 . 0 , we assess if the trained model can be preferred over the responses generated from text-davinci-003 . For AlpacaEval 2 . 0 , we used GPT-4-turbo 7 as an evaluator following the default setting. We assess if the generated responses are favored over those generated from GPT-4. Finally, using GPT-4 as an evaluator in MT-Bench, we check if the models can follow the instructions with hard answers in a multi-turn conversation.",
+      "metadata": {
+        "source": "arxiv:2403.07691v2",
+        "title": "ORPO: Monolithic Preference Optimization without Reference Model",
+        "authors": [
+          "Jiwoo Hong",
+          "Noah Lee",
+          "James Thorne"
+        ],
+        "section": "5.2 Leaderboard Evaluation",
+        "chunkIndex": 26,
+        "totalChunks": 95
+      }
+    },
+    {
+      "id": "2403.07691v2-chunk-27",
+      "content": "First, we assess the general instruction-following abilities of the models by comparing the preference alignment algorithms in Sections 6.1 and 6.2. Second, we measure the win rate of OPT models trained with ORPO against other alignment methods training OPT 1.3B as a reward model in Section 6.3. Then, we measure the lexical diversity of the models trained with ORPO and DPO in Section 6.4.",
+      "metadata": {
+        "source": "arxiv:2403.07691v2",
+        "title": "ORPO: Monolithic Preference Optimization without Reference Model",
+        "authors": [
+          "Jiwoo Hong",
+          "Noah Lee",
+          "James Thorne"
+        ],
+        "section": "6 Results and Analysis",
+        "chunkIndex": 27,
+        "totalChunks": 95
+      }
+    },
+    {
+      "id": "2403.07691v2-chunk-28",
+      "content": "Phi-2 (2.7B) ORPO improved pre-trained Phi-2 to exceed the performance of the Llama-2 Chat instruction-following language model by only using UltraFeedback as the instruction-tuning dataset, as shown in Table 1. λ of 0.25 was applied for Phi2, resulting in 71.80% and 6.35% in AlpacaEval.\n\nLlama-2 (7B) Notably, UltraFeedback and ORPO with λ of 0.2 on Llama-2 (7B) resulted in higher AlpacaEval scores than the chat versions of both 7B and 13B scale trained with RLHF, eventually showing 81.26% and 9.44% in both AlpacaEvals.\n\nIn contrast, in our controlled experimental setting of conducting one epoch of SFT and three\n\n5 https://tatsu-lab.github.io/alpaca\\_eval/\n\n6 https://huggingface.co/spaces/lmsys/ chatbot-arena-leaderboard\n\n7 https://platform.openai.com/docs/models/ gpt-4-and-gpt-4-turbo\n\nTable 1: Table of instruction-following abilities of each checkpoint measured through AlpacaEval.",
+      "metadata": {
+        "source": "arxiv:2403.07691v2",
+        "title": "ORPO: Monolithic Preference Optimization without Reference Model",
+        "authors": [
+          "Jiwoo Hong",
+          "Noah Lee",
+          "James Thorne"
+        ],
+        "section": "6.1 Single-turn Instruction Following",
+        "chunkIndex": 28,
+        "totalChunks": 95
+      }
+    },
+    {
+      "id": "2403.07691v2-chunk-29",
+      "content": "es/lmsys/ chatbot-arena-leaderboard\n\n7 https://platform.openai.com/docs/models/ gpt-4-and-gpt-4-turbo\n\nTable 1: Table of instruction-following abilities of each checkpoint measured through AlpacaEval. While clearly showing the improvements in instruction-following abilities after training with ORPO , it is notable that ORPO models exceed RLHF or DPO models of Llama-2 and Mistral (* indicates the results from the official leaderboard.)\n\n| Model Name               | Size   | AlpacaEval 1.0   | AlpacaEval 2.0   |\n|--------------------------|--------|------------------|------------------|\n| Phi-2 + SFT              | 2.7B   | 48.37% (1.77)    | 0.11% (0.06)     |\n| Phi-2 + SFT + DPO        | 2.7B   | 50.63% (1.77)    | 0.78% (0.22)     |\n| Phi-2 + ORPO (Ours)      | 2.7B   | 71.80% (1.59)    | 6.35% (0.74)     |\n| Llama-2 Chat *           | 7B     | 71.34% (1.59)    | 4.96% (0.67)     |\n| Llama-2 Chat *           | 13B    | 81.09% (1.38)    | 7.70% (0.83)     |\n| Llama-2 + ORPO (Ours)    |",
+      "metadata": {
+        "source": "arxiv:2403.07691v2",
+        "title": "ORPO: Monolithic Preference Optimization without Reference Model",
+        "authors": [
+          "Jiwoo Hong",
+          "Noah Lee",
+          "James Thorne"
+        ],
+        "section": "6.1 Single-turn Instruction Following",
+        "chunkIndex": 29,
+        "totalChunks": 95
+      }
+    },
+    {
+      "id": "2403.07691v2-chunk-30",
+      "content": "6.35% (0.74)     |\n| Llama-2 Chat *           | 7B     | 71.34% (1.59)    | 4.96% (0.67)     |\n| Llama-2 Chat *           | 13B    | 81.09% (1.38)    | 7.70% (0.83)     |\n| Llama-2 + ORPO (Ours)    | 7B     | 81.26% (1.37)    | 9.44% (0.85)     |\n| Zephyr ( α ) *           | 7B     | 85.76% (1.23)    | 8.35% (0.87)     |\n| Zephyr ( β ) *           | 7B     | 90.60% (1.03)    | 10.99% (0.96)    |\n| Mistral- ORPO - α (Ours) | 7B     | 87.92% (1.14)    | 11.33% (0.97)    |\n| Mistral- ORPO - β (Ours) | 7B     | 91.41% (1.15)    | 12.20% (0.98)    |\n\nepochs of DPO following Tunstall et al. (2023) and Rafailov et al. (2023), Llama-2 + SFT and Llama2 + SFT + DPO yielded models with outputs that could not be evaluated. This supports the efficacy of ORPO , in which the model can rapidly learn the desired domain and the preference with limited data. This aligns with the h ( d ) examination in the gradient of our method studied in Section 4.3.",
+      "metadata": {
+        "source": "arxiv:2403.07691v2",
+        "title": "ORPO: Monolithic Preference Optimization without Reference Model",
+        "authors": [
+          "Jiwoo Hong",
+          "Noah Lee",
+          "James Thorne"
+        ],
+        "section": "6.1 Single-turn Instruction Following",
+        "chunkIndex": 30,
+        "totalChunks": 95
+      }
+    },
+    {
+      "id": "2403.07691v2-chunk-31",
+      "content": "y of ORPO , in which the model can rapidly learn the desired domain and the preference with limited data. This aligns with the h ( d ) examination in the gradient of our method studied in Section 4.3.\n\nMistralORPO -α (7B) Furthermore, fine-tuning Mistral (7B) with single-turn conversation dataset, UltraFeedback, and ORPO with λ of 0.1 outperforms Zephyr series, which are the Mistral (7B) models fine-tuned with SFT on 20K UltraChat (Ding et al., 2023) and DPO on the full UltraFeedback. As shown in Table 1, MistralORPO -α (7B) achieves 87.92% and 11.33%, which exceeds Zephyr α by 1.98% and Zephyr β by 0.34% in AlpacaEval 2 . 0 . The sample responses and corresponding references from GPT-4 can be found in Appendix I.\n\nMistralORPO -β (7B) Using the same configuration of MistralORPO -α (7B), we additionally compare fine-tuning Mistral on the cleaned version of the UltraFeedback 8 to demonstrate the effect of the data quality (Bartolome et al., 2023).",
+      "metadata": {
+        "source": "arxiv:2403.07691v2",
+        "title": "ORPO: Monolithic Preference Optimization without Reference Model",
+        "authors": [
+          "Jiwoo Hong",
+          "Noah Lee",
+          "James Thorne"
+        ],
+        "section": "6.1 Single-turn Instruction Following",
+        "chunkIndex": 31,
+        "totalChunks": 95
+      }
+    },
+    {
+      "id": "2403.07691v2-chunk-32",
+      "content": "configuration of MistralORPO -α (7B), we additionally compare fine-tuning Mistral on the cleaned version of the UltraFeedback 8 to demonstrate the effect of the data quality (Bartolome et al., 2023). While the actual sizes of datasets are similar, ORPO gains further advantages from the dataset quality by scoring over 91% and 12% on AlpacaEval, as shown in Table 1. Further instruction-following evaluation on two Mistral-based models with IFEval (Zhou et al., 2023c) is reported in the Appendix D.\n\n8 https://huggingface.co/datasets/argilla/ ultrafeedback-binarized-preferences-cleaned\n\nFigure 4: MT-Bench result of MistralORPO -α (7B) and MistralORPO -β (7B) by the category. Further comparison can be found in the Appendix G.\n\n<!-- image -->",
+      "metadata": {
+        "source": "arxiv:2403.07691v2",
+        "title": "ORPO: Monolithic Preference Optimization without Reference Model",
+        "authors": [
+          "Jiwoo Hong",
+          "Noah Lee",
+          "James Thorne"
+        ],
+        "section": "6.1 Single-turn Instruction Following",
+        "chunkIndex": 32,
+        "totalChunks": 95
+      }
+    },
+    {
+      "id": "2403.07691v2-chunk-33",
+      "content": "With our best model, MistralORPO -α (7B) and MistralORPO -β (7B), we also assess the multi-turn instruction-following skills with deterministic answers (e.g., math) through MT-Bench.\n\nAs shown in Figure 4, ORPO -Mistral (7B) series achieve comparable results to either larger or the proprietary models, including Llama-2-Chat (70B) and Claude. Eventually, MistralORPO -α (7B) and MistralORPO -β (7B) scored 7.23 and 7.32 in MTBench without being exposed to the multi-turn conversation dataset during training.",
+      "metadata": {
+        "source": "arxiv:2403.07691v2",
+        "title": "ORPO: Monolithic Preference Optimization without Reference Model",
+        "authors": [
+          "Jiwoo Hong",
+          "Noah Lee",
+          "James Thorne"
+        ],
+        "section": "6.2 Multi-turn Instruction Following",
+        "chunkIndex": 33,
+        "totalChunks": 95
+      }
+    },
+    {
+      "id": "2403.07691v2-chunk-34",
+      "content": "We assess the win rate of ORPO over other preference alignment methods, including supervised fine-tuning (SFT), PPO, and DPO, using RM-1.3B to understand the effectiveness and scalability of ORPO in Tables 2 and 3. Additionally, we visually verify that ORPO can effectively enhance the\n\nFigure 5: Reward distribution comparison between OPT-125M (left), OPT-350M (middle), and OPT-1.3B (right) trained with SFT (blue), RLHF (green), DPO (orange), and ORPO (red) on the test set of UltraFeedback using the RM-1.3B. While the rewards of the trained models are roughly normal and preference optimization algorithms (RLHF, DPO, and ORPO ) tend to move the reward distribution in the positive direction, ORPO is on par or better than RLHF and DPO in increasing the expected reward. The same plot for the HH-RLHF dataset is in Appendix F.\n\n<!-- image -->\n\nexpected reward compared to SFT in Figure 5.",
+      "metadata": {
+        "source": "arxiv:2403.07691v2",
+        "title": "ORPO: Monolithic Preference Optimization without Reference Model",
+        "authors": [
+          "Jiwoo Hong",
+          "Noah Lee",
+          "James Thorne"
+        ],
+        "section": "6.3 Reward Model Win Rate",
+        "chunkIndex": 34,
+        "totalChunks": 95
+      }
+    },
+    {
+      "id": "2403.07691v2-chunk-35",
+      "content": "ion, ORPO is on par or better than RLHF and DPO in increasing the expected reward. The same plot for the HH-RLHF dataset is in Appendix F.\n\n<!-- image -->\n\nexpected reward compared to SFT in Figure 5.\n\nHH-RLHF In Table 2, ORPO outperforms SFT and PPO across all model scales. The highest win rate against SFT and PPO across the size of the model was 78.0% and 79.4%, respectively. Meanwhile, the win rate over DPO was correlated to the model's size, with the largest model having the highest win rate: 70.9%.\n\n| ORPO vs   | SFT         | +DPO        | +PPO        |\n|-----------|-------------|-------------|-------------|\n| OPT-125M  | 84.0 (0.62) | 41.7 (0.77) | 66.1 (0.26) |\n| OPT-350M  | 82.7 (0.56) | 49.4 (0.54) | 79.4 (0.29) |\n| OPT-1.3B  | 78.0 (0.16) | 70.9 (0.52) | 65.9 (0.33) |\n\nTable 2: Average win rate (%) and its standard deviation of ORPO and standard deviation over other methods on HH-RLHF dataset for three rounds.",
+      "metadata": {
+        "source": "arxiv:2403.07691v2",
+        "title": "ORPO: Monolithic Preference Optimization without Reference Model",
+        "authors": [
+          "Jiwoo Hong",
+          "Noah Lee",
+          "James Thorne"
+        ],
+        "section": "6.3 Reward Model Win Rate",
+        "chunkIndex": 35,
+        "totalChunks": 95
+      }
+    },
+    {
+      "id": "2403.07691v2-chunk-36",
+      "content": "| OPT-1.3B  | 78.0 (0.16) | 70.9 (0.52) | 65.9 (0.33) |\n\nTable 2: Average win rate (%) and its standard deviation of ORPO and standard deviation over other methods on HH-RLHF dataset for three rounds. Sampling decoding with a temperature of 1.0 was used on the test set.\n\nUltraFeedback The win rate in UltraFeedback followed similar trends to what was reported in HHRLHF, as shown in Table 3. ORPO was preferred over SFT and PPO for maximum 80.5% and 85.8%, respectively. While consistently preferring ORPO over SFT and PPO, the win rate over DPO gradually increases as the size of the model increases. The scale-wise trend exceeding DPO will be further shown through 2.7B models in Section 6.1.\n\nOverall Reward Distribution In addition to the win rate, we compare the reward distribution of the responses generated with respect to the test set of the UltraFeedback dataset in Figure 5 and HHRLHF dataset in Appendix F.",
+      "metadata": {
+        "source": "arxiv:2403.07691v2",
+        "title": "ORPO: Monolithic Preference Optimization without Reference Model",
+        "authors": [
+          "Jiwoo Hong",
+          "Noah Lee",
+          "James Thorne"
+        ],
+        "section": "6.3 Reward Model Win Rate",
+        "chunkIndex": 36,
+        "totalChunks": 95
+      }
+    },
+    {
+      "id": "2403.07691v2-chunk-37",
+      "content": "ution In addition to the win rate, we compare the reward distribution of the responses generated with respect to the test set of the UltraFeedback dataset in Figure 5 and HHRLHF dataset in Appendix F. Regarding the SFT reward distribution as a default, PPO, DPO, and ORPO shift it in both datasets. However, the magnitude of reward shifts for each algorithm differs.\n\nTable 3: Average win rate (%) and its standard deviation of ORPO and standard deviation over other methods on UltraFeedback dataset for three rounds. Sampling decoding with a temperature of 1.0 was used.\n\n| ORPO vs   | SFT         | +DPO        | +PPO        |\n|-----------|-------------|-------------|-------------|\n| OPT-125M  | 73.2 (0.12) | 48.8 (0.29) | 71.4 (0.28) |\n| OPT-350M  | 80.5 (0.54) | 50.5 (0.17) | 85.8 (0.62) |\n| OPT-1.3B  | 69.4 (0.57) | 57.8 (0.73) | 65.7 (1.07) |",
+      "metadata": {
+        "source": "arxiv:2403.07691v2",
+        "title": "ORPO: Monolithic Preference Optimization without Reference Model",
+        "authors": [
+          "Jiwoo Hong",
+          "Noah Lee",
+          "James Thorne"
+        ],
+        "section": "6.3 Reward Model Win Rate",
+        "chunkIndex": 37,
+        "totalChunks": 95
+      }
+    },
+    {
+      "id": "2403.07691v2-chunk-38",
+      "content": "---|-------------|-------------|\n| OPT-125M  | 73.2 (0.12) | 48.8 (0.29) | 71.4 (0.28) |\n| OPT-350M  | 80.5 (0.54) | 50.5 (0.17) | 85.8 (0.62) |\n| OPT-1.3B  | 69.4 (0.57) | 57.8 (0.73) | 65.7 (1.07) |\n\nIn Figure 5, RLHF (i.e., SFT + PPO) has some abnormal properties of the distribution with a low expected reward. We attribute this to empirical evidence of the instability and reward mismatch problem of RLHF (Rafailov et al., 2023; Gao et al., 2022; Shen et al., 2023) as the RLHF models were trained with RM-350M and assessed with RM1.3B. Meanwhile, it is notable that the ORPO distribution (red) is mainly located on the very right side of each subplot, indicating higher expected rewards. Recalling the intent of preference alignment methods, the distributions in Figure 5 indicate that ORPO tends to fulfill the aim of preference alignment for all model sizes.",
+      "metadata": {
+        "source": "arxiv:2403.07691v2",
+        "title": "ORPO: Monolithic Preference Optimization without Reference Model",
+        "authors": [
+          "Jiwoo Hong",
+          "Noah Lee",
+          "James Thorne"
+        ],
+        "section": "6.3 Reward Model Win Rate",
+        "chunkIndex": 38,
+        "totalChunks": 95
+      }
+    },
+    {
+      "id": "2403.07691v2-chunk-39",
+      "content": "The lexical diversity of the preference-aligned language models was studied in previous works (Kirk et al., 2024). We expand the concept of per-input and across-input diversity introduced in Kirk et al. (2024) by using Gemini-Pro (Gemini Team et al., 2023) as an embedding model, which is suitable for assessing the diversity of instruction-following language models by encoding a maximum of 2048 tokens. The diversity metric with the given set of sampled responses is defined as Equation 13.\n\n<!-- formula-not-decoded -->\n\n<!-- formula-not-decoded -->\n\nwhere cos( h i , h j ) refers to the cosine similarity between the embedding h i and h j . 5 different responses are sampled with a temperature of 1.0 to 160 queries in AlpacaEval (i.e., K = 5 , N = 160 ) using Phi-2 and Llama-2 trained with ORPO and DPO. We report the results in Table 4.",
+      "metadata": {
+        "source": "arxiv:2403.07691v2",
+        "title": "ORPO: Monolithic Preference Optimization without Reference Model",
+        "authors": [
+          "Jiwoo Hong",
+          "Noah Lee",
+          "James Thorne"
+        ],
+        "section": "6.4 Lexical Diversity",
+        "chunkIndex": 39,
+        "totalChunks": 95
+      }
+    },
+    {
+      "id": "2403.07691v2-chunk-40",
+      "content": ". 5 different responses are sampled with a temperature of 1.0 to 160 queries in AlpacaEval (i.e., K = 5 , N = 160 ) using Phi-2 and Llama-2 trained with ORPO and DPO. We report the results in Table 4.\n\nPer Input Diversity (PID) We average the inputwise average cosine similarity between the generated samples with Equation 14 to assess the perinput diversity. In Table 4, ORPO models have the highest average cosine similarity in the first column for both models, which implies the lowest diversity per input. This indicates that ORPO generally assigns high probabilities to the desired tokens, while DPO has a relatively smoother logit distribution.\n\n<!-- formula-not-decoded -->\n\nAcross Input Diversity (AID) Using 8 samples generated per input, we sample the first item for each input and examine their inter cosine similarity with Equation 15 for across-input diversity.",
+      "metadata": {
+        "source": "arxiv:2403.07691v2",
+        "title": "ORPO: Monolithic Preference Optimization without Reference Model",
+        "authors": [
+          "Jiwoo Hong",
+          "Noah Lee",
+          "James Thorne"
+        ],
+        "section": "6.4 Lexical Diversity",
+        "chunkIndex": 40,
+        "totalChunks": 95
+      }
+    },
+    {
+      "id": "2403.07691v2-chunk-41",
+      "content": "ed -->\n\nAcross Input Diversity (AID) Using 8 samples generated per input, we sample the first item for each input and examine their inter cosine similarity with Equation 15 for across-input diversity. Unlike per-input diversity, it is noteworthy that Phi-2 ( ORPO ) has lower average cosine similarity in the second row of Table 4. We can infer that ORPO triggers the model to generate more instructionspecific responses than DPO.\n\n<!-- formula-not-decoded -->\n\nTable 4: Lexical diversity of Phi-2 and Llama-2 finetuned with DPO and ORPO . Lower cosine similarity is equivalent to higher diversity. The highest value in each column within the same model family is bolded.\n\n|                     |   Per Input ↓ |   Across Input ↓ |\n|---------------------|---------------|------------------|\n| Phi-2 + SFT + DPO   |        0.8012 |           0.6019 |\n| Phi-2 + ORPO        |        0.8909 |           0.5173 |\n| Llama-2 + SFT + DPO |        0.8889 |           0.5658 |\n| Llama-2 + ORPO      |        0",
+      "metadata": {
+        "source": "arxiv:2403.07691v2",
+        "title": "ORPO: Monolithic Preference Optimization without Reference Model",
+        "authors": [
+          "Jiwoo Hong",
+          "Noah Lee",
+          "James Thorne"
+        ],
+        "section": "6.4 Lexical Diversity",
+        "chunkIndex": 41,
+        "totalChunks": 95
+      }
+    },
+    {
+      "id": "2403.07691v2-chunk-42",
+      "content": "SFT + DPO   |        0.8012 |           0.6019 |\n| Phi-2 + ORPO        |        0.8909 |           0.5173 |\n| Llama-2 + SFT + DPO |        0.8889 |           0.5658 |\n| Llama-2 + ORPO      |        0.9008 |           0.5091 |",
+      "metadata": {
+        "source": "arxiv:2403.07691v2",
+        "title": "ORPO: Monolithic Preference Optimization without Reference Model",
+        "authors": [
+          "Jiwoo Hong",
+          "Noah Lee",
+          "James Thorne"
+        ],
+        "section": "6.4 Lexical Diversity",
+        "chunkIndex": 42,
+        "totalChunks": 95
+      }
+    },
+    {
+      "id": "2403.07691v2-chunk-43",
+      "content": "In this section, we expound on the theoretical and computational details of ORPO . The theoretical analysis of ORPO is studied in Section 7.1, which will be supported with the empirical analysis in Section 7.2. Then, we compare the computational load of DPO and ORPO in Section 7.3.",
+      "metadata": {
+        "source": "arxiv:2403.07691v2",
+        "title": "ORPO: Monolithic Preference Optimization without Reference Model",
+        "authors": [
+          "Jiwoo Hong",
+          "Noah Lee",
+          "James Thorne"
+        ],
+        "section": "7 Discussion",
+        "chunkIndex": 43,
+        "totalChunks": 95
+      }
+    },
+    {
+      "id": "2403.07691v2-chunk-44",
+      "content": "The rationale for selecting the odds ratio instead of the probability ratio lies in its stability. The probability ratio for generating the favored response y w over the disfavored response y l given an input sequence x can be defined as Equation 16.\n\n<!-- formula-not-decoded -->\n\nWhile this formulation has been used in previous preference alignment methods that precede SFT (Rafailov et al., 2023; Azar et al., 2023), the odds ratio is a better choice in the setting where the preference alignment is incorporated in SFT as the odds ratio is more sensitive to the model's preference understanding. In other words, the probability ratio leads to more extreme discrimination of the disfavored responses than the odds ratio.\n\nWe visualize this through the sample distributions of the log probability ratio log PR ( X 2 | X 1 ) and log odds ratio log OR ( X 2 | X 1 ) . We sample 50,000 samples each with Equation 17 and plot the log probability ratio and log odds ratio in Figure 6.",
+      "metadata": {
+        "source": "arxiv:2403.07691v2",
+        "title": "ORPO: Monolithic Preference Optimization without Reference Model",
+        "authors": [
+          "Jiwoo Hong",
+          "Noah Lee",
+          "James Thorne"
+        ],
+        "section": "7.1 Comparison to Probability Ratio",
+        "chunkIndex": 44,
+        "totalChunks": 95
+      }
+    },
+    {
+      "id": "2403.07691v2-chunk-45",
+      "content": "e log probability ratio log PR ( X 2 | X 1 ) and log odds ratio log OR ( X 2 | X 1 ) . We sample 50,000 samples each with Equation 17 and plot the log probability ratio and log odds ratio in Figure 6. We multiply β for the probability ratio as it is practiced in the probability ratio-based methods and report the cases where β = 0 . 2 and β = 1 . 0 .\n\n<!-- formula-not-decoded -->\n\n<!-- formula-not-decoded -->\n\n<!-- formula-not-decoded -->\n\nRecalling that the log sigmoid function is applied to the log probability ratio and log odds ratio, each ratio's scale determines the expected margin between the likelihood of the favored and disfavored styles when the loss is minimized. In that sense, the contrast should be relatively extreme to minimize the log sigmoid loss when PR ( X 2 | X 1 ) is inputted instead of OR ( X 2 | X 1 ) to the log sigmoid function, regarding the sharp distribution of log PR ( X 2 | X 1 )",
+      "metadata": {
+        "source": "arxiv:2403.07691v2",
+        "title": "ORPO: Monolithic Preference Optimization without Reference Model",
+        "authors": [
+          "Jiwoo Hong",
+          "Noah Lee",
+          "James Thorne"
+        ],
+        "section": "7.1 Comparison to Probability Ratio",
+        "chunkIndex": 45,
+        "totalChunks": 95
+      }
+    },
+    {
+      "id": "2403.07691v2-chunk-46",
+      "content": "relatively extreme to minimize the log sigmoid loss when PR ( X 2 | X 1 ) is inputted instead of OR ( X 2 | X 1 ) to the log sigmoid function, regarding the sharp distribution of log PR ( X 2 | X 1 )\n\nFigure 6: Sampled distribution of log PR ( X 2 | X 1 ) and log OR ( X 2 | X 1 ) . log OR ( X 2 | X 1 ) has a wider range given the same input probability pairs ( X 1 , X 2 ) .\n\n<!-- image -->\n\nin Figure 6. This results in overly suppressing the logits for the tokens in the disfavored responses in the setting where SFT and preference alignment are incorporated, as the model is not adapted to the domain. We empirically support this analysis through the ablation study in Appendix B. Therefore, the odds ratio is a better choice when the preference alignment is done with SFT due to the mild discrimination of disfavored responses and the prioritizing of the favored responses to be generated.",
+      "metadata": {
+        "source": "arxiv:2403.07691v2",
+        "title": "ORPO: Monolithic Preference Optimization without Reference Model",
+        "authors": [
+          "Jiwoo Hong",
+          "Noah Lee",
+          "James Thorne"
+        ],
+        "section": "7.1 Comparison to Probability Ratio",
+        "chunkIndex": 46,
+        "totalChunks": 95
+      }
+    },
+    {
+      "id": "2403.07691v2-chunk-47",
+      "content": ", the odds ratio is a better choice when the preference alignment is done with SFT due to the mild discrimination of disfavored responses and the prioritizing of the favored responses to be generated.\n\nThroughout fine-tuning, minimizing the log sigmoid loss leads to either PR ( X 2 | X 1 ) or OR ( X 2 | X 1 ) to be larger. This is equivalent to the rejected responses' token-wise likelihood, which will generally get smaller. In this context, it is essential to avoid an overly extreme contrast. This precaution is especially important given the sharp distribution of log PR ( X 2 | X 1 ) depicted in Figure 6. The excessive margin could lead to the unwarranted suppression of logits for tokens in disfavored responses within the incorporated setting, potentially resulting in issues of degeneration.",
+      "metadata": {
+        "source": "arxiv:2403.07691v2",
+        "title": "ORPO: Monolithic Preference Optimization without Reference Model",
+        "authors": [
+          "Jiwoo Hong",
+          "Noah Lee",
+          "James Thorne"
+        ],
+        "section": "7.1 Comparison to Probability Ratio",
+        "chunkIndex": 47,
+        "totalChunks": 95
+      }
+    },
+    {
+      "id": "2403.07691v2-chunk-48",
+      "content": "We demonstrate that models trained with ORPO learned to reflect the preference throughout the training process. We monitored the log probabilities of the chosen and rejected responses and the log odds ratio with λ = 1 . 0 . With the same dataset and model as Figure 3, Figure 7 shows that the log probability of rejected responses is diminishing while that of chosen responses is on par with Figure 3 as the log odds ratio increases. This indicates that ORPO is successfully preserving the domain adaptation role of SFT while the penalty term L OR induces the model to lower the likelihood of unwanted generations. We discuss the effect of λ in Equation 6 in Appendix E, studying the proclivity of the log probability margin between the favored and disfavored responses with respect to λ .\n\nFigure 7: Average log-likelihood for chosen and rejected responses and log odds ratio per batch. The odds consistently increase during training with ORPO .\n\n<!-- image -->",
+      "metadata": {
+        "source": "arxiv:2403.07691v2",
+        "title": "ORPO: Monolithic Preference Optimization without Reference Model",
+        "authors": [
+          "Jiwoo Hong",
+          "Noah Lee",
+          "James Thorne"
+        ],
+        "section": "7.2 Minimizing L OR",
+        "chunkIndex": 48,
+        "totalChunks": 95
+      }
+    },
+    {
+      "id": "2403.07691v2-chunk-49",
+      "content": "As depicted in Figure 2, ORPO does not require a reference model, unlike RLHF and DPO. In that sense, ORPO is computationally more efficient than RLHF and DPO in two perspectives: 1) memory allocation and 2) fewer FLOPs per batch.\n\nThe reference model ( π SFT ) in the context of RLHF and DPO denotes the model trained with supervised fine-tuning (SFT), which will be the baseline model for updating the parameters with RLHF or DPO (Ziegler et al., 2020; Rafailov et al., 2023). Thus, two π SFT s, a frozen reference model and the model undergoing tuning, are required during training. Furthermore, in theory, two forward passes should be calculated for each model to acquire the logits for the chosen and rejected responses. In other words, four forward passes happen in total for a single batch. On the other hand, a reference model is not required in ORPO as π SFT is directly updated. This leads to half the number of forward passes required for each batch during training.",
+      "metadata": {
+        "source": "arxiv:2403.07691v2",
+        "title": "ORPO: Monolithic Preference Optimization without Reference Model",
+        "authors": [
+          "Jiwoo Hong",
+          "Noah Lee",
+          "James Thorne"
+        ],
+        "section": "7.3 Computational Efficiency",
+        "chunkIndex": 49,
+        "totalChunks": 95
+      }
+    },
+    {
+      "id": "2403.07691v2-chunk-50",
+      "content": "In this paper, we introduced a reference-free monolithic preference alignment method, odds ratio preference optimization ( ORPO ), by revisiting and understanding the value of the supervised fine-tuning (SFT) phase in the context of preference alignment. ORPO was consistently preferred by the fine-tuned reward model against SFT and RLHF across the scale, and the win rate against DPO increased as the size of the model increased. Furthermore, we validate the scalability of ORPO with 2.7B and 7B pre-trained language models by exceeding the larger state-of-the-art instruction-following language models in AlpacaEval. Specifically, MistralORPO -α and MistralORPO -β achieved 11.33% and\n\n12.20% in AlpacaEval 2 . 0 , 7.23 and 7.32 in MTBench, thereby underscoring the efficiency and effectiveness of ORPO . We release fine-tuning code and model checkpoints for MistralORPO -α and MistralORPO -β to aid reproducibility.",
+      "metadata": {
+        "source": "arxiv:2403.07691v2",
+        "title": "ORPO: Monolithic Preference Optimization without Reference Model",
+        "authors": [
+          "Jiwoo Hong",
+          "Noah Lee",
+          "James Thorne"
+        ],
+        "section": "8 Conclusion",
+        "chunkIndex": 50,
+        "totalChunks": 95
+      }
+    },
+    {
+      "id": "2403.07691v2-chunk-51",
+      "content": "While conducting a comprehensive analysis of the diverse preference alignment methods, including DPO and RLHF, we did not incorporate a more comprehensive range of preference alignment algorithms. We leave the broader range of comparison against other methods as future work, along with scaling our method to over 7B models. In addition, we will expand the fine-tuning datasets into diverse domains and qualities, thereby verifying the generalizability of our method in various NLP downstream tasks. Finally, we would like to study the internal impact of our method on the pre-trained language model, expanding the understanding of preference alignment procedure to not only the supervised fine-tuning stage but also consecutive preference alignment algorithms.",
+      "metadata": {
+        "source": "arxiv:2403.07691v2",
+        "title": "ORPO: Monolithic Preference Optimization without Reference Model",
+        "authors": [
+          "Jiwoo Hong",
+          "Noah Lee",
+          "James Thorne"
+        ],
+        "section": "Limitations",
+        "chunkIndex": 51,
+        "totalChunks": 95
+      }
+    },
+    {
+      "id": "2403.07691v2-chunk-52",
+      "content": "Josh Achiam, Steven Adler, Sandhini Agarwal, Lama Ahmad, Ilge Akkaya, Florencia Leoni Aleman, Diogo Almeida, Janko Altenschmidt, Sam Altman, Shyamal Anadkat, et al. 2023. Gpt-4 technical report. arXiv preprint arXiv:2303.08774 .\n\n- Ebtesam Almazrouei, Hamza Alobeidli, Abdulaziz Alshamsi, Alessandro Cappelli, Ruxandra Cojocaru, Mérouane Debbah, Étienne Goffinet, Daniel Hesslow, Julien Launay, Quentin Malartic, Daniele Mazzotta, Badreddine Noune, Baptiste Pannier, and Guilherme Penedo. 2023. The falcon series of open language models.\n- Mohammad Gheshlaghi Azar, Mark Rowland, Bilal Piot, Daniel Guo, Daniele Calandriello, Michal Valko, and Rémi Munos. 2023. A general theoretical paradigm to understand learning from human preferences.\n- Yuntao Bai, Andy Jones, Kamal Ndousse, Amanda Askell, Anna Chen, Nova DasSarma, Dawn Drain, Stanislav Fort, Deep Ganguli, Tom Henighan, Nicholas Joseph, Saurav Kadavath, Jackson Kernion, Tom Conerly, Sheer El-Showk, Nelson Elhage, Zac Hatfield-Dodds, Danny H",
+      "metadata": {
+        "source": "arxiv:2403.07691v2",
+        "title": "ORPO: Monolithic Preference Optimization without Reference Model",
+        "authors": [
+          "Jiwoo Hong",
+          "Noah Lee",
+          "James Thorne"
+        ],
+        "section": "References",
+        "chunkIndex": 52,
+        "totalChunks": 95
+      }
+    },
+    {
+      "id": "2403.07691v2-chunk-53",
+      "content": "Chen, Nova DasSarma, Dawn Drain, Stanislav Fort, Deep Ganguli, Tom Henighan, Nicholas Joseph, Saurav Kadavath, Jackson Kernion, Tom Conerly, Sheer El-Showk, Nelson Elhage, Zac Hatfield-Dodds, Danny Hernandez, Tristan Hume, Scott Johnston, Shauna Kravec, Liane Lovitt, Neel Nanda, Catherine Olsson, Dario Amodei, Tom Brown, Jack Clark, Sam McCandlish, Chris Olah, Ben Mann, and Jared Kaplan. 2022a. Training a helpful and harmless assistant with reinforcement learning from human feedback.\n\nYuntao Bai, Saurav Kadavath, Sandipan Kundu, Amanda Askell, Jackson Kernion, Andy Jones, Anna Chen, Anna Goldie, Azalia Mirhoseini, Cameron McKinnon, Carol Chen, Catherine Olsson, Christopher Olah, Danny Hernandez, Dawn Drain, Deep Ganguli, Dustin Li, Eli Tran-Johnson, Ethan Perez, Jamie Kerr, Jared Mueller, Jeffrey Ladish, Joshua Landau, Kamal Ndousse, Kamile Lukosuite, Liane Lovitt, Michael Sellitto, Nelson Elhage, Nicholas Schiefer, Noemi Mercado, Nova DasSarma, Robert Lasenby, Robin Larson, Sam Ringe",
+      "metadata": {
+        "source": "arxiv:2403.07691v2",
+        "title": "ORPO: Monolithic Preference Optimization without Reference Model",
+        "authors": [
+          "Jiwoo Hong",
+          "Noah Lee",
+          "James Thorne"
+        ],
+        "section": "References",
+        "chunkIndex": 53,
+        "totalChunks": 95
+      }
+    },
+    {
+      "id": "2403.07691v2-chunk-54",
+      "content": "Jeffrey Ladish, Joshua Landau, Kamal Ndousse, Kamile Lukosuite, Liane Lovitt, Michael Sellitto, Nelson Elhage, Nicholas Schiefer, Noemi Mercado, Nova DasSarma, Robert Lasenby, Robin Larson, Sam Ringer, Scott Johnston, Shauna Kravec, Sheer El Showk, Stanislav Fort, Tamera Lanham, Timothy Telleen-Lawton, Tom Conerly, Tom Henighan, Tristan Hume, Samuel R. Bowman, Zac Hatfield-Dodds, Ben Mann, Dario Amodei, Nicholas Joseph, Sam McCandlish, Tom Brown, and Jared Kaplan. 2022b. Constitutional ai: Harmlessness from ai feedback.\n\n- Alvaro Bartolome, Gabriel Martin, and Daniel Vila. 2023. Notus. https://github.com/argilla-io/ notus .\n- Edward Beeching, Clémentine Fourrier, Nathan Habib, Sheon Han, Nathan Lambert, Nazneen Rajani, Omar Sanseviero, Lewis Tunstall, and Thomas Wolf. 2023. Open llm leaderboard. https://huggingface.co/ spaces/HuggingFaceH4/open\\_llm\\_leaderboard .\n- Ralph Allan Bradley and Milton E. Terry. 1952. Rank analysis of incomplete block designs: I.",
+      "metadata": {
+        "source": "arxiv:2403.07691v2",
+        "title": "ORPO: Monolithic Preference Optimization without Reference Model",
+        "authors": [
+          "Jiwoo Hong",
+          "Noah Lee",
+          "James Thorne"
+        ],
+        "section": "References",
+        "chunkIndex": 54,
+        "totalChunks": 95
+      }
+    },
+    {
+      "id": "2403.07691v2-chunk-55",
+      "content": "s Wolf. 2023. Open llm leaderboard. https://huggingface.co/ spaces/HuggingFaceH4/open\\_llm\\_leaderboard .\n- Ralph Allan Bradley and Milton E. Terry. 1952. Rank analysis of incomplete block designs: I. the method of paired comparisons. Biometrika , 39(3/4):324345.\n- Tom Brown, Benjamin Mann, Nick Ryder, Melanie Subbiah, Jared D Kaplan, Prafulla Dhariwal, Arvind Neelakantan, Pranav Shyam, Girish Sastry, Amanda Askell, Sandhini Agarwal, Ariel Herbert-Voss, Gretchen Krueger, Tom Henighan, Rewon Child, Aditya Ramesh, Daniel Ziegler, Jeffrey Wu, Clemens Winter, Chris Hesse, Mark Chen, Eric Sigler, Mateusz Litwin, Scott Gray, Benjamin Chess, Jack Clark, Christopher Berner, Sam McCandlish, Alec Radford, Ilya Sutskever, and Dario Amodei. 2020. Language models are few-shot learners. In Advances in Neural Information Processing Systems , volume 33, pages 1877-1901. Curran Associates, Inc.\n- Tianchi Cai, Xierui Song, Jiyan Jiang, Fei Teng, Jinjie Gu, and Guannan Zhang. 2023.",
+      "metadata": {
+        "source": "arxiv:2403.07691v2",
+        "title": "ORPO: Monolithic Preference Optimization without Reference Model",
+        "authors": [
+          "Jiwoo Hong",
+          "Noah Lee",
+          "James Thorne"
+        ],
+        "section": "References",
+        "chunkIndex": 55,
+        "totalChunks": 95
+      }
+    },
+    {
+      "id": "2403.07691v2-chunk-56",
+      "content": "rners. In Advances in Neural Information Processing Systems , volume 33, pages 1877-1901. Curran Associates, Inc.\n- Tianchi Cai, Xierui Song, Jiyan Jiang, Fei Teng, Jinjie Gu, and Guannan Zhang. 2023. Ulma: Unified language model alignment with demonstration and pointwise human preference. ArXiv , abs/2312.02554.\n- Nicholas Carlini, Florian Tramer, Eric Wallace, Matthew Jagielski, Ariel Herbert-Voss, Katherine Lee, Adam Roberts, Tom Brown, Dawn Song, Ulfar Erlingsson, Alina Oprea, and Colin Raffel. 2021. Extracting training data from large language models.\n- Weixin Chen and Bo Li. 2024. Grath: Gradual selftruthifying for large language models.\n- Qinyuan Cheng, Tianxiang Sun, Xiangyang Liu, Wenwei Zhang, Zhangyue Yin, Shimin Li, Linyang Li,\n- Kai Chen, and Xipeng Qiu. 2024. Can ai assistants know what they don't know?\n- Tri Dao. 2023. Flashattention-2: Faster attention with better parallelism and work partitioning.\n- Tim Dettmers, Artidoro Pagnoni, Ari Holtzman, and Luke Zettlemoyer.",
+      "metadata": {
+        "source": "arxiv:2403.07691v2",
+        "title": "ORPO: Monolithic Preference Optimization without Reference Model",
+        "authors": [
+          "Jiwoo Hong",
+          "Noah Lee",
+          "James Thorne"
+        ],
+        "section": "References",
+        "chunkIndex": 56,
+        "totalChunks": 95
+      }
+    },
+    {
+      "id": "2403.07691v2-chunk-57",
+      "content": "ants know what they don't know?\n- Tri Dao. 2023. Flashattention-2: Faster attention with better parallelism and work partitioning.\n- Tim Dettmers, Artidoro Pagnoni, Ari Holtzman, and Luke Zettlemoyer. 2023. Qlora: Efficient finetuning of quantized llms.\n- Ning Ding, Yulin Chen, Bokai Xu, Yujia Qin, Zhi Zheng, Shengding Hu, Zhiyuan Liu, Maosong Sun, and Bowen Zhou. 2023. Enhancing chat language models by scaling high-quality instructional conversations.\n- Guanting Dong, Hongyi Yuan, Keming Lu, Chengpeng Li, Mingfeng Xue, Dayiheng Liu, Wei Wang, Zheng Yuan, Chang Zhou, and Jingren Zhou. 2024. How abilities in large language models are affected by supervised fine-tuning data composition.\n- Kawin Ethayarajh, Winnie Xu, Niklas Muennighoff, Dan Jurafsky, and Douwe Kiela. 2024. Kto: Model alignment as prospect theoretic optimization. arXiv preprint arXiv:2402.01306 .\n- Leo Gao, John Schulman, and Jacob Hilton. 2022.",
+      "metadata": {
+        "source": "arxiv:2403.07691v2",
+        "title": "ORPO: Monolithic Preference Optimization without Reference Model",
+        "authors": [
+          "Jiwoo Hong",
+          "Noah Lee",
+          "James Thorne"
+        ],
+        "section": "References",
+        "chunkIndex": 57,
+        "totalChunks": 95
+      }
+    },
+    {
+      "id": "2403.07691v2-chunk-58",
+      "content": "u, Niklas Muennighoff, Dan Jurafsky, and Douwe Kiela. 2024. Kto: Model alignment as prospect theoretic optimization. arXiv preprint arXiv:2402.01306 .\n- Leo Gao, John Schulman, and Jacob Hilton. 2022. Scaling laws for reward model overoptimization.\n- Leo Gao, Jonathan Tow, Baber Abbasi, Stella Biderman, Sid Black, Anthony DiPofi, Charles Foster, Laurence Golding, Jeffrey Hsu, Alain Le Noac'h, Haonan Li, Kyle McDonell, Niklas Muennighoff, Chris Ociepa, Jason Phang, Laria Reynolds, Hailey Schoelkopf, Aviya Skowron, Lintang Sutawika, Eric Tang, Anish Thite, Ben Wang, Kevin Wang, and Andy Zou. 2023. A framework for few-shot language model evaluation.\n- Samuel Gehman, Suchin Gururangan, Maarten Sap, Yejin Choi, and Noah A. Smith. 2020. RealToxicityPrompts: Evaluating neural toxic degeneration in language models. In Findings of the Association for Computational Linguistics: EMNLP 2020 , pages 3356-3369, Online.",
+      "metadata": {
+        "source": "arxiv:2403.07691v2",
+        "title": "ORPO: Monolithic Preference Optimization without Reference Model",
+        "authors": [
+          "Jiwoo Hong",
+          "Noah Lee",
+          "James Thorne"
+        ],
+        "section": "References",
+        "chunkIndex": 58,
+        "totalChunks": 95
+      }
+    },
+    {
+      "id": "2403.07691v2-chunk-59",
+      "content": "d Noah A. Smith. 2020. RealToxicityPrompts: Evaluating neural toxic degeneration in language models. In Findings of the Association for Computational Linguistics: EMNLP 2020 , pages 3356-3369, Online. Association for Computational Linguistics.\n- Gemini Team, Rohan Anil, Sebastian Borgeaud, Yonghui Wu, Jean-Baptiste Alayrac, Jiahui Yu, Radu Soricut, Johan Schalkwyk, Andrew M Dai, Anja Hauth, et al. 2023. Gemini: a family of highly capable multimodal models. arXiv preprint arXiv:2312.11805 .\n- Aaron Gokaslan and Vanya Cohen. 2019. Openwebtext corpus. http://Skylion007.github.io/ OpenWebTextCorpus .\n- Alexey Gorbatovski and Sergey Kovalchuk. 2024. Reinforcement learning for question answering in programming domain using public community scoring as a human feedback.\n- Hamish Haggerty and Rohitash Chandra. 2024. Selfsupervised learning for skin cancer diagnosis with limited training data.\n- Mojan Javaheripi and Sébastien Bubeck. 2023.",
+      "metadata": {
+        "source": "arxiv:2403.07691v2",
+        "title": "ORPO: Monolithic Preference Optimization without Reference Model",
+        "authors": [
+          "Jiwoo Hong",
+          "Noah Lee",
+          "James Thorne"
+        ],
+        "section": "References",
+        "chunkIndex": 59,
+        "totalChunks": 95
+      }
+    },
+    {
+      "id": "2403.07691v2-chunk-60",
+      "content": "scoring as a human feedback.\n- Hamish Haggerty and Rohitash Chandra. 2024. Selfsupervised learning for skin cancer diagnosis with limited training data.\n- Mojan Javaheripi and Sébastien Bubeck. 2023. Phi-2: The surprising power of small language models.\n- Albert Q. Jiang, Alexandre Sablayrolles, Arthur Mensch, Chris Bamford, Devendra Singh Chaplot, Diego de las Casas, Florian Bressand, Gianna Lengyel, Guillaume Lample, Lucile Saulnier, Lélio Renard Lavaud, Marie-Anne Lachaux, Pierre Stock, Teven Le Scao, Thibaut Lavril, Thomas Wang, Timothée Lacroix, and William El Sayed. 2023. Mistral 7b.\n- Robert Kirk, Ishita Mediratta, Christoforos Nalmpantis, Jelena Luketina, Eric Hambro, Edward Grefenstette, and Roberta Raileanu. 2024. Understanding the effects of rlhf on llm generalisation and diversity.\n- Harrison Lee, Samrat Phatale, Hassan Mansoor, Thomas Mesnard, Johan Ferret, Kellie Lu, Colton Bishop, Ethan Hall, Victor Carbune, Abhinav Rastogi, and Sushant Prakash. 2023.",
+      "metadata": {
+        "source": "arxiv:2403.07691v2",
+        "title": "ORPO: Monolithic Preference Optimization without Reference Model",
+        "authors": [
+          "Jiwoo Hong",
+          "Noah Lee",
+          "James Thorne"
+        ],
+        "section": "References",
+        "chunkIndex": 60,
+        "totalChunks": 95
+      }
+    },
+    {
+      "id": "2403.07691v2-chunk-61",
+      "content": "alisation and diversity.\n- Harrison Lee, Samrat Phatale, Hassan Mansoor, Thomas Mesnard, Johan Ferret, Kellie Lu, Colton Bishop, Ethan Hall, Victor Carbune, Abhinav Rastogi, and Sushant Prakash. 2023. Rlaif: Scaling reinforcement learning from human feedback with ai feedback.\n- Margaret Li, Stephen Roller, Ilia Kulikov, Sean Welleck, Y-Lan Boureau, Kyunghyun Cho, and Jason Weston. 2020. Don't say that! making inconsistent dialogue unlikely with unlikelihood training. In Proceedings of the 58th Annual Meeting of the Association for Computational Linguistics , pages 4715-4728, Online. Association for Computational Linguistics.\n- Xian Li, Ping Yu, Chunting Zhou, Timo Schick, Luke Zettlemoyer, Omer Levy, Jason Weston, and Mike Lewis. 2023a. Self-alignment with instruction backtranslation.\n- Xuechen Li, Tianyi Zhang, Yann Dubois, Rohan Taori, Ishaan Gulrajani, Carlos Guestrin, Percy Liang, and Tatsunori B. Hashimoto. 2023b.",
+      "metadata": {
+        "source": "arxiv:2403.07691v2",
+        "title": "ORPO: Monolithic Preference Optimization without Reference Model",
+        "authors": [
+          "Jiwoo Hong",
+          "Noah Lee",
+          "James Thorne"
+        ],
+        "section": "References",
+        "chunkIndex": 61,
+        "totalChunks": 95
+      }
+    },
+    {
+      "id": "2403.07691v2-chunk-62",
+      "content": "Lewis. 2023a. Self-alignment with instruction backtranslation.\n- Xuechen Li, Tianyi Zhang, Yann Dubois, Rohan Taori, Ishaan Gulrajani, Carlos Guestrin, Percy Liang, and Tatsunori B. Hashimoto. 2023b. Alpacaeval: An automatic evaluator of instruction-following models. https://github.com/tatsu-lab/alpaca\\_eval .\n- Yuanzhi Li, Sébastien Bubeck, Ronen Eldan, Allie Del Giorno, Suriya Gunasekar, and Yin Tat Lee. 2023c. Textbooks are all you need ii: phi-1.5 technical report.\n- Tsung-Yi Lin, Priya Goyal, Ross Girshick, Kaiming He, and Piotr Dollár. 2017. Focal loss for dense object detection. In Proceedings of the IEEE international conference on computer vision , pages 2980-2988.\n- Ilya Loshchilov and Frank Hutter. 2019. Decoupled weight decay regularization.\n- Anqi Mao, Mehryar Mohri, and Yutao Zhong. 2023. Cross-entropy loss functions: Theoretical analysis and applications.\n- Long Ouyang, Jeff Wu, Xu Jiang, Diogo Almeida, Carroll L.",
+      "metadata": {
+        "source": "arxiv:2403.07691v2",
+        "title": "ORPO: Monolithic Preference Optimization without Reference Model",
+        "authors": [
+          "Jiwoo Hong",
+          "Noah Lee",
+          "James Thorne"
+        ],
+        "section": "References",
+        "chunkIndex": 62,
+        "totalChunks": 95
+      }
+    },
+    {
+      "id": "2403.07691v2-chunk-63",
+      "content": "decay regularization.\n- Anqi Mao, Mehryar Mohri, and Yutao Zhong. 2023. Cross-entropy loss functions: Theoretical analysis and applications.\n- Long Ouyang, Jeff Wu, Xu Jiang, Diogo Almeida, Carroll L. Wainwright, Pamela Mishkin, Chong Zhang, Sandhini Agarwal, Katarina Slama, Alex Ray, John Schulman, Jacob Hilton, Fraser Kelton, Luke Miller, Maddie Simens, Amanda Askell, Peter Welinder, Paul Christiano, Jan Leike, and Ryan Lowe. 2022. Training language models to follow instructions with human feedback.\n- Jing-Cheng Pang, Pengyuan Wang, Kaiyuan Li, XiongHui Chen, Jiacheng Xu, Zongzhang Zhang, and Yang Yu. 2023. Language model self-improvement by reinforcement learning contemplation.\n- Guilherme Penedo, Quentin Malartic, Daniel Hesslow, Ruxandra Cojocaru, Alessandro Cappelli, Hamza Alobeidli, Baptiste Pannier, Ebtesam Almazrouei, and Julien Launay. 2023.",
+      "metadata": {
+        "source": "arxiv:2403.07691v2",
+        "title": "ORPO: Monolithic Preference Optimization without Reference Model",
+        "authors": [
+          "Jiwoo Hong",
+          "Noah Lee",
+          "James Thorne"
+        ],
+        "section": "References",
+        "chunkIndex": 63,
+        "totalChunks": 95
+      }
+    },
+    {
+      "id": "2403.07691v2-chunk-64",
+      "content": "nt learning contemplation.\n- Guilherme Penedo, Quentin Malartic, Daniel Hesslow, Ruxandra Cojocaru, Alessandro Cappelli, Hamza Alobeidli, Baptiste Pannier, Ebtesam Almazrouei, and Julien Launay. 2023. The refinedweb dataset for falcon llm: Outperforming curated corpora with web data, and web data only.\n- Reid Pryzant, Dan Iter, Jerry Li, Yin Lee, Chenguang Zhu, and Michael Zeng. 2023. Automatic prompt optimization with 'gradient descent' and beam search. In Proceedings of the 2023 Conference on Empirical Methods in Natural Language Processing , pages 7957-7968, Singapore. Association for Computational Linguistics.\n- Rafael Rafailov, Archit Sharma, Eric Mitchell, Stefano Ermon, Christopher D. Manning, and Chelsea Finn. 2023. Direct preference optimization: Your language model is secretly a reward model.\n- Miguel Moura Ramos, Patrick Fernandes, António Farinhas, and André F. T. Martins. 2023.",
+      "metadata": {
+        "source": "arxiv:2403.07691v2",
+        "title": "ORPO: Monolithic Preference Optimization without Reference Model",
+        "authors": [
+          "Jiwoo Hong",
+          "Noah Lee",
+          "James Thorne"
+        ],
+        "section": "References",
+        "chunkIndex": 64,
+        "totalChunks": 95
+      }
+    },
+    {
+      "id": "2403.07691v2-chunk-65",
+      "content": "nning, and Chelsea Finn. 2023. Direct preference optimization: Your language model is secretly a reward model.\n- Miguel Moura Ramos, Patrick Fernandes, António Farinhas, and André F. T. Martins. 2023. Aligning neural machine translation models: Human feedback in training and inference.\n- Jeff Rasley, Samyam Rajbhandari, Olatunji Ruwase, and Yuxiong He. 2020. Deepspeed: System optimizations enable training deep learning models with over 100 billion parameters. In Proceedings of the 26th ACM SIGKDD International Conference on Knowledge Discovery &amp; Data Mining , KDD '20, page 3505-3506, New York, NY, USA. Association for Computing Machinery.\n- John Schulman, Filip Wolski, Prafulla Dhariwal, Alec Radford, and Oleg Klimov. 2017. Proximal policy optimization algorithms.\n- Wei Shen, Rui Zheng, Wenyu Zhan, Jun Zhao, Shihan Dou, Tao Gui, Qi Zhang, and Xuanjing Huang. 2023. Loose lips sink ships: Mitigating length bias in reinforcement learning from human feedback.",
+      "metadata": {
+        "source": "arxiv:2403.07691v2",
+        "title": "ORPO: Monolithic Preference Optimization without Reference Model",
+        "authors": [
+          "Jiwoo Hong",
+          "Noah Lee",
+          "James Thorne"
+        ],
+        "section": "References",
+        "chunkIndex": 65,
+        "totalChunks": 95
+      }
+    },
+    {
+      "id": "2403.07691v2-chunk-66",
+      "content": "thms.\n- Wei Shen, Rui Zheng, Wenyu Zhan, Jun Zhao, Shihan Dou, Tao Gui, Qi Zhang, and Xuanjing Huang. 2023. Loose lips sink ships: Mitigating length bias in reinforcement learning from human feedback. In Findings of the Association for Computational Linguistics: EMNLP 2023 , pages 2859-2873, Singapore. Association for Computational Linguistics.\n- Feifan Song, Bowen Yu, Minghao Li, Haiyang Yu, Fei Huang, Yongbin Li, and Houfeng Wang. 2023. Preference ranking optimization for human alignment.\n- Nisan Stiennon, Long Ouyang, Jeff Wu, Daniel M. Ziegler, Ryan Lowe, Chelsea Voss, Alec Radford, Dario Amodei, and Paul Christiano. 2022. Learning to summarize from human feedback.\n- Rohan Taori, Ishaan Gulrajani, Tianyi Zhang, Yann Dubois, Xuechen Li, Carlos Guestrin, Percy Liang, and Tatsunori B. Hashimoto. 2023. Stanford alpaca: An instruction-following llama model. https:// github.com/tatsu-lab/stanford\\_alpaca .\n- Katherine Tian, Eric Mitchell, Huaxiu Yao, Christopher D.",
+      "metadata": {
+        "source": "arxiv:2403.07691v2",
+        "title": "ORPO: Monolithic Preference Optimization without Reference Model",
+        "authors": [
+          "Jiwoo Hong",
+          "Noah Lee",
+          "James Thorne"
+        ],
+        "section": "References",
+        "chunkIndex": 66,
+        "totalChunks": 95
+      }
+    },
+    {
+      "id": "2403.07691v2-chunk-67",
+      "content": "g, and Tatsunori B. Hashimoto. 2023. Stanford alpaca: An instruction-following llama model. https:// github.com/tatsu-lab/stanford\\_alpaca .\n- Katherine Tian, Eric Mitchell, Huaxiu Yao, Christopher D. Manning, and Chelsea Finn. 2023. Finetuning language models for factuality.\n- Hugo Touvron, Thibaut Lavril, Gautier Izacard, Xavier Martinet, Marie-Anne Lachaux, Timothée Lacroix, Baptiste Rozière, Naman Goyal, Eric Hambro, Faisal Azhar, Aurelien Rodriguez, Armand Joulin, Edouard Grave, and Guillaume Lample. 2023. Llama: Open and efficient foundation language models.\n- Lewis Tunstall, Edward Beeching, Nathan Lambert, Nazneen Rajani, Kashif Rasul, Younes Belkada, Shengyi Huang, Leandro von Werra, Clémentine Fourrier, Nathan Habib, Nathan Sarrazin, Omar Sanseviero, Alexander M. Rush, and Thomas Wolf. 2023. Zephyr: Direct distillation of lm alignment.\n- Leandro von Werra, Younes Belkada, Lewis Tunstall, Edward Beeching, Tristan Thrush, Nathan Lambert, and Shengyi Huang. 2020.",
+      "metadata": {
+        "source": "arxiv:2403.07691v2",
+        "title": "ORPO: Monolithic Preference Optimization without Reference Model",
+        "authors": [
+          "Jiwoo Hong",
+          "Noah Lee",
+          "James Thorne"
+        ],
+        "section": "References",
+        "chunkIndex": 67,
+        "totalChunks": 95
+      }
+    },
+    {
+      "id": "2403.07691v2-chunk-68",
+      "content": "Rush, and Thomas Wolf. 2023. Zephyr: Direct distillation of lm alignment.\n- Leandro von Werra, Younes Belkada, Lewis Tunstall, Edward Beeching, Tristan Thrush, Nathan Lambert, and Shengyi Huang. 2020. Trl: Transformer reinforcement learning. https://github. com/huggingface/trl .\n- Binghai Wang, Rui Zheng, Lu Chen, Yan Liu, Shihan Dou, Caishuang Huang, Wei Shen, Senjie Jin, Enyu Zhou, Chenyu Shi, Songyang Gao, Nuo Xu, Yuhao Zhou, Xiaoran Fan, Zhiheng Xi, Jun Zhao, Xiao Wang, Tao Ji, Hang Yan, Lixing Shen, Zhan Chen, Tao Gui, Qi Zhang, Xipeng Qiu, Xuanjing Huang, Zuxuan Wu, and Yu-Gang Jiang. 2024. Secrets of rlhf in large language models part ii: Reward modeling.\n- Yizhong Wang, Hamish Ivison, Pradeep Dasigi, Jack Hessel, Tushar Khot, Khyathi Raghavi Chandu, David Wadden, Kelsey MacMillan, Noah A. Smith, Iz Beltagy, and Hannaneh Hajishirzi. 2023. How far can camels go? exploring the state of instruction tuning on open resources.\n- Jason Wei, Maarten Bosma, Vincent Y.",
+      "metadata": {
+        "source": "arxiv:2403.07691v2",
+        "title": "ORPO: Monolithic Preference Optimization without Reference Model",
+        "authors": [
+          "Jiwoo Hong",
+          "Noah Lee",
+          "James Thorne"
+        ],
+        "section": "References",
+        "chunkIndex": 68,
+        "totalChunks": 95
+      }
+    },
+    {
+      "id": "2403.07691v2-chunk-69",
+      "content": ", Kelsey MacMillan, Noah A. Smith, Iz Beltagy, and Hannaneh Hajishirzi. 2023. How far can camels go? exploring the state of instruction tuning on open resources.\n- Jason Wei, Maarten Bosma, Vincent Y. Zhao, Kelvin Guu, Adams Wei Yu, Brian Lester, Nan Du, Andrew M. Dai, and Quoc V. Le. 2022. Finetuned language models are zero-shot learners.\n- Sean Welleck, Ilia Kulikov, Stephen Roller, Emily Dinan, Kyunghyun Cho, and Jason Weston. 2019. Neural text generation with unlikelihood training. arXiv preprint arXiv:1908.04319 .\n- Tianhao Wu, Banghua Zhu, Ruoyu Zhang, Zhaojin Wen, Kannan Ramchandran, and Jiantao Jiao. 2023. Pairwise proximal policy optimization: Harnessing relative feedback for llm alignment.\n- Susan Zhang, Stephen Roller, Naman Goyal, Mikel Artetxe, Moya Chen, Shuohui Chen, Christopher Dewan, Mona Diab, Xian Li, Xi Victoria Lin, Todor Mihaylov, Myle Ott, Sam Shleifer, Kurt Shuster, Daniel Simig, Punit Singh Koura, Anjali Sridhar, Tianlu Wang, and Luke Zettlemoyer. 2022.",
+      "metadata": {
+        "source": "arxiv:2403.07691v2",
+        "title": "ORPO: Monolithic Preference Optimization without Reference Model",
+        "authors": [
+          "Jiwoo Hong",
+          "Noah Lee",
+          "James Thorne"
+        ],
+        "section": "References",
+        "chunkIndex": 69,
+        "totalChunks": 95
+      }
+    },
+    {
+      "id": "2403.07691v2-chunk-70",
+      "content": "Christopher Dewan, Mona Diab, Xian Li, Xi Victoria Lin, Todor Mihaylov, Myle Ott, Sam Shleifer, Kurt Shuster, Daniel Simig, Punit Singh Koura, Anjali Sridhar, Tianlu Wang, and Luke Zettlemoyer. 2022. Opt: Open pretrained transformer language models.\n- Yanli Zhao, Andrew Gu, Rohan Varma, Liang Luo, Chien-Chin Huang, Min Xu, Less Wright, Hamid Shojanazeri, Myle Ott, Sam Shleifer, Alban Desmaison, Can Balioglu, Pritam Damania, Bernard Nguyen, Geeta Chauhan, Yuchen Hao, Ajit Mathews, and Shen Li. 2023. Pytorch fsdp: Experiences on scaling fully sharded data parallel.\n- Lianmin Zheng, Wei-Lin Chiang, Ying Sheng, Siyuan Zhuang, Zhanghao Wu, Yonghao Zhuang, Zi Lin, Zhuohan Li, Dacheng Li, Eric P. Xing, Hao Zhang, Joseph E. Gonzalez, and Ion Stoica. 2023. Judging LLM-as-a-Judge with MT-Bench and Chatbot Arena.",
+      "metadata": {
+        "source": "arxiv:2403.07691v2",
+        "title": "ORPO: Monolithic Preference Optimization without Reference Model",
+        "authors": [
+          "Jiwoo Hong",
+          "Noah Lee",
+          "James Thorne"
+        ],
+        "section": "References",
+        "chunkIndex": 70,
+        "totalChunks": 95
+      }
+    },
+    {
+      "id": "2403.07691v2-chunk-71",
+      "content": ", Siyuan Zhuang, Zhanghao Wu, Yonghao Zhuang, Zi Lin, Zhuohan Li, Dacheng Li, Eric P. Xing, Hao Zhang, Joseph E. Gonzalez, and Ion Stoica. 2023. Judging LLM-as-a-Judge with MT-Bench and Chatbot Arena. ArXiv:2306.05685 [cs].\n- Chunting Zhou, Pengfei Liu, Puxin Xu, Srini Iyer, Jiao Sun, Yuning Mao, Xuezhe Ma, Avia Efrat, Ping Yu, Lili Yu, Susan Zhang, Gargi Ghosh, Mike Lewis, Luke Zettlemoyer, and Omer Levy. 2023a. Lima: Less is more for alignment.\n- Haotian Zhou, Tingkai Liu, Qianli Ma, Jianbo Yuan, Pengfei Liu, Yang You, and Hongxia Yang. 2023b. Lobass: Gauging learnability in supervised finetuning data. ArXiv , abs/2310.13008.\n- Jeffrey Zhou, Tianjian Lu, Swaroop Mishra, Siddhartha Brahma, Sujoy Basu, Yi Luan, Denny Zhou, and Le Hou. 2023c. Instruction-following evaluation for large language models.\n- Daniel M. Ziegler, Nisan Stiennon, Jeffrey Wu, Tom B. Brown, Alec Radford, Dario Amodei, Paul Christiano, and Geoffrey Irving. 2020. Fine-tuning language models from human preferences.",
+      "metadata": {
+        "source": "arxiv:2403.07691v2",
+        "title": "ORPO: Monolithic Preference Optimization without Reference Model",
+        "authors": [
+          "Jiwoo Hong",
+          "Noah Lee",
+          "James Thorne"
+        ],
+        "section": "References",
+        "chunkIndex": 71,
+        "totalChunks": 95
+      }
+    },
+    {
+      "id": "2403.07691v2-chunk-72",
+      "content": "age models.\n- Daniel M. Ziegler, Nisan Stiennon, Jeffrey Wu, Tom B. Brown, Alec Radford, Dario Amodei, Paul Christiano, and Geoffrey Irving. 2020. Fine-tuning language models from human preferences.",
+      "metadata": {
+        "source": "arxiv:2403.07691v2",
+        "title": "ORPO: Monolithic Preference Optimization without Reference Model",
+        "authors": [
+          "Jiwoo Hong",
+          "Noah Lee",
+          "James Thorne"
+        ],
+        "section": "References",
+        "chunkIndex": 72,
+        "totalChunks": 95
+      }
+    },
+    {
+      "id": "2403.07691v2-chunk-73",
+      "content": "Suppose that g ( x, y l , y w ) = odds θ P ( y w | x ) odds θ P ( y l | x )\n\n<!-- formula-not-decoded -->\n\nIn Equation 25, the remaining derivative can be further simplified by replacing 1 -P θ ( y | x ) terms where P ( y | x ) = N √ ∏ N t P θ ( y t | x, y &lt;t in odds θ ( y | x ) as follows.\n\n<!-- formula-not-decoded -->\n\n<!-- formula-not-decoded -->\n\n<!-- formula-not-decoded -->\n\n<!-- formula-not-decoded -->\n\n<!-- formula-not-decoded -->\n\nTherefore, the final form of ∇ θ L OR would be\n\n<!-- formula-not-decoded -->\n\n<!-- formula-not-decoded -->\n\n<!-- formula-not-decoded -->",
+      "metadata": {
+        "source": "arxiv:2403.07691v2",
+        "title": "ORPO: Monolithic Preference Optimization without Reference Model",
+        "authors": [
+          "Jiwoo Hong",
+          "Noah Lee",
+          "James Thorne"
+        ],
+        "section": "A Derivation of ∇ θ L OR with Odds Ratio",
+        "chunkIndex": 73,
+        "totalChunks": 95
+      }
+    },
+    {
+      "id": "2403.07691v2-chunk-74",
+      "content": "In this section, we continue the discussion in Section 7.1 through empirical results comparing the log probabilities of chosen and rejected responses in UltraFeedback when trained with probability ratio and odds ratio. Recalling the sensitivity of each ratio discussed in Section 7.1, it is expected for the probability ratio to lower the log probabilities of the rejected responses with a larger scale than the odds ratio. This is well-shown in Figure 8, which is the log probabilities of each batch while fine-tuning with probability ratio (left) rapidly reaches under -4, while the same phenomenon happens after the over-fitting occurs in the case of odds ratio (right).\n\nFigure 8: The log probability trace when the model is trained with the probability ratio (left) and the odds ratio (right) given the same hyperparameters. The probability ratio leads the rejected responses to have relatively lower log probabilities.\n\n<!-- image -->",
+      "metadata": {
+        "source": "arxiv:2403.07691v2",
+        "title": "ORPO: Monolithic Preference Optimization without Reference Model",
+        "authors": [
+          "Jiwoo Hong",
+          "Noah Lee",
+          "James Thorne"
+        ],
+        "section": "B Ablation on Probability Ratio and Odds Ratio",
+        "chunkIndex": 74,
+        "totalChunks": 95
+      }
+    },
+    {
+      "id": "2403.07691v2-chunk-75",
+      "content": "Flash-Attention 2 (Dao, 2023) is applied for all the pre-trained models for computational efficiency. In particular, the OPT series and Phi-2 (2.7B) were trained with DeepSpeed ZeRO 2 (Rasley et al., 2020), Llama-2 (7B) and Mistral (7B) were trained with Fully Sharded Data Parallel(FSDP) (Zhao et al., 2023). 7B and 2.7B models were trained with four and two NVIDIA A100, and the rest were trained on four NVIDIA A6000. For optimizer, AdamW optimizer (Loshchilov and Hutter, 2019) and paged AdamW (Dettmers et al., 2023) were used, and the linear warmup with cosine decay was applied for the learning rate. For input length, every instance was truncated and padded to 1,024 tokens and 2,048 tokens for HH-RLHF and UltraFeedback, respectively. To guarantee that the models can sufficiently learn to generate the proper response to the conversation history or the complex instruction, we filtered instances with prompts with more than 1,024 tokens.",
+      "metadata": {
+        "source": "arxiv:2403.07691v2",
+        "title": "ORPO: Monolithic Preference Optimization without Reference Model",
+        "authors": [
+          "Jiwoo Hong",
+          "Noah Lee",
+          "James Thorne"
+        ],
+        "section": "C Experimental Details",
+        "chunkIndex": 75,
+        "totalChunks": 95
+      }
+    },
+    {
+      "id": "2403.07691v2-chunk-76",
+      "content": "guarantee that the models can sufficiently learn to generate the proper response to the conversation history or the complex instruction, we filtered instances with prompts with more than 1,024 tokens.\n\nSupervised Fine-tuning (SFT) For SFT, the maximum learning rate was set to 1e-5. Following Ziegler et al. (2020) and Rafailov et al. (2023), the training epoch is set to 1.\n\nReinforcement Learning with Human Feedback (RLHF) For RLHF, the hyperparameters were set as Table 5 for UltraFeedback. For the HH-RLHF dataset, the output\\_min\\_length and output\\_max\\_length were set to 64 and 256.\n\nDirect Preference Optimization (DPO) For DPO, β was set to 0.1 for every case. The learning rate was set to 5e-6, and the model was trained for three epochs to select the best model by evaluation loss in each epoch. However, in most cases, the first or the second checkpoint was selected as the best model as the evaluation loss increased from the third epoch.\n\nTable 5: Hyperparameter settings for RLHF.",
+      "metadata": {
+        "source": "arxiv:2403.07691v2",
+        "title": "ORPO: Monolithic Preference Optimization without Reference Model",
+        "authors": [
+          "Jiwoo Hong",
+          "Noah Lee",
+          "James Thorne"
+        ],
+        "section": "C Experimental Details",
+        "chunkIndex": 76,
+        "totalChunks": 95
+      }
+    },
+    {
+      "id": "2403.07691v2-chunk-77",
+      "content": "each epoch. However, in most cases, the first or the second checkpoint was selected as the best model as the evaluation loss increased from the third epoch.\n\nTable 5: Hyperparameter settings for RLHF.\n\n| Hyperparameter              | Setting   |\n|-----------------------------|-----------|\n| ppo_epoch                   | 4         |\n| init_kl_coef                | 0.1       |\n| horizon                     | 2,000     |\n| batch_size                  | 64        |\n| mini_batch_size             | 8         |\n| gradient_accumulation_steps | 1         |\n| output_min_length           | 128       |\n| output_max_length           | 512       |\n| optimizer                   | AdamW     |\n| learning_rate               | 1e-05     |\n| gamma                       | 0.99      |\n\nOdds Ratio Preference Optimization ( ORPO ) As ORPO does not require any special hyperparameter, only the learning rate and epoch were the only hyperparameter to set.",
+      "metadata": {
+        "source": "arxiv:2403.07691v2",
+        "title": "ORPO: Monolithic Preference Optimization without Reference Model",
+        "authors": [
+          "Jiwoo Hong",
+          "Noah Lee",
+          "James Thorne"
+        ],
+        "section": "C Experimental Details",
+        "chunkIndex": 77,
+        "totalChunks": 95
+      }
+    },
+    {
+      "id": "2403.07691v2-chunk-78",
+      "content": "| 0.99      |\n\nOdds Ratio Preference Optimization ( ORPO ) As ORPO does not require any special hyperparameter, only the learning rate and epoch were the only hyperparameter to set. For ORPO , the maximum learning rate was set to 8e-6 and trained for 10 epochs. The best model is selected based on the lowest evaluation loss for the OPT series, Phi-2 (2.7B) and Llama-2 (7B).",
+      "metadata": {
+        "source": "arxiv:2403.07691v2",
+        "title": "ORPO: Monolithic Preference Optimization without Reference Model",
+        "authors": [
+          "Jiwoo Hong",
+          "Noah Lee",
+          "James Thorne"
+        ],
+        "section": "C Experimental Details",
+        "chunkIndex": 78,
+        "totalChunks": 95
+      }
+    },
+    {
+      "id": "2403.07691v2-chunk-79",
+      "content": "Along with the AlpacaEval results reported in Section 6.1, we report the results of MistralORPO -α and MistralORPO -β on IFEval (Zhou et al., 2023c), calculated with the codes from Gao et al. (2023). Additional information can be found in: https://jiwooya1000.github.io/posts/orpo/#ifeval .\n\nTable 6: IFEval scores of MistralORPO -α and MistralORPO -β .\n\n| Model Type        |   Prompt-Strict |   Prompt-Loose |   Inst-Strict |   Inst-Loose |\n|-------------------|-----------------|----------------|---------------|--------------|\n| Mistral- ORPO - α |          0.5009 |         0.5083 |        0.5995 |       0.6163 |\n| Mistral- ORPO - β |          0.5287 |         0.5564 |        0.6355 |       0.6619 |",
+      "metadata": {
+        "source": "arxiv:2403.07691v2",
+        "title": "ORPO: Monolithic Preference Optimization without Reference Model",
+        "authors": [
+          "Jiwoo Hong",
+          "Noah Lee",
+          "James Thorne"
+        ],
+        "section": "D IFEval Result for MistralORPO -α and MistralORPO -β",
+        "chunkIndex": 79,
+        "totalChunks": 95
+      }
+    },
+    {
+      "id": "2403.07691v2-chunk-80",
+      "content": "For the weighting value λ in Equation 6, we conduct an ablation study with { 0 . 1 , 0 . 5 , 1 . 0 } . Mistral (7B) and UltraFeedback were used for the base model and dataset. In Section E.1, we compare the log probability trends by the value of λ , and we assess the downstream effect of λ in Section E.2.",
+      "metadata": {
+        "source": "arxiv:2403.07691v2",
+        "title": "ORPO: Monolithic Preference Optimization without Reference Model",
+        "authors": [
+          "Jiwoo Hong",
+          "Noah Lee",
+          "James Thorne"
+        ],
+        "section": "E Ablation on the Weighting Value ( λ )",
+        "chunkIndex": 80,
+        "totalChunks": 95
+      }
+    },
+    {
+      "id": "2403.07691v2-chunk-81",
+      "content": "Figure 9: The log probability trend by λ . With larger λ (e.g., λ = 1 . 0 ), L OR gets more influential in fine-tuning the models with ORPO .\n\n<!-- image -->\n\nIn Figure 9, we find that larger λ leads to stronger discrimination of the rejected responses in general. With λ = 0 . 1 , the average log probability of the chosen and the rejected responses stay close as the fine-tuning proceeds. Also, unlike other settings, the log probabilities for the rejected responses do not decrease, but rather, the log probabilities of the chosen responses increase to minimize L OR term.\n\nMoreover, in λ = 0 . 5 , there exists a similar trend of further increasing the log probabilities of the chosen responses, but the log probabilities of the rejected responses are diminishing simultaneously. Lastly, in λ = 1 . 0 , the chosen responses diminish along with the rejected responses while enlarging the margin between them. However, this does not mean smaller λ is always the better.",
+      "metadata": {
+        "source": "arxiv:2403.07691v2",
+        "title": "ORPO: Monolithic Preference Optimization without Reference Model",
+        "authors": [
+          "Jiwoo Hong",
+          "Noah Lee",
+          "James Thorne"
+        ],
+        "section": "E.1 Log Probability",
+        "chunkIndex": 81,
+        "totalChunks": 95
+      }
+    },
+    {
+      "id": "2403.07691v2-chunk-82",
+      "content": "ultaneously. Lastly, in λ = 1 . 0 , the chosen responses diminish along with the rejected responses while enlarging the margin between them. However, this does not mean smaller λ is always the better. It will depend on the specific need and model.",
+      "metadata": {
+        "source": "arxiv:2403.07691v2",
+        "title": "ORPO: Monolithic Preference Optimization without Reference Model",
+        "authors": [
+          "Jiwoo Hong",
+          "Noah Lee",
+          "James Thorne"
+        ],
+        "section": "E.1 Log Probability",
+        "chunkIndex": 82,
+        "totalChunks": 95
+      }
+    },
+    {
+      "id": "2403.07691v2-chunk-83",
+      "content": "Figure 10: MT-Bench result comparison by differing λ = 0 . 1 and λ = 1 . 0 .\n\n<!-- image -->\n\nThe downstream impact of λ stands out in the MT-Bench result. In comparison to λ = 0 . 1 , Mistral+ ORPO (7B) with λ = 1 . 0 performs worse in extraction, math, and reasoning, which are the categories that generally require deterministic answers. On the other hand, it performs better in STEM, humanities, and roleplay, which ask the generations without hard answers. Along with the amount of discrepancy between the trend in the logits of chosen and rejected responses, we can infer that making a more significant margin between the chosen and the rejected responses through higher λ in ORPO leads to overly adapting to the chosen responses set in the training dataset. This proclivity results in open-ended generations generally being preferred by the annotator while showing weaker performance in the hard-answered questions.",
+      "metadata": {
+        "source": "arxiv:2403.07691v2",
+        "title": "ORPO: Monolithic Preference Optimization without Reference Model",
+        "authors": [
+          "Jiwoo Hong",
+          "Noah Lee",
+          "James Thorne"
+        ],
+        "section": "E.2 MT-Bench",
+        "chunkIndex": 83,
+        "totalChunks": 95
+      }
+    },
+    {
+      "id": "2403.07691v2-chunk-84",
+      "content": "Along with Figure 11, which depicts the reward distribution of OPT2-125M, OPT2-350M, and OPT2-1.3B on the UltraFeedback dataset, we report the reward distribution of each pre-trained checkpoint trained on the HH-RLHF dataset. As discussed in Section 6.3, ORPO consistently pushes the reward distribution of SFT to the right side.\n\nFigure 11: Reward distribution comparison between OPT-125M (left), OPT-350M (middle), and OPT-1.3B (right) trained with SFT (blue), RLHF (green), DPO (orange), and ORPO (red) on the test set of HH-RLHF using the 1.3B reward model. General tendency follows that of Figure 5.\n\n<!-- image -->",
+      "metadata": {
+        "source": "arxiv:2403.07691v2",
+        "title": "ORPO: Monolithic Preference Optimization without Reference Model",
+        "authors": [
+          "Jiwoo Hong",
+          "Noah Lee",
+          "James Thorne"
+        ],
+        "section": "F Test Set Reward Distribution on HH-RLHF",
+        "chunkIndex": 84,
+        "totalChunks": 95
+      }
+    },
+    {
+      "id": "2403.07691v2-chunk-85",
+      "content": "For the MT-Bench result in Section 6.2, we report the category-wise scores of MistralORPO -α (7B) and MistralORPO -β (7B) in Figure 12. While surpassing Llama-2 Chat (13B) and Llama-2 Chat (70B) in most cases, MistralORPO -β (7B) is comparable to GPT-3.5-turbo in the categories that require descriptive generations. However, it lacks coding and math skills, which we speculate is due to the lack of training data, as we used 61k instances in UltraFeedback.\n\n<!-- image -->\n\nLoading [MathJax]/extensions/MathMenu.js\n\nFigure 12: MT-Bench result of MistralORPO -α (7B) and MistralORPO -β (7B) by the category.",
+      "metadata": {
+        "source": "arxiv:2403.07691v2",
+        "title": "ORPO: Monolithic Preference Optimization without Reference Model",
+        "authors": [
+          "Jiwoo Hong",
+          "Noah Lee",
+          "James Thorne"
+        ],
+        "section": "G MT-Bench Result of MistralORPO -α (7B) and MistralORPO -β (7B)",
+        "chunkIndex": 85,
+        "totalChunks": 95
+      }
+    },
+    {
+      "id": "2403.07691v2-chunk-86",
+      "content": "For the succinctness and verboseness instructions, we generated five different instructions, each with ChatGPT 9 . From the instructions in Table 7, we randomly sampled one prompt each for every batch to prevent potential word bias.\n\n|   # | Succinctness                                  | Verboseness                                         |\n|-----|-----------------------------------------------|-----------------------------------------------------|\n|   1 | Please generate a short and concise response. | Please generate an elaborative and chatty response. |\n|   2 | Provide a brief and concise answer.           | Provide a detailed answer.                          |\n|   3 | Keep your reply short and to the point.       | Keep your reply elaborative and intricate.          |\n|   4 | Keep your answer brief for clarity.           | Keep your answer detailed.                          |\n|   5 | Generate a brief and to-the-point answer.     | Generate a chatty and step-wise answer.",
+      "metadata": {
+        "source": "arxiv:2403.07691v2",
+        "title": "ORPO: Monolithic Preference Optimization without Reference Model",
+        "authors": [
+          "Jiwoo Hong",
+          "Noah Lee",
+          "James Thorne"
+        ],
+        "section": "H Special Instructions for Verbosity Assessment",
+        "chunkIndex": 86,
+        "totalChunks": 95
+      }
+    },
+    {
+      "id": "2403.07691v2-chunk-87",
+      "content": "| Keep your answer brief for clarity.           | Keep your answer detailed.                          |\n|   5 | Generate a brief and to-the-point answer.     | Generate a chatty and step-wise answer.             |\n\nTable 7: Instructions prepended to the queries from AlpacaEval. Each instruction set asks the model to generate either shorter or longer responses given the query, respectively.\n\n9 https://chat.openai.com/",
+      "metadata": {
+        "source": "arxiv:2403.07691v2",
+        "title": "ORPO: Monolithic Preference Optimization without Reference Model",
+        "authors": [
+          "Jiwoo Hong",
+          "Noah Lee",
+          "James Thorne"
+        ],
+        "section": "H Special Instructions for Verbosity Assessment",
+        "chunkIndex": 87,
+        "totalChunks": 95
+      }
+    },
+    {
+      "id": "2403.07691v2-chunk-88",
+      "content": "In this section, we two sample generations from MistralORPO -α (7B) on AlpacaEval, including the one which is preferred over the response of GPT-4 and the one in which GPT-4 was preferred. For readability, the instances with short responses are selected for both cases. Additionally, the responses for MistralORPO -α (7B) were sampled with a temperature of 0.7. The checkpoints for MistralORPO -α (7B) and MistralORPO -β (7B) can be found in https://huggingface.co/kaist-ai/mistral-orpo-alpha and https://huggingface.co/kaist-ai/mistral-orpo-beta .\n\nQuery 1 (GPT-4 Win): Give a brief description of the book that you are given. Matilda",
+      "metadata": {
+        "source": "arxiv:2403.07691v2",
+        "title": "ORPO: Monolithic Preference Optimization without Reference Model",
+        "authors": [
+          "Jiwoo Hong",
+          "Noah Lee",
+          "James Thorne"
+        ],
+        "section": "I Generation Samples from MistralORPO -α (7B)",
+        "chunkIndex": 88,
+        "totalChunks": 95
+      }
+    },
+    {
+      "id": "2403.07691v2-chunk-89",
+      "content": "\"Matilda\" is a children's novel written by the British author Roald Dahl. It was first published in 1988. The story revolves around a very intelligent and precocious young girl named Matilda Wormwood. Despite being neglected and mistreated by her ignorant and self-absorbed parents, Matilda finds solace in reading books and quickly develops a love for learning.\n\nAt the age of five, she begins attending school and meets Miss Honey, a kindhearted teacher who recognizes Matilda's extraordinary intellectual abilities. However, the school's tyrannical headmistress, Miss Trunchbull, is a cruel and oppressive figure who takes pleasure in punishing the children with her unreasonable and harsh methods.\n\nMatilda discovers that she possesses a unique telekinetic ability, which she learns to control and use to her advantage. With her wit, intelligence, and special powers, Matilda sets out to defend her friends from Miss Trunchbull's abuses and to help Miss Honey overcome her own difficult past.",
+      "metadata": {
+        "source": "arxiv:2403.07691v2",
+        "title": "ORPO: Monolithic Preference Optimization without Reference Model",
+        "authors": [
+          "Jiwoo Hong",
+          "Noah Lee",
+          "James Thorne"
+        ],
+        "section": "1. GPT-4 :",
+        "chunkIndex": 89,
+        "totalChunks": 95
+      }
+    },
+    {
+      "id": "2403.07691v2-chunk-90",
+      "content": "l and use to her advantage. With her wit, intelligence, and special powers, Matilda sets out to defend her friends from Miss Trunchbull's abuses and to help Miss Honey overcome her own difficult past.\n\nThe book is a tale of good triumphing over evil, and it celebrates the power of knowledge, kindness, and standing up for what is right. It has been adapted into a successful film, stage musical, and has remained a beloved classic in children's literature.",
+      "metadata": {
+        "source": "arxiv:2403.07691v2",
+        "title": "ORPO: Monolithic Preference Optimization without Reference Model",
+        "authors": [
+          "Jiwoo Hong",
+          "Noah Lee",
+          "James Thorne"
+        ],
+        "section": "1. GPT-4 :",
+        "chunkIndex": 90,
+        "totalChunks": 95
+      }
+    },
+    {
+      "id": "2403.07691v2-chunk-91",
+      "content": "\"Matilda\" is a children's book written by Roald Dahl, published in 1988. The story revolves around the life of Matilda Wormwood, a brilliant and gifted five-year-old girl who has telekinetic powers. The story explores themes of education, family, and the importance of reading and intellectual curiosity. The book has been praised for its wit, humor, and powerful message, making it a classic and beloved children's book.",
+      "metadata": {
+        "source": "arxiv:2403.07691v2",
+        "title": "ORPO: Monolithic Preference Optimization without Reference Model",
+        "authors": [
+          "Jiwoo Hong",
+          "Noah Lee",
+          "James Thorne"
+        ],
+        "section": "2. MistralORPO -β :",
+        "chunkIndex": 91,
+        "totalChunks": 95
+      }
+    },
+    {
+      "id": "2403.07691v2-chunk-92",
+      "content": "As an AI developed by OpenAI, I don't have personal opinions. However, I can share that ChatGPT is an advanced language model that has received considerable attention for its ability to generate human-like text. It's designed to assist users in a wide range of tasks, from answering questions to creating content and engaging in conversation.\n\nChatGPT has been praised for its fluency and versatility in handling various topics and for its potential to streamline and enhance communication in both personal and professional settings. However, like any technology, it also faces challenges and criticisms, such as ensuring the accuracy of information, preventing misuse, and managing ethical considerations surrounding AI-generated content.\n\nOverall, ChatGPT represents a significant achievement in natural language processing and has sparked discussions about the future of AI in our daily lives.",
+      "metadata": {
+        "source": "arxiv:2403.07691v2",
+        "title": "ORPO: Monolithic Preference Optimization without Reference Model",
+        "authors": [
+          "Jiwoo Hong",
+          "Noah Lee",
+          "James Thorne"
+        ],
+        "section": "1. GPT-4 :",
+        "chunkIndex": 92,
+        "totalChunks": 95
+      }
+    },
+    {
+      "id": "2403.07691v2-chunk-93",
+      "content": "As an AI language model, I am an example of the technology used in ChatGPT. I can provide a personal opinion, but please keep in mind that I am designed to be socially unbiased and positive in nature.\n\nChatGPT is an impressive advancement in artificial intelligence and natural language processing. It has the ability to understand and generate human-like text, making it possible for users to have engaging and informative conversations with the AI. This technology has the potential to revolutionize various industries, including customer support, education, content creation, and more.\n\nHowever, it's important to recognize that ChatGPT, like any AI technology, is not perfect. It may sometimes provide inaccurate or biased information due to the limitations of its training data or the complexity of human language. It's crucial to verify the facts and use critical thinking when interacting with AI systems like ChatGPT.",
+      "metadata": {
+        "source": "arxiv:2403.07691v2",
+        "title": "ORPO: Monolithic Preference Optimization without Reference Model",
+        "authors": [
+          "Jiwoo Hong",
+          "Noah Lee",
+          "James Thorne"
+        ],
+        "section": "2. MistralORPO -β :",
+        "chunkIndex": 93,
+        "totalChunks": 95
+      }
+    },
+    {
+      "id": "2403.07691v2-chunk-94",
+      "content": "d information due to the limitations of its training data or the complexity of human language. It's crucial to verify the facts and use critical thinking when interacting with AI systems like ChatGPT.\n\nOverall, ChatGPT represents a significant step forward in the field of AI, and its potential applications are vast. As a responsible user, it's important to approach this technology with a critical and respectful mindset, recognizing its strengths and limitations.",
+      "metadata": {
+        "source": "arxiv:2403.07691v2",
+        "title": "ORPO: Monolithic Preference Optimization without Reference Model",
+        "authors": [
+          "Jiwoo Hong",
+          "Noah Lee",
+          "James Thorne"
+        ],
+        "section": "2. MistralORPO -β :",
+        "chunkIndex": 94,
+        "totalChunks": 95
+      }
+    }
+  ],
+  "fullText": "## ORPO : Monolithic Preference Optimization without Reference Model\n\n## Jiwoo Hong Noah Lee James Thorne\n\nKAIST AI\n\n{jiwoo\\_hong, noah.lee, thorne}@kaist.ac.kr\n\n## Abstract\n\nWhile recent preference alignment algorithms for language models have demonstrated promising results, supervised fine-tuning (SFT) remains imperative for achieving successful convergence. In this paper, we study the crucial role of SFT within the context of preference alignment, emphasizing that a minor penalty for the disfavored generation style is sufficient for preference-aligned SFT. Building on this foundation, we introduce a straightforward and innovative reference model-free monolithic odds ratio preference optimization algorithm, ORPO , eliminating the necessity for an additional preference alignment phase. We demonstrate, both empirically and theoretically, that the odds ratio is a sensible choice for contrasting favored and disfavored styles during SFT across the diverse sizes from 125M to 7B. Specifically, fine-tuning Phi-2 (2.7B), Llama-2 (7B), and Mistral (7B) with ORPO on the UltraFeedback alone surpasses the performance of state-of-the-art language models with more than 7B and 13B parameters: achieving up to 12.20% on AlpacaEval 2 . 0 (Figure 1), 66.19% on IFEval (instruction-level loose, Table 6), and 7.32 in MT-Bench (Figure 12). We release code 1 and model checkpoints for MistralORPO -α (7B) 2 and MistralORPO -β (7B). 3\n\n## 1 Introduction\n\nPre-trained language models (PLMs) with vast training corpora such as web texts (Gokaslan and Cohen, 2019; Penedo et al., 2023) or textbooks (Li et al., 2023c) have shown remarkable abilities in diverse natural language processing (NLP) tasks (Brown et al., 2020; Zhang et al., 2022; Touvron et al., 2023; Jiang et al., 2023; Almazrouei et al., 2023). However, the models must undergo further\n\n1 https://github.com/xfactlab/orpo\n\n2 https://huggingface.co/kaist-ai/\n\nmistral-orpo-alpha\n\n3 https://huggingface.co/kaist-ai/ mistral-orpo-beta\n\nFigure 1: AlpacaEval 2 . 0 result of Llama-2 (7B) and Mistral (7B) fine-tuned with ORPO (blue) in comparison to the state-of-the-art models. Notably, MistralORPO -α &amp; β surpasses Zephyr β and Llama-2-Chat (13B) with a single epoch training exclusively on the UltraFeedback.\n\n<!-- image -->\n\ntuning to be usable in general-domain applications, typically through processes such as instruction tuning and preference alignment .\n\nInstruction-tuning (Wei et al., 2022; Taori et al., 2023; Wang et al., 2023; Zhou et al., 2023a) trains models to follow task descriptions given in natural language, which enables models to generalize well to previously unseen tasks. However, despite the ability to follow instructions, models may generate harmful or unethical outputs (Carlini et al., 2021; Gehman et al., 2020; Pryzant et al., 2023). To further align these models with human values, additional training is required with pairwise preference data using techniques such as reinforcement learning with human feedback (Ziegler et al., 2020; Stiennon et al., 2022, RLHF) and direct preference optimization (Rafailov et al., 2023, DPO).\n\nPreference alignment methods have demonstrated success in several downstream tasks beyond reducing harm. For example, improving factuality (Tian et al., 2023; Cheng et al., 2024; Chen and Li, 2024), code-based question answering (Gorbatovski and Kovalchuk, 2024), and machine translation (Ramos et al., 2023). The versatility of alignment algorithms over a wide range of downstream\n\nFigure 2: Comparison of model alignment techniques. ORPO aligns the language model without a reference model in a single-step manner by assigning a weak penalty to the rejected responses and a strong adaptation signal to the chosen responses with a simple log odds ratio term appended to the negative log-likelihood loss.\n\n<!-- image -->\n\ntasks highlights the necessity of understanding the alignment procedure and further improving the algorithms in terms of efficiency and performance. However, existing preference alignment methods normally consist of a multi-stage process, as shown in Figure 2, typically requiring a second reference model and a separate warm-up phase with supervised fine-tuning (SFT) (Ziegler et al., 2020; Rafailov et al., 2023; Wu et al., 2023).\n\nIn this paper, we study the role and impact of SFT in pairwise preference datasets for model alignment in Section 3 and propose a simple and novel monolithic alignment method, odds ratio preference optimization ( ORPO ), which efficiently penalizes the model from learning undesired generation styles during SFT in Section 4. In contrast to previous works, our approach requires neither an SFT warm-up stage nor a reference model, enabling resource-efficient development of preference-based aligned models.\n\nWe demonstrate the effectiveness of our method with the evaluation of model alignment tasks and popular leaderboards in Section 6.1 and 6.2 by fine-tuning Phi-2 (2.7B), Llama-2 (7B), and Mistral (7B) with ORPO . Then, we conduct controlled experiments comparing ORPO against established methods for model alignment, RLHF, and DPO for different datasets and model sizes in Section 6.3. Along with the post-hoc analysis of generation diversity in Section 6.4, we expound on the theoretical, empirical, and computational justification of utilizing the odds ratio in monolithic preference alignment in Section 7.3. We release the training code and the checkpoints for MistralORPO -α (7B) and MistralORPO -β (7B). These models achieve 7.24 and 7.32 in MT-Bench, 11.33% and 12.20%\n\non AlpacaEval 2 . 0 , and 61.63% and 66.19% in IFEval instruction-level loose accuracy, respectively.\n\n## 2 Related Works\n\nAlignment with Reinforcement Learning Reinforcement learning with human feedback (RLHF) commonly applies the Bradley-Terry model (Bradley and Terry, 1952) to estimate the probability of a pairwise competition between two independently evaluated instances. An additional reward model is trained to score instances. Reinforcement learning algorithms such as proximal policy optimization (PPO) (Schulman et al., 2017) are employed to train the model to maximize the score of the reward model for the chosen response, resulting in language models that are trained with human preferences (Ziegler et al., 2020; Stiennon et al., 2022). Notably, Ouyang et al. (2022) demonstrated the scalability and versatility of RLHF for instruction-following language models. Extensions such as language model feedback (RLAIF) could be a viable alternative to human feedback (Bai et al., 2022b; Lee et al., 2023; Pang et al., 2023). However, RLHF faces challenges of extensive hyperparameter searching due to the instability of PPO (Rafailov et al., 2023; Wu et al., 2023) and the sensitivity of the reward models (Gao et al., 2022; Wang et al., 2024). Therefore, there is a crucial need for stable preference alignment algorithms.\n\nAlignment without Reward Model Several techniques for preference alignment mitigate the need for reinforcement learning (Rafailov et al., 2023; Song et al., 2023; Azar et al., 2023; Ethayarajh et al., 2024). Rafailov et al. (2023) introduce direct policy optimization (DPO), which combines the reward modeling stage into the preference learn- ing stage. Azar et al. (2023) prevented potential overfitting problems in DPO through identity preference optimization (IPO). Ethayarajh et al. (2024) and Cai et al. (2023) proposed Kahneman-Tversky Optimisation (KTO) and Unified Language Model Alignment (ULMA) that does not require the pairwise preference dataset, unlike RLHF and DPO. Song et al. (2023) further suggests incorporation of the softmax value of the reference response set in the negative log-likelihood loss to merge the supervised fine-tuning and preference alignment.\n\nAlignment with Supervised Fine-tuning Preference alignment methods in reinforcement learning (RL) often leverage supervised fine-tuning (SFT) to ensure the stable update of the active policy in relation to the old policy (Schulman et al., 2017). This is because the SFT model is the old policy in the context of RLHF (Ziegler et al., 2020). Furthermore, empirical findings indicate that, even in non-RL alignment methods, the SFT model is crucial for achieving convergence to desired results (Rafailov et al., 2023; Tunstall et al., 2023).\n\nIn contrast, there have been approaches to build human-aligned language models by conducting SFT only with filtered datasets (Zhou et al., 2023a; Li et al., 2023a; Haggerty and Chandra, 2024; Zhou et al., 2023b). Zhou et al. (2023a) demonstrated that SFT with a small amount of data with finegrained filtering and curation could be sufficient for building helpful language model assistants. Furthermore, Li et al. (2023a) and Haggerty and Chandra (2024) proposed an iterative process of finetuning the supervised fine-tuned language models with their own generations after fine-grained selection of aligned generations and Zhou et al. (2023b) suggested that a curated subset of preference dataset is sufficient for alignment. While these works highlight the impact and significance of SFT in the context of alignment, the actual role of SFT and the theoretical background for incorporating preference alignment in SFT remains understudied.\n\n## 3 The Role of Supervised Fine-tuning\n\nWe study the behavior of supervised fine-tuning (SFT) as an initial stage of preference alignment methods (Ziegler et al., 2020; Rafailov et al., 2023) through analysis of the loss function in SFT and empirical demonstration of the preference comprehension ability of the trained SFT model. SFT plays a significant role in tailoring the pre-trained language models to the desired domain (Zhou et al.,\n\n2023a; Dong et al., 2024) by increasing the log probabilities of pertinent tokens. Nevertheless, this inadvertently increases the likelihood of generating tokens in undesirable styles, as illustrated in Figure 3. Therefore, it is necessary to develop methods capable of preserving the domain adaptation role of SFT while concurrently discerning and mitigating unwanted generation styles.\n\nAbsence of Penalty in Cross-Entropy Loss The goal of cross-entropy loss model fine-tuning is to penalize the model if the predicted logits for the reference answers are low, as shown in Equation 2.\n\n<!-- formula-not-decoded -->\n\n<!-- formula-not-decoded -->\n\nwhere y i is a boolean value that indicates if i th token in the vocabulary set V is a label token, p i refers to the probability of i th token, and m is the length of sequence. Using cross-entropy alone gives no direct penalty or compensation for the logits of non-answer tokens (Lin et al., 2017) as y i will be set to 0. While cross-entropy is generally effective for domain adaptation (Mao et al., 2023), there are no mechanisms to penalize rejected responses when compensating for the chosen responses. Therefore, the log probabilities of the tokens in the rejected responses increase along with the chosen responses, which is not desired from the viewpoint of preference alignment.\n\nGeneralization over Both Response Styles We conduct a pilot study to empirically demonstrate the miscalibration of chosen and rejected responses with supervised fine-tuning alone. We fine-tune OPT-350M (Zhang et al., 2022) on the chosen responses only from the HH-RLHF dataset (Bai et al., 2022b). Throughout the training, we monitor the log probability of rejected responses for each batch and report this in Figure 3. Both the log probability of chosen and rejected responses exhibited a simultaneous increase. This can be interpreted from two different perspectives. First, the cross-entropy loss effectively guides the model toward the intended domain (e.g., dialogue). However, the absence of a penalty for unwanted generations results in rejected responses sometimes having even higher log probabilities than the chosen ones.\n\nFigure 3: Log probabilities for chosen and rejected responses during OPT-350M model fine-tuning on HHRLHF dataset. Despite only chosen responses being used for supervision, rejected responses show a comparable likelihood of generation.\n\n<!-- image -->\n\nPenalizing Undesired Generations Appending an unlikelihood penalty to the loss has demonstrated success in reducing unwanted degenerative traits in models (Welleck et al., 2019; Li et al., 2020). For example, to prevent repetitions , an unwanted token set of previous contexts, k ∈ C recent , is disfavored by adding the following term to (1 -p ( k ) i ) to the loss (such as Equation 2) which penalizes the model for assigning high probabilities to recent tokens. Motivated by SFT ascribing high probabilities to rejected tokens (Figure 3) and the effectiveness of appending penalizing unwanted traits, we design a monolithic preference alignment method that dynamically penalizes the disfavored response for each query without the need for crafting sets of rejected tokens.\n\n## 4 Odds Ratio Preference Optimization\n\nWe introduce a novel preference alignment algorithm, Odds Ratio Preference Optimization ( ORPO ), which incorporates an odds ratio-based penalty to the conventional negative log-likelihood (NLL) loss for differentiating the generation styles between favored and disfavored responses.\n\n## 4.1 Preliminaries\n\nGiven an input sequence x , the average loglikelihood of generating the output sequence y , of length m tokens, is computed as Equation 3. The odds of generating the output sequence y given an input sequence x is defined in Equation 4:\n\n<!-- formula-not-decoded -->\n\n<!-- formula-not-decoded -->\n\nIntuitively, odds θ ( y | x ) = k implies that it is k times more likely for the model θ to generate the output sequence y than not generating it. Thus, the odds ratio of the chosen response y w over the rejected response y l , OR θ ( y w , y l ) , indicates how much more likely it is for the model θ to generate y w than y l given input x , defined in Equation 5.\n\n<!-- formula-not-decoded -->\n\n## 4.2 Objective Function of ORPO\n\nThe objective function of ORPO in Equation 6 consists of two components: 1) supervised fine-tuning (SFT) loss ( L SFT ); 2) relative ratio loss ( L OR ).\n\n<!-- formula-not-decoded -->\n\nL SFT follows the conventional causal language modeling negative log-likelihood (NLL) loss function to maximize the likelihood of generating the reference tokens as previously discussed in Section 3. L OR in Equation 7 maximizes the odds ratio between the likelihood of generating the disfavored response y w and the disfavored response y l . We wrap the log odds ratio with the log sigmoid function so that L OR could be minimized by increasing the log odds ratio between y w and y l .\n\n<!-- formula-not-decoded -->\n\nTogether, L SFT and L OR weighted with λ tailor the pre-trained language model to adapt to the specific subset of the desired domain and disfavor generations in the rejected response sets.\n\n## 4.3 Gradient of ORPO\n\nThe gradient of L Ratio further justifies using the odds ratio loss. It comprises two terms: one that penalizes the wrong predictions and one that contrasts between chosen and rejected responses, denoted in Equation 8 4 for d = ( x, y l , y w ) ∼ D .\n\n<!-- formula-not-decoded -->\n\n<!-- formula-not-decoded -->\n\n<!-- formula-not-decoded -->\n\n4 The full derivation for ∇ θ L OR is in Appendix A.\n\nWhen the odds of the favored responses are relatively higher than the disfavored responses, δ ( d ) in Equation 9 will converge to 0. This indicates that the δ ( d ) will play the role of a penalty term, accelerating the parameter updates if the model is more likely to generate the rejected responses.\n\nMeanwhile, h ( d ) in Equation 10 implies a weighted contrast of the two gradients from the chosen and rejected responses. Specifically, 1 -P ( y | x ) in the denominators amplifies the gradients when the corresponding side of the likelihood P ( y | x ) is low. For the chosen responses, this accelerates the model's adaptation toward the distribution of chosen responses as the likelihood increases.\n\n## 5 Experimental Settings\n\n## 5.1 Training Configurations\n\nModels We train a series of OPT models (Zhang et al., 2022) scaling from 125M to 1.3B parameters comparing supervised fine-tuning (SFT), proximal policy optimization (PPO), direct policy optimization (DPO), and compare these to our ORPO . PPO and DPO models were fine-tuned with TRL library (von Werra et al., 2020) on top of SFT models trained for a single epoch on the chosen responses following Rafailov et al. (2023) and Tunstall et al. (2023). We notate this by prepending \"+\" to each algorithm (e.g., +DPO). Additionally, we train Phi-2 (2.7B) (Javaheripi and Bubeck, 2023), a pre-trained language model with promising downstream performance (Beeching et al., 2023), as well as Llama2 (7B) (Touvron et al., 2023) and Mistral (7B) (Jiang et al., 2023). Further training details for each method are in Appendix C.\n\nDatasets We test each training configuration and model on two datasets: 1) Anthropic's HH-RLHF (Bai et al., 2022a), 2) Binarized UltraFeedback (Tunstall et al., 2023). We filtered out instances where y w = y l or where y w = ∅ or where y l = ∅ .\n\nReward Models We train OPT-350M and OPT1.3B on each dataset for a single epoch for reward modeling with the objective function in Equation 11 (Ziegler et al., 2020). The OPT-350M reward model was used for PPO, and OPT-1.3B reward model was used to assess the generations of finetuned models. We refer to these reward models as RM-350M and RM-1.3B in Section 6.\n\n## 5.2 Leaderboard Evaluation\n\nIn Section 6.1, we evaluate the models using the AlpacaEval 1 . 0 and AlpacaEval 2 . 0 (Li et al., 2023b) benchmarks, comparing ORPO to other instructiontuned models reported in the official leaderboard, 5 including Llama-2 Chat (7B) and (13B) (Touvron et al., 2023), and Zephyr α and β (Almazrouei et al., 2023). Similarly, in Section 6.2, we evaluate the models with MT-Bench (Zheng et al., 2023) and report the results and the scores of the same models reported in the official leaderboard. 6 Using GPT-4 (Achiam et al., 2023) as an evaluator in AlpacaEval 1 . 0 , we assess if the trained model can be preferred over the responses generated from text-davinci-003 . For AlpacaEval 2 . 0 , we used GPT-4-turbo 7 as an evaluator following the default setting. We assess if the generated responses are favored over those generated from GPT-4. Finally, using GPT-4 as an evaluator in MT-Bench, we check if the models can follow the instructions with hard answers in a multi-turn conversation.\n\n## 6 Results and Analysis\n\nFirst, we assess the general instruction-following abilities of the models by comparing the preference alignment algorithms in Sections 6.1 and 6.2. Second, we measure the win rate of OPT models trained with ORPO against other alignment methods training OPT 1.3B as a reward model in Section 6.3. Then, we measure the lexical diversity of the models trained with ORPO and DPO in Section 6.4.\n\n## 6.1 Single-turn Instruction Following\n\nPhi-2 (2.7B) ORPO improved pre-trained Phi-2 to exceed the performance of the Llama-2 Chat instruction-following language model by only using UltraFeedback as the instruction-tuning dataset, as shown in Table 1. λ of 0.25 was applied for Phi2, resulting in 71.80% and 6.35% in AlpacaEval.\n\nLlama-2 (7B) Notably, UltraFeedback and ORPO with λ of 0.2 on Llama-2 (7B) resulted in higher AlpacaEval scores than the chat versions of both 7B and 13B scale trained with RLHF, eventually showing 81.26% and 9.44% in both AlpacaEvals.\n\nIn contrast, in our controlled experimental setting of conducting one epoch of SFT and three\n\n5 https://tatsu-lab.github.io/alpaca\\_eval/\n\n6 https://huggingface.co/spaces/lmsys/ chatbot-arena-leaderboard\n\n7 https://platform.openai.com/docs/models/ gpt-4-and-gpt-4-turbo\n\nTable 1: Table of instruction-following abilities of each checkpoint measured through AlpacaEval. While clearly showing the improvements in instruction-following abilities after training with ORPO , it is notable that ORPO models exceed RLHF or DPO models of Llama-2 and Mistral (* indicates the results from the official leaderboard.)\n\n| Model Name               | Size   | AlpacaEval 1.0   | AlpacaEval 2.0   |\n|--------------------------|--------|------------------|------------------|\n| Phi-2 + SFT              | 2.7B   | 48.37% (1.77)    | 0.11% (0.06)     |\n| Phi-2 + SFT + DPO        | 2.7B   | 50.63% (1.77)    | 0.78% (0.22)     |\n| Phi-2 + ORPO (Ours)      | 2.7B   | 71.80% (1.59)    | 6.35% (0.74)     |\n| Llama-2 Chat *           | 7B     | 71.34% (1.59)    | 4.96% (0.67)     |\n| Llama-2 Chat *           | 13B    | 81.09% (1.38)    | 7.70% (0.83)     |\n| Llama-2 + ORPO (Ours)    | 7B     | 81.26% (1.37)    | 9.44% (0.85)     |\n| Zephyr ( α ) *           | 7B     | 85.76% (1.23)    | 8.35% (0.87)     |\n| Zephyr ( β ) *           | 7B     | 90.60% (1.03)    | 10.99% (0.96)    |\n| Mistral- ORPO - α (Ours) | 7B     | 87.92% (1.14)    | 11.33% (0.97)    |\n| Mistral- ORPO - β (Ours) | 7B     | 91.41% (1.15)    | 12.20% (0.98)    |\n\nepochs of DPO following Tunstall et al. (2023) and Rafailov et al. (2023), Llama-2 + SFT and Llama2 + SFT + DPO yielded models with outputs that could not be evaluated. This supports the efficacy of ORPO , in which the model can rapidly learn the desired domain and the preference with limited data. This aligns with the h ( d ) examination in the gradient of our method studied in Section 4.3.\n\nMistralORPO -α (7B) Furthermore, fine-tuning Mistral (7B) with single-turn conversation dataset, UltraFeedback, and ORPO with λ of 0.1 outperforms Zephyr series, which are the Mistral (7B) models fine-tuned with SFT on 20K UltraChat (Ding et al., 2023) and DPO on the full UltraFeedback. As shown in Table 1, MistralORPO -α (7B) achieves 87.92% and 11.33%, which exceeds Zephyr α by 1.98% and Zephyr β by 0.34% in AlpacaEval 2 . 0 . The sample responses and corresponding references from GPT-4 can be found in Appendix I.\n\nMistralORPO -β (7B) Using the same configuration of MistralORPO -α (7B), we additionally compare fine-tuning Mistral on the cleaned version of the UltraFeedback 8 to demonstrate the effect of the data quality (Bartolome et al., 2023). While the actual sizes of datasets are similar, ORPO gains further advantages from the dataset quality by scoring over 91% and 12% on AlpacaEval, as shown in Table 1. Further instruction-following evaluation on two Mistral-based models with IFEval (Zhou et al., 2023c) is reported in the Appendix D.\n\n8 https://huggingface.co/datasets/argilla/ ultrafeedback-binarized-preferences-cleaned\n\nFigure 4: MT-Bench result of MistralORPO -α (7B) and MistralORPO -β (7B) by the category. Further comparison can be found in the Appendix G.\n\n<!-- image -->\n\n## 6.2 Multi-turn Instruction Following\n\nWith our best model, MistralORPO -α (7B) and MistralORPO -β (7B), we also assess the multi-turn instruction-following skills with deterministic answers (e.g., math) through MT-Bench.\n\nAs shown in Figure 4, ORPO -Mistral (7B) series achieve comparable results to either larger or the proprietary models, including Llama-2-Chat (70B) and Claude. Eventually, MistralORPO -α (7B) and MistralORPO -β (7B) scored 7.23 and 7.32 in MTBench without being exposed to the multi-turn conversation dataset during training.\n\n## 6.3 Reward Model Win Rate\n\nWe assess the win rate of ORPO over other preference alignment methods, including supervised fine-tuning (SFT), PPO, and DPO, using RM-1.3B to understand the effectiveness and scalability of ORPO in Tables 2 and 3. Additionally, we visually verify that ORPO can effectively enhance the\n\nFigure 5: Reward distribution comparison between OPT-125M (left), OPT-350M (middle), and OPT-1.3B (right) trained with SFT (blue), RLHF (green), DPO (orange), and ORPO (red) on the test set of UltraFeedback using the RM-1.3B. While the rewards of the trained models are roughly normal and preference optimization algorithms (RLHF, DPO, and ORPO ) tend to move the reward distribution in the positive direction, ORPO is on par or better than RLHF and DPO in increasing the expected reward. The same plot for the HH-RLHF dataset is in Appendix F.\n\n<!-- image -->\n\nexpected reward compared to SFT in Figure 5.\n\nHH-RLHF In Table 2, ORPO outperforms SFT and PPO across all model scales. The highest win rate against SFT and PPO across the size of the model was 78.0% and 79.4%, respectively. Meanwhile, the win rate over DPO was correlated to the model's size, with the largest model having the highest win rate: 70.9%.\n\n| ORPO vs   | SFT         | +DPO        | +PPO        |\n|-----------|-------------|-------------|-------------|\n| OPT-125M  | 84.0 (0.62) | 41.7 (0.77) | 66.1 (0.26) |\n| OPT-350M  | 82.7 (0.56) | 49.4 (0.54) | 79.4 (0.29) |\n| OPT-1.3B  | 78.0 (0.16) | 70.9 (0.52) | 65.9 (0.33) |\n\nTable 2: Average win rate (%) and its standard deviation of ORPO and standard deviation over other methods on HH-RLHF dataset for three rounds. Sampling decoding with a temperature of 1.0 was used on the test set.\n\nUltraFeedback The win rate in UltraFeedback followed similar trends to what was reported in HHRLHF, as shown in Table 3. ORPO was preferred over SFT and PPO for maximum 80.5% and 85.8%, respectively. While consistently preferring ORPO over SFT and PPO, the win rate over DPO gradually increases as the size of the model increases. The scale-wise trend exceeding DPO will be further shown through 2.7B models in Section 6.1.\n\nOverall Reward Distribution In addition to the win rate, we compare the reward distribution of the responses generated with respect to the test set of the UltraFeedback dataset in Figure 5 and HHRLHF dataset in Appendix F. Regarding the SFT reward distribution as a default, PPO, DPO, and ORPO shift it in both datasets. However, the magnitude of reward shifts for each algorithm differs.\n\nTable 3: Average win rate (%) and its standard deviation of ORPO and standard deviation over other methods on UltraFeedback dataset for three rounds. Sampling decoding with a temperature of 1.0 was used.\n\n| ORPO vs   | SFT         | +DPO        | +PPO        |\n|-----------|-------------|-------------|-------------|\n| OPT-125M  | 73.2 (0.12) | 48.8 (0.29) | 71.4 (0.28) |\n| OPT-350M  | 80.5 (0.54) | 50.5 (0.17) | 85.8 (0.62) |\n| OPT-1.3B  | 69.4 (0.57) | 57.8 (0.73) | 65.7 (1.07) |\n\nIn Figure 5, RLHF (i.e., SFT + PPO) has some abnormal properties of the distribution with a low expected reward. We attribute this to empirical evidence of the instability and reward mismatch problem of RLHF (Rafailov et al., 2023; Gao et al., 2022; Shen et al., 2023) as the RLHF models were trained with RM-350M and assessed with RM1.3B. Meanwhile, it is notable that the ORPO distribution (red) is mainly located on the very right side of each subplot, indicating higher expected rewards. Recalling the intent of preference alignment methods, the distributions in Figure 5 indicate that ORPO tends to fulfill the aim of preference alignment for all model sizes.\n\n## 6.4 Lexical Diversity\n\nThe lexical diversity of the preference-aligned language models was studied in previous works (Kirk et al., 2024). We expand the concept of per-input and across-input diversity introduced in Kirk et al. (2024) by using Gemini-Pro (Gemini Team et al., 2023) as an embedding model, which is suitable for assessing the diversity of instruction-following language models by encoding a maximum of 2048 tokens. The diversity metric with the given set of sampled responses is defined as Equation 13.\n\n<!-- formula-not-decoded -->\n\n<!-- formula-not-decoded -->\n\nwhere cos( h i , h j ) refers to the cosine similarity between the embedding h i and h j . 5 different responses are sampled with a temperature of 1.0 to 160 queries in AlpacaEval (i.e., K = 5 , N = 160 ) using Phi-2 and Llama-2 trained with ORPO and DPO. We report the results in Table 4.\n\nPer Input Diversity (PID) We average the inputwise average cosine similarity between the generated samples with Equation 14 to assess the perinput diversity. In Table 4, ORPO models have the highest average cosine similarity in the first column for both models, which implies the lowest diversity per input. This indicates that ORPO generally assigns high probabilities to the desired tokens, while DPO has a relatively smoother logit distribution.\n\n<!-- formula-not-decoded -->\n\nAcross Input Diversity (AID) Using 8 samples generated per input, we sample the first item for each input and examine their inter cosine similarity with Equation 15 for across-input diversity. Unlike per-input diversity, it is noteworthy that Phi-2 ( ORPO ) has lower average cosine similarity in the second row of Table 4. We can infer that ORPO triggers the model to generate more instructionspecific responses than DPO.\n\n<!-- formula-not-decoded -->\n\nTable 4: Lexical diversity of Phi-2 and Llama-2 finetuned with DPO and ORPO . Lower cosine similarity is equivalent to higher diversity. The highest value in each column within the same model family is bolded.\n\n|                     |   Per Input ↓ |   Across Input ↓ |\n|---------------------|---------------|------------------|\n| Phi-2 + SFT + DPO   |        0.8012 |           0.6019 |\n| Phi-2 + ORPO        |        0.8909 |           0.5173 |\n| Llama-2 + SFT + DPO |        0.8889 |           0.5658 |\n| Llama-2 + ORPO      |        0.9008 |           0.5091 |\n\n## 7 Discussion\n\nIn this section, we expound on the theoretical and computational details of ORPO . The theoretical analysis of ORPO is studied in Section 7.1, which will be supported with the empirical analysis in Section 7.2. Then, we compare the computational load of DPO and ORPO in Section 7.3.\n\n## 7.1 Comparison to Probability Ratio\n\nThe rationale for selecting the odds ratio instead of the probability ratio lies in its stability. The probability ratio for generating the favored response y w over the disfavored response y l given an input sequence x can be defined as Equation 16.\n\n<!-- formula-not-decoded -->\n\nWhile this formulation has been used in previous preference alignment methods that precede SFT (Rafailov et al., 2023; Azar et al., 2023), the odds ratio is a better choice in the setting where the preference alignment is incorporated in SFT as the odds ratio is more sensitive to the model's preference understanding. In other words, the probability ratio leads to more extreme discrimination of the disfavored responses than the odds ratio.\n\nWe visualize this through the sample distributions of the log probability ratio log PR ( X 2 | X 1 ) and log odds ratio log OR ( X 2 | X 1 ) . We sample 50,000 samples each with Equation 17 and plot the log probability ratio and log odds ratio in Figure 6. We multiply β for the probability ratio as it is practiced in the probability ratio-based methods and report the cases where β = 0 . 2 and β = 1 . 0 .\n\n<!-- formula-not-decoded -->\n\n<!-- formula-not-decoded -->\n\n<!-- formula-not-decoded -->\n\nRecalling that the log sigmoid function is applied to the log probability ratio and log odds ratio, each ratio's scale determines the expected margin between the likelihood of the favored and disfavored styles when the loss is minimized. In that sense, the contrast should be relatively extreme to minimize the log sigmoid loss when PR ( X 2 | X 1 ) is inputted instead of OR ( X 2 | X 1 ) to the log sigmoid function, regarding the sharp distribution of log PR ( X 2 | X 1 )\n\nFigure 6: Sampled distribution of log PR ( X 2 | X 1 ) and log OR ( X 2 | X 1 ) . log OR ( X 2 | X 1 ) has a wider range given the same input probability pairs ( X 1 , X 2 ) .\n\n<!-- image -->\n\nin Figure 6. This results in overly suppressing the logits for the tokens in the disfavored responses in the setting where SFT and preference alignment are incorporated, as the model is not adapted to the domain. We empirically support this analysis through the ablation study in Appendix B. Therefore, the odds ratio is a better choice when the preference alignment is done with SFT due to the mild discrimination of disfavored responses and the prioritizing of the favored responses to be generated.\n\nThroughout fine-tuning, minimizing the log sigmoid loss leads to either PR ( X 2 | X 1 ) or OR ( X 2 | X 1 ) to be larger. This is equivalent to the rejected responses' token-wise likelihood, which will generally get smaller. In this context, it is essential to avoid an overly extreme contrast. This precaution is especially important given the sharp distribution of log PR ( X 2 | X 1 ) depicted in Figure 6. The excessive margin could lead to the unwarranted suppression of logits for tokens in disfavored responses within the incorporated setting, potentially resulting in issues of degeneration.\n\n## 7.2 Minimizing L OR\n\nWe demonstrate that models trained with ORPO learned to reflect the preference throughout the training process. We monitored the log probabilities of the chosen and rejected responses and the log odds ratio with λ = 1 . 0 . With the same dataset and model as Figure 3, Figure 7 shows that the log probability of rejected responses is diminishing while that of chosen responses is on par with Figure 3 as the log odds ratio increases. This indicates that ORPO is successfully preserving the domain adaptation role of SFT while the penalty term L OR induces the model to lower the likelihood of unwanted generations. We discuss the effect of λ in Equation 6 in Appendix E, studying the proclivity of the log probability margin between the favored and disfavored responses with respect to λ .\n\nFigure 7: Average log-likelihood for chosen and rejected responses and log odds ratio per batch. The odds consistently increase during training with ORPO .\n\n<!-- image -->\n\n## 7.3 Computational Efficiency\n\nAs depicted in Figure 2, ORPO does not require a reference model, unlike RLHF and DPO. In that sense, ORPO is computationally more efficient than RLHF and DPO in two perspectives: 1) memory allocation and 2) fewer FLOPs per batch.\n\nThe reference model ( π SFT ) in the context of RLHF and DPO denotes the model trained with supervised fine-tuning (SFT), which will be the baseline model for updating the parameters with RLHF or DPO (Ziegler et al., 2020; Rafailov et al., 2023). Thus, two π SFT s, a frozen reference model and the model undergoing tuning, are required during training. Furthermore, in theory, two forward passes should be calculated for each model to acquire the logits for the chosen and rejected responses. In other words, four forward passes happen in total for a single batch. On the other hand, a reference model is not required in ORPO as π SFT is directly updated. This leads to half the number of forward passes required for each batch during training.\n\n## 8 Conclusion\n\nIn this paper, we introduced a reference-free monolithic preference alignment method, odds ratio preference optimization ( ORPO ), by revisiting and understanding the value of the supervised fine-tuning (SFT) phase in the context of preference alignment. ORPO was consistently preferred by the fine-tuned reward model against SFT and RLHF across the scale, and the win rate against DPO increased as the size of the model increased. Furthermore, we validate the scalability of ORPO with 2.7B and 7B pre-trained language models by exceeding the larger state-of-the-art instruction-following language models in AlpacaEval. Specifically, MistralORPO -α and MistralORPO -β achieved 11.33% and\n\n12.20% in AlpacaEval 2 . 0 , 7.23 and 7.32 in MTBench, thereby underscoring the efficiency and effectiveness of ORPO . We release fine-tuning code and model checkpoints for MistralORPO -α and MistralORPO -β to aid reproducibility.\n\n## Limitations\n\nWhile conducting a comprehensive analysis of the diverse preference alignment methods, including DPO and RLHF, we did not incorporate a more comprehensive range of preference alignment algorithms. We leave the broader range of comparison against other methods as future work, along with scaling our method to over 7B models. In addition, we will expand the fine-tuning datasets into diverse domains and qualities, thereby verifying the generalizability of our method in various NLP downstream tasks. Finally, we would like to study the internal impact of our method on the pre-trained language model, expanding the understanding of preference alignment procedure to not only the supervised fine-tuning stage but also consecutive preference alignment algorithms.\n\n## References\n\nJosh Achiam, Steven Adler, Sandhini Agarwal, Lama Ahmad, Ilge Akkaya, Florencia Leoni Aleman, Diogo Almeida, Janko Altenschmidt, Sam Altman, Shyamal Anadkat, et al. 2023. Gpt-4 technical report. arXiv preprint arXiv:2303.08774 .\n\n- Ebtesam Almazrouei, Hamza Alobeidli, Abdulaziz Alshamsi, Alessandro Cappelli, Ruxandra Cojocaru, Mérouane Debbah, Étienne Goffinet, Daniel Hesslow, Julien Launay, Quentin Malartic, Daniele Mazzotta, Badreddine Noune, Baptiste Pannier, and Guilherme Penedo. 2023. The falcon series of open language models.\n- Mohammad Gheshlaghi Azar, Mark Rowland, Bilal Piot, Daniel Guo, Daniele Calandriello, Michal Valko, and Rémi Munos. 2023. A general theoretical paradigm to understand learning from human preferences.\n- Yuntao Bai, Andy Jones, Kamal Ndousse, Amanda Askell, Anna Chen, Nova DasSarma, Dawn Drain, Stanislav Fort, Deep Ganguli, Tom Henighan, Nicholas Joseph, Saurav Kadavath, Jackson Kernion, Tom Conerly, Sheer El-Showk, Nelson Elhage, Zac Hatfield-Dodds, Danny Hernandez, Tristan Hume, Scott Johnston, Shauna Kravec, Liane Lovitt, Neel Nanda, Catherine Olsson, Dario Amodei, Tom Brown, Jack Clark, Sam McCandlish, Chris Olah, Ben Mann, and Jared Kaplan. 2022a. Training a helpful and harmless assistant with reinforcement learning from human feedback.\n\nYuntao Bai, Saurav Kadavath, Sandipan Kundu, Amanda Askell, Jackson Kernion, Andy Jones, Anna Chen, Anna Goldie, Azalia Mirhoseini, Cameron McKinnon, Carol Chen, Catherine Olsson, Christopher Olah, Danny Hernandez, Dawn Drain, Deep Ganguli, Dustin Li, Eli Tran-Johnson, Ethan Perez, Jamie Kerr, Jared Mueller, Jeffrey Ladish, Joshua Landau, Kamal Ndousse, Kamile Lukosuite, Liane Lovitt, Michael Sellitto, Nelson Elhage, Nicholas Schiefer, Noemi Mercado, Nova DasSarma, Robert Lasenby, Robin Larson, Sam Ringer, Scott Johnston, Shauna Kravec, Sheer El Showk, Stanislav Fort, Tamera Lanham, Timothy Telleen-Lawton, Tom Conerly, Tom Henighan, Tristan Hume, Samuel R. Bowman, Zac Hatfield-Dodds, Ben Mann, Dario Amodei, Nicholas Joseph, Sam McCandlish, Tom Brown, and Jared Kaplan. 2022b. Constitutional ai: Harmlessness from ai feedback.\n\n- Alvaro Bartolome, Gabriel Martin, and Daniel Vila. 2023. Notus. https://github.com/argilla-io/ notus .\n- Edward Beeching, Clémentine Fourrier, Nathan Habib, Sheon Han, Nathan Lambert, Nazneen Rajani, Omar Sanseviero, Lewis Tunstall, and Thomas Wolf. 2023. Open llm leaderboard. https://huggingface.co/ spaces/HuggingFaceH4/open\\_llm\\_leaderboard .\n- Ralph Allan Bradley and Milton E. Terry. 1952. Rank analysis of incomplete block designs: I. the method of paired comparisons. Biometrika , 39(3/4):324345.\n- Tom Brown, Benjamin Mann, Nick Ryder, Melanie Subbiah, Jared D Kaplan, Prafulla Dhariwal, Arvind Neelakantan, Pranav Shyam, Girish Sastry, Amanda Askell, Sandhini Agarwal, Ariel Herbert-Voss, Gretchen Krueger, Tom Henighan, Rewon Child, Aditya Ramesh, Daniel Ziegler, Jeffrey Wu, Clemens Winter, Chris Hesse, Mark Chen, Eric Sigler, Mateusz Litwin, Scott Gray, Benjamin Chess, Jack Clark, Christopher Berner, Sam McCandlish, Alec Radford, Ilya Sutskever, and Dario Amodei. 2020. Language models are few-shot learners. In Advances in Neural Information Processing Systems , volume 33, pages 1877-1901. Curran Associates, Inc.\n- Tianchi Cai, Xierui Song, Jiyan Jiang, Fei Teng, Jinjie Gu, and Guannan Zhang. 2023. Ulma: Unified language model alignment with demonstration and pointwise human preference. ArXiv , abs/2312.02554.\n- Nicholas Carlini, Florian Tramer, Eric Wallace, Matthew Jagielski, Ariel Herbert-Voss, Katherine Lee, Adam Roberts, Tom Brown, Dawn Song, Ulfar Erlingsson, Alina Oprea, and Colin Raffel. 2021. Extracting training data from large language models.\n- Weixin Chen and Bo Li. 2024. Grath: Gradual selftruthifying for large language models.\n- Qinyuan Cheng, Tianxiang Sun, Xiangyang Liu, Wenwei Zhang, Zhangyue Yin, Shimin Li, Linyang Li,\n- Kai Chen, and Xipeng Qiu. 2024. Can ai assistants know what they don't know?\n- Tri Dao. 2023. Flashattention-2: Faster attention with better parallelism and work partitioning.\n- Tim Dettmers, Artidoro Pagnoni, Ari Holtzman, and Luke Zettlemoyer. 2023. Qlora: Efficient finetuning of quantized llms.\n- Ning Ding, Yulin Chen, Bokai Xu, Yujia Qin, Zhi Zheng, Shengding Hu, Zhiyuan Liu, Maosong Sun, and Bowen Zhou. 2023. Enhancing chat language models by scaling high-quality instructional conversations.\n- Guanting Dong, Hongyi Yuan, Keming Lu, Chengpeng Li, Mingfeng Xue, Dayiheng Liu, Wei Wang, Zheng Yuan, Chang Zhou, and Jingren Zhou. 2024. How abilities in large language models are affected by supervised fine-tuning data composition.\n- Kawin Ethayarajh, Winnie Xu, Niklas Muennighoff, Dan Jurafsky, and Douwe Kiela. 2024. Kto: Model alignment as prospect theoretic optimization. arXiv preprint arXiv:2402.01306 .\n- Leo Gao, John Schulman, and Jacob Hilton. 2022. Scaling laws for reward model overoptimization.\n- Leo Gao, Jonathan Tow, Baber Abbasi, Stella Biderman, Sid Black, Anthony DiPofi, Charles Foster, Laurence Golding, Jeffrey Hsu, Alain Le Noac'h, Haonan Li, Kyle McDonell, Niklas Muennighoff, Chris Ociepa, Jason Phang, Laria Reynolds, Hailey Schoelkopf, Aviya Skowron, Lintang Sutawika, Eric Tang, Anish Thite, Ben Wang, Kevin Wang, and Andy Zou. 2023. A framework for few-shot language model evaluation.\n- Samuel Gehman, Suchin Gururangan, Maarten Sap, Yejin Choi, and Noah A. Smith. 2020. RealToxicityPrompts: Evaluating neural toxic degeneration in language models. In Findings of the Association for Computational Linguistics: EMNLP 2020 , pages 3356-3369, Online. Association for Computational Linguistics.\n- Gemini Team, Rohan Anil, Sebastian Borgeaud, Yonghui Wu, Jean-Baptiste Alayrac, Jiahui Yu, Radu Soricut, Johan Schalkwyk, Andrew M Dai, Anja Hauth, et al. 2023. Gemini: a family of highly capable multimodal models. arXiv preprint arXiv:2312.11805 .\n- Aaron Gokaslan and Vanya Cohen. 2019. Openwebtext corpus. http://Skylion007.github.io/ OpenWebTextCorpus .\n- Alexey Gorbatovski and Sergey Kovalchuk. 2024. Reinforcement learning for question answering in programming domain using public community scoring as a human feedback.\n- Hamish Haggerty and Rohitash Chandra. 2024. Selfsupervised learning for skin cancer diagnosis with limited training data.\n- Mojan Javaheripi and Sébastien Bubeck. 2023. Phi-2: The surprising power of small language models.\n- Albert Q. Jiang, Alexandre Sablayrolles, Arthur Mensch, Chris Bamford, Devendra Singh Chaplot, Diego de las Casas, Florian Bressand, Gianna Lengyel, Guillaume Lample, Lucile Saulnier, Lélio Renard Lavaud, Marie-Anne Lachaux, Pierre Stock, Teven Le Scao, Thibaut Lavril, Thomas Wang, Timothée Lacroix, and William El Sayed. 2023. Mistral 7b.\n- Robert Kirk, Ishita Mediratta, Christoforos Nalmpantis, Jelena Luketina, Eric Hambro, Edward Grefenstette, and Roberta Raileanu. 2024. Understanding the effects of rlhf on llm generalisation and diversity.\n- Harrison Lee, Samrat Phatale, Hassan Mansoor, Thomas Mesnard, Johan Ferret, Kellie Lu, Colton Bishop, Ethan Hall, Victor Carbune, Abhinav Rastogi, and Sushant Prakash. 2023. Rlaif: Scaling reinforcement learning from human feedback with ai feedback.\n- Margaret Li, Stephen Roller, Ilia Kulikov, Sean Welleck, Y-Lan Boureau, Kyunghyun Cho, and Jason Weston. 2020. Don't say that! making inconsistent dialogue unlikely with unlikelihood training. In Proceedings of the 58th Annual Meeting of the Association for Computational Linguistics , pages 4715-4728, Online. Association for Computational Linguistics.\n- Xian Li, Ping Yu, Chunting Zhou, Timo Schick, Luke Zettlemoyer, Omer Levy, Jason Weston, and Mike Lewis. 2023a. Self-alignment with instruction backtranslation.\n- Xuechen Li, Tianyi Zhang, Yann Dubois, Rohan Taori, Ishaan Gulrajani, Carlos Guestrin, Percy Liang, and Tatsunori B. Hashimoto. 2023b. Alpacaeval: An automatic evaluator of instruction-following models. https://github.com/tatsu-lab/alpaca\\_eval .\n- Yuanzhi Li, Sébastien Bubeck, Ronen Eldan, Allie Del Giorno, Suriya Gunasekar, and Yin Tat Lee. 2023c. Textbooks are all you need ii: phi-1.5 technical report.\n- Tsung-Yi Lin, Priya Goyal, Ross Girshick, Kaiming He, and Piotr Dollár. 2017. Focal loss for dense object detection. In Proceedings of the IEEE international conference on computer vision , pages 2980-2988.\n- Ilya Loshchilov and Frank Hutter. 2019. Decoupled weight decay regularization.\n- Anqi Mao, Mehryar Mohri, and Yutao Zhong. 2023. Cross-entropy loss functions: Theoretical analysis and applications.\n- Long Ouyang, Jeff Wu, Xu Jiang, Diogo Almeida, Carroll L. Wainwright, Pamela Mishkin, Chong Zhang, Sandhini Agarwal, Katarina Slama, Alex Ray, John Schulman, Jacob Hilton, Fraser Kelton, Luke Miller, Maddie Simens, Amanda Askell, Peter Welinder, Paul Christiano, Jan Leike, and Ryan Lowe. 2022. Training language models to follow instructions with human feedback.\n- Jing-Cheng Pang, Pengyuan Wang, Kaiyuan Li, XiongHui Chen, Jiacheng Xu, Zongzhang Zhang, and Yang Yu. 2023. Language model self-improvement by reinforcement learning contemplation.\n- Guilherme Penedo, Quentin Malartic, Daniel Hesslow, Ruxandra Cojocaru, Alessandro Cappelli, Hamza Alobeidli, Baptiste Pannier, Ebtesam Almazrouei, and Julien Launay. 2023. The refinedweb dataset for falcon llm: Outperforming curated corpora with web data, and web data only.\n- Reid Pryzant, Dan Iter, Jerry Li, Yin Lee, Chenguang Zhu, and Michael Zeng. 2023. Automatic prompt optimization with 'gradient descent' and beam search. In Proceedings of the 2023 Conference on Empirical Methods in Natural Language Processing , pages 7957-7968, Singapore. Association for Computational Linguistics.\n- Rafael Rafailov, Archit Sharma, Eric Mitchell, Stefano Ermon, Christopher D. Manning, and Chelsea Finn. 2023. Direct preference optimization: Your language model is secretly a reward model.\n- Miguel Moura Ramos, Patrick Fernandes, António Farinhas, and André F. T. Martins. 2023. Aligning neural machine translation models: Human feedback in training and inference.\n- Jeff Rasley, Samyam Rajbhandari, Olatunji Ruwase, and Yuxiong He. 2020. Deepspeed: System optimizations enable training deep learning models with over 100 billion parameters. In Proceedings of the 26th ACM SIGKDD International Conference on Knowledge Discovery &amp; Data Mining , KDD '20, page 3505-3506, New York, NY, USA. Association for Computing Machinery.\n- John Schulman, Filip Wolski, Prafulla Dhariwal, Alec Radford, and Oleg Klimov. 2017. Proximal policy optimization algorithms.\n- Wei Shen, Rui Zheng, Wenyu Zhan, Jun Zhao, Shihan Dou, Tao Gui, Qi Zhang, and Xuanjing Huang. 2023. Loose lips sink ships: Mitigating length bias in reinforcement learning from human feedback. In Findings of the Association for Computational Linguistics: EMNLP 2023 , pages 2859-2873, Singapore. Association for Computational Linguistics.\n- Feifan Song, Bowen Yu, Minghao Li, Haiyang Yu, Fei Huang, Yongbin Li, and Houfeng Wang. 2023. Preference ranking optimization for human alignment.\n- Nisan Stiennon, Long Ouyang, Jeff Wu, Daniel M. Ziegler, Ryan Lowe, Chelsea Voss, Alec Radford, Dario Amodei, and Paul Christiano. 2022. Learning to summarize from human feedback.\n- Rohan Taori, Ishaan Gulrajani, Tianyi Zhang, Yann Dubois, Xuechen Li, Carlos Guestrin, Percy Liang, and Tatsunori B. Hashimoto. 2023. Stanford alpaca: An instruction-following llama model. https:// github.com/tatsu-lab/stanford\\_alpaca .\n- Katherine Tian, Eric Mitchell, Huaxiu Yao, Christopher D. Manning, and Chelsea Finn. 2023. Finetuning language models for factuality.\n- Hugo Touvron, Thibaut Lavril, Gautier Izacard, Xavier Martinet, Marie-Anne Lachaux, Timothée Lacroix, Baptiste Rozière, Naman Goyal, Eric Hambro, Faisal Azhar, Aurelien Rodriguez, Armand Joulin, Edouard Grave, and Guillaume Lample. 2023. Llama: Open and efficient foundation language models.\n- Lewis Tunstall, Edward Beeching, Nathan Lambert, Nazneen Rajani, Kashif Rasul, Younes Belkada, Shengyi Huang, Leandro von Werra, Clémentine Fourrier, Nathan Habib, Nathan Sarrazin, Omar Sanseviero, Alexander M. Rush, and Thomas Wolf. 2023. Zephyr: Direct distillation of lm alignment.\n- Leandro von Werra, Younes Belkada, Lewis Tunstall, Edward Beeching, Tristan Thrush, Nathan Lambert, and Shengyi Huang. 2020. Trl: Transformer reinforcement learning. https://github. com/huggingface/trl .\n- Binghai Wang, Rui Zheng, Lu Chen, Yan Liu, Shihan Dou, Caishuang Huang, Wei Shen, Senjie Jin, Enyu Zhou, Chenyu Shi, Songyang Gao, Nuo Xu, Yuhao Zhou, Xiaoran Fan, Zhiheng Xi, Jun Zhao, Xiao Wang, Tao Ji, Hang Yan, Lixing Shen, Zhan Chen, Tao Gui, Qi Zhang, Xipeng Qiu, Xuanjing Huang, Zuxuan Wu, and Yu-Gang Jiang. 2024. Secrets of rlhf in large language models part ii: Reward modeling.\n- Yizhong Wang, Hamish Ivison, Pradeep Dasigi, Jack Hessel, Tushar Khot, Khyathi Raghavi Chandu, David Wadden, Kelsey MacMillan, Noah A. Smith, Iz Beltagy, and Hannaneh Hajishirzi. 2023. How far can camels go? exploring the state of instruction tuning on open resources.\n- Jason Wei, Maarten Bosma, Vincent Y. Zhao, Kelvin Guu, Adams Wei Yu, Brian Lester, Nan Du, Andrew M. Dai, and Quoc V. Le. 2022. Finetuned language models are zero-shot learners.\n- Sean Welleck, Ilia Kulikov, Stephen Roller, Emily Dinan, Kyunghyun Cho, and Jason Weston. 2019. Neural text generation with unlikelihood training. arXiv preprint arXiv:1908.04319 .\n- Tianhao Wu, Banghua Zhu, Ruoyu Zhang, Zhaojin Wen, Kannan Ramchandran, and Jiantao Jiao. 2023. Pairwise proximal policy optimization: Harnessing relative feedback for llm alignment.\n- Susan Zhang, Stephen Roller, Naman Goyal, Mikel Artetxe, Moya Chen, Shuohui Chen, Christopher Dewan, Mona Diab, Xian Li, Xi Victoria Lin, Todor Mihaylov, Myle Ott, Sam Shleifer, Kurt Shuster, Daniel Simig, Punit Singh Koura, Anjali Sridhar, Tianlu Wang, and Luke Zettlemoyer. 2022. Opt: Open pretrained transformer language models.\n- Yanli Zhao, Andrew Gu, Rohan Varma, Liang Luo, Chien-Chin Huang, Min Xu, Less Wright, Hamid Shojanazeri, Myle Ott, Sam Shleifer, Alban Desmaison, Can Balioglu, Pritam Damania, Bernard Nguyen, Geeta Chauhan, Yuchen Hao, Ajit Mathews, and Shen Li. 2023. Pytorch fsdp: Experiences on scaling fully sharded data parallel.\n- Lianmin Zheng, Wei-Lin Chiang, Ying Sheng, Siyuan Zhuang, Zhanghao Wu, Yonghao Zhuang, Zi Lin, Zhuohan Li, Dacheng Li, Eric P. Xing, Hao Zhang, Joseph E. Gonzalez, and Ion Stoica. 2023. Judging LLM-as-a-Judge with MT-Bench and Chatbot Arena. ArXiv:2306.05685 [cs].\n- Chunting Zhou, Pengfei Liu, Puxin Xu, Srini Iyer, Jiao Sun, Yuning Mao, Xuezhe Ma, Avia Efrat, Ping Yu, Lili Yu, Susan Zhang, Gargi Ghosh, Mike Lewis, Luke Zettlemoyer, and Omer Levy. 2023a. Lima: Less is more for alignment.\n- Haotian Zhou, Tingkai Liu, Qianli Ma, Jianbo Yuan, Pengfei Liu, Yang You, and Hongxia Yang. 2023b. Lobass: Gauging learnability in supervised finetuning data. ArXiv , abs/2310.13008.\n- Jeffrey Zhou, Tianjian Lu, Swaroop Mishra, Siddhartha Brahma, Sujoy Basu, Yi Luan, Denny Zhou, and Le Hou. 2023c. Instruction-following evaluation for large language models.\n- Daniel M. Ziegler, Nisan Stiennon, Jeffrey Wu, Tom B. Brown, Alec Radford, Dario Amodei, Paul Christiano, and Geoffrey Irving. 2020. Fine-tuning language models from human preferences.\n\n## A Derivation of ∇ θ L OR with Odds Ratio\n\nSuppose that g ( x, y l , y w ) = odds θ P ( y w | x ) odds θ P ( y l | x )\n\n<!-- formula-not-decoded -->\n\nIn Equation 25, the remaining derivative can be further simplified by replacing 1 -P θ ( y | x ) terms where P ( y | x ) = N √ ∏ N t P θ ( y t | x, y &lt;t in odds θ ( y | x ) as follows.\n\n<!-- formula-not-decoded -->\n\n<!-- formula-not-decoded -->\n\n<!-- formula-not-decoded -->\n\n<!-- formula-not-decoded -->\n\n<!-- formula-not-decoded -->\n\nTherefore, the final form of ∇ θ L OR would be\n\n<!-- formula-not-decoded -->\n\n<!-- formula-not-decoded -->\n\n<!-- formula-not-decoded -->\n\n## B Ablation on Probability Ratio and Odds Ratio\n\nIn this section, we continue the discussion in Section 7.1 through empirical results comparing the log probabilities of chosen and rejected responses in UltraFeedback when trained with probability ratio and odds ratio. Recalling the sensitivity of each ratio discussed in Section 7.1, it is expected for the probability ratio to lower the log probabilities of the rejected responses with a larger scale than the odds ratio. This is well-shown in Figure 8, which is the log probabilities of each batch while fine-tuning with probability ratio (left) rapidly reaches under -4, while the same phenomenon happens after the over-fitting occurs in the case of odds ratio (right).\n\nFigure 8: The log probability trace when the model is trained with the probability ratio (left) and the odds ratio (right) given the same hyperparameters. The probability ratio leads the rejected responses to have relatively lower log probabilities.\n\n<!-- image -->\n\n## C Experimental Details\n\nFlash-Attention 2 (Dao, 2023) is applied for all the pre-trained models for computational efficiency. In particular, the OPT series and Phi-2 (2.7B) were trained with DeepSpeed ZeRO 2 (Rasley et al., 2020), Llama-2 (7B) and Mistral (7B) were trained with Fully Sharded Data Parallel(FSDP) (Zhao et al., 2023). 7B and 2.7B models were trained with four and two NVIDIA A100, and the rest were trained on four NVIDIA A6000. For optimizer, AdamW optimizer (Loshchilov and Hutter, 2019) and paged AdamW (Dettmers et al., 2023) were used, and the linear warmup with cosine decay was applied for the learning rate. For input length, every instance was truncated and padded to 1,024 tokens and 2,048 tokens for HH-RLHF and UltraFeedback, respectively. To guarantee that the models can sufficiently learn to generate the proper response to the conversation history or the complex instruction, we filtered instances with prompts with more than 1,024 tokens.\n\nSupervised Fine-tuning (SFT) For SFT, the maximum learning rate was set to 1e-5. Following Ziegler et al. (2020) and Rafailov et al. (2023), the training epoch is set to 1.\n\nReinforcement Learning with Human Feedback (RLHF) For RLHF, the hyperparameters were set as Table 5 for UltraFeedback. For the HH-RLHF dataset, the output\\_min\\_length and output\\_max\\_length were set to 64 and 256.\n\nDirect Preference Optimization (DPO) For DPO, β was set to 0.1 for every case. The learning rate was set to 5e-6, and the model was trained for three epochs to select the best model by evaluation loss in each epoch. However, in most cases, the first or the second checkpoint was selected as the best model as the evaluation loss increased from the third epoch.\n\nTable 5: Hyperparameter settings for RLHF.\n\n| Hyperparameter              | Setting   |\n|-----------------------------|-----------|\n| ppo_epoch                   | 4         |\n| init_kl_coef                | 0.1       |\n| horizon                     | 2,000     |\n| batch_size                  | 64        |\n| mini_batch_size             | 8         |\n| gradient_accumulation_steps | 1         |\n| output_min_length           | 128       |\n| output_max_length           | 512       |\n| optimizer                   | AdamW     |\n| learning_rate               | 1e-05     |\n| gamma                       | 0.99      |\n\nOdds Ratio Preference Optimization ( ORPO ) As ORPO does not require any special hyperparameter, only the learning rate and epoch were the only hyperparameter to set. For ORPO , the maximum learning rate was set to 8e-6 and trained for 10 epochs. The best model is selected based on the lowest evaluation loss for the OPT series, Phi-2 (2.7B) and Llama-2 (7B).\n\n## D IFEval Result for MistralORPO -α and MistralORPO -β\n\nAlong with the AlpacaEval results reported in Section 6.1, we report the results of MistralORPO -α and MistralORPO -β on IFEval (Zhou et al., 2023c), calculated with the codes from Gao et al. (2023). Additional information can be found in: https://jiwooya1000.github.io/posts/orpo/#ifeval .\n\nTable 6: IFEval scores of MistralORPO -α and MistralORPO -β .\n\n| Model Type        |   Prompt-Strict |   Prompt-Loose |   Inst-Strict |   Inst-Loose |\n|-------------------|-----------------|----------------|---------------|--------------|\n| Mistral- ORPO - α |          0.5009 |         0.5083 |        0.5995 |       0.6163 |\n| Mistral- ORPO - β |          0.5287 |         0.5564 |        0.6355 |       0.6619 |\n\n## E Ablation on the Weighting Value ( λ )\n\nFor the weighting value λ in Equation 6, we conduct an ablation study with { 0 . 1 , 0 . 5 , 1 . 0 } . Mistral (7B) and UltraFeedback were used for the base model and dataset. In Section E.1, we compare the log probability trends by the value of λ , and we assess the downstream effect of λ in Section E.2.\n\n## E.1 Log Probability\n\nFigure 9: The log probability trend by λ . With larger λ (e.g., λ = 1 . 0 ), L OR gets more influential in fine-tuning the models with ORPO .\n\n<!-- image -->\n\nIn Figure 9, we find that larger λ leads to stronger discrimination of the rejected responses in general. With λ = 0 . 1 , the average log probability of the chosen and the rejected responses stay close as the fine-tuning proceeds. Also, unlike other settings, the log probabilities for the rejected responses do not decrease, but rather, the log probabilities of the chosen responses increase to minimize L OR term.\n\nMoreover, in λ = 0 . 5 , there exists a similar trend of further increasing the log probabilities of the chosen responses, but the log probabilities of the rejected responses are diminishing simultaneously. Lastly, in λ = 1 . 0 , the chosen responses diminish along with the rejected responses while enlarging the margin between them. However, this does not mean smaller λ is always the better. It will depend on the specific need and model.\n\n## E.2 MT-Bench\n\nFigure 10: MT-Bench result comparison by differing λ = 0 . 1 and λ = 1 . 0 .\n\n<!-- image -->\n\nThe downstream impact of λ stands out in the MT-Bench result. In comparison to λ = 0 . 1 , Mistral+ ORPO (7B) with λ = 1 . 0 performs worse in extraction, math, and reasoning, which are the categories that generally require deterministic answers. On the other hand, it performs better in STEM, humanities, and roleplay, which ask the generations without hard answers. Along with the amount of discrepancy between the trend in the logits of chosen and rejected responses, we can infer that making a more significant margin between the chosen and the rejected responses through higher λ in ORPO leads to overly adapting to the chosen responses set in the training dataset. This proclivity results in open-ended generations generally being preferred by the annotator while showing weaker performance in the hard-answered questions.\n\n## F Test Set Reward Distribution on HH-RLHF\n\nAlong with Figure 11, which depicts the reward distribution of OPT2-125M, OPT2-350M, and OPT2-1.3B on the UltraFeedback dataset, we report the reward distribution of each pre-trained checkpoint trained on the HH-RLHF dataset. As discussed in Section 6.3, ORPO consistently pushes the reward distribution of SFT to the right side.\n\nFigure 11: Reward distribution comparison between OPT-125M (left), OPT-350M (middle), and OPT-1.3B (right) trained with SFT (blue), RLHF (green), DPO (orange), and ORPO (red) on the test set of HH-RLHF using the 1.3B reward model. General tendency follows that of Figure 5.\n\n<!-- image -->\n\n## G MT-Bench Result of MistralORPO -α (7B) and MistralORPO -β (7B)\n\nFor the MT-Bench result in Section 6.2, we report the category-wise scores of MistralORPO -α (7B) and MistralORPO -β (7B) in Figure 12. While surpassing Llama-2 Chat (13B) and Llama-2 Chat (70B) in most cases, MistralORPO -β (7B) is comparable to GPT-3.5-turbo in the categories that require descriptive generations. However, it lacks coding and math skills, which we speculate is due to the lack of training data, as we used 61k instances in UltraFeedback.\n\n<!-- image -->\n\nLoading [MathJax]/extensions/MathMenu.js\n\nFigure 12: MT-Bench result of MistralORPO -α (7B) and MistralORPO -β (7B) by the category.\n\n## H Special Instructions for Verbosity Assessment\n\nFor the succinctness and verboseness instructions, we generated five different instructions, each with ChatGPT 9 . From the instructions in Table 7, we randomly sampled one prompt each for every batch to prevent potential word bias.\n\n|   # | Succinctness                                  | Verboseness                                         |\n|-----|-----------------------------------------------|-----------------------------------------------------|\n|   1 | Please generate a short and concise response. | Please generate an elaborative and chatty response. |\n|   2 | Provide a brief and concise answer.           | Provide a detailed answer.                          |\n|   3 | Keep your reply short and to the point.       | Keep your reply elaborative and intricate.          |\n|   4 | Keep your answer brief for clarity.           | Keep your answer detailed.                          |\n|   5 | Generate a brief and to-the-point answer.     | Generate a chatty and step-wise answer.             |\n\nTable 7: Instructions prepended to the queries from AlpacaEval. Each instruction set asks the model to generate either shorter or longer responses given the query, respectively.\n\n9 https://chat.openai.com/\n\n## I Generation Samples from MistralORPO -α (7B)\n\nIn this section, we two sample generations from MistralORPO -α (7B) on AlpacaEval, including the one which is preferred over the response of GPT-4 and the one in which GPT-4 was preferred. For readability, the instances with short responses are selected for both cases. Additionally, the responses for MistralORPO -α (7B) were sampled with a temperature of 0.7. The checkpoints for MistralORPO -α (7B) and MistralORPO -β (7B) can be found in https://huggingface.co/kaist-ai/mistral-orpo-alpha and https://huggingface.co/kaist-ai/mistral-orpo-beta .\n\nQuery 1 (GPT-4 Win): Give a brief description of the book that you are given. Matilda\n\n## 1. GPT-4 :\n\n\"Matilda\" is a children's novel written by the British author Roald Dahl. It was first published in 1988. The story revolves around a very intelligent and precocious young girl named Matilda Wormwood. Despite being neglected and mistreated by her ignorant and self-absorbed parents, Matilda finds solace in reading books and quickly develops a love for learning.\n\nAt the age of five, she begins attending school and meets Miss Honey, a kindhearted teacher who recognizes Matilda's extraordinary intellectual abilities. However, the school's tyrannical headmistress, Miss Trunchbull, is a cruel and oppressive figure who takes pleasure in punishing the children with her unreasonable and harsh methods.\n\nMatilda discovers that she possesses a unique telekinetic ability, which she learns to control and use to her advantage. With her wit, intelligence, and special powers, Matilda sets out to defend her friends from Miss Trunchbull's abuses and to help Miss Honey overcome her own difficult past.\n\nThe book is a tale of good triumphing over evil, and it celebrates the power of knowledge, kindness, and standing up for what is right. It has been adapted into a successful film, stage musical, and has remained a beloved classic in children's literature.\n\n## 2. MistralORPO -β :\n\n\"Matilda\" is a children's book written by Roald Dahl, published in 1988. The story revolves around the life of Matilda Wormwood, a brilliant and gifted five-year-old girl who has telekinetic powers. The story explores themes of education, family, and the importance of reading and intellectual curiosity. The book has been praised for its wit, humor, and powerful message, making it a classic and beloved children's book.\n\n## Query 2 (MistralORPO -β Win): What do you think about ChatGPT?\n\n## 1. GPT-4 :\n\nAs an AI developed by OpenAI, I don't have personal opinions. However, I can share that ChatGPT is an advanced language model that has received considerable attention for its ability to generate human-like text. It's designed to assist users in a wide range of tasks, from answering questions to creating content and engaging in conversation.\n\nChatGPT has been praised for its fluency and versatility in handling various topics and for its potential to streamline and enhance communication in both personal and professional settings. However, like any technology, it also faces challenges and criticisms, such as ensuring the accuracy of information, preventing misuse, and managing ethical considerations surrounding AI-generated content.\n\nOverall, ChatGPT represents a significant achievement in natural language processing and has sparked discussions about the future of AI in our daily lives.\n\n## 2. MistralORPO -β :\n\nAs an AI language model, I am an example of the technology used in ChatGPT. I can provide a personal opinion, but please keep in mind that I am designed to be socially unbiased and positive in nature.\n\nChatGPT is an impressive advancement in artificial intelligence and natural language processing. It has the ability to understand and generate human-like text, making it possible for users to have engaging and informative conversations with the AI. This technology has the potential to revolutionize various industries, including customer support, education, content creation, and more.\n\nHowever, it's important to recognize that ChatGPT, like any AI technology, is not perfect. It may sometimes provide inaccurate or biased information due to the limitations of its training data or the complexity of human language. It's crucial to verify the facts and use critical thinking when interacting with AI systems like ChatGPT.\n\nOverall, ChatGPT represents a significant step forward in the field of AI, and its potential applications are vast. As a responsible user, it's important to approach this technology with a critical and respectful mindset, recognizing its strengths and limitations.",
+  "tables": [
+    {
+      "index": 0,
+      "markdown": "| Model Name               | Size   | AlpacaEval 1.0   | AlpacaEval 2.0   |\n|--------------------------|--------|------------------|------------------|\n| Phi-2 + SFT              | 2.7B   | 48.37% (1.77)    | 0.11% (0.06)     |\n| Phi-2 + SFT + DPO        | 2.7B   | 50.63% (1.77)    | 0.78% (0.22)     |\n| Phi-2 + ORPO (Ours)      | 2.7B   | 71.80% (1.59)    | 6.35% (0.74)     |\n| Llama-2 Chat *           | 7B     | 71.34% (1.59)    | 4.96% (0.67)     |\n| Llama-2 Chat *           | 13B    | 81.09% (1.38)    | 7.70% (0.83)     |\n| Llama-2 + ORPO (Ours)    | 7B     | 81.26% (1.37)    | 9.44% (0.85)     |\n| Zephyr ( α ) *           | 7B     | 85.76% (1.23)    | 8.35% (0.87)     |\n| Zephyr ( β ) *           | 7B     | 90.60% (1.03)    | 10.99% (0.96)    |\n| Mistral- ORPO - α (Ours) | 7B     | 87.92% (1.14)    | 11.33% (0.97)    |\n| Mistral- ORPO - β (Ours) | 7B     | 91.41% (1.15)    | 12.20% (0.98)    |"
+    },
+    {
+      "index": 1,
+      "markdown": "| ORPO vs   | SFT         | +DPO        | +PPO        |\n|-----------|-------------|-------------|-------------|\n| OPT-125M  | 84.0 (0.62) | 41.7 (0.77) | 66.1 (0.26) |\n| OPT-350M  | 82.7 (0.56) | 49.4 (0.54) | 79.4 (0.29) |\n| OPT-1.3B  | 78.0 (0.16) | 70.9 (0.52) | 65.9 (0.33) |"
+    },
+    {
+      "index": 2,
+      "markdown": "| ORPO vs   | SFT         | +DPO        | +PPO        |\n|-----------|-------------|-------------|-------------|\n| OPT-125M  | 73.2 (0.12) | 48.8 (0.29) | 71.4 (0.28) |\n| OPT-350M  | 80.5 (0.54) | 50.5 (0.17) | 85.8 (0.62) |\n| OPT-1.3B  | 69.4 (0.57) | 57.8 (0.73) | 65.7 (1.07) |"
+    },
+    {
+      "index": 3,
+      "markdown": "|                     |   Per Input ↓ |   Across Input ↓ |\n|---------------------|---------------|------------------|\n| Phi-2 + SFT + DPO   |        0.8012 |           0.6019 |\n| Phi-2 + ORPO        |        0.8909 |           0.5173 |\n| Llama-2 + SFT + DPO |        0.8889 |           0.5658 |\n| Llama-2 + ORPO      |        0.9008 |           0.5091 |"
+    },
+    {
+      "index": 4,
+      "markdown": "| Hyperparameter              | Setting   |\n|-----------------------------|-----------|\n| ppo_epoch                   | 4         |\n| init_kl_coef                | 0.1       |\n| horizon                     | 2,000     |\n| batch_size                  | 64        |\n| mini_batch_size             | 8         |\n| gradient_accumulation_steps | 1         |\n| output_min_length           | 128       |\n| output_max_length           | 512       |\n| optimizer                   | AdamW     |\n| learning_rate               | 1e-05     |\n| gamma                       | 0.99      |"
+    },
+    {
+      "index": 5,
+      "markdown": "| Model Type        |   Prompt-Strict |   Prompt-Loose |   Inst-Strict |   Inst-Loose |\n|-------------------|-----------------|----------------|---------------|--------------|\n| Mistral- ORPO - α |          0.5009 |         0.5083 |        0.5995 |       0.6163 |\n| Mistral- ORPO - β |          0.5287 |         0.5564 |        0.6355 |       0.6619 |"
+    },
+    {
+      "index": 6,
+      "markdown": "|   # | Succinctness                                  | Verboseness                                         |\n|-----|-----------------------------------------------|-----------------------------------------------------|\n|   1 | Please generate a short and concise response. | Please generate an elaborative and chatty response. |\n|   2 | Provide a brief and concise answer.           | Provide a detailed answer.                          |\n|   3 | Keep your reply short and to the point.       | Keep your reply elaborative and intricate.          |\n|   4 | Keep your answer brief for clarity.           | Keep your answer detailed.                          |\n|   5 | Generate a brief and to-the-point answer.     | Generate a chatty and step-wise answer.             |"
+    }
+  ],
+  "stats": {
+    "pages": 22,
+    "chunksCreated": 95,
+    "totalCharacters": 66330,
+    "totalWords": 10276,
+    "numTables": 7,
+    "processingTimeMs": 21787
+  }
+}

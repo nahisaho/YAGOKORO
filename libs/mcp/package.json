@@ -1,0 +1,48 @@
+{
+  "name": "@yagokoro/mcp",
+  "version": "0.1.0",
+  "private": true,
+  "description": "MCP (Model Context Protocol) server implementation for YAGOKORO GraphRAG system",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "test": "vitest run --passWithNoTests",
+    "test:unit": "vitest run --exclude='**/*.integration.test.ts'",
+    "test:integration": "vitest run --include='**/*.integration.test.ts'",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
+    "typecheck": "tsc --noEmit",
+    "clean": "rm -rf dist coverage"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.0.0",
+    "@yagokoro/domain": "workspace:*",
+    "@yagokoro/graphrag": "workspace:*",
+    "@yagokoro/neo4j": "workspace:*",
+    "@yagokoro/vector": "workspace:*",
+    "zod": "^3.24.1"
+  },
+  "devDependencies": {
+    "vitest": "^2.1.8",
+    "zod-to-json-schema": "^3.25.1"
+  },
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "server",
+    "tools",
+    "resources"
+  ]
+}

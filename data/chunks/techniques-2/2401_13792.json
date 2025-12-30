@@ -1,0 +1,813 @@
+{
+  "paper": {
+    "id": "2401.13792v1",
+    "title": "Probabilistic Mobility Load Balancing for Multi-band 5G and Beyond Networks",
+    "abstract": "The ever-increasing demand for data services and the proliferation of user equipment (UE) have resulted in a significant rise in the volume of mobile traffic. Moreover, in multi-band networks, non-uniform traffic distribution among different operational bands can lead to congestion, which can adversely impact the user's quality of experience. Load balancing is a critical aspect of network optimization, where it ensures that the traffic is evenly distributed among different bands, avoiding congestion and ensuring better user experience. Traditional load balancing approaches rely only on the band channel quality as a load indicator and to move UEs between bands, which disregards the UE's demands and the band resource, and hence, leading to a suboptimal balancing and utilization of resources. To address this challenge, we propose an event-based algorithm, in which we model the load balancing problem as a multi-objective stochastic optimization, and assign UEs to bands in a probabilistic manner. The goal is to evenly distribute traffic across available bands according to their resources, while maintaining minimal number of inter-frequency handovers to avoid the signaling overhead and the interruption time. Simulation results show that the proposed algorithm enhances the network's performance and outperforms traditional load balancing approaches in terms of throughput and interruption time.",
+    "authors": [
+      "Saria Al Lahham",
+      "Di Wu",
+      "Ekram Hossain",
+      "Xue Liu",
+      "Gregory Dudek"
+    ],
+    "published": "2024-01-24T20:21:56.000Z",
+    "updated": "2024-01-24T20:21:56.000Z",
+    "primaryCategory": "cs.NI",
+    "categories": [
+      "cs.NI"
+    ],
+    "pdfUrl": "https://arxiv.org/pdf/2401.13792v1",
+    "absUrl": "https://arxiv.org/abs/2401.13792v1"
+  },
+  "chunks": [
+    {
+      "id": "2401.13792v1-chunk-0",
+      "content": "Saria Al Lahham, Di Wu, Ekram Hossain, Xue Liu, Gregory Dudek\n\nSamsung AI Center, Montr´ eal, Canada\n\n{ s.allahham, di.wu1, steve.liu, greg.dudek } @samsung.com, { e.hossain } @partner.samsung.com\n\nAbstract -The ever-increasing demand for data services and the proliferation of user equipment (UE) have resulted in a significant rise in the volume of mobile traffic. Moreover, in multiband networks, non-uniform traffic distribution among different operational bands can lead to congestion, which can adversely impact the user's quality of experience. Load balancing is a critical aspect of network optimization, where it ensures that the traffic is evenly distributed among different bands, avoiding congestion and ensuring better user experience. Traditional load balancing approaches rely only on the band channel quality as a load indicator and to move UEs between bands, which disregards the UE's demands and the band resource, and hence, leading to a suboptimal balancing and utilization of res",
+      "metadata": {
+        "source": "arxiv:2401.13792v1",
+        "title": "Probabilistic Mobility Load Balancing for Multi-band 5G and Beyond Networks",
+        "authors": [
+          "Saria Al Lahham",
+          "Di Wu",
+          "Ekram Hossain",
+          "Xue Liu",
+          "Gregory Dudek"
+        ],
+        "section": "Probabilistic Mobility Load Balancing for Multi-band 5G and Beyond Networks",
+        "chunkIndex": 0,
+        "totalChunks": 43
+      }
+    },
+    {
+      "id": "2401.13792v1-chunk-1",
+      "content": "the band channel quality as a load indicator and to move UEs between bands, which disregards the UE's demands and the band resource, and hence, leading to a suboptimal balancing and utilization of resources. To address this challenge, we propose an event-based algorithm, in which we model the load balancing problem as a multi-objective stochastic optimization, and assign UEs to bands in a probabilistic manner. The goal is to evenly distribute traffic across available bands according to their resources, while maintaining minimal number of inter-frequency handovers to avoid the signaling overhead and the interruption time. Simulation results show that the proposed algorithm enhances the network's performance and outperforms traditional load balancing approaches in terms of throughput and interruption time.\n\nIndex Terms -Cellular networks, load balancing, optimization",
+      "metadata": {
+        "source": "arxiv:2401.13792v1",
+        "title": "Probabilistic Mobility Load Balancing for Multi-band 5G and Beyond Networks",
+        "authors": [
+          "Saria Al Lahham",
+          "Di Wu",
+          "Ekram Hossain",
+          "Xue Liu",
+          "Gregory Dudek"
+        ],
+        "section": "Probabilistic Mobility Load Balancing for Multi-band 5G and Beyond Networks",
+        "chunkIndex": 1,
+        "totalChunks": 43
+      }
+    },
+    {
+      "id": "2401.13792v1-chunk-2",
+      "content": "Mobility load balancing (MLB) has been recognized as a crucial element of managing radio resources [1], and a core problem in 5G communication networks. In fact, MLB is commonly studied within the context of self-organizing networks (SON), which provide a comprehensive framework for self-optimization and self-healing, with load balancing being a critical aspect of the self-optimization component [2]. MLB in 3GPP standards is defined as moving cell-edge user equipment units (UEs) in a crowded cell to a lesscrowded neighboring cell. In multi-band networks, MLB can additionally move UEs between the available bands via interfrequency handovers (HOs) based on the channel quality for each band, where it aims to enhance the UEs throughput, ensure fairness between UEs, and minimize the latency [3]. Given the continuously increasing number of UEs and their increased data demand, coupled with their demand heterogeneity and mobility, load balancing is becoming even more important in managing netw",
+      "metadata": {
+        "source": "arxiv:2401.13792v1",
+        "title": "Probabilistic Mobility Load Balancing for Multi-band 5G and Beyond Networks",
+        "authors": [
+          "Saria Al Lahham",
+          "Di Wu",
+          "Ekram Hossain",
+          "Xue Liu",
+          "Gregory Dudek"
+        ],
+        "section": "I. INTRODUCTION",
+        "chunkIndex": 2,
+        "totalChunks": 43
+      }
+    },
+    {
+      "id": "2401.13792v1-chunk-3",
+      "content": ". Given the continuously increasing number of UEs and their increased data demand, coupled with their demand heterogeneity and mobility, load balancing is becoming even more important in managing network resources. Moreover, it is reported that mobile network data was doubled in the last two years alone, and with the introduction of extended-reality (XR) applications and advancements in the quality and resolution of video content, it is expected that network traffic will increase by at least 38% over the next years [4]. This shows the need for efficient load balancing techniques that can effectively distribute traffic across available resources to ensure optimal network performance.\n\nThe existing literature on MLB focuses on the optimal adjustment of the HO controllable parameters, specifically, the cell individual offsets (CIOs), relying on the current load of each cell and the measurements reported by the UEs such as the Reference Signal Received Quality (RSRQ).",
+      "metadata": {
+        "source": "arxiv:2401.13792v1",
+        "title": "Probabilistic Mobility Load Balancing for Multi-band 5G and Beyond Networks",
+        "authors": [
+          "Saria Al Lahham",
+          "Di Wu",
+          "Ekram Hossain",
+          "Xue Liu",
+          "Gregory Dudek"
+        ],
+        "section": "I. INTRODUCTION",
+        "chunkIndex": 3,
+        "totalChunks": 43
+      }
+    },
+    {
+      "id": "2401.13792v1-chunk-4",
+      "content": "le parameters, specifically, the cell individual offsets (CIOs), relying on the current load of each cell and the measurements reported by the UEs such as the Reference Signal Received Quality (RSRQ). An example of the usage of CIOs is the A3 event as defined in the 3GPP standards [5]:\n\n<!-- formula-not-decoded -->\n\nwhere R n and R s are the RSRQ reported values for a neighboring cell and the serving cell, respectively, H is the hysteresis, and O n,s is a controllable CIO. Various rule-based MLB techniques were proposed in the literature. For instance, the authors in [6] proposed an algorithm to adjust the CIO between cells based on the difference in their load, i.e., a cell which has lesser load than its neighbor its CIO gets decreased by a factor to ease the HO triggering from its neighbor, where the factor is a function of the difference between the cells' loads.",
+      "metadata": {
+        "source": "arxiv:2401.13792v1",
+        "title": "Probabilistic Mobility Load Balancing for Multi-band 5G and Beyond Networks",
+        "authors": [
+          "Saria Al Lahham",
+          "Di Wu",
+          "Ekram Hossain",
+          "Xue Liu",
+          "Gregory Dudek"
+        ],
+        "section": "I. INTRODUCTION",
+        "chunkIndex": 4,
+        "totalChunks": 43
+      }
+    },
+    {
+      "id": "2401.13792v1-chunk-5",
+      "content": "cell which has lesser load than its neighbor its CIO gets decreased by a factor to ease the HO triggering from its neighbor, where the factor is a function of the difference between the cells' loads. A similar approach was proposed in [7], but the authors considered adding or subtracting an adaptive step-size to the offset based on the time average of the load for each cell. Furthermore, to tackle the problem of non-uniform traffic distribution between cells, the authors in [8] proposed a traffic and cell load balancers with a new HO rule-set, including adjustable CIOs and time-to-trigger based on the average RB consumption of each UE. Apart from rule-based methods, numerous learning-based methods were proposed and were shown to be superior to rule-based methods. For example, Reinforcement Learning (RL)-based MLB was presented in [9] in addition to inactive mode load balancing.",
+      "metadata": {
+        "source": "arxiv:2401.13792v1",
+        "title": "Probabilistic Mobility Load Balancing for Multi-band 5G and Beyond Networks",
+        "authors": [
+          "Saria Al Lahham",
+          "Di Wu",
+          "Ekram Hossain",
+          "Xue Liu",
+          "Gregory Dudek"
+        ],
+        "section": "I. INTRODUCTION",
+        "chunkIndex": 5,
+        "totalChunks": 43
+      }
+    },
+    {
+      "id": "2401.13792v1-chunk-6",
+      "content": "ng-based methods were proposed and were shown to be superior to rule-based methods. For example, Reinforcement Learning (RL)-based MLB was presented in [9] in addition to inactive mode load balancing. The authors proposed a hierarchical RL algorithm to control both MLB CIOs for active UEs, and the cell reselection parameters for inactive UEs to mitigate overloading cells, which resulted a much better performance. To generalize on real-world data and to enable better tradeoffs between different key performance indicators (KPIs), the authors in [10] proposed a multi-objective meta-RL algorithm. Compared to rule-based methods and single objective RL, the proposed approach achieved better KPIs and Pareto fronts. Furthermore, a set of RL algorithms were proposed in [11] with a diverse set of reward functions to satisfy the operators' needs and key performance indicators (KPIs).",
+      "metadata": {
+        "source": "arxiv:2401.13792v1",
+        "title": "Probabilistic Mobility Load Balancing for Multi-band 5G and Beyond Networks",
+        "authors": [
+          "Saria Al Lahham",
+          "Di Wu",
+          "Ekram Hossain",
+          "Xue Liu",
+          "Gregory Dudek"
+        ],
+        "section": "I. INTRODUCTION",
+        "chunkIndex": 6,
+        "totalChunks": 43
+      }
+    },
+    {
+      "id": "2401.13792v1-chunk-7",
+      "content": "d better KPIs and Pareto fronts. Furthermore, a set of RL algorithms were proposed in [11] with a diverse set of reward functions to satisfy the operators' needs and key performance indicators (KPIs). Each algorithm and reward function target a different scenario based on the density of the cells and the UEs traffic patterns.\n\nNonetheless, CIO-based HO for MLB approaches do not move UEs between bands according to their demands or band resources with inter-frequency HOs, but they rely on the fact that the lesser the load of a band, the better the channel quality (e.g., RSRQ). However, once the band resources (i.e., Physical Resource Blocks (PRBs)) are fully utilized, the channel quality becomes independent of the current load, and performance of aforementioned approaches deteriorates. To this end, in this work, we consider a centralized approach by employing forced HOs, where a base station (BS) can change the operating band of a UE through an RRC reconfiguration message [12].",
+      "metadata": {
+        "source": "arxiv:2401.13792v1",
+        "title": "Probabilistic Mobility Load Balancing for Multi-band 5G and Beyond Networks",
+        "authors": [
+          "Saria Al Lahham",
+          "Di Wu",
+          "Ekram Hossain",
+          "Xue Liu",
+          "Gregory Dudek"
+        ],
+        "section": "I. INTRODUCTION",
+        "chunkIndex": 7,
+        "totalChunks": 43
+      }
+    },
+    {
+      "id": "2401.13792v1-chunk-8",
+      "content": "tes. To this end, in this work, we consider a centralized approach by employing forced HOs, where a base station (BS) can change the operating band of a UE through an RRC reconfiguration message [12]. By doing so, the BS have the control over moving UEs to more appropriate bands based on the UE's traffic and the bands' available resources. As such, we formulate the load balancing problem as a multi-objective UE-band assignment problem. To mitigate the signaling overhead and reduce the interruptions time caused by the forced HOs, we set our objective as the joint minimization of the number of interfrequency HOs and the bands' total load. Moreover, to avoid the computational complexity overhead caused by solving the assignment problem, we propose an event-based algorithm that checks if there is a necessity for load balancing. The contributions of this work can be summarized as follows:",
+      "metadata": {
+        "source": "arxiv:2401.13792v1",
+        "title": "Probabilistic Mobility Load Balancing for Multi-band 5G and Beyond Networks",
+        "authors": [
+          "Saria Al Lahham",
+          "Di Wu",
+          "Ekram Hossain",
+          "Xue Liu",
+          "Gregory Dudek"
+        ],
+        "section": "I. INTRODUCTION",
+        "chunkIndex": 8,
+        "totalChunks": 43
+      }
+    },
+    {
+      "id": "2401.13792v1-chunk-9",
+      "content": "rhead caused by solving the assignment problem, we propose an event-based algorithm that checks if there is a necessity for load balancing. The contributions of this work can be summarized as follows:\n\n- We formulate a multi-objective stochastic optimization problem to model the UE-band assignment problem, aiming at minimizing the maximum load of the bands and number of HOs required.\n- By leveraging problem transformation methods (e.g., epigraph technique), we reduce the problem into a Linear Program to reduce the solution complexity.\n- We propose an event-based MLB algorithm with probabilistic assignment scheme, which uses the solution of the Linear Program, such that the assignment for a UE is given by a probability distribution over the bands.\n\nThe remainder of the paper is organized as follows: Section II introduces the considered system model in this work.",
+      "metadata": {
+        "source": "arxiv:2401.13792v1",
+        "title": "Probabilistic Mobility Load Balancing for Multi-band 5G and Beyond Networks",
+        "authors": [
+          "Saria Al Lahham",
+          "Di Wu",
+          "Ekram Hossain",
+          "Xue Liu",
+          "Gregory Dudek"
+        ],
+        "section": "I. INTRODUCTION",
+        "chunkIndex": 9,
+        "totalChunks": 43
+      }
+    },
+    {
+      "id": "2401.13792v1-chunk-10",
+      "content": "that the assignment for a UE is given by a probability distribution over the bands.\n\nThe remainder of the paper is organized as follows: Section II introduces the considered system model in this work. Section III presents the formulated multi-objective optimization problem, while Section IV presents the solution methodology and the proposed algorithm. In Section V we show the analysis for the solution and the performance evaluation. Finally, Section VI concludes the paper.",
+      "metadata": {
+        "source": "arxiv:2401.13792v1",
+        "title": "Probabilistic Mobility Load Balancing for Multi-band 5G and Beyond Networks",
+        "authors": [
+          "Saria Al Lahham",
+          "Di Wu",
+          "Ekram Hossain",
+          "Xue Liu",
+          "Gregory Dudek"
+        ],
+        "section": "I. INTRODUCTION",
+        "chunkIndex": 10,
+        "totalChunks": 43
+      }
+    },
+    {
+      "id": "2401.13792v1-chunk-11",
+      "content": "We consider a cellular network consisting of N macrogNodeBs (gNBs), each of which covers three different cells. Each cell operates over B non-overlapping frequency bands, and serves U UEs that are uniformly distributed across the cell. Within a cell, the set of available bands is denoted by B and the set of UEs is denoted by U . Throughout this work, we omit the cell index since we focus on the cell-level multi-band MLB, and each cell has its own unique set of UEs and bands. As for MLB between different cells, the 3GPP default rule set for MLB [2] is employed such as the A2 and A5 events.\n\nThe downlink (DL) channels for each band to each user in a cell have time-varying capacities. A UE u 's DL channel rate from a band b at time t is random variable and denoted by r u,b ( t ) . We assume that r u,b ( t ) is chosen from a discrete set of rates as in a practical wireless system and sampled from a stationary distribution.",
+      "metadata": {
+        "source": "arxiv:2401.13792v1",
+        "title": "Probabilistic Mobility Load Balancing for Multi-band 5G and Beyond Networks",
+        "authors": [
+          "Saria Al Lahham",
+          "Di Wu",
+          "Ekram Hossain",
+          "Xue Liu",
+          "Gregory Dudek"
+        ],
+        "section": "II. SYSTEM MODEL",
+        "chunkIndex": 11,
+        "totalChunks": 43
+      }
+    },
+    {
+      "id": "2401.13792v1-chunk-12",
+      "content": "t time t is random variable and denoted by r u,b ( t ) . We assume that r u,b ( t ) is chosen from a discrete set of rates as in a practical wireless system and sampled from a stationary distribution. Note that different UEs for each band can possibly have heterogeneous rate distributions, depending mainly on the band resources, denoted by N b , and the Signalto-Interference-Noise-Ratio (SINR), where band resources are usually represented by the number PRBs in that band. We then denote the U × B rate matrix in a cell as R ( t ) , such that the u th row r u ( t ) denotes the rate vector for a UE u across all bands, and the b th column r b ( t ) denotes the rate vector in a band b for all the UEs. Afterwards, we assume a full buffer traffic model, and define the UEs' demand vector as d ( t ) , where the UE u 's demand at time t is given by:\n\n<!-- formula-not-decoded -->",
+      "metadata": {
+        "source": "arxiv:2401.13792v1",
+        "title": "Probabilistic Mobility Load Balancing for Multi-band 5G and Beyond Networks",
+        "authors": [
+          "Saria Al Lahham",
+          "Di Wu",
+          "Ekram Hossain",
+          "Xue Liu",
+          "Gregory Dudek"
+        ],
+        "section": "II. SYSTEM MODEL",
+        "chunkIndex": 12,
+        "totalChunks": 43
+      }
+    },
+    {
+      "id": "2401.13792v1-chunk-13",
+      "content": "band b for all the UEs. Afterwards, we assume a full buffer traffic model, and define the UEs' demand vector as d ( t ) , where the UE u 's demand at time t is given by:\n\n<!-- formula-not-decoded -->\n\nin which a u ( t ) is a Poisson random variable with a mean of λ u and denotes the number of packets arrivals, and s represents the packet size in bits. Thereafter, we define the load vector for a band b as a vector as follows:\n\n<!-- formula-not-decoded -->\n\nwhere ⊘ is the Hadamard division operator (i.e., element-wise division). The load vector defines how much each UE increases the band load based on the UE's incoming traffic, channel quality, and DL rate from that band. Indeed, UEs with bad channel quality with a band means low DL rate, and hence, a higher load to the band (e.g., occupying more PRBs to meet the UE demand). For the remainder of the paper, the time index t will be omitted for the sake of clarity.",
+      "metadata": {
+        "source": "arxiv:2401.13792v1",
+        "title": "Probabilistic Mobility Load Balancing for Multi-band 5G and Beyond Networks",
+        "authors": [
+          "Saria Al Lahham",
+          "Di Wu",
+          "Ekram Hossain",
+          "Xue Liu",
+          "Gregory Dudek"
+        ],
+        "section": "II. SYSTEM MODEL",
+        "chunkIndex": 13,
+        "totalChunks": 43
+      }
+    },
+    {
+      "id": "2401.13792v1-chunk-14",
+      "content": "g more PRBs to meet the UE demand). For the remainder of the paper, the time index t will be omitted for the sake of clarity.",
+      "metadata": {
+        "source": "arxiv:2401.13792v1",
+        "title": "Probabilistic Mobility Load Balancing for Multi-band 5G and Beyond Networks",
+        "authors": [
+          "Saria Al Lahham",
+          "Di Wu",
+          "Ekram Hossain",
+          "Xue Liu",
+          "Gregory Dudek"
+        ],
+        "section": "II. SYSTEM MODEL",
+        "chunkIndex": 14,
+        "totalChunks": 43
+      }
+    },
+    {
+      "id": "2401.13792v1-chunk-15",
+      "content": "Our main objective in this work is to balance the loads between the available bands by moving UEs between bands via forced inter-frequency HOs while minimizing the number of needed HOs. As such, we first define the U × B UE-band assignments matrix X , such that the u th row x u denotes the assignment vector for a UE u between all bands, and the b th column x b denotes the assignment vector in a band b for all the UEs. The assignment entries x u,b = 1 if the UE u is assigned to a band b , and x u,b = 0 otherwise. Subsequently, we define the load balancing objective function as follows:\n\n<!-- formula-not-decoded -->\n\nwhich represents the maximum load across all the bands, and E[ ρ b ] denotes the expected load vector for a band. In fact, the optimal solution for minimizing the maximum load is to keep all the loads the same for all the bands, which is our target in MLB. Afterwards, we define the number of inter-frequency HOs objective function as follows:\n\n<!-- formula-not-decoded -->",
+      "metadata": {
+        "source": "arxiv:2401.13792v1",
+        "title": "Probabilistic Mobility Load Balancing for Multi-band 5G and Beyond Networks",
+        "authors": [
+          "Saria Al Lahham",
+          "Di Wu",
+          "Ekram Hossain",
+          "Xue Liu",
+          "Gregory Dudek"
+        ],
+        "section": "III. PROBLEM FORMULATION",
+        "chunkIndex": 15,
+        "totalChunks": 43
+      }
+    },
+    {
+      "id": "2401.13792v1-chunk-16",
+      "content": "ad is to keep all the loads the same for all the bands, which is our target in MLB. Afterwards, we define the number of inter-frequency HOs objective function as follows:\n\n<!-- formula-not-decoded -->\n\nwhere || . || 1 for a matrix here denotes the absolute sum of all the entries, and ˆ X is the UE-band assignments at t -1\n\nprior to the load balancing. It is important to notice that there is a trade-off between the two objectives. On the one hand, the optimal value for the second objective is achieved when X = ˆ X , indicating that no UE needs to be relocated to another band, thereby precluding any load balancing with no HOs. On the other hand, in a worst-case scenario, it may be essential to relocate all UEs from their current band to another one, resulting in a much worse solution for the second objective. To this end, we formulate a scalarized weighted multi-objective optimization problem (MOP) as follows:\n\n<!-- formula-not-decoded -->\n\n<!-- formula-not-decoded -->",
+      "metadata": {
+        "source": "arxiv:2401.13792v1",
+        "title": "Probabilistic Mobility Load Balancing for Multi-band 5G and Beyond Networks",
+        "authors": [
+          "Saria Al Lahham",
+          "Di Wu",
+          "Ekram Hossain",
+          "Xue Liu",
+          "Gregory Dudek"
+        ],
+        "section": "III. PROBLEM FORMULATION",
+        "chunkIndex": 16,
+        "totalChunks": 43
+      }
+    },
+    {
+      "id": "2401.13792v1-chunk-17",
+      "content": "se solution for the second objective. To this end, we formulate a scalarized weighted multi-objective optimization problem (MOP) as follows:\n\n<!-- formula-not-decoded -->\n\n<!-- formula-not-decoded -->\n\n<!-- formula-not-decoded -->\n\n<!-- formula-not-decoded -->\n\n<!-- formula-not-decoded -->\n\n<!-- formula-not-decoded -->\n\nwhere w ∈ [0 , 1] is the objective weight hyper-parameter in the MOP, constraint (6b) tells that a UE can only be assigned to one band, constraint (6c) ensures that the UE will be granted a minimum rate of r min , constraint (6d) avoids over-congesting bands that has better channel quality and offers higher data rates by setting a cap n max on the number of UEs on this band, such that n max is proportional to the bands' resources, and finally, constraint (6e) tells that the decision variable is a binary matrix.",
+      "metadata": {
+        "source": "arxiv:2401.13792v1",
+        "title": "Probabilistic Mobility Load Balancing for Multi-band 5G and Beyond Networks",
+        "authors": [
+          "Saria Al Lahham",
+          "Di Wu",
+          "Ekram Hossain",
+          "Xue Liu",
+          "Gregory Dudek"
+        ],
+        "section": "III. PROBLEM FORMULATION",
+        "chunkIndex": 17,
+        "totalChunks": 43
+      }
+    },
+    {
+      "id": "2401.13792v1-chunk-18",
+      "content": "tes by setting a cap n max on the number of UEs on this band, such that n max is proportional to the bands' resources, and finally, constraint (6e) tells that the decision variable is a binary matrix. It can be noticed that the problem is not only an NP-Hard Integer Nonlinear Program [13], but also a stochastic optimization problem by having the UEs' data rate and the incoming traffic as random vectors in f 1 ( X ) . To tackle these challenges, common approaches such as relaxing the integer decision variables and estimating the random variables can be followed and further optimized as will be demonstrated in the next section.",
+      "metadata": {
+        "source": "arxiv:2401.13792v1",
+        "title": "Probabilistic Mobility Load Balancing for Multi-band 5G and Beyond Networks",
+        "authors": [
+          "Saria Al Lahham",
+          "Di Wu",
+          "Ekram Hossain",
+          "Xue Liu",
+          "Gregory Dudek"
+        ],
+        "section": "III. PROBLEM FORMULATION",
+        "chunkIndex": 18,
+        "totalChunks": 43
+      }
+    },
+    {
+      "id": "2401.13792v1-chunk-19",
+      "content": "This section presents the proposed approach for solving the formulated MOP that aims to redistribute UEs across bands, such that the maximum bands' load is minimized while reducing the number of needed inter-frequency HOs.",
+      "metadata": {
+        "source": "arxiv:2401.13792v1",
+        "title": "Probabilistic Mobility Load Balancing for Multi-band 5G and Beyond Networks",
+        "authors": [
+          "Saria Al Lahham",
+          "Di Wu",
+          "Ekram Hossain",
+          "Xue Liu",
+          "Gregory Dudek"
+        ],
+        "section": "IV. METHODOLOGY AND PROPOSED SOLUTION",
+        "chunkIndex": 19,
+        "totalChunks": 43
+      }
+    },
+    {
+      "id": "2401.13792v1-chunk-20",
+      "content": "First to address, in practice, a possible infeasibility can result from constraint (6c), where a UE can have data rates less than r min due to bad channel conditions, and it does not satisfy the MLB rule set to move to a neighboring cell. As such, the best possible solution is to associate with the band b that has the best channel quality as follows:\n\n<!-- formula-not-decoded -->\n\nwhere γ u = { γ 1 , ..., γ B } can be the set of a UE u RSRQ values with each band. It is important to note that any relocated UE according the aforementioned solution adds a load to the associated band. As a result, we denote the incurred load to a band b prior to the optimization as ˆ ρ b , then the UE is removed from the set of considered UEs U in the optimization.\n\nAfterwards, to deal with random vectors in the problem, one common practice is to consider the expected value of the random variables from observed samples over a time period of ∆ t as an estimation instead of instantaneous samples.",
+      "metadata": {
+        "source": "arxiv:2401.13792v1",
+        "title": "Probabilistic Mobility Load Balancing for Multi-band 5G and Beyond Networks",
+        "authors": [
+          "Saria Al Lahham",
+          "Di Wu",
+          "Ekram Hossain",
+          "Xue Liu",
+          "Gregory Dudek"
+        ],
+        "section": "A. Problem Transformation",
+        "chunkIndex": 20,
+        "totalChunks": 43
+      }
+    },
+    {
+      "id": "2401.13792v1-chunk-21",
+      "content": "vectors in the problem, one common practice is to consider the expected value of the random variables from observed samples over a time period of ∆ t as an estimation instead of instantaneous samples. Even though such estimation is not optimal, it works in practice in many scenarios [14]. Accordingly, prior to solving the optimization, the load vector in f 1 ( X ) is substituted by ρ b = E[ ρ b ( t )] , where the expectation is considered over time. Nevertheless, the choice of ∆ t is important, since having a relatively small or large values can lead to sub-optimal solutions.\n\nSubsequently, to address the integrality of the problem, we relax the integer variables to continuous ones in the range of [0 , 1] . We further propose the probabilistic rounding approach, which is to make use of constraint (6b) and regard the UE assignment vector x u as a probability distribution over the bands.",
+      "metadata": {
+        "source": "arxiv:2401.13792v1",
+        "title": "Probabilistic Mobility Load Balancing for Multi-band 5G and Beyond Networks",
+        "authors": [
+          "Saria Al Lahham",
+          "Di Wu",
+          "Ekram Hossain",
+          "Xue Liu",
+          "Gregory Dudek"
+        ],
+        "section": "A. Problem Transformation",
+        "chunkIndex": 21,
+        "totalChunks": 43
+      }
+    },
+    {
+      "id": "2401.13792v1-chunk-22",
+      "content": "range of [0 , 1] . We further propose the probabilistic rounding approach, which is to make use of constraint (6b) and regard the UE assignment vector x u as a probability distribution over the bands. Not only this approach allows us to have better solutions and mitigate the deterministic rounding errors that might occur in the solution, but also takes into account the probabilistic nature of the problem. Accordingly, after solving the optimization, we assume for each UE there exist a probability distribution p u that takes on the values of { 1 , 2 , ..., B } , and has probabilities of x u , and then to select the assigned band b we sample from that distribution, i.e., b ∼ p u .\n\nLast but not least, to transform the problem into an equivalent Linear Program (LP), we leverage the epigraph technique [13] to linearize the objective function by first introducing a non-negative slack variable t , such that:\n\n<!-- formula-not-decoded -->",
+      "metadata": {
+        "source": "arxiv:2401.13792v1",
+        "title": "Probabilistic Mobility Load Balancing for Multi-band 5G and Beyond Networks",
+        "authors": [
+          "Saria Al Lahham",
+          "Di Wu",
+          "Ekram Hossain",
+          "Xue Liu",
+          "Gregory Dudek"
+        ],
+        "section": "A. Problem Transformation",
+        "chunkIndex": 22,
+        "totalChunks": 43
+      }
+    },
+    {
+      "id": "2401.13792v1-chunk-23",
+      "content": "ivalent Linear Program (LP), we leverage the epigraph technique [13] to linearize the objective function by first introducing a non-negative slack variable t , such that:\n\n<!-- formula-not-decoded -->\n\nand substituting t instead of f 1 ( X ) . Additionally, slack variables y and y b are introduced where:\n\n<!-- formula-not-decoded -->\n\n<!-- formula-not-decoded -->\n\n<!-- formula-not-decoded -->\n\nwhere ⪯ is the element-wise ≤ comparison. Consequently, we can formulate the equivalent transformed LP as follows:\n\n<!-- formula-not-decoded -->\n\n<!-- formula-not-decoded -->\n\n<!-- formula-not-decoded -->\n\n<!-- formula-not-decoded -->\n\n<!-- formula-not-decoded -->\n\nIn general, LP is a well-established and widely-used optimization model, for which many efficient and low-complexity algorithms have been developed, in addition to the existence",
+      "metadata": {
+        "source": "arxiv:2401.13792v1",
+        "title": "Probabilistic Mobility Load Balancing for Multi-band 5G and Beyond Networks",
+        "authors": [
+          "Saria Al Lahham",
+          "Di Wu",
+          "Ekram Hossain",
+          "Xue Liu",
+          "Gregory Dudek"
+        ],
+        "section": "A. Problem Transformation",
+        "chunkIndex": 23,
+        "totalChunks": 43
+      }
+    },
+    {
+      "id": "2401.13792v1-chunk-24",
+      "content": "rmula-not-decoded -->\n\nIn general, LP is a well-established and widely-used optimization model, for which many efficient and low-complexity algorithms have been developed, in addition to the existence\n\n```\nInput: ∆ t, L th , w, r min , n max ; for t = 0 : ∞ do foreach b ∈ B do get d ( t ) and r b ( t ) ; calculate ρ b ( t ) according to (3); store ( d ( t ) , r b ( t ) , ρ b ( t )) ; if t %∆ t = 0 then calculate LBI according to (11); if LBI ≥ L th then continue ; else assign infeasible UEs according to (7); calculate E[ ρ b ( t )] ∀ b ∈ B ; X ← solve the LP in (10) ; foreach x u ∈ X do sample a band b with probabilities x u ; assign the band b to UE u ; else continue ;\n```\n\nAlgorithm 1: Probabilistic Mobility Load Balancing (PMLB)\n\nof a variety of open sourced solvers such as CVXPY [15] that can be used.",
+      "metadata": {
+        "source": "arxiv:2401.13792v1",
+        "title": "Probabilistic Mobility Load Balancing for Multi-band 5G and Beyond Networks",
+        "authors": [
+          "Saria Al Lahham",
+          "Di Wu",
+          "Ekram Hossain",
+          "Xue Liu",
+          "Gregory Dudek"
+        ],
+        "section": "A. Problem Transformation",
+        "chunkIndex": 24,
+        "totalChunks": 43
+      }
+    },
+    {
+      "id": "2401.13792v1-chunk-25",
+      "content": "robabilities x u ; assign the band b to UE u ; else continue ;\n```\n\nAlgorithm 1: Probabilistic Mobility Load Balancing (PMLB)\n\nof a variety of open sourced solvers such as CVXPY [15] that can be used. It is important to mention that, in practice, the two objectives t and y are normalized in the range of [0 , 1] by dividing over the maximum values of the objectives f 1 ( X ) and f 2 ( X ) , respectively.",
+      "metadata": {
+        "source": "arxiv:2401.13792v1",
+        "title": "Probabilistic Mobility Load Balancing for Multi-band 5G and Beyond Networks",
+        "authors": [
+          "Saria Al Lahham",
+          "Di Wu",
+          "Ekram Hossain",
+          "Xue Liu",
+          "Gregory Dudek"
+        ],
+        "section": "A. Problem Transformation",
+        "chunkIndex": 25,
+        "totalChunks": 43
+      }
+    },
+    {
+      "id": "2401.13792v1-chunk-26",
+      "content": "Two important concerns arise from our approach: Firstly, the optimal frequency at which the optimization should be performed and secondly, whether optimization is essential to be performed periodically in the first place. In fact, these two concerns are contingent upon numerous factors, but the most important ones are the mobility and data traffic patterns of the UEs. To address the concerns, we propose to perform the optimization every ∆ t minutes, such that we satisfy an event based on the UE data traffic distribution across bands. Therein, to indicate how much the loads between the bands are evenly distributed, we define the load balancing index (LBI) as follows:\n\n<!-- formula-not-decoded -->\n\nwhere ¯ ρ b = | | ρ b ( t ) || 1 and represents the band b load. One can notice that the LBI is simply the Jain's Fairness Index (JFI) [16], but across the bands' loads. Usually, JFI is used to quantify how the resources are uniformly-distributed in resource allocation problems.",
+      "metadata": {
+        "source": "arxiv:2401.13792v1",
+        "title": "Probabilistic Mobility Load Balancing for Multi-band 5G and Beyond Networks",
+        "authors": [
+          "Saria Al Lahham",
+          "Di Wu",
+          "Ekram Hossain",
+          "Xue Liu",
+          "Gregory Dudek"
+        ],
+        "section": "B. Algorithm",
+        "chunkIndex": 26,
+        "totalChunks": 43
+      }
+    },
+    {
+      "id": "2401.13792v1-chunk-27",
+      "content": "that the LBI is simply the Jain's Fairness Index (JFI) [16], but across the bands' loads. Usually, JFI is used to quantify how the resources are uniformly-distributed in resource allocation problems. In a similar manner, the JFI can also quantify how the loads are balanced since we aim to keep the bands' loads uniformly distributed. The LBI will vary eventually based on channel quality from each UE to their assigned band, and the movement of UEs when they enter and\n\nTABLE I: Simulation Parameters\n\n| Parameter                                                                                                                                                 | Value                                                                                       |\n|-----------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------",
+      "metadata": {
+        "source": "arxiv:2401.13792v1",
+        "title": "Probabilistic Mobility Load Balancing for Multi-band 5G and Beyond Networks",
+        "authors": [
+          "Saria Al Lahham",
+          "Di Wu",
+          "Ekram Hossain",
+          "Xue Liu",
+          "Gregory Dudek"
+        ],
+        "section": "B. Algorithm",
+        "chunkIndex": 27,
+        "totalChunks": 43
+      }
+    },
+    {
+      "id": "2401.13792v1-chunk-28",
+      "content": "----------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------|\n| Simulation time Inter-site distance # of cells Number of bands B Bandwidth for each band # PRB for each band Packet size Scheduler ∆ t LBI threshold L th | 24 h 200 m 3 4 [20, 10, 5, 10] MHz [100, 50, 25, 50] 1500 Bytes Proportional Fair 2 min 0.8 |\n\nleave the cell since they either add or remove load from bands. Consequently, we define the event as the occurrence at which the LBI drops below a threshold, i.e., LBI ≤ L th . In fact, not only this event allows us to save some computation, but it also leads to less inter-frequency HOs since no UEs will be relocated if the event is not triggered. It is important to note that the optimization for each cell can be executed by the corresponding BS to perform load balancing between the bands in that cell.",
+      "metadata": {
+        "source": "arxiv:2401.13792v1",
+        "title": "Probabilistic Mobility Load Balancing for Multi-band 5G and Beyond Networks",
+        "authors": [
+          "Saria Al Lahham",
+          "Di Wu",
+          "Ekram Hossain",
+          "Xue Liu",
+          "Gregory Dudek"
+        ],
+        "section": "B. Algorithm",
+        "chunkIndex": 28,
+        "totalChunks": 43
+      }
+    },
+    {
+      "id": "2401.13792v1-chunk-29",
+      "content": "e relocated if the event is not triggered. It is important to note that the optimization for each cell can be executed by the corresponding BS to perform load balancing between the bands in that cell. The proposed Probabilistic MLB (PMLB) algorithm is presented in Algorithm 1 and summarized as follows: For each band in a cell, get the measurement reports, the DL rate, and the incoming traffic size for each UE. Calculate the load that each UE is going to add to the band, and store the values. At each ∆ t , check the LBI event, if the loads are unbalanced, perform the feasibility checks and solve the LP in (10). Finally, assign UEs to a band based on the probability distributions that we obtained from solving the LP.",
+      "metadata": {
+        "source": "arxiv:2401.13792v1",
+        "title": "Probabilistic Mobility Load Balancing for Multi-band 5G and Beyond Networks",
+        "authors": [
+          "Saria Al Lahham",
+          "Di Wu",
+          "Ekram Hossain",
+          "Xue Liu",
+          "Gregory Dudek"
+        ],
+        "section": "B. Algorithm",
+        "chunkIndex": 29,
+        "totalChunks": 43
+      }
+    },
+    {
+      "id": "2401.13792v1-chunk-30",
+      "content": "The experiments are conducted on a proprietary System Level Simulator (SLS) [10], which is a packet-level simulator that emulates traffic for 5G networks based on real-word data. The main simulation parameters are listed in Table I. In the conducted experiments, we consider three dynamic traffic scenarios: Scenario A: A heavy traffic scenario with 400 UEs per cell and packet inter-arrival time 1 /λ u of 20 ms, Scenario B: A moderate traffic scenario with the same number of UEs but a packet inter-arrival time 1 /λ u of 50 ms, and Scenario C: A light traffic scenario with lower number of UEs with 200 UEs per cell and a packet inter-arrival time 1 /λ u of 50 ms. In what follows, we first analyze the proposed solution to the formulated MOP in terms of Pareto optimality and the proposed integer relaxation method. Afterwards, we compare the performance of the proposed algorithm against different baselines.",
+      "metadata": {
+        "source": "arxiv:2401.13792v1",
+        "title": "Probabilistic Mobility Load Balancing for Multi-band 5G and Beyond Networks",
+        "authors": [
+          "Saria Al Lahham",
+          "Di Wu",
+          "Ekram Hossain",
+          "Xue Liu",
+          "Gregory Dudek"
+        ],
+        "section": "V. EXPERIMENTAL RESULTS",
+        "chunkIndex": 30,
+        "totalChunks": 43
+      }
+    },
+    {
+      "id": "2401.13792v1-chunk-31",
+      "content": "One way to model MOP is by scalarization, where all the objectives are simply added but each objective is multiplied by a significance weight [13]. To find the Pareto-optimal solutions to the MOP, the weights values are varied for each objective and then the solutions for each variation form the Pareto front. The Pareto front for our MOP and the tradeoffs between the\n\nFig. 1: The Pareto Frontier of the MOP\n\n<!-- image -->\n\ntwo objectives are depicted in Fig. 1. Each point on the curve represents a different value for the objective weight w . On the one extreme, when the weight for the load objective is equal to 0 (i.e., no significance and no load balancing needed), the HO objective achieves its optimal value, that is, no UEs are relocated. On the other extreme, when the weight for the load objective is equal to 1 (i.e., full significance), we achieve the lowest load possible, but the second objective achieves a very suboptimal value.",
+      "metadata": {
+        "source": "arxiv:2401.13792v1",
+        "title": "Probabilistic Mobility Load Balancing for Multi-band 5G and Beyond Networks",
+        "authors": [
+          "Saria Al Lahham",
+          "Di Wu",
+          "Ekram Hossain",
+          "Xue Liu",
+          "Gregory Dudek"
+        ],
+        "section": "A. Analysis of Optimization Solution",
+        "chunkIndex": 31,
+        "totalChunks": 43
+      }
+    },
+    {
+      "id": "2401.13792v1-chunk-32",
+      "content": "d. On the other extreme, when the weight for the load objective is equal to 1 (i.e., full significance), we achieve the lowest load possible, but the second objective achieves a very suboptimal value. It can be seen that the Pareto optimal solutions can be achieved when the weight w is in the range of [0 . 3 , 0 . 5] . Then, we study the proposed integer relaxation approach in terms of time complexity (Fig. 2 (a)) and the objective value (Fig. 2 (b)). Such study helps to understand the reduction in time complexity and its decrease in the objective value due to the relaxation. To compare with our approach with probabilistic rounding (P-LB), first, the LP in (10) is solved without integer relaxation using a Mixed-Integer LP (MILP) solver by employing the Branch and Bound algorithm. Afterwards, we solve it with integer relaxation considering the deterministic rounding approach (D-LP), where the values are rounded to the nearest integer (i.e., 0 or 1) and ties broken evenly. In Fig.",
+      "metadata": {
+        "source": "arxiv:2401.13792v1",
+        "title": "Probabilistic Mobility Load Balancing for Multi-band 5G and Beyond Networks",
+        "authors": [
+          "Saria Al Lahham",
+          "Di Wu",
+          "Ekram Hossain",
+          "Xue Liu",
+          "Gregory Dudek"
+        ],
+        "section": "A. Analysis of Optimization Solution",
+        "chunkIndex": 32,
+        "totalChunks": 43
+      }
+    },
+    {
+      "id": "2401.13792v1-chunk-33",
+      "content": "terwards, we solve it with integer relaxation considering the deterministic rounding approach (D-LP), where the values are rounded to the nearest integer (i.e., 0 or 1) and ties broken evenly. In Fig. 2(a), we show the LP solution time in milliseconds. It can be seen that as we increase the number UEs in the problem (i.e., increasing the number of variables), the time increases exponentially for MILP, whereas with the integer relaxations it increases only marginally. However, in Fig. 2(b), it can be seen that the MILP achieves the best objective value, and the D-LP method achieves a worse value, but it also increases the performance gap as we increase the number of UEs. Although for our approach we observe a slightly worse objective value, it keeps a constant gap between the MILP.",
+      "metadata": {
+        "source": "arxiv:2401.13792v1",
+        "title": "Probabilistic Mobility Load Balancing for Multi-band 5G and Beyond Networks",
+        "authors": [
+          "Saria Al Lahham",
+          "Di Wu",
+          "Ekram Hossain",
+          "Xue Liu",
+          "Gregory Dudek"
+        ],
+        "section": "A. Analysis of Optimization Solution",
+        "chunkIndex": 33,
+        "totalChunks": 43
+      }
+    },
+    {
+      "id": "2401.13792v1-chunk-34",
+      "content": "The proposed PMLB algorithm is compared to two baselines, namely, a rule-based MLB (RBMLB) and the 3GPP defined MLB, in addition to the no load balancing baseline. RBMLB is a proprietary MLB algorithm that is developed by Samsung and used by some telecom operators. It uses a fixed set of rules such that a pool of UEs that are randomly selected moved between bands, in addition to the A2, A4, and the A5\n\nevents to assess the channel quality prior to any HO. The NO MLB baseline let the UEs camp on the first 2 bands only without relocating any UEs, whereas the 3GPP defined MLB let the UEs associates with bands based on the A2 event. The performance comparison is shown in Fig. 3. All the results shown are the average metric per ∆ t in a day, and averaged across all the cells.\n\nFig. 2: Optimization analysis in terms of (a) time complexity and (b) the objective function value between rounding techniques\n\n<!-- image -->",
+      "metadata": {
+        "source": "arxiv:2401.13792v1",
+        "title": "Probabilistic Mobility Load Balancing for Multi-band 5G and Beyond Networks",
+        "authors": [
+          "Saria Al Lahham",
+          "Di Wu",
+          "Ekram Hossain",
+          "Xue Liu",
+          "Gregory Dudek"
+        ],
+        "section": "B. Performance Comparison",
+        "chunkIndex": 34,
+        "totalChunks": 43
+      }
+    },
+    {
+      "id": "2401.13792v1-chunk-35",
+      "content": "ric per ∆ t in a day, and averaged across all the cells.\n\nFig. 2: Optimization analysis in terms of (a) time complexity and (b) the objective function value between rounding techniques\n\n<!-- image -->\n\nFirst, we show the algorithm behavior in terms of band utilization and load balancing in Fig. 3(a). It can be noticed that our proposed algorithm utilizes all the bands and distributes the load among the bands the most, followed by RBMLB, whereas the vanilla MLB algorithm utilized mainly two bands which have the best channel quality. Afterwards, the average and minimum cell throughput across the bands are depicted in Fig. 3(b) and Fig. 3(c), respectively. In heavy traffic scenarios, we can see that PMLB algorithm outperforms RBMLB, achieving an 18% improvement in the average throughput, and almost double the performance in terms of minimum throughput.",
+      "metadata": {
+        "source": "arxiv:2401.13792v1",
+        "title": "Probabilistic Mobility Load Balancing for Multi-band 5G and Beyond Networks",
+        "authors": [
+          "Saria Al Lahham",
+          "Di Wu",
+          "Ekram Hossain",
+          "Xue Liu",
+          "Gregory Dudek"
+        ],
+        "section": "B. Performance Comparison",
+        "chunkIndex": 35,
+        "totalChunks": 43
+      }
+    },
+    {
+      "id": "2401.13792v1-chunk-36",
+      "content": "In heavy traffic scenarios, we can see that PMLB algorithm outperforms RBMLB, achieving an 18% improvement in the average throughput, and almost double the performance in terms of minimum throughput. This is due to the fact that the PMLB algorithm relocates UEs to bands with best resources or best channel quality in order to guarantee a minimum data rate requirement, unlike the other algorithms. Similarly, in moderate and light traffic scenarios, PMLB algorithm outperforms other algorithms, but the gap between PMLB and RBMLB almost diminishes in light traffic scenario. In fact, since PMLB tries to utilize all the bands and distribute the load evenly, some bands might have more capacity to accommodate more UEs without affecting the assigned UEs, and hence, utilizing all the bands equally might not be necessary in light traffic scenarios. Subsequently, the inter-frequency HO count and the cause interruption time are shown in Fig. 3(d) and Fig. 3(e), respectively.",
+      "metadata": {
+        "source": "arxiv:2401.13792v1",
+        "title": "Probabilistic Mobility Load Balancing for Multi-band 5G and Beyond Networks",
+        "authors": [
+          "Saria Al Lahham",
+          "Di Wu",
+          "Ekram Hossain",
+          "Xue Liu",
+          "Gregory Dudek"
+        ],
+        "section": "B. Performance Comparison",
+        "chunkIndex": 36,
+        "totalChunks": 43
+      }
+    },
+    {
+      "id": "2401.13792v1-chunk-37",
+      "content": "all the bands equally might not be necessary in light traffic scenarios. Subsequently, the inter-frequency HO count and the cause interruption time are shown in Fig. 3(d) and Fig. 3(e), respectively. The PMLB algorithm achieves less HO count and interruption time than the RBMLB method by 14%-36% in all scenarios. This is due to the LBI event that was added as a trigger to the optimization in order to avoid relocating UEs unnecessarily. We can see the LBI values in Fig. 3(f). We set the LBI threshold to L th to 0.8, and it can be seen that the PMLB method was able to maintain an LBI average above 0.9 in all scenarios.\n\nFig. 3: Performance comparison between algorithms in terms of (a) load balancing behavior (b) average throughput (c) minimum throughput (d) HO count (e) HO interruption time (f) LBI\n\n<!-- image -->",
+      "metadata": {
+        "source": "arxiv:2401.13792v1",
+        "title": "Probabilistic Mobility Load Balancing for Multi-band 5G and Beyond Networks",
+        "authors": [
+          "Saria Al Lahham",
+          "Di Wu",
+          "Ekram Hossain",
+          "Xue Liu",
+          "Gregory Dudek"
+        ],
+        "section": "B. Performance Comparison",
+        "chunkIndex": 37,
+        "totalChunks": 43
+      }
+    },
+    {
+      "id": "2401.13792v1-chunk-38",
+      "content": "We have presented a new approach for MLB in multiband networks, namely, Probabilistic Mobility Load Balancing (PMLB). We have modeled the UE-band assignment problem as an integer multi-objective stochastic optimization problem, where the objectives are to minimize the maximum load and the number of handovers required. To reduce the solution complexity, we have proposed to estimate the random variables and relax the integrality of the problem, and then we have transformed the problem into an LP. The solution outputs a probability distribution for each UE over the bands, where the assigned band to a UE is sampled from that distribution. The simulation results show that the proposed algorithm outperforms rule-based methods in terms of throughput and the interruption time caused by the handovers.",
+      "metadata": {
+        "source": "arxiv:2401.13792v1",
+        "title": "Probabilistic Mobility Load Balancing for Multi-band 5G and Beyond Networks",
+        "authors": [
+          "Saria Al Lahham",
+          "Di Wu",
+          "Ekram Hossain",
+          "Xue Liu",
+          "Gregory Dudek"
+        ],
+        "section": "VI. CONCLUSION",
+        "chunkIndex": 38,
+        "totalChunks": 43
+      }
+    },
+    {
+      "id": "2401.13792v1-chunk-39",
+      "content": "- [1] A. Tolli, P. Hakalin, and H. Holma, 'Performance evaluation of common radio resource management (crrm),' in 2002 IEEE International Conference on Communications. Conference Proceedings. ICC 2002 (Cat. No.02CH37333) , vol. 5, 2002, pp. 3429-3433 vol.5.\n- [2] 3GPP, 'LTE; Evolved Universal Terrestrial Radio Access Network (EUTRAN); Self-configuring and self-optimizing network (SON) use cases and solutions,' 3rd Generation Partnership Project (3GPP), Technical Specification (TS) 36.902, 2010, version 9.2.0.\n- [3] H. Hu and e. a. Zhang, Jian, 'Self-configuration and self-optimization for lte networks,' IEEE Communications Magazine , vol. 48, no. 2, pp. 94-100, 2010.\n- [4] Ericsson, 'Ericsson mobility report,' Tech. Rep., 2022. [Online]. Available: https://www.ericsson.com/en/reports-and-papers/ mobility-report/reports\n- [5] 3GPP, 'LTE; Evolved Universal Terrestrial Radio Access (E-UTRA); Radio Resource Control (RRC); Protocol specification,' 3rd Generation Partnership Project (3GPP),",
+      "metadata": {
+        "source": "arxiv:2401.13792v1",
+        "title": "Probabilistic Mobility Load Balancing for Multi-band 5G and Beyond Networks",
+        "authors": [
+          "Saria Al Lahham",
+          "Di Wu",
+          "Ekram Hossain",
+          "Xue Liu",
+          "Gregory Dudek"
+        ],
+        "section": "REFERENCES",
+        "chunkIndex": 39,
+        "totalChunks": 43
+      }
+    },
+    {
+      "id": "2401.13792v1-chunk-40",
+      "content": "apers/ mobility-report/reports\n- [5] 3GPP, 'LTE; Evolved Universal Terrestrial Radio Access (E-UTRA); Radio Resource Control (RRC); Protocol specification,' 3rd Generation Partnership Project (3GPP), Technical Specification (TS) 36.331, 2017, version 13.7.1.\n- [6] R. Kwan, R. Arnott, R. Paterson, R. Trivisonno, and M. Kubota, 'On mobility load balancing for lte systems,' in 2010 IEEE 72nd Vehicular Technology Conference - Fall , 2010, pp. 1-5.\n- [7] Y. Yang and e. a. Li, Pengfei, 'A high-efficient algorithm of mobile load balancing in lte system,' in 2012 IEEE Vehicular Technology Conference (VTC Fall) , 2012, pp. 1-5.\n- [8] Z. Huang, J. Liu, Q. Shen, J. Wu, and X. Gan, 'A threshold-based multi-traffic load balance mechanism in lte-a networks,' in 2015 IEEE wireless communications and networking conference (WCNC) . IEEE, 2015, pp. 1273-1278.\n- [9] J. Kang, X. Chen, D. Wu, Y. T. Xu, X. Liu, G. Dudek, T. Lee, and I.",
+      "metadata": {
+        "source": "arxiv:2401.13792v1",
+        "title": "Probabilistic Mobility Load Balancing for Multi-band 5G and Beyond Networks",
+        "authors": [
+          "Saria Al Lahham",
+          "Di Wu",
+          "Ekram Hossain",
+          "Xue Liu",
+          "Gregory Dudek"
+        ],
+        "section": "REFERENCES",
+        "chunkIndex": 40,
+        "totalChunks": 43
+      }
+    },
+    {
+      "id": "2401.13792v1-chunk-41",
+      "content": "chanism in lte-a networks,' in 2015 IEEE wireless communications and networking conference (WCNC) . IEEE, 2015, pp. 1273-1278.\n- [9] J. Kang, X. Chen, D. Wu, Y. T. Xu, X. Liu, G. Dudek, T. Lee, and I. Park, 'Hierarchical policy learning for hybrid communication load balancing,' in ICC 2021-IEEE International Conference on Communications . IEEE, 2021, pp. 1-6.\n- [10] A. e. a. Feriani, 'Multiobjective load balancing for multiband downlink cellular networks: A meta-reinforcement learning approach,' IEEE Journal on Selected Areas in Communications , vol. 40, no. 9, pp. 2614-2629, 2022.\n- [11] G. Alsuhli, K. Banawan, K. Attiah, A. Elezabi, K. Seddik, A. Gaber, M. Zaki, and Y. Gadallah, 'Mobility load management in cellular networks: A deep reinforcement learning approach,' IEEE Transactions on Mobile Computing , 2021.\n- [12] 3GPP, '5G;NR; NR and NG-RAN Overall description;Stage-2,' 3rd Generation Partnership Project (3GPP), Technical Specification (TS) 38.300, 2021, version 16.4.0.\n- [13] S",
+      "metadata": {
+        "source": "arxiv:2401.13792v1",
+        "title": "Probabilistic Mobility Load Balancing for Multi-band 5G and Beyond Networks",
+        "authors": [
+          "Saria Al Lahham",
+          "Di Wu",
+          "Ekram Hossain",
+          "Xue Liu",
+          "Gregory Dudek"
+        ],
+        "section": "REFERENCES",
+        "chunkIndex": 41,
+        "totalChunks": 43
+      }
+    },
+    {
+      "id": "2401.13792v1-chunk-42",
+      "content": "Mobile Computing , 2021.\n- [12] 3GPP, '5G;NR; NR and NG-RAN Overall description;Stage-2,' 3rd Generation Partnership Project (3GPP), Technical Specification (TS) 38.300, 2021, version 16.4.0.\n- [13] S. Boyd, S. P. Boyd, and L. Vandenberghe, Convex optimization . Cambridge university press, 2004.\n- [14] J. R. Birge and F. Louveaux, Introduction to stochastic programming . Springer Science &amp; Business Media, 2011.\n- [15] S. Diamond and S. Boyd, 'CVXPY: A python-embedded modeling language for convex optimization,' Journal of Machine Learning\n\nResearch , vol. 17, no. 83, pp. 1-5, 2016. [Online]. Available: http://jmlr.org/papers/v17/15-408.html\n\n- [16] R. K. Jain, D.-M. W. Chiu, W. R. Hawe et al. , 'A quantitative measure of fairness and discrimination,' Eastern Research Laboratory, Digital Equipment Corporation, Hudson, MA , vol. 21, 1984.",
+      "metadata": {
+        "source": "arxiv:2401.13792v1",
+        "title": "Probabilistic Mobility Load Balancing for Multi-band 5G and Beyond Networks",
+        "authors": [
+          "Saria Al Lahham",
+          "Di Wu",
+          "Ekram Hossain",
+          "Xue Liu",
+          "Gregory Dudek"
+        ],
+        "section": "REFERENCES",
+        "chunkIndex": 42,
+        "totalChunks": 43
+      }
+    }
+  ],
+  "fullText": "## Probabilistic Mobility Load Balancing for Multi-band 5G and Beyond Networks\n\nSaria Al Lahham, Di Wu, Ekram Hossain, Xue Liu, Gregory Dudek\n\nSamsung AI Center, Montr´ eal, Canada\n\n{ s.allahham, di.wu1, steve.liu, greg.dudek } @samsung.com, { e.hossain } @partner.samsung.com\n\nAbstract -The ever-increasing demand for data services and the proliferation of user equipment (UE) have resulted in a significant rise in the volume of mobile traffic. Moreover, in multiband networks, non-uniform traffic distribution among different operational bands can lead to congestion, which can adversely impact the user's quality of experience. Load balancing is a critical aspect of network optimization, where it ensures that the traffic is evenly distributed among different bands, avoiding congestion and ensuring better user experience. Traditional load balancing approaches rely only on the band channel quality as a load indicator and to move UEs between bands, which disregards the UE's demands and the band resource, and hence, leading to a suboptimal balancing and utilization of resources. To address this challenge, we propose an event-based algorithm, in which we model the load balancing problem as a multi-objective stochastic optimization, and assign UEs to bands in a probabilistic manner. The goal is to evenly distribute traffic across available bands according to their resources, while maintaining minimal number of inter-frequency handovers to avoid the signaling overhead and the interruption time. Simulation results show that the proposed algorithm enhances the network's performance and outperforms traditional load balancing approaches in terms of throughput and interruption time.\n\nIndex Terms -Cellular networks, load balancing, optimization\n\n## I. INTRODUCTION\n\nMobility load balancing (MLB) has been recognized as a crucial element of managing radio resources [1], and a core problem in 5G communication networks. In fact, MLB is commonly studied within the context of self-organizing networks (SON), which provide a comprehensive framework for self-optimization and self-healing, with load balancing being a critical aspect of the self-optimization component [2]. MLB in 3GPP standards is defined as moving cell-edge user equipment units (UEs) in a crowded cell to a lesscrowded neighboring cell. In multi-band networks, MLB can additionally move UEs between the available bands via interfrequency handovers (HOs) based on the channel quality for each band, where it aims to enhance the UEs throughput, ensure fairness between UEs, and minimize the latency [3]. Given the continuously increasing number of UEs and their increased data demand, coupled with their demand heterogeneity and mobility, load balancing is becoming even more important in managing network resources. Moreover, it is reported that mobile network data was doubled in the last two years alone, and with the introduction of extended-reality (XR) applications and advancements in the quality and resolution of video content, it is expected that network traffic will increase by at least 38% over the next years [4]. This shows the need for efficient load balancing techniques that can effectively distribute traffic across available resources to ensure optimal network performance.\n\nThe existing literature on MLB focuses on the optimal adjustment of the HO controllable parameters, specifically, the cell individual offsets (CIOs), relying on the current load of each cell and the measurements reported by the UEs such as the Reference Signal Received Quality (RSRQ). An example of the usage of CIOs is the A3 event as defined in the 3GPP standards [5]:\n\n<!-- formula-not-decoded -->\n\nwhere R n and R s are the RSRQ reported values for a neighboring cell and the serving cell, respectively, H is the hysteresis, and O n,s is a controllable CIO. Various rule-based MLB techniques were proposed in the literature. For instance, the authors in [6] proposed an algorithm to adjust the CIO between cells based on the difference in their load, i.e., a cell which has lesser load than its neighbor its CIO gets decreased by a factor to ease the HO triggering from its neighbor, where the factor is a function of the difference between the cells' loads. A similar approach was proposed in [7], but the authors considered adding or subtracting an adaptive step-size to the offset based on the time average of the load for each cell. Furthermore, to tackle the problem of non-uniform traffic distribution between cells, the authors in [8] proposed a traffic and cell load balancers with a new HO rule-set, including adjustable CIOs and time-to-trigger based on the average RB consumption of each UE. Apart from rule-based methods, numerous learning-based methods were proposed and were shown to be superior to rule-based methods. For example, Reinforcement Learning (RL)-based MLB was presented in [9] in addition to inactive mode load balancing. The authors proposed a hierarchical RL algorithm to control both MLB CIOs for active UEs, and the cell reselection parameters for inactive UEs to mitigate overloading cells, which resulted a much better performance. To generalize on real-world data and to enable better tradeoffs between different key performance indicators (KPIs), the authors in [10] proposed a multi-objective meta-RL algorithm. Compared to rule-based methods and single objective RL, the proposed approach achieved better KPIs and Pareto fronts. Furthermore, a set of RL algorithms were proposed in [11] with a diverse set of reward functions to satisfy the operators' needs and key performance indicators (KPIs). Each algorithm and reward function target a different scenario based on the density of the cells and the UEs traffic patterns.\n\nNonetheless, CIO-based HO for MLB approaches do not move UEs between bands according to their demands or band resources with inter-frequency HOs, but they rely on the fact that the lesser the load of a band, the better the channel quality (e.g., RSRQ). However, once the band resources (i.e., Physical Resource Blocks (PRBs)) are fully utilized, the channel quality becomes independent of the current load, and performance of aforementioned approaches deteriorates. To this end, in this work, we consider a centralized approach by employing forced HOs, where a base station (BS) can change the operating band of a UE through an RRC reconfiguration message [12]. By doing so, the BS have the control over moving UEs to more appropriate bands based on the UE's traffic and the bands' available resources. As such, we formulate the load balancing problem as a multi-objective UE-band assignment problem. To mitigate the signaling overhead and reduce the interruptions time caused by the forced HOs, we set our objective as the joint minimization of the number of interfrequency HOs and the bands' total load. Moreover, to avoid the computational complexity overhead caused by solving the assignment problem, we propose an event-based algorithm that checks if there is a necessity for load balancing. The contributions of this work can be summarized as follows:\n\n- We formulate a multi-objective stochastic optimization problem to model the UE-band assignment problem, aiming at minimizing the maximum load of the bands and number of HOs required.\n- By leveraging problem transformation methods (e.g., epigraph technique), we reduce the problem into a Linear Program to reduce the solution complexity.\n- We propose an event-based MLB algorithm with probabilistic assignment scheme, which uses the solution of the Linear Program, such that the assignment for a UE is given by a probability distribution over the bands.\n\nThe remainder of the paper is organized as follows: Section II introduces the considered system model in this work. Section III presents the formulated multi-objective optimization problem, while Section IV presents the solution methodology and the proposed algorithm. In Section V we show the analysis for the solution and the performance evaluation. Finally, Section VI concludes the paper.\n\n## II. SYSTEM MODEL\n\nWe consider a cellular network consisting of N macrogNodeBs (gNBs), each of which covers three different cells. Each cell operates over B non-overlapping frequency bands, and serves U UEs that are uniformly distributed across the cell. Within a cell, the set of available bands is denoted by B and the set of UEs is denoted by U . Throughout this work, we omit the cell index since we focus on the cell-level multi-band MLB, and each cell has its own unique set of UEs and bands. As for MLB between different cells, the 3GPP default rule set for MLB [2] is employed such as the A2 and A5 events.\n\nThe downlink (DL) channels for each band to each user in a cell have time-varying capacities. A UE u 's DL channel rate from a band b at time t is random variable and denoted by r u,b ( t ) . We assume that r u,b ( t ) is chosen from a discrete set of rates as in a practical wireless system and sampled from a stationary distribution. Note that different UEs for each band can possibly have heterogeneous rate distributions, depending mainly on the band resources, denoted by N b , and the Signalto-Interference-Noise-Ratio (SINR), where band resources are usually represented by the number PRBs in that band. We then denote the U × B rate matrix in a cell as R ( t ) , such that the u th row r u ( t ) denotes the rate vector for a UE u across all bands, and the b th column r b ( t ) denotes the rate vector in a band b for all the UEs. Afterwards, we assume a full buffer traffic model, and define the UEs' demand vector as d ( t ) , where the UE u 's demand at time t is given by:\n\n<!-- formula-not-decoded -->\n\nin which a u ( t ) is a Poisson random variable with a mean of λ u and denotes the number of packets arrivals, and s represents the packet size in bits. Thereafter, we define the load vector for a band b as a vector as follows:\n\n<!-- formula-not-decoded -->\n\nwhere ⊘ is the Hadamard division operator (i.e., element-wise division). The load vector defines how much each UE increases the band load based on the UE's incoming traffic, channel quality, and DL rate from that band. Indeed, UEs with bad channel quality with a band means low DL rate, and hence, a higher load to the band (e.g., occupying more PRBs to meet the UE demand). For the remainder of the paper, the time index t will be omitted for the sake of clarity.\n\n## III. PROBLEM FORMULATION\n\nOur main objective in this work is to balance the loads between the available bands by moving UEs between bands via forced inter-frequency HOs while minimizing the number of needed HOs. As such, we first define the U × B UE-band assignments matrix X , such that the u th row x u denotes the assignment vector for a UE u between all bands, and the b th column x b denotes the assignment vector in a band b for all the UEs. The assignment entries x u,b = 1 if the UE u is assigned to a band b , and x u,b = 0 otherwise. Subsequently, we define the load balancing objective function as follows:\n\n<!-- formula-not-decoded -->\n\nwhich represents the maximum load across all the bands, and E[ ρ b ] denotes the expected load vector for a band. In fact, the optimal solution for minimizing the maximum load is to keep all the loads the same for all the bands, which is our target in MLB. Afterwards, we define the number of inter-frequency HOs objective function as follows:\n\n<!-- formula-not-decoded -->\n\nwhere || . || 1 for a matrix here denotes the absolute sum of all the entries, and ˆ X is the UE-band assignments at t -1\n\nprior to the load balancing. It is important to notice that there is a trade-off between the two objectives. On the one hand, the optimal value for the second objective is achieved when X = ˆ X , indicating that no UE needs to be relocated to another band, thereby precluding any load balancing with no HOs. On the other hand, in a worst-case scenario, it may be essential to relocate all UEs from their current band to another one, resulting in a much worse solution for the second objective. To this end, we formulate a scalarized weighted multi-objective optimization problem (MOP) as follows:\n\n<!-- formula-not-decoded -->\n\n<!-- formula-not-decoded -->\n\n<!-- formula-not-decoded -->\n\n<!-- formula-not-decoded -->\n\n<!-- formula-not-decoded -->\n\n<!-- formula-not-decoded -->\n\nwhere w ∈ [0 , 1] is the objective weight hyper-parameter in the MOP, constraint (6b) tells that a UE can only be assigned to one band, constraint (6c) ensures that the UE will be granted a minimum rate of r min , constraint (6d) avoids over-congesting bands that has better channel quality and offers higher data rates by setting a cap n max on the number of UEs on this band, such that n max is proportional to the bands' resources, and finally, constraint (6e) tells that the decision variable is a binary matrix. It can be noticed that the problem is not only an NP-Hard Integer Nonlinear Program [13], but also a stochastic optimization problem by having the UEs' data rate and the incoming traffic as random vectors in f 1 ( X ) . To tackle these challenges, common approaches such as relaxing the integer decision variables and estimating the random variables can be followed and further optimized as will be demonstrated in the next section.\n\n## IV. METHODOLOGY AND PROPOSED SOLUTION\n\nThis section presents the proposed approach for solving the formulated MOP that aims to redistribute UEs across bands, such that the maximum bands' load is minimized while reducing the number of needed inter-frequency HOs.\n\n## A. Problem Transformation\n\nFirst to address, in practice, a possible infeasibility can result from constraint (6c), where a UE can have data rates less than r min due to bad channel conditions, and it does not satisfy the MLB rule set to move to a neighboring cell. As such, the best possible solution is to associate with the band b that has the best channel quality as follows:\n\n<!-- formula-not-decoded -->\n\nwhere γ u = { γ 1 , ..., γ B } can be the set of a UE u RSRQ values with each band. It is important to note that any relocated UE according the aforementioned solution adds a load to the associated band. As a result, we denote the incurred load to a band b prior to the optimization as ˆ ρ b , then the UE is removed from the set of considered UEs U in the optimization.\n\nAfterwards, to deal with random vectors in the problem, one common practice is to consider the expected value of the random variables from observed samples over a time period of ∆ t as an estimation instead of instantaneous samples. Even though such estimation is not optimal, it works in practice in many scenarios [14]. Accordingly, prior to solving the optimization, the load vector in f 1 ( X ) is substituted by ρ b = E[ ρ b ( t )] , where the expectation is considered over time. Nevertheless, the choice of ∆ t is important, since having a relatively small or large values can lead to sub-optimal solutions.\n\nSubsequently, to address the integrality of the problem, we relax the integer variables to continuous ones in the range of [0 , 1] . We further propose the probabilistic rounding approach, which is to make use of constraint (6b) and regard the UE assignment vector x u as a probability distribution over the bands. Not only this approach allows us to have better solutions and mitigate the deterministic rounding errors that might occur in the solution, but also takes into account the probabilistic nature of the problem. Accordingly, after solving the optimization, we assume for each UE there exist a probability distribution p u that takes on the values of { 1 , 2 , ..., B } , and has probabilities of x u , and then to select the assigned band b we sample from that distribution, i.e., b ∼ p u .\n\nLast but not least, to transform the problem into an equivalent Linear Program (LP), we leverage the epigraph technique [13] to linearize the objective function by first introducing a non-negative slack variable t , such that:\n\n<!-- formula-not-decoded -->\n\nand substituting t instead of f 1 ( X ) . Additionally, slack variables y and y b are introduced where:\n\n<!-- formula-not-decoded -->\n\n<!-- formula-not-decoded -->\n\n<!-- formula-not-decoded -->\n\nwhere ⪯ is the element-wise ≤ comparison. Consequently, we can formulate the equivalent transformed LP as follows:\n\n<!-- formula-not-decoded -->\n\n<!-- formula-not-decoded -->\n\n<!-- formula-not-decoded -->\n\n<!-- formula-not-decoded -->\n\n<!-- formula-not-decoded -->\n\nIn general, LP is a well-established and widely-used optimization model, for which many efficient and low-complexity algorithms have been developed, in addition to the existence\n\n```\nInput: ∆ t, L th , w, r min , n max ; for t = 0 : ∞ do foreach b ∈ B do get d ( t ) and r b ( t ) ; calculate ρ b ( t ) according to (3); store ( d ( t ) , r b ( t ) , ρ b ( t )) ; if t %∆ t = 0 then calculate LBI according to (11); if LBI ≥ L th then continue ; else assign infeasible UEs according to (7); calculate E[ ρ b ( t )] ∀ b ∈ B ; X ← solve the LP in (10) ; foreach x u ∈ X do sample a band b with probabilities x u ; assign the band b to UE u ; else continue ;\n```\n\nAlgorithm 1: Probabilistic Mobility Load Balancing (PMLB)\n\nof a variety of open sourced solvers such as CVXPY [15] that can be used. It is important to mention that, in practice, the two objectives t and y are normalized in the range of [0 , 1] by dividing over the maximum values of the objectives f 1 ( X ) and f 2 ( X ) , respectively.\n\n## B. Algorithm\n\nTwo important concerns arise from our approach: Firstly, the optimal frequency at which the optimization should be performed and secondly, whether optimization is essential to be performed periodically in the first place. In fact, these two concerns are contingent upon numerous factors, but the most important ones are the mobility and data traffic patterns of the UEs. To address the concerns, we propose to perform the optimization every ∆ t minutes, such that we satisfy an event based on the UE data traffic distribution across bands. Therein, to indicate how much the loads between the bands are evenly distributed, we define the load balancing index (LBI) as follows:\n\n<!-- formula-not-decoded -->\n\nwhere ¯ ρ b = | | ρ b ( t ) || 1 and represents the band b load. One can notice that the LBI is simply the Jain's Fairness Index (JFI) [16], but across the bands' loads. Usually, JFI is used to quantify how the resources are uniformly-distributed in resource allocation problems. In a similar manner, the JFI can also quantify how the loads are balanced since we aim to keep the bands' loads uniformly distributed. The LBI will vary eventually based on channel quality from each UE to their assigned band, and the movement of UEs when they enter and\n\nTABLE I: Simulation Parameters\n\n| Parameter                                                                                                                                                 | Value                                                                                       |\n|-----------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------|\n| Simulation time Inter-site distance # of cells Number of bands B Bandwidth for each band # PRB for each band Packet size Scheduler ∆ t LBI threshold L th | 24 h 200 m 3 4 [20, 10, 5, 10] MHz [100, 50, 25, 50] 1500 Bytes Proportional Fair 2 min 0.8 |\n\nleave the cell since they either add or remove load from bands. Consequently, we define the event as the occurrence at which the LBI drops below a threshold, i.e., LBI ≤ L th . In fact, not only this event allows us to save some computation, but it also leads to less inter-frequency HOs since no UEs will be relocated if the event is not triggered. It is important to note that the optimization for each cell can be executed by the corresponding BS to perform load balancing between the bands in that cell. The proposed Probabilistic MLB (PMLB) algorithm is presented in Algorithm 1 and summarized as follows: For each band in a cell, get the measurement reports, the DL rate, and the incoming traffic size for each UE. Calculate the load that each UE is going to add to the band, and store the values. At each ∆ t , check the LBI event, if the loads are unbalanced, perform the feasibility checks and solve the LP in (10). Finally, assign UEs to a band based on the probability distributions that we obtained from solving the LP.\n\n## V. EXPERIMENTAL RESULTS\n\nThe experiments are conducted on a proprietary System Level Simulator (SLS) [10], which is a packet-level simulator that emulates traffic for 5G networks based on real-word data. The main simulation parameters are listed in Table I. In the conducted experiments, we consider three dynamic traffic scenarios: Scenario A: A heavy traffic scenario with 400 UEs per cell and packet inter-arrival time 1 /λ u of 20 ms, Scenario B: A moderate traffic scenario with the same number of UEs but a packet inter-arrival time 1 /λ u of 50 ms, and Scenario C: A light traffic scenario with lower number of UEs with 200 UEs per cell and a packet inter-arrival time 1 /λ u of 50 ms. In what follows, we first analyze the proposed solution to the formulated MOP in terms of Pareto optimality and the proposed integer relaxation method. Afterwards, we compare the performance of the proposed algorithm against different baselines.\n\n## A. Analysis of Optimization Solution\n\nOne way to model MOP is by scalarization, where all the objectives are simply added but each objective is multiplied by a significance weight [13]. To find the Pareto-optimal solutions to the MOP, the weights values are varied for each objective and then the solutions for each variation form the Pareto front. The Pareto front for our MOP and the tradeoffs between the\n\nFig. 1: The Pareto Frontier of the MOP\n\n<!-- image -->\n\ntwo objectives are depicted in Fig. 1. Each point on the curve represents a different value for the objective weight w . On the one extreme, when the weight for the load objective is equal to 0 (i.e., no significance and no load balancing needed), the HO objective achieves its optimal value, that is, no UEs are relocated. On the other extreme, when the weight for the load objective is equal to 1 (i.e., full significance), we achieve the lowest load possible, but the second objective achieves a very suboptimal value. It can be seen that the Pareto optimal solutions can be achieved when the weight w is in the range of [0 . 3 , 0 . 5] . Then, we study the proposed integer relaxation approach in terms of time complexity (Fig. 2 (a)) and the objective value (Fig. 2 (b)). Such study helps to understand the reduction in time complexity and its decrease in the objective value due to the relaxation. To compare with our approach with probabilistic rounding (P-LB), first, the LP in (10) is solved without integer relaxation using a Mixed-Integer LP (MILP) solver by employing the Branch and Bound algorithm. Afterwards, we solve it with integer relaxation considering the deterministic rounding approach (D-LP), where the values are rounded to the nearest integer (i.e., 0 or 1) and ties broken evenly. In Fig. 2(a), we show the LP solution time in milliseconds. It can be seen that as we increase the number UEs in the problem (i.e., increasing the number of variables), the time increases exponentially for MILP, whereas with the integer relaxations it increases only marginally. However, in Fig. 2(b), it can be seen that the MILP achieves the best objective value, and the D-LP method achieves a worse value, but it also increases the performance gap as we increase the number of UEs. Although for our approach we observe a slightly worse objective value, it keeps a constant gap between the MILP.\n\n## B. Performance Comparison\n\nThe proposed PMLB algorithm is compared to two baselines, namely, a rule-based MLB (RBMLB) and the 3GPP defined MLB, in addition to the no load balancing baseline. RBMLB is a proprietary MLB algorithm that is developed by Samsung and used by some telecom operators. It uses a fixed set of rules such that a pool of UEs that are randomly selected moved between bands, in addition to the A2, A4, and the A5\n\nevents to assess the channel quality prior to any HO. The NO MLB baseline let the UEs camp on the first 2 bands only without relocating any UEs, whereas the 3GPP defined MLB let the UEs associates with bands based on the A2 event. The performance comparison is shown in Fig. 3. All the results shown are the average metric per ∆ t in a day, and averaged across all the cells.\n\nFig. 2: Optimization analysis in terms of (a) time complexity and (b) the objective function value between rounding techniques\n\n<!-- image -->\n\nFirst, we show the algorithm behavior in terms of band utilization and load balancing in Fig. 3(a). It can be noticed that our proposed algorithm utilizes all the bands and distributes the load among the bands the most, followed by RBMLB, whereas the vanilla MLB algorithm utilized mainly two bands which have the best channel quality. Afterwards, the average and minimum cell throughput across the bands are depicted in Fig. 3(b) and Fig. 3(c), respectively. In heavy traffic scenarios, we can see that PMLB algorithm outperforms RBMLB, achieving an 18% improvement in the average throughput, and almost double the performance in terms of minimum throughput. This is due to the fact that the PMLB algorithm relocates UEs to bands with best resources or best channel quality in order to guarantee a minimum data rate requirement, unlike the other algorithms. Similarly, in moderate and light traffic scenarios, PMLB algorithm outperforms other algorithms, but the gap between PMLB and RBMLB almost diminishes in light traffic scenario. In fact, since PMLB tries to utilize all the bands and distribute the load evenly, some bands might have more capacity to accommodate more UEs without affecting the assigned UEs, and hence, utilizing all the bands equally might not be necessary in light traffic scenarios. Subsequently, the inter-frequency HO count and the cause interruption time are shown in Fig. 3(d) and Fig. 3(e), respectively. The PMLB algorithm achieves less HO count and interruption time than the RBMLB method by 14%-36% in all scenarios. This is due to the LBI event that was added as a trigger to the optimization in order to avoid relocating UEs unnecessarily. We can see the LBI values in Fig. 3(f). We set the LBI threshold to L th to 0.8, and it can be seen that the PMLB method was able to maintain an LBI average above 0.9 in all scenarios.\n\nFig. 3: Performance comparison between algorithms in terms of (a) load balancing behavior (b) average throughput (c) minimum throughput (d) HO count (e) HO interruption time (f) LBI\n\n<!-- image -->\n\n## VI. CONCLUSION\n\nWe have presented a new approach for MLB in multiband networks, namely, Probabilistic Mobility Load Balancing (PMLB). We have modeled the UE-band assignment problem as an integer multi-objective stochastic optimization problem, where the objectives are to minimize the maximum load and the number of handovers required. To reduce the solution complexity, we have proposed to estimate the random variables and relax the integrality of the problem, and then we have transformed the problem into an LP. The solution outputs a probability distribution for each UE over the bands, where the assigned band to a UE is sampled from that distribution. The simulation results show that the proposed algorithm outperforms rule-based methods in terms of throughput and the interruption time caused by the handovers.\n\n## REFERENCES\n\n- [1] A. Tolli, P. Hakalin, and H. Holma, 'Performance evaluation of common radio resource management (crrm),' in 2002 IEEE International Conference on Communications. Conference Proceedings. ICC 2002 (Cat. No.02CH37333) , vol. 5, 2002, pp. 3429-3433 vol.5.\n- [2] 3GPP, 'LTE; Evolved Universal Terrestrial Radio Access Network (EUTRAN); Self-configuring and self-optimizing network (SON) use cases and solutions,' 3rd Generation Partnership Project (3GPP), Technical Specification (TS) 36.902, 2010, version 9.2.0.\n- [3] H. Hu and e. a. Zhang, Jian, 'Self-configuration and self-optimization for lte networks,' IEEE Communications Magazine , vol. 48, no. 2, pp. 94-100, 2010.\n- [4] Ericsson, 'Ericsson mobility report,' Tech. Rep., 2022. [Online]. Available: https://www.ericsson.com/en/reports-and-papers/ mobility-report/reports\n- [5] 3GPP, 'LTE; Evolved Universal Terrestrial Radio Access (E-UTRA); Radio Resource Control (RRC); Protocol specification,' 3rd Generation Partnership Project (3GPP), Technical Specification (TS) 36.331, 2017, version 13.7.1.\n- [6] R. Kwan, R. Arnott, R. Paterson, R. Trivisonno, and M. Kubota, 'On mobility load balancing for lte systems,' in 2010 IEEE 72nd Vehicular Technology Conference - Fall , 2010, pp. 1-5.\n- [7] Y. Yang and e. a. Li, Pengfei, 'A high-efficient algorithm of mobile load balancing in lte system,' in 2012 IEEE Vehicular Technology Conference (VTC Fall) , 2012, pp. 1-5.\n- [8] Z. Huang, J. Liu, Q. Shen, J. Wu, and X. Gan, 'A threshold-based multi-traffic load balance mechanism in lte-a networks,' in 2015 IEEE wireless communications and networking conference (WCNC) . IEEE, 2015, pp. 1273-1278.\n- [9] J. Kang, X. Chen, D. Wu, Y. T. Xu, X. Liu, G. Dudek, T. Lee, and I. Park, 'Hierarchical policy learning for hybrid communication load balancing,' in ICC 2021-IEEE International Conference on Communications . IEEE, 2021, pp. 1-6.\n- [10] A. e. a. Feriani, 'Multiobjective load balancing for multiband downlink cellular networks: A meta-reinforcement learning approach,' IEEE Journal on Selected Areas in Communications , vol. 40, no. 9, pp. 2614-2629, 2022.\n- [11] G. Alsuhli, K. Banawan, K. Attiah, A. Elezabi, K. Seddik, A. Gaber, M. Zaki, and Y. Gadallah, 'Mobility load management in cellular networks: A deep reinforcement learning approach,' IEEE Transactions on Mobile Computing , 2021.\n- [12] 3GPP, '5G;NR; NR and NG-RAN Overall description;Stage-2,' 3rd Generation Partnership Project (3GPP), Technical Specification (TS) 38.300, 2021, version 16.4.0.\n- [13] S. Boyd, S. P. Boyd, and L. Vandenberghe, Convex optimization . Cambridge university press, 2004.\n- [14] J. R. Birge and F. Louveaux, Introduction to stochastic programming . Springer Science &amp; Business Media, 2011.\n- [15] S. Diamond and S. Boyd, 'CVXPY: A python-embedded modeling language for convex optimization,' Journal of Machine Learning\n\nResearch , vol. 17, no. 83, pp. 1-5, 2016. [Online]. Available: http://jmlr.org/papers/v17/15-408.html\n\n- [16] R. K. Jain, D.-M. W. Chiu, W. R. Hawe et al. , 'A quantitative measure of fairness and discrimination,' Eastern Research Laboratory, Digital Equipment Corporation, Hudson, MA , vol. 21, 1984.",
+  "tables": [
+    {
+      "index": 0,
+      "markdown": "| Parameter                                                                                                                                                 | Value                                                                                       |\n|-----------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------|\n| Simulation time Inter-site distance # of cells Number of bands B Bandwidth for each band # PRB for each band Packet size Scheduler ∆ t LBI threshold L th | 24 h 200 m 3 4 [20, 10, 5, 10] MHz [100, 50, 25, 50] 1500 Bytes Proportional Fair 2 min 0.8 |"
+    }
+  ],
+  "stats": {
+    "pages": 7,
+    "chunksCreated": 43,
+    "totalCharacters": 30928,
+    "totalWords": 5119,
+    "numTables": 1,
+    "processingTimeMs": 12145
+  }
+}

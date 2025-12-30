@@ -1,0 +1,241 @@
+/**
+ * GlobalQueryEngine
+ *
+ * Implements global search strategy for GraphRAG queries.
+ * Uses community summaries and map-reduce approach for
+ * broad knowledge queries that span multiple topics.
+ */
+
+import type { LLMClient } from '@yagokoro/domain';
+import {
+  DEFAULT_GLOBAL_OPTIONS,
+  type Citation,
+  type CommunityRetriever,
+  type QueryCommunitySummary,
+  type GlobalQueryOptions,
+  type QueryContext,
+  type QueryMetrics,
+  type QueryResponse,
+} from './types.js';
+
+/**
+ * Extended global query options with relevance threshold
+ */
+export interface ExtendedGlobalOptions extends GlobalQueryOptions {
+  /** Minimum relevance threshold (0-1) */
+  minRelevance?: number;
+}
+
+/**
+ * Dependencies for GlobalQueryEngine
+ */
+export interface GlobalQueryEngineDeps {
+  /** Community retriever for hierarchical summaries */
+  communityRetriever: CommunityRetriever;
+  /** LLM client for map-reduce operations */
+  llmClient: LLMClient;
+  /** Map-reduce function for combining summaries */
+  mapReducer: (query: string, summaries: string[]) => Promise<string>;
+}
+
+/**
+ * Default extended options
+ */
+const DEFAULT_EXTENDED_OPTIONS: Required<ExtendedGlobalOptions> = {
+  ...DEFAULT_GLOBAL_OPTIONS,
+  minRelevance: 0.3,
+};
+
+/**
+ * Global Query Engine
+ *
+ * Performs global search using community summaries by:
+ * 1. Retrieving relevant communities at specified level
+ * 2. Applying map-reduce to combine community insights
+ * 3. Building comprehensive context from summaries
+ *
+ * This approach is effective for broad queries like:
+ * - "What are the main themes in AI research?"
+ * - "How has machine learning evolved?"
+ * - "Overview of language models"
+ *
+ * @example
+ * ```typescript
+ * const engine = new GlobalQueryEngine({
+ *   communityRetriever,
+ *   llmClient,
+ *   mapReducer,
+ * });
+ *
+ * const result = await engine.query('Overview of AI research');
+ * console.log(result.context.communitySummaries);
+ * ```
+ */
+export class GlobalQueryEngine {
+  private readonly deps: GlobalQueryEngineDeps;
+  private readonly options: Required<ExtendedGlobalOptions>;
+
+  constructor(deps: GlobalQueryEngineDeps, options: ExtendedGlobalOptions = {}) {
+    this.deps = deps;
+    this.options = { ...DEFAULT_EXTENDED_OPTIONS, ...options };
+  }
+
+  /**
+   * Execute a global query
+   *
+   * @param queryText - Natural language query
+   * @param options - Override default options for this query
+   * @returns Query response with community context
+   */
+  async query(
+    queryText: string,
+    options?: ExtendedGlobalOptions
+  ): Promise<QueryResponse> {
+    const mergedOptions = { ...this.options, ...options };
+    const startTime = performance.now();
+    const retrievalStart = startTime;
+
+    const metrics: QueryMetrics = {
+      totalTimeMs: 0,
+      retrievalTimeMs: 0,
+      generationTimeMs: 0,
+      entitiesRetrieved: 0,
+      relationsRetrieved: 0,
+      communitiesConsulted: 0,
+    };
+
+    try {
+      // Step 1: Retrieve relevant communities
+      const communities = await this.deps.communityRetriever.retrieveRelevant(
+        queryText,
+        mergedOptions.communityLevel
+      );
+
+      // Step 2: Filter by minimum relevance
+      const filteredCommunities = communities.filter(
+        (c) => c.relevance >= mergedOptions.minRelevance
+      );
+
+      // Step 3: Sort by relevance and limit
+      const sortedCommunities = filteredCommunities
+        .sort((a, b) => b.relevance - a.relevance)
+        .slice(0, mergedOptions.maxCommunities);
+
+      metrics.retrievalTimeMs = performance.now() - retrievalStart;
+      metrics.communitiesConsulted = sortedCommunities.length;
+
+      // Step 4: Map-reduce community summaries
+      const textChunks: string[] = [];
+
+      if (sortedCommunities.length > 0) {
+        const summaryTexts = sortedCommunities.map((c) => c.summary);
+
+        // Process in batches
+        const batches = this.batchArray(summaryTexts, mergedOptions.batchSize);
+        const batchResults: string[] = [];
+
+        const generationStart = performance.now();
+
+        for (const batch of batches) {
+          const combinedSummary = await this.deps.mapReducer(queryText, batch);
+          batchResults.push(combinedSummary);
+        }
+
+        // Final reduce if multiple batches
+        if (batchResults.length > 1) {
+          const finalSummary = await this.deps.mapReducer(queryText, batchResults);
+          textChunks.push(finalSummary);
+        } else {
+          const firstResult = batchResults[0];
+          if (firstResult !== undefined) {
+            textChunks.push(firstResult);
+          }
+        }
+
+        metrics.generationTimeMs = performance.now() - generationStart;
+      }
+
+      // Step 5: Build context
+      const context = this.buildContext(sortedCommunities, textChunks);
+
+      metrics.totalTimeMs = performance.now() - startTime;
+
+      return {
+        query: queryText,
+        answer: '', // Answer is generated by ResponseGenerator
+        queryType: 'global',
+        citations: this.buildCitations(sortedCommunities),
+        context,
+        metrics,
+        success: true,
+      };
+    } catch (error) {
+      metrics.totalTimeMs = performance.now() - startTime;
+      const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+
+      return {
+        query: queryText,
+        answer: '',
+        queryType: 'global',
+        citations: [],
+        context: this.emptyContext(),
+        metrics,
+        success: false,
+        error: `Global query failed: ${errorMessage}`,
+      };
+    }
+  }
+
+  /**
+   * Build query context from communities
+   */
+  private buildContext(
+    communities: QueryCommunitySummary[],
+    textChunks: string[]
+  ): QueryContext {
+    return {
+      entities: [],
+      relations: [],
+      communitySummaries: communities,
+      textChunks,
+    };
+  }
+
+  /**
+   * Build citations from communities
+   */
+  private buildCitations(communities: QueryCommunitySummary[]): Citation[] {
+    return communities.map((community) => ({
+      entityId: community.communityId,
+      entityName: `Community ${community.communityId}`,
+      sourceType: 'community' as const,
+      relevance: community.relevance,
+      excerpt: community.summary.slice(0, 200),
+    }));
+  }
+
+  /**
+   * Split array into batches
+   */
+  private batchArray<T>(array: T[], batchSize: number): T[][] {
+    const batches: T[][] = [];
+
+    for (let i = 0; i < array.length; i += batchSize) {
+      batches.push(array.slice(i, i + batchSize));
+    }
+
+    return batches;
+  }
+
+  /**
+   * Create empty context
+   */
+  private emptyContext(): QueryContext {
+    return {
+      entities: [],
+      relations: [],
+      communitySummaries: [],
+      textChunks: [],
+    };
+  }
+}

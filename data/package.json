@@ -1,0 +1,26 @@
+{
+  "name": "@yagokoro/seed-data",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "seed": "npx tsx seed/ingest.ts",
+    "seed:dry-run": "npx tsx seed/ingest.ts --dry-run",
+    "embed": "npx tsx seed/embed.ts",
+    "embed:dry-run": "npx tsx seed/embed.ts --dry-run",
+    "search": "npx tsx seed/search-test.ts",
+    "query": "npx tsx seed/query-test.ts",
+    "qa": "npx tsx seed/qa-demo.ts",
+    "validate": "npx tsx seed/validate.ts"
+  },
+  "dependencies": {
+    "@yagokoro/domain": "workspace:*",
+    "@yagokoro/neo4j": "workspace:*",
+    "@yagokoro/vector": "workspace:*",
+    "neo4j-driver": "^5.27.0"
+  },
+  "devDependencies": {
+    "tsx": "^4.7.0",
+    "typescript": "^5.7.0"
+  }
+}

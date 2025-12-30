@@ -1,5 +1,10 @@
 import { describe, expect, it } from 'vitest';
-import { type RelationType, isValidRelationType } from './RelationType.js';
+import {
+  type RelationType,
+  isValidRelationType,
+  isValidReviewStatus,
+  isValidExtractionMethod,
+} from './RelationType.js';
 
 describe('RelationType', () => {
   describe('isValidRelationType', () => {
@@ -17,9 +22,11 @@ describe('RelationType', () => {
         'INVENTED',
         'AFFILIATED_WITH',
         'CONTRIBUTED_TO',
+        'SPECIALIZES_IN',
         'COLLABORATED_WITH',
         'ACQUIRED',
         'FUNDED',
+        'COMPETES_WITH',
         'IMPROVES_UPON',
         'DERIVED_FROM',
         'APPLIED_IN',
@@ -31,6 +38,9 @@ describe('RelationType', () => {
         'EXTENDS',
         'MEMBER_OF',
         'PARENT_COMMUNITY',
+        'INFLUENCED_BY',
+        'EVOLVED_INTO',
+        'BASED_ON',
       ];
 
       for (const type of validTypes) {
@@ -42,6 +52,35 @@ describe('RelationType', () => {
       expect(isValidRelationType('INVALID_TYPE')).toBe(false);
       expect(isValidRelationType('')).toBe(false);
       expect(isValidRelationType('random')).toBe(false);
+    });
+  });
+
+  describe('isValidReviewStatus', () => {
+    it('should return true for valid review statuses', () => {
+      expect(isValidReviewStatus('pending')).toBe(true);
+      expect(isValidReviewStatus('approved')).toBe(true);
+      expect(isValidReviewStatus('rejected')).toBe(true);
+      expect(isValidReviewStatus('modified')).toBe(true);
+    });
+
+    it('should return false for invalid review statuses', () => {
+      expect(isValidReviewStatus('INVALID')).toBe(false);
+      expect(isValidReviewStatus('')).toBe(false);
+    });
+  });
+
+  describe('isValidExtractionMethod', () => {
+    it('should return true for valid extraction methods', () => {
+      expect(isValidExtractionMethod('manual')).toBe(true);
+      expect(isValidExtractionMethod('cooccurrence')).toBe(true);
+      expect(isValidExtractionMethod('pattern')).toBe(true);
+      expect(isValidExtractionMethod('llm')).toBe(true);
+      expect(isValidExtractionMethod('hybrid')).toBe(true);
+    });
+
+    it('should return false for invalid extraction methods', () => {
+      expect(isValidExtractionMethod('INVALID')).toBe(false);
+      expect(isValidExtractionMethod('')).toBe(false);
     });
   });
 });

@@ -1,0 +1,112 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Relation Types Configuration",
+  "description": "Schema for YAGOKORO relation types configuration",
+  "type": "object",
+  "required": ["version", "relationTypes"],
+  "properties": {
+    "$schema": {
+      "type": "string"
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$",
+      "description": "Semantic version of the configuration"
+    },
+    "description": {
+      "type": "string"
+    },
+    "relationTypes": {
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/definitions/RelationTypeConfig"
+      }
+    },
+    "entityTypes": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Valid entity types in the knowledge graph"
+    },
+    "scoring": {
+      "type": "object",
+      "properties": {
+        "weights": {
+          "type": "object",
+          "properties": {
+            "cooccurrence": { "type": "number", "minimum": 0, "maximum": 1 },
+            "llm": { "type": "number", "minimum": 0, "maximum": 1 },
+            "source": { "type": "number", "minimum": 0, "maximum": 1 },
+            "graph": { "type": "number", "minimum": 0, "maximum": 1 }
+          },
+          "description": "Weights for confidence scoring (must sum to 1.0)"
+        },
+        "thresholds": {
+          "type": "object",
+          "properties": {
+            "autoApprove": { "type": "number", "minimum": 0, "maximum": 1 },
+            "review": { "type": "number", "minimum": 0, "maximum": 1 }
+          },
+          "description": "HITL thresholds for review workflow"
+        }
+      }
+    },
+    "conflictingPairs": {
+      "type": "array",
+      "items": {
+        "type": "array",
+        "items": { "type": "string" },
+        "minItems": 2,
+        "maxItems": 2
+      },
+      "description": "Pairs of relation types that conflict with each other"
+    }
+  },
+  "definitions": {
+    "RelationTypeConfig": {
+      "type": "object",
+      "required": ["description", "sourceTypes", "targetTypes", "bidirectional", "extractable"],
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "Human-readable description of the relation type"
+        },
+        "sourceTypes": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Valid entity types for source of relation"
+        },
+        "targetTypes": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Valid entity types for target of relation"
+        },
+        "bidirectional": {
+          "type": "boolean",
+          "description": "Whether the relation is symmetric"
+        },
+        "patterns": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Text patterns for extraction (use {source} and {target} placeholders)"
+        },
+        "extractable": {
+          "type": "boolean",
+          "description": "Whether this relation type can be auto-extracted"
+        },
+        "defaultConfidence": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1,
+          "description": "Default confidence score for extracted relations"
+        },
+        "conflictsWith": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "List of relation types this conflicts with"
+        }
+      }
+    }
+  }
+}

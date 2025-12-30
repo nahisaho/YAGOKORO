@@ -1,0 +1,40 @@
+{
+  "name": "@yagokoro/extractor",
+  "version": "3.0.0",
+  "private": true,
+  "description": "Automatic relation extraction using co-occurrence analysis and pattern matching",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": ["dist"],
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "test": "vitest run",
+    "test:unit": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
+    "typecheck": "tsc --noEmit",
+    "clean": "rm -rf dist coverage"
+  },
+  "dependencies": {
+    "@yagokoro/domain": "workspace:*",
+    "zod": "^3.24.1"
+  },
+  "devDependencies": {
+    "vitest": "^2.1.8"
+  },
+  "keywords": [
+    "relation-extraction",
+    "co-occurrence",
+    "pattern-matching",
+    "nlp",
+    "knowledge-graph"
+  ]
+}

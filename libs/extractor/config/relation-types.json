@@ -1,0 +1,442 @@
+{
+  "$schema": "./relation-types.schema.json",
+  "version": "3.0.0",
+  "description": "Relation type configuration for YAGOKORO Knowledge Graph",
+  "relationTypes": {
+    "DEVELOPED_BY": {
+      "description": "Entity was developed/created by target",
+      "sourceTypes": ["AIModel", "Technique", "Dataset"],
+      "targetTypes": ["Organization", "Person"],
+      "bidirectional": false,
+      "patterns": [
+        "{source} developed by {target}",
+        "{source} was developed by {target}",
+        "{source} created by {target}",
+        "{source} was created by {target}",
+        "{target} developed {source}",
+        "{target} created {source}",
+        "{target}'s {source}"
+      ],
+      "extractable": true,
+      "defaultConfidence": 0.7
+    },
+    "TRAINED_ON": {
+      "description": "Model was trained using target dataset",
+      "sourceTypes": ["AIModel"],
+      "targetTypes": ["Dataset"],
+      "bidirectional": false,
+      "patterns": [
+        "{source} trained on {target}",
+        "{source} was trained on {target}",
+        "{source} uses {target} dataset",
+        "{source} trained using {target}"
+      ],
+      "extractable": true,
+      "defaultConfidence": 0.7
+    },
+    "USES_TECHNIQUE": {
+      "description": "Entity uses/employs the target technique",
+      "sourceTypes": ["AIModel", "Publication"],
+      "targetTypes": ["Technique"],
+      "bidirectional": false,
+      "patterns": [
+        "{source} uses {target}",
+        "{source} employs {target}",
+        "{source} utilizes {target}",
+        "{source} based on {target}",
+        "{source} implements {target}"
+      ],
+      "extractable": true,
+      "defaultConfidence": 0.6
+    },
+    "EVALUATED_ON": {
+      "description": "Entity was evaluated/benchmarked on target",
+      "sourceTypes": ["AIModel"],
+      "targetTypes": ["Benchmark", "Dataset"],
+      "bidirectional": false,
+      "patterns": [
+        "{source} evaluated on {target}",
+        "{source} benchmarked on {target}",
+        "{source} tested on {target}",
+        "{source} achieves {score} on {target}"
+      ],
+      "extractable": true,
+      "defaultConfidence": 0.7
+    },
+    "CITES": {
+      "description": "Publication cites/references target",
+      "sourceTypes": ["Publication"],
+      "targetTypes": ["Publication"],
+      "bidirectional": false,
+      "patterns": [
+        "{source} cites {target}",
+        "{source} references {target}",
+        "as described in {target}",
+        "according to {target}"
+      ],
+      "extractable": true,
+      "defaultConfidence": 0.8
+    },
+    "AFFILIATED_WITH": {
+      "description": "Person is affiliated with organization",
+      "sourceTypes": ["Person"],
+      "targetTypes": ["Organization"],
+      "bidirectional": false,
+      "patterns": [
+        "{source} from {target}",
+        "{source} at {target}",
+        "{source} of {target}",
+        "{source}, {target}"
+      ],
+      "extractable": true,
+      "defaultConfidence": 0.7
+    },
+    "CONTRIBUTED_TO": {
+      "description": "Person contributed to entity development",
+      "sourceTypes": ["Person"],
+      "targetTypes": ["AIModel", "Publication", "Technique"],
+      "bidirectional": false,
+      "patterns": [
+        "{source} contributed to {target}",
+        "{source} worked on {target}",
+        "{source} co-authored {target}"
+      ],
+      "extractable": true,
+      "defaultConfidence": 0.6
+    },
+    "SPECIALIZES_IN": {
+      "description": "Person specializes in field/topic",
+      "sourceTypes": ["Person", "Organization"],
+      "targetTypes": ["Concept", "Technique"],
+      "bidirectional": false,
+      "patterns": [
+        "{source} specializes in {target}",
+        "{source} expert in {target}",
+        "{source} focuses on {target}",
+        "{source}'s research focuses on {target}"
+      ],
+      "extractable": true,
+      "defaultConfidence": 0.6
+    },
+    "INFLUENCED_BY": {
+      "description": "Entity was influenced by target",
+      "sourceTypes": ["AIModel", "Technique", "Person"],
+      "targetTypes": ["AIModel", "Technique", "Person", "Publication"],
+      "bidirectional": false,
+      "patterns": [
+        "{source} influenced by {target}",
+        "{source} inspired by {target}",
+        "{source} draws from {target}",
+        "{source} builds upon {target}"
+      ],
+      "extractable": true,
+      "defaultConfidence": 0.5
+    },
+    "COLLABORATED_WITH": {
+      "description": "Collaboration between entities",
+      "sourceTypes": ["Organization", "Person"],
+      "targetTypes": ["Organization", "Person"],
+      "bidirectional": true,
+      "patterns": [
+        "{source} collaborated with {target}",
+        "{source} and {target} collaborated",
+        "{source} partnered with {target}",
+        "collaboration between {source} and {target}"
+      ],
+      "extractable": true,
+      "defaultConfidence": 0.6
+    },
+    "EVOLVED_INTO": {
+      "description": "Entity evolved/developed into target",
+      "sourceTypes": ["AIModel", "Technique"],
+      "targetTypes": ["AIModel", "Technique"],
+      "bidirectional": false,
+      "patterns": [
+        "{source} evolved into {target}",
+        "{source} became {target}",
+        "{target} successor of {source}",
+        "{target} is the next version of {source}"
+      ],
+      "extractable": true,
+      "defaultConfidence": 0.6
+    },
+    "COMPETES_WITH": {
+      "description": "Competition between entities",
+      "sourceTypes": ["Organization", "AIModel"],
+      "targetTypes": ["Organization", "AIModel"],
+      "bidirectional": true,
+      "patterns": [
+        "{source} competes with {target}",
+        "{source} vs {target}",
+        "{source} and {target} are competitors",
+        "{source} rival of {target}"
+      ],
+      "extractable": true,
+      "defaultConfidence": 0.5,
+      "conflictsWith": ["DEVELOPED_BY", "COLLABORATED_WITH", "BASED_ON"]
+    },
+    "BASED_ON": {
+      "description": "Entity is based on/derived from target",
+      "sourceTypes": ["AIModel", "Technique", "Publication"],
+      "targetTypes": ["AIModel", "Technique", "Publication"],
+      "bidirectional": false,
+      "patterns": [
+        "{source} based on {target}",
+        "{source} derived from {target}",
+        "{source} extends {target}",
+        "{source} is a variant of {target}"
+      ],
+      "extractable": true,
+      "defaultConfidence": 0.6
+    },
+    "SUCCESSOR_OF": {
+      "description": "Entity is the successor of target",
+      "sourceTypes": ["AIModel"],
+      "targetTypes": ["AIModel"],
+      "bidirectional": false,
+      "patterns": [
+        "{source} successor of {target}",
+        "{source} replaces {target}",
+        "{source} is the next generation of {target}"
+      ],
+      "extractable": true,
+      "defaultConfidence": 0.7
+    },
+    "VARIANT_OF": {
+      "description": "Entity is a variant/version of target",
+      "sourceTypes": ["AIModel"],
+      "targetTypes": ["AIModel"],
+      "bidirectional": false,
+      "patterns": [
+        "{source} variant of {target}",
+        "{source} version of {target}",
+        "{source} is based on {target}"
+      ],
+      "extractable": true,
+      "defaultConfidence": 0.7
+    },
+    "FINE_TUNED_FROM": {
+      "description": "Model was fine-tuned from base model",
+      "sourceTypes": ["AIModel"],
+      "targetTypes": ["AIModel"],
+      "bidirectional": false,
+      "patterns": [
+        "{source} fine-tuned from {target}",
+        "{source} fine-tuned on {target}",
+        "{source} adapted from {target}"
+      ],
+      "extractable": true,
+      "defaultConfidence": 0.7
+    },
+    "DESCRIBED_IN": {
+      "description": "Entity is described in publication",
+      "sourceTypes": ["AIModel", "Technique", "Dataset"],
+      "targetTypes": ["Publication"],
+      "bidirectional": false,
+      "patterns": [
+        "{source} described in {target}",
+        "{source} introduced in {target}",
+        "{source} presented in {target}"
+      ],
+      "extractable": true,
+      "defaultConfidence": 0.8
+    },
+    "AUTHORED": {
+      "description": "Person authored publication",
+      "sourceTypes": ["Person"],
+      "targetTypes": ["Publication"],
+      "bidirectional": false,
+      "patterns": [
+        "{source} authored {target}",
+        "{source} wrote {target}",
+        "{target} by {source}"
+      ],
+      "extractable": true,
+      "defaultConfidence": 0.8
+    },
+    "INVENTED": {
+      "description": "Person invented technique",
+      "sourceTypes": ["Person"],
+      "targetTypes": ["Technique"],
+      "bidirectional": false,
+      "patterns": [
+        "{source} invented {target}",
+        "{source} created {target}",
+        "{source} introduced {target}"
+      ],
+      "extractable": true,
+      "defaultConfidence": 0.7
+    },
+    "ACQUIRED": {
+      "description": "Organization acquired target",
+      "sourceTypes": ["Organization"],
+      "targetTypes": ["Organization"],
+      "bidirectional": false,
+      "patterns": [
+        "{source} acquired {target}",
+        "{source} bought {target}",
+        "{target} acquired by {source}"
+      ],
+      "extractable": true,
+      "defaultConfidence": 0.8
+    },
+    "FUNDED": {
+      "description": "Organization funded entity",
+      "sourceTypes": ["Organization"],
+      "targetTypes": ["AIModel", "Publication", "Organization"],
+      "bidirectional": false,
+      "patterns": [
+        "{source} funded {target}",
+        "{target} funded by {source}",
+        "{source} sponsored {target}"
+      ],
+      "extractable": true,
+      "defaultConfidence": 0.7
+    },
+    "IMPROVES_UPON": {
+      "description": "Technique improves upon target",
+      "sourceTypes": ["Technique"],
+      "targetTypes": ["Technique"],
+      "bidirectional": false,
+      "patterns": [
+        "{source} improves upon {target}",
+        "{source} improves {target}",
+        "{source} enhances {target}"
+      ],
+      "extractable": true,
+      "defaultConfidence": 0.6
+    },
+    "DERIVED_FROM": {
+      "description": "Entity derived from target",
+      "sourceTypes": ["Technique", "Dataset"],
+      "targetTypes": ["Technique", "Dataset"],
+      "bidirectional": false,
+      "patterns": [
+        "{source} derived from {target}",
+        "{source} based on {target}"
+      ],
+      "extractable": true,
+      "defaultConfidence": 0.6
+    },
+    "APPLIED_IN": {
+      "description": "Technique applied in model",
+      "sourceTypes": ["Technique"],
+      "targetTypes": ["AIModel"],
+      "bidirectional": false,
+      "patterns": [
+        "{source} applied in {target}",
+        "{source} used in {target}",
+        "{target} uses {source}"
+      ],
+      "extractable": true,
+      "defaultConfidence": 0.6
+    },
+    "INTRODUCED_IN": {
+      "description": "Technique introduced in publication",
+      "sourceTypes": ["Technique"],
+      "targetTypes": ["Publication"],
+      "bidirectional": false,
+      "patterns": [
+        "{source} introduced in {target}",
+        "{source} presented in {target}"
+      ],
+      "extractable": true,
+      "defaultConfidence": 0.7
+    },
+    "RELATED_TO": {
+      "description": "Concept related to target concept",
+      "sourceTypes": ["Concept"],
+      "targetTypes": ["Concept"],
+      "bidirectional": true,
+      "patterns": [
+        "{source} related to {target}",
+        "{source} similar to {target}"
+      ],
+      "extractable": true,
+      "defaultConfidence": 0.5
+    },
+    "SUBCONCEPT_OF": {
+      "description": "Concept is subconcept of target",
+      "sourceTypes": ["Concept"],
+      "targetTypes": ["Concept"],
+      "bidirectional": false,
+      "patterns": [
+        "{source} subconcept of {target}",
+        "{source} type of {target}",
+        "{source} is a {target}"
+      ],
+      "extractable": true,
+      "defaultConfidence": 0.6
+    },
+    "EXEMPLIFIED_BY": {
+      "description": "Concept exemplified by model",
+      "sourceTypes": ["Concept"],
+      "targetTypes": ["AIModel"],
+      "bidirectional": false,
+      "patterns": [
+        "{source} exemplified by {target}",
+        "{target} is an example of {source}"
+      ],
+      "extractable": true,
+      "defaultConfidence": 0.5
+    },
+    "EXTENDS": {
+      "description": "Publication extends target publication",
+      "sourceTypes": ["Publication"],
+      "targetTypes": ["Publication"],
+      "bidirectional": false,
+      "patterns": [
+        "{source} extends {target}",
+        "{source} builds on {target}"
+      ],
+      "extractable": true,
+      "defaultConfidence": 0.6
+    },
+    "MEMBER_OF": {
+      "description": "Entity is member of community",
+      "sourceTypes": ["Person", "Organization", "AIModel"],
+      "targetTypes": ["Community"],
+      "bidirectional": false,
+      "patterns": [],
+      "extractable": false,
+      "defaultConfidence": 0.8
+    },
+    "PARENT_COMMUNITY": {
+      "description": "Community is parent of target community",
+      "sourceTypes": ["Community"],
+      "targetTypes": ["Community"],
+      "bidirectional": false,
+      "patterns": [],
+      "extractable": false,
+      "defaultConfidence": 0.8
+    }
+  },
+  "entityTypes": [
+    "AIModel",
+    "Organization",
+    "Person",
+    "Publication",
+    "Dataset",
+    "Technique",
+    "Benchmark",
+    "Concept",
+    "Community"
+  ],
+  "scoring": {
+    "weights": {
+      "cooccurrence": 0.3,
+      "llm": 0.3,
+      "source": 0.2,
+      "graph": 0.2
+    },
+    "thresholds": {
+      "autoApprove": 0.7,
+      "review": 0.5
+    }
+  },
+  "conflictingPairs": [
+    ["DEVELOPED_BY", "COMPETES_WITH"],
+    ["COLLABORATED_WITH", "COMPETES_WITH"],
+    ["BASED_ON", "COMPETES_WITH"]
+  ]
+}

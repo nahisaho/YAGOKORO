@@ -74,3 +74,13 @@ export {
   type ArxivSearchOptions,
   type ArxivSearchResult,
 } from './ingest.js';
+export {
+  createPathCommand,
+  type PathService,
+  type CLIPath,
+  type CLIPathNode,
+  type CLIPathRelation,
+  type CLIPathResult,
+  type CLIPathExplanation,
+  type PathFindOptions,
+} from './path.js';

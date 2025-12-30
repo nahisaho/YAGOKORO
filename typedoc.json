@@ -1,0 +1,77 @@
+{
+  "$schema": "https://typedoc.org/schema.json",
+  "entryPoints": [
+    "libs/domain/src/index.ts",
+    "libs/neo4j/src/index.ts",
+    "libs/vector/src/index.ts",
+    "libs/graphrag/src/index.ts",
+    "libs/mcp/src/index.ts",
+    "libs/cli/src/index.ts",
+    "libs/normalizer/src/index.ts",
+    "libs/nlq/src/index.ts",
+    "libs/reasoner/src/index.ts",
+    "libs/analyzer/src/index.ts"
+  ],
+  "entryPointStrategy": "expand",
+  "out": "docs/api",
+  "name": "YAGOKORO API Documentation",
+  "readme": "README.md",
+  "includeVersion": true,
+  "categorizeByGroup": true,
+  "categoryOrder": [
+    "Domain",
+    "Neo4j",
+    "Vector",
+    "GraphRAG",
+    "MCP",
+    "CLI",
+    "Normalizer",
+    "NLQ",
+    "Reasoner",
+    "Analyzer",
+    "*"
+  ],
+  "navigationLinks": {
+    "GitHub": "https://github.com/nahisaho/YAGOKORO"
+  },
+  "plugin": [],
+  "exclude": [
+    "**/*.test.ts",
+    "**/*.spec.ts",
+    "**/test/**",
+    "**/node_modules/**"
+  ],
+  "excludePrivate": true,
+  "excludeProtected": false,
+  "excludeInternal": true,
+  "excludeExternals": true,
+  "skipErrorChecking": true,
+  "validation": {
+    "notExported": false,
+    "invalidLink": false,
+    "notDocumented": false
+  },
+  "sort": [
+    "source-order",
+    "alphabetical"
+  ],
+  "kindSortOrder": [
+    "Module",
+    "Namespace",
+    "Class",
+    "Interface",
+    "TypeAlias",
+    "Function",
+    "Variable",
+    "Enum"
+  ],
+  "treatWarningsAsErrors": false,
+  "treatValidationWarningsAsErrors": false,
+  "commentStyle": "jsdoc",
+  "searchInComments": true,
+  "customCss": "",
+  "hideGenerator": true,
+  "hideParameterTypesInTitle": false,
+  "preserveLinkText": true,
+  "theme": "default"
+}

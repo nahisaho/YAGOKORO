@@ -5,6 +5,122 @@ All notable changes to YAGOKORO will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.0.0] - 2025-12-30
+
+### 🎉 Major Release: YAGOKORO v2
+
+This release introduces comprehensive GraphRAG v2 capabilities including entity normalization,
+natural language querying, multi-hop reasoning, hallucination detection, and research gap analysis.
+
+### Added
+
+#### Phase 1: Entity Normalization (@yagokoro/normalizer)
+- **RuleNormalizer** - Rule-based entity name normalization
+  - Case normalization, whitespace handling, abbreviation expansion
+  - Configurable normalization rules
+- **SimilarityMatcher** - Fuzzy matching for entity deduplication
+  - Levenshtein distance, Jaro-Winkler, n-gram similarity
+  - Configurable thresholds
+- **EntityResolver** - Entity resolution and merging
+  - Automatic duplicate detection
+  - Property merging strategies
+- **NormalizationPipeline** - Orchestrated normalization workflow
+  - Batch processing support
+  - Dry-run mode
+
+#### Phase 2: Natural Language Query (@yagokoro/nlq)
+- **IntentClassifier** - Query intent classification
+  - Entity lookup, relation lookup, aggregation, path finding
+  - Japanese language support
+- **CypherGenerator** - NL to Cypher conversion
+  - Template-based generation
+  - LLM-assisted generation
+- **FallbackManager** - Graceful degradation
+  - Vector search fallback
+  - Response synthesis
+- **QueryOptimizer** - Query performance optimization
+  - Index hints, query simplification
+
+#### Phase 3: Research Gap Analysis (@yagokoro/analyzer)
+- **GapDetector** - Research gap identification
+  - Coverage analysis
+  - Trend detection
+- **OpportunityScorer** - Research opportunity scoring
+  - Multi-factor scoring
+  - Confidence calculation
+- **TrendAnalyzer** - Publication and citation trends
+  - Time series analysis
+  - Emerging topic detection
+- **ReportGenerator** - Automated report generation
+  - Weekly/monthly/quarterly reports
+  - Multiple output formats
+- **AlertGenerator** - Proactive alerting system
+  - Date range threshold monitoring
+  - Configurable alert severity
+
+#### Phase 4: Multi-hop Reasoning (@yagokoro/reasoner)
+- **PathFinder** (BFS/DFS/A*) - Path finding algorithms
+  - Configurable max hops
+  - Weighted edges support
+  - Cycle detection
+- **ReasoningChain** - Chain-of-thought reasoning
+  - Step-by-step explanation
+  - Confidence propagation
+- **ConfidenceCalculator** - Multi-factor confidence scoring
+  - Graph coverage, path confidence, recency, source quality
+- **HallucinationDetector** - Response validation
+  - Consistency checking
+  - Contradiction detection
+  - Entity verification
+
+#### Phase 5: Integration & Infrastructure
+- **MCP Tools** - New MCP server tools
+  - `natural_language_query` - NL to Cypher
+  - `chain_of_thought` - Multi-step reasoning
+  - `validate_response` - Hallucination detection
+  - `check_consistency` - Claim verification
+  - `normalize_entities` - Entity normalization
+  - `find_path` - Multi-hop path finding
+  - `analyze_lifecycle` - Entity lifecycle
+  - `generate_report` - Periodic reports
+- **CLI Commands** - New CLI commands
+  - `normalize` - Entity normalization
+  - `query` - Natural language query
+  - `path` - Path finding
+  - `analyze` - Gap analysis
+  - `lifecycle` - Lifecycle management
+- **Auth & Security** - Security infrastructure
+  - SecretManager for credential management
+  - InputValidator for injection prevention
+  - RateLimiter with presets
+- **Transaction Management** - Robust data operations
+  - TransactionManager with retry logic
+  - UnitOfWork pattern
+- **Error Handling** - Unified error system
+  - ErrorHandler with severity levels
+  - Sensitive data masking
+  - Error statistics tracking
+
+#### Phase 6: Testing & Documentation
+- **E2E Tests** - 81 new E2E tests for CLI and MCP
+- **Performance Tests** - 24 tests validating NFR requirements
+- **API Documentation** - TypeDoc configuration and API reference
+
+### Performance
+
+- Entity normalization: 1000 entities < 30s ✅
+- Path finding (4-hop): < 5s ✅
+- Gap analysis: < 60s ✅
+- Report generation: < 120s ✅
+
+### Technical Details
+
+- **New Packages**: normalizer, nlq, reasoner, analyzer
+- **Total Tests**: 1850+
+- **Test Coverage**: Comprehensive unit, integration, and E2E tests
+
+---
+
 ## [0.7.0] - 2025-12-30
 
 ### Added

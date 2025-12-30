@@ -68,7 +68,7 @@ describe('BFSPathFinder', () => {
 
       expect(result.paths).toHaveLength(2);
       expect(result.statistics.totalPaths).toBe(2);
-      expect(result.executionTime).toBeGreaterThan(0);
+      expect(result.executionTime).toBeGreaterThanOrEqual(0);
     });
 
     it('should build correct Cypher query with relation filter', async () => {

@@ -47,3 +47,6 @@ export {
   type LifecycleRepository,
   type LifecycleAnalysisResult,
 } from './TechnologyLifecycleTrackerService.js';
+
+// Alerts and Reports (TASK-V2-027)
+export * from './alerts/index.js';

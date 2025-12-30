@@ -137,6 +137,71 @@ export interface CLIDecliningTechnology {
 }
 
 /**
+ * Alert severity type
+ */
+export type AlertSeverity = 'info' | 'warning' | 'critical';
+
+/**
+ * Alert type
+ */
+export type AlertType =
+  | 'phase_transition'
+  | 'maturity_change'
+  | 'trend_shift'
+  | 'emerging_technology'
+  | 'declining_technology'
+  | 'anomaly_detected';
+
+/**
+ * CLI alert interface
+ */
+export interface CLIAlert {
+  id: string;
+  type: AlertType;
+  severity: AlertSeverity;
+  technologyId: string;
+  technologyName: string;
+  title: string;
+  message: string;
+  createdAt: string;
+  acknowledged: boolean;
+  acknowledgedAt?: string;
+}
+
+/**
+ * Report period type
+ */
+export type ReportPeriod = 'weekly' | 'monthly' | 'quarterly' | 'annual';
+
+/**
+ * Report format type
+ */
+export type ReportFormatType = 'markdown' | 'html' | 'json';
+
+/**
+ * CLI periodic report
+ */
+export interface CLIPeriodicReport {
+  id: string;
+  period: ReportPeriod;
+  startDate: string;
+  endDate: string;
+  generatedAt: string;
+  summary: {
+    totalTechnologies: number;
+    newTechnologies: number;
+    transitionedTechnologies: number;
+    alerts: {
+      total: number;
+      critical: number;
+      warning: number;
+      info: number;
+    };
+  };
+  content: string;
+}
+
+/**
  * Lifecycle analyze options
  */
 export interface LifecycleAnalyzeOptions {
@@ -183,6 +248,23 @@ export interface LifecycleService {
 
   /** Get technologies by phase */
   getTechnologiesByPhase(phase: LifecyclePhase): Promise<CLILifecycleAnalysis[]>;
+
+  /** Get alerts */
+  getAlerts(options?: {
+    acknowledged?: boolean;
+    severity?: AlertSeverity;
+    limit?: number;
+  }): Promise<CLIAlert[]>;
+
+  /** Acknowledge alert */
+  acknowledgeAlert(alertId: string): Promise<boolean>;
+
+  /** Generate periodic report */
+  generatePeriodicReport(options?: {
+    period?: ReportPeriod;
+    format?: ReportFormatType;
+    language?: 'ja' | 'en';
+  }): Promise<CLIPeriodicReport>;
 }
 
 // ============ Helper Functions ============
@@ -317,6 +399,85 @@ export function createLifecycleCommand(service: LifecycleService): Command {
         process.exitCode = 1;
       }
     });
+
+  // lifecycle alerts
+  lifecycle
+    .command('alerts')
+    .description('アラート一覧を表示')
+    .option('-a, --acknowledged', '確認済みアラートを含める', false)
+    .option('-s, --severity <level>', '重要度でフィルタ (info|warning|critical)')
+    .option('-l, --limit <count>', '最大件数', '20')
+    .option('-f, --format <format>', '出力形式 (json|table|yaml)', 'table')
+    .action(
+      async (options: {
+        acknowledged: boolean;
+        severity?: string;
+        limit: string;
+        format: string;
+      }) => {
+        try {
+          const alerts = await service.getAlerts({
+            acknowledged: options.acknowledged ? undefined : false,
+            severity: options.severity as AlertSeverity | undefined,
+            limit: parseInt(options.limit, 10),
+          });
+          printAlerts(alerts, options.format as OutputFormat);
+        } catch (error) {
+          console.error(formatError(error));
+          process.exitCode = 1;
+        }
+      }
+    );
+
+  // lifecycle acknowledge <alertId>
+  lifecycle
+    .command('acknowledge <alertId>')
+    .alias('ack')
+    .description('アラートを確認済みにする')
+    .action(async (alertId: string) => {
+      try {
+        const success = await service.acknowledgeAlert(alertId);
+        if (success) {
+          console.log(`✅ アラート ${alertId} を確認済みにしました`);
+        } else {
+          console.error(`❌ アラート ${alertId} が見つかりません`);
+          process.exitCode = 1;
+        }
+      } catch (error) {
+        console.error(formatError(error));
+        process.exitCode = 1;
+      }
+    });
+
+  // lifecycle periodic-report
+  lifecycle
+    .command('periodic-report')
+    .alias('pr')
+    .description('定期レポートを生成')
+    .option('-p, --period <period>', '期間 (weekly|monthly|quarterly|annual)', 'monthly')
+    .option('-o, --output <format>', '出力形式 (markdown|html|json)', 'markdown')
+    .option('-l, --language <lang>', '言語 (ja|en)', 'ja')
+    .option('-f, --format <format>', '出力形式 (json|table)', 'table')
+    .action(
+      async (options: {
+        period: string;
+        output: string;
+        language: string;
+        format: string;
+      }) => {
+        try {
+          const report = await service.generatePeriodicReport({
+            period: options.period as ReportPeriod,
+            format: options.output as ReportFormatType,
+            language: options.language as 'ja' | 'en',
+          });
+          printPeriodicReport(report, options.format as OutputFormat);
+        } catch (error) {
+          console.error(formatError(error));
+          process.exitCode = 1;
+        }
+      }
+    );
 
   return lifecycle;
 }
@@ -606,4 +767,122 @@ function printPhaseResults(
   }
 
   console.log(`\n合計: ${results.length}件\n`);
+}
+
+// ============ Alert Output Helpers ============
+
+const SEVERITY_ICONS: Record<AlertSeverity, string> = {
+  critical: '🔴',
+  warning: '🟡',
+  info: '🔵',
+};
+
+const SEVERITY_LABELS: Record<AlertSeverity, string> = {
+  critical: '重大',
+  warning: '警告',
+  info: '情報',
+};
+
+const ALERT_TYPE_LABELS: Record<AlertType, string> = {
+  phase_transition: 'フェーズ遷移',
+  maturity_change: '成熟度変化',
+  trend_shift: 'トレンド変化',
+  emerging_technology: '新興技術検出',
+  declining_technology: '衰退技術検出',
+  anomaly_detected: '異常検出',
+};
+
+function printAlerts(alerts: CLIAlert[], format: OutputFormat): void {
+  if (format === 'json') {
+    console.log(formatOutput(alerts, format));
+    return;
+  }
+
+  console.log('\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+  console.log('🔔 アラート一覧');
+  console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n');
+
+  if (alerts.length === 0) {
+    console.log('未確認のアラートはありません。\n');
+    return;
+  }
+
+  // Summary by severity
+  const criticalCount = alerts.filter((a) => a.severity === 'critical').length;
+  const warningCount = alerts.filter((a) => a.severity === 'warning').length;
+  const infoCount = alerts.filter((a) => a.severity === 'info').length;
+
+  console.log('📊 サマリー:');
+  console.log(`   🔴 重大: ${criticalCount}件`);
+  console.log(`   🟡 警告: ${warningCount}件`);
+  console.log(`   🔵 情報: ${infoCount}件`);
+  console.log('');
+
+  // Sort by severity (critical first)
+  const sorted = [...alerts].sort((a, b) => {
+    const order: Record<AlertSeverity, number> = { critical: 0, warning: 1, info: 2 };
+    return order[a.severity] - order[b.severity];
+  });
+
+  for (const alert of sorted) {
+    const icon = SEVERITY_ICONS[alert.severity];
+    const severity = SEVERITY_LABELS[alert.severity];
+    const type = ALERT_TYPE_LABELS[alert.type];
+    const ackStatus = alert.acknowledged ? '✅ 確認済' : '';
+
+    console.log(`${icon} [${severity}] ${alert.title} ${ackStatus}`);
+    console.log(`   ID: ${alert.id}`);
+    console.log(`   種別: ${type}`);
+    console.log(`   技術: ${alert.technologyName}`);
+    console.log(`   ${alert.message}`);
+    console.log(`   作成: ${alert.createdAt}`);
+    if (alert.acknowledgedAt) {
+      console.log(`   確認: ${alert.acknowledgedAt}`);
+    }
+    console.log('');
+  }
+
+  console.log(`合計: ${alerts.length}件\n`);
+}
+
+function printPeriodicReport(report: CLIPeriodicReport, format: OutputFormat): void {
+  if (format === 'json') {
+    console.log(formatOutput(report, format));
+    return;
+  }
+
+  const periodLabels: Record<ReportPeriod, string> = {
+    weekly: '週次',
+    monthly: '月次',
+    quarterly: '四半期',
+    annual: '年次',
+  };
+
+  console.log('\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+  console.log(`📊 ${periodLabels[report.period]}レポート`);
+  console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n');
+
+  console.log(`📅 期間: ${report.startDate} ～ ${report.endDate}`);
+  console.log(`📝 生成日時: ${report.generatedAt}`);
+  console.log('');
+
+  console.log('📊 サマリー:');
+  console.log(`   技術総数: ${report.summary.totalTechnologies}`);
+  console.log(`   新規技術: ${report.summary.newTechnologies}`);
+  console.log(`   フェーズ遷移: ${report.summary.transitionedTechnologies}`);
+  console.log('');
+
+  console.log('🔔 アラート統計:');
+  console.log(`   合計: ${report.summary.alerts.total}件`);
+  console.log(`   🔴 重大: ${report.summary.alerts.critical}件`);
+  console.log(`   🟡 警告: ${report.summary.alerts.warning}件`);
+  console.log(`   🔵 情報: ${report.summary.alerts.info}件`);
+  console.log('');
+
+  if (report.content) {
+    console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+    console.log('📄 レポート内容:');
+    console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+    console.log(report.content);
+  }
 }

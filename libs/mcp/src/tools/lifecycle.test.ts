@@ -13,6 +13,8 @@ import {
   type MCPEmergingTechnology,
   type MCPDecliningTechnology,
   type MCPTechnologyComparison,
+  type MCPAlert,
+  type MCPPeriodicReport,
 } from './lifecycle.js';
 
 // =============================================================================
@@ -95,6 +97,55 @@ function createMockService(): LifecycleToolService {
     summary: 'TransformerとLSTMの比較分析',
   };
 
+  // TASK-V2-028: Mock alerts and reports
+  const mockAlerts: MCPAlert[] = [
+    {
+      id: 'alert-001',
+      type: 'phase_transition',
+      severity: 'warning',
+      technologyId: 'tech-001',
+      technologyName: 'Transformer',
+      title: 'フェーズ遷移: Transformer',
+      message: 'Transformerが過熱期から回復期へ移行しました',
+      createdAt: '2024-01-15T10:00:00Z',
+      acknowledged: false,
+    },
+    {
+      id: 'alert-002',
+      type: 'emerging_technology',
+      severity: 'info',
+      technologyId: 'tech-003',
+      technologyName: 'Mamba',
+      title: '新興技術検出: Mamba',
+      message: 'Mambaが急成長中です',
+      createdAt: '2024-01-14T08:00:00Z',
+      acknowledged: true,
+      acknowledgedAt: '2024-01-14T09:00:00Z',
+    },
+  ];
+
+  const mockPeriodicReport: MCPPeriodicReport = {
+    id: 'report-001',
+    title: '技術ライフサイクル月次レポート (2024/01)',
+    period: 'monthly',
+    periodStart: '2024-01-01',
+    periodEnd: '2024-01-31',
+    generatedAt: '2024-02-01T00:00:00Z',
+    executiveSummary: '今月は3件の技術を監視しました。1件の技術で改善が見られました。',
+    highlights: ['Transformerが最も顕著な成長を示しました', '1件の技術が安定期に到達'],
+    technologies: [
+      {
+        id: 'tech-001',
+        name: 'Transformer',
+        phase: 'slope_of_enlightenment',
+        phaseLabel: '回復期',
+        maturityScore: 75,
+        change: 'improved',
+      },
+    ],
+    recommendations: ['衰退傾向のLSTMについて代替技術の検討を推奨します'],
+  };
+
   return {
     analyzeTechnology: vi.fn().mockResolvedValue(mockAnalysis),
     generateReport: vi.fn().mockResolvedValue(mockReport),
@@ -102,6 +153,10 @@ function createMockService(): LifecycleToolService {
     findDecliningTechnologies: vi.fn().mockResolvedValue(mockDeclining),
     compareTechnologies: vi.fn().mockResolvedValue(mockComparison),
     getTechnologiesByPhase: vi.fn().mockResolvedValue([mockAnalysis]),
+    // TASK-V2-028: Alert & Report methods
+    getAlerts: vi.fn().mockResolvedValue(mockAlerts),
+    acknowledgeAlert: vi.fn().mockResolvedValue(undefined),
+    generatePeriodicReport: vi.fn().mockResolvedValue(mockPeriodicReport),
   };
 }
 
@@ -111,7 +166,7 @@ function createMockService(): LifecycleToolService {
 
 describe('lifecycleTools', () => {
   it('should define all lifecycle tools', () => {
-    expect(lifecycleTools).toHaveLength(6);
+    expect(lifecycleTools).toHaveLength(9);
 
     const toolNames = lifecycleTools.map((t) => t.name);
     expect(toolNames).toContain('lifecycle_analyze');
@@ -120,6 +175,10 @@ describe('lifecycleTools', () => {
     expect(toolNames).toContain('lifecycle_declining');
     expect(toolNames).toContain('lifecycle_compare');
     expect(toolNames).toContain('lifecycle_by_phase');
+    // TASK-V2-028: Alert & Report tools
+    expect(toolNames).toContain('lifecycle_alerts');
+    expect(toolNames).toContain('lifecycle_acknowledge_alert');
+    expect(toolNames).toContain('lifecycle_periodic_report');
   });
 
   it('should have Japanese descriptions', () => {
@@ -151,6 +210,10 @@ describe('isLifecycleTool', () => {
     expect(isLifecycleTool('lifecycle_declining')).toBe(true);
     expect(isLifecycleTool('lifecycle_compare')).toBe(true);
     expect(isLifecycleTool('lifecycle_by_phase')).toBe(true);
+    // TASK-V2-028: Alert & Report tools
+    expect(isLifecycleTool('lifecycle_alerts')).toBe(true);
+    expect(isLifecycleTool('lifecycle_acknowledge_alert')).toBe(true);
+    expect(isLifecycleTool('lifecycle_periodic_report')).toBe(true);
   });
 
   it('should return false for non-lifecycle tools', () => {
@@ -365,6 +428,177 @@ describe('createLifecycleToolHandler', () => {
       expect(result.isError).toBe(true);
       const text = (result.content[0] as { text: string }).text;
       expect(text).toContain('Database error');
+    });
+  });
+
+  // TASK-V2-028: Alert & Report handler tests
+  describe('lifecycle_alerts', () => {
+    it('should get all alerts', async () => {
+      const result = await handler('lifecycle_alerts', {});
+
+      expect(result.isError).toBeUndefined();
+      const text = (result.content[0] as { text: string }).text;
+      expect(text).toContain('ライフサイクルアラート');
+      expect(text).toContain('2 件');
+      expect(text).toContain('Transformer');
+      expect(text).toContain('Mamba');
+    });
+
+    it('should filter by technology ID', async () => {
+      const result = await handler('lifecycle_alerts', {
+        technologyId: 'tech-001',
+      });
+
+      expect(result.isError).toBeUndefined();
+      expect(service.getAlerts).toHaveBeenCalledWith(
+        expect.objectContaining({ technologyId: 'tech-001' })
+      );
+    });
+
+    it('should filter unacknowledged only', async () => {
+      const result = await handler('lifecycle_alerts', {
+        unacknowledgedOnly: true,
+      });
+
+      expect(result.isError).toBeUndefined();
+      expect(service.getAlerts).toHaveBeenCalledWith(
+        expect.objectContaining({ unacknowledgedOnly: true })
+      );
+    });
+
+    it('should handle empty alerts', async () => {
+      vi.mocked(service.getAlerts).mockResolvedValue([]);
+
+      const result = await handler('lifecycle_alerts', {});
+
+      const text = (result.content[0] as { text: string }).text;
+      expect(text).toContain('アラートはありません');
+    });
+
+    it('should display severity icons', async () => {
+      const result = await handler('lifecycle_alerts', {});
+
+      const text = (result.content[0] as { text: string }).text;
+      expect(text).toContain('⚠️'); // warning icon
+      expect(text).toContain('ℹ️'); // info icon
+    });
+  });
+
+  describe('lifecycle_acknowledge_alert', () => {
+    it('should acknowledge alert successfully', async () => {
+      const result = await handler('lifecycle_acknowledge_alert', {
+        alertId: 'alert-001',
+      });
+
+      expect(result.isError).toBeUndefined();
+      const text = (result.content[0] as { text: string }).text;
+      expect(text).toContain('確認済み');
+      expect(text).toContain('alert-001');
+      expect(service.acknowledgeAlert).toHaveBeenCalledWith('alert-001');
+    });
+
+    it('should return error when alertId is missing', async () => {
+      const result = await handler('lifecycle_acknowledge_alert', {});
+
+      expect(result.isError).toBe(true);
+      const text = (result.content[0] as { text: string }).text;
+      expect(text).toContain('alertId is required');
+    });
+
+    it('should handle service errors', async () => {
+      vi.mocked(service.acknowledgeAlert).mockRejectedValue(new Error('Alert not found'));
+
+      const result = await handler('lifecycle_acknowledge_alert', {
+        alertId: 'invalid-id',
+      });
+
+      expect(result.isError).toBe(true);
+      const text = (result.content[0] as { text: string }).text;
+      expect(text).toContain('Alert not found');
+    });
+  });
+
+  describe('lifecycle_periodic_report', () => {
+    it('should generate monthly report by default', async () => {
+      const result = await handler('lifecycle_periodic_report', {});
+
+      expect(result.isError).toBeUndefined();
+      const text = (result.content[0] as { text: string }).text;
+      expect(text).toContain('月次レポート');
+      expect(text).toContain('エグゼクティブサマリー');
+      expect(service.generatePeriodicReport).toHaveBeenCalledWith(
+        expect.objectContaining({ period: 'monthly' })
+      );
+    });
+
+    it('should generate quarterly report', async () => {
+      const result = await handler('lifecycle_periodic_report', {
+        period: 'quarterly',
+      });
+
+      expect(result.isError).toBeUndefined();
+      expect(service.generatePeriodicReport).toHaveBeenCalledWith(
+        expect.objectContaining({ period: 'quarterly' })
+      );
+    });
+
+    it('should include recommendations', async () => {
+      const result = await handler('lifecycle_periodic_report', {
+        includeRecommendations: true,
+      });
+
+      expect(result.isError).toBeUndefined();
+      const text = (result.content[0] as { text: string }).text;
+      expect(text).toContain('推奨事項');
+      expect(text).toContain('LSTM');
+    });
+
+    it('should filter by technology IDs', async () => {
+      const result = await handler('lifecycle_periodic_report', {
+        technologyIds: ['tech-001', 'tech-002'],
+      });
+
+      expect(result.isError).toBeUndefined();
+      expect(service.generatePeriodicReport).toHaveBeenCalledWith(
+        expect.objectContaining({ technologyIds: ['tech-001', 'tech-002'] })
+      );
+    });
+
+    it('should return JSON format', async () => {
+      const mockJsonReport = {
+        id: 'report-001',
+        title: 'Test Report',
+        period: 'monthly' as const,
+        periodStart: '2024-01-01',
+        periodEnd: '2024-01-31',
+        generatedAt: '2024-02-01T00:00:00Z',
+        executiveSummary: 'Test summary',
+        highlights: [],
+        technologies: [],
+        recommendations: [],
+      };
+      vi.mocked(service.generatePeriodicReport).mockResolvedValue(mockJsonReport);
+
+      const result = await handler('lifecycle_periodic_report', {
+        format: 'json',
+      });
+
+      expect(result.isError).toBeUndefined();
+      const text = (result.content[0] as { text: string }).text;
+      // Should be valid JSON
+      expect(() => JSON.parse(text)).not.toThrow();
+    });
+
+    it('should handle service errors', async () => {
+      vi.mocked(service.generatePeriodicReport).mockRejectedValue(
+        new Error('Report generation failed')
+      );
+
+      const result = await handler('lifecycle_periodic_report', {});
+
+      expect(result.isError).toBe(true);
+      const text = (result.content[0] as { text: string }).text;
+      expect(text).toContain('Report generation failed');
     });
   });
 });

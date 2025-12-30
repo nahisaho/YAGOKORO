@@ -1,6 +1,6 @@
 {
   "name": "yagokoro",
-  "version": "0.4.0",
+  "version": "2.0.0",
   "private": true,
   "description": "GraphRAG MCP System for AGI - Generative AI Genealogy Knowledge System",
   "type": "module",
@@ -24,6 +24,8 @@
     "typecheck": "pnpm -r typecheck",
     "clean": "pnpm -r clean && rm -rf node_modules",
     "dev": "pnpm -r --parallel dev",
+    "docs": "typedoc",
+    "docs:watch": "typedoc --watch",
     "docker:up": "docker compose -f docker/docker-compose.yml up -d",
     "docker:down": "docker compose -f docker/docker-compose.yml down",
     "docker:dev": "docker compose -f docker/docker-compose.dev.yml up -d",
@@ -32,6 +34,7 @@
   "devDependencies": {
     "@biomejs/biome": "^1.9.4",
     "@types/node": "^20.17.10",
+    "typedoc": "^0.27.6",
     "typescript": "^5.7.2",
     "vitest": "^2.1.8"
   },
@@ -40,6 +43,6 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/your-org/yagokoro.git"
+    "url": "https://github.com/nahisaho/yagokoro.git"
   }
 }

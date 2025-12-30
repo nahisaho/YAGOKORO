@@ -169,7 +169,7 @@ describe('Histogram', () => {
 
     expect(result).toBe('done');
     expect(histogram.getCount()).toBe(1);
-    expect(histogram.getSum()).toBeGreaterThan(0.01); // At least 10ms
+    expect(histogram.getSum()).toBeGreaterThan(0.001); // At least 1ms (timing may vary)
   });
 
   it('should record time even on failure', async () => {

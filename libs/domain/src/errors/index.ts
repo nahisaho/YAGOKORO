@@ -45,3 +45,21 @@ export {
   Result,
   tryCatch,
 } from './ErrorHandling.js';
+
+// ErrorHandler
+export {
+  type ErrorSeverity,
+  type ErrorContext,
+  type ErrorLogEntry,
+  type ErrorHandlerConfig,
+  type ErrorLogger,
+  type ErrorHandler,
+  type ErrorStats,
+  type ErrorBoundaryOptions,
+  createErrorHandler,
+  getGlobalErrorHandler,
+  setGlobalErrorHandler,
+  handleError,
+  withErrorHandling,
+  withErrorBoundary,
+} from './ErrorHandler.js';

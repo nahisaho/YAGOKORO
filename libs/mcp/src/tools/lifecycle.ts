@@ -115,6 +115,47 @@ export interface MCPTechnologyComparison {
 }
 
 /**
+ * Alert result for MCP
+ */
+export interface MCPAlert {
+  id: string;
+  type: string;
+  severity: 'info' | 'warning' | 'critical';
+  technologyId: string;
+  technologyName: string;
+  title: string;
+  message: string;
+  createdAt: string;
+  acknowledged: boolean;
+  acknowledgedAt?: string;
+  details?: Record<string, unknown>;
+}
+
+/**
+ * Periodic report result for MCP
+ */
+export interface MCPPeriodicReport {
+  id: string;
+  title: string;
+  period: 'weekly' | 'monthly' | 'quarterly' | 'annual';
+  periodStart: string;
+  periodEnd: string;
+  generatedAt: string;
+  executiveSummary: string;
+  highlights: string[];
+  technologies: Array<{
+    id: string;
+    name: string;
+    phase: LifecyclePhase;
+    phaseLabel: string;
+    maturityScore: number;
+    change: 'improved' | 'stable' | 'declined';
+  }>;
+  recommendations: string[];
+  renderedContent?: string;
+}
+
+/**
  * Lifecycle service interface
  */
 export interface LifecycleToolService {
@@ -153,6 +194,33 @@ export interface LifecycleToolService {
    * Get technologies by phase
    */
   getTechnologiesByPhase(phase: LifecyclePhase): Promise<MCPLifecycleAnalysis[]>;
+
+  // TASK-V2-028: Alert & Report methods
+  /**
+   * Get lifecycle alerts
+   */
+  getAlerts(options?: {
+    technologyId?: string;
+    unacknowledgedOnly?: boolean;
+    severity?: 'info' | 'warning' | 'critical';
+    limit?: number;
+  }): Promise<MCPAlert[]>;
+
+  /**
+   * Acknowledge an alert
+   */
+  acknowledgeAlert(alertId: string): Promise<void>;
+
+  /**
+   * Generate periodic report
+   */
+  generatePeriodicReport(options?: {
+    period?: 'weekly' | 'monthly' | 'quarterly' | 'annual';
+    technologyIds?: string[];
+    format?: 'markdown' | 'html' | 'json';
+    includeAlerts?: boolean;
+    includeRecommendations?: boolean;
+  }): Promise<MCPPeriodicReport>;
 }
 
 // =============================================================================
@@ -269,6 +337,84 @@ export const lifecycleTools: Tool[] = [
       required: ['phase'],
     },
   },
+  // TASK-V2-028: Alert & Report Tools
+  {
+    name: 'lifecycle_alerts',
+    description:
+      '技術ライフサイクルのアラートを取得します。フェーズ遷移、成熟度変化、新興/衰退技術のアラートを表示します。',
+    inputSchema: {
+      type: 'object',
+      properties: {
+        technologyId: {
+          type: 'string',
+          description: '特定の技術IDでフィルタ（省略時は全アラート）',
+        },
+        unacknowledgedOnly: {
+          type: 'boolean',
+          description: '未確認のアラートのみ取得（デフォルト: false）',
+        },
+        severity: {
+          type: 'string',
+          enum: ['info', 'warning', 'critical'],
+          description: '重要度でフィルタ',
+        },
+        limit: {
+          type: 'number',
+          description: '取得する最大件数（デフォルト: 20）',
+        },
+      },
+      required: [],
+    },
+  },
+  {
+    name: 'lifecycle_acknowledge_alert',
+    description:
+      'アラートを確認済みとしてマークします。',
+    inputSchema: {
+      type: 'object',
+      properties: {
+        alertId: {
+          type: 'string',
+          description: '確認するアラートID',
+        },
+      },
+      required: ['alertId'],
+    },
+  },
+  {
+    name: 'lifecycle_periodic_report',
+    description:
+      '技術ライフサイクルの定期レポートを生成します。週次、月次、四半期、年次のレポートを作成できます。',
+    inputSchema: {
+      type: 'object',
+      properties: {
+        period: {
+          type: 'string',
+          enum: ['weekly', 'monthly', 'quarterly', 'annual'],
+          description: 'レポート期間（デフォルト: monthly）',
+        },
+        technologyIds: {
+          type: 'array',
+          items: { type: 'string' },
+          description: '対象技術のID配列（省略時は全技術）',
+        },
+        format: {
+          type: 'string',
+          enum: ['markdown', 'html', 'json'],
+          description: '出力フォーマット（デフォルト: markdown）',
+        },
+        includeAlerts: {
+          type: 'boolean',
+          description: 'アラート情報を含める（デフォルト: true）',
+        },
+        includeRecommendations: {
+          type: 'boolean',
+          description: '推奨事項を含める（デフォルト: true）',
+        },
+      },
+      required: [],
+    },
+  },
 ];
 
 // =============================================================================
@@ -307,6 +453,13 @@ export function createLifecycleToolHandler(
         return handleCompare(service, args);
       case 'lifecycle_by_phase':
         return handleByPhase(service, args);
+      // TASK-V2-028: Alert & Report handlers
+      case 'lifecycle_alerts':
+        return handleAlerts(service, args);
+      case 'lifecycle_acknowledge_alert':
+        return handleAcknowledgeAlert(service, args);
+      case 'lifecycle_periodic_report':
+        return handlePeriodicReport(service, args);
       default:
         return {
           content: [
@@ -812,6 +965,224 @@ function formatDirection(direction: 'rising' | 'stable' | 'declining'): string {
     declining: '↓ 下降',
   };
   return labels[direction] || direction;
+}
+
+// =============================================================================
+// Alert & Report Handlers (TASK-V2-028)
+// =============================================================================
+
+async function handleAlerts(
+  service: LifecycleToolService,
+  args: Record<string, unknown>
+): Promise<CallToolResult> {
+  const technologyId = args.technologyId as string | undefined;
+  const unacknowledgedOnly = args.unacknowledgedOnly as boolean | undefined;
+  const severity = args.severity as 'info' | 'warning' | 'critical' | undefined;
+  const limit = args.limit as number | undefined;
+
+  try {
+    const alerts = await service.getAlerts({
+      technologyId,
+      unacknowledgedOnly,
+      severity,
+      limit: limit ?? 20,
+    });
+
+    if (alerts.length === 0) {
+      return {
+        content: [
+          {
+            type: 'text',
+            text: 'アラートはありません。',
+          } as TextContent,
+        ],
+      };
+    }
+
+    const severityIcon: Record<string, string> = {
+      info: 'ℹ️',
+      warning: '⚠️',
+      critical: '🚨',
+    };
+
+    const output = [
+      '# ライフサイクルアラート',
+      '',
+      `*${alerts.length} 件のアラート*`,
+      '',
+      ...alerts.map((a) => [
+        `## ${severityIcon[a.severity]} ${a.title}`,
+        '',
+        `**技術**: ${a.technologyName} | **重要度**: ${a.severity} | **状態**: ${a.acknowledged ? '確認済' : '未確認'}`,
+        '',
+        a.message,
+        '',
+        `*ID: ${a.id} | 発生日時: ${a.createdAt}*`,
+        '',
+        '---',
+        '',
+      ]).flat(),
+    ].join('\n');
+
+    return {
+      content: [
+        {
+          type: 'text',
+          text: output,
+        } as TextContent,
+      ],
+    };
+  } catch (error) {
+    return {
+      content: [
+        {
+          type: 'text',
+          text: `Error getting alerts: ${error instanceof Error ? error.message : String(error)}`,
+        } as TextContent,
+      ],
+      isError: true,
+    };
+  }
+}
+
+async function handleAcknowledgeAlert(
+  service: LifecycleToolService,
+  args: Record<string, unknown>
+): Promise<CallToolResult> {
+  const alertId = args.alertId as string;
+
+  if (!alertId) {
+    return {
+      content: [
+        {
+          type: 'text',
+          text: 'Error: alertId is required',
+        } as TextContent,
+      ],
+      isError: true,
+    };
+  }
+
+  try {
+    await service.acknowledgeAlert(alertId);
+
+    return {
+      content: [
+        {
+          type: 'text',
+          text: `✅ アラート ${alertId} を確認済みとしてマークしました。`,
+        } as TextContent,
+      ],
+    };
+  } catch (error) {
+    return {
+      content: [
+        {
+          type: 'text',
+          text: `Error acknowledging alert: ${error instanceof Error ? error.message : String(error)}`,
+        } as TextContent,
+      ],
+      isError: true,
+    };
+  }
+}
+
+async function handlePeriodicReport(
+  service: LifecycleToolService,
+  args: Record<string, unknown>
+): Promise<CallToolResult> {
+  const period = (args.period as 'weekly' | 'monthly' | 'quarterly' | 'annual') ?? 'monthly';
+  const technologyIds = args.technologyIds as string[] | undefined;
+  const format = (args.format as 'markdown' | 'html' | 'json') ?? 'markdown';
+  const includeAlerts = args.includeAlerts as boolean ?? true;
+  const includeRecommendations = args.includeRecommendations as boolean ?? true;
+
+  try {
+    const report = await service.generatePeriodicReport({
+      period,
+      technologyIds,
+      format,
+      includeAlerts,
+      includeRecommendations,
+    });
+
+    if (format === 'json') {
+      return {
+        content: [
+          {
+            type: 'text',
+            text: JSON.stringify(report, null, 2),
+          } as TextContent,
+        ],
+      };
+    }
+
+    // Use rendered content if available
+    if (report.renderedContent) {
+      return {
+        content: [
+          {
+            type: 'text',
+            text: report.renderedContent,
+          } as TextContent,
+        ],
+      };
+    }
+
+    // Fallback to basic markdown
+    const periodLabels: Record<string, string> = {
+      weekly: '週次',
+      monthly: '月次',
+      quarterly: '四半期',
+      annual: '年次',
+    };
+
+    const output = [
+      `# ${report.title}`,
+      '',
+      `**期間**: ${report.periodStart} 〜 ${report.periodEnd}`,
+      `**生成日時**: ${report.generatedAt}`,
+      '',
+      '## エグゼクティブサマリー',
+      '',
+      report.executiveSummary,
+      '',
+      '## ハイライト',
+      '',
+      ...report.highlights.map((h) => `- ${h}`),
+      '',
+      '## 技術サマリー',
+      '',
+      '| 技術名 | フェーズ | 成熟度 | 変化 |',
+      '|--------|----------|--------|------|',
+      ...report.technologies.map(
+        (t) => `| ${t.name} | ${t.phaseLabel} | ${t.maturityScore.toFixed(0)}% | ${t.change === 'improved' ? '↑' : t.change === 'declined' ? '↓' : '→'} |`
+      ),
+      '',
+      ...(report.recommendations.length > 0
+        ? ['## 推奨事項', '', ...report.recommendations.map((r) => `- ${r}`), '']
+        : []),
+    ].join('\n');
+
+    return {
+      content: [
+        {
+          type: 'text',
+          text: output,
+        } as TextContent,
+      ],
+    };
+  } catch (error) {
+    return {
+      content: [
+        {
+          type: 'text',
+          text: `Error generating periodic report: ${error instanceof Error ? error.message : String(error)}`,
+        } as TextContent,
+      ],
+      isError: true,
+    };
+  }
 }
 
 /**

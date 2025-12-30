@@ -1,6 +1,6 @@
 {
   "name": "@yagokoro/graphrag",
-  "version": "0.1.0",
+  "version": "2.0.0",
   "private": true,
   "description": "GraphRAG core engine - extraction, reasoning, and query processing",
   "type": "module",

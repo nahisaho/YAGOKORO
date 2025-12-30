@@ -115,9 +115,27 @@ natural language querying, multi-hop reasoning, hallucination detection, and res
 
 ### Technical Details
 
-- **New Packages**: normalizer, nlq, reasoner, analyzer
-- **Total Tests**: 1850+
+- **New Packages**: normalizer, nlq, reasoner, analyzer, hallucination
+- **Total Tests**: 1,874 (all passing)
 - **Test Coverage**: Comprehensive unit, integration, and E2E tests
+
+### Test Summary by Package
+
+| Package | Tests |
+|---------|-------|
+| @yagokoro/domain | 167 |
+| @yagokoro/graphrag | 332 |
+| @yagokoro/neo4j | 102 |
+| @yagokoro/vector | 34 |
+| @yagokoro/mcp | 379 |
+| @yagokoro/cli | 247 |
+| @yagokoro/normalizer | 85 |
+| @yagokoro/nlq | 66 |
+| @yagokoro/reasoner | 93 |
+| @yagokoro/analyzer | 206 |
+| @yagokoro/hallucination | 28 |
+| yagokoro (E2E) | 135 |
+| **Total** | **1,874** |
 
 ---
 

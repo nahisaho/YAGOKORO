@@ -151,6 +151,17 @@ LLMを活用した高度な関係抽出パイプラインを実装し、以下�
 - **Priority**: P0
 - **Trace**: DES-002-004, TEST-002-004
 
+**REQ-002-024**: 関係タイプ拡張性
+- **Type**: Ubiquitous
+- **Statement**: The system SHALL support adding new relationship types without code changes through configuration.
+- **Acceptance Criteria**:
+  - AC1: 関係タイプをYAML/JSON設定ファイルで定義
+  - AC2: 新タイプ追加時にLLMプロンプトを自動更新
+  - AC3: 既存グラフへの影響なしで新タイプ追加可能
+  - AC4: 関係タイプのバリデーションルール定義可能
+- **Priority**: P1
+- **Trace**: DES-002-024, TEST-002-024
+
 ---
 
 ### 3.2 F-002: リアルタイム論文取り込み (Paper Ingestion)
@@ -203,17 +214,22 @@ arXivとSemantic Scholar APIを活用した自動論文取り込みパイプラ�
   - AC2: 取得遅延: 24時間以内
   - AC3: メタデータ: タイトル、著者、abstract、DOI、公開日
   - AC4: API制限準拠（3秒間隔）
+  - AC5: **スロットリング**: Token Bucket方式で同時リクエスト制御
+  - AC6: **リトライ**: 429エラー時に指数バックオフ（最大5回）
 - **Priority**: P0
 - **Trace**: DES-002-005, TEST-002-005
 
 **REQ-002-006**: Semantic Scholar連携
 - **Type**: Event-driven
 - **Statement**: WHEN a paper is ingested from arXiv, the system SHALL enrich the metadata with citation counts and related papers from Semantic Scholar API.
-- **Acceptance Criteria**:
+- **Acceptance Criteria**:  
   - AC1: 引用数、被引用論文リストを取得
   - AC2: 関連論文（references, citations）を取得
   - AC3: 著者のh-index、所属組織を取得
   - AC4: API制限準拠（100リクエスト/5分）
+  - AC5: **スロットリング**: Sliding Window方式でレート制限
+  - AC6: **リトライ**: 429/503エラー時に指数バックオフ（最大3回）
+  - AC7: **フォールバック**: API障害時はarXivデータのみで処理続行
 - **Priority**: P1
 - **Trace**: DES-002-006, TEST-002-006
 
@@ -327,6 +343,28 @@ v2新機能をMCPツールとして公開：
   - AC4: 応答時間: 3秒以内
 - **Priority**: P1
 - **Trace**: DES-002-013, TEST-002-013
+
+**REQ-002-025**: 正規化ツール（normalize）
+- **Type**: Event-driven
+- **Statement**: WHEN an MCP client calls the `normalizer/normalize` tool with an entity name, the system SHALL return the normalized form with confidence score.
+- **Acceptance Criteria**:
+  - AC1: 入力: エンティティ名（文字列）
+  - AC2: 出力: { original, normalized, confidence, aliases[] }
+  - AC3: バッチ入力対応（最大100件）
+  - AC4: 応答時間: 1秒以内（単一）、5秒以内（バッチ）
+- **Priority**: P1
+- **Trace**: DES-002-025, TEST-002-025
+
+**REQ-002-026**: 正規化候補提案ツール（suggest）
+- **Type**: Event-driven
+- **Statement**: WHEN an MCP client calls the `normalizer/suggest` tool with an entity name, the system SHALL return similar entities from the knowledge graph.
+- **Acceptance Criteria**:
+  - AC1: 入力: エンティティ名（文字列）、threshold（オプション、デフォルト0.7）
+  - AC2: 出力: { candidates: [{ name, similarity, type }], total }
+  - AC3: 最大10件の候補を返却
+  - AC4: 応答時間: 2秒以内
+- **Priority**: P2
+- **Trace**: DES-002-026, TEST-002-026
 
 ---
 
@@ -493,11 +531,82 @@ v2では、知識グラフの更新が全データの再処理を必要として
   - AC2: Secret Manager統合
   - AC3: キーローテーション対応
 
+### 4.4 Error Handling
+
+**REQ-002-027**: エラーハンドリング・リトライ
+- **Statement**: The system SHALL implement comprehensive error handling with retry mechanisms for all external API calls.
+- **Acceptance Criteria**:
+  - AC1: **リトライ戦略**: 指数バックオフ（初期1秒、最大30秒、最大5回）
+  - AC2: **Circuit Breaker**: 連続5回失敗で30秒間APIをスキップ
+  - AC3: **フォールバック**: 代替データソースまたはキャッシュからの提供
+  - AC4: **Dead Letter Queue**: 処理失敗データの保存と再処理機能
+  - AC5: **エラー分類**: Transient/Permanent エラーの自動判別
+
+**REQ-002-028**: グレースフルデグラデーション
+- **Statement**: IF external APIs are unavailable, THEN the system SHALL continue operating with reduced functionality.
+- **Acceptance Criteria**:
+  - AC1: arXiv障害時: 既存データでのクエリ応答を継続
+  - AC2: Semantic Scholar障害時: 引用情報なしで論文取り込み続行
+  - AC3: LLM障害時: ルールベース処理にフォールバック
+  - AC4: 障害状態をヘルスチェックエンドポイントで公開
+
+### 4.5 Monitoring
+
+**REQ-002-029**: パイプライン監視
+- **Statement**: The system SHALL provide comprehensive monitoring for all data pipelines.
+- **Acceptance Criteria**:
+  - AC1: **メトリクス収集**: 処理件数、成功率、レイテンシ、キュー深度
+  - AC2: **ログ出力**: 構造化ログ（JSON形式）でCloud Logging対応
+  - AC3: **アラート**: エラー率5%超過、レイテンシ閾値超過で通知
+  - AC4: **ダッシュボード**: Grafana/Cloud Monitoring対応
+  - AC5: **トレーシング**: OpenTelemetry対応で分散トレース
+
+**REQ-002-030**: ヘルスチェック
+- **Statement**: The system SHALL expose health check endpoints for all services.
+- **Acceptance Criteria**:
+  - AC1: `/health` エンドポイントで全体ステータス
+  - AC2: `/health/ready` で依存サービス接続状態
+  - AC3: `/health/live` でプロセス生存確認
+  - AC4: 各外部API接続状態を個別表示
+
 ---
 
 ## 5. Dependencies
 
-### 5.1 External APIs
+### 5.1 Feature Dependencies
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│                  Feature Dependency Graph                   │
+├─────────────────────────────────────────────────────────────┤
+│                                                             │
+│  F-002 (論文取り込み)                                        │
+│      │                                                      │
+│      ▼                                                      │
+│  F-001 (自動関係抽出) ──────────────┐                       │
+│      │                             │                       │
+│      ▼                             ▼                       │
+│  F-004 (HITL確認)            F-003 (MCPツール)              │
+│      │                             │                       │
+│      └─────────────┬───────────────┘                       │
+│                    ▼                                        │
+│              F-005 (インクリメンタル更新)                    │
+│                    │                                        │
+│                    ▼                                        │
+│              F-006 (クエリキャッシュ)                        │
+│                                                             │
+└─────────────────────────────────────────────────────────────┘
+```
+
+| 依存元 | 依存先 | 依存内容 |
+|--------|--------|----------|
+| F-001 | F-002 | 論文データが関係抽出の入力 |
+| F-003 | F-001 | 抽出された関係がMCPクエリ結果に反映 |
+| F-004 | F-001 | 中信頼度の関係がHITLレビュー対象 |
+| F-005 | F-001, F-002 | 差分検出の対象データ |
+| F-006 | F-003 | MCPクエリ結果のキャッシュ |
+
+### 5.2 External APIs
 
 | API | Purpose | Rate Limit |
 |-----|---------|------------|
@@ -505,7 +614,7 @@ v2では、知識グラフの更新が全データの再処理を必要として
 | Semantic Scholar API | 引用情報・著者情報 | 100リクエスト/5分 |
 | Ollama/OpenAI API | LLM推論 | モデル依存 |
 
-### 5.2 v2パッケージ依存
+### 5.3 v2パッケージ依存
 
 | Package | v3での用途 |
 |---------|-----------|
@@ -519,27 +628,73 @@ v2では、知識グラフの更新が全データの再処理を必要として
 
 ## 6. Success Metrics
 
-| Metric | Current (v2) | Target (v3) |
-|--------|--------------|-------------|
-| 関係数 | 229 | 1,000+ |
-| マルチホップ発見率 | 0% | 50%+ |
-| 論文取り込み遅延 | 手動 | 24時間以内 |
-| MCPツール数 | 6 | 15+ |
-| HITLレビュー完了率 | N/A | 95%/週 |
+| Metric | Current (v2) | Target (v3) | 根拠・算出方法 |
+|--------|--------------|-------------|----------------|
+| 関係数 | 229 | 1,000+ | 共起分析で平均4関係/エンティティ × 244エンティティ ≈ 1,000 |
+| マルチホップ発見率 | 0% | 50%+ | 関係密度4倍でグラフ接続性が指数的に向上（小世界ネットワーク理論） |
+| 論文取り込み遅延 | 手動 | 24時間以内 | arXiv更新頻度（1日2回）+ 処理時間（6時間）+ バッファ |
+| MCPツール数 | 6 | 15+ | 既存6 + 新規9（NLQ×2, 推論×2, 分析×2, 検証×2, 正規化×1）|
+| HITLレビュー完了率 | N/A | 95%/週 | 想定レビュー件数50件/週、1件5分で週4時間の作業量 |
+
+### 6.1 計測方法
+
+| Metric | 計測方法 | 計測頻度 |
+|--------|----------|----------|
+| 関係数 | Neo4j: `MATCH ()-[r]->() RETURN count(r)` | 日次 |
+| マルチホップ発見率 | テストケース10件での成功率 | リリース時 |
+| 論文取り込み遅延 | arXiv公開日時 - KG反映日時の差分 | 日次 |
+| MCPツール数 | MCP Server manifest.json のツール数 | リリース時 |
+| HITLレビュー完了率 | 完了件数 / 発生件数 × 100 | 週次 |
 
 ---
 
 ## 7. Timeline
 
-| Phase | Duration | Deliverables |
-|-------|----------|--------------|
-| Phase 1: 自動関係抽出 | 2週間 | F-001実装 |
-| Phase 2: 論文取り込み | 2週間 | F-002実装 |
-| Phase 3: MCPツール | 2週間 | F-003実装 |
-| Phase 4: HITL | 1週間 | F-004実装 |
-| Phase 5: 最適化 | 1週間 | F-005, F-006実装 |
+### 7.1 段階リリース計画
 
-**Total**: 8週間
+| Phase | Duration | Deliverables | Release |
+|-------|----------|--------------|--------|
+| Phase 1: 論文取り込み | 2週間 | F-002実装 | v3.0.0-alpha |
+| Phase 2: 自動関係抽出 | 3週間 | F-001実装 | v3.0.0-beta |
+| Phase 3: MCPツール | 2週間 | F-003実装 | v3.0.0-rc1 |
+| Phase 4: HITL | 2週間 | F-004実装 | v3.0.0-rc2 |
+| Phase 5: 最適化 | 2週間 | F-005, F-006実装 | v3.0.0 |
+| バッファ | 1週間 | バグ修正・調整 | - |
+
+**Total**: 12週間（バッファ込み）
+
+### 7.2 依存関係を考慮した実行順序
+
+```
+Week 1-2:   F-002（論文取り込み）── 他機能の入力データ生成
+     │
+     ▼
+Week 3-5:   F-001（自動関係抽出）── F-002の出力を処理
+     │
+     ├─────────────────┐
+     ▼                 ▼
+Week 6-7:   F-003（MCP）    Week 6-7: F-004（HITL）── 並行実施可能
+     │                 │
+     └────────┬────────┘
+              ▼
+Week 8-9:   F-005（差分更新）
+              │
+              ▼
+Week 10-11: F-006（キャッシュ）
+              │
+              ▼
+Week 12:    バッファ・最終調整
+```
+
+### 7.3 リスクと対策
+
+| リスク | 影響 | 発生確率 | 対策 |
+|--------|------|----------|------|
+| arXiv API仕様変更 | F-002遅延 | 低 | APIバージョン固定、変更監視 |
+| LLM推論精度不足 | F-001品質低下 | 中 | プロンプトチューニング、複数モデル併用 |
+| HITL対象件数過多 | レビュー滞留 | 中 | 閾値調整、バッチ承認機能強化 |
+| Neo4j性能問題 | F-005遅延 | 低 | インデックス最適化、バッチサイズ調整 |
+| 開発リソース不足 | 全体遅延 | 中 | P2機能の後回し、段階リリース |
 
 ---
 
@@ -568,6 +723,17 @@ v2では、知識グラフの更新が全データの再処理を必要として
 | REQ-002-017 | DES-002-017 | libs/pipeline | TEST-002-017 |
 | REQ-002-018 | DES-002-018 | libs/pipeline | TEST-002-018 |
 | REQ-002-019 | DES-002-019 | libs/cache | TEST-002-019 |
+| REQ-002-020 | DES-002-020 | libs/ingestion | TEST-002-020 |
+| REQ-002-021 | DES-002-021 | libs/mcp | TEST-002-021 |
+| REQ-002-022 | DES-002-022 | libs/pipeline | TEST-002-022 |
+| REQ-002-023 | DES-002-023 | libs/ingestion | TEST-002-023 |
+| REQ-002-024 | DES-002-024 | libs/extractor | TEST-002-024 |
+| REQ-002-025 | DES-002-025 | libs/mcp | TEST-002-025 |
+| REQ-002-026 | DES-002-026 | libs/mcp | TEST-002-026 |
+| REQ-002-027 | DES-002-027 | libs/common | TEST-002-027 |
+| REQ-002-028 | DES-002-028 | libs/common | TEST-002-028 |
+| REQ-002-029 | DES-002-029 | libs/monitor | TEST-002-029 |
+| REQ-002-030 | DES-002-030 | libs/monitor | TEST-002-030 |
 
 ### 8.2 Glossary
 
@@ -577,8 +743,21 @@ v2では、知識グラフの更新が全データの再処理を必要として
 | Co-occurrence | 同一文書内でのエンティティ共起 |
 | Incremental Update | 変更部分のみを更新する差分処理方式 |
 | Hype Cycle | Gartner社の技術成熟度モデル |
+| Circuit Breaker | 連続失敗時にAPIコールを一時停止するパターン |
+| Token Bucket | レート制限の実装パターン（トークン消費方式）|
+| Sliding Window | レート制限の実装パターン（時間窓方式）|
+| Dead Letter Queue | 処理失敗メッセージを保存するキュー |
+| Exponential Backoff | リトライ間隔を指数的に増加させる戦略 |
+| Graceful Degradation | 障害時に機能を縮退して継続稼働する設計 |
+
+### 8.3 変更履歴
+
+| Version | Date | Author | Changes |
+|---------|------|--------|---------|
+| 1.0 | 2025-12-30 | GitHub Copilot | 初版作成 |
+| 1.1 | 2025-12-30 | GitHub Copilot | レビュー指摘対応（エラーハンドリング、依存関係、リスク、根拠追加）|
 
 ---
 
-**Document Status**: Draft
+**Document Status**: Review Complete
 **Next Step**: Design Document (DES-002)

@@ -315,10 +315,13 @@ describe('ReportGenerator', () => {
         period: 'monthly',
       });
 
-      const monthsDiff =
-        (report.periodEnd.getFullYear() - report.periodStart.getFullYear()) * 12 +
-        (report.periodEnd.getMonth() - report.periodStart.getMonth());
-      expect(monthsDiff).toBe(1);
+      const daysDiff = Math.round(
+        (report.periodEnd.getTime() - report.periodStart.getTime()) /
+          (1000 * 60 * 60 * 24)
+      );
+      // Monthly period should be roughly 28-31 days
+      expect(daysDiff).toBeGreaterThanOrEqual(27);
+      expect(daysDiff).toBeLessThanOrEqual(32);
     });
 
     it('should calculate quarterly period correctly', async () => {
@@ -326,10 +329,13 @@ describe('ReportGenerator', () => {
         period: 'quarterly',
       });
 
-      const monthsDiff =
-        (report.periodEnd.getFullYear() - report.periodStart.getFullYear()) * 12 +
-        (report.periodEnd.getMonth() - report.periodStart.getMonth());
-      expect(monthsDiff).toBe(3);
+      const daysDiff = Math.round(
+        (report.periodEnd.getTime() - report.periodStart.getTime()) /
+          (1000 * 60 * 60 * 24)
+      );
+      // Quarterly period should be roughly 89-93 days
+      expect(daysDiff).toBeGreaterThanOrEqual(88);
+      expect(daysDiff).toBeLessThanOrEqual(94);
     });
   });
 

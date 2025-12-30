@@ -1,6 +1,6 @@
 {
   "name": "@yagokoro/analyzer",
-  "version": "0.1.0",
+  "version": "2.0.0",
   "description": "Research gap analyzer for YAGOKORO GraphRAG system",
   "type": "module",
   "main": "dist/index.js",

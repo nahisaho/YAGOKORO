@@ -1,6 +1,6 @@
 {
   "name": "@yagokoro/neo4j",
-  "version": "0.1.0",
+  "version": "2.0.0",
   "private": true,
   "description": "Neo4j repository implementation for YAGOKORO GraphRAG system",
   "type": "module",

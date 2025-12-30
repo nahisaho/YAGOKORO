@@ -1,6 +1,6 @@
 {
   "name": "@yagokoro/mcp",
-  "version": "0.1.0",
+  "version": "2.0.0",
   "private": true,
   "description": "MCP (Model Context Protocol) server implementation for YAGOKORO GraphRAG system",
   "type": "module",

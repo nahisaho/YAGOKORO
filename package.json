@@ -34,11 +34,18 @@
   "devDependencies": {
     "@biomejs/biome": "^1.9.4",
     "@types/node": "^20.17.10",
+    "tsx": "^4.21.0",
     "typedoc": "^0.27.6",
     "typescript": "^5.7.2",
     "vitest": "^2.1.8"
   },
-  "keywords": ["graphrag", "knowledge-graph", "mcp", "agi", "generative-ai"],
+  "keywords": [
+    "graphrag",
+    "knowledge-graph",
+    "mcp",
+    "agi",
+    "generative-ai"
+  ],
   "author": "YAGOKORO Team",
   "license": "MIT",
   "repository": {

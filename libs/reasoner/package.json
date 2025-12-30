@@ -1,6 +1,6 @@
 {
   "name": "@yagokoro/reasoner",
-  "version": "0.1.0",
+  "version": "2.0.0",
   "description": "Multi-hop reasoning engine for YAGOKORO knowledge graph",
   "type": "module",
   "main": "dist/index.js",

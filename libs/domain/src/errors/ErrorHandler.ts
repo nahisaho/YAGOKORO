@@ -356,19 +356,23 @@ export function createErrorHandler(
   }
 
   function getStats(): ErrorStats {
-    return {
-      ...stats,
+    const result: ErrorStats = {
+      totalErrors: stats.totalErrors,
       byCode: new Map(stats.byCode),
       bySeverity: new Map(stats.bySeverity),
-      lastError: stats.lastError ? { ...stats.lastError } : undefined,
+      startTime: stats.startTime,
     };
+    if (stats.lastError) {
+      result.lastError = { ...stats.lastError };
+    }
+    return result;
   }
 
   function resetStats(): void {
     stats.totalErrors = 0;
     stats.byCode.clear();
     stats.bySeverity.clear();
-    stats.lastError = undefined;
+    delete stats.lastError;
     stats.startTime = new Date();
   }
 

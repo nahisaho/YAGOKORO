@@ -5,6 +5,122 @@ All notable changes to YAGOKORO will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.0.0] - 2025-12-31
+
+### 🎉 Major Release: YAGOKORO v3 - Knowledge Graph Auto-Growth
+
+This release implements automatic knowledge graph enrichment through relation extraction,
+paper ingestion pipelines, and expanded MCP tool integration.
+
+### Added
+
+#### F-001: Auto-Relation Extraction (@yagokoro/extractor) 🆕
+- **CooccurrenceAnalyzer** - Entity co-occurrence detection
+  - Document-level, paragraph-level, sentence-level scope
+  - Window-based analysis with configurable size
+  - TF-IDF weighted co-occurrence scoring
+- **PatternMatcher** - Syntactic pattern-based relation detection
+  - Verb pattern matching (developed, created, uses, etc.)
+  - Dependency parsing integration
+  - Configurable pattern templates
+- **RelationScorer** - Multi-factor confidence scoring
+  - Frequency-based scoring
+  - Position-based scoring (title, abstract, body)
+  - Source reliability weighting
+- **ContradictionDetector** - Relation conflict detection
+  - Temporal contradiction detection
+  - Logical inconsistency checking
+  - Confidence-based resolution
+- **LLMRelationInferrer** - LLM-powered relation inference
+  - GPT-4o integration for complex relations
+  - Structured prompt templates
+  - Confidence calibration
+- **RelationExtractorService** - Orchestrated extraction pipeline
+  - Configurable extraction strategies
+  - Batch processing support
+  - Integration with HITL review queue
+
+#### F-002: Paper Ingestion Pipeline (@yagokoro/ingestion) 🆕
+- **ArxivClient** - arXiv OAI-PMH API client
+  - Paper metadata fetching (cs.AI, cs.CL, cs.LG, cs.CV, cs.NE)
+  - 3-second rate limit compliance
+  - Incremental harvesting support
+- **SemanticScholarClient** - Semantic Scholar REST API client
+  - Citation and reference enrichment
+  - Author h-index retrieval
+  - 100 requests/5min rate limit
+- **TokenBucketRateLimiter** - Token bucket rate limiting
+  - Configurable bucket size and refill rate
+  - Burst handling support
+- **SlidingWindowRateLimiter** - Sliding window rate limiting
+  - Time-window based limiting
+  - Precise rate control
+- **CircuitBreaker** - Circuit breaker pattern
+  - Failure threshold configuration
+  - Automatic recovery
+  - Half-open state testing
+- **Deduplicator** - Paper deduplication
+  - DOI exact matching
+  - Title similarity matching (≥0.95 threshold)
+  - Author matching (3+ authors + title ≥0.8)
+- **ScheduleRunner** - Cron-based scheduling
+  - Configurable intervals (1h-24h, default 6h)
+  - Named schedule management
+- **IngestionService** - Main orchestration service
+  - End-to-end ingestion workflow
+  - Error recovery and retry
+  - Progress tracking
+
+#### F-003: MCP Tool Expansion (@yagokoro/mcp) 🆕
+Enhanced MCP tools for external AI system integration:
+- `natural_language_query` - NL to Cypher with fallback
+- `chain_of_thought` - Multi-step reasoning (max 10 steps)
+- `validate_response` - Response validation against graph
+- `check_consistency` - Claim consistency checking
+- `find_path` - Path finding (max 10 hops)
+- `explain_path` - LLM-powered path explanation
+- `analyze_gaps` - Knowledge gap analysis
+- `analyze_lifecycle` - Entity lifecycle analysis
+- `normalize_entities` - Entity normalization (dry-run support)
+- `generate_report` - Periodic report generation
+
+### Performance
+
+- Entity normalization: 1000 entities < 30s ✅
+- Path finding (4-hop): < 5s (actual: ~400ms) ✅
+- Gap analysis: < 60s (actual: ~500ms) ✅
+- Report generation: < 120s (actual: ~1s) ✅
+- p95 latency: under threshold ✅
+- Throughput: 100 req/sec ✅
+
+### Test Summary by Package (v3.0.0)
+
+| Package | Tests | Status |
+|---------|-------|--------|
+| @yagokoro/domain | 179 | ✅ |
+| @yagokoro/extractor | 208 | ✅ 🆕 |
+| @yagokoro/ingestion | 46 | ✅ 🆕 |
+| @yagokoro/neo4j | 102 | ✅ |
+| @yagokoro/nlq | 66 | ✅ |
+| @yagokoro/normalizer | 85 | ✅ |
+| @yagokoro/vector | 34 | ✅ |
+| @yagokoro/analyzer | 206 | ✅ |
+| @yagokoro/cli | 247 | ✅ |
+| @yagokoro/graphrag | 332 | ✅ |
+| @yagokoro/hallucination | 28 | ✅ |
+| @yagokoro/mcp | 379 | ✅ |
+| @yagokoro/reasoner | 93 | ✅ |
+| apps/yagokoro (E2E) | 135 | ✅ |
+| **Total** | **2,140** | ✅ |
+
+### Technical Details
+
+- **New Packages**: @yagokoro/extractor, @yagokoro/ingestion
+- **Test Increase**: +266 tests (1,874 → 2,140)
+- **E2E Coverage**: CLI, MCP, Performance tests
+
+---
+
 ## [2.0.0] - 2025-12-30
 
 ### 🎉 Major Release: YAGOKORO v2

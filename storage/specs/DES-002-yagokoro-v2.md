@@ -5,7 +5,7 @@
 | 項目 | 内容 |
 |------|------|
 | **Document ID** | DES-002 |
-| **Version** | 0.1.0 (Draft) |
+| **Version** | 0.2.0 (Draft) |
 | **Status** | Draft |
 | **Created** | 2025-12-30 |
 | **Author** | YAGOKORO Development Team |
@@ -399,6 +399,30 @@ export class AliasTableManager {
     return this.cache.get(alias.toLowerCase()) || null;
   }
 
+  /**
+   * Neo4jコネクションを取得（他コンポーネントでの利用用）
+   */
+  getNeo4jConnection(): Neo4jConnection {
+    return this.neo4jConnection;
+  }
+
+  /**
+   * エイリアステーブルをキャッシュにロード
+   */
+  private async loadCache(): Promise<void> {
+    const result = await this.neo4jConnection.run(`
+      MATCH (a:Alias)
+      RETURN a.alias as alias, a.canonical as canonical
+    `);
+    
+    for (const record of result.records) {
+      this.cache.set(
+        record.get('alias').toLowerCase(),
+        record.get('canonical')
+      );
+    }
+  }
+
   async rollback(alias: string): Promise<boolean> {
     const result = await this.neo4jConnection.run(`
       MATCH (a:Alias {alias: $alias})
@@ -572,6 +596,64 @@ Respond in JSON format:
     const response = await this.llmClient.generate(prompt);
     return JSON.parse(response);
   }
+
+  /**
+   * 既存のエンティティ名一覧を取得
+   */
+  private async getExistingEntities(): Promise<string[]> {
+    const neo4jConnection = this.aliasManager.getNeo4jConnection();
+    const cypher = `
+      MATCH (e)
+      WHERE e:AIModel OR e:Technique OR e:Person OR e:Organization OR e:Concept
+      RETURN DISTINCT e.name as name
+    `;
+    
+    const result = await neo4jConnection.run(cypher);
+    return result.records.map(r => r.get('name'));
+  }
+}
+
+// 型定義
+interface EntityNormalizerDependencies {
+  ruleNormalizer: RuleNormalizer;
+  similarityMatcher: SimilarityMatcher;
+  aliasManager: AliasTableManager;
+  llmClient: LLMClient;
+}
+
+interface NormalizeOptions {
+  confirmWithLLM?: boolean;
+}
+
+interface NormalizeResult {
+  original: string;
+  canonical: string;
+  source: 'cache' | 'rule' | 'similarity' | 'llm';
+  confidence: number;
+  reasoning?: string;
+}
+
+interface NormalizeAllOptions {
+  entityType?: string;
+  confirmWithLLM?: boolean;
+}
+
+interface NormalizationReport {
+  totalEntities: number;
+  normalizedCount: number;
+  results: NormalizeResult[];
+  errors: NormalizationError[];
+}
+
+interface NormalizationError {
+  entity: string;
+  error: string;
+}
+
+interface LLMEquivalenceResult {
+  isEquivalent: boolean;
+  confidence: number;
+  reasoning: string;
 }
 ```
 
@@ -801,6 +883,195 @@ export class BFSPathFinder implements PathFinderStrategy {
   private filterCyclicPaths(paths: Path[]): Path[] {
     return paths.filter(path => !this.cycleDetector.hasCycle(path));
   }
+
+  /**
+   * FR-002-03: 重み付きトラバーサル
+   * 関係の信頼度スコアを考慮した経路探索を行う
+   */
+  async findWeightedPaths(
+    query: PathQuery,
+    weightFunction: (relation: PathRelation) => number
+  ): Promise<WeightedPathResult> {
+    const startTime = Date.now();
+
+    // 重み付きパス用のCypherクエリ
+    const cypher = this.buildWeightedCypherQuery(query);
+    
+    const result = await this.neo4jConnection.run(cypher, {
+      startType: query.startEntityType,
+      startName: query.startEntityName,
+      endType: query.endEntityType,
+      endName: query.endEntityName,
+      maxHops: query.maxHops
+    });
+
+    const paths = this.processWeightedPaths(result.records, weightFunction);
+    const filteredPaths = this.filterCyclicPaths(paths);
+
+    // 総重みでソート（降順 = 高信頼度優先）
+    const sortedPaths = filteredPaths.sort((a, b) => b.totalWeight - a.totalWeight);
+
+    return {
+      paths: sortedPaths,
+      statistics: this.calculateStatistics(sortedPaths),
+      executionTime: Date.now() - startTime
+    };
+  }
+
+  private buildWeightedCypherQuery(query: PathQuery): string {
+    const relationFilter = query.relationTypes 
+      ? `:${query.relationTypes.join('|')}` 
+      : '';
+
+    return `
+      MATCH path = (start:${query.startEntityType} ${query.startEntityName ? '{name: $startName}' : ''})
+        -[rels${relationFilter}*1..${query.maxHops}]-
+        (end:${query.endEntityType} ${query.endEntityName ? '{name: $endName}' : ''})
+      WHERE ALL(n IN nodes(path) WHERE single(x IN nodes(path) WHERE x = n))
+      WITH path, rels,
+           reduce(weight = 0.0, r IN rels | weight + coalesce(r.confidence, 0.5)) as totalWeight
+      RETURN path, totalWeight, length(path) as hops
+      ORDER BY totalWeight DESC
+      LIMIT 100
+    `;
+  }
+
+  private processWeightedPaths(
+    records: any[],
+    weightFunction: (relation: PathRelation) => number
+  ): WeightedPath[] {
+    return records.map(record => {
+      const path = this.processPath(record);
+      const totalWeight = path.relations.reduce(
+        (sum, rel) => sum + weightFunction(rel),
+        0
+      );
+      return { ...path, totalWeight };
+    });
+  }
+
+  /**
+   * FR-002-05: バッチパス探索
+   * 複数のエンティティペアに対して並列にパス探索を行う
+   */
+  async batchFindPaths(
+    pairs: Array<{ source: string; target: string }>,
+    options: BatchPathOptions = {}
+  ): Promise<BatchPathResult> {
+    const startTime = Date.now();
+    const maxConcurrency = options.maxConcurrency ?? 5;
+    const maxHops = options.maxHops ?? 4;
+
+    const results = new Map<string, PathResult>();
+    const errors: BatchPathError[] = [];
+
+    // 並列実行（同時実行数を制限）
+    const chunks = this.chunkArray(pairs, maxConcurrency);
+    
+    for (const chunk of chunks) {
+      const promises = chunk.map(async (pair) => {
+        const key = `${pair.source}:${pair.target}`;
+        try {
+          const result = await this.findPaths({
+            startEntityType: 'Entity',
+            startEntityName: pair.source,
+            endEntityType: 'Entity',
+            endEntityName: pair.target,
+            maxHops
+          });
+          results.set(key, result);
+        } catch (error) {
+          errors.push({
+            source: pair.source,
+            target: pair.target,
+            error: error instanceof Error ? error.message : String(error)
+          });
+        }
+      });
+
+      await Promise.all(promises);
+    }
+
+    return {
+      results,
+      totalPairs: pairs.length,
+      successCount: results.size,
+      errorCount: errors.length,
+      errors,
+      executionTime: Date.now() - startTime
+    };
+  }
+
+  private chunkArray<T>(array: T[], chunkSize: number): T[][] {
+    const chunks: T[][] = [];
+    for (let i = 0; i < array.length; i += chunkSize) {
+      chunks.push(array.slice(i, i + chunkSize));
+    }
+    return chunks;
+  }
+
+  private processPath(record: any): Path {
+    // Neo4jのレコードからPathオブジェクトを構築
+    const pathData = record.get('path');
+    const nodes: PathNode[] = pathData.segments.map((seg: any) => ({
+      id: seg.start.identity.toString(),
+      type: seg.start.labels[0] as EntityType,
+      name: seg.start.properties.name,
+      properties: seg.start.properties
+    }));
+    // 最後のノードを追加
+    const lastSeg = pathData.segments[pathData.segments.length - 1];
+    if (lastSeg) {
+      nodes.push({
+        id: lastSeg.end.identity.toString(),
+        type: lastSeg.end.labels[0] as EntityType,
+        name: lastSeg.end.properties.name,
+        properties: lastSeg.end.properties
+      });
+    }
+
+    const relations: PathRelation[] = pathData.segments.map((seg: any) => ({
+      type: seg.relationship.type as RelationType,
+      direction: 'outgoing',
+      properties: seg.relationship.properties
+    }));
+
+    return {
+      nodes,
+      relations,
+      score: 1.0,
+      hops: record.get('hops')
+    };
+  }
+}
+
+// 型定義の追加
+export interface WeightedPath extends Path {
+  totalWeight: number;
+}
+
+export interface WeightedPathResult extends PathResult {
+  paths: WeightedPath[];
+}
+
+export interface BatchPathOptions {
+  maxConcurrency?: number;
+  maxHops?: number;
+}
+
+export interface BatchPathResult {
+  results: Map<string, PathResult>;
+  totalPairs: number;
+  successCount: number;
+  errorCount: number;
+  errors: BatchPathError[];
+  executionTime: number;
+}
+
+export interface BatchPathError {
+  source: string;
+  target: string;
+  error: string;
 }
 ```
 
@@ -1426,11 +1697,13 @@ export class GapDetector {
   private citationAnalyzer: CitationAnalyzer;
   private clusterAnalyzer: ClusterAnalyzer;
   private llmClient: LLMClient;
+  private neo4jConnection: Neo4jConnection;
 
   constructor(deps: GapDetectorDependencies) {
     this.citationAnalyzer = deps.citationAnalyzer;
     this.clusterAnalyzer = deps.clusterAnalyzer;
     this.llmClient = deps.llmClient;
+    this.neo4jConnection = deps.neo4jConnection;
   }
 
   async detectGaps(options: GapDetectionOptions = {}): Promise<ResearchGap[]> {
@@ -1525,6 +1798,141 @@ export class GapDetector {
       severityOrder[a.severity] - severityOrder[b.severity]
     );
   }
+
+  /**
+   * 既存の技術組み合わせを取得
+   */
+  private async getExistingCombinations(): Promise<Set<string>> {
+    const cypher = `
+      MATCH (m:AIModel)-[:USES]->(t:Technique)
+      RETURN m.name as model, t.name as technique
+    `;
+    const result = await this.neo4jConnection.run(cypher);
+    
+    const combinations = new Set<string>();
+    for (const record of result.records) {
+      const key = `${record.get('model')}:${record.get('technique')}`;
+      combinations.add(key);
+    }
+    return combinations;
+  }
+
+  /**
+   * 理論的に可能な組み合わせを生成
+   */
+  private async generatePossibleCombinations(): Promise<PossibleCombination[]> {
+    // モデルとテクニックの一覧を取得
+    const modelsCypher = `MATCH (m:AIModel) RETURN m.name as name LIMIT 100`;
+    const techniquesCypher = `MATCH (t:Technique) RETURN t.name as name LIMIT 100`;
+    
+    const [modelsResult, techniquesResult] = await Promise.all([
+      this.neo4jConnection.run(modelsCypher),
+      this.neo4jConnection.run(techniquesCypher)
+    ]);
+    
+    const models = modelsResult.records.map(r => r.get('name'));
+    const techniques = techniquesResult.records.map(r => r.get('name'));
+    
+    // デカルト積を生成
+    const combinations: PossibleCombination[] = [];
+    for (const model of models) {
+      for (const technique of techniques) {
+        combinations.push({
+          key: `${model}:${technique}`,
+          model,
+          technique
+        });
+      }
+    }
+    
+    return combinations;
+  }
+
+  /**
+   * ギャップの重要度を計算
+   */
+  private calculateSeverity(combo: PossibleCombination): 'low' | 'medium' | 'high' {
+    // モデルとテクニックの重要度に基づいて判定
+    // 実際の実装では、引用数や論文数を考慮
+    return 'medium';  // デフォルト
+  }
+
+  /**
+   * 孤立した研究領域を検出
+   */
+  private async findIsolatedResearchAreas(): Promise<ResearchGap[]> {
+    const clusterGaps = await this.clusterAnalyzer.findClusterGaps();
+    
+    return clusterGaps.map(gap => ({
+      id: `gap-isolated-${gap.cluster1.id}-${gap.cluster2.id}`,
+      type: 'isolated_cluster' as GapType,
+      description: `クラスター "${gap.cluster1.name}" と "${gap.cluster2.name}" の間の接続が弱い`,
+      severity: gap.connectionStrength < 0.05 ? 'high' : 'medium' as const,
+      evidence: [{
+        type: 'weak_connection',
+        value: { connectionStrength: gap.connectionStrength },
+        source: 'cluster_analysis'
+      }],
+      suggestedActions: [
+        `${gap.potentialBridgeTopics.join(', ')} をブリッジトピックとして研究`,
+        `両クラスターを統合する学際的研究の実施`
+      ],
+      relatedEntities: [gap.cluster1.name, gap.cluster2.name]
+    }));
+  }
+
+  /**
+   * LLMによる追加分析
+   */
+  private async analyzWithLLM(existingGaps: ResearchGap[]): Promise<ResearchGap[]> {
+    const prompt = `
+以下の研究ギャップを分析し、追加の洞察を提供してください:
+
+${existingGaps.slice(0, 10).map(g => `- ${g.description}`).join('\n')}
+
+追加で考慮すべき研究ギャップがあれば、JSON配列で応答してください:
+[{"description": "説明", "type": "タイプ", "severity": "high|medium|low"}]
+
+追加がない場合は空配列[] を返してください。
+`;
+
+    try {
+      const response = await this.llmClient.generate(prompt);
+      const additionalGaps = JSON.parse(response);
+      
+      return additionalGaps.map((gap: any, i: number) => ({
+        id: `gap-llm-${i}`,
+        type: (gap.type || 'unexplored_application') as GapType,
+        description: gap.description,
+        severity: (gap.severity || 'medium') as 'low' | 'medium' | 'high',
+        evidence: [{ type: 'llm_analysis', value: gap, source: 'llm' }],
+        suggestedActions: [],
+        relatedEntities: []
+      }));
+    } catch (error) {
+      // LLM分析が失敗しても既存のギャップは返す
+      return [];
+    }
+  }
+}
+
+// 型定義
+interface GapDetectorDependencies {
+  citationAnalyzer: CitationAnalyzer;
+  clusterAnalyzer: ClusterAnalyzer;
+  llmClient: LLMClient;
+  neo4jConnection: Neo4jConnection;
+}
+
+interface GapDetectionOptions {
+  domain?: string;
+  useLLM?: boolean;
+}
+
+interface PossibleCombination {
+  key: string;
+  model: string;
+  technique: string;
 }
 ```
 
@@ -1786,21 +2194,72 @@ export class TimelineAggregator {
 
 ```typescript
 // libs/analyzer/src/lifecycle/PhaseDetector.ts
+
+/**
+ * FR-004-01: Hype Cycle ステージ定義
+ * 要件書(REQ-002)の用語に従い、日本語・英語の両方をサポート
+ */
 export type LifecyclePhase = 
-  | 'emerging'      // 出現期: 最初の論文から2年以内
-  | 'growing'       // 成長期: 論文数が増加傾向
-  | 'mature'        // 成熟期: 論文数が安定
-  | 'declining'     // 衰退期: 論文数が減少傾向
-  | 'legacy';       // レガシー: 2年以上新規論文なし
+  | 'innovation_trigger'      // 黎明期 (Innovation Trigger)
+  | 'peak_of_expectations'    // 過熱期 (Peak of Inflated Expectations)
+  | 'trough_of_disillusionment'  // 幻滅期 (Trough of Disillusionment)
+  | 'slope_of_enlightenment'  // 回復期 (Slope of Enlightenment)
+  | 'plateau_of_productivity'; // 安定期 (Plateau of Productivity)
+
+/**
+ * 日本語ラベルへのマッピング
+ */
+export const LIFECYCLE_PHASE_LABELS: Record<LifecyclePhase, string> = {
+  'innovation_trigger': '黎明期',
+  'peak_of_expectations': '過熱期',
+  'trough_of_disillusionment': '幻滅期',
+  'slope_of_enlightenment': '回復期',
+  'plateau_of_productivity': '安定期'
+};
+
+/**
+ * 英語ラベルへのマッピング
+ */
+export const LIFECYCLE_PHASE_LABELS_EN: Record<LifecyclePhase, string> = {
+  'innovation_trigger': 'Innovation Trigger',
+  'peak_of_expectations': 'Peak of Inflated Expectations',
+  'trough_of_disillusionment': 'Trough of Disillusionment',
+  'slope_of_enlightenment': 'Slope of Enlightenment',
+  'plateau_of_productivity': 'Plateau of Productivity'
+};
 
 export interface PhaseResult {
   entity: string;
   currentPhase: LifecyclePhase;
+  phaseLabel: string;  // 日本語ラベル
   phaseStartDate: Date;
   confidence: number;
+  maturityScore: MaturityScore;  // FR-004-02: 成熟度スコア
   metrics: PhaseMetrics;
   history: PhaseTransition[];
 }
+
+/**
+ * FR-004-02: 成熟度スコア (0-100)
+ * 各技術の成熟度を数値化して評価
+ */
+export interface MaturityScore {
+  overall: number;  // 総合スコア (0-100)
+  components: {
+    publicationGrowth: number;     // 論文成長率 (0-25)
+    citationVelocity: number;      // 引用モメンタム (0-25)
+    industryAdoption: number;      // 産業採用度 (0-25)
+    communityActivity: number;     // コミュニティ活動 (0-25)
+  };
+  interpretation: MaturityInterpretation;
+}
+
+export type MaturityInterpretation = 
+  | 'very_early'     // 0-20:  非常に初期段階
+  | 'early'          // 21-40: 初期段階
+  | 'developing'     // 41-60: 発展中
+  | 'established'    // 61-80: 確立済み
+  | 'highly_mature'; // 81-100: 高度に成熟
 
 export interface PhaseMetrics {
   totalPublications: number;
@@ -1829,17 +2288,24 @@ export class PhaseDetector {
     const metrics = this.calculateMetrics(timeline);
     const phase = this.determinePhase(metrics, timeline);
     const history = await this.reconstructHistory(entityId, timeline);
+    const maturityScore = this.calculateMaturityScore(metrics, timeline);
 
     return {
       entity: entityId,
       currentPhase: phase,
+      phaseLabel: LIFECYCLE_PHASE_LABELS[phase],
       phaseStartDate: this.findPhaseStartDate(history, phase),
       confidence: this.calculateConfidence(metrics),
+      maturityScore,
       metrics,
       history
     };
   }
 
+  /**
+   * FR-004-01: Hype Cycle ステージ判定
+   * 複数の指標を組み合わせてステージを判定
+   */
   private determinePhase(
     metrics: PhaseMetrics, 
     timeline: TimelineEvent[]
@@ -1848,31 +2314,120 @@ export class PhaseDetector {
     const firstEvent = timeline[0];
     const lastEvent = timeline[timeline.length - 1];
 
-    if (!firstEvent) return 'emerging';
+    if (!firstEvent) return 'innovation_trigger';
 
     const ageInYears = (now.getTime() - firstEvent.date.getTime()) / 
                        (365 * 24 * 60 * 60 * 1000);
-    const timeSinceLastEvent = (now.getTime() - lastEvent.date.getTime()) / 
-                               (365 * 24 * 60 * 60 * 1000);
+    const timeSinceLastEvent = lastEvent 
+      ? (now.getTime() - lastEvent.date.getTime()) / (365 * 24 * 60 * 60 * 1000)
+      : 0;
 
-    // レガシー判定: 2年以上新規論文なし
-    if (timeSinceLastEvent > 2 && metrics.totalPublications > 5) {
-      return 'legacy';
+    // 安定期判定: 長期間安定した論文数、高い産業採用率
+    if (ageInYears > 5 && 
+        Math.abs(metrics.publicationGrowthRate) < 0.1 &&
+        metrics.derivativeCount > 10) {
+      return 'plateau_of_productivity';
     }
 
-    // 出現期: 2年以内
+    // 回復期判定: 衰退後の回復、安定した成長
+    if (ageInYears > 3 && 
+        metrics.publicationGrowthRate > 0 && 
+        metrics.publicationGrowthRate < 0.3 &&
+        metrics.citationMomentum > 0.5) {
+      return 'slope_of_enlightenment';
+    }
+
+    // 幻滅期判定: 成長率がマイナス、引用が減少
+    if (metrics.publicationGrowthRate < -0.1 && 
+        timeSinceLastEvent < 2) {
+      return 'trough_of_disillusionment';
+    }
+
+    // 過熱期判定: 急激な成長
+    if (metrics.publicationGrowthRate > 0.5 && 
+        ageInYears < 3) {
+      return 'peak_of_expectations';
+    }
+
+    // 黎明期判定: 最初の論文から2年以内
     if (ageInYears < 2) {
-      return 'emerging';
+      return 'innovation_trigger';
     }
 
-    // 成長率に基づく判定
+    // デフォルト: 指標に基づいて最も適切なステージを返す
     if (metrics.publicationGrowthRate > 0.2) {
-      return 'growing';
-    } else if (metrics.publicationGrowthRate > -0.1) {
-      return 'mature';
+      return 'peak_of_expectations';
+    } else if (metrics.publicationGrowthRate > 0) {
+      return 'slope_of_enlightenment';
     } else {
-      return 'declining';
+      return 'trough_of_disillusionment';
     }
+  }
+
+  /**
+   * FR-004-02: 成熟度スコア計算 (0-100)
+   */
+  private calculateMaturityScore(
+    metrics: PhaseMetrics,
+    timeline: TimelineEvent[]
+  ): MaturityScore {
+    // 各コンポーネントのスコア計算 (0-25点ずつ)
+    const publicationGrowth = this.scorePublicationGrowth(metrics);
+    const citationVelocity = this.scoreCitationVelocity(metrics);
+    const industryAdoption = this.scoreIndustryAdoption(metrics, timeline);
+    const communityActivity = this.scoreCommunityActivity(metrics);
+
+    const overall = publicationGrowth + citationVelocity + 
+                    industryAdoption + communityActivity;
+
+    return {
+      overall,
+      components: {
+        publicationGrowth,
+        citationVelocity,
+        industryAdoption,
+        communityActivity
+      },
+      interpretation: this.interpretMaturityScore(overall)
+    };
+  }
+
+  private scorePublicationGrowth(metrics: PhaseMetrics): number {
+    // 論文数と成長率に基づいてスコア化
+    const pubScore = Math.min(metrics.totalPublications / 100, 1) * 15;
+    const growthScore = metrics.publicationGrowthRate > 0 
+      ? Math.min(metrics.publicationGrowthRate, 1) * 10
+      : 0;
+    return Math.round(pubScore + growthScore);
+  }
+
+  private scoreCitationVelocity(metrics: PhaseMetrics): number {
+    // 引用モメンタムに基づいてスコア化
+    return Math.round(metrics.citationMomentum * 25);
+  }
+
+  private scoreIndustryAdoption(
+    metrics: PhaseMetrics, 
+    timeline: TimelineEvent[]
+  ): number {
+    // 派生技術数と産業採用イベントに基づいてスコア化
+    const derivativeScore = Math.min(metrics.derivativeCount / 20, 1) * 15;
+    const adoptionEvents = timeline.filter(e => e.eventType === 'adoption').length;
+    const adoptionScore = Math.min(adoptionEvents / 5, 1) * 10;
+    return Math.round(derivativeScore + adoptionScore);
+  }
+
+  private scoreCommunityActivity(metrics: PhaseMetrics): number {
+    // 最近の論文数に基づいてスコア化
+    return Math.round(Math.min(metrics.publicationsLastYear / 20, 1) * 25);
+  }
+
+  private interpretMaturityScore(score: number): MaturityInterpretation {
+    if (score <= 20) return 'very_early';
+    if (score <= 40) return 'early';
+    if (score <= 60) return 'developing';
+    if (score <= 80) return 'established';
+    return 'highly_mature';
   }
 
   private calculateMetrics(timeline: TimelineEvent[]): PhaseMetrics {
@@ -2624,6 +3179,317 @@ export function registerAllTools(server: Server): void {
 
 ---
 
+## 8.5 Error Handling Strategy
+
+### 8.5.1 Error Types
+
+```typescript
+// libs/shared/src/errors/YagokoroError.ts
+
+/**
+ * YAGOKORO共通エラー基底クラス
+ */
+export abstract class YagokoroError extends Error {
+  readonly code: string;
+  readonly context: Record<string, unknown>;
+  readonly isRetryable: boolean;
+
+  constructor(
+    message: string,
+    code: string,
+    context: Record<string, unknown> = {},
+    isRetryable: boolean = false
+  ) {
+    super(message);
+    this.name = this.constructor.name;
+    this.code = code;
+    this.context = context;
+    this.isRetryable = isRetryable;
+    Error.captureStackTrace(this, this.constructor);
+  }
+
+  toJSON(): Record<string, unknown> {
+    return {
+      name: this.name,
+      message: this.message,
+      code: this.code,
+      context: this.context,
+      isRetryable: this.isRetryable,
+      stack: this.stack
+    };
+  }
+}
+
+/**
+ * エンティティが見つからないエラー
+ */
+export class EntityNotFoundError extends YagokoroError {
+  constructor(entityId: string, entityType?: string) {
+    super(
+      `Entity not found: ${entityId}${entityType ? ` (type: ${entityType})` : ''}`,
+      'ENTITY_NOT_FOUND',
+      { entityId, entityType },
+      false
+    );
+  }
+}
+
+/**
+ * パスが見つからないエラー
+ */
+export class PathNotFoundError extends YagokoroError {
+  constructor(source: string, target: string, maxHops: number) {
+    super(
+      `No path found from "${source}" to "${target}" within ${maxHops} hops`,
+      'PATH_NOT_FOUND',
+      { source, target, maxHops },
+      false
+    );
+  }
+}
+
+/**
+ * 正規化エラー
+ */
+export class NormalizationError extends YagokoroError {
+  constructor(entity: string, reason: string) {
+    super(
+      `Failed to normalize entity "${entity}": ${reason}`,
+      'NORMALIZATION_ERROR',
+      { entity, reason },
+      true
+    );
+  }
+}
+
+/**
+ * データベース接続エラー
+ */
+export class DatabaseConnectionError extends YagokoroError {
+  constructor(database: 'neo4j' | 'qdrant', originalError?: Error) {
+    super(
+      `Failed to connect to ${database}`,
+      'DATABASE_CONNECTION_ERROR',
+      { database, originalError: originalError?.message },
+      true
+    );
+  }
+}
+
+/**
+ * LLMエラー
+ */
+export class LLMError extends YagokoroError {
+  constructor(operation: string, originalError?: Error) {
+    super(
+      `LLM operation failed: ${operation}`,
+      'LLM_ERROR',
+      { operation, originalError: originalError?.message },
+      true
+    );
+  }
+}
+
+/**
+ * バリデーションエラー
+ */
+export class ValidationError extends YagokoroError {
+  constructor(field: string, reason: string) {
+    super(
+      `Validation failed for "${field}": ${reason}`,
+      'VALIDATION_ERROR',
+      { field, reason },
+      false
+    );
+  }
+}
+
+/**
+ * タイムアウトエラー
+ */
+export class TimeoutError extends YagokoroError {
+  constructor(operation: string, timeoutMs: number) {
+    super(
+      `Operation "${operation}" timed out after ${timeoutMs}ms`,
+      'TIMEOUT_ERROR',
+      { operation, timeoutMs },
+      true
+    );
+  }
+}
+```
+
+### 8.5.2 Error Handler
+
+```typescript
+// libs/shared/src/errors/ErrorHandler.ts
+
+import { Logger } from '../telemetry/Logger.js';
+
+export interface ErrorHandlerOptions {
+  logger: Logger;
+  onError?: (error: YagokoroError) => void;
+  maxRetries?: number;
+  retryDelayMs?: number;
+}
+
+export class ErrorHandler {
+  private logger: Logger;
+  private onError?: (error: YagokoroError) => void;
+  private maxRetries: number;
+  private retryDelayMs: number;
+
+  constructor(options: ErrorHandlerOptions) {
+    this.logger = options.logger;
+    this.onError = options.onError;
+    this.maxRetries = options.maxRetries ?? 3;
+    this.retryDelayMs = options.retryDelayMs ?? 1000;
+  }
+
+  /**
+   * エラーをハンドルし、適切にログ出力
+   */
+  handle(error: unknown, context?: string): YagokoroError {
+    const yagokoroError = this.normalizeError(error, context);
+    
+    this.logger.error({
+      message: yagokoroError.message,
+      code: yagokoroError.code,
+      context: yagokoroError.context,
+      stack: yagokoroError.stack
+    });
+
+    if (this.onError) {
+      this.onError(yagokoroError);
+    }
+
+    return yagokoroError;
+  }
+
+  /**
+   * リトライ付きの非同期操作を実行
+   */
+  async withRetry<T>(
+    operation: () => Promise<T>,
+    operationName: string
+  ): Promise<T> {
+    let lastError: Error | undefined;
+
+    for (let attempt = 1; attempt <= this.maxRetries; attempt++) {
+      try {
+        return await operation();
+      } catch (error) {
+        const yagokoroError = this.normalizeError(error, operationName);
+        lastError = yagokoroError;
+
+        if (!yagokoroError.isRetryable || attempt === this.maxRetries) {
+          throw yagokoroError;
+        }
+
+        this.logger.warn({
+          message: `Retrying operation "${operationName}" (attempt ${attempt + 1}/${this.maxRetries})`,
+          error: yagokoroError.message
+        });
+
+        await this.delay(this.retryDelayMs * attempt);
+      }
+    }
+
+    throw lastError;
+  }
+
+  private normalizeError(error: unknown, context?: string): YagokoroError {
+    if (error instanceof YagokoroError) {
+      return error;
+    }
+
+    if (error instanceof Error) {
+      return new YagokoroError(
+        error.message,
+        'UNKNOWN_ERROR',
+        { originalError: error.name, context },
+        false
+      ) as any;
+    }
+
+    return new YagokoroError(
+      String(error),
+      'UNKNOWN_ERROR',
+      { context },
+      false
+    ) as any;
+  }
+
+  private delay(ms: number): Promise<void> {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
+}
+```
+
+### 8.5.3 Result Type (Functional Error Handling)
+
+```typescript
+// libs/shared/src/types/Result.ts
+
+/**
+ * 関数型エラーハンドリングのためのResult型
+ */
+export type Result<T, E = YagokoroError> = 
+  | { success: true; data: T }
+  | { success: false; error: E };
+
+export const Result = {
+  ok<T>(data: T): Result<T, never> {
+    return { success: true, data };
+  },
+
+  err<E>(error: E): Result<never, E> {
+    return { success: false, error };
+  },
+
+  isOk<T, E>(result: Result<T, E>): result is { success: true; data: T } {
+    return result.success === true;
+  },
+
+  isErr<T, E>(result: Result<T, E>): result is { success: false; error: E } {
+    return result.success === false;
+  },
+
+  map<T, U, E>(result: Result<T, E>, fn: (data: T) => U): Result<U, E> {
+    if (Result.isOk(result)) {
+      return Result.ok(fn(result.data));
+    }
+    return result;
+  },
+
+  flatMap<T, U, E>(
+    result: Result<T, E>, 
+    fn: (data: T) => Result<U, E>
+  ): Result<U, E> {
+    if (Result.isOk(result)) {
+      return fn(result.data);
+    }
+    return result;
+  },
+
+  unwrap<T, E>(result: Result<T, E>): T {
+    if (Result.isOk(result)) {
+      return result.data;
+    }
+    throw result.error;
+  },
+
+  unwrapOr<T, E>(result: Result<T, E>, defaultValue: T): T {
+    if (Result.isOk(result)) {
+      return result.data;
+    }
+    return defaultValue;
+  }
+};
+```
+
+---
+
 ## 8. Phase 6: Enhanced CLI Commands Design
 
 ### 8.1 CLI Command Structure
@@ -3090,7 +3956,541 @@ export function createCLI(): Command {
 
 ## 9. Integration Architecture
 
-### 9.1 Dependency Injection Container
+### 9.1 Scalability Design (NFR-005, NFR-006, NFR-007)
+
+#### 9.1.1 Overview
+
+YAGOKOROは以下のスケーラビリティ要件を満たすよう設計されています：
+- **NFR-005**: 対応論文数 10,000件+
+- **NFR-006**: 対応エンティティ数 50,000件+
+- **NFR-007**: 対応関係数 200,000件+
+
+#### 9.1.2 Database Indexing Strategy
+
+```cypher
+// Neo4j インデックス定義
+// エンティティ検索用
+CREATE INDEX entity_name_idx IF NOT EXISTS FOR (e:Entity) ON (e.name);
+CREATE INDEX entity_type_idx IF NOT EXISTS FOR (e:Entity) ON (e.type);
+
+// AIModel固有
+CREATE INDEX aimodel_name_idx IF NOT EXISTS FOR (m:AIModel) ON (m.name);
+CREATE INDEX aimodel_year_idx IF NOT EXISTS FOR (m:AIModel) ON (m.releaseYear);
+
+// Technique固有
+CREATE INDEX technique_name_idx IF NOT EXISTS FOR (t:Technique) ON (t.name);
+
+// Publication固有
+CREATE INDEX publication_year_idx IF NOT EXISTS FOR (p:Publication) ON (p.year);
+CREATE INDEX publication_title_idx IF NOT EXISTS FOR (p:Publication) ON (p.title);
+
+// エイリアステーブル用
+CREATE INDEX alias_idx IF NOT EXISTS FOR (a:Alias) ON (a.alias);
+CREATE CONSTRAINT alias_unique IF NOT EXISTS FOR (a:Alias) REQUIRE a.alias IS UNIQUE;
+
+// 複合インデックス（パス探索高速化）
+CREATE INDEX entity_type_name_idx IF NOT EXISTS FOR (e:Entity) ON (e.type, e.name);
+```
+
+#### 9.1.3 Query Optimization
+
+```typescript
+// libs/neo4j/src/queries/OptimizedQueries.ts
+
+/**
+ * 大規模データ対応のページネーション付きクエリ
+ */
+export class OptimizedQueries {
+  /**
+   * ページネーション付きエンティティ取得
+   */
+  static getEntitiesPaginated(
+    type: string, 
+    skip: number, 
+    limit: number
+  ): string {
+    return `
+      MATCH (e:${type})
+      RETURN e
+      ORDER BY e.name
+      SKIP $skip
+      LIMIT $limit
+    `;
+  }
+
+  /**
+   * パス探索のプルーニング戦略
+   * - 低信頼度の関係を除外
+   * - 中間ノード数を制限
+   */
+  static findPathsWithPruning(maxHops: number): string {
+    return `
+      MATCH path = (start)-[rels*1..${maxHops}]-(end)
+      WHERE start.name = $startName 
+        AND end.name = $endName
+        AND ALL(r IN rels WHERE coalesce(r.confidence, 0.5) >= 0.3)
+        AND ALL(n IN nodes(path) WHERE single(x IN nodes(path) WHERE x = n))
+      WITH path, rels, length(path) as hops
+      ORDER BY hops ASC, 
+               reduce(conf = 1.0, r IN rels | conf * coalesce(r.confidence, 0.5)) DESC
+      LIMIT 100
+    `;
+  }
+
+  /**
+   * バッチ処理用のUNWIND
+   */
+  static batchCreateAliases(): string {
+    return `
+      UNWIND $aliases as alias
+      MERGE (a:Alias {alias: alias.alias})
+      SET a.canonical = alias.canonical,
+          a.confidence = alias.confidence,
+          a.source = alias.source,
+          a.updatedAt = datetime()
+      ON CREATE SET a.createdAt = datetime()
+    `;
+  }
+}
+```
+
+#### 9.1.4 Connection Pooling
+
+```typescript
+// libs/neo4j/src/connection/ConnectionPool.ts
+
+export interface PoolConfig {
+  maxSize: number;
+  acquisitionTimeout: number;
+  connectionTimeout: number;
+}
+
+export class Neo4jConnectionPool {
+  private driver: neo4j.Driver;
+  private config: PoolConfig;
+
+  constructor(uri: string, auth: neo4j.AuthToken, config: PoolConfig) {
+    this.config = config;
+    this.driver = neo4j.driver(uri, auth, {
+      maxConnectionPoolSize: config.maxSize,
+      connectionAcquisitionTimeout: config.acquisitionTimeout,
+      connectionTimeout: config.connectionTimeout,
+      maxTransactionRetryTime: 30000
+    });
+  }
+
+  async getSession(mode: 'READ' | 'WRITE' = 'READ'): Promise<neo4j.Session> {
+    return this.driver.session({
+      defaultAccessMode: mode === 'READ' 
+        ? neo4j.session.READ 
+        : neo4j.session.WRITE
+    });
+  }
+
+  async close(): Promise<void> {
+    await this.driver.close();
+  }
+}
+```
+
+### 9.2 Security Design (NFR-013, NFR-014)
+
+#### 9.2.1 API Key Management
+
+```typescript
+// libs/shared/src/security/SecretManager.ts
+
+export interface SecretManagerConfig {
+  provider: 'env' | 'vault' | 'aws-secrets';
+  vaultUrl?: string;
+  awsRegion?: string;
+}
+
+export class SecretManager {
+  private config: SecretManagerConfig;
+  private cache: Map<string, string> = new Map();
+
+  constructor(config: SecretManagerConfig) {
+    this.config = config;
+  }
+
+  async getSecret(key: string): Promise<string> {
+    // キャッシュチェック
+    if (this.cache.has(key)) {
+      return this.cache.get(key)!;
+    }
+
+    let secret: string;
+
+    switch (this.config.provider) {
+      case 'env':
+        secret = this.getFromEnv(key);
+        break;
+      case 'vault':
+        secret = await this.getFromVault(key);
+        break;
+      case 'aws-secrets':
+        secret = await this.getFromAWSSecrets(key);
+        break;
+      default:
+        throw new Error(`Unknown secret provider: ${this.config.provider}`);
+    }
+
+    this.cache.set(key, secret);
+    return secret;
+  }
+
+  private getFromEnv(key: string): string {
+    const value = process.env[key];
+    if (!value) {
+      throw new Error(`Environment variable ${key} not set`);
+    }
+    return value;
+  }
+
+  private async getFromVault(key: string): Promise<string> {
+    // HashiCorp Vault implementation
+    // 実際の実装ではVault APIを呼び出す
+    throw new Error('Vault integration not implemented');
+  }
+
+  private async getFromAWSSecrets(key: string): Promise<string> {
+    // AWS Secrets Manager implementation
+    // 実際の実装ではAWS SDKを使用
+    throw new Error('AWS Secrets Manager integration not implemented');
+  }
+}
+```
+
+#### 9.2.2 Authentication & Authorization
+
+```typescript
+// libs/mcp/src/auth/MCPAuthenticator.ts
+
+export interface MCPAuthConfig {
+  enabled: boolean;
+  apiKeyHeader: string;
+  validApiKeys: string[];
+  rateLimit: {
+    windowMs: number;
+    maxRequests: number;
+  };
+}
+
+export class MCPAuthenticator {
+  private config: MCPAuthConfig;
+  private requestCounts: Map<string, { count: number; resetTime: number }> = new Map();
+
+  constructor(config: MCPAuthConfig) {
+    this.config = config;
+  }
+
+  /**
+   * リクエストを認証
+   */
+  authenticate(apiKey: string | undefined): AuthResult {
+    if (!this.config.enabled) {
+      return { authenticated: true };
+    }
+
+    if (!apiKey) {
+      return { 
+        authenticated: false, 
+        error: 'API key is required' 
+      };
+    }
+
+    if (!this.config.validApiKeys.includes(apiKey)) {
+      return { 
+        authenticated: false, 
+        error: 'Invalid API key' 
+      };
+    }
+
+    // レート制限チェック
+    const rateLimitResult = this.checkRateLimit(apiKey);
+    if (!rateLimitResult.allowed) {
+      return { 
+        authenticated: false, 
+        error: `Rate limit exceeded. Try again in ${rateLimitResult.retryAfter}s` 
+      };
+    }
+
+    return { authenticated: true };
+  }
+
+  private checkRateLimit(apiKey: string): RateLimitResult {
+    const now = Date.now();
+    const record = this.requestCounts.get(apiKey);
+
+    if (!record || now > record.resetTime) {
+      this.requestCounts.set(apiKey, {
+        count: 1,
+        resetTime: now + this.config.rateLimit.windowMs
+      });
+      return { allowed: true };
+    }
+
+    if (record.count >= this.config.rateLimit.maxRequests) {
+      return { 
+        allowed: false, 
+        retryAfter: Math.ceil((record.resetTime - now) / 1000) 
+      };
+    }
+
+    record.count++;
+    return { allowed: true };
+  }
+}
+
+interface AuthResult {
+  authenticated: boolean;
+  error?: string;
+}
+
+interface RateLimitResult {
+  allowed: boolean;
+  retryAfter?: number;
+}
+```
+
+#### 9.2.3 Input Validation & Sanitization
+
+```typescript
+// libs/shared/src/security/InputValidator.ts
+
+import { z } from 'zod';
+
+/**
+ * 入力バリデーションスキーマ
+ */
+export const InputSchemas = {
+  entityName: z.string()
+    .min(1, 'Entity name is required')
+    .max(500, 'Entity name too long')
+    .regex(/^[^<>{}|\\^`]*$/, 'Invalid characters in entity name'),
+
+  cypherParam: z.string()
+    .regex(/^[a-zA-Z0-9_\-\s.,:'"]+$/, 'Invalid characters for Cypher parameter'),
+
+  maxHops: z.number()
+    .int()
+    .min(1, 'Min hops is 1')
+    .max(10, 'Max hops is 10'),
+
+  limit: z.number()
+    .int()
+    .min(1, 'Min limit is 1')
+    .max(1000, 'Max limit is 1000')
+};
+
+/**
+ * Cypherインジェクション対策
+ */
+export function sanitizeCypherInput(input: string): string {
+  // 危険な文字をエスケープ
+  return input
+    .replace(/\\/g, '\\\\')
+    .replace(/'/g, "\\'")
+    .replace(/"/g, '\\"')
+    .replace(/;/g, '')
+    .replace(/--/g, '');
+}
+
+/**
+ * バリデーション付きのクエリパラメータ生成
+ */
+export function createSafeQueryParams(
+  params: Record<string, unknown>
+): Record<string, unknown> {
+  const safeParams: Record<string, unknown> = {};
+  
+  for (const [key, value] of Object.entries(params)) {
+    if (typeof value === 'string') {
+      safeParams[key] = sanitizeCypherInput(value);
+    } else {
+      safeParams[key] = value;
+    }
+  }
+  
+  return safeParams;
+}
+```
+
+### 9.3 Transaction Design
+
+#### 9.3.1 Transaction Manager
+
+```typescript
+// libs/neo4j/src/transaction/TransactionManager.ts
+
+import neo4j, { Session, Transaction } from 'neo4j-driver';
+
+export interface TransactionContext {
+  tx: Transaction;
+  session: Session;
+}
+
+export class TransactionManager {
+  private connectionPool: Neo4jConnectionPool;
+
+  constructor(connectionPool: Neo4jConnectionPool) {
+    this.connectionPool = connectionPool;
+  }
+
+  /**
+   * 読み取り専用トランザクション
+   */
+  async readTransaction<T>(
+    work: (tx: Transaction) => Promise<T>
+  ): Promise<T> {
+    const session = await this.connectionPool.getSession('READ');
+    try {
+      return await session.executeRead(work);
+    } finally {
+      await session.close();
+    }
+  }
+
+  /**
+   * 書き込みトランザクション
+   */
+  async writeTransaction<T>(
+    work: (tx: Transaction) => Promise<T>
+  ): Promise<T> {
+    const session = await this.connectionPool.getSession('WRITE');
+    try {
+      return await session.executeWrite(work);
+    } finally {
+      await session.close();
+    }
+  }
+
+  /**
+   * 明示的なトランザクション制御
+   */
+  async beginTransaction(mode: 'READ' | 'WRITE'): Promise<TransactionContext> {
+    const session = await this.connectionPool.getSession(mode);
+    const tx = session.beginTransaction();
+    return { tx, session };
+  }
+
+  async commitTransaction(ctx: TransactionContext): Promise<void> {
+    await ctx.tx.commit();
+    await ctx.session.close();
+  }
+
+  async rollbackTransaction(ctx: TransactionContext): Promise<void> {
+    await ctx.tx.rollback();
+    await ctx.session.close();
+  }
+
+  /**
+   * バッチ操作用のトランザクション
+   * 大量データの処理時に使用
+   */
+  async batchWriteTransaction<T>(
+    items: T[],
+    batchSize: number,
+    work: (tx: Transaction, batch: T[]) => Promise<void>
+  ): Promise<BatchResult> {
+    const results: BatchResult = {
+      totalProcessed: 0,
+      successCount: 0,
+      errorCount: 0,
+      errors: []
+    };
+
+    for (let i = 0; i < items.length; i += batchSize) {
+      const batch = items.slice(i, i + batchSize);
+      
+      try {
+        await this.writeTransaction(async (tx) => {
+          await work(tx, batch);
+        });
+        results.successCount += batch.length;
+      } catch (error) {
+        results.errorCount += batch.length;
+        results.errors.push({
+          batchIndex: Math.floor(i / batchSize),
+          error: error instanceof Error ? error.message : String(error)
+        });
+      }
+      
+      results.totalProcessed += batch.length;
+    }
+
+    return results;
+  }
+}
+
+interface BatchResult {
+  totalProcessed: number;
+  successCount: number;
+  errorCount: number;
+  errors: Array<{ batchIndex: number; error: string }>;
+}
+```
+
+#### 9.3.2 Unit of Work Pattern
+
+```typescript
+// libs/shared/src/patterns/UnitOfWork.ts
+
+export interface UnitOfWork {
+  begin(): Promise<void>;
+  commit(): Promise<void>;
+  rollback(): Promise<void>;
+}
+
+export class Neo4jUnitOfWork implements UnitOfWork {
+  private transactionManager: TransactionManager;
+  private context: TransactionContext | null = null;
+  private operations: Array<(tx: Transaction) => Promise<void>> = [];
+
+  constructor(transactionManager: TransactionManager) {
+    this.transactionManager = transactionManager;
+  }
+
+  async begin(): Promise<void> {
+    this.context = await this.transactionManager.beginTransaction('WRITE');
+    this.operations = [];
+  }
+
+  registerOperation(operation: (tx: Transaction) => Promise<void>): void {
+    this.operations.push(operation);
+  }
+
+  async commit(): Promise<void> {
+    if (!this.context) {
+      throw new Error('Transaction not started');
+    }
+
+    try {
+      for (const operation of this.operations) {
+        await operation(this.context.tx);
+      }
+      await this.transactionManager.commitTransaction(this.context);
+    } catch (error) {
+      await this.rollback();
+      throw error;
+    } finally {
+      this.context = null;
+      this.operations = [];
+    }
+  }
+
+  async rollback(): Promise<void> {
+    if (this.context) {
+      await this.transactionManager.rollbackTransaction(this.context);
+      this.context = null;
+      this.operations = [];
+    }
+  }
+}
+```
+
+### 9.4 Dependency Injection Container
 
 ```typescript
 // libs/shared/src/container.ts
@@ -3127,11 +4527,17 @@ container.bind<PhaseDetector>('PhaseDetector').to(PhaseDetector);
 container.bind<TrendPredictor>('TrendPredictor').to(TrendPredictor);
 container.bind<TechnologyLifecycleTrackerService>('LifecycleTracker').to(TechnologyLifecycleTrackerService);
 
+// Security & Infrastructure
+container.bind<SecretManager>('SecretManager').to(SecretManager).inSingletonScope();
+container.bind<MCPAuthenticator>('MCPAuthenticator').to(MCPAuthenticator).inSingletonScope();
+container.bind<TransactionManager>('TransactionManager').to(TransactionManager).inSingletonScope();
+container.bind<ErrorHandler>('ErrorHandler').to(ErrorHandler).inSingletonScope();
+
 // Report Generation
 container.bind<ReportGenerator>('ReportGenerator').to(ReportGenerator);
 ```
 
-### 9.2 Configuration Schema
+### 9.5 Configuration Schema
 
 ```typescript
 // libs/shared/src/config.ts
@@ -3460,6 +4866,7 @@ export const cacheHitCounter = new Counter({
 **Document History**
 
 | Version | Date | Author | Changes |
-|---------|------|--------|---------|
+|---------|------|--------|---------|     
 | 0.1.0 | 2025-12-30 | YAGOKORO Dev Team | Initial draft |
+| 0.2.0 | 2025-12-30 | YAGOKORO Dev Team | レビュー指摘対応: FR-002-03/05(重み付き・バッチ探索), FR-004-01/02(Hype Cycle用語統一・成熟度スコア), エラーハンドリング戦略, NFR対応(スケーラビリティ/セキュリティ), トランザクション設計, 未定義メソッド実装 |
 

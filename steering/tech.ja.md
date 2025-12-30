@@ -1,15 +1,15 @@
 # Technology Stack
 
 **Project**: YAGOKORO
-**Last Updated**: 2025-12-29
-**Status**: Phase 1 - 実装完了 ✅
+**Last Updated**: 2025-12-31
+**Status**: Phase 2 - v3.0.0 開発中 🔄
 
 ---
 
 ## Overview
 
 YAGOKOROは、LLM・GraphRAG・オントロジーを統合したAGI実現を目指すシステムです。
-本ドキュメントでは、Phase 1（Generative AI系譜GraphRAGシステム）の技術スタックを定義します。
+本ドキュメントでは、Phase 1（完了）およびPhase 2（v3.0.0開発）の技術スタックを定義します。
 
 ## Decision Criteria
 
@@ -239,6 +239,49 @@ pip install docling
 | @yagokoro/vector | ✅ Implemented | Connection, Store, Embedding |
 | @yagokoro/mcp | ✅ Implemented | Server, 8 Tools, Resources, Health, Auth, Metrics |
 | @yagokoro/cli | ✅ Implemented | 5 Commands (graph, entity, relation, community, mcp) |
+| @yagokoro/nlq | ✅ Implemented | NLQ→Cypher変換 |
+| @yagokoro/hallucination | ✅ Implemented | ハルシネーション検出 |
+| @yagokoro/extractor | 🔄 v3.0.0 | 共起分析ベース関係抽出 |
+| @yagokoro/ingestion | 🔄 v3.0.0 | 論文自動取り込み (arXiv/Semantic Scholar) |
+| @yagokoro/hitl | 🔄 v3.0.0 | Human-in-the-Loop検証ワークフロー |
+| @yagokoro/pipeline | 🔄 v3.0.0 | 差分更新パイプライン |
+| @yagokoro/cache | 🔄 v3.0.0 | クエリキャッシュ（LRU + 依存グラフ無効化） |
+
+---
+
+## v3.0.0 New Technologies
+
+### Relation Extraction (F-001)
+
+| Aspect | Choice | Status |
+|--------|--------|--------|
+| Cooccurrence Analysis | **Custom Implementation** | 🔄 Planned |
+| Pattern Matching | **Dependency Parsing** | 🔄 Planned |
+| Confidence Scoring | **Multi-factor (TF-IDF, Position, Frequency)** | 🔄 Planned |
+
+### Paper Ingestion (F-002)
+
+| Aspect | Choice | Status |
+|--------|--------|--------|
+| arXiv Client | **OAI-PMH API** | 🔄 Planned |
+| Semantic Scholar | **REST API** | 🔄 Planned |
+| Rate Limiting | **Token Bucket + Circuit Breaker** | 🔄 Planned |
+| Deduplication | **DOI + Title Similarity + Author Match** | 🔄 Planned |
+
+### HITL Workflow (F-004)
+
+| Aspect | Choice | Status |
+|--------|--------|--------|
+| Threshold | **0.5-0.7 → Review, 0.7+ → Auto-approve** | 🔄 Planned |
+| Batch Approval | **Confidence-based bulk approve** | 🔄 Planned |
+
+### Query Cache (F-006)
+
+| Aspect | Choice | Status |
+|--------|--------|--------|
+| Cache Strategy | **LRU + TTL** | 🔄 Planned |
+| Invalidation | **Dependency Graph Selective** | 🔄 Planned |
+| Storage | **In-Memory (Redis optional)** | 🔄 Planned |
 
 ---
 
@@ -257,14 +300,31 @@ pip install docling
 
 ---
 
-## Completed Sprints
+## Completed Sprints (Phase 1)
 
 - ✅ Sprint 0: Project Setup (Monorepo, Docker, CI/CD)
 - ✅ Sprint 1: Domain & Infrastructure (Entities, Neo4j, Vector)
 - ✅ Sprint 2: GraphRAG Core (Extraction, Reasoning, Query)
 - ✅ Sprint 3: Integration (MCP Tools, CLI Commands)
 - ✅ Sprint 4: Observability & Security (Backup, Auth, Logging, Metrics)
+- ✅ Sprint 5: NLQ (Natural Language Query → Cypher)
+- ✅ Sprint 6: Hallucination Detection
 
 ---
 
-*Updated: 2025-12-29*
+## v3.0.0 Sprint Plan (Phase 2)
+
+| Sprint | Focus | Duration | Status |
+|--------|-------|----------|--------|
+| Sprint 1 | 論文自動取り込み (@yagokoro/ingestion) | 36h | ⏳ Planned |
+| Sprint 2 | 共起分析ベース関係抽出 (@yagokoro/extractor) | 38h | ⏳ Planned |
+| Sprint 3 | MCPツール拡張 (9 new tools) | 38h | ⏳ Planned |
+| Sprint 4 | HITL検証ワークフロー (@yagokoro/hitl) | 32h | ⏳ Planned |
+| Sprint 5 | 差分更新パイプライン (@yagokoro/pipeline) | 38h | ⏳ Planned |
+| Sprint 6 | クエリキャッシュ + 統合テスト (@yagokoro/cache) | 36h | ⏳ Planned |
+
+**Total**: 218 hours / 6 sprints
+
+---
+
+*Updated: 2025-12-31*

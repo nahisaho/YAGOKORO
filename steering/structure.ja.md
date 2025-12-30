@@ -1,8 +1,8 @@
 # Project Structure
 
 **Project**: YAGOKORO
-**Last Updated**: 2025-12-29
-**Version**: 1.0
+**Last Updated**: 2025-12-31
+**Version**: 2.0 (v3.0.0 対応)
 
 ---
 
@@ -24,10 +24,15 @@ yagokoro/
 ├── libs/                    # ライブラリ層（Library-First）
 │   ├── domain/             # Layer 1: ドメインモデル
 │   ├── graphrag/           # Layer 2: GraphRAGコアロジック
-│   ├── nlq/                # Layer 2: 自然言語クエリ処理 [NEW Sprint 5]
-│   ├── hallucination/      # Layer 2: ハルシネーション検出 [Sprint 6]
+│   ├── nlq/                # Layer 2: 自然言語クエリ処理
+│   ├── hallucination/      # Layer 2: ハルシネーション検出
+│   ├── extractor/          # Layer 2: 関係抽出 [NEW v3]
+│   ├── ingestion/          # Layer 2: 論文自動取り込み [NEW v3]
+│   ├── hitl/               # Layer 2: Human-in-the-Loop検証 [NEW v3]
+│   ├── pipeline/           # Layer 2: 差分更新パイプライン [NEW v3]
 │   ├── neo4j/              # Layer 3: Neo4jリポジトリ
 │   ├── vector/             # Layer 3: Qdrantベクトルストア
+│   ├── cache/              # Layer 3: クエリキャッシュ [NEW v3]
 │   ├── mcp/                # Layer 4: MCPサーバー
 │   └── cli/                # Layer 4: CLIコマンド
 ├── steering/               # プロジェクトメモリ（MUSUBI SDD）
@@ -76,7 +81,7 @@ yagokoro/
 | Ingest | ArxivClient, UnstructuredClient, DocumentProcessor |
 | LLM | LLMClient, PromptTemplates |
 
-### Layer 2: NLQ (@yagokoro/nlq) [NEW Sprint 5]
+### Layer 2: NLQ (@yagokoro/nlq)
 
 **Purpose**: 自然言語クエリをCypherに変換
 **Location**: `libs/nlq/`
@@ -93,7 +98,7 @@ yagokoro/
 | Cypher | CypherGenerator (リトライ付き) |
 | Service | NLQService (フォールバック機構) |
 
-### Layer 2: Hallucination (@yagokoro/hallucination) [Sprint 6]
+### Layer 2: Hallucination (@yagokoro/hallucination)
 
 **Purpose**: ハルシネーション検出・整合性検証
 **Location**: `libs/hallucination/`
@@ -109,10 +114,79 @@ yagokoro/
 | Extractor | EntityMentionExtractor |
 | Filter | HallucinationFilter |
 
-### Layer 3: Infrastructure (@yagokoro/neo4j, @yagokoro/vector)
+### Layer 2: Extractor (@yagokoro/extractor) [NEW v3]
 
-**Purpose**: 外部システム統合（DB、API）
-**Location**: `libs/neo4j/`, `libs/vector/`
+**Purpose**: 共起分析ベースの関係自動抽出
+**Location**: `libs/extractor/`
+**Rules**:
+
+- Domain, Neo4jレイヤーに依存
+- 抽出された関係はHITLレビューを経由
+
+**Contents**:
+| カテゴリ | 内容 |
+|----------|------|
+| Cooccurrence | CooccurrenceAnalyzer (document/paragraph/sentence scope) |
+| Pattern | PatternMatcher (verb patterns, dependency) |
+| Scorer | RelationScorer (confidence calculation) |
+| Service | RelationExtractorService |
+
+### Layer 2: Ingestion (@yagokoro/ingestion) [NEW v3]
+
+**Purpose**: 外部ソースからの論文自動取り込み
+**Location**: `libs/ingestion/`
+**Rules**:
+
+- Domain, Extractorレイヤーに依存
+- API制限を遵守（Rate Limiter, Circuit Breaker）
+
+**Contents**:
+| カテゴリ | 内容 |
+|----------|------|
+| Client | ArxivClient, SemanticScholarClient |
+| Dedupe | Deduplicator (DOI, title similarity, author matching) |
+| Scheduler | ScheduleRunner (cron expression) |
+| RateLimit | RateLimiter, CircuitBreaker |
+| Service | IngestionService |
+
+### Layer 2: HITL (@yagokoro/hitl) [NEW v3]
+
+**Purpose**: Human-in-the-Loop検証ワークフロー
+**Location**: `libs/hitl/`
+**Rules**:
+
+- Domain, Neo4jレイヤーに依存
+- 信頼度0.5-0.7の関係を人間レビュー
+
+**Contents**:
+| カテゴリ | 内容 |
+|----------|------|
+| Queue | ReviewQueue (priority queue) |
+| Workflow | ApprovalWorkflow (approve/reject/modify) |
+| Batch | BatchApprover (confidence threshold) |
+| Service | HITLService |
+
+### Layer 2: Pipeline (@yagokoro/pipeline) [NEW v3]
+
+**Purpose**: 差分更新とトランザクション管理
+**Location**: `libs/pipeline/`
+**Rules**:
+
+- 全レイヤーのオーケストレーション
+- ロールバック可能なトランザクション
+
+**Contents**:
+| カテゴリ | 内容 |
+|----------|------|
+| Change | ChangeDetector (hash-based) |
+| Apply | ChangeApplier (batch processing) |
+| Transaction | TransactionManager (rollback support) |
+| Service | PipelineService |
+
+### Layer 3: Infrastructure (@yagokoro/neo4j, @yagokoro/vector, @yagokoro/cache)
+
+**Purpose**: 外部システム統合（DB、API、キャッシュ）
+**Location**: `libs/neo4j/`, `libs/vector/`, `libs/cache/`
 **Rules**:
 
 - Domainのポートを実装
@@ -132,6 +206,14 @@ yagokoro/
 | Store | VectorStore, CollectionManager |
 | Embedding | EmbeddingService, TextChunker |
 
+**@yagokoro/cache** [NEW v3]:
+| カテゴリ | 内容 |
+|----------|------|
+| Store | InMemoryCache, LRUEviction |
+| Key | CacheKeyGenerator, PatternMatcher |
+| Invalidation | DependencyTracker, SelectiveInvalidation |
+| Service | CacheService |
+
 ### Layer 4: Interface (@yagokoro/mcp, @yagokoro/cli)
 
 **Purpose**: エントリーポイント（MCP、CLI）
@@ -145,33 +227,44 @@ yagokoro/
 | カテゴリ | 内容 |
 |----------|------|
 | Server | YagokoroMCPServer |
-| Tools | queryKnowledgeGraph, getEntity, getRelations, getPath, getCommunity, addEntity, addRelation, searchSimilar |
+| Tools (Existing) | queryKnowledgeGraph, getEntity, getRelations, getPath, getCommunity, addEntity, addRelation, searchSimilar |
+| Tools (NLQ) [v3] | nlq_query, nlq_history |
+| Tools (Reasoning) [v3] | find_paths, infer_relations |
+| Tools (Analysis) [v3] | analyze_gaps, analyze_lifecycle |
+| Tools (Verification) [v3] | verify_statement, verify_entity |
+| Tools (Normalization) [v3] | normalize_entity |
 | Resources | knowledgeGraph, entities, communities |
 | Health | HealthCheck, StatusMonitor |
 
 **@yagokoro/cli**:
 | カテゴリ | 内容 |
 |----------|------|
-| Commands | graph, entity, relation, community, mcp |
-| Utils | Logger, TypeDefinitions |
+| Commands (Existing) | graph, entity, relation, community, mcp |
+| Commands (Ingestion) [v3] | ingest arxiv, ingest semantic-scholar, schedule |
+| Commands (Extract) [v3] | extract, extract analyze |
+| Commands (Review) [v3] | review list, review approve, review reject |
+| Commands (Pipeline) [v3] | pipeline run, pipeline status, pipeline rollback |
+| Commands (Cache) [v3] | cache stats, cache clear, cache invalidate |
+| Utils | Logger, TypeDefinitions, OutputFormatter |
 
 ---
 
 ## Layer Dependency Rules
 
 ```
-┌─────────────────────────────────────────┐
-│   Interface (MCP, CLI) - apps/yagokoro  │ ← Entry points
-├─────────────────────────────────────────┤
-│      @yagokoro/mcp, @yagokoro/cli       │ ← Interface libraries
-├─────────────────────────────────────────┤
-│   @yagokoro/neo4j, @yagokoro/vector     │ ← Infrastructure
-├─────────────────────────────────────────┤
-│  @yagokoro/graphrag, @yagokoro/nlq,     │ ← Application/Use Cases
-│  @yagokoro/hallucination                │
-├─────────────────────────────────────────┤
-│           @yagokoro/domain              │ ← Domain (NO dependencies)
-└─────────────────────────────────────────┘
+┌─────────────────────────────────────────────────────────────────┐
+│     Interface (MCP, CLI) - apps/yagokoro                        │ ← Entry points
+├─────────────────────────────────────────────────────────────────┤
+│        @yagokoro/mcp, @yagokoro/cli                             │ ← Interface libraries
+├─────────────────────────────────────────────────────────────────┤
+│     @yagokoro/neo4j, @yagokoro/vector, @yagokoro/cache          │ ← Infrastructure
+├─────────────────────────────────────────────────────────────────┤
+│  @yagokoro/graphrag, @yagokoro/nlq, @yagokoro/hallucination,    │ ← Application/Use Cases
+│  @yagokoro/extractor, @yagokoro/ingestion, @yagokoro/hitl,      │   [v3 NEW: extractor,
+│  @yagokoro/pipeline                                             │    ingestion, hitl, pipeline]
+├─────────────────────────────────────────────────────────────────┤
+│             @yagokoro/domain                                    │ ← Domain (NO dependencies)
+└─────────────────────────────────────────────────────────────────┘
 
 依存方向: 上 → 下 のみ許可
 ```
@@ -329,6 +422,18 @@ This structure enforces:
 
 ## Changelog
 
+### Version 2.0 (2025-12-31) - v3.0.0 対応
+
+- Added 5 new v3 packages to Layer 2:
+  - @yagokoro/extractor (共起分析ベースの関係抽出)
+  - @yagokoro/ingestion (論文自動取り込み)
+  - @yagokoro/hitl (Human-in-the-Loop検証)
+  - @yagokoro/pipeline (差分更新パイプライン)
+- Added @yagokoro/cache to Layer 3 (クエリキャッシュ)
+- Updated @yagokoro/mcp: 8 tools → 17 tools (9 new v3 tools)
+- Updated @yagokoro/cli: 5 commands → 11 command groups (6 new v3 commands)
+- Updated dependency diagram for v3 architecture
+
 ### Version 1.2 (2025-12-29)
 
 - Added @yagokoro/nlq to Layer 2 (Sprint 5 complete)
@@ -341,5 +446,5 @@ This structure enforces:
 
 ---
 
-**Last Updated**: 2025-12-29
+**Last Updated**: 2025-12-31
 **Maintained By**: {{MAINTAINER}}

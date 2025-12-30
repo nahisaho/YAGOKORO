@@ -795,9 +795,259 @@ export interface CacheStatistics {
 
 ---
 
-## 5. シーケンス図
+## 5. CLI Interface設計
 
-### 5.1 論文取り込みフロー（F-002）
+### 5.1 概要
+
+Article II（CLI Interface原則）に準拠し、すべての機能をCLIから操作可能とする。各新規パッケージは対応するCLIコマンドを提供する。
+
+```
+yagokoro <command> <subcommand> [options]
+```
+
+### 5.2 論文取り込みコマンド（@yagokoro/ingestion）
+
+#### 5.2.1 ingest - 論文取り込み実行
+
+```bash
+# arXivから取り込み
+yagokoro ingest arxiv --query "transformer attention" --categories cs.AI,cs.CL --max 100
+
+# Semantic Scholarから取り込み
+yagokoro ingest semantic-scholar --query "graph neural network" --max 50
+
+# 両方から取り込み
+yagokoro ingest all --query "large language model" --since 2024-01-01
+```
+
+| オプション | 短縮形 | 説明 | デフォルト |
+|-----------|-------|------|-----------|
+| `--query` | `-q` | 検索クエリ | (必須) |
+| `--categories` | `-c` | arXivカテゴリ（カンマ区切り）| なし |
+| `--since` | `-s` | 取得開始日 (YYYY-MM-DD) | 30日前 |
+| `--until` | `-u` | 取得終了日 (YYYY-MM-DD) | 今日 |
+| `--max` | `-m` | 最大取得件数 | 100 |
+| `--dry-run` | `-d` | 実際には取り込まない | false |
+
+#### 5.2.2 schedule - スケジュール管理
+
+```bash
+# スケジュール登録
+yagokoro schedule add --name "daily-ai" --cron "0 2 * * *" --query "artificial intelligence"
+
+# スケジュール一覧
+yagokoro schedule list
+
+# スケジュール削除
+yagokoro schedule remove --name "daily-ai"
+
+# スケジュール状態確認
+yagokoro schedule status
+```
+
+#### 5.2.3 status - 取り込み状態
+
+```bash
+# 直近の取り込み状態
+yagokoro ingest status
+
+# 詳細表示
+yagokoro ingest status --verbose
+
+# JSON出力
+yagokoro ingest status --format json
+```
+
+### 5.3 関係抽出コマンド（@yagokoro/extractor）
+
+#### 5.3.1 extract - 関係抽出実行
+
+```bash
+# 単一ドキュメントから抽出
+yagokoro extract --document "path/to/paper.pdf"
+
+# 最近取り込んだ論文から抽出
+yagokoro extract --recent 50
+
+# 全未処理論文から抽出
+yagokoro extract --all-pending
+
+# 共起分析のみ
+yagokoro extract --method cooccurrence --min-confidence 0.5
+```
+
+| オプション | 短縮形 | 説明 | デフォルト |
+|-----------|-------|------|-----------|
+| `--document` | `-d` | 対象ドキュメントパス | なし |
+| `--recent` | `-r` | 直近N件の論文を対象 | なし |
+| `--all-pending` | `-a` | 全未処理論文 | false |
+| `--method` | `-m` | 抽出方法 (cooccurrence\|pattern\|all) | all |
+| `--min-confidence` | `-c` | 最低信頼度 | 0.5 |
+| `--batch-size` | `-b` | バッチサイズ | 10 |
+
+#### 5.3.2 analyze - 抽出結果分析
+
+```bash
+# 抽出統計
+yagokoro extract analyze --stats
+
+# 関係タイプ分布
+yagokoro extract analyze --by-type
+
+# 信頼度分布
+yagokoro extract analyze --by-confidence
+```
+
+### 5.4 HITLコマンド（@yagokoro/hitl）
+
+#### 5.4.1 review - レビュー管理
+
+```bash
+# 保留中レビュー一覧
+yagokoro review list --status pending
+
+# レビュー詳細表示
+yagokoro review show <review-id>
+
+# 承認
+yagokoro review approve <review-id> --comment "Verified against source"
+
+# 却下
+yagokoro review reject <review-id> --reason "Incorrect relation type"
+
+# 修正して承認
+yagokoro review approve <review-id> --modify-type "USES"
+
+# 一括承認（高信頼度）
+yagokoro review batch-approve --min-confidence 0.85 --max 100
+```
+
+| オプション | 短縮形 | 説明 | デフォルト |
+|-----------|-------|------|-----------|
+| `--status` | `-s` | フィルタ (pending\|approved\|rejected) | pending |
+| `--type` | `-t` | アイテムタイプ (relation\|entity) | all |
+| `--limit` | `-l` | 表示件数 | 20 |
+| `--sort` | | ソート (confidence\|date) | confidence |
+
+#### 5.4.2 stats - レビュー統計
+
+```bash
+# レビュー統計
+yagokoro review stats
+
+# 期間指定
+yagokoro review stats --since 2024-01-01
+```
+
+### 5.5 パイプラインコマンド（@yagokoro/pipeline）
+
+#### 5.5.1 pipeline - パイプライン実行
+
+```bash
+# 差分検知＋更新
+yagokoro pipeline run
+
+# ドライラン
+yagokoro pipeline run --dry-run
+
+# 強制フル同期
+yagokoro pipeline run --full-sync
+
+# 特定トランザクションのロールバック
+yagokoro pipeline rollback <transaction-id>
+```
+
+| オプション | 短縮形 | 説明 | デフォルト |
+|-----------|-------|------|-----------|
+| `--dry-run` | `-d` | 実際には適用しない | false |
+| `--full-sync` | `-f` | 差分ではなく全同期 | false |
+| `--batch-size` | `-b` | バッチサイズ | 100 |
+| `--parallel` | `-p` | 並列処理数 | 5 |
+
+#### 5.5.2 status - パイプライン状態
+
+```bash
+# 現在の状態
+yagokoro pipeline status
+
+# トランザクション履歴
+yagokoro pipeline history --limit 10
+
+# 特定トランザクション詳細
+yagokoro pipeline show <transaction-id>
+```
+
+### 5.6 キャッシュコマンド（@yagokoro/cache）
+
+#### 5.6.1 cache - キャッシュ管理
+
+```bash
+# キャッシュ統計
+yagokoro cache stats
+
+# キャッシュクリア（全体）
+yagokoro cache clear
+
+# パターン指定で無効化
+yagokoro cache invalidate --pattern "nlq:*"
+
+# 特定キー削除
+yagokoro cache delete <key>
+```
+
+| オプション | 短縮形 | 説明 | デフォルト |
+|-----------|-------|------|-----------|
+| `--pattern` | `-p` | 無効化パターン (glob) | なし |
+| `--force` | `-f` | 確認なしで実行 | false |
+
+### 5.7 グローバルオプション
+
+すべてのコマンドで使用可能なオプション：
+
+| オプション | 短縮形 | 説明 | デフォルト |
+|-----------|-------|------|-----------|
+| `--help` | `-h` | ヘルプ表示 | - |
+| `--version` | `-v` | バージョン表示 | - |
+| `--config` | `-c` | 設定ファイルパス | ~/.yagokoro/config.yml |
+| `--verbose` | | 詳細ログ出力 | false |
+| `--quiet` | `-q` | 最小出力 | false |
+| `--format` | `-f` | 出力形式 (text\|json\|yaml) | text |
+| `--no-color` | | カラー出力無効 | false |
+
+### 5.8 終了コード
+
+| コード | 意味 |
+|-------|------|
+| 0 | 成功 |
+| 1 | 一般エラー |
+| 2 | 引数エラー |
+| 3 | 設定エラー |
+| 4 | 接続エラー（Neo4j/API） |
+| 5 | 認証エラー |
+| 10 | 部分成功（一部失敗あり） |
+
+### 5.9 実装ロケーション
+
+```
+libs/cli/src/
+├── commands/
+│   ├── ingest.ts        # 論文取り込み
+│   ├── schedule.ts      # スケジュール管理
+│   ├── extract.ts       # 関係抽出
+│   ├── review.ts        # HITLレビュー
+│   ├── pipeline.ts      # パイプライン
+│   └── cache.ts         # キャッシュ管理
+├── utils/
+│   ├── output.ts        # 出力フォーマッタ
+│   └── config.ts        # 設定読み込み
+└── index.ts             # エントリポイント
+```
+
+---
+
+## 6. シーケンス図
+
+### 6.1 論文取り込みフロー（F-002）
 
 ```
 ┌─────┐    ┌───────────┐    ┌─────────┐    ┌──────────┐    ┌───────┐
@@ -836,7 +1086,7 @@ export interface CacheStatistics {
    │             │               │              │              │
 ```
 
-### 5.2 HITL検証フロー（F-004）
+### 6.2 HITL検証フロー（F-004）
 
 ```
 ┌─────────┐   ┌───────────┐   ┌─────────┐   ┌─────────┐   ┌───────┐
@@ -872,7 +1122,7 @@ export interface CacheStatistics {
      │              │              │              │             │
 ```
 
-### 5.3 NLQクエリフロー（MCP経由）
+### 6.3 NLQクエリフロー（MCP経由）
 
 ```
 ┌───────┐   ┌─────────┐   ┌───────┐   ┌─────────┐   ┌───────┐   ┌───────┐
@@ -917,7 +1167,7 @@ export interface CacheStatistics {
 
 ---
 
-## 6. ADR（アーキテクチャ決定記録）
+## 7. ADR（アーキテクチャ決定記録）
 
 ### ADR-001: 共起分析による関係抽出
 
@@ -971,9 +1221,9 @@ export interface CacheStatistics {
 
 ---
 
-## 7. 非機能要件対応設計
+## 8. 非機能要件対応設計
 
-### 7.1 パフォーマンス
+### 8.1 パフォーマンス
 
 | 要件 | 設計 |
 |------|------|
@@ -981,7 +1231,7 @@ export interface CacheStatistics {
 | NLQレスポンス: 3秒以内 | クエリキャッシュ（ヒット率80%目標）|
 | 差分更新: 10分以内 | 変更検知ハッシュ + 差分適用 |
 
-### 7.2 可用性
+### 8.2 可用性
 
 | 要件 | 設計 |
 |------|------|
@@ -989,7 +1239,7 @@ export interface CacheStatistics {
 | 部分障害継続 | Graceful Degradation（キャッシュ返却）|
 | データ整合性 | トランザクション + ロールバック |
 
-### 7.3 セキュリティ
+### 8.3 セキュリティ
 
 | 要件 | 設計 |
 |------|------|
@@ -997,7 +1247,7 @@ export interface CacheStatistics {
 | 入力検証 | Zodスキーマバリデーション |
 | ログ | 機密情報マスキング |
 
-### 7.4 エラーハンドリング
+### 8.4 エラーハンドリング
 
 | コンポーネント | エラー種別 | 対応策 |
 |---------------|-----------|--------|
@@ -1031,9 +1281,9 @@ interface DeadLetterItem {
 
 ---
 
-## 8. テスト戦略
+## 9. テスト戦略
 
-### 8.1 テストカテゴリ
+### 9.1 テストカテゴリ
 
 | カテゴリ | 対象 | ツール |
 |---------|------|--------|
@@ -1042,7 +1292,7 @@ interface DeadLetterItem {
 | E2E | 全体フロー | Vitest + Neo4j |
 | Performance | 負荷・レスポンス | k6 |
 
-### 8.2 テスト件数目標
+### 9.2 テスト件数目標
 
 | パッケージ | 目標件数 | 根拠 |
 |-----------|---------|------|
@@ -1056,14 +1306,15 @@ interface DeadLetterItem {
 
 ---
 
-## 9. 変更履歴
+## 10. 変更履歴
 
 | Version | Date | Author | Changes |
 |---------|------|--------|---------|
 | 1.0 | 2025-12-31 | GitHub Copilot | 初版作成 |
 | 1.1 | 2025-12-31 | GitHub Copilot | レビュー対応: Document ID変更(DES-002→DES-003)、HITL閾値統一、エラーハンドリング追加 |
+| 1.2 | 2025-12-31 | GitHub Copilot | Article II準拠: CLI Interface設計セクション(§5)追加 |
 
 ---
 
-**Document Status**: Review Complete
+**Document Status**: Approved
 **Next Step**: TASKS-003（タスク分解）

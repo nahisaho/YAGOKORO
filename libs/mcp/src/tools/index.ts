@@ -59,3 +59,26 @@ export {
   type AliasEntry as MCPAliasEntry,
   type NormalizationRule,
 } from './normalization-tools.js';
+
+// Path finding tools
+export {
+  createPathTools,
+  createFindPathsTool,
+  createShortestPathTool,
+  createCheckConnectionTool,
+  createDegreesOfSeparationTool,
+  createExplainPathTool,
+  FindPathsInputSchema,
+  ShortestPathInputSchema,
+  CheckConnectionInputSchema,
+  DegreesOfSeparationInputSchema,
+  ExplainPathInputSchema,
+  type PathToolDependencies,
+  type PathServiceInterface,
+  type Path,
+  type PathNode,
+  type PathRelation,
+  type PathResult,
+  type PathExplanation,
+  type FindPathsOptions,
+} from './path-tools.js';

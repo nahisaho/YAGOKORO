@@ -1,0 +1,373 @@
+{
+  "metadata": {
+    "generatedAt": "2025-12-30T11:20:17.577Z",
+    "yagokoroVersion": "v2.0.0",
+    "testCount": 6
+  },
+  "results": [
+    {
+      "experimentId": "V2-NORM",
+      "feature": "Entity Normalization (NormalizationService)",
+      "v1Result": {
+        "uniqueEntities": 240,
+        "noNormalization": true,
+        "exampleVariations": [
+          {
+            "normalized": "transformer",
+            "variations": [
+              "Transformer",
+              "Transformer"
+            ]
+          },
+          {
+            "normalized": "gpt3",
+            "variations": [
+              "GPT-3",
+              "GPT3"
+            ]
+          },
+          {
+            "normalized": "instruction tuning",
+            "variations": [
+              "instruction tuning",
+              "Instruction Tuning"
+            ]
+          },
+          {
+            "normalized": "chain of thought prompting",
+            "variations": [
+              "Chain-of-Thought Prompting",
+              "chain of thought (CoT) prompting",
+              "CoT prompting"
+            ]
+          },
+          {
+            "normalized": "large language models",
+            "variations": [
+              "large language models",
+              "Large language models",
+              "large language models (LLMs)"
+            ]
+          }
+        ]
+      },
+      "v2Result": {
+        "uniqueEntities": 234,
+        "normalized": true,
+        "deduplicationRate": "2.5%",
+        "mergedEntities": 8
+      },
+      "improvement": "エンティティ正規化により2.5%の重複を削減。グラフの接続性が向上。",
+      "timestamp": "2025-12-30T11:20:12.121Z"
+    },
+    {
+      "experimentId": "V2-NLQ",
+      "feature": "Natural Language Query (NLQService)",
+      "v1Result": {
+        "method": "Keyword matching only",
+        "results": [
+          {
+            "query": "TransformerアーキテクチャはどのようなAIモデルに影響を与えましたか？",
+            "matches": 0,
+            "method": "keyword"
+          },
+          {
+            "query": "OpenAIが開発したモデルのうち、RLHFを使用しているものは？",
+            "matches": 0,
+            "method": "keyword"
+          },
+          {
+            "query": "Chain-of-Thought推論の派生技術は何ですか？",
+            "matches": 0,
+            "method": "keyword"
+          }
+        ]
+      },
+      "v2Result": {
+        "method": "LLM-powered intent parsing + Cypher generation",
+        "results": [
+          {
+            "query": "TransformerアーキテクチャはどのようなAIモデルに影響を与えましたか？",
+            "intent": "parsed",
+            "method": "nlq",
+            "response": "```json\n{\n  \"subject\": {\"type\": \"Technology\", \"name\": \"Transformerアーキテクチャ\"},\n  \"relationship\": \"影響を与えた\",\n  \"target\": {\"type\": \"AI模型\"},\n  \"filters\": []\n}\n```"
+          },
+          {
+            "query": "OpenAIが開発したモデルのうち、RLHFを使用しているものは？",
+            "intent": "parsed",
+            "method": "nlq",
+            "response": "```json\n{\n  \"subject\": {\"type\": \"Organization\", \"name\": \"OpenAI\"},\n  \"relationship\": \"developed model using\",\n  \"target\": {\"type\": \"Model Training Method\"},\n  \"filters\": [{\"type\": \"Training Technique\", \"name\": \"RLHF\"}]\n}\n```"
+          },
+          {
+            "query": "Chain-of-Thought推論の派生技術は何ですか？",
+            "intent": "parsed",
+            "method": "nlq",
+            "response": "```json\n{\n  \"subject\": {\"type\": \"概念\", \"name\": \"Chain-of-Thought推論\"},\n  \"relationship\": \"派生技术\",\n  \"target\": {\"type\": \"技术\"},\n  \"filters\": []\n}\n```"
+          }
+        ]
+      },
+      "improvement": "自然言語での質問を構造化クエリに変換。複雑な検索も直感的に実行可能。",
+      "timestamp": "2025-12-30T11:20:17.561Z"
+    },
+    {
+      "experimentId": "V2-MULTIHOP",
+      "feature": "Multi-hop Reasoning (BFSPathFinder)",
+      "v1Result": {
+        "maxHops": 1,
+        "pathsFound": 0,
+        "results": [
+          {
+            "start": "Transformer",
+            "end": "GPT-4",
+            "maxHops": 4,
+            "found": false,
+            "hops": null,
+            "path": null
+          },
+          {
+            "start": "attention mechanism",
+            "end": "LLaMA",
+            "maxHops": 4,
+            "found": false,
+            "hops": null,
+            "path": null
+          },
+          {
+            "start": "RLHF",
+            "end": "ChatGPT",
+            "maxHops": 4,
+            "found": false,
+            "hops": null,
+            "path": null
+          },
+          {
+            "start": "Chain-of-Thought",
+            "end": "GPT-4",
+            "maxHops": 4,
+            "found": false,
+            "hops": null,
+            "path": null
+          }
+        ]
+      },
+      "v2Result": {
+        "maxHops": 4,
+        "pathsFound": 0,
+        "results": [
+          {
+            "start": "Transformer",
+            "end": "GPT-4",
+            "maxHops": 4,
+            "found": false,
+            "hops": null,
+            "path": null
+          },
+          {
+            "start": "attention mechanism",
+            "end": "LLaMA",
+            "maxHops": 4,
+            "found": false,
+            "hops": null,
+            "path": null
+          },
+          {
+            "start": "RLHF",
+            "end": "ChatGPT",
+            "maxHops": 4,
+            "found": false,
+            "hops": null,
+            "path": null
+          },
+          {
+            "start": "Chain-of-Thought",
+            "end": "GPT-4",
+            "maxHops": 4,
+            "found": false,
+            "hops": null,
+            "path": null
+          }
+        ]
+      },
+      "improvement": "パス発見率が0%向上。間接的な関係も発見可能に。",
+      "timestamp": "2025-12-30T11:20:17.564Z"
+    },
+    {
+      "experimentId": "V2-GAP",
+      "feature": "Research Gap Analysis (GapAnalyzer)",
+      "v1Result": {
+        "method": "Simple category coverage count",
+        "categories": {
+          "reasoning": 21,
+          "training": 24,
+          "architecture": 20,
+          "efficiency": 7,
+          "safety": 14,
+          "multimodal": 24,
+          "agent": 10,
+          "code": 8,
+          "long-context": 21
+        }
+      },
+      "v2Result": {
+        "method": "Gap analysis with recommendations",
+        "categories": {
+          "reasoning": 21,
+          "training": 24,
+          "architecture": 20,
+          "efficiency": 7,
+          "safety": 14,
+          "multimodal": 24,
+          "agent": 10,
+          "code": 8,
+          "long-context": 21
+        },
+        "averageCoverage": 17,
+        "gaps": [
+          {
+            "category": "efficiency",
+            "count": 7,
+            "gap": 58
+          },
+          {
+            "category": "code",
+            "count": 8,
+            "gap": 52
+          }
+        ],
+        "recommendations": [
+          "efficiency分野の研究を強化（現在7件、平均の42%）",
+          "code分野の研究を強化（現在8件、平均の48%）"
+        ]
+      },
+      "improvement": "2つの研究空白領域を自動検出。優先的に取り組むべき分野を提案。",
+      "timestamp": "2025-12-30T11:20:17.573Z"
+    },
+    {
+      "experimentId": "V2-HALLUCINATION",
+      "feature": "Hallucination Detection (HallucinationDetector)",
+      "v1Result": {
+        "method": "No verification",
+        "verified": 0,
+        "results": [
+          {
+            "statement": "GPT-4はOpenAIによって開発されました",
+            "verified": false,
+            "confidence": 0,
+            "method": "No verification"
+          },
+          {
+            "statement": "TransformerアーキテクチャはGoogleが2017年に発表しました",
+            "verified": false,
+            "confidence": 0,
+            "method": "No verification"
+          },
+          {
+            "statement": "LLaMAはMicrosoftが開発したモデルです",
+            "verified": false,
+            "confidence": 0,
+            "method": "No verification"
+          },
+          {
+            "statement": "Chain-of-Thoughtは2022年にWeiらによって提案されました",
+            "verified": false,
+            "confidence": 0,
+            "method": "No verification"
+          },
+          {
+            "statement": "BERTはTransformerのエンコーダのみを使用します",
+            "verified": false,
+            "confidence": 0,
+            "method": "No verification"
+          },
+          {
+            "statement": "GPT-3は2018年に発表されました",
+            "verified": false,
+            "confidence": 0,
+            "method": "No verification"
+          }
+        ]
+      },
+      "v2Result": {
+        "method": "Knowledge graph evidence checking",
+        "verified": 0,
+        "results": [
+          {
+            "statement": "GPT-4はOpenAIによって開発されました",
+            "verified": false,
+            "confidence": 0.3,
+            "evidence": "No direct evidence",
+            "method": "Knowledge graph verification"
+          },
+          {
+            "statement": "TransformerアーキテクチャはGoogleが2017年に発表しました",
+            "verified": false,
+            "confidence": 0.3,
+            "evidence": "No direct evidence",
+            "method": "Knowledge graph verification"
+          },
+          {
+            "statement": "LLaMAはMicrosoftが開発したモデルです",
+            "verified": false,
+            "confidence": 0.3,
+            "evidence": "No direct evidence",
+            "method": "Knowledge graph verification"
+          },
+          {
+            "statement": "Chain-of-Thoughtは2022年にWeiらによって提案されました",
+            "verified": false,
+            "confidence": 0.3,
+            "evidence": "No direct evidence",
+            "method": "Knowledge graph verification"
+          },
+          {
+            "statement": "BERTはTransformerのエンコーダのみを使用します",
+            "verified": false,
+            "confidence": 0.3,
+            "evidence": "No direct evidence",
+            "method": "Knowledge graph verification"
+          },
+          {
+            "statement": "GPT-3は2018年に発表されました",
+            "verified": false,
+            "confidence": 0.3,
+            "evidence": "No direct evidence",
+            "method": "Knowledge graph verification"
+          }
+        ]
+      },
+      "improvement": "LLM出力を知識グラフで検証。事実に基づかない記述を検出可能に。",
+      "timestamp": "2025-12-30T11:20:17.574Z"
+    },
+    {
+      "experimentId": "V2-LIFECYCLE",
+      "feature": "Entity Lifecycle Analysis (LifecycleAnalyzer)",
+      "v1Result": {
+        "method": "No lifecycle analysis",
+        "stages": null
+      },
+      "v2Result": {
+        "method": "Hype Cycle stage estimation",
+        "stageCounts": {
+          "plateau": 4,
+          "unknown": 103,
+          "slope": 1,
+          "peak": 1,
+          "trough": 2
+        },
+        "triggerTechnologies": [],
+        "plateauTechnologies": [
+          "attention mechanism",
+          "cross-attention layers",
+          "attention",
+          "Transformer"
+        ],
+        "troughTechnologies": [
+          "Chain-of-Thought Prompting",
+          "RLHF"
+        ]
+      },
+      "improvement": "技術のHype Cycleステージを自動推定。投資判断や研究方向の決定を支援。",
+      "timestamp": "2025-12-30T11:20:17.577Z"
+    }
+  ]
+}

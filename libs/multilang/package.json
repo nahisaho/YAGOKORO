@@ -1,0 +1,46 @@
+{
+  "name": "@yagokoro/multilang",
+  "version": "5.0.0",
+  "description": "Multilingual paper processing for YAGOKORO - language detection, translation, and cross-lingual entity linking",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "scripts": {
+    "build": "tsc",
+    "test": "vitest run --passWithNoTests",
+    "test:watch": "vitest",
+    "lint": "biome check src/",
+    "clean": "rm -rf dist",
+    "python:setup": "bash python/setup.sh"
+  },
+  "dependencies": {
+    "@yagokoro/domain": "workspace:*",
+    "@yagokoro/neo4j": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/better-sqlite3": "^7.6.8",
+    "typescript": "^5.7.2",
+    "vitest": "^2.1.8"
+  },
+  "optionalDependencies": {
+    "better-sqlite3": "^11.0.0",
+    "redis": "^4.6.0"
+  },
+  "keywords": [
+    "multilingual",
+    "translation",
+    "language-detection",
+    "cross-lingual",
+    "entity-linking",
+    "ner",
+    "graphrag"
+  ],
+  "author": "nahisaho",
+  "license": "MIT"
+}

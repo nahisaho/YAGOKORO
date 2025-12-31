@@ -1,0 +1,100 @@
+{
+  "experiment": "EXP-003",
+  "title": "RelationScorer による信頼度スコアリング",
+  "timestamp": "2025-12-31T00:05:57.644Z",
+  "config": {
+    "weights": {
+      "cooccurrence": 0.3,
+      "llm": 0.3,
+      "source": 0.2,
+      "graph": 0.2
+    },
+    "thresholds": {
+      "autoApprove": 0.7,
+      "review": 0.5
+    }
+  },
+  "statistics": {
+    "total": 6,
+    "statusCounts": {
+      "approved": 2,
+      "pending": 3,
+      "rejected": 1
+    },
+    "avgScore": 0.6166666666666667
+  },
+  "results": [
+    {
+      "index": 1,
+      "description": "BERT → Google (高信頼度: 複数ソースで確認)",
+      "inputScores": {
+        "cooccurrenceScore": 0.9,
+        "llmConfidence": 0.95,
+        "sourceReliability": 0.85,
+        "graphConsistency": 0.9
+      },
+      "finalScore": 0.905,
+      "status": "approved"
+    },
+    {
+      "index": 2,
+      "description": "GPT-3 → WebCorpus (中信頼度: 詳細不明)",
+      "inputScores": {
+        "cooccurrenceScore": 0.6,
+        "llmConfidence": 0.7,
+        "sourceReliability": 0.5,
+        "graphConsistency": 0.6
+      },
+      "finalScore": 0.61,
+      "status": "pending"
+    },
+    {
+      "index": 3,
+      "description": "LLaMA → Anthropic (低信頼度: 誤情報の可能性)",
+      "inputScores": {
+        "cooccurrenceScore": 0.2,
+        "llmConfidence": 0.3,
+        "sourceReliability": 0.4,
+        "graphConsistency": 0.1
+      },
+      "finalScore": 0.25,
+      "status": "rejected"
+    },
+    {
+      "index": 4,
+      "description": "PaLM → Google (LLMのみ高信頼)",
+      "inputScores": {
+        "cooccurrenceScore": 0.3,
+        "llmConfidence": 0.95,
+        "sourceReliability": 0.5,
+        "graphConsistency": 0.4
+      },
+      "finalScore": 0.5549999999999999,
+      "status": "pending"
+    },
+    {
+      "index": 5,
+      "description": "Transformer → Attention (共起分析高・LLM低)",
+      "inputScores": {
+        "cooccurrenceScore": 0.95,
+        "llmConfidence": 0.4,
+        "sourceReliability": 0.7,
+        "graphConsistency": 0.8
+      },
+      "finalScore": 0.705,
+      "status": "approved"
+    },
+    {
+      "index": 6,
+      "description": "RoBERTa → BERT (境界値: 自動承認ギリギリ)",
+      "inputScores": {
+        "cooccurrenceScore": 0.7,
+        "llmConfidence": 0.65,
+        "sourceReliability": 0.6,
+        "graphConsistency": 0.75
+      },
+      "finalScore": 0.675,
+      "status": "pending"
+    }
+  ]
+}

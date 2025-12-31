@@ -1,0 +1,139 @@
+{
+  "experiment": "EXP-011 to EXP-015",
+  "title": "v3.0.0 追加機能実験",
+  "timestamp": "2025-12-31T00:43:47.372Z",
+  "results": {
+    "EXP-011": {
+      "totalRelations": 7,
+      "contradictionsDetected": 2,
+      "byType": {
+        "cyclic": 1,
+        "conflicting_type": 1
+      },
+      "contradictions": [
+        {
+          "type": "cyclic",
+          "severity": 1,
+          "explanation": "Cyclic relationship detected: Transformer -> BERT -> GPT -> Transformer"
+        },
+        {
+          "type": "conflicting_type",
+          "severity": 0.9749999999999999,
+          "explanation": "Conflicting relation types between LLaMA and Meta: DEVELOPED_BY conflicts with COMPETES_WITH"
+        }
+      ]
+    },
+    "EXP-012": {
+      "testCases": 3,
+      "results": [
+        {
+          "source": "GPT-4",
+          "target": "OpenAI",
+          "relationType": "CITES",
+          "confidence": 0.5,
+          "isValid": true
+        },
+        {
+          "source": "Transformer",
+          "target": "self-attention",
+          "relationType": "CITES",
+          "confidence": 0.5,
+          "isValid": true
+        },
+        {
+          "source": "BERT",
+          "target": "Transformer",
+          "relationType": "CITES",
+          "confidence": 0.5,
+          "isValid": true
+        }
+      ]
+    },
+    "EXP-013": {
+      "tools": 5,
+      "validationResults": [
+        {
+          "tool": "queryKnowledgeGraph",
+          "valid": true,
+          "params": 3
+        },
+        {
+          "tool": "getEntity",
+          "valid": true,
+          "params": 2
+        },
+        {
+          "tool": "getRelations",
+          "valid": true,
+          "params": 4
+        },
+        {
+          "tool": "getPath",
+          "valid": true,
+          "params": 3
+        },
+        {
+          "tool": "searchSimilar",
+          "valid": true,
+          "params": 4
+        }
+      ]
+    },
+    "EXP-014": {
+      "tools": 5,
+      "validationResults": [
+        {
+          "tool": "findPaths",
+          "valid": true,
+          "params": 6
+        },
+        {
+          "tool": "shortestPath",
+          "valid": true,
+          "params": 3
+        },
+        {
+          "tool": "checkConnection",
+          "valid": true,
+          "params": 3
+        },
+        {
+          "tool": "degreesOfSeparation",
+          "valid": true,
+          "params": 3
+        },
+        {
+          "tool": "explainPath",
+          "valid": false,
+          "error": "[\n  {\n    \"code\": \"invalid_type\",\n    \"expected\": \"string\",\n    \"received\": \"undefined\",\n    \"path\": [\n      \"startEntity\"\n    ],\n    \"message\": \"Required\"\n  },\n  {\n    \"code\": \"invalid_type\",\n    \"expected\": \"string\",\n    \"received\": \"undefined\",\n    \"path\": [\n      \"endEntity\"\n    ],\n    \"message\": \"Required\"\n  }\n]"
+        }
+      ]
+    },
+    "EXP-015": {
+      "tools": 4,
+      "gapTypes": 5,
+      "validationResults": [
+        {
+          "tool": "gap_analyze",
+          "valid": true,
+          "params": 5
+        },
+        {
+          "tool": "gap_getById",
+          "valid": true,
+          "params": 1
+        },
+        {
+          "tool": "gap_generateProposals",
+          "valid": true,
+          "params": 2
+        },
+        {
+          "tool": "gap_exportReport",
+          "valid": true,
+          "params": 2
+        }
+      ]
+    }
+  }
+}

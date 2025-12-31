@@ -1,0 +1,5129 @@
+{
+  "experiment": "EXP-004",
+  "title": "arXiv API による論文自動取得",
+  "timestamp": "2025-12-31T00:06:45.163Z",
+  "statistics": {
+    "totalQueries": 3,
+    "totalPapers": 300,
+    "categoryCount": {
+      "physics.optics": 12,
+      "math.LO": 48,
+      "cs.RO": 3,
+      "math-ph": 18,
+      "quant-ph": 30,
+      "cs.LO": 42,
+      "cs.CC": 3,
+      "cs.AI": 18,
+      "cs.SE": 9,
+      "cs.CV": 15,
+      "cs.CL": 12,
+      "physics.hist-ph": 3,
+      "hep-th": 12,
+      "cs.CY": 3,
+      "cs.LG": 15,
+      "physics.gen-ph": 9,
+      "math.AP": 3,
+      "math.RT": 3,
+      "cs.PL": 24,
+      "physics.class-ph": 3,
+      "cs.DB": 6,
+      "math.HO": 6,
+      "physics.ed-ph": 3,
+      "cs.CR": 15,
+      "math.OC": 6,
+      "eess.IV": 3,
+      "math.ST": 3,
+      "math.MG": 3,
+      "physics.bio-ph": 3,
+      "cond-mat.soft": 3,
+      "math.AG": 6,
+      "math.RA": 12,
+      "cond-mat.stat-mech": 3,
+      "cond-mat.mtrl-sci": 3,
+      "cond-mat.mes-hall": 9,
+      "cs.DC": 6,
+      "gr-qc": 9,
+      "cs.ET": 3,
+      "math.DS": 6,
+      "physics.chem-ph": 3,
+      "math.PR": 6,
+      "cs.DM": 3,
+      "math.CO": 3,
+      "hep-lat": 3,
+      "econ.EM": 3,
+      "astro-ph": 3,
+      "math.NT": 3,
+      "physics.comp-ph": 3,
+      "hep-ph": 6,
+      "physics.flu-dyn": 3,
+      "math.FA": 3,
+      "math.CA": 3,
+      "astro-ph.CO": 3,
+      "math.GR": 3,
+      "math.DG": 3,
+      "cond-mat.str-el": 3,
+      "stat.ML": 3,
+      "math.QA": 3
+    },
+    "yearCount": {
+      "unknown": 300
+    }
+  },
+  "results": [
+    {
+      "query": "LLM reasoning",
+      "description": "LLM推論研究",
+      "count": 100,
+      "papers": [
+        {
+          "id": "2107.02533",
+          "title": "Anti-parity-time topologically undefined state",
+          "authors": [
+            {
+              "name": "Haohao Wang"
+            },
+            {
+              "name": "Kaiwen Ji"
+            },
+            {
+              "name": "Yuandan Wang"
+            },
+            {
+              "name": "Zhenjuan Liu"
+            },
+            {
+              "name": "Yuanmei Gao"
+            },
+            {
+              "name": "Yanlong Shen"
+            },
+            {
+              "name": "Shi Bai"
+            },
+            {
+              "name": "Koji Sugioka"
+            },
+            {
+              "name": "Xinyuan Qi"
+            }
+          ],
+          "categories": [
+            "physics.optics"
+          ]
+        },
+        {
+          "id": "2205.06022",
+          "title": "Undefinability and Absolute Undefinability in Arithmetic",
+          "authors": [
+            {
+              "name": "Roman Kossak"
+            }
+          ],
+          "categories": [
+            "math.LO"
+          ]
+        },
+        {
+          "id": "2003.04862",
+          "title": "Compensation for undefined behaviors during robot task execution by switching controllers depending on embedded dynamics in RNN",
+          "authors": [
+            {
+              "name": "Kanata Suzuki"
+            },
+            {
+              "name": "Hiroki Mori"
+            },
+            {
+              "name": "Tetsuya Ogata"
+            }
+          ],
+          "categories": [
+            "cs.RO"
+          ]
+        },
+        {
+          "id": "1305.5244",
+          "title": "A formal framework for the study of the notion of undefined particle number in quantum mechanics",
+          "authors": [
+            {
+              "name": "Newton da Costa"
+            },
+            {
+              "name": "Federico Holik"
+            }
+          ],
+          "categories": [
+            "math-ph",
+            "quant-ph"
+          ]
+        },
+        {
+          "id": "2407.20889",
+          "title": "Two strong undefinability results in inquisitive and team semantics",
+          "authors": [
+            {
+              "name": "Fausto Barbero"
+            }
+          ],
+          "categories": [
+            "math.LO"
+          ]
+        },
+        {
+          "id": "2504.03523",
+          "title": "Undefinability of Approximation of 2-to-2 Games",
+          "authors": [
+            {
+              "name": "Anuj Dawar"
+            },
+            {
+              "name": "Bálint Molnár"
+            }
+          ],
+          "categories": [
+            "cs.LO",
+            "cs.CC"
+          ]
+        },
+        {
+          "id": "2009.00315",
+          "title": "Tarski's Undefinability Theorem and Diagonal Lemma",
+          "authors": [
+            {
+              "name": "Saeed Salehi"
+            }
+          ],
+          "categories": [
+            "math.LO"
+          ]
+        },
+        {
+          "id": "1003.4483",
+          "title": "Tarski's Undefinability Theorem and first-order arithmetic",
+          "authors": [
+            {
+              "name": "Stephen Boyce"
+            }
+          ],
+          "categories": [
+            "math.LO"
+          ]
+        },
+        {
+          "id": "2402.12931",
+          "title": "Epstein Semantics: Characterization, Interpolation, Undefinability, and (In)Completeness",
+          "authors": [
+            {
+              "name": "Krzysztof A. Krawczyk"
+            }
+          ],
+          "categories": [
+            "math.LO"
+          ]
+        },
+        {
+          "id": "2205.09440",
+          "title": "Bosonic fields in states with undefined particle numbers possess detectable non-contextuality features, plus more",
+          "authors": [
+            {
+              "name": "Konrad Schlichtholz"
+            },
+            {
+              "name": "Antonio Mandarino"
+            },
+            {
+              "name": "Marek Żukowski"
+            }
+          ],
+          "categories": [
+            "quant-ph"
+          ]
+        },
+        {
+          "id": "2208.04422",
+          "title": "Truth Set Algebra: A New Way to Prove Undefinability",
+          "authors": [
+            {
+              "name": "Sophia Knight"
+            },
+            {
+              "name": "Pavel Naumov"
+            },
+            {
+              "name": "Qi Shi"
+            },
+            {
+              "name": "Vigasan Suntharraj"
+            }
+          ],
+          "categories": [
+            "cs.AI",
+            "cs.LO",
+            "math.LO"
+          ]
+        },
+        {
+          "id": "1509.00164",
+          "title": "Theorems of Tarski's Undefinability and Godel's Second Incompleteness-Computationally",
+          "authors": [
+            {
+              "name": "Saeed Salehi"
+            }
+          ],
+          "categories": [
+            "math.LO",
+            "cs.LO"
+          ]
+        },
+        {
+          "id": "2404.11671",
+          "title": "A Study of Undefined Behavior Across Foreign Function Boundaries in Rust Libraries",
+          "authors": [
+            {
+              "name": "Ian McCormack"
+            },
+            {
+              "name": "Joshua Sunshine"
+            },
+            {
+              "name": "Jonathan Aldrich"
+            }
+          ],
+          "categories": [
+            "cs.SE"
+          ]
+        },
+        {
+          "id": "2411.17406",
+          "title": "Seeing the Undefined: Chain-of-Action for Generative Semantic Labels",
+          "authors": [
+            {
+              "name": "Meng Wei"
+            },
+            {
+              "name": "Zhongnian Li"
+            },
+            {
+              "name": "Peng Ying"
+            },
+            {
+              "name": "Xinzheng Xu"
+            }
+          ],
+          "categories": [
+            "cs.CV"
+          ]
+        },
+        {
+          "id": "2503.02335",
+          "title": "Unlocking a New Rust Programming Experience: Fast and Slow Thinking with LLMs to Conquer Undefined Behaviors",
+          "authors": [
+            {
+              "name": "Renshuang Jiang"
+            },
+            {
+              "name": "Pan Dong"
+            },
+            {
+              "name": "Zhenling Duan"
+            },
+            {
+              "name": "Yu Shi"
+            },
+            {
+              "name": "Xiaoxiang Fang"
+            },
+            {
+              "name": "Yan Ding"
+            },
+            {
+              "name": "Jun Ma"
+            },
+            {
+              "name": "Shuai Zhao"
+            },
+            {
+              "name": "Zhe Jiang"
+            }
+          ],
+          "categories": [
+            "cs.SE",
+            "cs.CL"
+          ]
+        },
+        {
+          "id": "2410.10903",
+          "title": "Implications of Tarski's Undefinability Theorem on the Theory of Everything",
+          "authors": [
+            {
+              "name": "Mir Faizal"
+            },
+            {
+              "name": "Arshid Shabir"
+            },
+            {
+              "name": "Aatif Kaisar Khan"
+            }
+          ],
+          "categories": [
+            "physics.hist-ph",
+            "hep-th"
+          ]
+        },
+        {
+          "id": "1803.03937",
+          "title": "From Tarski to Gödel. Or, how to derive the Second Incompleteness Theorem from the Undefinability of Truth without Self-reference",
+          "authors": [
+            {
+              "name": "Albert Visser"
+            }
+          ],
+          "categories": [
+            "math.LO"
+          ]
+        },
+        {
+          "id": "1911.10806",
+          "title": "Detecting Unknown Behaviors by Pre-defined Behaviours: An Bayesian Non-parametric Approach",
+          "authors": [
+            {
+              "name": "Jin Watanabe"
+            },
+            {
+              "name": "Takatomi Kubo"
+            },
+            {
+              "name": "Fan Yang"
+            },
+            {
+              "name": "Kazushi Ikeda"
+            }
+          ],
+          "categories": [
+            "cs.CY",
+            "cs.LG"
+          ]
+        },
+        {
+          "id": "2210.02168",
+          "title": "An Active Learning Reliability Method for Systems with Partially Defined Performance Functions",
+          "authors": [
+            {
+              "name": "Jonathan Sadeghi"
+            },
+            {
+              "name": "Romain Mueller"
+            },
+            {
+              "name": "John Redford"
+            }
+          ],
+          "categories": [
+            "cs.LG"
+          ]
+        },
+        {
+          "id": "0711.1247",
+          "title": "Discovery of Quantum Hidden Variable",
+          "authors": [
+            {
+              "name": "Huai-yang Cui"
+            }
+          ],
+          "categories": [
+            "physics.gen-ph"
+          ]
+        },
+        {
+          "id": "1812.04307",
+          "title": "Analysis of the One-dimensional Euler-Lagrange equation of continuum mechanics with a Lagrangian of a special form",
+          "authors": [
+            {
+              "name": "E. I. Kaptsov"
+            },
+            {
+              "name": "S. V. Meleshko"
+            }
+          ],
+          "categories": [
+            "math-ph",
+            "math.AP"
+          ]
+        },
+        {
+          "id": "1909.12636",
+          "title": "On wild algebras and super-decomposable pure-injective modules",
+          "authors": [
+            {
+              "name": "Grzegorz Pastuszak"
+            }
+          ],
+          "categories": [
+            "math.RT",
+            "math.LO"
+          ]
+        },
+        {
+          "id": "2506.13990",
+          "title": "Machine Mirages: Defining the Undefined",
+          "authors": [
+            {
+              "name": "Hamidou Tembine"
+            }
+          ],
+          "categories": [
+            "cs.AI"
+          ]
+        },
+        {
+          "id": "2510.10410",
+          "title": "A Trace-based Approach for Code Safety Analysis",
+          "authors": [
+            {
+              "name": "Hui Xu"
+            }
+          ],
+          "categories": [
+            "cs.PL",
+            "cs.SE"
+          ]
+        },
+        {
+          "id": "2106.15167",
+          "title": "Learning from Miscellaneous Other-Class Words for Few-shot Named Entity Recognition",
+          "authors": [
+            {
+              "name": "Meihan Tong"
+            },
+            {
+              "name": "Shuai Wang"
+            },
+            {
+              "name": "Bin Xu"
+            },
+            {
+              "name": "Yixin Cao"
+            },
+            {
+              "name": "Minghui Liu"
+            },
+            {
+              "name": "Lei Hou"
+            },
+            {
+              "name": "Juanzi Li"
+            }
+          ],
+          "categories": [
+            "cs.CL"
+          ]
+        },
+        {
+          "id": "physics/0603091",
+          "title": "A defect of the electromagnetism and it serves as a hidden variable for quantum mechanics",
+          "authors": [
+            {
+              "name": "Huai-yang Cui"
+            }
+          ],
+          "categories": [
+            "physics.gen-ph",
+            "physics.class-ph"
+          ]
+        },
+        {
+          "id": "1309.5821",
+          "title": "Undefined By Data: A Survey of Big Data Definitions",
+          "authors": [
+            {
+              "name": "Jonathan Stuart Ward"
+            },
+            {
+              "name": "Adam Barker"
+            }
+          ],
+          "categories": [
+            "cs.DB"
+          ]
+        },
+        {
+          "id": "1805.00343",
+          "title": "Teaching Differentiation: A Rare Case for the Problem of the Slope of the Tangent Line",
+          "authors": [
+            {
+              "name": "Roman Kvasov"
+            }
+          ],
+          "categories": [
+            "math.HO"
+          ]
+        },
+        {
+          "id": "2210.01083",
+          "title": "Schroedinger cats and quantum complementarity",
+          "authors": [
+            {
+              "name": "Lorenzo Maccone"
+            }
+          ],
+          "categories": [
+            "quant-ph",
+            "physics.ed-ph"
+          ]
+        },
+        {
+          "id": "2202.06242",
+          "title": "Beyond NaN: Resiliency of Optimization Layers in The Face of Infeasibility",
+          "authors": [
+            {
+              "name": "Wai Tuck Wong"
+            },
+            {
+              "name": "Sarah Kinsey"
+            },
+            {
+              "name": "Ramesha Karunasena"
+            },
+            {
+              "name": "Thanh Nguyen"
+            },
+            {
+              "name": "Arunesh Sinha"
+            }
+          ],
+          "categories": [
+            "cs.LG",
+            "cs.CR",
+            "math.OC"
+          ]
+        },
+        {
+          "id": "2504.01527",
+          "title": "Beyond Nearest Neighbor Interpolation in Data Augmentation",
+          "authors": [
+            {
+              "name": "Olivier Rukundo"
+            }
+          ],
+          "categories": [
+            "cs.CV",
+            "eess.IV"
+          ]
+        },
+        {
+          "id": "1205.2679",
+          "title": "Testing means from sampling populations with undefined labels",
+          "authors": [
+            {
+              "name": "Florent Autin"
+            },
+            {
+              "name": "Christophe Pouet"
+            }
+          ],
+          "categories": [
+            "math.ST"
+          ]
+        },
+        {
+          "id": "2109.14951",
+          "title": "Causality in a qubit-based quantum switch",
+          "authors": [
+            {
+              "name": "Carlos Sabín"
+            }
+          ],
+          "categories": [
+            "quant-ph"
+          ]
+        },
+        {
+          "id": "2008.12643",
+          "title": "On the Notion of Equal Figures in Euclid",
+          "authors": [
+            {
+              "name": "Michael Beeson"
+            }
+          ],
+          "categories": [
+            "math.LO",
+            "cs.LO",
+            "math.MG"
+          ]
+        },
+        {
+          "id": "0902.4598",
+          "title": "Comment on \"A generalized Langevin formalism of complete DNA melting transition\"",
+          "authors": [
+            {
+              "name": "Titus S. van Erp"
+            },
+            {
+              "name": "Santiago Cuesta-Lopez"
+            },
+            {
+              "name": "Johannes-Geert Hagmann"
+            },
+            {
+              "name": "Michel Peyrard"
+            }
+          ],
+          "categories": [
+            "physics.bio-ph",
+            "cond-mat.soft"
+          ]
+        },
+        {
+          "id": "1707.08245",
+          "title": "Non-commutative crepant resolutions for some toric singularities II",
+          "authors": [
+            {
+              "name": "Špela Špenko"
+            },
+            {
+              "name": "Michel Van den Bergh"
+            }
+          ],
+          "categories": [
+            "math.AG",
+            "math.RA"
+          ]
+        },
+        {
+          "id": "cmp-lg/9712003",
+          "title": "Context as a Spurious Concept",
+          "authors": [
+            {
+              "name": "Graeme Hirst"
+            }
+          ],
+          "categories": [
+            "cs.CL"
+          ]
+        },
+        {
+          "id": "cond-mat/9709082",
+          "title": "Violation of Scaling in the Contact Process with Quenched Disorder",
+          "authors": [
+            {
+              "name": "Ronald Dickman"
+            },
+            {
+              "name": "Adriana G. Moreira"
+            }
+          ],
+          "categories": [
+            "cond-mat.stat-mech"
+          ]
+        },
+        {
+          "id": "1408.3827",
+          "title": "Feature-Rich Magnetic Quantization in Sliding Bilayer Graphenes",
+          "authors": [
+            {
+              "name": "Yao-Kung Huang"
+            },
+            {
+              "name": "Szu-Chao Chen"
+            },
+            {
+              "name": "Yen-Hung Ho"
+            },
+            {
+              "name": "Chiun-Yan Lin"
+            },
+            {
+              "name": "Ming-Fa Lin"
+            }
+          ],
+          "categories": [
+            "cond-mat.mtrl-sci",
+            "cond-mat.mes-hall"
+          ]
+        },
+        {
+          "id": "1406.7492",
+          "title": "Andrews' Type Theory with Undefinedness",
+          "authors": [
+            {
+              "name": "William M. Farmer"
+            }
+          ],
+          "categories": [
+            "math.LO",
+            "cs.LO"
+          ]
+        },
+        {
+          "id": "2211.13543",
+          "title": "Impure Simplicial Complexes: Complete Axiomatization",
+          "authors": [
+            {
+              "name": "Rojo Randrianomentsoa"
+            },
+            {
+              "name": "Hans van Ditmarsch"
+            },
+            {
+              "name": "Roman Kuznets"
+            }
+          ],
+          "categories": [
+            "cs.LO",
+            "cs.DC"
+          ]
+        },
+        {
+          "id": "1511.03227",
+          "title": "Primordial brusque bounce in Born-Infeld determinantal gravity",
+          "authors": [
+            {
+              "name": "Franco Fiorini"
+            }
+          ],
+          "categories": [
+            "gr-qc",
+            "hep-th"
+          ]
+        },
+        {
+          "id": "1703.09064",
+          "title": "Memristor equations: incomplete physics and undefined passivity/activity",
+          "authors": [
+            {
+              "name": "Kyle Sundqvist"
+            },
+            {
+              "name": "David K. Ferry"
+            },
+            {
+              "name": "Laszlo B. Kish"
+            }
+          ],
+          "categories": [
+            "cs.ET"
+          ]
+        },
+        {
+          "id": "1804.08488",
+          "title": "Shared aggregate sets in answer set programming",
+          "authors": [
+            {
+              "name": "Mario Alviano"
+            },
+            {
+              "name": "Carmine Dodaro"
+            },
+            {
+              "name": "Marco Maratea"
+            }
+          ],
+          "categories": [
+            "cs.LO"
+          ]
+        },
+        {
+          "id": "2112.04436",
+          "title": "A Completeness Proof for A Regular Predicate Logic with Undefined Truth Value",
+          "authors": [
+            {
+              "name": "Antti Valmari"
+            },
+            {
+              "name": "Lauri Hella"
+            }
+          ],
+          "categories": [
+            "math.LO",
+            "cs.LO"
+          ]
+        },
+        {
+          "id": "1802.00588",
+          "title": "When Good Components Go Bad: Formally Secure Compilation Despite Dynamic Compromise",
+          "authors": [
+            {
+              "name": "Carmine Abate"
+            },
+            {
+              "name": "Arthur Azevedo de Amorim"
+            },
+            {
+              "name": "Roberto Blanco"
+            },
+            {
+              "name": "Ana Nora Evans"
+            },
+            {
+              "name": "Guglielmo Fachini"
+            },
+            {
+              "name": "Catalin Hritcu"
+            },
+            {
+              "name": "Théo Laurent"
+            },
+            {
+              "name": "Benjamin C. Pierce"
+            },
+            {
+              "name": "Marco Stronati"
+            },
+            {
+              "name": "Jérémy Thibault"
+            },
+            {
+              "name": "Andrew Tolmach"
+            }
+          ],
+          "categories": [
+            "cs.CR",
+            "cs.PL"
+          ]
+        },
+        {
+          "id": "quant-ph/0002067",
+          "title": "Rules for Integrals over Products of Distributions from Coordinate Independence of Path Integrals",
+          "authors": [
+            {
+              "name": "H. Kleinert"
+            },
+            {
+              "name": "A. Chervyakov"
+            }
+          ],
+          "categories": [
+            "quant-ph"
+          ]
+        },
+        {
+          "id": "quant-ph/0403204",
+          "title": "Off-diagonal quantum holonomy along density operators",
+          "authors": [
+            {
+              "name": "Stefan Filipp"
+            },
+            {
+              "name": "Erik Sjöqvist"
+            }
+          ],
+          "categories": [
+            "quant-ph"
+          ]
+        },
+        {
+          "id": "2410.01981",
+          "title": "Surveying the Rust Verification Landscape",
+          "authors": [
+            {
+              "name": "Alex Le Blanc"
+            },
+            {
+              "name": "Patrick Lam"
+            }
+          ],
+          "categories": [
+            "cs.PL"
+          ]
+        },
+        {
+          "id": "2407.04917",
+          "title": "A Calculus for Unreachable Code",
+          "authors": [
+            {
+              "name": "Peter Zhong"
+            },
+            {
+              "name": "Shu-Hung You"
+            },
+            {
+              "name": "Simone Campanoni"
+            },
+            {
+              "name": "Robert Bruce Findler"
+            },
+            {
+              "name": "Matthew Flatt"
+            },
+            {
+              "name": "Christos Dimoulas"
+            }
+          ],
+          "categories": [
+            "cs.PL"
+          ]
+        },
+        {
+          "id": "1710.07308",
+          "title": "Formally Secure Compilation of Unsafe Low-Level Components (Extended Abstract)",
+          "authors": [
+            {
+              "name": "Guglielmo Fachini"
+            },
+            {
+              "name": "Catalin Hritcu"
+            },
+            {
+              "name": "Marco Stronati"
+            },
+            {
+              "name": "Ana Nora Evans"
+            },
+            {
+              "name": "Théo Laurent"
+            },
+            {
+              "name": "Arthur Azevedo de Amorim"
+            },
+            {
+              "name": "Benjamin C. Pierce"
+            },
+            {
+              "name": "Andrew Tolmach"
+            }
+          ],
+          "categories": [
+            "cs.CR",
+            "cs.PL"
+          ]
+        },
+        {
+          "id": "gr-qc/0006036",
+          "title": "Nonthermal nature of extremal Kerr black holes",
+          "authors": [
+            {
+              "name": "Tony Rothman"
+            }
+          ],
+          "categories": [
+            "gr-qc"
+          ]
+        },
+        {
+          "id": "2112.11659",
+          "title": "Controlling wave-particle duality with quantum entanglement",
+          "authors": [
+            {
+              "name": "Kai Wang"
+            },
+            {
+              "name": "Daniel R. Terno"
+            },
+            {
+              "name": "Caslav Brukner"
+            },
+            {
+              "name": "Shining Zhu"
+            },
+            {
+              "name": "Xiao-Song Ma"
+            }
+          ],
+          "categories": [
+            "quant-ph",
+            "physics.optics"
+          ]
+        },
+        {
+          "id": "1601.02233",
+          "title": "Entanglement indicators for quantum optical fields: three-mode multiport beamsplitters EPR interference experiments",
+          "authors": [
+            {
+              "name": "Junghee Ryu"
+            },
+            {
+              "name": "Marcin Marciniak"
+            },
+            {
+              "name": "Marcin Wieśniak"
+            },
+            {
+              "name": "Marek Żukowski"
+            }
+          ],
+          "categories": [
+            "quant-ph"
+          ]
+        },
+        {
+          "id": "2401.16277",
+          "title": "SECOMP: Formally Secure Compilation of Compartmentalized C Programs",
+          "authors": [
+            {
+              "name": "Jérémy Thibault"
+            },
+            {
+              "name": "Roberto Blanco"
+            },
+            {
+              "name": "Dongjae Lee"
+            },
+            {
+              "name": "Sven Argo"
+            },
+            {
+              "name": "Arthur Azevedo de Amorim"
+            },
+            {
+              "name": "Aïna Linn Georges"
+            },
+            {
+              "name": "Catalin Hritcu"
+            },
+            {
+              "name": "Andrew Tolmach"
+            }
+          ],
+          "categories": [
+            "cs.PL",
+            "cs.CR"
+          ]
+        },
+        {
+          "id": "1205.4442",
+          "title": "Harmonic functions on the Sierpinski triangle",
+          "authors": [
+            {
+              "name": "Ilia Smilga"
+            }
+          ],
+          "categories": [
+            "math.DS"
+          ]
+        },
+        {
+          "id": "1506.02652",
+          "title": "Chemical descriptors, convexity and structure of density matrices in molecular systems",
+          "authors": [
+            {
+              "name": "Roberto C. Bochicchio"
+            }
+          ],
+          "categories": [
+            "physics.chem-ph",
+            "quant-ph"
+          ]
+        },
+        {
+          "id": "1905.06416",
+          "title": "Geometric phase associated with Poincaré beams due to unfolding of fractional optical vortex beams",
+          "authors": [
+            {
+              "name": "Satyajit Maji"
+            },
+            {
+              "name": "Aswini K. Pattanayak"
+            },
+            {
+              "name": "Maruthi M. Brundavanam"
+            }
+          ],
+          "categories": [
+            "physics.optics"
+          ]
+        },
+        {
+          "id": "math/0606643",
+          "title": "Entropy And Vision",
+          "authors": [
+            {
+              "name": "Rami Kanhouche"
+            }
+          ],
+          "categories": [
+            "math.PR",
+            "cs.CV",
+            "cs.DB",
+            "cs.DM",
+            "cs.LG",
+            "math.CO"
+          ]
+        },
+        {
+          "id": "hep-lat/0208026",
+          "title": "Transiting topological sectors with the overlap",
+          "authors": [
+            {
+              "name": "Michael Creutz"
+            }
+          ],
+          "categories": [
+            "hep-lat"
+          ]
+        },
+        {
+          "id": "1101.2798",
+          "title": "On Logical Extension of Algebraic Division",
+          "authors": [
+            {
+              "name": "Mohammed Abubakr"
+            }
+          ],
+          "categories": [
+            "cs.LO"
+          ]
+        },
+        {
+          "id": "2507.17373",
+          "title": "SFUOD: Source-Free Unknown Object Detection",
+          "authors": [
+            {
+              "name": "Keon-Hee Park"
+            },
+            {
+              "name": "Seun-An Choe"
+            },
+            {
+              "name": "Gyeong-Moon Park"
+            }
+          ],
+          "categories": [
+            "cs.CV",
+            "cs.AI"
+          ]
+        },
+        {
+          "id": "2412.05919",
+          "title": "Estimating Spillover Effects in the Presence of Isolated Nodes",
+          "authors": [
+            {
+              "name": "Bora Kim"
+            }
+          ],
+          "categories": [
+            "econ.EM"
+          ]
+        },
+        {
+          "id": "1301.5163",
+          "title": "Cosmological models with spinor and scalar fields by Noether symmetry approach",
+          "authors": [
+            {
+              "name": "Gilberto M. Kremer"
+            },
+            {
+              "name": "Rudinei C. de Souza"
+            }
+          ],
+          "categories": [
+            "gr-qc"
+          ]
+        },
+        {
+          "id": "1502.05562",
+          "title": "A New Penta-valued Logic Based Knowledge Representation",
+          "authors": [
+            {
+              "name": "Vasile Patrascu"
+            }
+          ],
+          "categories": [
+            "cs.AI"
+          ]
+        },
+        {
+          "id": "cs/0410014",
+          "title": "Normal forms for Answer Sets Programming",
+          "authors": [
+            {
+              "name": "Stefania Costantini"
+            },
+            {
+              "name": "Alessandro Provetti"
+            }
+          ],
+          "categories": [
+            "cs.AI"
+          ]
+        },
+        {
+          "id": "1412.8490",
+          "title": "Image Encryption and Decryption in A Modification of ElGamal Cryptosystem in MATLAB",
+          "authors": [
+            {
+              "name": "Hayder Raheem Hashim"
+            },
+            {
+              "name": "Irtifaa Abdalkadum Neamaa"
+            }
+          ],
+          "categories": [
+            "cs.CR"
+          ]
+        },
+        {
+          "id": "1511.07339",
+          "title": "Fractional vortex Hilbert's Hotel",
+          "authors": [
+            {
+              "name": "Greg Gbur"
+            }
+          ],
+          "categories": [
+            "physics.optics"
+          ]
+        },
+        {
+          "id": "astro-ph/0104089",
+          "title": "Effects of perturbing forces on the orbital stability of planetary systems",
+          "authors": [
+            {
+              "name": "L. Kiseleva-Eggleton"
+            },
+            {
+              "name": "E. Bois"
+            }
+          ],
+          "categories": [
+            "astro-ph"
+          ]
+        },
+        {
+          "id": "0801.2089",
+          "title": "Some explicit constructions of integral structures in quaternion algebras",
+          "authors": [
+            {
+              "name": "Miriam Ciavarella"
+            },
+            {
+              "name": "Lea Terracini"
+            }
+          ],
+          "categories": [
+            "math.NT",
+            "math.AG"
+          ]
+        },
+        {
+          "id": "0907.5598",
+          "title": "Convergence of Expected Utility for Universal AI",
+          "authors": [
+            {
+              "name": "Peter de Blanc"
+            }
+          ],
+          "categories": [
+            "cs.AI"
+          ]
+        },
+        {
+          "id": "1211.6718",
+          "title": "Stable algorithm for event detection in event-driven particle dynamics",
+          "authors": [
+            {
+              "name": "Marcus N. Bannerman"
+            },
+            {
+              "name": "Severin Strobl"
+            },
+            {
+              "name": "Arno Formella"
+            },
+            {
+              "name": "Thorsten Poeschel"
+            }
+          ],
+          "categories": [
+            "physics.comp-ph"
+          ]
+        },
+        {
+          "id": "2103.03032",
+          "title": "Wanted Dead or Alive : Epistemic logic for impure simplicial complexes",
+          "authors": [
+            {
+              "name": "Hans van Ditmarsch"
+            },
+            {
+              "name": "Roman Kuznets"
+            }
+          ],
+          "categories": [
+            "cs.DC",
+            "cs.LO"
+          ]
+        },
+        {
+          "id": "2401.10459",
+          "title": "On the undefinability of pathological Banach spaces",
+          "authors": [
+            {
+              "name": "Clovis Hamel"
+            },
+            {
+              "name": "Franklin D. Tall"
+            }
+          ],
+          "categories": [
+            "math.LO"
+          ]
+        },
+        {
+          "id": "1911.08880",
+          "title": "On the Magnetic Current Density in the Maxwell Equations Based on the Noether Theorem",
+          "authors": [
+            {
+              "name": "Mehdi Nosrati"
+            }
+          ],
+          "categories": [
+            "physics.gen-ph"
+          ]
+        },
+        {
+          "id": "2510.01072",
+          "title": "Lessons Learned So Far From a Community Effort to Verify the Rust Standard Library (work-in-progress)",
+          "authors": [
+            {
+              "name": "Alex Le Blanc"
+            },
+            {
+              "name": "Patrick Lam"
+            }
+          ],
+          "categories": [
+            "cs.PL"
+          ]
+        },
+        {
+          "id": "2302.12581",
+          "title": "The variance-gamma ratio distribution",
+          "authors": [
+            {
+              "name": "Robert E. Gaunt"
+            },
+            {
+              "name": "Siqi Li"
+            }
+          ],
+          "categories": [
+            "math.PR"
+          ]
+        },
+        {
+          "id": "0804.2507",
+          "title": "Constraining the nuclear gluon distribution in $eA$ processes at RHIC",
+          "authors": [
+            {
+              "name": "E. R. Cazaroto"
+            },
+            {
+              "name": "F. Carvalho"
+            },
+            {
+              "name": "V. P. Goncalves"
+            },
+            {
+              "name": "F. S. Navarra"
+            }
+          ],
+          "categories": [
+            "hep-ph"
+          ]
+        },
+        {
+          "id": "0909.0367",
+          "title": "Quantum pumping in deformable quantum dots",
+          "authors": [
+            {
+              "name": "F. Romeo"
+            },
+            {
+              "name": "R. Citro"
+            }
+          ],
+          "categories": [
+            "cond-mat.mes-hall"
+          ]
+        },
+        {
+          "id": "1501.04273",
+          "title": "A note on the reciprocal theorem for the swimming of simple bodies",
+          "authors": [
+            {
+              "name": "Gwynn J. Elfring"
+            }
+          ],
+          "categories": [
+            "physics.flu-dyn"
+          ]
+        },
+        {
+          "id": "1805.08209",
+          "title": "Possible Worlds, Incompleteness and Undefinability",
+          "authors": [
+            {
+              "name": "Christopher F. S. Maligec"
+            }
+          ],
+          "categories": [
+            "math.LO"
+          ]
+        },
+        {
+          "id": "1203.4579",
+          "title": "Metrics and norms used for obtaining sparse solutions to underdetermined Systems of Linear Equations",
+          "authors": [
+            {
+              "name": "Leoni Dalla"
+            },
+            {
+              "name": "George K. Papageorgiou"
+            }
+          ],
+          "categories": [
+            "math.OC",
+            "math.FA"
+          ]
+        },
+        {
+          "id": "2211.12260",
+          "title": "Some Useful Collective Properties of Bessel, Marcum Q-Functions and Laguerre Polynomials",
+          "authors": [
+            {
+              "name": "Hakan Ozturk"
+            },
+            {
+              "name": "Fikret Anli"
+            },
+            {
+              "name": "Abdelouahab Kadem"
+            }
+          ],
+          "categories": [
+            "math.CA",
+            "math-ph"
+          ]
+        },
+        {
+          "id": "1204.1370",
+          "title": "Dirac tachyons and antitachyons in many-particle system",
+          "authors": [
+            {
+              "name": "Ernst Trojan"
+            }
+          ],
+          "categories": [
+            "hep-ph"
+          ]
+        },
+        {
+          "id": "1210.3363",
+          "title": "Why does the Jeans Swindle work?",
+          "authors": [
+            {
+              "name": "M. Falco"
+            },
+            {
+              "name": "S. H. Hansen"
+            },
+            {
+              "name": "R. Wojtak"
+            },
+            {
+              "name": "G. A. Mamon"
+            }
+          ],
+          "categories": [
+            "astro-ph.CO"
+          ]
+        },
+        {
+          "id": "1507.04406",
+          "title": "Skolem-Noether for nilpotent products",
+          "authors": [
+            {
+              "name": "James B. Wilson"
+            }
+          ],
+          "categories": [
+            "math.GR",
+            "math.RA"
+          ]
+        },
+        {
+          "id": "1612.00252",
+          "title": "Disjoint-union partial algebras",
+          "authors": [
+            {
+              "name": "Robin Hirsch"
+            },
+            {
+              "name": "Brett McLean"
+            }
+          ],
+          "categories": [
+            "math.RA",
+            "cs.LO",
+            "math.LO"
+          ]
+        },
+        {
+          "id": "1607.02790",
+          "title": "Hyper Normalisation and Conditioning for Discrete Probability Distributions",
+          "authors": [
+            {
+              "name": "Bart Jacobs"
+            }
+          ],
+          "categories": [
+            "cs.LO"
+          ]
+        },
+        {
+          "id": "1704.06799",
+          "title": "Renormalization of SU(2) Yang-Mills theory with Flow Equations",
+          "authors": [
+            {
+              "name": "Alexander N. Efremov"
+            },
+            {
+              "name": "Riccardo Guida"
+            },
+            {
+              "name": "Christoph Kopper"
+            }
+          ],
+          "categories": [
+            "math-ph",
+            "hep-th"
+          ]
+        },
+        {
+          "id": "1306.6004",
+          "title": "A logical treatment of special relativity, with and without faster-than-light observers",
+          "authors": [
+            {
+              "name": "Benjamin Hoffman"
+            }
+          ],
+          "categories": [
+            "math.LO",
+            "math-ph"
+          ]
+        },
+        {
+          "id": "1005.5596",
+          "title": "A generic tool to generate a lexicon for NLP from Lexicon-Grammar tables",
+          "authors": [
+            {
+              "name": "Matthieu Constant"
+            },
+            {
+              "name": "Elsa Tolone"
+            }
+          ],
+          "categories": [
+            "cs.CL"
+          ]
+        },
+        {
+          "id": "1311.5857",
+          "title": "Improving Frenet's Frame Using Bishop's Frame",
+          "authors": [
+            {
+              "name": "Daniel Carroll"
+            },
+            {
+              "name": "Emek Köse"
+            },
+            {
+              "name": "Ivan Sterling"
+            }
+          ],
+          "categories": [
+            "math.DG"
+          ]
+        },
+        {
+          "id": "1705.08796",
+          "title": "Robust procedure for creating and characterizing the atomic structure of scanning tunneling microscope tips",
+          "authors": [
+            {
+              "name": "Sumit Tewari"
+            },
+            {
+              "name": "Koen M. Bastiaans"
+            },
+            {
+              "name": "Milan P. Allan"
+            },
+            {
+              "name": "Jan M. van Ruitenbeek"
+            }
+          ],
+          "categories": [
+            "cond-mat.mes-hall",
+            "cond-mat.str-el"
+          ]
+        },
+        {
+          "id": "1303.6001",
+          "title": "Generalizing k-means for an arbitrary distance matrix",
+          "authors": [
+            {
+              "name": "Balázs Szalkai"
+            }
+          ],
+          "categories": [
+            "cs.LG",
+            "cs.CV",
+            "stat.ML"
+          ]
+        },
+        {
+          "id": "0912.5419",
+          "title": "Breakdown of Normal Hyperbolicity for a Family of Invariant Manifolds with Generalized Lyapunov-Type Numbers Uniformly Bounded below Their Critical Values",
+          "authors": [
+            {
+              "name": "Dennis Guang Yang"
+            }
+          ],
+          "categories": [
+            "math.DS"
+          ]
+        },
+        {
+          "id": "quant-ph/0305114",
+          "title": "Illustrating the concept of quantum information",
+          "authors": [
+            {
+              "name": "Richard Jozsa"
+            }
+          ],
+          "categories": [
+            "quant-ph"
+          ]
+        },
+        {
+          "id": "0909.5271",
+          "title": "Partial Komori fields and imperative Komori fields",
+          "authors": [
+            {
+              "name": "J. A. Bergstra"
+            },
+            {
+              "name": "C. A. Middelburg"
+            }
+          ],
+          "categories": [
+            "math.RA",
+            "cs.LO"
+          ]
+        },
+        {
+          "id": "2211.14956",
+          "title": "Hunt for 3-Schur polynomials",
+          "authors": [
+            {
+              "name": "A. Morozov"
+            },
+            {
+              "name": "N. Tselousov"
+            }
+          ],
+          "categories": [
+            "hep-th",
+            "math-ph",
+            "math.QA"
+          ]
+        },
+        {
+          "id": "2312.08117",
+          "title": "Memory Simulations, Security and Optimization in a Verified Compiler",
+          "authors": [
+            {
+              "name": "David Monniaux"
+            }
+          ],
+          "categories": [
+            "cs.LO",
+            "cs.PL"
+          ]
+        },
+        {
+          "id": "2210.12545",
+          "title": "Francois Viete and his contribution to mathematics",
+          "authors": [
+            {
+              "name": "Athanasios Paraskevopoulos"
+            }
+          ],
+          "categories": [
+            "math.HO"
+          ]
+        }
+      ]
+    },
+    {
+      "query": "knowledge graph embedding",
+      "description": "知識グラフ埋め込み",
+      "count": 100,
+      "papers": [
+        {
+          "id": "2107.02533",
+          "title": "Anti-parity-time topologically undefined state",
+          "authors": [
+            {
+              "name": "Haohao Wang"
+            },
+            {
+              "name": "Kaiwen Ji"
+            },
+            {
+              "name": "Yuandan Wang"
+            },
+            {
+              "name": "Zhenjuan Liu"
+            },
+            {
+              "name": "Yuanmei Gao"
+            },
+            {
+              "name": "Yanlong Shen"
+            },
+            {
+              "name": "Shi Bai"
+            },
+            {
+              "name": "Koji Sugioka"
+            },
+            {
+              "name": "Xinyuan Qi"
+            }
+          ],
+          "categories": [
+            "physics.optics"
+          ]
+        },
+        {
+          "id": "2205.06022",
+          "title": "Undefinability and Absolute Undefinability in Arithmetic",
+          "authors": [
+            {
+              "name": "Roman Kossak"
+            }
+          ],
+          "categories": [
+            "math.LO"
+          ]
+        },
+        {
+          "id": "2003.04862",
+          "title": "Compensation for undefined behaviors during robot task execution by switching controllers depending on embedded dynamics in RNN",
+          "authors": [
+            {
+              "name": "Kanata Suzuki"
+            },
+            {
+              "name": "Hiroki Mori"
+            },
+            {
+              "name": "Tetsuya Ogata"
+            }
+          ],
+          "categories": [
+            "cs.RO"
+          ]
+        },
+        {
+          "id": "1305.5244",
+          "title": "A formal framework for the study of the notion of undefined particle number in quantum mechanics",
+          "authors": [
+            {
+              "name": "Newton da Costa"
+            },
+            {
+              "name": "Federico Holik"
+            }
+          ],
+          "categories": [
+            "math-ph",
+            "quant-ph"
+          ]
+        },
+        {
+          "id": "2407.20889",
+          "title": "Two strong undefinability results in inquisitive and team semantics",
+          "authors": [
+            {
+              "name": "Fausto Barbero"
+            }
+          ],
+          "categories": [
+            "math.LO"
+          ]
+        },
+        {
+          "id": "2504.03523",
+          "title": "Undefinability of Approximation of 2-to-2 Games",
+          "authors": [
+            {
+              "name": "Anuj Dawar"
+            },
+            {
+              "name": "Bálint Molnár"
+            }
+          ],
+          "categories": [
+            "cs.LO",
+            "cs.CC"
+          ]
+        },
+        {
+          "id": "2009.00315",
+          "title": "Tarski's Undefinability Theorem and Diagonal Lemma",
+          "authors": [
+            {
+              "name": "Saeed Salehi"
+            }
+          ],
+          "categories": [
+            "math.LO"
+          ]
+        },
+        {
+          "id": "1003.4483",
+          "title": "Tarski's Undefinability Theorem and first-order arithmetic",
+          "authors": [
+            {
+              "name": "Stephen Boyce"
+            }
+          ],
+          "categories": [
+            "math.LO"
+          ]
+        },
+        {
+          "id": "2402.12931",
+          "title": "Epstein Semantics: Characterization, Interpolation, Undefinability, and (In)Completeness",
+          "authors": [
+            {
+              "name": "Krzysztof A. Krawczyk"
+            }
+          ],
+          "categories": [
+            "math.LO"
+          ]
+        },
+        {
+          "id": "2205.09440",
+          "title": "Bosonic fields in states with undefined particle numbers possess detectable non-contextuality features, plus more",
+          "authors": [
+            {
+              "name": "Konrad Schlichtholz"
+            },
+            {
+              "name": "Antonio Mandarino"
+            },
+            {
+              "name": "Marek Żukowski"
+            }
+          ],
+          "categories": [
+            "quant-ph"
+          ]
+        },
+        {
+          "id": "2208.04422",
+          "title": "Truth Set Algebra: A New Way to Prove Undefinability",
+          "authors": [
+            {
+              "name": "Sophia Knight"
+            },
+            {
+              "name": "Pavel Naumov"
+            },
+            {
+              "name": "Qi Shi"
+            },
+            {
+              "name": "Vigasan Suntharraj"
+            }
+          ],
+          "categories": [
+            "cs.AI",
+            "cs.LO",
+            "math.LO"
+          ]
+        },
+        {
+          "id": "1509.00164",
+          "title": "Theorems of Tarski's Undefinability and Godel's Second Incompleteness-Computationally",
+          "authors": [
+            {
+              "name": "Saeed Salehi"
+            }
+          ],
+          "categories": [
+            "math.LO",
+            "cs.LO"
+          ]
+        },
+        {
+          "id": "2404.11671",
+          "title": "A Study of Undefined Behavior Across Foreign Function Boundaries in Rust Libraries",
+          "authors": [
+            {
+              "name": "Ian McCormack"
+            },
+            {
+              "name": "Joshua Sunshine"
+            },
+            {
+              "name": "Jonathan Aldrich"
+            }
+          ],
+          "categories": [
+            "cs.SE"
+          ]
+        },
+        {
+          "id": "2411.17406",
+          "title": "Seeing the Undefined: Chain-of-Action for Generative Semantic Labels",
+          "authors": [
+            {
+              "name": "Meng Wei"
+            },
+            {
+              "name": "Zhongnian Li"
+            },
+            {
+              "name": "Peng Ying"
+            },
+            {
+              "name": "Xinzheng Xu"
+            }
+          ],
+          "categories": [
+            "cs.CV"
+          ]
+        },
+        {
+          "id": "2503.02335",
+          "title": "Unlocking a New Rust Programming Experience: Fast and Slow Thinking with LLMs to Conquer Undefined Behaviors",
+          "authors": [
+            {
+              "name": "Renshuang Jiang"
+            },
+            {
+              "name": "Pan Dong"
+            },
+            {
+              "name": "Zhenling Duan"
+            },
+            {
+              "name": "Yu Shi"
+            },
+            {
+              "name": "Xiaoxiang Fang"
+            },
+            {
+              "name": "Yan Ding"
+            },
+            {
+              "name": "Jun Ma"
+            },
+            {
+              "name": "Shuai Zhao"
+            },
+            {
+              "name": "Zhe Jiang"
+            }
+          ],
+          "categories": [
+            "cs.SE",
+            "cs.CL"
+          ]
+        },
+        {
+          "id": "2410.10903",
+          "title": "Implications of Tarski's Undefinability Theorem on the Theory of Everything",
+          "authors": [
+            {
+              "name": "Mir Faizal"
+            },
+            {
+              "name": "Arshid Shabir"
+            },
+            {
+              "name": "Aatif Kaisar Khan"
+            }
+          ],
+          "categories": [
+            "physics.hist-ph",
+            "hep-th"
+          ]
+        },
+        {
+          "id": "1803.03937",
+          "title": "From Tarski to Gödel. Or, how to derive the Second Incompleteness Theorem from the Undefinability of Truth without Self-reference",
+          "authors": [
+            {
+              "name": "Albert Visser"
+            }
+          ],
+          "categories": [
+            "math.LO"
+          ]
+        },
+        {
+          "id": "1911.10806",
+          "title": "Detecting Unknown Behaviors by Pre-defined Behaviours: An Bayesian Non-parametric Approach",
+          "authors": [
+            {
+              "name": "Jin Watanabe"
+            },
+            {
+              "name": "Takatomi Kubo"
+            },
+            {
+              "name": "Fan Yang"
+            },
+            {
+              "name": "Kazushi Ikeda"
+            }
+          ],
+          "categories": [
+            "cs.CY",
+            "cs.LG"
+          ]
+        },
+        {
+          "id": "2210.02168",
+          "title": "An Active Learning Reliability Method for Systems with Partially Defined Performance Functions",
+          "authors": [
+            {
+              "name": "Jonathan Sadeghi"
+            },
+            {
+              "name": "Romain Mueller"
+            },
+            {
+              "name": "John Redford"
+            }
+          ],
+          "categories": [
+            "cs.LG"
+          ]
+        },
+        {
+          "id": "0711.1247",
+          "title": "Discovery of Quantum Hidden Variable",
+          "authors": [
+            {
+              "name": "Huai-yang Cui"
+            }
+          ],
+          "categories": [
+            "physics.gen-ph"
+          ]
+        },
+        {
+          "id": "1812.04307",
+          "title": "Analysis of the One-dimensional Euler-Lagrange equation of continuum mechanics with a Lagrangian of a special form",
+          "authors": [
+            {
+              "name": "E. I. Kaptsov"
+            },
+            {
+              "name": "S. V. Meleshko"
+            }
+          ],
+          "categories": [
+            "math-ph",
+            "math.AP"
+          ]
+        },
+        {
+          "id": "1909.12636",
+          "title": "On wild algebras and super-decomposable pure-injective modules",
+          "authors": [
+            {
+              "name": "Grzegorz Pastuszak"
+            }
+          ],
+          "categories": [
+            "math.RT",
+            "math.LO"
+          ]
+        },
+        {
+          "id": "2506.13990",
+          "title": "Machine Mirages: Defining the Undefined",
+          "authors": [
+            {
+              "name": "Hamidou Tembine"
+            }
+          ],
+          "categories": [
+            "cs.AI"
+          ]
+        },
+        {
+          "id": "2510.10410",
+          "title": "A Trace-based Approach for Code Safety Analysis",
+          "authors": [
+            {
+              "name": "Hui Xu"
+            }
+          ],
+          "categories": [
+            "cs.PL",
+            "cs.SE"
+          ]
+        },
+        {
+          "id": "2106.15167",
+          "title": "Learning from Miscellaneous Other-Class Words for Few-shot Named Entity Recognition",
+          "authors": [
+            {
+              "name": "Meihan Tong"
+            },
+            {
+              "name": "Shuai Wang"
+            },
+            {
+              "name": "Bin Xu"
+            },
+            {
+              "name": "Yixin Cao"
+            },
+            {
+              "name": "Minghui Liu"
+            },
+            {
+              "name": "Lei Hou"
+            },
+            {
+              "name": "Juanzi Li"
+            }
+          ],
+          "categories": [
+            "cs.CL"
+          ]
+        },
+        {
+          "id": "physics/0603091",
+          "title": "A defect of the electromagnetism and it serves as a hidden variable for quantum mechanics",
+          "authors": [
+            {
+              "name": "Huai-yang Cui"
+            }
+          ],
+          "categories": [
+            "physics.gen-ph",
+            "physics.class-ph"
+          ]
+        },
+        {
+          "id": "1309.5821",
+          "title": "Undefined By Data: A Survey of Big Data Definitions",
+          "authors": [
+            {
+              "name": "Jonathan Stuart Ward"
+            },
+            {
+              "name": "Adam Barker"
+            }
+          ],
+          "categories": [
+            "cs.DB"
+          ]
+        },
+        {
+          "id": "1805.00343",
+          "title": "Teaching Differentiation: A Rare Case for the Problem of the Slope of the Tangent Line",
+          "authors": [
+            {
+              "name": "Roman Kvasov"
+            }
+          ],
+          "categories": [
+            "math.HO"
+          ]
+        },
+        {
+          "id": "2210.01083",
+          "title": "Schroedinger cats and quantum complementarity",
+          "authors": [
+            {
+              "name": "Lorenzo Maccone"
+            }
+          ],
+          "categories": [
+            "quant-ph",
+            "physics.ed-ph"
+          ]
+        },
+        {
+          "id": "2202.06242",
+          "title": "Beyond NaN: Resiliency of Optimization Layers in The Face of Infeasibility",
+          "authors": [
+            {
+              "name": "Wai Tuck Wong"
+            },
+            {
+              "name": "Sarah Kinsey"
+            },
+            {
+              "name": "Ramesha Karunasena"
+            },
+            {
+              "name": "Thanh Nguyen"
+            },
+            {
+              "name": "Arunesh Sinha"
+            }
+          ],
+          "categories": [
+            "cs.LG",
+            "cs.CR",
+            "math.OC"
+          ]
+        },
+        {
+          "id": "2504.01527",
+          "title": "Beyond Nearest Neighbor Interpolation in Data Augmentation",
+          "authors": [
+            {
+              "name": "Olivier Rukundo"
+            }
+          ],
+          "categories": [
+            "cs.CV",
+            "eess.IV"
+          ]
+        },
+        {
+          "id": "1205.2679",
+          "title": "Testing means from sampling populations with undefined labels",
+          "authors": [
+            {
+              "name": "Florent Autin"
+            },
+            {
+              "name": "Christophe Pouet"
+            }
+          ],
+          "categories": [
+            "math.ST"
+          ]
+        },
+        {
+          "id": "2109.14951",
+          "title": "Causality in a qubit-based quantum switch",
+          "authors": [
+            {
+              "name": "Carlos Sabín"
+            }
+          ],
+          "categories": [
+            "quant-ph"
+          ]
+        },
+        {
+          "id": "2008.12643",
+          "title": "On the Notion of Equal Figures in Euclid",
+          "authors": [
+            {
+              "name": "Michael Beeson"
+            }
+          ],
+          "categories": [
+            "math.LO",
+            "cs.LO",
+            "math.MG"
+          ]
+        },
+        {
+          "id": "0902.4598",
+          "title": "Comment on \"A generalized Langevin formalism of complete DNA melting transition\"",
+          "authors": [
+            {
+              "name": "Titus S. van Erp"
+            },
+            {
+              "name": "Santiago Cuesta-Lopez"
+            },
+            {
+              "name": "Johannes-Geert Hagmann"
+            },
+            {
+              "name": "Michel Peyrard"
+            }
+          ],
+          "categories": [
+            "physics.bio-ph",
+            "cond-mat.soft"
+          ]
+        },
+        {
+          "id": "1707.08245",
+          "title": "Non-commutative crepant resolutions for some toric singularities II",
+          "authors": [
+            {
+              "name": "Špela Špenko"
+            },
+            {
+              "name": "Michel Van den Bergh"
+            }
+          ],
+          "categories": [
+            "math.AG",
+            "math.RA"
+          ]
+        },
+        {
+          "id": "cmp-lg/9712003",
+          "title": "Context as a Spurious Concept",
+          "authors": [
+            {
+              "name": "Graeme Hirst"
+            }
+          ],
+          "categories": [
+            "cs.CL"
+          ]
+        },
+        {
+          "id": "cond-mat/9709082",
+          "title": "Violation of Scaling in the Contact Process with Quenched Disorder",
+          "authors": [
+            {
+              "name": "Ronald Dickman"
+            },
+            {
+              "name": "Adriana G. Moreira"
+            }
+          ],
+          "categories": [
+            "cond-mat.stat-mech"
+          ]
+        },
+        {
+          "id": "1408.3827",
+          "title": "Feature-Rich Magnetic Quantization in Sliding Bilayer Graphenes",
+          "authors": [
+            {
+              "name": "Yao-Kung Huang"
+            },
+            {
+              "name": "Szu-Chao Chen"
+            },
+            {
+              "name": "Yen-Hung Ho"
+            },
+            {
+              "name": "Chiun-Yan Lin"
+            },
+            {
+              "name": "Ming-Fa Lin"
+            }
+          ],
+          "categories": [
+            "cond-mat.mtrl-sci",
+            "cond-mat.mes-hall"
+          ]
+        },
+        {
+          "id": "1406.7492",
+          "title": "Andrews' Type Theory with Undefinedness",
+          "authors": [
+            {
+              "name": "William M. Farmer"
+            }
+          ],
+          "categories": [
+            "math.LO",
+            "cs.LO"
+          ]
+        },
+        {
+          "id": "2211.13543",
+          "title": "Impure Simplicial Complexes: Complete Axiomatization",
+          "authors": [
+            {
+              "name": "Rojo Randrianomentsoa"
+            },
+            {
+              "name": "Hans van Ditmarsch"
+            },
+            {
+              "name": "Roman Kuznets"
+            }
+          ],
+          "categories": [
+            "cs.LO",
+            "cs.DC"
+          ]
+        },
+        {
+          "id": "1511.03227",
+          "title": "Primordial brusque bounce in Born-Infeld determinantal gravity",
+          "authors": [
+            {
+              "name": "Franco Fiorini"
+            }
+          ],
+          "categories": [
+            "gr-qc",
+            "hep-th"
+          ]
+        },
+        {
+          "id": "1703.09064",
+          "title": "Memristor equations: incomplete physics and undefined passivity/activity",
+          "authors": [
+            {
+              "name": "Kyle Sundqvist"
+            },
+            {
+              "name": "David K. Ferry"
+            },
+            {
+              "name": "Laszlo B. Kish"
+            }
+          ],
+          "categories": [
+            "cs.ET"
+          ]
+        },
+        {
+          "id": "1804.08488",
+          "title": "Shared aggregate sets in answer set programming",
+          "authors": [
+            {
+              "name": "Mario Alviano"
+            },
+            {
+              "name": "Carmine Dodaro"
+            },
+            {
+              "name": "Marco Maratea"
+            }
+          ],
+          "categories": [
+            "cs.LO"
+          ]
+        },
+        {
+          "id": "2112.04436",
+          "title": "A Completeness Proof for A Regular Predicate Logic with Undefined Truth Value",
+          "authors": [
+            {
+              "name": "Antti Valmari"
+            },
+            {
+              "name": "Lauri Hella"
+            }
+          ],
+          "categories": [
+            "math.LO",
+            "cs.LO"
+          ]
+        },
+        {
+          "id": "1802.00588",
+          "title": "When Good Components Go Bad: Formally Secure Compilation Despite Dynamic Compromise",
+          "authors": [
+            {
+              "name": "Carmine Abate"
+            },
+            {
+              "name": "Arthur Azevedo de Amorim"
+            },
+            {
+              "name": "Roberto Blanco"
+            },
+            {
+              "name": "Ana Nora Evans"
+            },
+            {
+              "name": "Guglielmo Fachini"
+            },
+            {
+              "name": "Catalin Hritcu"
+            },
+            {
+              "name": "Théo Laurent"
+            },
+            {
+              "name": "Benjamin C. Pierce"
+            },
+            {
+              "name": "Marco Stronati"
+            },
+            {
+              "name": "Jérémy Thibault"
+            },
+            {
+              "name": "Andrew Tolmach"
+            }
+          ],
+          "categories": [
+            "cs.CR",
+            "cs.PL"
+          ]
+        },
+        {
+          "id": "quant-ph/0002067",
+          "title": "Rules for Integrals over Products of Distributions from Coordinate Independence of Path Integrals",
+          "authors": [
+            {
+              "name": "H. Kleinert"
+            },
+            {
+              "name": "A. Chervyakov"
+            }
+          ],
+          "categories": [
+            "quant-ph"
+          ]
+        },
+        {
+          "id": "quant-ph/0403204",
+          "title": "Off-diagonal quantum holonomy along density operators",
+          "authors": [
+            {
+              "name": "Stefan Filipp"
+            },
+            {
+              "name": "Erik Sjöqvist"
+            }
+          ],
+          "categories": [
+            "quant-ph"
+          ]
+        },
+        {
+          "id": "2410.01981",
+          "title": "Surveying the Rust Verification Landscape",
+          "authors": [
+            {
+              "name": "Alex Le Blanc"
+            },
+            {
+              "name": "Patrick Lam"
+            }
+          ],
+          "categories": [
+            "cs.PL"
+          ]
+        },
+        {
+          "id": "2407.04917",
+          "title": "A Calculus for Unreachable Code",
+          "authors": [
+            {
+              "name": "Peter Zhong"
+            },
+            {
+              "name": "Shu-Hung You"
+            },
+            {
+              "name": "Simone Campanoni"
+            },
+            {
+              "name": "Robert Bruce Findler"
+            },
+            {
+              "name": "Matthew Flatt"
+            },
+            {
+              "name": "Christos Dimoulas"
+            }
+          ],
+          "categories": [
+            "cs.PL"
+          ]
+        },
+        {
+          "id": "1710.07308",
+          "title": "Formally Secure Compilation of Unsafe Low-Level Components (Extended Abstract)",
+          "authors": [
+            {
+              "name": "Guglielmo Fachini"
+            },
+            {
+              "name": "Catalin Hritcu"
+            },
+            {
+              "name": "Marco Stronati"
+            },
+            {
+              "name": "Ana Nora Evans"
+            },
+            {
+              "name": "Théo Laurent"
+            },
+            {
+              "name": "Arthur Azevedo de Amorim"
+            },
+            {
+              "name": "Benjamin C. Pierce"
+            },
+            {
+              "name": "Andrew Tolmach"
+            }
+          ],
+          "categories": [
+            "cs.CR",
+            "cs.PL"
+          ]
+        },
+        {
+          "id": "gr-qc/0006036",
+          "title": "Nonthermal nature of extremal Kerr black holes",
+          "authors": [
+            {
+              "name": "Tony Rothman"
+            }
+          ],
+          "categories": [
+            "gr-qc"
+          ]
+        },
+        {
+          "id": "2112.11659",
+          "title": "Controlling wave-particle duality with quantum entanglement",
+          "authors": [
+            {
+              "name": "Kai Wang"
+            },
+            {
+              "name": "Daniel R. Terno"
+            },
+            {
+              "name": "Caslav Brukner"
+            },
+            {
+              "name": "Shining Zhu"
+            },
+            {
+              "name": "Xiao-Song Ma"
+            }
+          ],
+          "categories": [
+            "quant-ph",
+            "physics.optics"
+          ]
+        },
+        {
+          "id": "1601.02233",
+          "title": "Entanglement indicators for quantum optical fields: three-mode multiport beamsplitters EPR interference experiments",
+          "authors": [
+            {
+              "name": "Junghee Ryu"
+            },
+            {
+              "name": "Marcin Marciniak"
+            },
+            {
+              "name": "Marcin Wieśniak"
+            },
+            {
+              "name": "Marek Żukowski"
+            }
+          ],
+          "categories": [
+            "quant-ph"
+          ]
+        },
+        {
+          "id": "2401.16277",
+          "title": "SECOMP: Formally Secure Compilation of Compartmentalized C Programs",
+          "authors": [
+            {
+              "name": "Jérémy Thibault"
+            },
+            {
+              "name": "Roberto Blanco"
+            },
+            {
+              "name": "Dongjae Lee"
+            },
+            {
+              "name": "Sven Argo"
+            },
+            {
+              "name": "Arthur Azevedo de Amorim"
+            },
+            {
+              "name": "Aïna Linn Georges"
+            },
+            {
+              "name": "Catalin Hritcu"
+            },
+            {
+              "name": "Andrew Tolmach"
+            }
+          ],
+          "categories": [
+            "cs.PL",
+            "cs.CR"
+          ]
+        },
+        {
+          "id": "1205.4442",
+          "title": "Harmonic functions on the Sierpinski triangle",
+          "authors": [
+            {
+              "name": "Ilia Smilga"
+            }
+          ],
+          "categories": [
+            "math.DS"
+          ]
+        },
+        {
+          "id": "1506.02652",
+          "title": "Chemical descriptors, convexity and structure of density matrices in molecular systems",
+          "authors": [
+            {
+              "name": "Roberto C. Bochicchio"
+            }
+          ],
+          "categories": [
+            "physics.chem-ph",
+            "quant-ph"
+          ]
+        },
+        {
+          "id": "1905.06416",
+          "title": "Geometric phase associated with Poincaré beams due to unfolding of fractional optical vortex beams",
+          "authors": [
+            {
+              "name": "Satyajit Maji"
+            },
+            {
+              "name": "Aswini K. Pattanayak"
+            },
+            {
+              "name": "Maruthi M. Brundavanam"
+            }
+          ],
+          "categories": [
+            "physics.optics"
+          ]
+        },
+        {
+          "id": "math/0606643",
+          "title": "Entropy And Vision",
+          "authors": [
+            {
+              "name": "Rami Kanhouche"
+            }
+          ],
+          "categories": [
+            "math.PR",
+            "cs.CV",
+            "cs.DB",
+            "cs.DM",
+            "cs.LG",
+            "math.CO"
+          ]
+        },
+        {
+          "id": "hep-lat/0208026",
+          "title": "Transiting topological sectors with the overlap",
+          "authors": [
+            {
+              "name": "Michael Creutz"
+            }
+          ],
+          "categories": [
+            "hep-lat"
+          ]
+        },
+        {
+          "id": "1101.2798",
+          "title": "On Logical Extension of Algebraic Division",
+          "authors": [
+            {
+              "name": "Mohammed Abubakr"
+            }
+          ],
+          "categories": [
+            "cs.LO"
+          ]
+        },
+        {
+          "id": "2507.17373",
+          "title": "SFUOD: Source-Free Unknown Object Detection",
+          "authors": [
+            {
+              "name": "Keon-Hee Park"
+            },
+            {
+              "name": "Seun-An Choe"
+            },
+            {
+              "name": "Gyeong-Moon Park"
+            }
+          ],
+          "categories": [
+            "cs.CV",
+            "cs.AI"
+          ]
+        },
+        {
+          "id": "2412.05919",
+          "title": "Estimating Spillover Effects in the Presence of Isolated Nodes",
+          "authors": [
+            {
+              "name": "Bora Kim"
+            }
+          ],
+          "categories": [
+            "econ.EM"
+          ]
+        },
+        {
+          "id": "1301.5163",
+          "title": "Cosmological models with spinor and scalar fields by Noether symmetry approach",
+          "authors": [
+            {
+              "name": "Gilberto M. Kremer"
+            },
+            {
+              "name": "Rudinei C. de Souza"
+            }
+          ],
+          "categories": [
+            "gr-qc"
+          ]
+        },
+        {
+          "id": "1502.05562",
+          "title": "A New Penta-valued Logic Based Knowledge Representation",
+          "authors": [
+            {
+              "name": "Vasile Patrascu"
+            }
+          ],
+          "categories": [
+            "cs.AI"
+          ]
+        },
+        {
+          "id": "cs/0410014",
+          "title": "Normal forms for Answer Sets Programming",
+          "authors": [
+            {
+              "name": "Stefania Costantini"
+            },
+            {
+              "name": "Alessandro Provetti"
+            }
+          ],
+          "categories": [
+            "cs.AI"
+          ]
+        },
+        {
+          "id": "1412.8490",
+          "title": "Image Encryption and Decryption in A Modification of ElGamal Cryptosystem in MATLAB",
+          "authors": [
+            {
+              "name": "Hayder Raheem Hashim"
+            },
+            {
+              "name": "Irtifaa Abdalkadum Neamaa"
+            }
+          ],
+          "categories": [
+            "cs.CR"
+          ]
+        },
+        {
+          "id": "1511.07339",
+          "title": "Fractional vortex Hilbert's Hotel",
+          "authors": [
+            {
+              "name": "Greg Gbur"
+            }
+          ],
+          "categories": [
+            "physics.optics"
+          ]
+        },
+        {
+          "id": "astro-ph/0104089",
+          "title": "Effects of perturbing forces on the orbital stability of planetary systems",
+          "authors": [
+            {
+              "name": "L. Kiseleva-Eggleton"
+            },
+            {
+              "name": "E. Bois"
+            }
+          ],
+          "categories": [
+            "astro-ph"
+          ]
+        },
+        {
+          "id": "0801.2089",
+          "title": "Some explicit constructions of integral structures in quaternion algebras",
+          "authors": [
+            {
+              "name": "Miriam Ciavarella"
+            },
+            {
+              "name": "Lea Terracini"
+            }
+          ],
+          "categories": [
+            "math.NT",
+            "math.AG"
+          ]
+        },
+        {
+          "id": "0907.5598",
+          "title": "Convergence of Expected Utility for Universal AI",
+          "authors": [
+            {
+              "name": "Peter de Blanc"
+            }
+          ],
+          "categories": [
+            "cs.AI"
+          ]
+        },
+        {
+          "id": "1211.6718",
+          "title": "Stable algorithm for event detection in event-driven particle dynamics",
+          "authors": [
+            {
+              "name": "Marcus N. Bannerman"
+            },
+            {
+              "name": "Severin Strobl"
+            },
+            {
+              "name": "Arno Formella"
+            },
+            {
+              "name": "Thorsten Poeschel"
+            }
+          ],
+          "categories": [
+            "physics.comp-ph"
+          ]
+        },
+        {
+          "id": "2103.03032",
+          "title": "Wanted Dead or Alive : Epistemic logic for impure simplicial complexes",
+          "authors": [
+            {
+              "name": "Hans van Ditmarsch"
+            },
+            {
+              "name": "Roman Kuznets"
+            }
+          ],
+          "categories": [
+            "cs.DC",
+            "cs.LO"
+          ]
+        },
+        {
+          "id": "2401.10459",
+          "title": "On the undefinability of pathological Banach spaces",
+          "authors": [
+            {
+              "name": "Clovis Hamel"
+            },
+            {
+              "name": "Franklin D. Tall"
+            }
+          ],
+          "categories": [
+            "math.LO"
+          ]
+        },
+        {
+          "id": "1911.08880",
+          "title": "On the Magnetic Current Density in the Maxwell Equations Based on the Noether Theorem",
+          "authors": [
+            {
+              "name": "Mehdi Nosrati"
+            }
+          ],
+          "categories": [
+            "physics.gen-ph"
+          ]
+        },
+        {
+          "id": "2510.01072",
+          "title": "Lessons Learned So Far From a Community Effort to Verify the Rust Standard Library (work-in-progress)",
+          "authors": [
+            {
+              "name": "Alex Le Blanc"
+            },
+            {
+              "name": "Patrick Lam"
+            }
+          ],
+          "categories": [
+            "cs.PL"
+          ]
+        },
+        {
+          "id": "2302.12581",
+          "title": "The variance-gamma ratio distribution",
+          "authors": [
+            {
+              "name": "Robert E. Gaunt"
+            },
+            {
+              "name": "Siqi Li"
+            }
+          ],
+          "categories": [
+            "math.PR"
+          ]
+        },
+        {
+          "id": "0804.2507",
+          "title": "Constraining the nuclear gluon distribution in $eA$ processes at RHIC",
+          "authors": [
+            {
+              "name": "E. R. Cazaroto"
+            },
+            {
+              "name": "F. Carvalho"
+            },
+            {
+              "name": "V. P. Goncalves"
+            },
+            {
+              "name": "F. S. Navarra"
+            }
+          ],
+          "categories": [
+            "hep-ph"
+          ]
+        },
+        {
+          "id": "0909.0367",
+          "title": "Quantum pumping in deformable quantum dots",
+          "authors": [
+            {
+              "name": "F. Romeo"
+            },
+            {
+              "name": "R. Citro"
+            }
+          ],
+          "categories": [
+            "cond-mat.mes-hall"
+          ]
+        },
+        {
+          "id": "1501.04273",
+          "title": "A note on the reciprocal theorem for the swimming of simple bodies",
+          "authors": [
+            {
+              "name": "Gwynn J. Elfring"
+            }
+          ],
+          "categories": [
+            "physics.flu-dyn"
+          ]
+        },
+        {
+          "id": "1805.08209",
+          "title": "Possible Worlds, Incompleteness and Undefinability",
+          "authors": [
+            {
+              "name": "Christopher F. S. Maligec"
+            }
+          ],
+          "categories": [
+            "math.LO"
+          ]
+        },
+        {
+          "id": "1203.4579",
+          "title": "Metrics and norms used for obtaining sparse solutions to underdetermined Systems of Linear Equations",
+          "authors": [
+            {
+              "name": "Leoni Dalla"
+            },
+            {
+              "name": "George K. Papageorgiou"
+            }
+          ],
+          "categories": [
+            "math.OC",
+            "math.FA"
+          ]
+        },
+        {
+          "id": "2211.12260",
+          "title": "Some Useful Collective Properties of Bessel, Marcum Q-Functions and Laguerre Polynomials",
+          "authors": [
+            {
+              "name": "Hakan Ozturk"
+            },
+            {
+              "name": "Fikret Anli"
+            },
+            {
+              "name": "Abdelouahab Kadem"
+            }
+          ],
+          "categories": [
+            "math.CA",
+            "math-ph"
+          ]
+        },
+        {
+          "id": "1204.1370",
+          "title": "Dirac tachyons and antitachyons in many-particle system",
+          "authors": [
+            {
+              "name": "Ernst Trojan"
+            }
+          ],
+          "categories": [
+            "hep-ph"
+          ]
+        },
+        {
+          "id": "1210.3363",
+          "title": "Why does the Jeans Swindle work?",
+          "authors": [
+            {
+              "name": "M. Falco"
+            },
+            {
+              "name": "S. H. Hansen"
+            },
+            {
+              "name": "R. Wojtak"
+            },
+            {
+              "name": "G. A. Mamon"
+            }
+          ],
+          "categories": [
+            "astro-ph.CO"
+          ]
+        },
+        {
+          "id": "1507.04406",
+          "title": "Skolem-Noether for nilpotent products",
+          "authors": [
+            {
+              "name": "James B. Wilson"
+            }
+          ],
+          "categories": [
+            "math.GR",
+            "math.RA"
+          ]
+        },
+        {
+          "id": "1612.00252",
+          "title": "Disjoint-union partial algebras",
+          "authors": [
+            {
+              "name": "Robin Hirsch"
+            },
+            {
+              "name": "Brett McLean"
+            }
+          ],
+          "categories": [
+            "math.RA",
+            "cs.LO",
+            "math.LO"
+          ]
+        },
+        {
+          "id": "1607.02790",
+          "title": "Hyper Normalisation and Conditioning for Discrete Probability Distributions",
+          "authors": [
+            {
+              "name": "Bart Jacobs"
+            }
+          ],
+          "categories": [
+            "cs.LO"
+          ]
+        },
+        {
+          "id": "1704.06799",
+          "title": "Renormalization of SU(2) Yang-Mills theory with Flow Equations",
+          "authors": [
+            {
+              "name": "Alexander N. Efremov"
+            },
+            {
+              "name": "Riccardo Guida"
+            },
+            {
+              "name": "Christoph Kopper"
+            }
+          ],
+          "categories": [
+            "math-ph",
+            "hep-th"
+          ]
+        },
+        {
+          "id": "1306.6004",
+          "title": "A logical treatment of special relativity, with and without faster-than-light observers",
+          "authors": [
+            {
+              "name": "Benjamin Hoffman"
+            }
+          ],
+          "categories": [
+            "math.LO",
+            "math-ph"
+          ]
+        },
+        {
+          "id": "1005.5596",
+          "title": "A generic tool to generate a lexicon for NLP from Lexicon-Grammar tables",
+          "authors": [
+            {
+              "name": "Matthieu Constant"
+            },
+            {
+              "name": "Elsa Tolone"
+            }
+          ],
+          "categories": [
+            "cs.CL"
+          ]
+        },
+        {
+          "id": "1311.5857",
+          "title": "Improving Frenet's Frame Using Bishop's Frame",
+          "authors": [
+            {
+              "name": "Daniel Carroll"
+            },
+            {
+              "name": "Emek Köse"
+            },
+            {
+              "name": "Ivan Sterling"
+            }
+          ],
+          "categories": [
+            "math.DG"
+          ]
+        },
+        {
+          "id": "1705.08796",
+          "title": "Robust procedure for creating and characterizing the atomic structure of scanning tunneling microscope tips",
+          "authors": [
+            {
+              "name": "Sumit Tewari"
+            },
+            {
+              "name": "Koen M. Bastiaans"
+            },
+            {
+              "name": "Milan P. Allan"
+            },
+            {
+              "name": "Jan M. van Ruitenbeek"
+            }
+          ],
+          "categories": [
+            "cond-mat.mes-hall",
+            "cond-mat.str-el"
+          ]
+        },
+        {
+          "id": "1303.6001",
+          "title": "Generalizing k-means for an arbitrary distance matrix",
+          "authors": [
+            {
+              "name": "Balázs Szalkai"
+            }
+          ],
+          "categories": [
+            "cs.LG",
+            "cs.CV",
+            "stat.ML"
+          ]
+        },
+        {
+          "id": "0912.5419",
+          "title": "Breakdown of Normal Hyperbolicity for a Family of Invariant Manifolds with Generalized Lyapunov-Type Numbers Uniformly Bounded below Their Critical Values",
+          "authors": [
+            {
+              "name": "Dennis Guang Yang"
+            }
+          ],
+          "categories": [
+            "math.DS"
+          ]
+        },
+        {
+          "id": "quant-ph/0305114",
+          "title": "Illustrating the concept of quantum information",
+          "authors": [
+            {
+              "name": "Richard Jozsa"
+            }
+          ],
+          "categories": [
+            "quant-ph"
+          ]
+        },
+        {
+          "id": "0909.5271",
+          "title": "Partial Komori fields and imperative Komori fields",
+          "authors": [
+            {
+              "name": "J. A. Bergstra"
+            },
+            {
+              "name": "C. A. Middelburg"
+            }
+          ],
+          "categories": [
+            "math.RA",
+            "cs.LO"
+          ]
+        },
+        {
+          "id": "2211.14956",
+          "title": "Hunt for 3-Schur polynomials",
+          "authors": [
+            {
+              "name": "A. Morozov"
+            },
+            {
+              "name": "N. Tselousov"
+            }
+          ],
+          "categories": [
+            "hep-th",
+            "math-ph",
+            "math.QA"
+          ]
+        },
+        {
+          "id": "2312.08117",
+          "title": "Memory Simulations, Security and Optimization in a Verified Compiler",
+          "authors": [
+            {
+              "name": "David Monniaux"
+            }
+          ],
+          "categories": [
+            "cs.LO",
+            "cs.PL"
+          ]
+        },
+        {
+          "id": "2210.12545",
+          "title": "Francois Viete and his contribution to mathematics",
+          "authors": [
+            {
+              "name": "Athanasios Paraskevopoulos"
+            }
+          ],
+          "categories": [
+            "math.HO"
+          ]
+        }
+      ]
+    },
+    {
+      "query": "retrieval augmented generation",
+      "description": "RAG技術",
+      "count": 100,
+      "papers": [
+        {
+          "id": "2107.02533",
+          "title": "Anti-parity-time topologically undefined state",
+          "authors": [
+            {
+              "name": "Haohao Wang"
+            },
+            {
+              "name": "Kaiwen Ji"
+            },
+            {
+              "name": "Yuandan Wang"
+            },
+            {
+              "name": "Zhenjuan Liu"
+            },
+            {
+              "name": "Yuanmei Gao"
+            },
+            {
+              "name": "Yanlong Shen"
+            },
+            {
+              "name": "Shi Bai"
+            },
+            {
+              "name": "Koji Sugioka"
+            },
+            {
+              "name": "Xinyuan Qi"
+            }
+          ],
+          "categories": [
+            "physics.optics"
+          ]
+        },
+        {
+          "id": "2205.06022",
+          "title": "Undefinability and Absolute Undefinability in Arithmetic",
+          "authors": [
+            {
+              "name": "Roman Kossak"
+            }
+          ],
+          "categories": [
+            "math.LO"
+          ]
+        },
+        {
+          "id": "2003.04862",
+          "title": "Compensation for undefined behaviors during robot task execution by switching controllers depending on embedded dynamics in RNN",
+          "authors": [
+            {
+              "name": "Kanata Suzuki"
+            },
+            {
+              "name": "Hiroki Mori"
+            },
+            {
+              "name": "Tetsuya Ogata"
+            }
+          ],
+          "categories": [
+            "cs.RO"
+          ]
+        },
+        {
+          "id": "1305.5244",
+          "title": "A formal framework for the study of the notion of undefined particle number in quantum mechanics",
+          "authors": [
+            {
+              "name": "Newton da Costa"
+            },
+            {
+              "name": "Federico Holik"
+            }
+          ],
+          "categories": [
+            "math-ph",
+            "quant-ph"
+          ]
+        },
+        {
+          "id": "2407.20889",
+          "title": "Two strong undefinability results in inquisitive and team semantics",
+          "authors": [
+            {
+              "name": "Fausto Barbero"
+            }
+          ],
+          "categories": [
+            "math.LO"
+          ]
+        },
+        {
+          "id": "2504.03523",
+          "title": "Undefinability of Approximation of 2-to-2 Games",
+          "authors": [
+            {
+              "name": "Anuj Dawar"
+            },
+            {
+              "name": "Bálint Molnár"
+            }
+          ],
+          "categories": [
+            "cs.LO",
+            "cs.CC"
+          ]
+        },
+        {
+          "id": "2009.00315",
+          "title": "Tarski's Undefinability Theorem and Diagonal Lemma",
+          "authors": [
+            {
+              "name": "Saeed Salehi"
+            }
+          ],
+          "categories": [
+            "math.LO"
+          ]
+        },
+        {
+          "id": "1003.4483",
+          "title": "Tarski's Undefinability Theorem and first-order arithmetic",
+          "authors": [
+            {
+              "name": "Stephen Boyce"
+            }
+          ],
+          "categories": [
+            "math.LO"
+          ]
+        },
+        {
+          "id": "2402.12931",
+          "title": "Epstein Semantics: Characterization, Interpolation, Undefinability, and (In)Completeness",
+          "authors": [
+            {
+              "name": "Krzysztof A. Krawczyk"
+            }
+          ],
+          "categories": [
+            "math.LO"
+          ]
+        },
+        {
+          "id": "2205.09440",
+          "title": "Bosonic fields in states with undefined particle numbers possess detectable non-contextuality features, plus more",
+          "authors": [
+            {
+              "name": "Konrad Schlichtholz"
+            },
+            {
+              "name": "Antonio Mandarino"
+            },
+            {
+              "name": "Marek Żukowski"
+            }
+          ],
+          "categories": [
+            "quant-ph"
+          ]
+        },
+        {
+          "id": "2208.04422",
+          "title": "Truth Set Algebra: A New Way to Prove Undefinability",
+          "authors": [
+            {
+              "name": "Sophia Knight"
+            },
+            {
+              "name": "Pavel Naumov"
+            },
+            {
+              "name": "Qi Shi"
+            },
+            {
+              "name": "Vigasan Suntharraj"
+            }
+          ],
+          "categories": [
+            "cs.AI",
+            "cs.LO",
+            "math.LO"
+          ]
+        },
+        {
+          "id": "1509.00164",
+          "title": "Theorems of Tarski's Undefinability and Godel's Second Incompleteness-Computationally",
+          "authors": [
+            {
+              "name": "Saeed Salehi"
+            }
+          ],
+          "categories": [
+            "math.LO",
+            "cs.LO"
+          ]
+        },
+        {
+          "id": "2404.11671",
+          "title": "A Study of Undefined Behavior Across Foreign Function Boundaries in Rust Libraries",
+          "authors": [
+            {
+              "name": "Ian McCormack"
+            },
+            {
+              "name": "Joshua Sunshine"
+            },
+            {
+              "name": "Jonathan Aldrich"
+            }
+          ],
+          "categories": [
+            "cs.SE"
+          ]
+        },
+        {
+          "id": "2411.17406",
+          "title": "Seeing the Undefined: Chain-of-Action for Generative Semantic Labels",
+          "authors": [
+            {
+              "name": "Meng Wei"
+            },
+            {
+              "name": "Zhongnian Li"
+            },
+            {
+              "name": "Peng Ying"
+            },
+            {
+              "name": "Xinzheng Xu"
+            }
+          ],
+          "categories": [
+            "cs.CV"
+          ]
+        },
+        {
+          "id": "2503.02335",
+          "title": "Unlocking a New Rust Programming Experience: Fast and Slow Thinking with LLMs to Conquer Undefined Behaviors",
+          "authors": [
+            {
+              "name": "Renshuang Jiang"
+            },
+            {
+              "name": "Pan Dong"
+            },
+            {
+              "name": "Zhenling Duan"
+            },
+            {
+              "name": "Yu Shi"
+            },
+            {
+              "name": "Xiaoxiang Fang"
+            },
+            {
+              "name": "Yan Ding"
+            },
+            {
+              "name": "Jun Ma"
+            },
+            {
+              "name": "Shuai Zhao"
+            },
+            {
+              "name": "Zhe Jiang"
+            }
+          ],
+          "categories": [
+            "cs.SE",
+            "cs.CL"
+          ]
+        },
+        {
+          "id": "2410.10903",
+          "title": "Implications of Tarski's Undefinability Theorem on the Theory of Everything",
+          "authors": [
+            {
+              "name": "Mir Faizal"
+            },
+            {
+              "name": "Arshid Shabir"
+            },
+            {
+              "name": "Aatif Kaisar Khan"
+            }
+          ],
+          "categories": [
+            "physics.hist-ph",
+            "hep-th"
+          ]
+        },
+        {
+          "id": "1803.03937",
+          "title": "From Tarski to Gödel. Or, how to derive the Second Incompleteness Theorem from the Undefinability of Truth without Self-reference",
+          "authors": [
+            {
+              "name": "Albert Visser"
+            }
+          ],
+          "categories": [
+            "math.LO"
+          ]
+        },
+        {
+          "id": "1911.10806",
+          "title": "Detecting Unknown Behaviors by Pre-defined Behaviours: An Bayesian Non-parametric Approach",
+          "authors": [
+            {
+              "name": "Jin Watanabe"
+            },
+            {
+              "name": "Takatomi Kubo"
+            },
+            {
+              "name": "Fan Yang"
+            },
+            {
+              "name": "Kazushi Ikeda"
+            }
+          ],
+          "categories": [
+            "cs.CY",
+            "cs.LG"
+          ]
+        },
+        {
+          "id": "2210.02168",
+          "title": "An Active Learning Reliability Method for Systems with Partially Defined Performance Functions",
+          "authors": [
+            {
+              "name": "Jonathan Sadeghi"
+            },
+            {
+              "name": "Romain Mueller"
+            },
+            {
+              "name": "John Redford"
+            }
+          ],
+          "categories": [
+            "cs.LG"
+          ]
+        },
+        {
+          "id": "0711.1247",
+          "title": "Discovery of Quantum Hidden Variable",
+          "authors": [
+            {
+              "name": "Huai-yang Cui"
+            }
+          ],
+          "categories": [
+            "physics.gen-ph"
+          ]
+        },
+        {
+          "id": "1812.04307",
+          "title": "Analysis of the One-dimensional Euler-Lagrange equation of continuum mechanics with a Lagrangian of a special form",
+          "authors": [
+            {
+              "name": "E. I. Kaptsov"
+            },
+            {
+              "name": "S. V. Meleshko"
+            }
+          ],
+          "categories": [
+            "math-ph",
+            "math.AP"
+          ]
+        },
+        {
+          "id": "1909.12636",
+          "title": "On wild algebras and super-decomposable pure-injective modules",
+          "authors": [
+            {
+              "name": "Grzegorz Pastuszak"
+            }
+          ],
+          "categories": [
+            "math.RT",
+            "math.LO"
+          ]
+        },
+        {
+          "id": "2506.13990",
+          "title": "Machine Mirages: Defining the Undefined",
+          "authors": [
+            {
+              "name": "Hamidou Tembine"
+            }
+          ],
+          "categories": [
+            "cs.AI"
+          ]
+        },
+        {
+          "id": "2510.10410",
+          "title": "A Trace-based Approach for Code Safety Analysis",
+          "authors": [
+            {
+              "name": "Hui Xu"
+            }
+          ],
+          "categories": [
+            "cs.PL",
+            "cs.SE"
+          ]
+        },
+        {
+          "id": "2106.15167",
+          "title": "Learning from Miscellaneous Other-Class Words for Few-shot Named Entity Recognition",
+          "authors": [
+            {
+              "name": "Meihan Tong"
+            },
+            {
+              "name": "Shuai Wang"
+            },
+            {
+              "name": "Bin Xu"
+            },
+            {
+              "name": "Yixin Cao"
+            },
+            {
+              "name": "Minghui Liu"
+            },
+            {
+              "name": "Lei Hou"
+            },
+            {
+              "name": "Juanzi Li"
+            }
+          ],
+          "categories": [
+            "cs.CL"
+          ]
+        },
+        {
+          "id": "physics/0603091",
+          "title": "A defect of the electromagnetism and it serves as a hidden variable for quantum mechanics",
+          "authors": [
+            {
+              "name": "Huai-yang Cui"
+            }
+          ],
+          "categories": [
+            "physics.gen-ph",
+            "physics.class-ph"
+          ]
+        },
+        {
+          "id": "1309.5821",
+          "title": "Undefined By Data: A Survey of Big Data Definitions",
+          "authors": [
+            {
+              "name": "Jonathan Stuart Ward"
+            },
+            {
+              "name": "Adam Barker"
+            }
+          ],
+          "categories": [
+            "cs.DB"
+          ]
+        },
+        {
+          "id": "1805.00343",
+          "title": "Teaching Differentiation: A Rare Case for the Problem of the Slope of the Tangent Line",
+          "authors": [
+            {
+              "name": "Roman Kvasov"
+            }
+          ],
+          "categories": [
+            "math.HO"
+          ]
+        },
+        {
+          "id": "2210.01083",
+          "title": "Schroedinger cats and quantum complementarity",
+          "authors": [
+            {
+              "name": "Lorenzo Maccone"
+            }
+          ],
+          "categories": [
+            "quant-ph",
+            "physics.ed-ph"
+          ]
+        },
+        {
+          "id": "2202.06242",
+          "title": "Beyond NaN: Resiliency of Optimization Layers in The Face of Infeasibility",
+          "authors": [
+            {
+              "name": "Wai Tuck Wong"
+            },
+            {
+              "name": "Sarah Kinsey"
+            },
+            {
+              "name": "Ramesha Karunasena"
+            },
+            {
+              "name": "Thanh Nguyen"
+            },
+            {
+              "name": "Arunesh Sinha"
+            }
+          ],
+          "categories": [
+            "cs.LG",
+            "cs.CR",
+            "math.OC"
+          ]
+        },
+        {
+          "id": "2504.01527",
+          "title": "Beyond Nearest Neighbor Interpolation in Data Augmentation",
+          "authors": [
+            {
+              "name": "Olivier Rukundo"
+            }
+          ],
+          "categories": [
+            "cs.CV",
+            "eess.IV"
+          ]
+        },
+        {
+          "id": "1205.2679",
+          "title": "Testing means from sampling populations with undefined labels",
+          "authors": [
+            {
+              "name": "Florent Autin"
+            },
+            {
+              "name": "Christophe Pouet"
+            }
+          ],
+          "categories": [
+            "math.ST"
+          ]
+        },
+        {
+          "id": "2109.14951",
+          "title": "Causality in a qubit-based quantum switch",
+          "authors": [
+            {
+              "name": "Carlos Sabín"
+            }
+          ],
+          "categories": [
+            "quant-ph"
+          ]
+        },
+        {
+          "id": "2008.12643",
+          "title": "On the Notion of Equal Figures in Euclid",
+          "authors": [
+            {
+              "name": "Michael Beeson"
+            }
+          ],
+          "categories": [
+            "math.LO",
+            "cs.LO",
+            "math.MG"
+          ]
+        },
+        {
+          "id": "0902.4598",
+          "title": "Comment on \"A generalized Langevin formalism of complete DNA melting transition\"",
+          "authors": [
+            {
+              "name": "Titus S. van Erp"
+            },
+            {
+              "name": "Santiago Cuesta-Lopez"
+            },
+            {
+              "name": "Johannes-Geert Hagmann"
+            },
+            {
+              "name": "Michel Peyrard"
+            }
+          ],
+          "categories": [
+            "physics.bio-ph",
+            "cond-mat.soft"
+          ]
+        },
+        {
+          "id": "1707.08245",
+          "title": "Non-commutative crepant resolutions for some toric singularities II",
+          "authors": [
+            {
+              "name": "Špela Špenko"
+            },
+            {
+              "name": "Michel Van den Bergh"
+            }
+          ],
+          "categories": [
+            "math.AG",
+            "math.RA"
+          ]
+        },
+        {
+          "id": "cmp-lg/9712003",
+          "title": "Context as a Spurious Concept",
+          "authors": [
+            {
+              "name": "Graeme Hirst"
+            }
+          ],
+          "categories": [
+            "cs.CL"
+          ]
+        },
+        {
+          "id": "cond-mat/9709082",
+          "title": "Violation of Scaling in the Contact Process with Quenched Disorder",
+          "authors": [
+            {
+              "name": "Ronald Dickman"
+            },
+            {
+              "name": "Adriana G. Moreira"
+            }
+          ],
+          "categories": [
+            "cond-mat.stat-mech"
+          ]
+        },
+        {
+          "id": "1408.3827",
+          "title": "Feature-Rich Magnetic Quantization in Sliding Bilayer Graphenes",
+          "authors": [
+            {
+              "name": "Yao-Kung Huang"
+            },
+            {
+              "name": "Szu-Chao Chen"
+            },
+            {
+              "name": "Yen-Hung Ho"
+            },
+            {
+              "name": "Chiun-Yan Lin"
+            },
+            {
+              "name": "Ming-Fa Lin"
+            }
+          ],
+          "categories": [
+            "cond-mat.mtrl-sci",
+            "cond-mat.mes-hall"
+          ]
+        },
+        {
+          "id": "1406.7492",
+          "title": "Andrews' Type Theory with Undefinedness",
+          "authors": [
+            {
+              "name": "William M. Farmer"
+            }
+          ],
+          "categories": [
+            "math.LO",
+            "cs.LO"
+          ]
+        },
+        {
+          "id": "2211.13543",
+          "title": "Impure Simplicial Complexes: Complete Axiomatization",
+          "authors": [
+            {
+              "name": "Rojo Randrianomentsoa"
+            },
+            {
+              "name": "Hans van Ditmarsch"
+            },
+            {
+              "name": "Roman Kuznets"
+            }
+          ],
+          "categories": [
+            "cs.LO",
+            "cs.DC"
+          ]
+        },
+        {
+          "id": "1511.03227",
+          "title": "Primordial brusque bounce in Born-Infeld determinantal gravity",
+          "authors": [
+            {
+              "name": "Franco Fiorini"
+            }
+          ],
+          "categories": [
+            "gr-qc",
+            "hep-th"
+          ]
+        },
+        {
+          "id": "1703.09064",
+          "title": "Memristor equations: incomplete physics and undefined passivity/activity",
+          "authors": [
+            {
+              "name": "Kyle Sundqvist"
+            },
+            {
+              "name": "David K. Ferry"
+            },
+            {
+              "name": "Laszlo B. Kish"
+            }
+          ],
+          "categories": [
+            "cs.ET"
+          ]
+        },
+        {
+          "id": "1804.08488",
+          "title": "Shared aggregate sets in answer set programming",
+          "authors": [
+            {
+              "name": "Mario Alviano"
+            },
+            {
+              "name": "Carmine Dodaro"
+            },
+            {
+              "name": "Marco Maratea"
+            }
+          ],
+          "categories": [
+            "cs.LO"
+          ]
+        },
+        {
+          "id": "2112.04436",
+          "title": "A Completeness Proof for A Regular Predicate Logic with Undefined Truth Value",
+          "authors": [
+            {
+              "name": "Antti Valmari"
+            },
+            {
+              "name": "Lauri Hella"
+            }
+          ],
+          "categories": [
+            "math.LO",
+            "cs.LO"
+          ]
+        },
+        {
+          "id": "1802.00588",
+          "title": "When Good Components Go Bad: Formally Secure Compilation Despite Dynamic Compromise",
+          "authors": [
+            {
+              "name": "Carmine Abate"
+            },
+            {
+              "name": "Arthur Azevedo de Amorim"
+            },
+            {
+              "name": "Roberto Blanco"
+            },
+            {
+              "name": "Ana Nora Evans"
+            },
+            {
+              "name": "Guglielmo Fachini"
+            },
+            {
+              "name": "Catalin Hritcu"
+            },
+            {
+              "name": "Théo Laurent"
+            },
+            {
+              "name": "Benjamin C. Pierce"
+            },
+            {
+              "name": "Marco Stronati"
+            },
+            {
+              "name": "Jérémy Thibault"
+            },
+            {
+              "name": "Andrew Tolmach"
+            }
+          ],
+          "categories": [
+            "cs.CR",
+            "cs.PL"
+          ]
+        },
+        {
+          "id": "quant-ph/0002067",
+          "title": "Rules for Integrals over Products of Distributions from Coordinate Independence of Path Integrals",
+          "authors": [
+            {
+              "name": "H. Kleinert"
+            },
+            {
+              "name": "A. Chervyakov"
+            }
+          ],
+          "categories": [
+            "quant-ph"
+          ]
+        },
+        {
+          "id": "quant-ph/0403204",
+          "title": "Off-diagonal quantum holonomy along density operators",
+          "authors": [
+            {
+              "name": "Stefan Filipp"
+            },
+            {
+              "name": "Erik Sjöqvist"
+            }
+          ],
+          "categories": [
+            "quant-ph"
+          ]
+        },
+        {
+          "id": "2410.01981",
+          "title": "Surveying the Rust Verification Landscape",
+          "authors": [
+            {
+              "name": "Alex Le Blanc"
+            },
+            {
+              "name": "Patrick Lam"
+            }
+          ],
+          "categories": [
+            "cs.PL"
+          ]
+        },
+        {
+          "id": "2407.04917",
+          "title": "A Calculus for Unreachable Code",
+          "authors": [
+            {
+              "name": "Peter Zhong"
+            },
+            {
+              "name": "Shu-Hung You"
+            },
+            {
+              "name": "Simone Campanoni"
+            },
+            {
+              "name": "Robert Bruce Findler"
+            },
+            {
+              "name": "Matthew Flatt"
+            },
+            {
+              "name": "Christos Dimoulas"
+            }
+          ],
+          "categories": [
+            "cs.PL"
+          ]
+        },
+        {
+          "id": "1710.07308",
+          "title": "Formally Secure Compilation of Unsafe Low-Level Components (Extended Abstract)",
+          "authors": [
+            {
+              "name": "Guglielmo Fachini"
+            },
+            {
+              "name": "Catalin Hritcu"
+            },
+            {
+              "name": "Marco Stronati"
+            },
+            {
+              "name": "Ana Nora Evans"
+            },
+            {
+              "name": "Théo Laurent"
+            },
+            {
+              "name": "Arthur Azevedo de Amorim"
+            },
+            {
+              "name": "Benjamin C. Pierce"
+            },
+            {
+              "name": "Andrew Tolmach"
+            }
+          ],
+          "categories": [
+            "cs.CR",
+            "cs.PL"
+          ]
+        },
+        {
+          "id": "gr-qc/0006036",
+          "title": "Nonthermal nature of extremal Kerr black holes",
+          "authors": [
+            {
+              "name": "Tony Rothman"
+            }
+          ],
+          "categories": [
+            "gr-qc"
+          ]
+        },
+        {
+          "id": "2112.11659",
+          "title": "Controlling wave-particle duality with quantum entanglement",
+          "authors": [
+            {
+              "name": "Kai Wang"
+            },
+            {
+              "name": "Daniel R. Terno"
+            },
+            {
+              "name": "Caslav Brukner"
+            },
+            {
+              "name": "Shining Zhu"
+            },
+            {
+              "name": "Xiao-Song Ma"
+            }
+          ],
+          "categories": [
+            "quant-ph",
+            "physics.optics"
+          ]
+        },
+        {
+          "id": "1601.02233",
+          "title": "Entanglement indicators for quantum optical fields: three-mode multiport beamsplitters EPR interference experiments",
+          "authors": [
+            {
+              "name": "Junghee Ryu"
+            },
+            {
+              "name": "Marcin Marciniak"
+            },
+            {
+              "name": "Marcin Wieśniak"
+            },
+            {
+              "name": "Marek Żukowski"
+            }
+          ],
+          "categories": [
+            "quant-ph"
+          ]
+        },
+        {
+          "id": "2401.16277",
+          "title": "SECOMP: Formally Secure Compilation of Compartmentalized C Programs",
+          "authors": [
+            {
+              "name": "Jérémy Thibault"
+            },
+            {
+              "name": "Roberto Blanco"
+            },
+            {
+              "name": "Dongjae Lee"
+            },
+            {
+              "name": "Sven Argo"
+            },
+            {
+              "name": "Arthur Azevedo de Amorim"
+            },
+            {
+              "name": "Aïna Linn Georges"
+            },
+            {
+              "name": "Catalin Hritcu"
+            },
+            {
+              "name": "Andrew Tolmach"
+            }
+          ],
+          "categories": [
+            "cs.PL",
+            "cs.CR"
+          ]
+        },
+        {
+          "id": "1205.4442",
+          "title": "Harmonic functions on the Sierpinski triangle",
+          "authors": [
+            {
+              "name": "Ilia Smilga"
+            }
+          ],
+          "categories": [
+            "math.DS"
+          ]
+        },
+        {
+          "id": "1506.02652",
+          "title": "Chemical descriptors, convexity and structure of density matrices in molecular systems",
+          "authors": [
+            {
+              "name": "Roberto C. Bochicchio"
+            }
+          ],
+          "categories": [
+            "physics.chem-ph",
+            "quant-ph"
+          ]
+        },
+        {
+          "id": "1905.06416",
+          "title": "Geometric phase associated with Poincaré beams due to unfolding of fractional optical vortex beams",
+          "authors": [
+            {
+              "name": "Satyajit Maji"
+            },
+            {
+              "name": "Aswini K. Pattanayak"
+            },
+            {
+              "name": "Maruthi M. Brundavanam"
+            }
+          ],
+          "categories": [
+            "physics.optics"
+          ]
+        },
+        {
+          "id": "math/0606643",
+          "title": "Entropy And Vision",
+          "authors": [
+            {
+              "name": "Rami Kanhouche"
+            }
+          ],
+          "categories": [
+            "math.PR",
+            "cs.CV",
+            "cs.DB",
+            "cs.DM",
+            "cs.LG",
+            "math.CO"
+          ]
+        },
+        {
+          "id": "hep-lat/0208026",
+          "title": "Transiting topological sectors with the overlap",
+          "authors": [
+            {
+              "name": "Michael Creutz"
+            }
+          ],
+          "categories": [
+            "hep-lat"
+          ]
+        },
+        {
+          "id": "1101.2798",
+          "title": "On Logical Extension of Algebraic Division",
+          "authors": [
+            {
+              "name": "Mohammed Abubakr"
+            }
+          ],
+          "categories": [
+            "cs.LO"
+          ]
+        },
+        {
+          "id": "2507.17373",
+          "title": "SFUOD: Source-Free Unknown Object Detection",
+          "authors": [
+            {
+              "name": "Keon-Hee Park"
+            },
+            {
+              "name": "Seun-An Choe"
+            },
+            {
+              "name": "Gyeong-Moon Park"
+            }
+          ],
+          "categories": [
+            "cs.CV",
+            "cs.AI"
+          ]
+        },
+        {
+          "id": "2412.05919",
+          "title": "Estimating Spillover Effects in the Presence of Isolated Nodes",
+          "authors": [
+            {
+              "name": "Bora Kim"
+            }
+          ],
+          "categories": [
+            "econ.EM"
+          ]
+        },
+        {
+          "id": "1301.5163",
+          "title": "Cosmological models with spinor and scalar fields by Noether symmetry approach",
+          "authors": [
+            {
+              "name": "Gilberto M. Kremer"
+            },
+            {
+              "name": "Rudinei C. de Souza"
+            }
+          ],
+          "categories": [
+            "gr-qc"
+          ]
+        },
+        {
+          "id": "1502.05562",
+          "title": "A New Penta-valued Logic Based Knowledge Representation",
+          "authors": [
+            {
+              "name": "Vasile Patrascu"
+            }
+          ],
+          "categories": [
+            "cs.AI"
+          ]
+        },
+        {
+          "id": "cs/0410014",
+          "title": "Normal forms for Answer Sets Programming",
+          "authors": [
+            {
+              "name": "Stefania Costantini"
+            },
+            {
+              "name": "Alessandro Provetti"
+            }
+          ],
+          "categories": [
+            "cs.AI"
+          ]
+        },
+        {
+          "id": "1412.8490",
+          "title": "Image Encryption and Decryption in A Modification of ElGamal Cryptosystem in MATLAB",
+          "authors": [
+            {
+              "name": "Hayder Raheem Hashim"
+            },
+            {
+              "name": "Irtifaa Abdalkadum Neamaa"
+            }
+          ],
+          "categories": [
+            "cs.CR"
+          ]
+        },
+        {
+          "id": "1511.07339",
+          "title": "Fractional vortex Hilbert's Hotel",
+          "authors": [
+            {
+              "name": "Greg Gbur"
+            }
+          ],
+          "categories": [
+            "physics.optics"
+          ]
+        },
+        {
+          "id": "astro-ph/0104089",
+          "title": "Effects of perturbing forces on the orbital stability of planetary systems",
+          "authors": [
+            {
+              "name": "L. Kiseleva-Eggleton"
+            },
+            {
+              "name": "E. Bois"
+            }
+          ],
+          "categories": [
+            "astro-ph"
+          ]
+        },
+        {
+          "id": "0801.2089",
+          "title": "Some explicit constructions of integral structures in quaternion algebras",
+          "authors": [
+            {
+              "name": "Miriam Ciavarella"
+            },
+            {
+              "name": "Lea Terracini"
+            }
+          ],
+          "categories": [
+            "math.NT",
+            "math.AG"
+          ]
+        },
+        {
+          "id": "0907.5598",
+          "title": "Convergence of Expected Utility for Universal AI",
+          "authors": [
+            {
+              "name": "Peter de Blanc"
+            }
+          ],
+          "categories": [
+            "cs.AI"
+          ]
+        },
+        {
+          "id": "1211.6718",
+          "title": "Stable algorithm for event detection in event-driven particle dynamics",
+          "authors": [
+            {
+              "name": "Marcus N. Bannerman"
+            },
+            {
+              "name": "Severin Strobl"
+            },
+            {
+              "name": "Arno Formella"
+            },
+            {
+              "name": "Thorsten Poeschel"
+            }
+          ],
+          "categories": [
+            "physics.comp-ph"
+          ]
+        },
+        {
+          "id": "2103.03032",
+          "title": "Wanted Dead or Alive : Epistemic logic for impure simplicial complexes",
+          "authors": [
+            {
+              "name": "Hans van Ditmarsch"
+            },
+            {
+              "name": "Roman Kuznets"
+            }
+          ],
+          "categories": [
+            "cs.DC",
+            "cs.LO"
+          ]
+        },
+        {
+          "id": "2401.10459",
+          "title": "On the undefinability of pathological Banach spaces",
+          "authors": [
+            {
+              "name": "Clovis Hamel"
+            },
+            {
+              "name": "Franklin D. Tall"
+            }
+          ],
+          "categories": [
+            "math.LO"
+          ]
+        },
+        {
+          "id": "1911.08880",
+          "title": "On the Magnetic Current Density in the Maxwell Equations Based on the Noether Theorem",
+          "authors": [
+            {
+              "name": "Mehdi Nosrati"
+            }
+          ],
+          "categories": [
+            "physics.gen-ph"
+          ]
+        },
+        {
+          "id": "2510.01072",
+          "title": "Lessons Learned So Far From a Community Effort to Verify the Rust Standard Library (work-in-progress)",
+          "authors": [
+            {
+              "name": "Alex Le Blanc"
+            },
+            {
+              "name": "Patrick Lam"
+            }
+          ],
+          "categories": [
+            "cs.PL"
+          ]
+        },
+        {
+          "id": "2302.12581",
+          "title": "The variance-gamma ratio distribution",
+          "authors": [
+            {
+              "name": "Robert E. Gaunt"
+            },
+            {
+              "name": "Siqi Li"
+            }
+          ],
+          "categories": [
+            "math.PR"
+          ]
+        },
+        {
+          "id": "0804.2507",
+          "title": "Constraining the nuclear gluon distribution in $eA$ processes at RHIC",
+          "authors": [
+            {
+              "name": "E. R. Cazaroto"
+            },
+            {
+              "name": "F. Carvalho"
+            },
+            {
+              "name": "V. P. Goncalves"
+            },
+            {
+              "name": "F. S. Navarra"
+            }
+          ],
+          "categories": [
+            "hep-ph"
+          ]
+        },
+        {
+          "id": "0909.0367",
+          "title": "Quantum pumping in deformable quantum dots",
+          "authors": [
+            {
+              "name": "F. Romeo"
+            },
+            {
+              "name": "R. Citro"
+            }
+          ],
+          "categories": [
+            "cond-mat.mes-hall"
+          ]
+        },
+        {
+          "id": "1501.04273",
+          "title": "A note on the reciprocal theorem for the swimming of simple bodies",
+          "authors": [
+            {
+              "name": "Gwynn J. Elfring"
+            }
+          ],
+          "categories": [
+            "physics.flu-dyn"
+          ]
+        },
+        {
+          "id": "1805.08209",
+          "title": "Possible Worlds, Incompleteness and Undefinability",
+          "authors": [
+            {
+              "name": "Christopher F. S. Maligec"
+            }
+          ],
+          "categories": [
+            "math.LO"
+          ]
+        },
+        {
+          "id": "1203.4579",
+          "title": "Metrics and norms used for obtaining sparse solutions to underdetermined Systems of Linear Equations",
+          "authors": [
+            {
+              "name": "Leoni Dalla"
+            },
+            {
+              "name": "George K. Papageorgiou"
+            }
+          ],
+          "categories": [
+            "math.OC",
+            "math.FA"
+          ]
+        },
+        {
+          "id": "2211.12260",
+          "title": "Some Useful Collective Properties of Bessel, Marcum Q-Functions and Laguerre Polynomials",
+          "authors": [
+            {
+              "name": "Hakan Ozturk"
+            },
+            {
+              "name": "Fikret Anli"
+            },
+            {
+              "name": "Abdelouahab Kadem"
+            }
+          ],
+          "categories": [
+            "math.CA",
+            "math-ph"
+          ]
+        },
+        {
+          "id": "1204.1370",
+          "title": "Dirac tachyons and antitachyons in many-particle system",
+          "authors": [
+            {
+              "name": "Ernst Trojan"
+            }
+          ],
+          "categories": [
+            "hep-ph"
+          ]
+        },
+        {
+          "id": "1210.3363",
+          "title": "Why does the Jeans Swindle work?",
+          "authors": [
+            {
+              "name": "M. Falco"
+            },
+            {
+              "name": "S. H. Hansen"
+            },
+            {
+              "name": "R. Wojtak"
+            },
+            {
+              "name": "G. A. Mamon"
+            }
+          ],
+          "categories": [
+            "astro-ph.CO"
+          ]
+        },
+        {
+          "id": "1507.04406",
+          "title": "Skolem-Noether for nilpotent products",
+          "authors": [
+            {
+              "name": "James B. Wilson"
+            }
+          ],
+          "categories": [
+            "math.GR",
+            "math.RA"
+          ]
+        },
+        {
+          "id": "1612.00252",
+          "title": "Disjoint-union partial algebras",
+          "authors": [
+            {
+              "name": "Robin Hirsch"
+            },
+            {
+              "name": "Brett McLean"
+            }
+          ],
+          "categories": [
+            "math.RA",
+            "cs.LO",
+            "math.LO"
+          ]
+        },
+        {
+          "id": "1607.02790",
+          "title": "Hyper Normalisation and Conditioning for Discrete Probability Distributions",
+          "authors": [
+            {
+              "name": "Bart Jacobs"
+            }
+          ],
+          "categories": [
+            "cs.LO"
+          ]
+        },
+        {
+          "id": "1704.06799",
+          "title": "Renormalization of SU(2) Yang-Mills theory with Flow Equations",
+          "authors": [
+            {
+              "name": "Alexander N. Efremov"
+            },
+            {
+              "name": "Riccardo Guida"
+            },
+            {
+              "name": "Christoph Kopper"
+            }
+          ],
+          "categories": [
+            "math-ph",
+            "hep-th"
+          ]
+        },
+        {
+          "id": "1306.6004",
+          "title": "A logical treatment of special relativity, with and without faster-than-light observers",
+          "authors": [
+            {
+              "name": "Benjamin Hoffman"
+            }
+          ],
+          "categories": [
+            "math.LO",
+            "math-ph"
+          ]
+        },
+        {
+          "id": "1005.5596",
+          "title": "A generic tool to generate a lexicon for NLP from Lexicon-Grammar tables",
+          "authors": [
+            {
+              "name": "Matthieu Constant"
+            },
+            {
+              "name": "Elsa Tolone"
+            }
+          ],
+          "categories": [
+            "cs.CL"
+          ]
+        },
+        {
+          "id": "1311.5857",
+          "title": "Improving Frenet's Frame Using Bishop's Frame",
+          "authors": [
+            {
+              "name": "Daniel Carroll"
+            },
+            {
+              "name": "Emek Köse"
+            },
+            {
+              "name": "Ivan Sterling"
+            }
+          ],
+          "categories": [
+            "math.DG"
+          ]
+        },
+        {
+          "id": "1705.08796",
+          "title": "Robust procedure for creating and characterizing the atomic structure of scanning tunneling microscope tips",
+          "authors": [
+            {
+              "name": "Sumit Tewari"
+            },
+            {
+              "name": "Koen M. Bastiaans"
+            },
+            {
+              "name": "Milan P. Allan"
+            },
+            {
+              "name": "Jan M. van Ruitenbeek"
+            }
+          ],
+          "categories": [
+            "cond-mat.mes-hall",
+            "cond-mat.str-el"
+          ]
+        },
+        {
+          "id": "1303.6001",
+          "title": "Generalizing k-means for an arbitrary distance matrix",
+          "authors": [
+            {
+              "name": "Balázs Szalkai"
+            }
+          ],
+          "categories": [
+            "cs.LG",
+            "cs.CV",
+            "stat.ML"
+          ]
+        },
+        {
+          "id": "0912.5419",
+          "title": "Breakdown of Normal Hyperbolicity for a Family of Invariant Manifolds with Generalized Lyapunov-Type Numbers Uniformly Bounded below Their Critical Values",
+          "authors": [
+            {
+              "name": "Dennis Guang Yang"
+            }
+          ],
+          "categories": [
+            "math.DS"
+          ]
+        },
+        {
+          "id": "quant-ph/0305114",
+          "title": "Illustrating the concept of quantum information",
+          "authors": [
+            {
+              "name": "Richard Jozsa"
+            }
+          ],
+          "categories": [
+            "quant-ph"
+          ]
+        },
+        {
+          "id": "0909.5271",
+          "title": "Partial Komori fields and imperative Komori fields",
+          "authors": [
+            {
+              "name": "J. A. Bergstra"
+            },
+            {
+              "name": "C. A. Middelburg"
+            }
+          ],
+          "categories": [
+            "math.RA",
+            "cs.LO"
+          ]
+        },
+        {
+          "id": "2211.14956",
+          "title": "Hunt for 3-Schur polynomials",
+          "authors": [
+            {
+              "name": "A. Morozov"
+            },
+            {
+              "name": "N. Tselousov"
+            }
+          ],
+          "categories": [
+            "hep-th",
+            "math-ph",
+            "math.QA"
+          ]
+        },
+        {
+          "id": "2312.08117",
+          "title": "Memory Simulations, Security and Optimization in a Verified Compiler",
+          "authors": [
+            {
+              "name": "David Monniaux"
+            }
+          ],
+          "categories": [
+            "cs.LO",
+            "cs.PL"
+          ]
+        },
+        {
+          "id": "2210.12545",
+          "title": "Francois Viete and his contribution to mathematics",
+          "authors": [
+            {
+              "name": "Athanasios Paraskevopoulos"
+            }
+          ],
+          "categories": [
+            "math.HO"
+          ]
+        }
+      ]
+    }
+  ]
+}

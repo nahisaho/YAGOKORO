@@ -1,0 +1,297 @@
+{
+  "experiment": "EXP-001",
+  "title": "CooccurrenceAnalyzer による関係発見",
+  "timestamp": "2025-12-31T00:03:34.159Z",
+  "config": {
+    "minCount": 2,
+    "levels": [
+      "document",
+      "paragraph",
+      "sentence"
+    ],
+    "normalizeNames": true
+  },
+  "documents": [
+    {
+      "id": "transformer-paper",
+      "title": "Attention Is All You Need"
+    },
+    {
+      "id": "bert-paper",
+      "title": "BERT"
+    }
+  ],
+  "entities": [
+    {
+      "id": "1",
+      "name": "Transformer",
+      "type": "Architecture"
+    },
+    {
+      "id": "2",
+      "name": "attention",
+      "type": "Technique"
+    },
+    {
+      "id": "3",
+      "name": "self-attention",
+      "type": "Technique"
+    },
+    {
+      "id": "4",
+      "name": "encoder",
+      "type": "Component"
+    },
+    {
+      "id": "5",
+      "name": "decoder",
+      "type": "Component"
+    },
+    {
+      "id": "6",
+      "name": "BERT",
+      "type": "Model"
+    },
+    {
+      "id": "7",
+      "name": "GPT",
+      "type": "Model"
+    },
+    {
+      "id": "8",
+      "name": "language model",
+      "type": "Concept"
+    },
+    {
+      "id": "9",
+      "name": "pre-training",
+      "type": "Technique"
+    },
+    {
+      "id": "10",
+      "name": "fine-tuning",
+      "type": "Technique"
+    }
+  ],
+  "results": {
+    "pairCount": 41,
+    "topPairs": [
+      {
+        "sourceId": "2",
+        "sourceName": "attention",
+        "sourceType": "Technique",
+        "targetId": "3",
+        "targetName": "self-attention",
+        "targetType": "Technique",
+        "count": 58,
+        "documentIds": [
+          "transformer-paper",
+          "bert-paper"
+        ],
+        "level": "sentence"
+      },
+      {
+        "sourceId": "6",
+        "sourceName": "BERT",
+        "sourceType": "Model",
+        "targetId": "10",
+        "targetName": "fine-tuning",
+        "targetType": "Technique",
+        "count": 41,
+        "documentIds": [
+          "bert-paper"
+        ],
+        "level": "sentence"
+      },
+      {
+        "sourceId": "4",
+        "sourceName": "encoder",
+        "sourceType": "Component",
+        "targetId": "5",
+        "targetName": "decoder",
+        "targetType": "Component",
+        "count": 36,
+        "documentIds": [
+          "transformer-paper",
+          "bert-paper"
+        ],
+        "level": "sentence"
+      },
+      {
+        "sourceId": "6",
+        "sourceName": "BERT",
+        "sourceType": "Model",
+        "targetId": "7",
+        "targetName": "GPT",
+        "targetType": "Model",
+        "count": 33,
+        "documentIds": [
+          "bert-paper"
+        ],
+        "level": "sentence"
+      },
+      {
+        "sourceId": "1",
+        "sourceName": "Transformer",
+        "sourceType": "Architecture",
+        "targetId": "2",
+        "targetName": "attention",
+        "targetType": "Technique",
+        "count": 30,
+        "documentIds": [
+          "transformer-paper",
+          "bert-paper"
+        ],
+        "level": "sentence"
+      },
+      {
+        "sourceId": "9",
+        "sourceName": "pre-training",
+        "sourceType": "Technique",
+        "targetId": "10",
+        "targetName": "fine-tuning",
+        "targetType": "Technique",
+        "count": 30,
+        "documentIds": [
+          "bert-paper"
+        ],
+        "level": "sentence"
+      },
+      {
+        "sourceId": "2",
+        "sourceName": "attention",
+        "sourceType": "Technique",
+        "targetId": "4",
+        "targetName": "encoder",
+        "targetType": "Component",
+        "count": 29,
+        "documentIds": [
+          "transformer-paper",
+          "bert-paper"
+        ],
+        "level": "sentence"
+      },
+      {
+        "sourceId": "6",
+        "sourceName": "BERT",
+        "sourceType": "Model",
+        "targetId": "9",
+        "targetName": "pre-training",
+        "targetType": "Technique",
+        "count": 28,
+        "documentIds": [
+          "bert-paper"
+        ],
+        "level": "sentence"
+      },
+      {
+        "sourceId": "8",
+        "sourceName": "language model",
+        "sourceType": "Concept",
+        "targetId": "9",
+        "targetName": "pre-training",
+        "targetType": "Technique",
+        "count": 23,
+        "documentIds": [
+          "bert-paper"
+        ],
+        "level": "sentence"
+      },
+      {
+        "sourceId": "2",
+        "sourceName": "attention",
+        "sourceType": "Technique",
+        "targetId": "5",
+        "targetName": "decoder",
+        "targetType": "Component",
+        "count": 21,
+        "documentIds": [
+          "transformer-paper"
+        ],
+        "level": "sentence"
+      }
+    ],
+    "relationCandidates": [
+      {
+        "source": "attention",
+        "target": "self-attention",
+        "sourceType": "Technique",
+        "targetType": "Technique",
+        "suggestedRelation": "RELATED_TO",
+        "count": 58
+      },
+      {
+        "source": "BERT",
+        "target": "fine-tuning",
+        "sourceType": "Model",
+        "targetType": "Technique",
+        "suggestedRelation": "USES_TECHNIQUE",
+        "count": 41
+      },
+      {
+        "source": "encoder",
+        "target": "decoder",
+        "sourceType": "Component",
+        "targetType": "Component",
+        "suggestedRelation": "RELATED_TO",
+        "count": 36
+      },
+      {
+        "source": "BERT",
+        "target": "GPT",
+        "sourceType": "Model",
+        "targetType": "Model",
+        "suggestedRelation": "RELATED_TO",
+        "count": 33
+      },
+      {
+        "source": "Transformer",
+        "target": "attention",
+        "sourceType": "Architecture",
+        "targetType": "Technique",
+        "suggestedRelation": "USES_TECHNIQUE",
+        "count": 30
+      },
+      {
+        "source": "pre-training",
+        "target": "fine-tuning",
+        "sourceType": "Technique",
+        "targetType": "Technique",
+        "suggestedRelation": "RELATED_TO",
+        "count": 30
+      },
+      {
+        "source": "attention",
+        "target": "encoder",
+        "sourceType": "Technique",
+        "targetType": "Component",
+        "suggestedRelation": "APPLIED_TO",
+        "count": 29
+      },
+      {
+        "source": "BERT",
+        "target": "pre-training",
+        "sourceType": "Model",
+        "targetType": "Technique",
+        "suggestedRelation": "USES_TECHNIQUE",
+        "count": 28
+      },
+      {
+        "source": "language model",
+        "target": "pre-training",
+        "sourceType": "Concept",
+        "targetType": "Technique",
+        "suggestedRelation": "RELATED_TO",
+        "count": 23
+      },
+      {
+        "source": "attention",
+        "target": "decoder",
+        "sourceType": "Technique",
+        "targetType": "Component",
+        "suggestedRelation": "APPLIED_TO",
+        "count": 21
+      }
+    ]
+  }
+}

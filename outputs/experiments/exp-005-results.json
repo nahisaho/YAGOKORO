@@ -1,0 +1,45 @@
+{
+  "experiment": "EXP-005",
+  "title": "Deduplicator による論文重複検出",
+  "timestamp": "2025-12-31T00:08:41.904Z",
+  "config": {
+    "titleExactThreshold": 0.95,
+    "titleCandidateThreshold": 0.8,
+    "minAuthorMatches": 3
+  },
+  "statistics": {
+    "inputPapers": 9,
+    "duplicatesFound": 3,
+    "uniquePapers": 6,
+    "byType": {
+      "doi": 1,
+      "title": 2
+    }
+  },
+  "results": [
+    {
+      "paperId": "semantic-scholar-transformer",
+      "paperTitle": "Attention Is All You Need (Transformer)",
+      "matchedId": "arxiv-2017-transformer",
+      "matchType": "doi",
+      "similarity": 1,
+      "needsReview": false
+    },
+    {
+      "paperId": "another-transformer",
+      "paperTitle": "Attention is all you need",
+      "matchedId": "arxiv-2017-transformer",
+      "matchType": "title",
+      "similarity": 1,
+      "needsReview": false
+    },
+    {
+      "paperId": "gpt3-similar",
+      "paperTitle": "Language Models Are Few-Shot Learners",
+      "matchedId": "gpt3-paper",
+      "matchType": "title",
+      "similarity": 1,
+      "needsReview": false
+    }
+  ]
+}

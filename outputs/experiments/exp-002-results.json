@@ -1,0 +1,99 @@
+{
+  "experiment": "EXP-002",
+  "title": "PatternMatcher による関係タイプ推論",
+  "timestamp": "2025-12-31T00:04:22.248Z",
+  "config": {
+    "minConfidence": 0.3,
+    "useDefaultPatterns": true,
+    "entityWindowSize": 100
+  },
+  "statistics": {
+    "totalTexts": 17,
+    "totalMatches": 8,
+    "byRelationType": {
+      "DEVELOPED_BY": 2,
+      "TRAINED_ON": 1,
+      "USES_TECHNIQUE": 2,
+      "BASED_ON": 1,
+      "CITES": 1,
+      "EVALUATED_ON": 1
+    },
+    "patternUsage": {
+      "undefined": 8
+    }
+  },
+  "results": [
+    {
+      "textIndex": 1,
+      "text": "BERT was developed by Google AI Language team in 2018.",
+      "relationType": "DEVELOPED_BY",
+      "confidence": 0.947,
+      "source": "was developed by",
+      "target": "N/A",
+      "matchedText": "was developed by"
+    },
+    {
+      "textIndex": 2,
+      "text": "GPT-3 was created by OpenAI researchers.",
+      "relationType": "DEVELOPED_BY",
+      "confidence": 0.9465,
+      "source": "was created by",
+      "target": "N/A",
+      "matchedText": "was created by"
+    },
+    {
+      "textIndex": 4,
+      "text": "BERT was trained on BookCorpus and Wikipedia datasets.",
+      "relationType": "TRAINED_ON",
+      "confidence": 0.945,
+      "source": "trained on",
+      "target": "N/A",
+      "matchedText": "trained on"
+    },
+    {
+      "textIndex": 7,
+      "text": "BERT uses masked language modeling for pre-training.",
+      "relationType": "USES_TECHNIQUE",
+      "confidence": 0.7969999999999999,
+      "source": "uses",
+      "target": "N/A",
+      "matchedText": "uses"
+    },
+    {
+      "textIndex": 8,
+      "text": "GPT-3 employs few-shot learning techniques.",
+      "relationType": "USES_TECHNIQUE",
+      "confidence": 0.7965,
+      "source": "employs",
+      "target": "N/A",
+      "matchedText": "employs"
+    },
+    {
+      "textIndex": 10,
+      "text": "RoBERTa is derived from BERT with improved training.",
+      "relationType": "BASED_ON",
+      "confidence": 0.9455,
+      "source": "is derived from",
+      "target": "N/A",
+      "matchedText": "is derived from"
+    },
+    {
+      "textIndex": 12,
+      "text": "GPT-2 builds upon the original GPT architecture.",
+      "relationType": "CITES",
+      "confidence": 0.84,
+      "source": "builds upon",
+      "target": "N/A",
+      "matchedText": "builds upon"
+    },
+    {
+      "textIndex": 13,
+      "text": "BERT was evaluated on GLUE benchmark tasks.",
+      "relationType": "EVALUATED_ON",
+      "confidence": 0.947,
+      "source": "was evaluated on",
+      "target": "N/A",
+      "matchedText": "was evaluated on"
+    }
+  ]
+}

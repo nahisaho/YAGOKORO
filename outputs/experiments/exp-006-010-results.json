@@ -1,0 +1,52 @@
+{
+  "experiment": "EXP-006 to EXP-010",
+  "title": "v3.0.0 機能統合実験",
+  "timestamp": "2025-12-31T00:12:01.726Z",
+  "results": {
+    "EXP-006": {
+      "totalPapers": 37,
+      "totalChunks": 8749,
+      "avgChunksPerPaper": 236.45945945945945,
+      "categories": {
+        "アラインメント・安全性": 4,
+        "Transformer基盤": 3,
+        "効率的学習・スケーリング": 5,
+        "RAG・知識統合": 3,
+        "大規模言語モデル": 7,
+        "拡散モデル・画像生成": 4,
+        "マルチモーダル": 4,
+        "プロンプティング・推論": 4,
+        "創発能力・評価": 3
+      }
+    },
+    "EXP-007": {
+      "successes": 3,
+      "failures": 3,
+      "blocked": 2,
+      "state": "open"
+    },
+    "EXP-008": {
+      "tokenBucket": {
+        "allowed": 5,
+        "blocked": 5
+      },
+      "slidingWindow": {
+        "allowed": 3,
+        "blocked": 7
+      }
+    },
+    "EXP-009": {
+      "executionCount": 2,
+      "successCount": 2,
+      "status": "stopped",
+      "consecutiveFailures": 0
+    },
+    "EXP-010": {
+      "total": 37,
+      "successful": 32,
+      "failed": 5,
+      "successRate": 86.48648648648648,
+      "totalChunks": 5567
+    }
+  }
+}

@@ -2,7 +2,7 @@
 
 **Project**: YAGOKORO
 **Last Updated**: 2025-12-31
-**Version**: 4.0.0 ✅ Complete
+**Version**: 5.0.0 ✅ Complete
 
 ---
 
@@ -30,8 +30,9 @@ yagokoro/
 │   ├── ingestion/          # Layer 2: 論文自動取り込み [v3]
 │   ├── hitl/               # Layer 2: Human-in-the-Loop検証 [v3]
 │   ├── pipeline/           # Layer 2: 差分更新パイプライン [v3]
-│   ├── temporal/           # Layer 2: 時系列分析 [NEW v4]
-│   ├── researcher/         # Layer 2: 研究者ネットワーク [NEW v4]
+│   ├── temporal/           # Layer 2: 時系列分析 [v4]
+│   ├── researcher/         # Layer 2: 研究者ネットワーク [v4]
+│   ├── multilang/          # Layer 2: 多言語処理 [NEW v5]
 │   ├── neo4j/              # Layer 3: Neo4jリポジトリ
 │   ├── vector/             # Layer 3: Qdrantベクトルストア
 │   ├── cache/              # Layer 3: クエリキャッシュ [NEW v3]
@@ -218,6 +219,32 @@ yagokoro/
 | Analysis | InfluenceScorer (h-index, PageRank), CommunityDetector (Louvain) |
 | Path | ShortestPathFinder, CareerAnalyzer |
 | Service | ResearcherService (94 tests) |
+
+### Layer 2: Multilang (@yagokoro/multilang) [NEW v5]
+
+**Purpose**: 多言語論文処理（言語検出、翻訳、NER、リンキング）
+**Location**: `libs/multilang/`
+**Rules**:
+
+- Domain, Neo4jレイヤーに依存
+- Python/spaCy連携による多言語NLP
+- 翻訳APIフォールバック機構
+
+**Contents**:
+| カテゴリ | 内容 |
+|----------|------|
+| Detection | LanguageDetector (langdetect + spaCy ensemble) |
+| Translation | TranslationService (DeepL/Google fallback), TranslationCache |
+| NER | MultilingualNER (spaCy en/zh/ja/ko models) |
+| Linking | CrossLingualLinker (Neo4j vector similarity + string matching) |
+| Normalization | TermNormalizer (Unicode/case/stemming) |
+| Cache | MemoryCacheStorage, SQLiteCacheStorage, RedisCacheStorage |
+| Service | MultilingualService (75 tests) |
+
+**Python依存**:
+- langdetect: 言語検出
+- spaCy 3.x: NER・トークン化
+- spaCyモデル: en_core_web_sm, zh_core_web_sm, ja_core_news_sm, ko_core_news_sm
 
 ### Layer 3: Infrastructure (@yagokoro/neo4j, @yagokoro/vector, @yagokoro/cache)
 

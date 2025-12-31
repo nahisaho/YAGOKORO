@@ -2,7 +2,7 @@
 
 **Project**: YAGOKORO
 **Last Updated**: 2025-12-31
-**Status**: Phase 3 - v4.0.0 完成 ✅
+**Status**: Phase 4 - v5.0.0 完成 ✅
 
 ---
 
@@ -136,6 +136,43 @@ pip install docling
 - インデックス時にLLM不使用（NLPベース）
 - クエリ時にバジェット制御（Z100, Z500, Z1500）
 - 反復深化探索による効率的なチャンク取得
+
+### Multilingual Processing [NEW v5]
+
+| Aspect | Choice | Status |
+|--------|--------|--------|
+| Language Detection | **langdetect** | ✅ Confirmed |
+| NLP Framework | **spaCy 3.x** | ✅ Confirmed |
+| Translation (Primary) | **DeepL API** | ✅ Confirmed |
+| Translation (Fallback) | **Google Translate** | ✅ Confirmed |
+| Cache (Distributed) | **Redis** | ✅ Confirmed |
+| Cache (Persistent) | **SQLite** | ✅ Confirmed |
+
+**spaCyモデル**:
+| 言語 | モデル | サイズ |
+|------|--------|--------|
+| English | en_core_web_sm | 12MB |
+| Chinese | zh_core_web_sm | 46MB |
+| Japanese | ja_core_news_sm | 22MB |
+| Korean | ko_core_news_sm | 16MB |
+
+**Python セットアップ**:
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+pip install langdetect spacy
+python -m spacy download en_core_web_sm
+python -m spacy download zh_core_web_sm
+python -m spacy download ja_core_news_sm
+python -m spacy download ko_core_news_sm
+```
+
+**特徴**:
+- 高精度言語検出（langdetect + spaCyアンサンブル）
+- DeepL/Google翻訳の自動フォールバック
+- 4言語対応NER（en/zh/ja/ko）
+- クロスリンガルエンティティリンキング
+- 3層キャッシュ（Memory/SQLite/Redis）
 
 ### CLI & Development
 

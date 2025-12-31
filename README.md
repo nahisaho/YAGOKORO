@@ -1,9 +1,9 @@
-# YAGOKORO v4.0.0 - Generative AI 系譜 GraphRAG MCP システム
+# YAGOKORO v5.0.0 - Generative AI 系譜 GraphRAG MCP システム
 
 [![CI](https://github.com/nahisaho/yagokoro/actions/workflows/ci.yml/badge.svg)](https://github.com/your-org/yagokoro/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Tests](https://img.shields.io/badge/tests-2445%20passing-brightgreen)]()
-[![Version](https://img.shields.io/badge/version-4.0.0-blue)]()
+[![Tests](https://img.shields.io/badge/tests-2520%20passing-brightgreen)]()
+[![Version](https://img.shields.io/badge/version-5.0.0-blue)]()
 
 生成AI技術の系譜・発展を知識グラフとして構築し、Model Context Protocol (MCP) を通じてAIエージェントに高度な検索・推論機能を提供するシステムです。
 
@@ -42,7 +42,16 @@
 - **Chain-of-Thought推論**: 多段階推論で複雑な質問に対応
 - **ハルシネーション検出**: AIレスポンスの整合性・矛盾検証
 
-### v4.0.0 New Features 🆕
+### v5.0.0 New Features 🆕
+- **多言語論文処理 (F-008)**: 多言語NER、翻訳、クロスリンガルリンキング
+  - **LanguageDetector**: 高精度言語検出 (langdetect + spaCy)
+  - **TranslationService**: DeepL/Google翻訳の自動フォールバック
+  - **MultilingualNER**: spaCy多言語NER (en/zh/ja/ko)
+  - **CrossLingualLinker**: クロスリンガルエンティティリンキング
+  - **TermNormalizer**: 用語正規化 (Unicode/大文字/ステミング)
+  - **TranslationCache**: 3層キャッシュ (Memory/SQLite/Redis)
+
+### v4.0.0 Features
 - **時系列分析 (F-004)**: トレンド検出、タイムライン、Hot Topics、予測、フェーズ分析
 - **研究者ネットワーク (F-005)**: 共著分析、影響力スコア、コミュニティ検出、キャリア分析
 - **CLI統合 (F-006)**: temporal/researcher CLIコマンド (16コマンド)
@@ -192,7 +201,7 @@ yagokoro backup restore ./backup.json
 | `normalize_entities` | エンティティ正規化 |
 | `generate_report` | 定期レポート生成 |
 
-### 時系列分析ツール (v4.0.0) 🆕
+### 時系列分析ツール (v4.0.0)
 
 | ツール名 | 説明 |
 |---------|------|
@@ -202,7 +211,7 @@ yagokoro backup restore ./backup.json
 | `temporal_forecast` | トレンド予測 (線形回帰) |
 | `temporal_by_phase` | 研究フェーズ別分析 |
 
-### 研究者ネットワークツール (v4.0.0) 🆕
+### 研究者ネットワークツール (v4.0.0)
 
 | ツール名 | 説明 |
 |---------|------|
@@ -213,6 +222,17 @@ yagokoro backup restore ./backup.json
 | `researcher_ranking` | 影響力ランキング (被引用/h-index) |
 | `researcher_communities` | 研究コミュニティ検出 |
 | `researcher_career` | キャリア分析 |
+
+### 多言語処理 (v5.0.0) 🆕
+
+| コンポーネント | 説明 |
+|---------|------|
+| `LanguageDetector` | 言語検出 (langdetect + spaCyアンサンブル) |
+| `TranslationService` | 翻訳 (DeepL/Google自動フォールバック) |
+| `MultilingualNER` | 多言語NER (en/zh/ja/ko対応) |
+| `CrossLingualLinker` | クロスリンガルエンティティリンキング |
+| `TermNormalizer` | 用語正規化 (Unicode/大文字/ステミング) |
+| `TranslationCache` | 3層キャッシュ (Memory/SQLite/Redis) |
 
 ### ドキュメントインジェスト (v0.6.0+)
 
@@ -250,8 +270,9 @@ yagokoro/
 │   ├── graphrag/          # GraphRAGコアロジック (332 tests)
 │   ├── extractor/         # 関係抽出 [v3] (208 tests)
 │   ├── ingestion/         # 論文取り込み [v3] (46 tests)
-│   ├── temporal/          # 時系列分析 [NEW v4] (113 tests)
-│   ├── researcher/        # 研究者ネットワーク [NEW v4] (94 tests)
+│   ├── temporal/          # 時系列分析 [v4] (113 tests)
+│   ├── researcher/        # 研究者ネットワーク [v4] (94 tests)
+│   ├── multilang/         # 多言語処理 [NEW v5] (75 tests)
 │   ├── nlq/               # 自然言語クエリ処理 (66 tests)
 │   ├── hallucination/     # ハルシネーション検出 (28 tests)
 │   ├── normalizer/        # エンティティ正規化 (85 tests)
@@ -267,7 +288,7 @@ yagokoro/
     └── specs/             # 要件・設計・タスク仕様
 ```
 
-**Total: 2,445 tests ✅**
+**Total: 2,520 tests ✅**
 
 ## ✨ 主要機能
 

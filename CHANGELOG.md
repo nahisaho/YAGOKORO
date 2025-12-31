@@ -5,6 +5,132 @@ All notable changes to YAGOKORO will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [5.0.0] - 2025-12-31
+
+### 🎉 Major Release: YAGOKORO v5 - Multilingual Paper Processing
+
+This release introduces comprehensive multilingual paper processing capabilities,
+enabling language detection, translation, named entity recognition, and cross-lingual
+entity linking for papers in English, Chinese, Japanese, and Korean.
+
+### Added
+
+#### F-008: Multilingual Paper Processing (@yagokoro/multilang) 🆕
+
+- **LanguageDetector** - High-accuracy language detection
+  - Primary: langdetect library (high accuracy)
+  - Secondary: spaCy ensemble validation
+  - Confidence scoring with threshold (default: 0.7)
+  - Fallback to English on detection failure
+
+- **TranslationService** - Multi-provider translation
+  - Primary: DeepL API (500,000 char/month free tier)
+  - Fallback: Google Translate API (auto-retry)
+  - Configurable timeout (default: 2s per request)
+  - Batch translation support
+
+- **MultilingualNER** - spaCy-based Named Entity Recognition
+  - English: en_core_web_sm (12MB)
+  - Chinese: zh_core_web_sm (46MB)
+  - Japanese: ja_core_news_sm (22MB)
+  - Korean: ko_core_news_sm (16MB)
+  - Entity types: PERSON, ORG, GPE, PRODUCT, WORK_OF_ART
+
+- **CrossLingualLinker** - Cross-language entity linking
+  - Neo4j vector similarity search (cosine, threshold: 0.85)
+  - String similarity matching (Levenshtein, threshold: 0.9)
+  - Translation-based linking for non-English entities
+  - Confidence scoring with multiple signals
+
+- **TermNormalizer** - Term normalization pipeline
+  - Unicode normalization (NFKC)
+  - Case folding (lowercase)
+  - Stemming (Porter stemmer for English)
+  - Custom abbreviation expansion
+  - Whitespace normalization
+
+- **TranslationCache** - 3-tier caching system
+  - Memory cache (LRU, max 1000 entries)
+  - SQLite cache (persistent, file-based)
+  - Redis cache (distributed, TTL support)
+  - Cache key generation with source/target language
+
+### Neo4j Schema Extensions
+
+New node labels and relationships for multilingual support:
+
+```cypher
+// Multilingual Entity Labels
+(:MultilingualEntity {
+  canonicalName: string,
+  language: string,
+  alternateNames: string[],
+  translations: map<string, string>
+})
+
+// Translation Relationships
+(:Entity)-[:SAME_AS {
+  confidence: float,
+  method: string,
+  translatedName: string
+}]->(:Entity)
+
+// Language-specific indexes
+CREATE INDEX entity_language FOR (e:Entity) ON (e.language)
+CREATE INDEX entity_canonical FOR (e:MultilingualEntity) ON (e.canonicalName)
+```
+
+### Test Summary by Package (v5.0.0)
+
+| Package | Tests | Status |
+|---------|-------|--------|
+| @yagokoro/domain | 179 | ✅ |
+| @yagokoro/extractor | 208 | ✅ |
+| @yagokoro/ingestion | 46 | ✅ |
+| @yagokoro/temporal | 113 | ✅ |
+| @yagokoro/researcher | 94 | ✅ |
+| @yagokoro/multilang | 75 | ✅ 🆕 |
+| @yagokoro/neo4j | 102 | ✅ |
+| @yagokoro/nlq | 66 | ✅ |
+| @yagokoro/normalizer | 85 | ✅ |
+| @yagokoro/vector | 34 | ✅ |
+| @yagokoro/analyzer | 206 | ✅ |
+| @yagokoro/cli | 294 | ✅ |
+| @yagokoro/graphrag | 332 | ✅ |
+| @yagokoro/hallucination | 28 | ✅ |
+| @yagokoro/mcp | 430 | ✅ |
+| @yagokoro/reasoner | 93 | ✅ |
+| apps/yagokoro (E2E) | 135 | ✅ |
+| **Total** | **2,520** | ✅ |
+
+### Technical Details
+
+- **New Packages**: @yagokoro/multilang
+- **Test Increase**: +75 tests (2,445 → 2,520)
+- **Python Dependencies**: langdetect, spaCy 3.x
+- **spaCy Models**: en_core_web_sm, zh_core_web_sm, ja_core_news_sm, ko_core_news_sm
+- **Translation APIs**: DeepL (primary), Google Translate (fallback)
+- **Cache Options**: Memory, SQLite, Redis
+
+### Requirements Mapping
+
+| Requirement | Component | Status |
+|-------------|-----------|--------|
+| REQ-008-01 | LanguageDetector | ✅ |
+| REQ-008-02 | TranslationService | ✅ |
+| REQ-008-03 | MultilingualNER | ✅ |
+| REQ-008-04 | CrossLingualLinker | ✅ |
+| REQ-008-05 | TermNormalizer | ✅ |
+| REQ-008-06 | TranslationCache | ✅ |
+| REQ-008-07 | Neo4j Schema | ✅ |
+| REQ-008-08 | Error Handling | ✅ |
+| REQ-008-09 | Performance | ✅ |
+| REQ-008-10 | Logging | ✅ |
+| REQ-008-11 | Configuration | ✅ |
+| REQ-008-12 | Integration Tests | ✅ |
+
+---
+
 ## [4.0.0] - 2025-12-31
 
 ### 🎉 Major Release: YAGOKORO v4 - Temporal Analysis & Researcher Network

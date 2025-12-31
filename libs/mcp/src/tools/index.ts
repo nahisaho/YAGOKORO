@@ -112,3 +112,44 @@ export {
   type MCPTechnologyComparison,
   type LifecyclePhase as MCPLifecyclePhase,
 } from './lifecycle.js';
+
+// Temporal tools
+export {
+  temporalTools,
+  createTemporalToolHandlers,
+  type TemporalToolService,
+  type MCPAdoptionPhase,
+  type MCPGranularity,
+  type MCPTimeRangePreset,
+  type MCPTimeRange,
+  type MCPDailyMetrics,
+  type MCPTrendSummary,
+  type MCPTrendDataPoint,
+  type MCPTrendAnalysisResult,
+  type MCPTimelineDataPoint,
+  type MCPTimelineResult,
+  type MCPHotTopic,
+  type MCPHotTopicsSummary,
+  type MCPHotTopicsResult,
+  type MCPForecastPrediction,
+  type MCPTrendForecast as MCPTemporalForecast,
+  type MCPPhaseDistribution,
+  type MCPTemporalStatistics,
+  type MCPTrendSnapshot,
+} from './temporal.js';
+
+// Researcher tools
+export {
+  researcherTools,
+  createResearcherToolHandlers,
+  type ResearcherToolService,
+  type MCPResearcherDetails,
+  type MCPInfluenceRankingItem,
+  type MCPCommunityInfo,
+  type MCPNetworkStats,
+  type MCPGraphExport,
+  type MCPCareerStage,
+  type MCPCareerTimeline,
+  type MCPCareerPrediction,
+  type MCPCollaborationPath,
+} from './researcher.js';

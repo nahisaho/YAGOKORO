@@ -2,7 +2,7 @@
 name: YAGOKORO
 description: AGI実現に向けたLLM・GraphRAG・オントロジー統合システム
 locale: ja
-version: "3.0.0"
+version: "4.0.0"
 created: 2025-12-28
 updated: 2025-12-31
 
@@ -38,6 +38,12 @@ libraries:
     - name: "@yagokoro/hallucination"
       path: "libs/hallucination"
       purpose: "ハルシネーション検出・整合性チェック"
+    - name: "@yagokoro/temporal"
+      path: "libs/temporal"
+      purpose: "時系列分析・トレンド検出（v4.0.0新規）"
+    - name: "@yagokoro/researcher"
+      path: "libs/researcher"
+      purpose: "研究者ネットワーク分析（v4.0.0新規）"
   infrastructure:
     - name: "@yagokoro/neo4j"
       path: "libs/neo4j"
@@ -71,7 +77,7 @@ domain_entities:
   - Technique
 
 # Phase
-current_phase: "Phase 2 - v3.0.0 Complete"
+current_phase: "Phase 4 - v5.0.0 Planned"
 phases:
   - id: 1
     name: "Generative AI系譜GraphRAGシステム (v1.0-v2.0)"
@@ -80,8 +86,38 @@ phases:
     name: "自動関係抽出・論文取り込み (v3.0.0)"
     status: "complete"
   - id: 3
-    name: "MCP外部システム連携"
+    name: "時系列分析・研究者ネットワーク (v4.0.0)"
     status: "complete"
   - id: 4
+    name: "多言語論文対応 (v5.0.0)"
+    status: "planned"
+  - id: 5
     name: "AGIコア機能"
     status: "planned"
+
+# v4.0.0 Features
+v4_features:
+  - id: "F-004"
+    name: "時系列分析"
+    package: "@yagokoro/temporal"
+    priority: P0
+    status: "complete"
+    tests: 113
+  - id: "F-005"
+    name: "研究者ネットワーク"
+    package: "@yagokoro/researcher"
+    priority: P0
+    status: "complete"
+    tests: 94
+  - id: "F-006"
+    name: "CLI統合"
+    package: "@yagokoro/cli"
+    priority: P0
+    status: "complete"
+    tests: 47
+  - id: "F-007"
+    name: "MCP統合"
+    package: "@yagokoro/mcp"
+    priority: P0
+    status: "complete"
+    tests: 51

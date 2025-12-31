@@ -2,7 +2,7 @@
 
 **Project**: YAGOKORO
 **Last Updated**: 2025-12-31
-**Version**: 3.0.0 ✅ Complete
+**Version**: 4.0.0 ✅ Complete
 
 ---
 
@@ -26,10 +26,12 @@ yagokoro/
 │   ├── graphrag/           # Layer 2: GraphRAGコアロジック
 │   ├── nlq/                # Layer 2: 自然言語クエリ処理
 │   ├── hallucination/      # Layer 2: ハルシネーション検出
-│   ├── extractor/          # Layer 2: 関係抽出 [NEW v3]
-│   ├── ingestion/          # Layer 2: 論文自動取り込み [NEW v3]
-│   ├── hitl/               # Layer 2: Human-in-the-Loop検証 [NEW v3]
-│   ├── pipeline/           # Layer 2: 差分更新パイプライン [NEW v3]
+│   ├── extractor/          # Layer 2: 関係抽出 [v3]
+│   ├── ingestion/          # Layer 2: 論文自動取り込み [v3]
+│   ├── hitl/               # Layer 2: Human-in-the-Loop検証 [v3]
+│   ├── pipeline/           # Layer 2: 差分更新パイプライン [v3]
+│   ├── temporal/           # Layer 2: 時系列分析 [NEW v4]
+│   ├── researcher/         # Layer 2: 研究者ネットワーク [NEW v4]
 │   ├── neo4j/              # Layer 3: Neo4jリポジトリ
 │   ├── vector/             # Layer 3: Qdrantベクトルストア
 │   ├── cache/              # Layer 3: クエリキャッシュ [NEW v3]
@@ -166,7 +168,7 @@ yagokoro/
 | Batch | BatchApprover (confidence threshold) |
 | Service | HITLService |
 
-### Layer 2: Pipeline (@yagokoro/pipeline) [NEW v3]
+### Layer 2: Pipeline (@yagokoro/pipeline) [v3]
 
 **Purpose**: 差分更新とトランザクション管理
 **Location**: `libs/pipeline/`
@@ -182,6 +184,40 @@ yagokoro/
 | Apply | ChangeApplier (batch processing) |
 | Transaction | TransactionManager (rollback support) |
 | Service | PipelineService |
+
+### Layer 2: Temporal (@yagokoro/temporal) [NEW v4]
+
+**Purpose**: 時系列分析・トレンド検出
+**Location**: `libs/temporal/`
+**Rules**:
+
+- Domain, Neo4jレイヤーに依存
+- 時系列データの集計・分析
+
+**Contents**:
+| カテゴリ | 内容 |
+|----------|------|
+| Aggregation | TimeSeriesAggregator (by period), TrendDetector (slope analysis) |
+| Analysis | TimelineAnalyzer, PhaseAnalyzer, SnapshotAnalyzer |
+| Prediction | ForecastEngine (linear regression), HotTopicDetector |
+| Service | TemporalService (113 tests) |
+
+### Layer 2: Researcher (@yagokoro/researcher) [NEW v4]
+
+**Purpose**: 研究者ネットワーク分析
+**Location**: `libs/researcher/`
+**Rules**:
+
+- Domain, Neo4jレイヤーに依存
+- グラフアルゴリズムで共著・影響力分析
+
+**Contents**:
+| カテゴリ | 内容 |
+|----------|------|
+| Graph | CoauthorNetwork, CollaborationGraph |
+| Analysis | InfluenceScorer (h-index, PageRank), CommunityDetector (Louvain) |
+| Path | ShortestPathFinder, CareerAnalyzer |
+| Service | ResearcherService (94 tests) |
 
 ### Layer 3: Infrastructure (@yagokoro/neo4j, @yagokoro/vector, @yagokoro/cache)
 
@@ -233,6 +269,8 @@ yagokoro/
 | Tools (Analysis) [v3] | analyze_gaps, analyze_lifecycle |
 | Tools (Verification) [v3] | verify_statement, verify_entity |
 | Tools (Normalization) [v3] | normalize_entity |
+| Tools (Temporal) [v4] | temporal_analyze_trends, temporal_get_timeline, temporal_hot_topics, temporal_forecast, temporal_by_phase |
+| Tools (Researcher) [v4] | researcher_search, researcher_get, researcher_coauthors, researcher_path, researcher_ranking, researcher_communities, researcher_career |
 | Resources | knowledgeGraph, entities, communities |
 | Health | HealthCheck, StatusMonitor |
 
@@ -245,6 +283,8 @@ yagokoro/
 | Commands (Review) [v3] | review list, review approve, review reject |
 | Commands (Pipeline) [v3] | pipeline run, pipeline status, pipeline rollback |
 | Commands (Cache) [v3] | cache stats, cache clear, cache invalidate |
+| Commands (Temporal) [v4] | temporal trends, timeline, hot-topics, forecast, phases, stats, snapshot |
+| Commands (Researcher) [v4] | researcher search, info, coauthors, path, ranking, communities, stats, export, career |
 | Utils | Logger, TypeDefinitions, OutputFormatter |
 
 ---
@@ -260,8 +300,9 @@ yagokoro/
 │     @yagokoro/neo4j, @yagokoro/vector, @yagokoro/cache          │ ← Infrastructure
 ├─────────────────────────────────────────────────────────────────┤
 │  @yagokoro/graphrag, @yagokoro/nlq, @yagokoro/hallucination,    │ ← Application/Use Cases
-│  @yagokoro/extractor, @yagokoro/ingestion, @yagokoro/hitl,      │   [v3 NEW: extractor,
-│  @yagokoro/pipeline                                             │    ingestion, hitl, pipeline]
+│  @yagokoro/extractor, @yagokoro/ingestion, @yagokoro/hitl,      │   [v3: extractor, ingestion,
+│  @yagokoro/pipeline, @yagokoro/temporal, @yagokoro/researcher   │    hitl, pipeline]
+│                                                                 │   [v4: temporal, researcher]
 ├─────────────────────────────────────────────────────────────────┤
 │             @yagokoro/domain                                    │ ← Domain (NO dependencies)
 └─────────────────────────────────────────────────────────────────┘
@@ -421,6 +462,15 @@ This structure enforces:
 ---
 
 ## Changelog
+
+### Version 3.0 (2025-12-31) - v4.0.0 対応
+
+- Added 2 new v4 packages to Layer 2:
+  - @yagokoro/temporal (時系列分析・トレンド検出) - 113 tests
+  - @yagokoro/researcher (研究者ネットワーク分析) - 94 tests
+- Updated @yagokoro/mcp: 17 tools → 29 tools (12 new v4 tools)
+- Updated @yagokoro/cli: 11 command groups → 13 command groups (2 new v4 commands)
+- Updated dependency diagram for v4 architecture
 
 ### Version 2.0 (2025-12-31) - v3.0.0 対応
 

@@ -6,12 +6,7 @@
  * for atomic operations across multiple repositories.
  */
 
-import type {
-  Session,
-  Transaction,
-  ManagedTransaction,
-  QueryResult,
-} from 'neo4j-driver';
+import type { ManagedTransaction } from 'neo4j-driver';
 import type { Neo4jConnection } from './Neo4jConnection.js';
 
 // ============================================================================
@@ -184,7 +179,7 @@ export function createTransactionManager(
       work: (tx: ManagedTransaction) => Promise<T>,
       options: TransactionOptions = {}
     ): Promise<T> {
-      const session = connection.getSession('read');
+      const session = connection.getReadSession();
       try {
         const txConfig = buildTransactionConfig(options);
         return await session.executeRead(work, txConfig);
@@ -197,7 +192,7 @@ export function createTransactionManager(
       work: (tx: ManagedTransaction) => Promise<T>,
       options: TransactionOptions = {}
     ): Promise<T> {
-      const session = connection.getSession('write');
+      const session = connection.getWriteSession();
       try {
         const txConfig = buildTransactionConfig(options);
         return await session.executeWrite(work, txConfig);
@@ -219,11 +214,11 @@ export function createTransactionManager(
         (a, b) => (b.priority ?? 0) - (a.priority ?? 0)
       );
 
-      const session = connection.getSession('write');
+      const session = connection.getWriteSession();
       try {
         const txConfig = buildTransactionConfig(options);
 
-        await session.executeWrite(async (tx) => {
+        await session.executeWrite(async (tx: ManagedTransaction) => {
           for (const item of sortedItems) {
             try {
               const result = await item.execute(tx);
@@ -304,9 +299,9 @@ function createUnitOfWorkImpl(connection: Neo4jConnection): UnitOfWork {
         return;
       }
 
-      const session = connection.getSession('write');
+      const session = connection.getWriteSession();
       try {
-        await session.executeWrite(async (tx) => {
+        await session.executeWrite(async (tx: ManagedTransaction) => {
           // Execute operations in order: create, update, delete
           const sorted = [...operations].sort((a, b) => {
             const order = { create: 0, update: 1, delete: 2 };

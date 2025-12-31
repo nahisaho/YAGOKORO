@@ -4,7 +4,16 @@ YAGOKOROが提供するMCPツールの詳細リファレンスです。
 
 ## 概要
 
-YAGOKOROは8つのMCPツールを提供し、AIエージェントがナレッジグラフを操作できるようにします。
+YAGOKOROは29のMCPツールを提供し、AIエージェントがナレッジグラフを操作できるようにします。
+
+### ツールカテゴリ
+
+| カテゴリ | ツール数 | 説明 |
+|----------|----------|------|
+| 基本ツール | 8 | エンティティ・リレーション操作 |
+| v3.0.0 高度なツール | 9 | NLQ、推論、分析 |
+| v4.0.0 時系列ツール | 5 | トレンド・タイムライン分析 |
+| v4.0.0 研究者ツール | 7 | 研究者ネットワーク分析 |
 
 ## ツール一覧
 
@@ -614,6 +623,402 @@ checkConsistency({
 | `ERR_6004` | サーバーエラー |
 | `ERR_1002` | エンティティが見つからない |
 | `ERR_1001` | バリデーションエラー |
+
+---
+
+## v4.0.0 時系列分析ツール 🆕
+
+### temporal_analyze_trends
+
+出版トレンドを分析します。
+
+**入力スキーマ:**
+```json
+{
+  "period": {
+    "type": "string",
+    "enum": ["year", "quarter", "month"],
+    "default": "year",
+    "description": "集計期間"
+  },
+  "from": {
+    "type": "string",
+    "description": "開始日 (YYYY-MM-DD)"
+  },
+  "to": {
+    "type": "string",
+    "description": "終了日 (YYYY-MM-DD)"
+  }
+}
+```
+
+**出力:**
+```json
+{
+  "trends": [
+    { "period": "2023", "count": 25, "growthRate": 0.39 },
+    { "period": "2024", "count": 32, "growthRate": 0.28 }
+  ],
+  "direction": "increasing",
+  "averageGrowthRate": 0.45
+}
+```
+
+---
+
+### temporal_get_timeline
+
+エンティティのタイムラインを取得します。
+
+**入力スキーマ:**
+```json
+{
+  "entityId": {
+    "type": "string",
+    "description": "エンティティID"
+  },
+  "category": {
+    "type": "string",
+    "description": "カテゴリでフィルタ"
+  },
+  "from": {
+    "type": "string",
+    "description": "開始日"
+  },
+  "to": {
+    "type": "string",
+    "description": "終了日"
+  }
+}
+```
+
+**出力:**
+```json
+{
+  "events": [
+    { "date": "2017-06-12", "event": "Attention Is All You Need", "type": "publication" },
+    { "date": "2018-10-11", "event": "BERT発表", "type": "publication" }
+  ]
+}
+```
+
+---
+
+### temporal_hot_topics
+
+注目トピックを検出します。
+
+**入力スキーマ:**
+```json
+{
+  "limit": {
+    "type": "number",
+    "default": 10,
+    "description": "取得件数"
+  },
+  "timeWindow": {
+    "type": "string",
+    "default": "6m",
+    "description": "時間窓 (例: 6m, 1y)"
+  }
+}
+```
+
+**出力:**
+```json
+{
+  "topics": [
+    { "name": "Large Language Models", "score": 98.5, "frequency": 45 },
+    { "name": "Multimodal AI", "score": 92.3, "frequency": 38 }
+  ]
+}
+```
+
+---
+
+### temporal_forecast
+
+トレンドを予測します。
+
+**入力スキーマ:**
+```json
+{
+  "periods": {
+    "type": "number",
+    "default": 3,
+    "description": "予測期間数"
+  },
+  "model": {
+    "type": "string",
+    "enum": ["linear", "exponential"],
+    "default": "linear",
+    "description": "予測モデル"
+  }
+}
+```
+
+**出力:**
+```json
+{
+  "predictions": [
+    { "period": "2025", "predicted": 42, "confidence": [38, 46] },
+    { "period": "2026", "predicted": 55, "confidence": [48, 62] }
+  ],
+  "r2": 0.94
+}
+```
+
+---
+
+### temporal_by_phase
+
+研究フェーズ別に分析します。
+
+**入力スキーマ:**
+```json
+{}
+```
+
+**出力:**
+```json
+{
+  "phases": [
+    { "name": "黎明期", "period": "2017-2018", "paperCount": 7, "keyTopics": ["Attention", "BERT"] },
+    { "name": "成長期", "period": "2019-2020", "paperCount": 13, "keyTopics": ["GPT", "Scaling"] }
+  ]
+}
+```
+
+---
+
+## v4.0.0 研究者ネットワークツール 🆕
+
+### researcher_search
+
+研究者を検索します。
+
+**入力スキーマ:**
+```json
+{
+  "name": {
+    "type": "string",
+    "description": "研究者名"
+  },
+  "affiliation": {
+    "type": "string",
+    "description": "所属機関"
+  },
+  "topic": {
+    "type": "string",
+    "description": "研究トピック"
+  },
+  "limit": {
+    "type": "number",
+    "default": 20,
+    "description": "最大件数"
+  }
+}
+```
+
+**出力:**
+```json
+{
+  "researchers": [
+    { "id": "uuid", "name": "Geoffrey Hinton", "affiliation": "Google", "paperCount": 234, "citations": 456789 }
+  ]
+}
+```
+
+---
+
+### researcher_get
+
+研究者の詳細を取得します。
+
+**入力スキーマ:**
+```json
+{
+  "researcherId": {
+    "type": "string",
+    "required": true,
+    "description": "研究者ID"
+  }
+}
+```
+
+---
+
+### researcher_coauthors
+
+共著者ネットワークを取得します。
+
+**入力スキーマ:**
+```json
+{
+  "researcherId": {
+    "type": "string",
+    "required": true,
+    "description": "研究者ID"
+  },
+  "limit": {
+    "type": "number",
+    "default": 20,
+    "description": "最大共著者数"
+  },
+  "minCoauthors": {
+    "type": "number",
+    "default": 1,
+    "description": "最小共著回数"
+  }
+}
+```
+
+**出力:**
+```json
+{
+  "coauthors": [
+    { "id": "uuid", "name": "Yann LeCun", "coauthorCount": 28 },
+    { "id": "uuid", "name": "Yoshua Bengio", "coauthorCount": 24 }
+  ],
+  "totalCoauthors": 45
+}
+```
+
+---
+
+### researcher_path
+
+研究者間の協力経路を探索します。
+
+**入力スキーマ:**
+```json
+{
+  "from": {
+    "type": "string",
+    "required": true,
+    "description": "始点研究者ID"
+  },
+  "to": {
+    "type": "string",
+    "required": true,
+    "description": "終点研究者ID"
+  },
+  "maxHops": {
+    "type": "number",
+    "default": 5,
+    "description": "最大ホップ数"
+  }
+}
+```
+
+**出力:**
+```json
+{
+  "found": true,
+  "path": ["Geoffrey Hinton", "Ilya Sutskever", "Dario Amodei"],
+  "hops": 2,
+  "explanation": "Hinton → Sutskever (共著: AlexNet) → Amodei (共同創業: Anthropic)"
+}
+```
+
+---
+
+### researcher_ranking
+
+研究者ランキングを取得します。
+
+**入力スキーマ:**
+```json
+{
+  "metric": {
+    "type": "string",
+    "enum": ["citations", "h-index", "publications"],
+    "default": "citations",
+    "description": "ランキング指標"
+  },
+  "limit": {
+    "type": "number",
+    "default": 10,
+    "description": "取得件数"
+  }
+}
+```
+
+**出力:**
+```json
+{
+  "rankings": [
+    { "rank": 1, "name": "Geoffrey Hinton", "value": 456789 },
+    { "rank": 2, "name": "Yann LeCun", "value": 345678 }
+  ],
+  "metric": "citations"
+}
+```
+
+---
+
+### researcher_communities
+
+研究者コミュニティを検出します。
+
+**入力スキーマ:**
+```json
+{
+  "algorithm": {
+    "type": "string",
+    "enum": ["louvain", "leiden"],
+    "default": "louvain",
+    "description": "検出アルゴリズム"
+  },
+  "minSize": {
+    "type": "number",
+    "default": 3,
+    "description": "最小コミュニティサイズ"
+  }
+}
+```
+
+**出力:**
+```json
+{
+  "communities": [
+    { "id": 1, "size": 45, "leader": "Geoffrey Hinton", "theme": "Deep Learning Origins" },
+    { "id": 2, "size": 38, "leader": "Ashish Vaswani", "theme": "Transformer Architecture" }
+  ],
+  "modularity": 0.68
+}
+```
+
+---
+
+### researcher_career
+
+研究者のキャリアを分析します。
+
+**入力スキーマ:**
+```json
+{
+  "researcherId": {
+    "type": "string",
+    "required": true,
+    "description": "研究者ID"
+  }
+}
+```
+
+**出力:**
+```json
+{
+  "periods": [
+    { "period": "2010-2015", "publications": 45, "mainTopics": ["Deep Learning", "CNN"] },
+    { "period": "2015-2020", "publications": 67, "mainTopics": ["NLP", "Transformer"] }
+  ],
+  "totalPublications": 234,
+  "topCollaborators": ["Yann LeCun", "Yoshua Bengio"]
+}
+```
+
+---
 
 ## ベストプラクティス
 

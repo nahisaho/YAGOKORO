@@ -28,7 +28,8 @@ const createMockTransaction = () => ({
 
 // Mock connection
 const createMockConnection = (session = createMockSession()) => ({
-  getSession: vi.fn().mockReturnValue(session),
+  getReadSession: vi.fn().mockReturnValue(session),
+  getWriteSession: vi.fn().mockReturnValue(session),
   run: vi.fn(),
   close: vi.fn(),
 });
@@ -56,7 +57,7 @@ describe('TransactionManager', () => {
       });
 
       expect(result).toEqual(expectedResult);
-      expect(mockConnection.getSession).toHaveBeenCalledWith('read');
+      expect(mockConnection.getReadSession).toHaveBeenCalled();
       expect(mockSession.close).toHaveBeenCalled();
     });
 
@@ -97,7 +98,7 @@ describe('TransactionManager', () => {
       });
 
       expect(result).toEqual(expectedResult);
-      expect(mockConnection.getSession).toHaveBeenCalledWith('write');
+      expect(mockConnection.getWriteSession).toHaveBeenCalled();
       expect(mockSession.close).toHaveBeenCalled();
     });
 

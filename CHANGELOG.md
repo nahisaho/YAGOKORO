@@ -5,6 +5,122 @@ All notable changes to YAGOKORO will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [4.0.0] - 2025-12-31
+
+### 🎉 Major Release: YAGOKORO v4 - Temporal Analysis & Researcher Network
+
+This release introduces temporal analysis capabilities and researcher network analysis,
+enabling time-series trend detection, research collaboration insights, and comprehensive
+CLI/MCP integration.
+
+### Added
+
+#### F-004: Temporal Analysis (@yagokoro/temporal) 🆕
+- **TrendAnalyzer** - Publication trend detection
+  - Period-based aggregation (year/quarter/month)
+  - Trend direction classification (increasing/decreasing/stable)
+  - Growth rate calculation
+- **TimelineAnalyzer** - Entity timeline visualization
+  - Entity/category-based filtering
+  - Event type classification
+  - Chronological sorting
+- **HotTopicsDetector** - Trending topic detection
+  - Frequency + recency scoring
+  - Configurable time windows
+  - Top-N topic ranking
+- **ForecastEngine** - Trend prediction
+  - Linear regression forecasting
+  - Confidence interval calculation
+  - Multi-period extrapolation
+- **PhaseAnalyzer** - Research phase classification
+  - Period-based phase detection
+  - Key event identification
+  - Phase-wise statistics
+
+#### F-005: Researcher Network (@yagokoro/researcher) 🆕
+- **ResearcherSearch** - Multi-criteria researcher search
+  - Name, affiliation, topic filtering
+  - Full-text search support
+- **CoauthorNetwork** - Coauthorship graph analysis
+  - Weighted collaboration edges
+  - Network centrality metrics
+  - Cluster coefficient calculation
+- **CollaborationPath** - Researcher path finding
+  - Dijkstra/BFS shortest path
+  - Collaboration chain explanation
+- **ResearcherRanking** - Influence ranking
+  - Citation count, h-index, publication count metrics
+  - Composite scoring
+- **CommunityDetector** - Research community detection
+  - Louvain algorithm integration
+  - Modularity optimization
+  - Community labeling
+
+#### F-006: CLI Integration 🆕
+New temporal and researcher CLI commands:
+- `yagokoro temporal trends` - Analyze publication trends
+- `yagokoro temporal timeline` - View entity timelines
+- `yagokoro temporal hot-topics` - Detect trending topics
+- `yagokoro temporal forecast` - Predict future trends
+- `yagokoro temporal phases` - Analyze research phases
+- `yagokoro temporal stats` - View temporal statistics
+- `yagokoro temporal snapshot` - Get point-in-time snapshot
+- `yagokoro researcher search` - Search researchers
+- `yagokoro researcher info` - Get researcher details
+- `yagokoro researcher coauthors` - View coauthor network
+- `yagokoro researcher path` - Find collaboration paths
+- `yagokoro researcher ranking` - View influence rankings
+- `yagokoro researcher communities` - Detect communities
+- `yagokoro researcher stats` - View network statistics
+- `yagokoro researcher export` - Export network data
+- `yagokoro researcher career` - Analyze researcher career
+
+#### F-007: MCP Tool Integration 🆕
+New MCP tools for AI agent integration:
+- `temporal_analyze_trends` - Analyze publication trends
+- `temporal_get_timeline` - Get entity timeline
+- `temporal_hot_topics` - Detect hot topics
+- `temporal_forecast` - Forecast trends
+- `temporal_by_phase` - Analyze by research phase
+- `researcher_search` - Search researchers
+- `researcher_get` - Get researcher details
+- `researcher_coauthors` - Get coauthor network
+- `researcher_path` - Find collaboration path
+- `researcher_ranking` - Get influence rankings
+- `researcher_communities` - Detect communities
+- `researcher_career` - Analyze researcher career
+
+### Test Summary by Package (v4.0.0)
+
+| Package | Tests | Status |
+|---------|-------|--------|
+| @yagokoro/domain | 179 | ✅ |
+| @yagokoro/extractor | 208 | ✅ |
+| @yagokoro/ingestion | 46 | ✅ |
+| @yagokoro/temporal | 113 | ✅ 🆕 |
+| @yagokoro/researcher | 94 | ✅ 🆕 |
+| @yagokoro/neo4j | 102 | ✅ |
+| @yagokoro/nlq | 66 | ✅ |
+| @yagokoro/normalizer | 85 | ✅ |
+| @yagokoro/vector | 34 | ✅ |
+| @yagokoro/analyzer | 206 | ✅ |
+| @yagokoro/cli | 294 | ✅ (+47) |
+| @yagokoro/graphrag | 332 | ✅ |
+| @yagokoro/hallucination | 28 | ✅ |
+| @yagokoro/mcp | 430 | ✅ (+51) |
+| @yagokoro/reasoner | 93 | ✅ |
+| apps/yagokoro (E2E) | 135 | ✅ |
+| **Total** | **2,445** | ✅ |
+
+### Technical Details
+
+- **New Packages**: @yagokoro/temporal, @yagokoro/researcher
+- **Test Increase**: +305 tests (2,140 → 2,445)
+- **New CLI Commands**: 16 (temporal: 7, researcher: 9)
+- **New MCP Tools**: 12 (temporal: 5, researcher: 7)
+
+---
+
 ## [3.0.0] - 2025-12-31
 
 ### 🎉 Major Release: YAGOKORO v3 - Knowledge Graph Auto-Growth

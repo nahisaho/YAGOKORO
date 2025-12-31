@@ -42,6 +42,10 @@ yagokoro/
 ├── libs/
 │   ├── domain/         # ドメインモデル
 │   ├── graphrag/       # GraphRAGコア
+│   ├── extractor/      # 関係抽出 [v3]
+│   ├── ingestion/      # 論文取り込み [v3]
+│   ├── temporal/       # 時系列分析 [v4]
+│   ├── researcher/     # 研究者ネットワーク [v4]
 │   ├── nlq/            # 自然言語クエリ
 │   ├── hallucination/  # ハルシネーション検出
 │   ├── neo4j/          # Neo4jリポジトリ

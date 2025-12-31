@@ -1,0 +1,39 @@
+{
+  "name": "@yagokoro/temporal",
+  "version": "4.0.0",
+  "description": "Time-series analysis for YAGOKORO - trend detection, adoption phases, and temporal queries",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "scripts": {
+    "build": "tsc",
+    "test": "vitest run --passWithNoTests",
+    "test:watch": "vitest",
+    "lint": "biome check src/",
+    "clean": "rm -rf dist"
+  },
+  "dependencies": {
+    "@yagokoro/domain": "workspace:*",
+    "@yagokoro/neo4j": "workspace:*"
+  },
+  "devDependencies": {
+    "typescript": "^5.7.2",
+    "vitest": "^2.1.8"
+  },
+  "keywords": [
+    "temporal",
+    "trend-analysis",
+    "time-series",
+    "adoption-phase",
+    "hot-topics",
+    "graphrag"
+  ],
+  "author": "nahisaho",
+  "license": "MIT"
+}

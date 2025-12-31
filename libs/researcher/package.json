@@ -1,0 +1,44 @@
+{
+  "name": "@yagokoro/researcher",
+  "version": "4.0.0",
+  "description": "Researcher network analysis for YAGOKORO - coauthor networks, community detection, influence scoring",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "scripts": {
+    "build": "tsc",
+    "test": "vitest run --passWithNoTests",
+    "test:watch": "vitest",
+    "lint": "biome check src/",
+    "clean": "rm -rf dist"
+  },
+  "dependencies": {
+    "@yagokoro/domain": "workspace:*",
+    "@yagokoro/neo4j": "workspace:*",
+    "graphology": "^0.25.4",
+    "graphology-communities-louvain": "^2.0.1",
+    "graphology-metrics": "^2.4.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.17.10",
+    "typescript": "^5.7.2",
+    "vitest": "^2.1.8"
+  },
+  "keywords": [
+    "researcher",
+    "coauthor-network",
+    "community-detection",
+    "leiden-algorithm",
+    "orcid",
+    "influence-score",
+    "graphrag"
+  ],
+  "author": "nahisaho",
+  "license": "MIT"
+}

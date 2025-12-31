@@ -16,3 +16,6 @@ export * from './queries/index.js';
 
 // Backup
 export * from './backup/index.js';
+
+// Migrations (v4.0.0)
+export * from './migrations/index.js';

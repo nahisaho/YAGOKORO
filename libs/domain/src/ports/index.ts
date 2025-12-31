@@ -34,3 +34,14 @@ export type {
   EmbeddingResponse,
 } from './LLMClient.js';
 
+// v4.0.0: Temporal analysis ports
+export type {
+  TrendRepository,
+  TrendQueryOptions,
+  SaveTrendMetricsOptions,
+  SaveSnapshotOptions,
+  TrendDataPoint,
+  TrendSnapshotRecord,
+  DailyMetricsRecord,
+  DailyMetricsInput,
+} from './TrendRepository.js';

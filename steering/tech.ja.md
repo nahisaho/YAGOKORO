@@ -2,14 +2,14 @@
 
 **Project**: YAGOKORO
 **Last Updated**: 2025-12-31
-**Status**: Phase 2 - v3.0.0 完成 ✅
+**Status**: Phase 3 - v4.0.0 完成 ✅
 
 ---
 
 ## Overview
 
 YAGOKOROは、LLM・GraphRAG・オントロジーを統合したAGI実現を目指すシステムです。
-本ドキュメントでは、Phase 1（完了）およびPhase 2（v3.0.0開発）の技術スタックを定義します。
+本ドキュメントでは、Phase 1〜3（v1.0.0〜v4.0.0）の技術スタックを定義します。
 
 ## Decision Criteria
 
@@ -246,6 +246,63 @@ pip install docling
 | @yagokoro/reasoner | ✅ Implemented | CoT推論・パス探索 |
 | @yagokoro/extractor | ✅ v3.0.0 | 共起分析ベース関係抽出 (208 tests) |
 | @yagokoro/ingestion | ✅ v3.0.0 | 論文自動取り込み (arXiv/Semantic Scholar) (46 tests) |
+| @yagokoro/temporal | ✅ v4.0.0 | 時系列分析・トレンド検出 (113 tests) |
+| @yagokoro/researcher | ✅ v4.0.0 | 研究者ネットワーク分析 (94 tests) |
+
+---
+
+## v4.0.0 New Technologies
+
+### Temporal Analysis (F-004) ✅ Complete
+
+| Aspect | Choice | Status |
+|--------|--------|--------|
+| Time Series Aggregation | **Custom Implementation** | ✅ Implemented |
+| Trend Detection | **Linear Regression** | ✅ Implemented |
+| Hot Topics | **Frequency + Recency Scoring** | ✅ Implemented |
+| Forecasting | **Simple Linear Regression** | ✅ Implemented |
+| Phase Analysis | **Period-based Classification** | ✅ Implemented |
+
+**TemporalService Contents**:
+| カテゴリ | 内容 |
+|----------|------|
+| Aggregation | analyzePublicationTrends (by period), getTimeline |
+| Analysis | getHotTopics, analyzeByPhase, analyzeSnapshot |
+| Prediction | forecastTrends (linear regression) |
+| Stats | getStats (comprehensive statistics) |
+
+### Researcher Network (F-005) ✅ Complete
+
+| Aspect | Choice | Status |
+|--------|--------|--------|
+| Coauthor Graph | **graphology** | ✅ Implemented |
+| Community Detection | **Louvain Algorithm** | ✅ Implemented |
+| Influence Score | **H-Index + Citation Count** | ✅ Implemented |
+| Path Finding | **Dijkstra / BFS** | ✅ Implemented |
+| Career Analysis | **Period-based Stats** | ✅ Implemented |
+
+**ResearcherService Contents**:
+| カテゴリ | 内容 |
+|----------|------|
+| Search | searchResearchers (by name, affiliation, topic) |
+| Network | getCoauthorNetwork, findCollaborationPath |
+| Ranking | getRankings (by citations, h-index, publications) |
+| Community | detectCommunities (Louvain) |
+| Career | analyzeCareer (periods, collaborators) |
+
+### CLI Integration (F-006) ✅ Complete
+
+| Command | Subcommands | Status |
+|---------|-------------|--------|
+| `yagokoro temporal` | trends, timeline, hot-topics, forecast, phases, stats, snapshot | ✅ 21 tests |
+| `yagokoro researcher` | search, info, coauthors, path, ranking, communities, stats, export, career | ✅ 26 tests |
+
+### MCP Integration (F-007) ✅ Complete
+
+| Tool Category | Tools | Status |
+|---------------|-------|--------|
+| Temporal Tools | temporal_analyze_trends, temporal_get_timeline, temporal_hot_topics, temporal_forecast, temporal_by_phase | ✅ 22 tests |
+| Researcher Tools | researcher_search, researcher_get, researcher_coauthors, researcher_path, researcher_ranking, researcher_communities, researcher_career | ✅ 29 tests |
 
 ---
 
@@ -283,7 +340,7 @@ pip install docling
 
 ---
 
-## Test Summary (v3.0.0)
+## Test Summary (v4.0.0)
 
 | Package | Tests | Status |
 |---------|-------|--------|
@@ -295,13 +352,15 @@ pip install docling
 | @yagokoro/normalizer | 85 | ✅ All Passing |
 | @yagokoro/vector | 34 | ✅ All Passing |
 | @yagokoro/analyzer | 206 | ✅ All Passing |
-| @yagokoro/cli | 247 | ✅ All Passing |
+| @yagokoro/cli | 294 | ✅ All Passing |
 | @yagokoro/graphrag | 332 | ✅ All Passing |
 | @yagokoro/hallucination | 28 | ✅ All Passing |
-| @yagokoro/mcp | 379 | ✅ All Passing |
+| @yagokoro/mcp | 430 | ✅ All Passing |
 | @yagokoro/reasoner | 93 | ✅ All Passing |
+| @yagokoro/temporal | 113 | ✅ All Passing |
+| @yagokoro/researcher | 94 | ✅ All Passing |
 | apps/yagokoro (E2E) | 135 | ✅ All Passing |
-| **Total** | **2,140** | ✅ **100%** |
+| **Total** | **2,445** | ✅ **100%** |
 
 ---
 
@@ -329,6 +388,20 @@ pip install docling
 | Sprint 6 | Integration + E2E Tests (apps/yagokoro) | 135 | ✅ Complete |
 
 **Total**: 2,140 tests / All passing
+
+---
+
+## v4.0.0 Sprint Results (Phase 3) ✅ Complete
+
+| Sprint | Focus | Tests | Status |
+|--------|-------|-------|--------|
+| Sprint 1 | TemporalService Core (@yagokoro/temporal) | 57 | ✅ Complete |
+| Sprint 2 | ResearcherService Core (@yagokoro/researcher) | 50 | ✅ Complete |
+| Sprint 3 | Integration Tests & Optimization | 100 | ✅ Complete |
+| Sprint 4 | CLI & MCP Integration | 98 | ✅ Complete |
+
+**v4.0.0 追加テスト**: 305 tests
+**累計**: 2,445 tests / All passing
 
 ---
 

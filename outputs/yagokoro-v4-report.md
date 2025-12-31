@@ -340,14 +340,11 @@ flowchart TB
 
 **経路詳細**:
 
-```
-Geoffrey Hinton
-    ↓ (共著: AlexNet, 2012)
-Ilya Sutskever
-    ↓ (共著: GPT-2/3, 2019-2020)
-Sam Altman
-    ↓ (共同創業: Anthropic, 2021)
-Dario Amodei
+```mermaid
+flowchart TB
+    A["Geoffrey Hinton"] -->|"共著: AlexNet, 2012"| B["Ilya Sutskever"]
+    B -->|"共著: GPT-2/3, 2019-2020"| C["Sam Altman"]
+    C -->|"共同創業: Anthropic, 2021"| D["Dario Amodei"]
 ```
 
 **考察**:
